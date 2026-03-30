@@ -1,0 +1,108 @@
+import type * as Preset from "@docusaurus/preset-classic";
+import type { Config } from "@docusaurus/types";
+import { themes as prismThemes } from "prism-react-renderer";
+
+const config: Config = {
+  title: "Pokémon Workshop Docs",
+  tagline: "Tutoriels et guides pour l'écosystème PSDK",
+  favicon: "img/favicon.ico",
+
+  future: {
+    v4: true,
+  },
+
+  url: "https://docs.pokemonworkshop.com",
+  baseUrl: "/",
+
+  organizationName: "PokemonWorkshop",
+  projectName: "pokemon-workshop-docs",
+
+  onBrokenLinks: "warn",
+
+  markdown: {
+    format: "md",
+  },
+
+  i18n: {
+    defaultLocale: "fr",
+    locales: ["fr", "en"],
+    localeConfigs: {
+      fr: { label: "Français", direction: "ltr" },
+      en: { label: "English", direction: "ltr" },
+    },
+  },
+
+  plugins: [require.resolve("./plugins/locale-doc-map")],
+
+  themes: [
+    [
+      "@easyops-cn/docusaurus-search-local",
+      {
+        hashed: true,
+        language: ["fr", "en"],
+        docsRouteBasePath: "/",
+      },
+    ],
+  ],
+
+  presets: [
+    [
+      "classic",
+      {
+        docs: {
+          path: "content",
+          sidebarPath: "./sidebars.ts",
+          routeBasePath: "/",
+        },
+        blog: false,
+        theme: {
+          customCss: "./src/css/custom.css",
+        },
+      } satisfies Preset.Options,
+    ],
+  ],
+
+  themeConfig: {
+    image: "img/logo.png",
+    colorMode: {
+      defaultMode: "dark",
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
+    },
+    navbar: {
+      title: "Pokémon Workshop Docs",
+      logo: {
+        alt: "Pokémon Workshop Logo",
+        src: "img/logo.svg",
+      },
+      items: [
+        { label: "Démarrage", to: "/category/démarrage", position: "left" },
+        { label: "Ruby", to: "/category/cours-ruby", position: "left" },
+        { label: "RPG Maker", to: "/category/rpg-maker", position: "left" },
+        { label: "PSDK", to: "/category/psdk", position: "left" },
+        { label: "Studio", to: "/category/studio", position: "left" },
+        { label: "Tiled", to: "/category/tiled", position: "left" },
+        { label: "Divers", to: "/category/divers", position: "left" },
+        {
+          type: "search",
+          position: "right",
+        },
+        {
+          type: "localeDropdown",
+          position: "right",
+        },
+      ],
+    },
+    footer: {
+      style: "dark",
+      copyright: `Copyright © ${new Date().getFullYear()} Pokémon Workshop. Built with Docusaurus.`,
+    },
+    prism: {
+      theme: prismThemes.vsDark,
+      darkTheme: prismThemes.vsDark,
+      additionalLanguages: ["ruby", "bash", "json"],
+    },
+  } satisfies Preset.ThemeConfig,
+};
+
+export default config;
