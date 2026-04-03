@@ -181,10 +181,10 @@ Pour créer un terrain complet, voici les fichiers à créer ou modifier :
 | Fichier                                           | Action                                                     |
 | ------------------------------------------------- | ---------------------------------------------------------- |
 | Studio -> Système de combat (fichier texte 60)    | Ajouter les messages d'activation et de fin                |
-| `scripts/my-project/001 FTerrainChangeHandler.rb` | Enregistrer les messages dans le handler                   |
-| `scripts/my-project/002 FieldTerrain.rb`          | Créer la classe d'effet du terrain                         |
-| `scripts/my-project/003 TerrainMove.rb`           | Lier l'attaque au terrain (si attaque)                     |
-| `scripts/my-project/004 Ability.rb`               | Créer le talent Surge (si talent)                          |
+| `my-project/scripts/001 FTerrainChangeHandler.rb` | Enregistrer les messages dans le handler                   |
+| `my-project/scripts/002 FieldTerrain.rb`          | Créer la classe d'effet du terrain                         |
+| `my-project/scripts/003 TerrainMove.rb`           | Lier l'attaque au terrain (si attaque)                     |
+| `my-project/scripts/004 Ability.rb`               | Créer le talent Surge (si talent)                          |
 | Studio -> Attaques                                | Créer l'attaque avec la procédure `s_terrain` (si attaque) |
 | Studio -> Talents                                 | Créer le talent (si talent)                                |
 

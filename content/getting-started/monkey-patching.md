@@ -1,23 +1,25 @@
 ---
-title: "Comment monkey-patcher une classe PSDK ?"
-slug: monkey-patcher-une-classe-psdk
+title: "Qu'est-ce que le monkey-patch et comment l'appliquer dans PSDK ?"
+slug: monkey-patch-dans-psdk
 sidebar_position: 3
-description: "PSDK est un moteur qui se met à jour régulièrement. Si on modifie directement un fichier du moteur pour changer un comportement, la prochaine mise à jour écrasera les modifications. Le monkey-patching permet de modifier le comportement d'une classe PSDK depuis ses propres scripts, sans toucher au code source du moteur."
+description: "PSDK est un moteur qui se met à jour régulièrement. Si on modifie directement un fichier du moteur pour changer un comportement, la prochaine mise à jour écrasera les modifications. Le monkey-patching permet de modifier le comportement de PSDK depuis ses propres scripts, sans toucher au code source du moteur."
 ---
 
-PSDK est un moteur qui se met à jour régulièrement. Si on modifie directement un fichier du moteur pour changer un comportement, la prochaine mise à jour écrasera les modifications. Le monkey-patching permet de modifier le comportement d'une classe PSDK **depuis ses propres scripts**, sans toucher au code source du moteur. Ce guide couvre les différentes techniques de monkey-patching utilisées dans PSDK : `prepend` pour modifier globalement une méthode, l'héritage pour un changement local à une seule scène, et la réouverture de module pour les constantes et fonctions d'enregistrement.
+PSDK est un moteur qui se met à jour régulièrement. Si on modifie directement un fichier du moteur pour changer un comportement, la prochaine mise à jour écrasera les modifications. Le monkey-patching permet de modifier le comportement de PSDK **depuis ses propres scripts**, sans toucher au code source du moteur. Ce guide couvre les différentes techniques de monkey-patching utilisées dans PSDK : `prepend` pour modifier globalement une méthode, l'héritage pour un changement local à une seule scène, et la réouverture de module pour les constantes et fonctions d'enregistrement.
 
-## Principe
+## Qu'est-ce que le monkey-patching ?
 
-Le problème est simple : on veut changer le comportement d'une méthode qui existe dans PSDK, mais le code du moteur n'est pas dans notre projet — il est chargé en interne par PSDK. On ne peut pas (et on ne doit pas) le modifier. Ruby permet de résoudre ce problème grâce au **module prepend** :
+Le monkey-patching consiste à modifier, à l'exécution, le comportement d'un code existant sans toucher à son fichier source. En Ruby, c'est possible parce que les classes et les modules sont **ouverts** : on peut les rouvrir à tout moment pour ajouter, remplacer ou enrichir des méthodes.
 
-1. Dans un fichier Ruby placé dans `scripts/`, on rouvre la classe PSDK ciblée.
-2. On déclare un module à l'intérieur de cette classe.
-3. Ce module redéfinit la méthode qu'on veut modifier.
-4. On appelle `prepend` pour insérer le module **avant** la classe dans la chaîne d'héritage.
-5. Dans la méthode redéfinie, `super` appelle l'implémentation originale de PSDK.
+Dans PSDK, le monkey-patching est indispensable. Le code du moteur n'est pas dans le projet — il est chargé en interne par PSDK. On ne peut pas (et on ne doit pas) le modifier directement. On travaille donc depuis ses propres scripts, placés dans `scripts/`, qui sont chargés **après** le moteur.
 
-L'avantage de `prepend` sur la réouverture directe de classe (redéfinir la méthode sans module) est la **composabilité** : si on installe plusieurs plugins qui modifient la même méthode, chaque `super` passe le relais au suivant dans la chaîne. Si on redéfinissait la méthode directement, on écraserait les patches des autres plugins.
+Trois techniques permettent de monkey-patcher dans PSDK :
+
+- **`prepend`** — insérer un module avant une classe ou un module dans la chaîne d'héritage, pour intercepter ou enrichir une méthode existante. C'est la technique principale.
+- **Réouverture de module** — rouvrir un module PSDK pour y ajouter des méthodes, des constantes ou des fonctions d'enregistrement, sans modifier l'existant.
+- **Héritage** — créer une sous-classe pour un changement local à une seule scène ou un seul composant, sans affecter le reste du jeu.
+
+`prepend` est privilégié par rapport à la réouverture directe de classe (redéfinir une méthode sans module) grâce à sa **composabilité** : si plusieurs plugins modifient la même méthode, chaque `super` passe le relais au suivant dans la chaîne. Redéfinir la méthode directement écraserait les patches des autres plugins.
 
 ## Où placer ses monkey-patches
 

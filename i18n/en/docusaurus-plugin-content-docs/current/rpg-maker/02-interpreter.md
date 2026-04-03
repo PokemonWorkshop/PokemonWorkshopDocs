@@ -120,7 +120,7 @@ The Interpreter is a Ruby class like any other. You can **reopen** it from your 
 For example, if you want a reusable method to heal the entire party:
 
 ```ruby
-# scripts/my-project/001 Interpreter.rb
+# my-project/scripts/001 Interpreter.rb
 class Interpreter
   # Heal all Pokemon in the party
   def heal_all_pokemon
@@ -141,7 +141,7 @@ heal_all_pokemon
 message("Your Pokemon have been fully healed!")
 ```
 
-This is the same principle as the monkey-patching described in guide **001 How to monkey-patch a PSDK class**: you reopen the class, add a method, and it becomes accessible everywhere. The difference is that here you're not modifying an existing method — you're creating a new one.
+This is the same principle as the monkey-patching described in guide **001 What is monkey-patching and how to apply it in PSDK**: you reopen the class, add a method, and it becomes accessible everywhere. The difference is that here you're not modifying an existing method — you're creating a new one.
 
 This is useful for several reasons:
 

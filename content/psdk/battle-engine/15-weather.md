@@ -222,11 +222,11 @@ Pour créer une météo complète, voici les fichiers à créer ou modifier :
 | Fichier                                          | Action                                                       |
 | ------------------------------------------------ | ------------------------------------------------------------ |
 | Studio -> Système de combat (fichier texte 18)   | Ajouter les messages d'activation, de fin et de tour         |
-| `scripts/my-project/001 Weather.rb`              | Ajouter le symbole dans `WEATHER_NAMES`                      |
-| `scripts/my-project/002 WeatherChangeHandler.rb` | Ajouter l'entrée dans `WEATHER_SYM_TO_MSG`                   |
-| `scripts/my-project/003 WeatherEffect.rb`        | Créer la classe d'effet de la météo                          |
-| `scripts/my-project/004 WeatherMove.rb`          | Ajouter dans `WEATHER_MOVES` et `WEATHER_ITEMS` (si attaque) |
-| `scripts/my-project/005 Ability.rb`              | Créer l'effet (si effet)                                     |
+| `my-project/scripts/001 Weather.rb`              | Ajouter le symbole dans `WEATHER_NAMES`                      |
+| `my-project/scripts/002 WeatherChangeHandler.rb` | Ajouter l'entrée dans `WEATHER_SYM_TO_MSG`                   |
+| `my-project/scripts/003 WeatherEffect.rb`        | Créer la classe d'effet de la météo                          |
+| `my-project/scripts/004 WeatherMove.rb`          | Ajouter dans `WEATHER_MOVES` et `WEATHER_ITEMS` (si attaque) |
+| `my-project/scripts/005 Ability.rb`              | Créer l'effet (si effet)                                     |
 | Studio -> Attaques                               | Créer l'attaque avec la procédure `s_weather` (si attaque)   |
 
 ## Conclusion

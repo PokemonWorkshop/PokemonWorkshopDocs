@@ -151,10 +151,10 @@ end
 | File                                              | Action                                                     |
 | ------------------------------------------------- | ---------------------------------------------------------- |
 | Studio -> Battle System (file 100060)             | Add activation and end messages                            |
-| `scripts/my-project/001 FTerrainChangeHandler.rb` | Register messages in the handler                           |
-| `scripts/my-project/002 FieldTerrain.rb`          | Create the terrain effect class                            |
-| `scripts/my-project/003 TerrainMove.rb`           | Link the move to the terrain (if move)                     |
-| `scripts/my-project/004 Ability.rb`               | Create the effect (if effect)                              |
+| `my-project/scripts/001 FTerrainChangeHandler.rb` | Register messages in the handler                           |
+| `my-project/scripts/002 FieldTerrain.rb`          | Create the terrain effect class                            |
+| `my-project/scripts/003 TerrainMove.rb`           | Link the move to the terrain (if move)                     |
+| `my-project/scripts/004 Ability.rb`               | Create the effect (if effect)                              |
 | Studio -> Moves                                   | Create the move with `s_terrain` procedure (if move)       |
 
 ## Conclusion

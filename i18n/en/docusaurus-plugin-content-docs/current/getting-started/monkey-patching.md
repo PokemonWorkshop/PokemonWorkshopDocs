@@ -1,23 +1,25 @@
 ---
-title: "How to monkey-patch a PSDK class?"
-slug: monkey-patch-a-psdk-class
+title: "What is monkey-patching and how to apply it in PSDK?"
+slug: monkey-patching-in-psdk
 sidebar_position: 3
-description: "PSDK is an engine that receives regular updates. If you directly modify an engine file to change a behavior, the next update will overwrite your changes. Monkey-patching allows you to modify the behavior of a PSDK class from your own scripts, without touching the engine's source code."
+description: "PSDK is an engine that receives regular updates. If you directly modify an engine file to change a behavior, the next update will overwrite your changes. Monkey-patching allows you to modify PSDK's behavior from your own scripts, without touching the engine's source code."
 ---
 
-PSDK is an engine that receives regular updates. If you directly modify an engine file to change a behavior, the next update will overwrite your changes. Monkey-patching allows you to modify the behavior of a PSDK class **from your own scripts**, without touching the engine's source code. This guide covers the different monkey-patching techniques used in PSDK: `prepend` to globally modify a method, inheritance for a change local to a single scene, and module reopening for constants and registration functions.
+PSDK is an engine that receives regular updates. If you directly modify an engine file to change a behavior, the next update will overwrite your changes. Monkey-patching allows you to modify PSDK's behavior **from your own scripts**, without touching the engine's source code. This guide covers the different monkey-patching techniques used in PSDK: `prepend` to globally modify a method, inheritance for a change local to a single scene, and module reopening for constants and registration functions.
 
-## Principle
+## What is monkey-patching?
 
-The problem is simple: you want to change the behavior of a method that exists in PSDK, but the engine's code is not in your project — it is loaded internally by PSDK. You cannot (and should not) modify it. Ruby solves this problem with **module prepend**:
+Monkey-patching means modifying the behavior of existing code at runtime, without touching its source file. In Ruby, this is possible because classes and modules are **open**: you can reopen them at any time to add, replace, or enrich methods.
 
-1. In a Ruby file placed in `scripts/`, reopen the target PSDK class.
-2. Declare a module inside that class.
-3. This module redefines the method you want to modify.
-4. Call `prepend` to insert the module **before** the class in the inheritance chain.
-5. In the redefined method, `super` calls PSDK's original implementation.
+In PSDK, monkey-patching is essential. The engine's code is not in your project — it is loaded internally by PSDK. You cannot (and should not) modify it directly. Instead, you work from your own scripts, placed in `scripts/`, which are loaded **after** the engine.
 
-The advantage of `prepend` over directly reopening the class (redefining the method without a module) is **composability**: if you install multiple plugins that modify the same method, each `super` passes control to the next one in the chain. If you redefined the method directly, you would overwrite patches from other plugins.
+Three techniques allow monkey-patching in PSDK:
+
+- **`prepend`** — insert a module before a class or module in the inheritance chain, to intercept or enrich an existing method. This is the primary technique.
+- **Module reopening** — reopen a PSDK module to add methods, constants, or registration functions, without modifying existing ones.
+- **Inheritance** — create a subclass for a change local to a single scene or component, without affecting the rest of the game.
+
+`prepend` is preferred over directly reopening a class (redefining a method without a module) thanks to its **composability**: if multiple plugins modify the same method, each `super` passes control to the next one in the chain. Redefining the method directly would overwrite patches from other plugins.
 
 ## Where to place monkey-patches
 
