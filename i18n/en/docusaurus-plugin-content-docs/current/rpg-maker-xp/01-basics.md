@@ -2,10 +2,10 @@
 title: "How to learn RPG Maker XP basics?"
 slug: rpg-maker-xp-basics
 sidebar_position: 1
-description: "PSDK uses RPG Maker XP (RMXP) only for event management. Maps are created with Tiled and the database is managed by Pokemon Studio. However, until Studio v3 is released, RMXP remains necessary for events. This guide points to the reference resource and clarifies what needs to be learned."
+description: "PSDK uses RPG Maker XP (RMXP) only for event management. Maps are created with Tiled and the database is managed by Pokémon Studio. However, until Pokémon Studio v3 is released, RMXP remains necessary for events. This guide points to the reference resource and clarifies what needs to be learned."
 ---
 
-PSDK uses **RPG Maker XP** (RMXP) only for **event** management. Maps are created with **Tiled** and the database is managed by **Pokemon Studio**. However, until Studio v3 is released, RMXP remains necessary for events. This guide points to the reference resource and clarifies what needs to be learned.
+PSDK uses **RPG Maker XP** (RMXP) only for **event** management. Maps are created with **Tiled** and the database is managed by **Pokémon Studio**. However, until Pokémon Studio v3 is released, RMXP remains necessary for events. This guide points to the reference resource and clarifies what needs to be learned.
 
 ## Why learn RPG Maker XP?
 
@@ -34,10 +34,10 @@ Only **chapter 1** needs to be read (up to around page 45). It covers:
 
 ## What we don't use
 
-**Chapter 2** of the tutorial covers the RMXP **database** (heroes, monsters, items, skills, etc.). In PSDK, this entire part is replaced by **Pokemon Studio** — that's where you define Pokemon, moves, trainers, items and everything else. Chapter 2 can be skipped.
+**Chapter 2** of the tutorial covers the RMXP **database** (heroes, monsters, items, skills, etc.). In PSDK, this entire part is replaced by **Pokémon Studio** — that's where you define Pokémon, moves, trainers, items and everything else. Chapter 2 can be skipped.
 
 ## Conclusion
 
 - Read **chapter 1** of the RPG Maker XP tutorial from Le Site du Zéro to master events.
-- Skip **chapter 2** (database) — Pokemon Studio replaces this part in PSDK.
+- Skip **chapter 2** (database) — Pokémon Studio replaces this part in PSDK.
 - Once the basics are acquired, guide **002 How to use the Interpreter in an event** explains how to go further with PSDK's Script commands.

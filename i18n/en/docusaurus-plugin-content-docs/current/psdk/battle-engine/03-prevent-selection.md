@@ -10,7 +10,7 @@ description: "This guide explains how to make a move non-selectable in the battl
 A move can be non-selectable for two distinct reasons:
 
 - **From the move itself**: the move checks its own conditions and decides it cannot be chosen.
-- **From an external effect**: an active effect on the Pokemon prevents the move from being selected.
+- **From an external effect**: an active effect on the Pokémon prevents the move from being selected.
 
 In both cases, the prevention is signaled by returning a `Proc`. This return **must be accompanied by a message** clearly indicating the reason to the player.
 

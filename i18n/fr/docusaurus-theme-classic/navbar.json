@@ -2,20 +2,20 @@
   "item.label.Getting Started": {
     "message": "Démarrage"
   },
-  "item.label.Ruby": {
-    "message": "Ruby"
-  },
-  "item.label.RPG Maker": {
-    "message": "RPG Maker"
+  "item.label.Pokémon Studio": {
+    "message": "Pokémon Studio"
   },
   "item.label.PSDK": {
     "message": "PSDK"
   },
-  "item.label.Studio": {
-    "message": "Studio"
-  },
   "item.label.Tiled": {
     "message": "Tiled"
+  },
+  "item.label.RPG Maker XP": {
+    "message": "RPG Maker XP"
+  },
+  "item.label.Ruby": {
+    "message": "Ruby"
   },
   "item.label.Misc": {
     "message": "Divers"

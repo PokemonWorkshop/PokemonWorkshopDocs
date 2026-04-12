@@ -9,7 +9,7 @@ export default function DocItemLayout(props: Props) {
 
   return (
     <>
-      {metadata.sourceDirName === "ruby-course" && <CourseProgress />}
+      {metadata.sourceDirName === "ruby" && <CourseProgress />}
       {metadata.sourceDirName === "psdk/ui-development" && <FilRougeProgress />}
       <OriginalDocItemLayout {...props} />
     </>

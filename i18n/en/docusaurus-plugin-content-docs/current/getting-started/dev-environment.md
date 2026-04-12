@@ -87,7 +87,7 @@ Solargraph needs access to the PSDK source code to provide autocompletion on eng
 
 There are two ways to access the PSDK code, and the choice determines how updates work:
 
-- **Via the symbolic link**: the files point to the Pokemon Studio installation. When you update PSDK from Studio, these files are updated automatically.
+- **Via the symbolic link**: the files point to the Pokémon Studio installation. When you update PSDK from Pokémon Studio, these files are updated automatically.
 - **Via the pokemonsdk repository**: the forked repository becomes the source of truth. PSDK updates are **not** automatic — you must synchronize the repository with the official one yourself (see guide 002, section "Keeping your fork up to date").
 
 ### If the pokemonsdk repository is in the project
@@ -123,9 +123,9 @@ max_files: 5000
 - `"../pokemonsdk/**/*.rb"`: tells Solargraph to include all Ruby files from the pokemonsdk repository. This is the relative path from `scripts/`.
 - `./**/*.rb`: also includes all user scripts in `scripts/`.
 
-### If the repository is not in the project (standard Studio project)
+### If the repository is not in the project (standard Pokémon Studio project)
 
-For a project created with Pokemon Studio without forking the repository, the PSDK scripts are bundled internally by Studio. You need to create a **symbolic link** so Solargraph can access them.
+For a project created with Pokémon Studio without forking the repository, the PSDK scripts are bundled internally by Pokémon Studio. You need to create a **symbolic link** so Solargraph can access them.
 
 Open **cmd** (Command Prompt) **as administrator**, navigate to the `scripts/` folder of the project, and create the link:
 
@@ -136,7 +136,7 @@ mklink /D psdk_scripts "%temp%\..\Programs\pokemon-studio\resources\psdk-binarie
 
 - `mklink /D` creates a directory symbolic link. Administrator mode is required. This command is specific to cmd (do not use PowerShell).
 - `psdk_scripts` is the name of the virtual folder that will appear in `scripts/`. Do not put your own scripts in it.
-- The target path points to the PSDK Ruby sources in the Pokemon Studio installation. `%temp%` is used to reach the user's `Programs` folder.
+- The target path points to the PSDK Ruby sources in the Pokémon Studio installation. `%temp%` is used to reach the user's `Programs` folder.
 
 Then adapt the `solargraph.yml` to include this link:
 

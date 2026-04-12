@@ -97,7 +97,7 @@ end
 ```
 
 - The `code` variable is declared before `call_scene` so it remains accessible after the block. The block assigns the sub-scene's return value to this variable.
-- The arguments to `call_scene` after the scene class are passed directly to the `GamePlay::NameInput` constructor. Here: empty string (initial value), maximum code length, `nil` (no Pokemon), and `phrase:` for the prompt message.
+- The arguments to `call_scene` after the scene class are passed directly to the `GamePlay::NameInput` constructor. Here: empty string (initial value), maximum code length, `nil` (no Pokémon), and `phrase:` for the prompt message.
 - The guard clause `return if code.nil? || code.empty?` handles the case where the player cancelled the input by pressing B in the NameInput scene.
 
 ## Simple message

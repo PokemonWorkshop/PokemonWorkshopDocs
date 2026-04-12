@@ -6,7 +6,7 @@ import { useChapterProgress } from "./useChapterProgress";
 export default function CourseProgress() {
   const { metadata } = useDoc();
   const { chapters, currentIndex, visitedIds } = useChapterProgress(
-    "ruby-course-progress",
+    "ruby-progress",
     metadata.id,
   );
 

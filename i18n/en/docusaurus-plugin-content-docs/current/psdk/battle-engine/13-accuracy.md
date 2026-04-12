@@ -22,14 +22,14 @@ Where `factor` is the product of three elements:
 If `bypass_chance_of_hit?` returns `true`, the accuracy check is skipped and the move always hits.
 
 :::note
-**Studio tip**: setting a move's accuracy to `0` in Studio is enough to make it never miss. The system treats an accuracy of 0 or less as an automatic bypass of the accuracy check.
+**Pokémon Studio tip**: setting a move's accuracy to `0` in Pokémon Studio is enough to make it never miss. The system treats an accuracy of 0 or less as an automatic bypass of the accuracy check.
 :::
 
 ## From the move
 
 Some moves change their accuracy based on context. For example, the move **Thunder** has 50 accuracy in sun, always hits in rain, and keeps its normal accuracy otherwise.
 
-To handle this behavior, override the `accuracy` method in the move's subclass. If the conditions are not met, return `super` to keep the value defined in Studio.
+To handle this behavior, override the `accuracy` method in the move's subclass. If the conditions are not met, return `super` to keep the value defined in Pokémon Studio.
 
 ### Example: Thunder
 
@@ -46,7 +46,7 @@ end
 
 - `return 50` reduces accuracy to 50% in sun.
 - `return 0` makes the move never miss in rain (accuracy of 0 = automatic bypass).
-- `return super` keeps the accuracy defined in Studio for all other cases.
+- `return super` keeps the accuracy defined in Pokémon Studio for all other cases.
 
 You can also override `bypass_chance_of_hit?` to completely skip the accuracy check based on specific conditions. For example, a move that always hits if the target used Minimize:
 

@@ -11,7 +11,7 @@ Git est l'outil de versioning utilisé par PSDK. Il permet de suivre l'historiqu
 
 ### Le dépôt (repository)
 
-Un dépôt Git est un dossier dont l'historique de modifications est suivi. Un projet PSDK créé avec Studio ne contient pas de dépôt Git par défaut — le code du moteur est embarqué en interne par Studio. Le dossier `pokemonsdk/` n'apparaît que lorsqu'on fork et clone le dépôt officiel (voir la section "Forker le dépôt PSDK" plus bas). Ce dossier devient alors la source de vérité pour le code du moteur, et les mises à jour ne sont plus automatiques.
+Un dépôt Git est un dossier dont l'historique de modifications est suivi. Un projet PSDK créé avec Pokémon Studio ne contient pas de dépôt Git par défaut — le code du moteur est embarqué en interne par Pokémon Studio. Le dossier `pokemonsdk/` n'apparaît que lorsqu'on fork et clone le dépôt officiel (voir la section "Forker le dépôt PSDK" plus bas). Ce dossier devient alors la source de vérité pour le code du moteur, et les mises à jour ne sont plus automatiques.
 
 ### Le commit
 
@@ -128,7 +128,7 @@ git clone git@gitlab.com:votre-pseudo/pokemonsdk.git
 
 ## Maintenir son fork à jour
 
-Le dépôt officiel PSDK évolue en permanence. Contrairement à un projet Studio classique où les mises à jour sont automatiques, avec un fork c'est à nous de synchroniser. Pour cela, il faut ajouter le dépôt officiel comme remote afin de pouvoir récupérer ses nouveaux commits et rebase notre branche `development` dessus.
+Le dépôt officiel PSDK évolue en permanence. Contrairement à un projet PokémonStudio classique où les mises à jour sont automatiques, avec un fork c'est à nous de synchroniser. Pour cela, il faut ajouter le dépôt officiel comme remote afin de pouvoir récupérer ses nouveaux commits et rebase notre branche `development` dessus.
 
 ### Ajouter le remote officiel
 

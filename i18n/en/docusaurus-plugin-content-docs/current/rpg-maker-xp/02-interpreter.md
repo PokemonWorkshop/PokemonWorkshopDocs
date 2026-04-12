@@ -11,7 +11,7 @@ In RMXP, when creating an event, you have access to standard commands: show a me
 
 When an event runs on the map, an object called the **Interpreter** processes each command one by one. This object is created when the map loads and lives as long as the map is active. Each RMXP command (show a message, move an event, play a sound) corresponds to a method on this object.
 
-What makes the Interpreter powerful in PSDK is that the engine **extends** it with many additional methods. Where base RMXP can only do simple things, PSDK adds methods to manage Pokemon, start battles, open menus, move the camera, and much more.
+What makes the Interpreter powerful in PSDK is that the engine **extends** it with many additional methods. Where base RMXP can only do simple things, PSDK adds methods to manage Pokémon, start battles, open menus, move the camera, and much more.
 
 ## The Script command
 
@@ -99,7 +99,7 @@ For those who prefer reading the code directly, all Interpreter methods are defi
 |---|---|
 | `100 Interpreter_Environnement.rb` | Player detection, event deletion |
 | `105 Interpreter_Camera.rb` | Camera movement |
-| `110 Interpreter_Pokemon.rb` | Add, remove, modify Pokemon |
+| `110 Interpreter_Pokemon.rb` | Add, remove, modify Pokémon |
 | `120 Interpreter_Shortcut.rb` | Shortcuts, emotions, menus, pathfinding |
 | `121 Interpreter_add_item.rb` | Item management |
 | `125 Interpreter_Fiber.rb` | Messages and choices |

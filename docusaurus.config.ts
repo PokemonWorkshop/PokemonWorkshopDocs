@@ -27,8 +27,8 @@ const config: Config = {
     defaultLocale: "en",
     locales: ["en", "fr"],
     localeConfigs: {
-      fr: { label: "Français", direction: "ltr" },
       en: { label: "English", direction: "ltr" },
+      fr: { label: "Français", direction: "ltr" },
     },
   },
 
@@ -39,7 +39,7 @@ const config: Config = {
       "@easyops-cn/docusaurus-search-local",
       {
         hashed: true,
-        language: ["fr", "en"],
+        language: ["en", "fr"],
         docsRouteBasePath: "/",
       },
     ],
@@ -68,7 +68,7 @@ const config: Config = {
       attributes: {
         name: "description",
         content:
-          "Official documentation for Pokémon Workshop: PSDK tutorials, Ruby courses, RPG Maker guides, and Studio references.",
+          "Official documentation for Pokémon Workshop: PSDK tutorials, Ruby courses, RPG Maker guides, and Pokémon Studio references.",
       },
     },
   ],
@@ -88,11 +88,11 @@ const config: Config = {
       },
       items: [
         { label: "Getting Started", to: "/category/getting-started", position: "left" },
-        { label: "Ruby", to: "/category/ruby-course", position: "left" },
-        { label: "RPG Maker", to: "/category/rpg-maker", position: "left" },
+        { label: "Pokémon Studio", to: "/category/pokemon-studio", position: "left" },
         { label: "PSDK", to: "/category/psdk", position: "left" },
-        { label: "Studio", to: "/category/studio", position: "left" },
         { label: "Tiled", to: "/category/tiled", position: "left" },
+        { label: "RPG Maker XP", to: "/category/rpg-maker-xp", position: "left" },
+        { label: "Ruby", to: "/category/ruby", position: "left" },
         { label: "Misc", to: "/category/misc", position: "left" },
         {
           type: "search",

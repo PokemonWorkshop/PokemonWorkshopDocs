@@ -138,7 +138,7 @@ Une fois ce fichier en place, la méthode est disponible dans tous les events du
 ```ruby
 # In a Script command
 heal_all_pokemon
-message("Your Pokemon have been fully healed!")
+message("Your Pokémon have been fully healed!")
 ```
 
 C'est le même principe que le monkey-patching décrit dans le guide **001 Qu'est-ce que le monkey-patch et comment l'appliquer dans PSDK** : on rouvre la classe, on ajoute une méthode, et elle devient accessible partout. La différence est qu'ici on ne modifie pas une méthode existante — on en crée une nouvelle.

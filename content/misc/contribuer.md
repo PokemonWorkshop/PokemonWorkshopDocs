@@ -39,13 +39,13 @@ La documentation est dans le dossier `content/`, organisée par section :
 content/
 ├── index.md                  # Page d'accueil
 ├── getting-started/          # Démarrage
-├── ruby-course/              # Cours Ruby
-├── rpg-maker/                # RPG Maker
+├── pokemon-studio/           # Pokémon Studio
 ├── psdk/                     # PSDK (battle-engine, ui-development)
 │   ├── battle-engine/
 │   └── ui-development/
-├── studio/                   # Studio
 ├── tiled/                    # Tiled
+├── rpg-maker-xp/             # RPG Maker XP
+├── ruby/                     # Cours Ruby
 └── divers/                   # Guides divers
 ```
 

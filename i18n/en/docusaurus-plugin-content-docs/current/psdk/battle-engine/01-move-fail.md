@@ -10,7 +10,7 @@ description: "This guide explains how to make a move fail before it is executed,
 A move can fail for two distinct reasons:
 
 - **From the move itself**: the move checks its own conditions and decides it cannot be used.
-- **From an external effect**: an active effect on the Pokemon prevents the move from being used.
+- **From an external effect**: an active effect on the Pokémon prevents the move from being used.
 
 In both cases, the failure **must be accompanied by a message** clearly indicating the reason to the player.
 
@@ -70,6 +70,6 @@ end
 ## Conclusion
 
 - Use `move_usable_by_user` if the failure depends on the move's own logic.
-- Use `on_move_prevention_user` if the failure depends on an external effect active on the Pokemon.
+- Use `on_move_prevention_user` if the failure depends on an external effect active on the Pokémon.
 - Return `false` (from a move) or `:prevent` (from an effect) depending on the context.
 - Always display a clear message to the player before returning the failure.

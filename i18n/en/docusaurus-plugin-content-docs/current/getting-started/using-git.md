@@ -11,7 +11,7 @@ Git is the versioning tool used by PSDK. It allows tracking the history of chang
 
 ### The repository
 
-A Git repository is a folder whose change history is tracked. A PSDK project created with Studio does not contain a Git repository by default — the engine code is bundled internally by Studio. The `pokemonsdk/` folder only appears when you fork and clone the official repository (see the "Forking the PSDK repository" section below). This folder then becomes the source of truth for the engine code, and updates are no longer automatic.
+A Git repository is a folder whose change history is tracked. A PSDK project created with Pokémon Studio does not contain a Git repository by default — the engine code is bundled internally by Pokémon Studio. The `pokemonsdk/` folder only appears when you fork and clone the official repository (see the "Forking the PSDK repository" section below). This folder then becomes the source of truth for the engine code, and updates are no longer automatic.
 
 ### The commit
 
@@ -128,7 +128,7 @@ git clone git@gitlab.com:your-username/pokemonsdk.git
 
 ## Keeping your fork up to date
 
-The official PSDK repository evolves constantly. Unlike a standard Studio project where updates are automatic, with a fork you must synchronize yourself. To do this, you need to add the official repository as a remote so you can fetch its new commits and rebase your `development` branch on top.
+The official PSDK repository evolves constantly. Unlike a standard Pokémon Studio project where updates are automatic, with a fork you must synchronize yourself. To do this, you need to add the official repository as a remote so you can fetch its new commits and rebase your `development` branch on top.
 
 ### Adding the official remote
 

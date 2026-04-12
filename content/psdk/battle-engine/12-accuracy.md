@@ -22,14 +22,14 @@ Où `factor` est le produit de trois éléments :
 Si `bypass_chance_of_hit?` retourne `true`, le test de précision est ignoré et l'attaque touche automatiquement.
 
 :::note
-**Astuce Studio** : mettre la précision d'une attaque à `0` dans Studio suffit à la rendre infaillible. Le système considère une précision inférieure ou égale à 0 comme un bypass automatique du test de précision.
+**Astuce Pokémon Studio** : mettre la précision d'une attaque à `0` dans Pokémon Studio suffit à la rendre infaillible. Le système considère une précision inférieure ou égale à 0 comme un bypass automatique du test de précision.
 :::
 
 ## Depuis l'attaque
 
 Certaines attaques modifient leur précision selon le contexte. Par exemple, l'attaque **Fatal-Foudre** a une précision de 50 au soleil, touche automatiquement sous la pluie, et conserve sa précision normale sinon.
 
-Pour gérer ce comportement, on override la méthode `accuracy` dans la sous-classe de l'attaque. Si les conditions ne sont pas remplies, on retourne `super` pour conserver la valeur définie dans Studio.
+Pour gérer ce comportement, on override la méthode `accuracy` dans la sous-classe de l'attaque. Si les conditions ne sont pas remplies, on retourne `super` pour conserver la valeur définie dans Pokémon Studio.
 
 ### Exemple : Fatal-Foudre
 
@@ -46,7 +46,7 @@ end
 
 - `return 50` réduit la précision à 50% au soleil.
 - `return 0` rend l'attaque infaillible sous la pluie (précision de 0 = bypass automatique).
-- `return super` conserve la précision définie dans Studio pour tous les autres cas.
+- `return super` conserve la précision définie dans Pokémon Studio pour tous les autres cas.
 
 On peut également override `bypass_chance_of_hit?` pour ignorer complètement le test de précision selon des conditions spécifiques. Par exemple, une attaque qui touche toujours si la cible utilise Lilliput :
 

@@ -22,14 +22,14 @@ La table de probabilité est la suivante :
 | 3     | 50%         |
 | 4+    | 100%        |
 
-## Depuis Studio
+## Depuis Pokémon Studio
 
-Le taux de critique de base d'une attaque se configure directement dans Studio via le champ `critical_rate`. Cette valeur représente le count initial du compteur critique :
+Le taux de critique de base d'une attaque se configure directement dans Pokémon Studio via le champ `critical_rate`. Cette valeur représente le count initial du compteur critique :
 
 - Un `critical_rate` de 0 donne un count de base de 0 (pas de bonus).
 - Un `critical_rate` de 1 donne un count de base de 1 (6.25% de base, cumulable avec d'autres bonus).
 
-Par exemple, les attaques **Tranche** et **Lame de Roc** ont un `critical_rate` de 1 dans Studio.
+Par exemple, les attaques **Tranche** et **Lame de Roc** ont un `critical_rate` de 1 dans Pokémon Studio.
 
 ## Depuis l'attaque
 
@@ -91,7 +91,7 @@ La prévention des coups critiques se fait via :
 
 ## Conclusion
 
-- Configurez le `critical_rate` dans Studio pour le taux de base (0 = normal, 1 = taux élevé).
+- Configurez le `critical_rate` dans Pokémon Studio pour le taux de base (0 = normal, 1 = taux élevé).
 - Surchargez `calc_critical_hit` dans la sous-classe de l'attaque pour une logique personnalisée. Utilisez `return true` pour un critique garanti, `bchance?` pour des chances augmentées, et `return super` sinon.
 - Le compteur est incrémenté par les talents, objets et effets avant d'être converti en probabilité.
 - La prévention se fait via les talents Armurbaston/Coque Armure ou l'effet Voeu Soin.

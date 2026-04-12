@@ -16,12 +16,12 @@ Adding a field terrain involves four steps:
 
 ## Adding text messages
 
-Terrain messages are stored in file 100060 in Studio. Two messages need to be added:
+Terrain messages are stored in file 100060 in Pokémon Studio. Two messages need to be added:
 
 - An **activation** message (when the terrain appears) -- e.g., *"An electric current runs across the battlefield!"*
 - An **end** message (when the terrain fades) -- e.g., *"The electricity disappeared from the battlefield."*
 
-Note the line numbers of these messages in Studio, they will be needed for registration in the handler.
+Note the line numbers of these messages in Pokémon Studio, they will be needed for registration in the handler.
 
 Existing terrains use these line numbers in file 60:
 
@@ -63,7 +63,7 @@ Between these two elements, you add the desired behavior by overriding `EffectBa
 
 ### `affected_by_terrain?`
 
-When adding terrain-related behavior, you must check `affected_by_terrain?` on the target or user Pokemon. This method returns `true` if the Pokemon is grounded. A Pokemon is **not** affected if it is Flying type, has the Levitate ability, is under the effect of Magnet Rise or Telekinesis, or holds an Air Balloon.
+When adding terrain-related behavior, you must check `affected_by_terrain?` on the target or user Pokémon. This method returns `true` if the Pokémon is grounded. A Pokémon is **not** affected if it is Flying type, has the Levitate ability, is under the effect of Magnet Rise or Telekinesis, or holds an Air Balloon.
 
 ### Available hooks
 
@@ -86,14 +86,14 @@ end
 
 ## Triggering the terrain via a move
 
-### Configure the move in Studio
+### Configure the move in Pokémon Studio
 
-Create the move in Pokemon Studio with these properties:
+Create the move in Pokémon Studio with these properties:
 
 - **Procedure**: `s_terrain`
 - **Category**: Status
 - **PP**: 10 (typical)
-- **Target**: All Pokemon
+- **Target**: All Pokémon
 
 ### Register the move in TerrainMove
 
@@ -159,9 +159,9 @@ end
 
 ## Conclusion
 
-- First add the **messages** in Studio (file 100060), as they are needed for the handler.
+- First add the **messages** in Pokémon Studio (file 100060), as they are needed for the handler.
 - Create the **effect class** by inheriting from `FieldTerrain` with at minimum `on_end_turn_event` and `register`.
 - Add entries to `FTERRAIN_SYM_TO_MSG` to link the messages to the terrain.
 - Add the entry to `TERRAIN_MOVES` for moves, or inherit from `ElectricSurge` for effects.
-- Always check `affected_by_terrain?` before applying an effect to a Pokemon.
+- Always check `affected_by_terrain?` before applying an effect to a Pokémon.
 - Existing terrains in `5 Battle/06 Effects/07 Field Terrain Effects/` serve as reference for possible behaviors.

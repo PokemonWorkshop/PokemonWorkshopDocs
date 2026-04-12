@@ -16,12 +16,12 @@ L'ajout d'un terrain se fait en quatre étapes :
 
 ## Ajouter les textes
 
-Les messages de terrain sont stockés dans le fichier 100060 sur Studio. Il faut ajouter deux messages :
+Les messages de terrain sont stockés dans le fichier 100060 sur Pokémon Studio. Il faut ajouter deux messages :
 
 - Un message **d'activation** (quand le terrain apparaît) — ex : _"An electric current runs across the battlefield!"_
 - Un message **de fin** (quand le terrain s'estompe) — ex : _"The electricity disappeared from the battlefield."_
 
-Notez les numéros de ligne de ces messages dans Studio, ils seront nécessaires pour l'enregistrement dans le handler.
+Notez les numéros de ligne de ces messages dans Pokémon Studio, ils seront nécessaires pour l'enregistrement dans le handler.
 
 Les terrains existants utilisent ces numéros de lignes dans le fichier 60 :
 
@@ -98,13 +98,13 @@ La structure du hash est la suivante :
 - `FTERRAIN_SYM_TO_MSG[:void_terrain] = 400` : le message d'activation (ligne 400 du fichier texte 60).
 - `FTERRAIN_SYM_TO_MSG[:none][:void_terrain] = 401` : le message de fin (ligne 401), affiché quand le terrain passe à `:none`.
 
-Les numéros `400` et `401` correspondent aux lignes des messages ajoutés dans Studio à la première étape.
+Les numéros `400` et `401` correspondent aux lignes des messages ajoutés dans Pokémon Studio à la première étape.
 
 ## Déclencher le terrain via une attaque
 
 Pour créer une attaque qui invoque le terrain :
 
-### Configurer l'attaque dans Studio
+### Configurer l'attaque dans PokémonStudio
 
 Créez l'attaque dans Pokémon Studio avec ces propriétés :
 
@@ -180,17 +180,17 @@ Pour créer un terrain complet, voici les fichiers à créer ou modifier :
 
 | Fichier                                           | Action                                                     |
 | ------------------------------------------------- | ---------------------------------------------------------- |
-| Studio → Système de combat (fichier texte 60)    | Ajouter les messages d'activation et de fin                |
+| Studio → Système de combat (fichier texte 60)     | Ajouter les messages d'activation et de fin                |
 | `my-project/scripts/001 FTerrainChangeHandler.rb` | Enregistrer les messages dans le handler                   |
 | `my-project/scripts/002 FieldTerrain.rb`          | Créer la classe d'effet du terrain                         |
 | `my-project/scripts/003 TerrainMove.rb`           | Lier l'attaque au terrain (si attaque)                     |
 | `my-project/scripts/004 Ability.rb`               | Créer le talent Surge (si talent)                          |
-| Studio → Attaques                                | Créer l'attaque avec la procédure `s_terrain` (si attaque) |
-| Studio → Talents                                 | Créer le talent (si talent)                                |
+| Studio → Attaques                                 | Créer l'attaque avec la procédure `s_terrain` (si attaque) |
+| Studio → Talents                                  | Créer le talent (si talent)                                |
 
 ## Conclusion
 
-- Ajoutez d'abord les **messages** dans Studio (fichier texte 60), car ils sont nécessaires pour le handler.
+- Ajoutez d'abord les **messages** dans Pokémon Studio (fichier texte 60), car ils sont nécessaires pour le handler.
 - Créez la **classe d'effet** en héritant de `FieldTerrain` avec au minimum `on_end_turn_event` et `register`.
 - Ajoutez les entrées dans `FTERRAIN_SYM_TO_MSG` pour lier les messages au terrain.
 - Ajoutez l'entrée dans `TERRAIN_MOVES` pour les attaques, ou héritez de `ElectricSurge` pour les talents.

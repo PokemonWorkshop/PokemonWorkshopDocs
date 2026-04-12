@@ -112,7 +112,7 @@ target.add_heal_to_history(amount, launcher, skill)
 | `move`          | `Battle::Move`               | Copy (`dup`) of the move            |
 | `original_move` | `Battle::Move`               | Direct reference to the move object |
 | `targets`       | `Array<PFM::PokemonBattler>` | Affected targets                    |
-| `attack_order`  | `Integer`                    | Pokemon's attack order this turn    |
+| `attack_order`  | `Integer`                    | Pokémon's attack order this turn    |
 
 `SuccessfulMoveHistory` inherits from `MoveHistory` without additions.
 
@@ -124,7 +124,7 @@ target.add_heal_to_history(amount, launcher, skill)
 | `damage`   | `Integer`                  | Amount of damage taken       |
 | `launcher` | `PFM::PokemonBattler, nil` | Launcher of the damage       |
 | `move`     | `Battle::Move, nil`        | Move that caused the damage  |
-| `ko`       | `Boolean`                  | Whether the Pokemon was KO'd |
+| `ko`       | `Boolean`                  | Whether the Pokémon was KO'd |
 
 ### StatHistory
 

@@ -87,7 +87,7 @@ Solargraph a besoin d'accéder au code source de PSDK pour proposer l'autocompl�
 
 Il y a deux façons d'accéder au code PSDK, et le choix détermine comment les mises à jour fonctionnent :
 
-- **Via le lien symbolique** : les fichiers pointent vers l'installation Pokémon Studio. Quand on met à jour PSDK depuis Studio, ces fichiers sont mis à jour automatiquement.
+- **Via le lien symbolique** : les fichiers pointent vers l'installation Pokémon Studio. Quand on met à jour PSDK depuis Pokémon Studio, ces fichiers sont mis à jour automatiquement.
 - **Via le dépôt pokemonsdk** : le dépôt forké devient la source de vérité. Les mises à jour de PSDK ne sont **pas** automatiques — il faut synchroniser soi-même le dépôt avec l'officiel (voir le guide 002, section "Maintenir son fork à jour").
 
 ### Si le dépôt pokemonsdk est dans le projet
@@ -125,7 +125,7 @@ max_files: 5000
 
 ### Si le dépôt n'est pas dans le projet
 
-Pour un projet sans fork du dépôt, les scripts PSDK sont embarqués en interne par Studio. Il faut créer un **lien symbolique** pour que Solargraph puisse y accéder.
+Pour un projet sans fork du dépôt, les scripts PSDK sont embarqués en interne par Pokémon Studio. Il faut créer un **lien symbolique** pour que Solargraph puisse y accéder.
 
 Ouvrir **cmd** (invite de commandes) **en mode administrateur**, se placer dans le dossier `scripts/` du projet, et créer le lien :
 

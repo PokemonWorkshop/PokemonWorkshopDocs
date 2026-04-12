@@ -16,13 +16,13 @@ Adding a weather involves four steps:
 
 ## Adding text messages
 
-Weather messages are stored in file 100018 in Studio. Up to three messages need to be added:
+Weather messages are stored in file 100018 in Pokémon Studio. Up to three messages need to be added:
 
 - An **activation** message (when the weather appears) -- e.g., *"It started to rain!"*
 - An **end** message (when the weather fades) -- e.g., *"The rain stopped."*
 - A **turn** message (displayed at the end of each turn, optional) -- e.g., *"The sandstorm rages."*
 
-Note the line numbers of these messages in Studio, they will be needed for registration in the handler.
+Note the line numbers of these messages in Pokémon Studio, they will be needed for registration in the handler.
 
 Existing weathers use these line numbers in file 18:
 
@@ -110,9 +110,9 @@ The hash structure is as follows:
 
 To create a move that invokes the weather:
 
-### Configure the move in Studio
+### Configure the move in Pokémon Studio
 
-Create the move in Pokemon Studio with these properties:
+Create the move in Pokémon Studio with these properties:
 
 - **Procedure**: `s_weather`
 - **Category**: Status
