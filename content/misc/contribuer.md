@@ -9,16 +9,16 @@ Ce guide explique comment ajouter ou modifier des pages de documentation, les co
 
 ## Prérequis
 
-- [Git](https://git-scm.com/) installé et configuré (voir le guide [Comment utiliser Git avec PSDK ?](/utiliser-git-avec-psdk)).
+- [Git](https://git-scm.com/) installé et configuré (voir le guide [Comment utiliser Git avec PSDK ?](/getting-started/using-git-with-psdk)).
 - [Bun](https://bun.sh/) installé pour lancer le site en local.
-- Un compte GitHub avec accès au dépôt [PokemonWorkshop/pokemon-workshop-docs](https://github.com/PokemonWorkshop/pokemon-workshop-docs).
+- Un compte GitHub avec accès au dépôt [PokemonWorkshop/PokemonWorkshopDocs](https://github.com/PokemonWorkshop/PokemonWorkshopDocs).
 
 ## Lancer le site en local
 
 Cloner le dépôt et installer les dépendances :
 
 ```bash
-git clone git@github.com:PokemonWorkshop/pokemon-workshop-docs.git
+git clone git@github.com:PokemonWorkshop/PokemonWorkshopDocs.git
 cd pokemon-workshop-docs/docs
 bun install
 ```
