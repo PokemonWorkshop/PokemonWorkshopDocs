@@ -4,7 +4,7 @@ import { themes as prismThemes } from "prism-react-renderer";
 
 const config: Config = {
   title: "Pokémon Workshop Docs",
-  tagline: "Tutoriels et guides pour l'écosystème PSDK",
+  tagline: "Tutorials and guides for the PSDK ecosystem",
   favicon: "img/favicon.ico",
 
   future: {
@@ -17,15 +17,15 @@ const config: Config = {
   organizationName: "PokemonWorkshop",
   projectName: "pokemon-workshop-docs",
 
-  onBrokenLinks: "warn",
+  onBrokenLinks: "throw",
 
   markdown: {
     format: "md",
   },
 
   i18n: {
-    defaultLocale: "fr",
-    locales: ["fr", "en"],
+    defaultLocale: "en",
+    locales: ["en", "fr"],
     localeConfigs: {
       fr: { label: "Français", direction: "ltr" },
       en: { label: "English", direction: "ltr" },
@@ -62,6 +62,17 @@ const config: Config = {
     ],
   ],
 
+  headTags: [
+    {
+      tagName: "meta",
+      attributes: {
+        name: "description",
+        content:
+          "Official documentation for Pokémon Workshop: PSDK tutorials, Ruby courses, RPG Maker guides, and Studio references.",
+      },
+    },
+  ],
+
   themeConfig: {
     image: "img/logo.png",
     colorMode: {
@@ -76,13 +87,13 @@ const config: Config = {
         src: "img/logo.svg",
       },
       items: [
-        { label: "Démarrage", to: "/category/démarrage", position: "left" },
-        { label: "Ruby", to: "/category/cours-ruby", position: "left" },
+        { label: "Getting Started", to: "/category/getting-started", position: "left" },
+        { label: "Ruby", to: "/category/ruby-course", position: "left" },
         { label: "RPG Maker", to: "/category/rpg-maker", position: "left" },
         { label: "PSDK", to: "/category/psdk", position: "left" },
         { label: "Studio", to: "/category/studio", position: "left" },
         { label: "Tiled", to: "/category/tiled", position: "left" },
-        { label: "Divers", to: "/category/divers", position: "left" },
+        { label: "Misc", to: "/category/misc", position: "left" },
         {
           type: "search",
           position: "right",

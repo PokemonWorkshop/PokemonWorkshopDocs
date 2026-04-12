@@ -1,0 +1,23 @@
+{
+  "item.label.Getting Started": {
+    "message": "Démarrage"
+  },
+  "item.label.Ruby": {
+    "message": "Ruby"
+  },
+  "item.label.RPG Maker": {
+    "message": "RPG Maker"
+  },
+  "item.label.PSDK": {
+    "message": "PSDK"
+  },
+  "item.label.Studio": {
+    "message": "Studio"
+  },
+  "item.label.Tiled": {
+    "message": "Tiled"
+  },
+  "item.label.Misc": {
+    "message": "Divers"
+  }
+}
