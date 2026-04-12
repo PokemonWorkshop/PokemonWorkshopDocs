@@ -120,7 +120,7 @@ puts Pokedex::MAX_TEAM_SIZE    # => 6
 ```ruby
 module Displayable
   def summary
-    return "#{@name} Niv.#{@level}"
+    return "#{@name} Lvl.#{@level}"
   end
 end
 
@@ -143,10 +143,10 @@ class Trainer
 end
 
 pikachu = Pokemon.new('Pikachu', 25)
-sacha = Trainer.new('Sacha', 10)
+sacha = Trainer.new('Ash', 10)
 
-puts pikachu.summary    # => Pikachu Niv.25
-puts sacha.summary      # => Sacha Niv.10
+puts pikachu.summary    # => Pikachu Lvl.25
+puts sacha.summary      # => Ash Lvl.10
 ```
 
 - `include Displayable` gives the `summary` method to `Pokemon` **and** `Trainer`. We shared behavior without inheritance.
@@ -189,13 +189,13 @@ end
 
 team = [
   Pokemon.new('Pikachu', [:electric]),
-  Pokemon.new('Dracaufeu', [:fire, :flying]),
-  Pokemon.new('Tortank', [:water])
+  Pokemon.new('Charizard', [:fire, :flying]),
+  Pokemon.new('Blastoise', [:water])
 ]
 
 # Called on the class (not on an object)
 fire_pokemon = Pokemon.find_by_type(team, :fire)
-puts fire_pokemon.first.name    # => Dracaufeu
+puts fire_pokemon.first.name    # => Charizard
 ```
 
 - `include` -> instance methods (called on an object: `pikachu.summary`)

@@ -48,7 +48,7 @@ end
 
 ```ruby
 names = registry.map { |pokemon| pokemon.name }
-# => ["Pikachu", "Dracaufeu", "Tortank"]
+# => ["Pikachu", "Charizard", "Blastoise"]
 ```
 
 `flat_map` does the same thing, then flattens the result by one level. This is useful when each element produces an Array:
@@ -233,7 +233,7 @@ class Pokemon
 end
 
 pikachu = Pokemon.new('Pikachu', 25)
-charizard = Pokemon.new('Dracaufeu', 50)
+charizard = Pokemon.new('Charizard', 50)
 
 puts pikachu < charizard                                    # => true
 puts charizard > pikachu                                    # => true

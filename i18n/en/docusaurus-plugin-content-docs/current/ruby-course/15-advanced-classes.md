@@ -103,7 +103,7 @@ Duck typing means you do not check the **type** of an object, but the **methods*
 
 ```ruby
 def display_creature(creature)
-  puts "#{creature.name} Niv.#{creature.level}" if creature.respond_to?(:name)
+  puts "#{creature.name} Lvl.#{creature.level}" if creature.respond_to?(:name)
 end
 ```
 
@@ -117,12 +117,12 @@ end
 ```ruby
 Move = Struct.new(:name, :type, :power, :accuracy)
 
-thunderbolt = Move.new('Tonnerre', :electric, 90, 100)
-puts thunderbolt.name      # => Tonnerre
+thunderbolt = Move.new('Thunder', :electric, 90, 100)
+puts thunderbolt.name      # => Thunder
 puts thunderbolt.power     # => 90
 
 # == automatically compares all values
-other = Move.new('Tonnerre', :electric, 90, 100)
+other = Move.new('Thunder', :electric, 90, 100)
 puts thunderbolt == other  # => true
 ```
 
@@ -132,12 +132,12 @@ puts thunderbolt == other  # => true
 ```ruby
 Move = Struct.new(:name, :type, :power, :accuracy) do
   def to_s
-    return "#{name} (#{type}) — Puissance : #{power}"
+    return "#{name} (#{type}) — Power: #{power}"
   end
 end
 
-puts Move.new('Tonnerre', :electric, 90, 100)
-# => Tonnerre (electric) — Puissance : 90
+puts Move.new('Thunder', :electric, 90, 100)
+# => Thunder (electric) — Power: 90
 ```
 
 ## method_missing — dynamic interception

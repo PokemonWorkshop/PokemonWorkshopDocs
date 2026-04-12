@@ -39,13 +39,13 @@ The most common structure for executing code based on a condition:
 level = 50
 
 if level >= 100
-  puts 'Niveau maximum atteint !'
+  puts 'Maximum level reached!'
 elsif level >= 50
-  puts 'Pokémon de haut niveau'
+  puts 'High-level Pokémon'
 elsif level >= 20
-  puts 'Pokémon de niveau moyen'
+  puts 'Medium-level Pokémon'
 else
-  puts 'Pokémon de bas niveau'
+  puts 'Low-level Pokémon'
 end
 ~~~
 
@@ -60,7 +60,7 @@ A simple `if` without `elsif` or `else`:
 health_points = 0
 
 if health_points <= 0
-  puts 'Le Pokémon est KO !'
+  puts 'The Pokémon is KO!'
 end
 ~~~
 
@@ -72,7 +72,7 @@ end
 held_item = nil
 
 unless held_item
-  puts 'Le Pokémon ne tient aucun objet.'
+  puts 'The Pokémon holds no item.'
 end
 ~~~
 
@@ -87,9 +87,9 @@ When the code to execute fits on a single line, you can put the condition at the
 level = 100
 health_points = 0
 
-puts 'Niveau maximum !' if level >= 100
-puts 'Le Pokémon est KO !' if health_points <= 0
-puts 'Le Pokémon est en forme.' unless health_points <= 0
+puts 'Maximum level!' if level >= 100
+puts 'The Pokémon is KO!' if health_points <= 0
+puts 'The Pokémon is healthy.' unless health_points <= 0
 ~~~
 
 - This is exactly the same as an `if ... end`, but more compact.
@@ -105,15 +105,15 @@ pokemon_type = :fire
 
 case pokemon_type
 when :fire
-  puts 'Fort contre Plante, faible contre Eau'
+  puts 'Strong against Grass, weak against Water'
 when :water
-  puts 'Fort contre Feu, faible contre Plante'
+  puts 'Strong against Fire, weak against Grass'
 when :grass
-  puts 'Fort contre Eau, faible contre Feu'
+  puts 'Strong against Water, weak against Fire'
 when :electric
-  puts 'Fort contre Eau'
+  puts 'Strong against Water'
 else
-  puts "Type inconnu : #{pokemon_type}"
+  puts "Unknown type: #{pokemon_type}"
 end
 ~~~
 
@@ -128,11 +128,11 @@ level = 45
 
 case level
 when 1..30
-  puts 'Bas niveau'
+  puts 'Low level'
 when 31..60
-  puts 'Niveau moyen'
+  puts 'Medium level'
 when 61..100
-  puts 'Haut niveau'
+  puts 'High level'
 end
 ~~~
 
@@ -145,11 +145,11 @@ value = 42
 
 case value
 when Integer
-  puts 'Un nombre entier'
+  puts 'An integer'
 when String
-  puts 'Du texte'
+  puts 'Some text'
 when Symbol
-  puts 'Un symbole'
+  puts 'A symbol'
 end
 ~~~
 
@@ -186,17 +186,17 @@ is_legendary = false
 
 # && : BOTH conditions must be true
 if level >= 50 && !is_legendary
-  puts 'Pokémon puissant et non légendaire'
+  puts 'Powerful and non-legendary Pokémon'
 end
 
 # || : at least ONE condition must be true
 if is_legendary || level >= 80
-  puts 'Pokémon rare !'
+  puts 'Rare Pokémon!'
 end
 
 # ! : inverts the value
 if !is_legendary
-  puts 'Pokémon non légendaire'
+  puts 'Non-legendary Pokémon'
 end
 ~~~
 
@@ -229,7 +229,7 @@ To choose between two values in a single line:
 
 ~~~ruby
 level = 50
-category = level >= 50 ? 'fort' : 'faible'
+category = level >= 50 ? 'strong' : 'weak'
 puts category    # => fort
 ~~~
 

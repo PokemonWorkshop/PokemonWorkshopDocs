@@ -21,9 +21,9 @@ Ruby provides two families of tools:
 Before building menus, we need to know how to read what the user types. Ruby provides `gets`:
 
 ~~~ruby
-print 'Quel est ton nom ? '
+print 'What is your name? '
 name = gets.chomp
-puts "Bonjour, #{name} !"
+puts "Hello, #{name}!"
 ~~~
 
 - `print` displays text **without** a newline (unlike `puts`). The cursor stays on the same line, which is convenient for questions.
@@ -33,9 +33,9 @@ puts "Bonjour, #{name} !"
 To read a number, add `.to_i`:
 
 ~~~ruby
-print 'Niveau du Pokémon : '
+print 'Pokémon level: '
 level = gets.chomp.to_i
-puts "Niveau : #{level}"
+puts "Level: #{level}"
 ~~~
 
 - `.to_i` converts the String to an Integer. If the user types something other than a number, `.to_i` returns 0.
@@ -48,7 +48,7 @@ puts "Niveau : #{level}"
 level = 1
 
 while level < 5
-  puts "Pikachu est au niveau #{level}"
+  puts "Pikachu is at level #{level}"
   level += 1
 end
 ~~~
@@ -56,10 +56,10 @@ end
 Outputs:
 
 ~~~
-Pikachu est au niveau 1
-Pikachu est au niveau 2
-Pikachu est au niveau 3
-Pikachu est au niveau 4
+Pikachu is at level 1
+Pikachu is at level 2
+Pikachu is at level 3
+Pikachu is at level 4
 ~~~
 
 - The condition `level < 5` is evaluated **before** each iteration. When `level` reaches 5, the condition becomes false and the loop stops.
@@ -75,10 +75,10 @@ max_hp = 120
 
 until hp >= max_hp
   hp += 10
-  puts "Soin en cours... PV : #{hp}/#{max_hp}"
+  puts "Healing... HP: #{hp}/#{max_hp}"
 end
 
-puts 'Soin terminé !'
+puts 'Healing complete!'
 ~~~
 
 - `until hp >= max_hp` reads as: "repeat until the HP reach the maximum".
@@ -90,15 +90,15 @@ puts 'Soin terminé !'
 
 ~~~ruby
 loop do
-  print 'Tape "quit" pour sortir : '
+  print 'Type "quit" to exit: '
   input = gets.chomp
 
   break if input == 'quit'
 
-  puts "Tu as tapé : #{input}"
+  puts "You typed: #{input}"
 end
 
-puts 'Sorti de la boucle !'
+puts 'Exited the loop!'
 ~~~
 
 - `loop do ... end` runs indefinitely until a `break` is reached.
@@ -111,7 +111,7 @@ puts 'Sorti de la boucle !'
 
 ~~~ruby
 3.times do
-  puts 'Pikachu utilise Tonnerre !'
+  puts 'Pikachu uses Thunderbolt!'
 end
 ~~~
 
@@ -119,18 +119,18 @@ You can also retrieve the iteration number:
 
 ~~~ruby
 5.times do |turn|
-  puts "Tour #{turn + 1}"
+  puts "Turn #{turn + 1}"
 end
 ~~~
 
 Outputs:
 
 ~~~
-Tour 1
-Tour 2
-Tour 3
-Tour 4
-Tour 5
+Turn 1
+Turn 2
+Turn 3
+Turn 4
+Turn 5
 ~~~
 
 - `|turn|` receives the iteration number, starting at **0**. We add 1 for human-readable display.
@@ -143,7 +143,7 @@ To iterate over a range of numbers:
 ~~~ruby
 # Count from 1 to 5
 1.upto(5) do |level|
-  puts "Niveau #{level}"
+  puts "Level #{level}"
 end
 ~~~
 
@@ -152,7 +152,7 @@ end
 5.downto(1) do |count|
   puts "#{count}..."
 end
-puts 'Évolution !'
+puts 'Evolution!'
 ~~~
 
 - `1.upto(5)` iterates from 1 to 5 inclusive, in ascending order.
@@ -163,7 +163,7 @@ puts 'Évolution !'
 We already saw `each` in chapter 3. It is **the** iteration method in Ruby:
 
 ~~~ruby
-team = ['Pikachu', 'Dracaufeu', 'Tortank']
+team = ['Pikachu', 'Charizard', 'Blastoise']
 
 team.each { |pokemon| puts "Go, #{pokemon} !" }
 
@@ -203,26 +203,26 @@ end
 `break` exits the loop immediately:
 
 ~~~ruby
-team = ['Pikachu', 'Dracaufeu', 'Tortank', 'Florizarre']
+team = ['Pikachu', 'Charizard', 'Blastoise', 'Venusaur']
 
 team.each do |pokemon|
-  break if pokemon == 'Tortank'
+  break if pokemon == 'Blastoise'
 
-  puts "Vérification de #{pokemon}..."
+  puts "Checking #{pokemon}..."
 end
 
-puts 'Tortank trouvé !'
+puts 'Blastoise found!'
 ~~~
 
 Outputs:
 
 ~~~
-Vérification de Pikachu...
-Vérification de Dracaufeu...
-Tortank trouvé !
+Checking Pikachu...
+Checking Charizard...
+Blastoise found!
 ~~~
 
-- As soon as `pokemon` equals `'Tortank'`, `break` stops the `each`. The remaining elements are not iterated.
+- As soon as `pokemon` equals `'Blastoise'`, `break` stops the `each`. The remaining elements are not iterated.
 
 ### next -- skip to the next iteration
 
@@ -234,16 +234,16 @@ levels = [5, 0, 12, 0, 8]
 levels.each do |level|
   next if level == 0
 
-  puts "Pokémon de niveau #{level}"
+  puts "Level #{level} Pokémon"
 end
 ~~~
 
 Outputs:
 
 ~~~
-Pokémon de niveau 5
-Pokémon de niveau 12
-Pokémon de niveau 8
+Level 5 Pokémon
+Level 12 Pokémon
+Level 8 Pokémon
 ~~~
 
 - `next if level == 0` skips Pokemon with level 0 (fainted). The `puts` is not executed for them, but the loop continues with the remaining elements.

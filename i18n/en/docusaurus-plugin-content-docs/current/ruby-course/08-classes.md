@@ -97,7 +97,7 @@ class Pokemon
   end
 end
 
-pokemon = Pokemon.new('Dracaufeu', 150)
+pokemon = Pokemon.new('Charizard', 150)
 puts pokemon.level    # => 100 (clamped by the setter)
 
 pokemon.level = -5
@@ -166,11 +166,11 @@ class Pokemon
   end
 
   def introduce
-    puts "Je suis #{self.name} !"
+    puts "I am #{self.name}!"
     # Equivalent to:
-    puts "Je suis #{name} !"
+    puts "I am #{name}!"
     # Equivalent to:
-    puts "Je suis #{@name} !"
+    puts "I am #{@name}!"
   end
 end
 ```
@@ -235,7 +235,7 @@ class Pokemon
 
   # Public: accessible from outside
   def summary
-    puts "#{@name} Niv.#{@level}"
+    puts "#{@name} Lvl.#{@level}"
     puts "  PV max : #{calculate_max_hp}"
   end
 
@@ -267,13 +267,13 @@ class Pokemon
   end
 
   def to_s
-    return "#{@name} Niv.#{@level}"
+    return "#{@name} Lvl.#{@level}"
   end
 end
 
 pikachu = Pokemon.new('Pikachu', 25)
-puts pikachu              # => Pikachu Niv.25
-puts "Go, #{pikachu} !"   # => Go, Pikachu Niv.25 !
+puts pikachu              # => Pikachu Lvl.25
+puts "Go, #{pikachu} !"   # => Go, Pikachu Lvl.25 !
 ```
 
 - Without `to_s`, `puts pikachu` would display something like `#<Pokemon:0x00007f...>`, which is not very useful.

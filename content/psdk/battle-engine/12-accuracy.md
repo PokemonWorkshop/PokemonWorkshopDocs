@@ -10,7 +10,7 @@ description: "Ce guide explique comment modifier dynamiquement la précision d'u
 La précision d'une attaque est calculée par la méthode `chance_of_hit` selon la formule :
 
 ```
-chance_of_hit = factor x accuracy
+chance_of_hit = factor × accuracy
 ```
 
 Où `factor` est le produit de trois éléments :
@@ -112,4 +112,4 @@ end
 - Surchargez `accuracy` dans la sous-classe de l'attaque pour modifier la précision selon le contexte. Retournez `super` si les conditions ne sont pas remplies.
 - Surchargez `bypass_chance_of_hit?` pour ignorer le test de précision selon une condition. Retournez `super` sinon.
 - Utilisez `chance_of_hit_multiplier` pour appliquer un multiplicateur sur la précision depuis un effet. Retournez un `Float`.
-- La formule finale est : `factor x accuracy`, où `factor` est le produit de tous les multiplicateurs, de la précision de l'utilisateur et de l'esquive de la cible.
+- La formule finale est : `factor × accuracy`, où `factor` est le produit de tous les multiplicateurs, de la précision de l'utilisateur et de l'esquive de la cible.

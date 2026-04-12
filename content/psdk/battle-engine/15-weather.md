@@ -18,9 +18,9 @@ L'ajout d'une météo se fait en quatre étapes :
 
 Les messages de météo sont stockés dans le fichier 100018 sur Studio. Il faut ajouter jusqu'à trois messages :
 
-- Un message **d'activation** (quand la météo apparaît) -- ex : _"It started to rain!"_
-- Un message **de fin** (quand la météo s'estompe) -- ex : _"The rain stopped."_
-- Un message **de tour** (affiché à chaque fin de tour, optionnel) -- ex : _"The sandstorm rages."_
+- Un message **d'activation** (quand la météo apparaît) — ex : _"It started to rain!"_
+- Un message **de fin** (quand la météo s'estompe) — ex : _"The rain stopped."_
+- Un message **de tour** (affiché à chaque fin de tour, optionnel) — ex : _"The sandstorm rages."_
 
 Notez les numéros de ligne de ces messages dans Studio, ils seront nécessaires pour l'enregistrement dans le handler.
 
@@ -28,11 +28,11 @@ Les météos existantes utilisent ces numéros de lignes dans le fichier 18 :
 
 | Météo     | Activation | Fin | Tour |
 | --------- | ---------- | --- | ---- |
-| Rain      | 88         | 93  | --   |
-| Sunny     | 87         | 92  | --   |
+| Rain      | 88         | 93  | —    |
+| Sunny     | 87         | 92  | —    |
 | Sandstorm | 89         | 94  | 98   |
 | Hail      | 90         | 95  | 99   |
-| Fog       | 91         | 96  | --   |
+| Fog       | 91         | 96  | —    |
 | Snow      | 287        | 288 | 289  |
 
 ## Créer la classe d'effet
@@ -125,16 +125,16 @@ Pour créer une attaque qui invoque la météo :
 
 ### Configurer l'attaque dans Studio
 
-Créez l'attaque dans Pokemon Studio avec ces propriétés :
+Créez l'attaque dans Pokémon Studio avec ces propriétés :
 
 - **Procédure** : `s_weather`
 - **Catégorie** : Statut
 - **PP** : 5 (typique)
-- **Cible** : Tous les Pokemon
+- **Cible** : Tous les Pokémon
 
 ### Enregistrer l'attaque dans WeatherMove
 
-Le hash `WEATHER_MOVES` associe le `db_symbol` de l'attaque au symbole de la météo. Il suffit d'y ajouter une entrée -- le `db_symbol` de l'attaque créée dans Studio doit correspondre à la clé :
+Le hash `WEATHER_MOVES` associe le `db_symbol` de l'attaque au symbole de la météo. Il suffit d'y ajouter une entrée — le `db_symbol` de l'attaque créée dans Studio doit correspondre à la clé :
 
 ```ruby
 module Battle
@@ -221,13 +221,13 @@ Pour créer une météo complète, voici les fichiers à créer ou modifier :
 
 | Fichier                                          | Action                                                       |
 | ------------------------------------------------ | ------------------------------------------------------------ |
-| Studio -> Système de combat (fichier texte 18)   | Ajouter les messages d'activation, de fin et de tour         |
+| Studio → Système de combat (fichier texte 18)   | Ajouter les messages d'activation, de fin et de tour         |
 | `my-project/scripts/001 Weather.rb`              | Ajouter le symbole dans `WEATHER_NAMES`                      |
 | `my-project/scripts/002 WeatherChangeHandler.rb` | Ajouter l'entrée dans `WEATHER_SYM_TO_MSG`                   |
 | `my-project/scripts/003 WeatherEffect.rb`        | Créer la classe d'effet de la météo                          |
 | `my-project/scripts/004 WeatherMove.rb`          | Ajouter dans `WEATHER_MOVES` et `WEATHER_ITEMS` (si attaque) |
 | `my-project/scripts/005 Ability.rb`              | Créer l'effet (si effet)                                     |
-| Studio -> Attaques                               | Créer l'attaque avec la procédure `s_weather` (si attaque)   |
+| Studio → Attaques                               | Créer l'attaque avec la procédure `s_weather` (si attaque)   |
 
 ## Conclusion
 

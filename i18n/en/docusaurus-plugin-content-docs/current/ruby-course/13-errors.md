@@ -21,10 +21,10 @@ This mechanism separates normal code from error-handling code: you write the hap
 
 ```ruby
 # Simple form: creates a RuntimeError
-raise 'Pokémon introuvable'
+raise 'Pokémon not found'
 
 # With a specific class
-raise ArgumentError, 'Le niveau doit être entre 1 et 100'
+raise ArgumentError, 'Level must be between 1 and 100'
 ```
 
 - `raise 'message'` creates a `RuntimeError` by default.
@@ -38,11 +38,11 @@ The `begin...rescue...end` block catches exceptions:
 ```ruby
 begin
   level = -5
-  raise ArgumentError, 'Le niveau doit être positif' if level < 1
+  raise ArgumentError, 'Level must be positive' if level < 1
 
-  puts "Niveau : #{level}"
+  puts "Level: #{level}"
 rescue ArgumentError => error
-  puts "Erreur : #{error.message}"
+  puts "Error: #{error.message}"
 end
 
 puts 'Le programme continue normalement.'
@@ -51,7 +51,7 @@ puts 'Le programme continue normalement.'
 Outputs:
 
 ```
-Erreur : Le niveau doit être positif
+Error: Level must be positive
 Le programme continue normalement.
 ```
 
@@ -65,12 +65,12 @@ When the `rescue` covers the entire method, you can omit `begin`:
 
 ```ruby
 def create_pokemon(name, level)
-  raise ArgumentError, 'Le nom ne peut pas être vide' if name.empty?
-  raise ArgumentError, 'Le niveau doit être entre 1 et 100' unless (1..100).include?(level)
+  raise ArgumentError, 'Name cannot be empty' if name.empty?
+  raise ArgumentError, 'Level must be between 1 and 100' unless (1..100).include?(level)
 
   return { name: name, level: level }
 rescue ArgumentError => error
-  puts "Erreur de création : #{error.message}"
+  puts "Creation error: #{error.message}"
   return nil
 end
 
@@ -90,15 +90,15 @@ You can chain multiple `rescue` clauses to handle different types of errors:
 
 ```ruby
 def load_pokemon(name)
-  raise ArgumentError, 'Nom vide' if name.empty?
-  raise RuntimeError, "Pokémon #{name} introuvable" unless name == 'Pikachu'
+  raise ArgumentError, 'Empty name' if name.empty?
+  raise RuntimeError, "Pokémon #{name} not found" unless name == 'Pikachu'
 
   return { name: name, level: 25 }
 rescue ArgumentError => error
-  puts "Argument invalide : #{error.message}"
+  puts "Invalid argument: #{error.message}"
   return nil
 rescue RuntimeError => error
-  puts "Erreur : #{error.message}"
+  puts "Error: #{error.message}"
   return nil
 end
 ```
@@ -141,16 +141,16 @@ attempts = 0
 
 begin
   attempts += 1
-  puts "Tentative #{attempts}..."
+  puts "Attempt #{attempts}..."
 
   # Simulate a random error
-  raise 'Échec du chargement' if rand(3) != 0
+  raise 'Loading failed' if rand(3) != 0
 
-  puts 'Chargement réussi !'
+  puts 'Loading succeeded!'
 rescue RuntimeError => error
-  puts "Erreur : #{error.message}"
+  puts "Error: #{error.message}"
   retry if attempts < 3
-  puts 'Abandon après 3 tentatives.'
+  puts 'Giving up after 3 attempts.'
 end
 ```
 
@@ -164,14 +164,14 @@ The `ensure` block **always** executes, whether an exception was raised or not:
 
 ```ruby
 def save(data, filename)
-  puts 'Sauvegarde en cours...'
-  raise 'Erreur de sauvegarde' if data.nil?
+  puts 'Saving in progress...'
+  raise 'Save error' if data.nil?
 
-  puts "Sauvegardé dans #{filename}"
+  puts "Saved to #{filename}"
 rescue RuntimeError => error
-  puts "Échec : #{error.message}"
+  puts "Failure: #{error.message}"
 ensure
-  puts 'Nettoyage terminé.'
+  puts 'Cleanup complete.'
 end
 
 save({ name: 'Pikachu' }, 'save.dat')
@@ -181,12 +181,12 @@ save(nil, 'save.dat')
 Outputs:
 
 ```
-Sauvegarde en cours...
-Sauvegardé dans save.dat
-Nettoyage terminé.
-Sauvegarde en cours...
-Échec : Erreur de sauvegarde
-Nettoyage terminé.
+Saving in progress...
+Saved to save.dat
+Cleanup complete.
+Saving in progress...
+Failure: Save error
+Cleanup complete.
 ```
 
 - `ensure` runs in **all** cases: after normal code, after a `rescue`, even after a `return`.
@@ -208,22 +208,22 @@ Then use them like any other exception:
 
 ```ruby
 def add_pokemon(team, pokemon)
-  raise Pokedex::TeamFullError, "L'équipe est pleine (6 max)" if team.size >= 6
-  raise Pokedex::DuplicateError, "#{pokemon} est déjà dans l'équipe" if team.include?(pokemon)
+  raise Pokedex::TeamFullError, "The team is full (6 max)" if team.size >= 6
+  raise Pokedex::DuplicateError, "#{pokemon} is already in the team" if team.include?(pokemon)
 
   team << pokemon
   return team
 end
 
 begin
-  team = ['Pikachu', 'Dracaufeu', 'Tortank', 'Florizarre', 'Dracolosse', 'Ectoplasma']
+  team = ['Pikachu', 'Charizard', 'Blastoise', 'Venusaur', 'Dragonite', 'Gengar']
   add_pokemon(team, 'Mewtwo')
 rescue Pokedex::TeamFullError => error
   puts error.message
 end
 ```
 
-Outputs: `L'équipe est pleine (6 max)`
+Outputs: `The team is full (6 max)`
 
 - Inheriting from `StandardError` ensures that `rescue` without a type catches them.
 - The class name describes the problem: `TeamFullError` is more meaningful than `RuntimeError`.
@@ -235,12 +235,12 @@ Outputs: `L'équipe est pleine (6 max)`
 
 ```ruby
 def process_pokemon(data)
-  puts "Traitement de #{data[:name]}..."
-  raise 'Données corrompues' if data[:level].nil?
+  puts "Processing #{data[:name]}..."
+  raise 'Corrupted data' if data[:level].nil?
 
   return data
 rescue RuntimeError => error
-  puts "Échec : #{error.message}"
+  puts "Failure: #{error.message}"
   raise
 end
 ```

@@ -18,8 +18,8 @@ L'ajout d'un terrain se fait en quatre étapes :
 
 Les messages de terrain sont stockés dans le fichier 100060 sur Studio. Il faut ajouter deux messages :
 
-- Un message **d'activation** (quand le terrain apparaît) -- ex : _"An electric current runs across the battlefield!"_
-- Un message **de fin** (quand le terrain s'estompe) -- ex : _"The electricity disappeared from the battlefield."_
+- Un message **d'activation** (quand le terrain apparaît) — ex : _"An electric current runs across the battlefield!"_
+- Un message **de fin** (quand le terrain s'estompe) — ex : _"The electricity disappeared from the battlefield."_
 
 Notez les numéros de ligne de ces messages dans Studio, ils seront nécessaires pour l'enregistrement dans le handler.
 
@@ -69,7 +69,7 @@ Entre ces deux éléments, on ajoute le comportement souhaité en overridant les
 
 ### `affected_by_terrain?`
 
-Quand on ajoute un comportement lié au terrain, il faut vérifier `affected_by_terrain?` sur le Pokemon cible ou utilisateur. Cette méthode retourne `true` si le Pokemon est au sol. Un Pokemon n'est **pas** affecté s'il est de type Vol, a le talent Lévitation, est sous l'effet de Magnéto-Rise ou Télékinésie, ou tient un Ballon.
+Quand on ajoute un comportement lié au terrain, il faut vérifier `affected_by_terrain?` sur le Pokémon cible ou utilisateur. Cette méthode retourne `true` si le Pokémon est au sol. Un Pokémon n'est **pas** affecté s'il est de type Vol, a le talent Lévitation, est sous l'effet de Magnéto-Rise ou Télékinésie, ou tient un Ballon.
 
 ### Hooks disponibles
 
@@ -106,16 +106,16 @@ Pour créer une attaque qui invoque le terrain :
 
 ### Configurer l'attaque dans Studio
 
-Créez l'attaque dans Pokemon Studio avec ces propriétés :
+Créez l'attaque dans Pokémon Studio avec ces propriétés :
 
 - **Procédure** : `s_terrain`
 - **Catégorie** : Statut
 - **PP** : 10 (typique)
-- **Cible** : Tous les Pokemon
+- **Cible** : Tous les Pokémon
 
 ### Enregistrer l'attaque dans TerrainMove
 
-Le hash `TERRAIN_MOVES` associe le `db_symbol` de l'attaque au symbole du terrain. Il suffit d'y ajouter une entrée -- le `db_symbol` de l'attaque créée dans Studio doit correspondre à la clé :
+Le hash `TERRAIN_MOVES` associe le `db_symbol` de l'attaque au symbole du terrain. Il suffit d'y ajouter une entrée — le `db_symbol` de l'attaque créée dans Studio doit correspondre à la clé :
 
 ```ruby
 module Battle
@@ -180,13 +180,13 @@ Pour créer un terrain complet, voici les fichiers à créer ou modifier :
 
 | Fichier                                           | Action                                                     |
 | ------------------------------------------------- | ---------------------------------------------------------- |
-| Studio -> Système de combat (fichier texte 60)    | Ajouter les messages d'activation et de fin                |
+| Studio → Système de combat (fichier texte 60)    | Ajouter les messages d'activation et de fin                |
 | `my-project/scripts/001 FTerrainChangeHandler.rb` | Enregistrer les messages dans le handler                   |
 | `my-project/scripts/002 FieldTerrain.rb`          | Créer la classe d'effet du terrain                         |
 | `my-project/scripts/003 TerrainMove.rb`           | Lier l'attaque au terrain (si attaque)                     |
 | `my-project/scripts/004 Ability.rb`               | Créer le talent Surge (si talent)                          |
-| Studio -> Attaques                                | Créer l'attaque avec la procédure `s_terrain` (si attaque) |
-| Studio -> Talents                                 | Créer le talent (si talent)                                |
+| Studio → Attaques                                | Créer l'attaque avec la procédure `s_terrain` (si attaque) |
+| Studio → Talents                                 | Créer le talent (si talent)                                |
 
 ## Conclusion
 
@@ -194,5 +194,5 @@ Pour créer un terrain complet, voici les fichiers à créer ou modifier :
 - Créez la **classe d'effet** en héritant de `FieldTerrain` avec au minimum `on_end_turn_event` et `register`.
 - Ajoutez les entrées dans `FTERRAIN_SYM_TO_MSG` pour lier les messages au terrain.
 - Ajoutez l'entrée dans `TERRAIN_MOVES` pour les attaques, ou héritez de `ElectricSurge` pour les talents.
-- Vérifiez toujours `affected_by_terrain?` avant d'appliquer un effet à un Pokemon.
+- Vérifiez toujours `affected_by_terrain?` avant d'appliquer un effet à un Pokémon.
 - Les terrains existants dans `5 Battle/06 Effects/07 Field Terrain Effects/` servent de référence pour les comportements possibles.

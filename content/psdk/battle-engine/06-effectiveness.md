@@ -21,7 +21,7 @@ La valeur retournée est un multiplicateur numérique appliqué **par type de la
 
 ## Depuis l'attaque
 
-Certaines attaques peuvent modifier leur efficacité selon leurs propres règles. Par exemple, l'attaque **Lyophilisation** inflige des dégâts super efficaces contre les Pokemon de type Eau, alors que la Glace est normalement neutre contre l'Eau.
+Certaines attaques peuvent modifier leur efficacité selon leurs propres règles. Par exemple, l'attaque **Lyophilisation** inflige des dégâts super efficaces contre les Pokémon de type Eau, alors que la Glace est normalement neutre contre l'Eau.
 
 Pour gérer ce comportement, on surcharge la méthode `single_type_multiplier_overwrite` dans la sous-classe de l'attaque. Si les conditions ne sont pas remplies, on retourne `super` pour laisser la chaîne de calcul continuer normalement.
 
@@ -54,7 +54,7 @@ end
 
 ## Depuis un effet
 
-Certains effets peuvent modifier l'efficacité de type d'une attaque. Par exemple, l'effet **Clairvoyance** permet aux attaques Normal et Combat de toucher les Pokemon de type Spectre avec une efficacité neutre.
+Certains effets peuvent modifier l'efficacité de type d'une attaque. Par exemple, l'effet **Clairvoyance** permet aux attaques Normal et Combat de toucher les Pokémon de type Spectre avec une efficacité neutre.
 
 Pour gérer ce comportement, on utilise la méthode `on_single_type_multiplier_overwrite` dans la classe de l'effet.
 

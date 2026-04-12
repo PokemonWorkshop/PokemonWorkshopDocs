@@ -38,11 +38,11 @@ lines.each { |line| puts line }
 
 ```ruby
 # Write (overwrites existing content)
-File.write('pokedex.txt', "Pikachu,25,electric\nDracaufeu,36,fire\n")
+File.write('pokedex.txt', "Pikachu,25,electric\nCharizard,36,fire\n")
 
 # Append to the end (without overwriting)
 File.open('pokedex.txt', 'a') do |file|
-  file.puts 'Tortank,40,water'
+  file.puts 'Blastoise,40,water'
 end
 ```
 
@@ -76,9 +76,9 @@ The main modes:
 
 ```ruby
 if File.exist?('pokedex.txt')
-  puts 'Le fichier existe'
+  puts 'The file exists'
 else
-  puts 'Le fichier n\'existe pas'
+  puts 'The file does not exist'
 end
 
 puts File.directory?('pokedex')      # => true if it is a directory
@@ -144,14 +144,14 @@ JSON is a human-readable text format that other languages can also use. You need
 require 'json'
 
 # Convert a Hash to JSON
-pokemon_data = { name: 'Dracaufeu', level: 50, types: ['fire', 'flying'] }
+pokemon_data = { name: 'Charizard', level: 50, types: ['fire', 'flying'] }
 json_string = JSON.generate(pokemon_data)
 puts json_string
-# => {"name":"Dracaufeu","level":50,"types":["fire","flying"]}
+# => {"name":"Charizard","level":50,"types":["fire","flying"]}
 
 # Convert the JSON back to a Hash
 parsed = JSON.parse(json_string)
-puts parsed['name']    # => Dracaufeu
+puts parsed['name']    # => Charizard
 ```
 
 - `JSON.generate` converts a Hash to a JSON String.

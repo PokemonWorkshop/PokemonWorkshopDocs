@@ -19,11 +19,11 @@ Single quotes create raw text. Double quotes allow interpolation (`#{}`) and esc
 name = 'Pikachu'
 
 # Single quotes: raw text, no interpolation
-puts 'Bonjour, #{name}'     # Displays: Bonjour, #{name}
+puts 'Hello, #{name}'     # Displays: Hello, #{name}
 
 # Double quotes: interpolation and escape sequences
-puts "Bonjour, #{name} !"   # Displays: Bonjour, Pikachu !
-puts "Ligne 1\nLigne 2"     # Displays on two lines
+puts "Hello, #{name}!"   # Displays: Hello, Pikachu!
+puts "Line 1\nLine 2"     # Displays on two lines
 ~~~
 
 - `\n` creates a line break. `\t` creates a tab. These sequences only work with double quotes.
@@ -35,8 +35,8 @@ To write text over multiple lines without chaining `\n`, Ruby offers **heredoc**
 
 ~~~ruby
 description = <<~TEXT
-  Pikachu est un Pokémon de type Électrik.
-  Il évolue depuis Pichu par bonheur.
+  Pikachu is an Electric-type Pokémon.
+  It evolves from Pichu through happiness.
 TEXT
 
 puts description
@@ -51,14 +51,14 @@ puts description
 There are two ways to combine text and variables. The first, interpolation, we already know:
 
 ~~~ruby
-name = 'Dracaufeu'
+name = 'Charizard'
 level = 36
 
 # Interpolation (preferred)
-puts "#{name} est niveau #{level}"
+puts "#{name} is level #{level}"
 
 # Concatenation (avoid)
-puts name + ' est niveau ' + level.to_s
+puts name + ' is level ' + level.to_s
 ~~~
 
 - Interpolation automatically converts values to text. Concatenation requires a call to `.to_s`, otherwise Ruby raises an error.
@@ -104,10 +104,10 @@ puts name.rstrip    # => "  Pikachu" (removes on the right only)
 ## Searching in a String
 
 ~~~ruby
-puts 'Bulbizarre'.include?('zarre')       # => true
-puts 'Bulbizarre'.include?('Feu')         # => false
-puts 'Bulbizarre'.start_with?('Bulb')     # => true
-puts 'Bulbizarre'.end_with?('zarre')      # => true
+puts 'Bulbasaur'.include?('saur')       # => true
+puts 'Bulbasaur'.include?('Fire')         # => false
+puts 'Bulbasaur'.start_with?('Bulb')     # => true
+puts 'Bulbasaur'.end_with?('saur')      # => true
 ~~~
 
 - These methods return `true` or `false`. The `?` at the end is the Ruby convention for methods that ask a question.
@@ -116,15 +116,15 @@ puts 'Bulbizarre'.end_with?('zarre')      # => true
 ## Replacing text
 
 ~~~ruby
-phrase = 'Pikachu utilise Tonnerre. Pikachu gagne !'
+phrase = 'Pikachu uses Thunderbolt. Pikachu wins!'
 
 # Replace the first occurrence
 puts phrase.sub('Pikachu', 'Raichu')
-# => Raichu utilise Tonnerre. Pikachu gagne !
+# => Raichu uses Thunderbolt. Pikachu wins!
 
 # Replace all occurrences
 puts phrase.gsub('Pikachu', 'Raichu')
-# => Raichu utilise Tonnerre. Raichu gagne !
+# => Raichu uses Thunderbolt. Raichu wins!
 ~~~
 
 - `.sub` replaces only the **first** occurrence. `.gsub` replaces **all** occurrences (the `g` stands for "global").

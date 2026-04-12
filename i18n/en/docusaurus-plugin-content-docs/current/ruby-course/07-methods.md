@@ -21,11 +21,11 @@ You create a method with `def`, a name, and `end`:
 
 ~~~ruby
 def greet
-  puts 'Bonjour, dresseur !'
+  puts 'Hello, trainer!'
 end
 
-greet    # Prints: Bonjour, dresseur !
-greet    # Prints: Bonjour, dresseur !
+greet    # Prints: Hello, trainer!
+greet    # Prints: Hello, trainer!
 ~~~
 
 - `def greet` declares the method. The code inside is **not** executed at that point.
@@ -42,7 +42,7 @@ def greet_pokemon(name)
 end
 
 greet_pokemon('Pikachu')     # Prints: Go, Pikachu !
-greet_pokemon('Dracaufeu')   # Prints: Go, Dracaufeu !
+greet_pokemon('Charizard')   # Prints: Go, Charizard!
 ~~~
 
 - `name` is a parameter. When you call the method, you pass a value that replaces this parameter.
@@ -58,7 +58,7 @@ def greet_pokemon(name, greeting = 'Go')
 end
 
 greet_pokemon('Pikachu')              # Prints: Go, Pikachu !
-greet_pokemon('Pikachu', 'En avant')  # Prints: En avant, Pikachu !
+greet_pokemon('Pikachu', 'Onward')  # Prints: En avant, Pikachu !
 ~~~
 
 - `greeting = 'Go'`: if the argument is not provided, `greeting` defaults to `'Go'`.
@@ -88,13 +88,13 @@ The splat collects a variable number of arguments into an Array:
 
 ~~~ruby
 def display_team(trainer, *pokemon_names)
-  puts "Équipe de #{trainer} :"
+  puts "Team of #{trainer}:"
   pokemon_names.each do |pokemon_name|
     puts "  - #{pokemon_name}"
   end
 end
 
-display_team('Sacha', 'Pikachu', 'Dracaufeu', 'Tortank')
+display_team('Ash', 'Pikachu', 'Charizard', 'Blastoise')
 ~~~
 
 - `*pokemon_names` gathers all arguments after `trainer` into an Array.
@@ -127,7 +127,7 @@ def calculate_damage(attack, defense)
 end
 
 damage = calculate_damage(55, 30)
-puts "Dégâts : #{damage}"    # Prints: Dégâts : 25
+puts "Damage: #{damage}"    # Prints: Dégâts : 25
 ~~~
 
 Without `return`, Ruby automatically returns the **last evaluated expression**:
@@ -145,12 +145,12 @@ Both forms work. In this tutorial series, we use `return` explicitly so the inte
 ~~~ruby
 def heal(pokemon)
   if pokemon[:hp] >= pokemon[:max_hp]
-    puts "#{pokemon[:name]} a déjà tous ses PV !"
+    puts "#{pokemon[:name]} already has full HP!"
     return
   end
 
   pokemon[:hp] = pokemon[:max_hp]
-  puts "#{pokemon[:name]} est soigné !"
+  puts "#{pokemon[:name]} is healed!"
 end
 ~~~
 
@@ -166,22 +166,22 @@ We have been using blocks since chapter 3 with `.each`, `.map`, `.select`. Let's
 
 ~~~ruby
 def with_announcement(pokemon_name)
-  puts "--- Début ---"
+  puts "--- Start ---"
   yield(pokemon_name)
-  puts "--- Fin ---"
+  puts "--- End ---"
 end
 
 with_announcement('Pikachu') do |name|
-  puts "#{name} utilise Tonnerre !"
+  puts "#{name} uses Thunderbolt!"
 end
 ~~~
 
 Outputs:
 
 ~~~
---- Début ---
-Pikachu utilise Tonnerre !
---- Fin ---
+--- Start ---
+Pikachu uses Thunderbolt!
+--- End ---
 ~~~
 
 - `yield(pokemon_name)` executes the block, passing `pokemon_name` as an argument.
@@ -192,7 +192,7 @@ Pikachu utilise Tonnerre !
 
 ~~~ruby
 def display_pokemon(pokemon)
-  puts "#{pokemon[:name]} Niv.#{pokemon[:level]}"
+  puts "#{pokemon[:name]} Lvl.#{pokemon[:level]}"
 
   if block_given?
     yield(pokemon)
@@ -229,12 +229,12 @@ end
 
 team = [
   { name: 'Pikachu', level: 25 },
-  { name: 'Dracaufeu', level: 36 },
-  { name: 'Tortank', level: 40 }
+  { name: 'Charizard', level: 36 },
+  { name: 'Blastoise', level: 40 }
 ]
 
 result = find_pokemon(team) { |pokemon| pokemon[:level] >= 35 }
-puts "Trouvé : #{result[:name]}"    # Prints: Trouvé : Dracaufeu
+puts "Found: #{result[:name]}"    # Prints: Found: Charizard
 ~~~
 
 - `&condition` captures the block and transforms it into a Proc object stored in `condition`.

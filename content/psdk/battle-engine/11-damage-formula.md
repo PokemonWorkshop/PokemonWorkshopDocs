@@ -7,7 +7,7 @@ description: "Ce guide explique comment remplacer la formule de calcul des dég�
 
 ## Principe
 
-La formule de calcul des dégâts est définie dans la méthode `damages`. Par défaut, elle utilise la formule standard de Pokemon (puissance, attaque, défense, STAB, efficacité, etc.).
+La formule de calcul des dégâts est définie dans la méthode `damages`. Par défaut, elle utilise la formule standard de Pokémon (puissance, attaque, défense, STAB, efficacité, etc.).
 
 Certaines attaques nécessitent de remplacer entièrement cette formule. Par exemple, **Draco-Rage** inflige toujours 40 PV de dégâts fixes, indépendamment des stats.
 

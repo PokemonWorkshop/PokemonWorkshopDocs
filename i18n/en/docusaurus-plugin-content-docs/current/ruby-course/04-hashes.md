@@ -158,7 +158,7 @@ pikachu.each_value { |value| puts value }
 Like Arrays, Hashes have `.select` and `.reject`:
 
 ```ruby
-pokemon = { name: 'Dracaufeu', type: :fire, level: 36, hp: 150 }
+pokemon = { name: 'Charizard', type: :fire, level: 36, hp: 150 }
 
 # Keep only pairs whose value is an Integer
 numbers = pokemon.select { |key, value| value.is_a?(Integer) }
@@ -186,14 +186,14 @@ p base        # => {:hp=>78, :attack=>84}  (unchanged)
 A Hash can contain other Hashes as values. This is very common for modeling complex data:
 
 ```ruby
-dracaufeu = {
-  name: 'Dracaufeu',
+charizard = {
+  name: 'Charizard',
   types: [:fire, :flying],
   stats: { hp: 78, attack: 84, speed: 100 }
 }
 
-puts dracaufeu[:stats][:hp]       # => 78
-puts dracaufeu[:stats][:speed]    # => 100
+puts charizard[:stats][:hp]       # => 78
+puts charizard[:stats][:speed]    # => 100
 ```
 
 - You chain `[]` to access nested levels: `hash[:key1][:key2]`.
@@ -202,14 +202,14 @@ The problem arises when an intermediate level does not exist:
 
 ```ruby
 # If :stats did not exist, we would get an error
-# dracaufeu[:moves][:first]    # => Error! NoMethodError (nil has no [])
+# charizard[:moves][:first]    # => Error! NoMethodError (nil has no [])
 ```
 
 To avoid this problem, Ruby offers `.dig`, which navigates deeply without error:
 
 ```ruby
-puts dracaufeu.dig(:stats, :hp)       # => 78
-puts dracaufeu.dig(:moves, :first)    # => nil (no error)
+puts charizard.dig(:stats, :hp)       # => 78
+puts charizard.dig(:moves, :first)    # => nil (no error)
 ```
 
 - `.dig` returns `nil` if an intermediate level does not exist, instead of raising an error.

@@ -14,11 +14,11 @@ Un Pokémon peut être immunisé à une attaque pour deux raisons distinctes :
 
 Dans les deux cas, l'immunité est signalée par un retour `true`.
 
-> **Différence avec le blocage** (guide 002) : le blocage empêche l'attaque d'atteindre la cible et affiche un message. L'immunité signifie que l'attaque atteint la cible mais n'a **aucun effet** -- le système affiche automatiquement le message "Ca n'affecte pas [Pokemon]...".
+> **Différence avec le blocage** (guide 002) : le blocage empêche l'attaque d'atteindre la cible et affiche un message. L'immunité signifie que l'attaque atteint la cible mais n'a **aucun effet** — le système affiche automatiquement le message "Ça n'affecte pas [Pokémon]...".
 
 ## Depuis l'attaque
 
-Certaines attaques peuvent ne pas affecter la cible selon leurs propres règles. Par exemple, l'attaque **Attraction** n'a aucun effet si les deux Pokemon ne sont pas de genres opposés ou si la cible est déjà sous l'effet d'Attraction.
+Certaines attaques peuvent ne pas affecter la cible selon leurs propres règles. Par exemple, l'attaque **Attraction** n'a aucun effet si les deux Pokémon ne sont pas de genres opposés ou si la cible est déjà sous l'effet d'Attraction.
 
 Pour gérer ce comportement, on override la méthode `target_immune?` dans la classe de l'attaque.
 
@@ -39,12 +39,12 @@ end
 ```
 
 - L'appel à `super` est **indispensable** pour conserver les vérifications par défaut.
-- `user.gender * target.gender == 2` vérifie que les deux Pokemon sont de genres opposés (male=1, femelle=2, donc 1\*2=2).
+- `user.gender * target.gender == 2` vérifie que les deux Pokémon sont de genres opposés (mâle=1, femelle=2, donc 1*2=2).
 - La méthode retourne `false` par défaut si aucune condition d'immunité n'est remplie.
 
 ## Depuis un effet
 
-Certains effets peuvent immuniser un Pokemon contre certaines attaques. Par exemple, le talent **Pare-Balles** immunise contre les attaques balistiques.
+Certains effets peuvent immuniser un Pokémon contre certaines attaques. Par exemple, le talent **Pare-Balles** immunise contre les attaques balistiques.
 
 Pour gérer ce comportement, on utilise la méthode `on_move_ability_immunity` dans la classe de l'effet. Malgré le nom de la méthode qui contient `ability`, elle concerne bien **tous les types d'effets**.
 
@@ -75,5 +75,5 @@ end
 
 - Utilisez `target_immune?` si l'immunité dépend de la logique propre de l'attaque.
 - Utilisez `on_move_ability_immunity` si l'immunité dépend d'un effet externe actif sur la cible.
-- Retournez `true` pour signaler l'immunité -- le message est affiché automatiquement par le système.
+- Retournez `true` pour signaler l'immunité — le message est affiché automatiquement par le système.
 - Pour les effets de type talent, pensez à afficher l'animation du talent avec `show_ability`.

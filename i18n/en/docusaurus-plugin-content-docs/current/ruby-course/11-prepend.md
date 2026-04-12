@@ -31,7 +31,7 @@ class Pokemon
   end
 
   def to_s
-    return "#{@name} Niv.#{@level}"
+    return "#{@name} Lvl.#{@level}"
   end
 end
 
@@ -44,7 +44,7 @@ end
 
 pikachu = Pokemon.new('Pikachu', 25)
 puts pikachu.can_evolve?      # => true
-puts pikachu                  # => Pikachu Niv.25 (to_s still works)
+puts pikachu                  # => Pikachu Lvl.25 (to_s still works)
 ```
 
 - **Adding** a method by reopening the class is safe. The original is not touched.
@@ -59,11 +59,11 @@ class Pokemon
   alias original_to_s to_s
 
   def to_s
-    return "[Modifié] #{original_to_s}"
+    return "[Modified] #{original_to_s}"
   end
 end
 
-puts Pokemon.new('Pikachu', 25)    # => [Modifié] Pikachu Niv.25
+puts Pokemon.new('Pikachu', 25)    # => [Modified] Pikachu Lvl.25
 ```
 
 - `alias original_to_s to_s` creates a copy of `to_s` under the name `original_to_s`.
@@ -92,9 +92,9 @@ end
 # The module that extends the behavior
 module DamageLog
   def take_damage(amount)
-    puts "#{name} subit #{amount} dégâts !"
+    puts "#{name} takes #{amount} damage!"
     super
-    puts "#{name} a #{hp} PV restants."
+    puts "#{name} has #{hp} HP remaining."
   end
 end
 
@@ -108,8 +108,8 @@ pikachu.take_damage(30)
 Output:
 
 ```
-Pikachu subit 30 dégâts !
-Pikachu a 70 PV restants.
+Pikachu takes 30 damage!
+Pikachu has 70 HP remaining.
 ```
 
 - `super` in the module calls the method **from the original class**. The original behavior is preserved and enriched.
@@ -141,7 +141,7 @@ You can prepend multiple modules. Each `super` goes up the chain:
 ```ruby
 module DamageLog
   def take_damage(amount)
-    puts "[LOG] #{name} subit #{amount} dégâts"
+    puts "[LOG] #{name} takes #{amount} damage"
     super
   end
 end
@@ -149,7 +149,7 @@ end
 module MagicShield
   def take_damage(amount)
     reduced_damage = (amount * 0.8).to_i
-    puts "[BOUCLIER] Dégâts réduits de #{amount} à #{reduced_damage}"
+    puts "[SHIELD] Damage reduced from #{amount} to #{reduced_damage}"
     super(reduced_damage)
   end
 end

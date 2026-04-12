@@ -46,7 +46,7 @@ def definitive_types(user, target)
 end
 ```
 
-- La constante `RAGING_BULL_USERS` limite l'effet aux Pokemon concernés, permettant un monkey patch facile.
+- La constante `RAGING_BULL_USERS` limite l'effet aux Pokémon concernés, permettant un monkey patch facile.
 - `data_type(:symbol).id` convertit un symbole de type en son identifiant numérique.
 - La méthode retourne toujours un `Array<Integer>`, même pour un seul type (`[type]`).
 

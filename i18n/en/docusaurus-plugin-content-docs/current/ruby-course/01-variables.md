@@ -76,11 +76,11 @@ You can replace the contents of a variable at any time. The old value is simply 
 name = 'Pikachu'
 puts name          # Displays: Pikachu
 
-name = 'Évoli'
-puts name          # Displays: Évoli
+name = 'Eevee'
+puts name          # Displays: Eevee
 ```
 
-- The variable `name` first points to `'Pikachu'`, then to `'Évoli'`. The name does not change, only the contents change.
+- The variable `name` first points to `'Pikachu'`, then to `'Eevee'`. The name does not change, only the contents change.
 
 ## Data types
 
@@ -121,7 +121,7 @@ A String is a sequence of characters surrounded by quotes. Ruby accepts single q
 
 ```ruby
 pokemon_name = 'Pikachu'
-description = "Un adorable Pokémon de type Électrik"
+description = "An adorable Electric-type Pokémon"
 ```
 
 The difference between the two is important. Double quotes allow you to **insert variables into text** using the `#{}` syntax. This is called **interpolation**:
@@ -131,10 +131,10 @@ name = 'Pikachu'
 level = 25
 
 # With double quotes: interpolation works
-puts "#{name} est niveau #{level}"    # Displays: Pikachu est niveau 25
+puts "#{name} is level #{level}"    # Displays: Pikachu is level 25
 
 # With single quotes: interpolation does NOT work
-puts '#{name} est niveau #{level}'    # Displays: #{name} est niveau #{level}
+puts '#{name} is level #{level}'    # Displays: #{name} is level #{level}
 ```
 
 - Interpolation is very handy for building sentences from variables. We will use it constantly.

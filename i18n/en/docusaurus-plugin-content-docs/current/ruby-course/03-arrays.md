@@ -18,12 +18,12 @@ You can think of an Array as a locker with several numbered compartments. Each c
 The simplest way to create an Array is to use square brackets `[]`:
 
 ```ruby
-team = ['Pikachu', 'Dracaufeu', 'Tortank']
+team = ['Pikachu', 'Charizard', 'Blastoise']
 types = [:electric, :fire, :water]
 levels = [25, 36, 40]
 empty = []
 
-p team     # => ["Pikachu", "Dracaufeu", "Tortank"]
+p team     # => ["Pikachu", "Charizard", "Blastoise"]
 p empty    # => []
 ```
 
@@ -50,14 +50,14 @@ p levels   # => [10, 20, 30, 40, 50, 60]
 Each element has an **index** (its position in the Array). Note: indexes start at **0**, not 1:
 
 ```ruby
-team = ['Pikachu', 'Dracaufeu', 'Tortank', 'Ectoplasma', 'Dracolosse', 'Ronflex']
+team = ['Pikachu', 'Charizard', 'Blastoise', 'Gengar', 'Dragonite', 'Snorlax']
 #        index 0      index 1     index 2     index 3       index 4      index 5
 
 puts team[0]      # => Pikachu      (first element)
-puts team[2]      # => Tortank      (third element)
-puts team[5]      # => Ronflex      (last element)
-puts team[-1]     # => Ronflex      (last, counting from the end)
-puts team[-2]     # => Dracolosse   (second to last)
+puts team[2]      # => Blastoise      (third element)
+puts team[5]      # => Snorlax      (last element)
+puts team[-1]     # => Snorlax      (last, counting from the end)
+puts team[-2]     # => Dragonite   (second to last)
 ```
 
 - `team[0]` accesses the first element. This is a programming convention: counting starts from 0.
@@ -66,10 +66,10 @@ puts team[-2]     # => Dracolosse   (second to last)
 Ruby also offers shortcuts:
 
 ```ruby
-team = ['Pikachu', 'Dracaufeu', 'Tortank']
+team = ['Pikachu', 'Charizard', 'Blastoise']
 
 puts team.first    # => Pikachu
-puts team.last     # => Tortank
+puts team.last     # => Blastoise
 ```
 
 ## Modifying an element
@@ -77,18 +77,18 @@ puts team.last     # => Tortank
 You can replace an element by assigning a new value to an index:
 
 ```ruby
-team = ['Pikachu', 'Dracaufeu', 'Tortank']
+team = ['Pikachu', 'Charizard', 'Blastoise']
 puts team[0]       # => Pikachu
 
 team[0] = 'Raichu'
 puts team[0]       # => Raichu
-p team             # => ["Raichu", "Dracaufeu", "Tortank"]
+p team             # => ["Raichu", "Charizard", "Blastoise"]
 ```
 
 ## Getting the size
 
 ```ruby
-team = ['Pikachu', 'Dracaufeu', 'Tortank']
+team = ['Pikachu', 'Charizard', 'Blastoise']
 
 puts team.size      # => 3
 puts team.length    # => 3  (identical to .size)
@@ -104,17 +104,17 @@ puts [].empty?      # => true
 team = ['Pikachu']
 
 # Add to the end
-team.push('Dracaufeu')
-team << 'Tortank'          # shortcut, the most commonly used
-p team    # => ["Pikachu", "Dracaufeu", "Tortank"]
+team.push('Charizard')
+team << 'Blastoise'          # shortcut, the most commonly used
+p team    # => ["Pikachu", "Charizard", "Blastoise"]
 
 # Add to the beginning
 team.unshift('Mew')
-p team    # => ["Mew", "Pikachu", "Dracaufeu", "Tortank"]
+p team    # => ["Mew", "Pikachu", "Charizard", "Blastoise"]
 
 # Insert at a specific position
-team.insert(2, 'Ectoplasma')
-p team    # => ["Mew", "Pikachu", "Ectoplasma", "Dracaufeu", "Tortank"]
+team.insert(2, 'Gengar')
+p team    # => ["Mew", "Pikachu", "Gengar", "Charizard", "Blastoise"]
 ```
 
 - `<<` is the most common way to add to the end. It is read as "append" or "push".
@@ -123,27 +123,27 @@ p team    # => ["Mew", "Pikachu", "Ectoplasma", "Dracaufeu", "Tortank"]
 ## Removing elements
 
 ```ruby
-team = ['Pikachu', 'Dracaufeu', 'Tortank', 'Ectoplasma']
+team = ['Pikachu', 'Charizard', 'Blastoise', 'Gengar']
 
 # Remove the last
 last_removed = team.pop
-puts last_removed   # => Ectoplasma
-p team              # => ["Pikachu", "Dracaufeu", "Tortank"]
+puts last_removed   # => Gengar
+p team              # => ["Pikachu", "Charizard", "Blastoise"]
 
 # Remove the first
 first_removed = team.shift
 puts first_removed    # => Pikachu
-p team                # => ["Dracaufeu", "Tortank"]
+p team                # => ["Charizard", "Blastoise"]
 
 # Remove by value (all occurrences)
-team = ['Pikachu', 'Dracaufeu', 'Pikachu']
+team = ['Pikachu', 'Charizard', 'Pikachu']
 team.delete('Pikachu')
-p team    # => ["Dracaufeu"]
+p team    # => ["Charizard"]
 
 # Remove by index
-team = ['Pikachu', 'Dracaufeu', 'Tortank']
+team = ['Pikachu', 'Charizard', 'Blastoise']
 team.delete_at(1)
-p team    # => ["Pikachu", "Tortank"]
+p team    # => ["Pikachu", "Blastoise"]
 ```
 
 - `.pop` and `.shift` return the removed element, allowing you to store it in a variable.
@@ -152,11 +152,11 @@ p team    # => ["Pikachu", "Tortank"]
 ## Searching in an Array
 
 ```ruby
-team = ['Pikachu', 'Dracaufeu', 'Tortank', 'Ectoplasma']
+team = ['Pikachu', 'Charizard', 'Blastoise', 'Gengar']
 
 puts team.include?('Pikachu')      # => true
 puts team.include?('Mewtwo')       # => false
-puts team.index('Tortank')         # => 2 (its position)
+puts team.index('Blastoise')         # => 2 (its position)
 puts team.index('Mewtwo')          # => nil (not found)
 ```
 
@@ -167,7 +167,7 @@ puts team.index('Mewtwo')          # => nil (not found)
 To do something with each element of an Array, use `.each`:
 
 ```ruby
-team = ['Pikachu', 'Dracaufeu', 'Tortank']
+team = ['Pikachu', 'Charizard', 'Blastoise']
 
 team.each { |pokemon| puts "Go, #{pokemon} !" }
 ```
@@ -176,8 +176,8 @@ Displays:
 
 ```
 Go, Pikachu !
-Go, Dracaufeu !
-Go, Tortank !
+Go, Charizard !
+Go, Blastoise !
 ```
 
 - `.each` passes each element, one by one, to the **block** `{ |pokemon| ... }`. The word `pokemon` between the pipes `| |` is the name given to the current element. You can choose any name, but it is more readable to use the singular of the collection.
@@ -186,8 +186,8 @@ Go, Tortank !
 
 ```ruby
 team.each do |pokemon|
-  puts "Pokémon : #{pokemon}"
-  puts "  Longueur du nom : #{pokemon.length}"
+  puts "Pokemon: #{pokemon}"
+  puts "  Name length: #{pokemon.length}"
 end
 ```
 
@@ -196,7 +196,7 @@ end
 When you need the position of each element along with its value:
 
 ```ruby
-team = ['Pikachu', 'Dracaufeu', 'Tortank']
+team = ['Pikachu', 'Charizard', 'Blastoise']
 
 team.each_with_index do |pokemon, index|
   puts "#{index + 1}. #{pokemon}"
@@ -207,8 +207,8 @@ Displays:
 
 ```
 1. Pikachu
-2. Dracaufeu
-3. Tortank
+2. Charizard
+3. Blastoise
 ```
 
 - `.each_with_index` passes two values to the block: the element and its index. We add 1 to the index for a more natural display (starting at 1 rather than 0).
@@ -218,11 +218,11 @@ Displays:
 `.map` creates a **new** Array by transforming each element:
 
 ```ruby
-team = ['Pikachu', 'Dracaufeu', 'Tortank']
+team = ['Pikachu', 'Charizard', 'Blastoise']
 
 uppercased_team = team.map { |pokemon| pokemon.upcase }
-p uppercased_team    # => ["PIKACHU", "DRACAUFEU", "TORTANK"]
-p team               # => ["Pikachu", "Dracaufeu", "Tortank"]  (unchanged)
+p uppercased_team    # => ["PIKACHU", "CHARIZARD", "BLASTOISE"]
+p team               # => ["Pikachu", "Charizard", "Blastoise"]  (unchanged)
 ```
 
 - `.map` does not modify the original Array. It returns a new Array with the results.
@@ -230,15 +230,15 @@ p team               # => ["Pikachu", "Dracaufeu", "Tortank"]  (unchanged)
 ## Filtering an Array with select and reject
 
 ```ruby
-team = ['Pikachu', 'Dracaufeu', 'Tortank', 'Ectoplasma', 'Dracolosse']
+team = ['Pikachu', 'Charizard', 'Blastoise', 'Gengar', 'Dragonite']
 
 # Keep only names longer than 8 characters
 long_names = team.select { |pokemon| pokemon.length > 8 }
-p long_names    # => ["Dracaufeu", "Ectoplasma", "Dracolosse"]
+p long_names    # => ["Charizard", "Gengar", "Dragonite"]
 
 # Exclude names longer than 8 characters
 short_names = team.reject { |pokemon| pokemon.length > 8 }
-p short_names   # => ["Pikachu", "Tortank"]
+p short_names   # => ["Pikachu", "Blastoise"]
 ```
 
 - `.select` keeps elements for which the block returns `true`.
@@ -247,10 +247,10 @@ p short_names   # => ["Pikachu", "Tortank"]
 ## Sorting and reordering
 
 ```ruby
-team = ['Tortank', 'Pikachu', 'Dracaufeu']
+team = ['Blastoise', 'Pikachu', 'Charizard']
 
-p team.sort         # => ["Dracaufeu", "Pikachu", "Tortank"]  (alphabetical order)
-p team.reverse      # => ["Dracaufeu", "Pikachu", "Tortank"]  (reversed order)
+p team.sort         # => ["Charizard", "Pikachu", "Blastoise"]  (alphabetical order)
+p team.reverse      # => ["Charizard", "Pikachu", "Blastoise"]  (reversed order)
 
 levels = [36, 25, 40, 10]
 p levels.sort       # => [10, 25, 36, 40]  (ascending order)
@@ -264,17 +264,17 @@ p levels.sort       # => [10, 25, 36, 40]  (ascending order)
 
 ```ruby
 # Remove nils
-sparse = ['Pikachu', nil, 'Tortank', nil]
-p sparse.compact        # => ["Pikachu", "Tortank"]
+sparse = ['Pikachu', nil, 'Blastoise', nil]
+p sparse.compact        # => ["Pikachu", "Blastoise"]
 
 # Remove duplicates
-duplicates = ['Pikachu', 'Dracaufeu', 'Pikachu', 'Tortank']
-p duplicates.uniq       # => ["Pikachu", "Dracaufeu", "Tortank"]
+duplicates = ['Pikachu', 'Charizard', 'Pikachu', 'Blastoise']
+p duplicates.uniq       # => ["Pikachu", "Charizard", "Blastoise"]
 
 # Convert an Array to a String
-team = ['Pikachu', 'Dracaufeu', 'Tortank']
-puts team.join(', ')    # => Pikachu, Dracaufeu, Tortank
-puts team.join(' | ')   # => Pikachu | Dracaufeu | Tortank
+team = ['Pikachu', 'Charizard', 'Blastoise']
+puts team.join(', ')    # => Pikachu, Charizard, Blastoise
+puts team.join(' | ')   # => Pikachu | Charizard | Blastoise
 ```
 
 - `.compact` removes all `nil` values. `.uniq` removes duplicates.

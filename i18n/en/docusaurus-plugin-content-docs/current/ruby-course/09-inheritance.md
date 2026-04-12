@@ -31,7 +31,7 @@ class Pokemon
   end
 
   def to_s
-    return "#{@name} Niv.#{@level}"
+    return "#{@name} Lvl.#{@level}"
   end
 
   def cry
@@ -49,7 +49,7 @@ class WildPokemon < Pokemon
 end
 
 wild = WildPokemon.new('Rattata', 3, 'Route 1')
-puts wild           # => Rattata Niv.3
+puts wild           # => Rattata Lvl.3
 puts wild.name      # => Rattata
 puts wild.area      # => Route 1
 puts wild.cry       # => Rattata !
@@ -102,7 +102,7 @@ class Pokemon
   end
 
   def to_s
-    return "#{@name} Niv.#{@level}"
+    return "#{@name} Lvl.#{@level}"
   end
 
   def cry
@@ -120,21 +120,21 @@ class WildPokemon < Pokemon
 
   # Override: enriches the parent's display
   def to_s
-    return "#{super} [Sauvage - #{@area}]"
+    return "#{super} [Wild - #{@area}]"
   end
 
   # Override: completely replaces the parent's behavior
   def cry
-    return "Un #{@name} sauvage apparaît !"
+    return "A wild #{@name} appears!"
   end
 end
 
 wild = WildPokemon.new('Rattata', 3, 'Route 1')
-puts wild       # => Rattata Niv.3 [Sauvage - Route 1]
-puts wild.cry   # => Un Rattata sauvage apparaît !
+puts wild       # => Rattata Lvl.3 [Wild - Route 1]
+puts wild.cry   # => A wild Rattata appears!
 ```
 
-- `to_s` calls `super` to retrieve the parent's display (`"Rattata Niv.3"`) and adds information to it. This is override by **enrichment**.
+- `to_s` calls `super` to retrieve the parent's display (`"Rattata Lvl.3"`) and adds information to it. This is override by **enrichment**.
 - `cry` does not call `super`. The parent's behavior is entirely replaced. This is override by **replacement**.
 
 You choose one or the other depending on the need. Enrichment is more common because it avoids duplicating the parent's logic.
@@ -151,17 +151,17 @@ class TrainerPokemon < Pokemon
   end
 
   def to_s
-    return "#{super} [Dresseur : #{@trainer_name}]"
+    return "#{super} [Trainer: #{@trainer_name}]"
   end
 
   def cry
-    return "#{@trainer_name} envoie #{@name} !"
+    return "#{@trainer_name} sends out #{@name}!"
   end
 end
 
-trainer_pokemon = TrainerPokemon.new('Dracaufeu', 36, 'Red')
-puts trainer_pokemon       # => Dracaufeu Niv.36 [Dresseur : Red]
-puts trainer_pokemon.cry   # => Red envoie Dracaufeu !
+trainer_pokemon = TrainerPokemon.new('Charizard', 36, 'Red')
+puts trainer_pokemon       # => Charizard Lvl.36 [Trainer: Red]
+puts trainer_pokemon.cry   # => Red sends out Charizard!
 ```
 
 - `TrainerPokemon` and `WildPokemon` both inherit from `Pokemon` but add different behaviors. This is **polymorphism**: the same call (`cry`) produces a different result depending on the object's class.
@@ -180,13 +180,13 @@ class LegendaryPokemon < WildPokemon
   end
 
   def to_s
-    return "#{super} | Attaque signature : #{@signature_move}"
+    return "#{super} | Signature move: #{@signature_move}"
   end
 end
 
-mewtwo = LegendaryPokemon.new('Mewtwo', 70, 'Grotte Azurée', 'Frappe Psy')
+mewtwo = LegendaryPokemon.new('Mewtwo', 70, 'Azure Cave', 'Psychic Strike')
 puts mewtwo
-# => Mewtwo Niv.70 [Sauvage - Grotte Azurée] | Attaque signature : Frappe Psy
+# => Mewtwo Lvl.70 [Wild - Azure Cave] | Signature move: Psychic Strike
 ```
 
 - `LegendaryPokemon` inherits from `WildPokemon`, which inherits from `Pokemon`. The `super` chain goes up automatically.
@@ -197,7 +197,7 @@ puts mewtwo
 Ruby offers several tools to examine relationships between classes:
 
 ```ruby
-mewtwo = LegendaryPokemon.new('Mewtwo', 70, 'Grotte Azurée', 'Frappe Psy')
+mewtwo = LegendaryPokemon.new('Mewtwo', 70, 'Azure Cave', 'Psychic Strike')
 
 # is_a? checks the class AND all its ancestors
 puts mewtwo.is_a?(LegendaryPokemon)           # => true

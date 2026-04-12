@@ -114,7 +114,7 @@ Pour un historique personnalisé, l'appel se place au même endroit que l'action
 target.add_heal_to_history(amount, launcher, skill)
 ```
 
-## Historiques existants -- référence
+## Historiques existants — référence
 
 ### MoveHistory
 
@@ -124,7 +124,7 @@ target.add_heal_to_history(amount, launcher, skill)
 | `move`          | `Battle::Move`               | Copie (`dup`) de l'attaque         |
 | `original_move` | `Battle::Move`               | Référence directe à l'objet move   |
 | `targets`       | `Array<PFM::PokemonBattler>` | Cibles affectées                   |
-| `attack_order`  | `Integer`                    | Ordre d'attaque du Pokemon ce tour |
+| `attack_order`  | `Integer`                    | Ordre d'attaque du Pokémon ce tour |
 
 `SuccessfulMoveHistory` hérite de `MoveHistory` sans ajout.
 
@@ -136,7 +136,7 @@ target.add_heal_to_history(amount, launcher, skill)
 | `damage`   | `Integer`                  | Montant de dégâts subis        |
 | `launcher` | `PFM::PokemonBattler, nil` | Lanceur des dégâts             |
 | `move`     | `Battle::Move, nil`        | Attaque ayant causé les dégâts |
-| `ko`       | `Boolean`                  | Si le Pokemon a été mis KO     |
+| `ko`       | `Boolean`                  | Si le Pokémon a été mis KO     |
 
 ### StatHistory
 
