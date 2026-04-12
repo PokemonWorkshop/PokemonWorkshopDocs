@@ -9,7 +9,7 @@ Ce chapitre présente l'**héritage**, le mécanisme qui permet à une classe de
 
 ## Principe
 
-On a créé une classe `Pokémon` au chapitre 8. Mais tous les Pokémon ne sont pas identiques : un Pokémon sauvage a une zone d'apparition et un taux de capture, un Pokémon de dresseur a un propriétaire et peut-être un surnom.
+On a créé une classe `Pokemon` au chapitre 8. Mais tous les Pokémon ne sont pas identiques : un Pokémon sauvage a une zone d'apparition et un taux de capture, un Pokémon de dresseur a un propriétaire et peut-être un surnom.
 
 On pourrait copier-coller la classe `Pokemon` et la modifier pour chaque cas, mais ce serait du gaspillage. Si on corrige un bug dans `Pokemon`, il faudrait le corriger dans toutes les copies.
 
