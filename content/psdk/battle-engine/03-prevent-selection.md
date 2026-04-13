@@ -1,28 +1,28 @@
 ---
-title: "Comment empêcher la sélection d'une attaque dans PSDK ?"
-slug: empecher-la-selection-dune-attaque
+title: "How to prevent move selection in PSDK?"
+slug: how-to-prevent-move-selection
 sidebar_position: 3
-description: "Ce guide explique comment rendre une attaque non sélectionnable dans le menu de combat, que ce soit depuis la logique propre de l'attaque ou depuis un effet externe."
+description: "This guide explains how to make a move non-selectable in the battle menu, whether from the move's own logic or from an external effect."
 ---
 
-## Principe
+## Principle
 
-Une attaque peut ne pas être sélectionnable pour deux raisons distinctes :
+A move can be non-selectable for two distinct reasons:
 
-- **Depuis l'attaque elle-même** : l'attaque vérifie ses propres conditions et décide qu'elle ne peut pas être choisie.
-- **Depuis un effet externe** : un effet actif sur le Pokémon empêche la sélection de l'attaque.
+- **From the move itself**: the move checks its own conditions and decides it cannot be chosen.
+- **From an external effect**: an active effect on the Pokémon prevents the move from being selected.
 
-Dans les deux cas, l'empêchement est signalé par le retour d'un `Proc`. Ce retour **doit impérativement être accompagné d'un message** indiquant clairement la raison au joueur.
+In both cases, the prevention is signaled by returning a `Proc`. This return **must be accompanied by a message** clearly indicating the reason to the player.
 
-> **Différence avec l'échec** (guide 001) : l'empêchement de sélection intervient **avant** le tour, dans le menu de combat. L'échec intervient **pendant** le tour, à l'exécution de l'attaque.
+> **Difference with failure** (guide 001): selection prevention happens **before** the turn, in the battle menu. Failure happens **during** the turn, at move execution.
 
-## Depuis l'attaque
+## From the move
 
-Certaines attaques peuvent ne pas être sélectionnables selon leurs propres règles. Par exemple, l'attaque **Garde-à-Joues** ne peut pas être sélectionnée si l'utilisateur ne tient pas de Baie.
+Some moves can be non-selectable based on their own rules. For example, the move **Stuff Cheeks** cannot be selected if the user is not holding a Berry.
 
-Pour gérer ce comportement, on override la méthode `disable_reason` dans la classe de l'attaque.
+To handle this behavior, override the `disable_reason` method in the move's class.
 
-### Exemple : Garde-à-Joues
+### Example: Stuff Cheeks
 
 ```ruby
 # Get the reason why the move is disabled
@@ -36,17 +36,17 @@ def disable_reason(user)
 end
 ```
 
-- L'appel à `super` est **indispensable** pour conserver les vérifications par défaut.
-- Si la condition n'est pas remplie, un `Proc` contenant le message est retourné pour signaler que l'attaque est désactivée.
-- Si la condition est remplie (l'utilisateur tient une Baie), `super` prend le relais.
+- The call to `super` is **mandatory** to preserve default checks.
+- If the condition is not met, a `Proc` containing the message is returned to signal that the move is disabled.
+- If the condition is met (the user holds a Berry), `super` takes over.
 
-## Depuis un effet
+## From an effect
 
-Certaines attaques peuvent ne pas être sélectionnables à cause d'un effet actif sur l'utilisateur. Par exemple, l'effet **Gravité** empêche la sélection des attaques affectées par la gravité.
+Some moves can be non-selectable because of an active effect on the user. For example, the **Gravity** effect prevents selection of gravity-affected moves.
 
-Pour gérer ce comportement, on utilise la méthode `on_move_disabled_check` dans la classe de l'effet.
+To handle this behavior, use the `on_move_disabled_check` method in the effect's class.
 
-### Exemple : Gravité
+### Example: Gravity
 
 ```ruby
 # Function called when we try to check if the user cannot use a move
@@ -61,20 +61,20 @@ def on_move_disabled_check(user, move)
 end
 ```
 
-- La première ligne vérifie que l'attaque est bien concernée par la gravité.
-- Si elle l'est, un `Proc` contenant le message est retourné.
-- Si elle ne l'est pas, `nil` est retourné implicitement (pas de blocage).
+- The first line checks that the move is affected by gravity.
+- If it is, a `Proc` containing the message is returned.
+- If it is not, `nil` is implicitly returned (no block).
 
-## Cas particulier : couplage avec la prévention
+## Special case: coupling with prevention
 
-Lorsqu'on utilise `disable_reason` pour désactiver une attaque, il faut également implémenter `move_usable_by_user` (guide 001). En effet, une attaque désactivée peut quand même être lancée via des effets comme **Métronome** qui contournent la sélection.
+When using `disable_reason` to disable a move, you must also implement `move_usable_by_user` (guide 001). Indeed, a disabled move can still be launched through effects like **Metronome** that bypass selection.
 
-De la même manière, pour les effets, `on_move_disabled_check` doit être couplé avec `on_move_prevention_user` pour couvrir le cas où l'attaque est lancée sans passer par le menu.
+Similarly, for effects, `on_move_disabled_check` must be coupled with `on_move_prevention_user` to cover the case where the move is launched without going through the menu.
 
 ## Conclusion
 
-- Utilisez `disable_reason` et `move_usable_by_user` si la logique dépend de l'attaque elle-même.
-- Utilisez `on_move_disabled_check` et `on_move_prevention_user` si la logique dépend d'un effet externe.
-- Retournez un `Proc` pour signaler que l'attaque est non sélectionnable.
-- Affichez toujours un message clair au joueur indiquant la raison.
-- Pensez toujours à couvrir le cas où l'attaque est lancée sans passer par le menu de sélection.
+- Use `disable_reason` and `move_usable_by_user` if the logic depends on the move itself.
+- Use `on_move_disabled_check` and `on_move_prevention_user` if the logic depends on an external effect.
+- Return a `Proc` to signal that the move is non-selectable.
+- Always display a clear message to the player indicating the reason.
+- Always cover the case where the move is launched without going through the selection menu.

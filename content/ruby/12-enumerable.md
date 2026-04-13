@@ -1,21 +1,21 @@
 ---
-title: "Comment utiliser Enumerable en Ruby ?"
+title: "How to use Enumerable in Ruby?"
 slug: enumerable
 sidebar_position: 12
-description: "Ce chapitre présente **Enumerable**, un module qui donne plus de 50 méthodes de manipulation de collections. On découvre aussi **Comparable**, qui permet de comparer des objets entre eux."
+description: "This chapter introduces **Enumerable**, a module that provides over 50 collection manipulation methods. We also discover **Comparable**, which allows comparing objects with each other."
 ---
 
-Ce chapitre présente **Enumerable**, un module qui donne plus de 50 méthodes de manipulation de collections. On découvre aussi **Comparable**, qui permet de comparer des objets entre eux.
+This chapter introduces **Enumerable**, a module that provides over 50 collection manipulation methods. We also discover **Comparable**, which allows comparing objects with each other.
 
-## Principe
+## Principle
 
-On a déjà utilisé `.map`, `.select`, `.reject` sur les Array. Ce ne sont pas des méthodes d'Array à proprement parler : elles viennent du module **Enumerable** qu'Array inclut automatiquement.
+We have already used `.map`, `.select`, `.reject` on Arrays. These are not strictly Array methods: they come from the **Enumerable** module that Array includes automatically.
 
-Le principe est simple : si une classe définit la méthode `each` et inclut `Enumerable`, elle hérite de toutes ces méthodes gratuitement. `each` est la seule brique nécessaire — Ruby construit tout le reste dessus.
+The principle is simple: if a class defines the `each` method and includes `Enumerable`, it inherits all these methods for free. `each` is the only building block needed — Ruby builds everything else on top of it.
 
-C'est exactement ce qu'on a appris au chapitre 10 avec les mixins : `include Enumerable` injecte des dizaines de méthodes dans la classe.
+This is exactly what we learned in chapter 10 with mixins: `include Enumerable` injects dozens of methods into the class.
 
-## Inclure Enumerable dans une classe
+## Including Enumerable in a class
 
 ```ruby
 class Registry
@@ -30,193 +30,193 @@ class Registry
     return self
   end
 
-  # La seule méthode obligatoire pour Enumerable
+  # The only required method for Enumerable
   def each(&block)
     @pokemon_list.each(&block)
   end
 end
 ```
 
-- `include Enumerable` donne accès à `map`, `select`, `sort_by`, `reduce`, etc.
-- `each` est le **contrat** : Enumerable l'utilise comme base pour toutes ses méthodes.
-- `&block` capture le bloc passé à `each` et le transmet à `@pokemon_list.each`.
-- `return self` dans `add` permet de chaîner : `registry.add(a).add(b)`.
+- `include Enumerable` gives access to `map`, `select`, `sort_by`, `reduce`, etc.
+- `each` is the **contract**: Enumerable uses it as the foundation for all its methods.
+- `&block` captures the block passed to `each` and forwards it to `@pokemon_list.each`.
+- `return self` in `add` allows chaining: `registry.add(a).add(b)`.
 
-## Transformer : map et flat_map
+## Transforming: map and flat_map
 
-`map` transforme chaque élément et retourne un nouvel Array :
+`map` transforms each element and returns a new Array:
 
 ```ruby
 names = registry.map { |pokemon| pokemon.name }
-# => ["Pikachu", "Dracaufeu", "Tortank"]
+# => ["Pikachu", "Charizard", "Blastoise"]
 ```
 
-`flat_map` fait la même chose, puis aplatit le résultat d'un niveau. C'est utile quand chaque élément produit un Array :
+`flat_map` does the same thing, then flattens the result by one level. This is useful when each element produces an Array:
 
 ```ruby
-# Chaque Pokémon peut avoir plusieurs types
+# Each Pokemon can have multiple types
 all_types = registry.flat_map { |pokemon| pokemon.types }
 # => [:electric, :fire, :flying, :water]
 
-# Sans flat_map, on obtiendrait un Array d'Arrays
+# Without flat_map, we would get an Array of Arrays
 registry.map { |pokemon| pokemon.types }
 # => [[:electric], [:fire, :flying], [:water]]
 ```
 
-- `flat_map` = `map` + `flatten(1)`. C'est un raccourci très courant.
+- `flat_map` = `map` + `flatten(1)`. It is a very common shortcut.
 
-## Filtrer : select, reject, find
+## Filtering: select, reject, find
 
-On les a déjà vus au chapitre 3, mais ils viennent d'Enumerable :
+We already saw them in chapter 3, but they come from Enumerable:
 
 ```ruby
-# Garder les Pokémon de type Feu
+# Keep Fire-type Pokemon
 fire_pokemon = registry.select { |pokemon| pokemon.types.include?(:fire) }
 
-# Exclure les Pokémon KO
+# Exclude KO'd Pokemon
 alive = registry.reject { |pokemon| pokemon.ko? }
 
-# Trouver le premier Pokémon Eau
+# Find the first Water-type Pokemon
 first_water = registry.find { |pokemon| pokemon.types.include?(:water) }
 ```
 
-- `select` et `reject` retournent un Array. `find` retourne un seul élément ou `nil`.
+- `select` and `reject` return an Array. `find` returns a single element or `nil`.
 
-## Réduire : reduce
+## Reducing: reduce
 
-`reduce` (aussi appelé `inject`) accumule une valeur en parcourant la collection :
+`reduce` (also called `inject`) accumulates a value while traversing the collection:
 
 ```ruby
-# Additionner tous les niveaux
+# Sum all levels
 total = registry.reduce(0) { |sum, pokemon| sum + pokemon.level }
 ```
 
-Comment ça fonctionne, étape par étape :
+How it works, step by step:
 
-1. `sum` commence à `0` (la valeur initiale passée à `reduce`)
-2. Premier tour : `sum = 0 + 25` → `sum` vaut `25`
-3. Deuxième tour : `sum = 25 + 36` → `sum` vaut `61`
-4. Et ainsi de suite... Le résultat final est la dernière valeur de `sum`.
+1. `sum` starts at `0` (the initial value passed to `reduce`)
+2. First iteration: `sum = 0 + 25` -> `sum` is `25`
+3. Second iteration: `sum = 25 + 36` -> `sum` is `61`
+4. And so on... The final result is the last value of `sum`.
 
-Il existe aussi des raccourcis :
+There are also shortcuts:
 
 ```ruby
-# sum est un raccourci pour reduce(0) { |s, p| s + p.level }
+# sum is a shortcut for reduce(0) { |s, p| s + p.level }
 total = registry.sum { |pokemon| pokemon.level }
 
-# reduce avec un symbole (quand on travaille directement sur des nombres)
+# reduce with a symbol (when working directly with numbers)
 levels = [25, 36, 40]
 total = levels.reduce(:+)    # => 101
 ```
 
-- `sum` est plus lisible que `reduce` pour les additions simples.
-- `reduce(:+)` appelle la méthode `+` entre chaque paire d'éléments.
+- `sum` is more readable than `reduce` for simple additions.
+- `reduce(:+)` calls the `+` method between each pair of elements.
 
-## Trier : sort_by, min_by, max_by
+## Sorting: sort_by, min_by, max_by
 
-`sort_by` trie selon un critère extrait par le bloc :
+`sort_by` sorts according to a criterion extracted by the block:
 
 ```ruby
-# Trier par niveau croissant
+# Sort by level ascending
 by_level = registry.sort_by { |pokemon| pokemon.level }
 
-# Trier par niveau décroissant (nier la valeur)
+# Sort by level descending (negate the value)
 strongest = registry.sort_by { |pokemon| -pokemon.level }
 ```
 
-`min_by` et `max_by` trouvent l'élément extrême sans trier toute la collection :
+`min_by` and `max_by` find the extreme element without sorting the entire collection:
 
 ```ruby
 strongest = registry.max_by { |pokemon| pokemon.level }
 weakest = registry.min_by { |pokemon| pokemon.level }
 
-# Les deux à la fois
+# Both at once
 weakest, strongest = registry.minmax_by { |pokemon| pokemon.level }
 ```
 
-- `sort_by` retourne un nouvel Array trié.
-- `min_by`/`max_by` sont plus performants que `sort_by.first`/`sort_by.last` car ils ne parcourent la collection qu'une seule fois.
+- `sort_by` returns a new sorted Array.
+- `min_by`/`max_by` are more efficient than `sort_by.first`/`sort_by.last` because they traverse the collection only once.
 
-## Regrouper : group_by et tally
+## Grouping: group_by and tally
 
-`group_by` organise les éléments en sous-groupes selon un critère :
+`group_by` organizes elements into subgroups based on a criterion:
 
 ```ruby
 by_type = registry.group_by { |pokemon| pokemon.types.first }
 # => { :electric => [...], :fire => [...], :water => [...] }
 ```
 
-`tally` compte les occurrences de chaque valeur dans un Array :
+`tally` counts occurrences of each value in an Array:
 
 ```ruby
-# Compter combien de Pokémon de chaque type
+# Count how many Pokemon of each type
 census = registry.flat_map { |pokemon| pokemon.types }.tally
 # => { :electric => 2, :fire => 3, :water => 1, :flying => 1 }
 ```
 
-- `group_by` retourne un Hash dont les clés sont les valeurs retournées par le bloc.
-- `tally` est un raccourci très pratique pour les comptages.
+- `group_by` returns a Hash whose keys are the values returned by the block.
+- `tally` is a very handy shortcut for counting.
 
-## Compter : count et sum
+## Counting: count and sum
 
 ```ruby
-# Combien de Pokémon au total ?
+# How many Pokemon in total?
 total = registry.count
 
-# Combien de Pokémon de type Feu ?
+# How many Fire-type Pokemon?
 fire_count = registry.count { |pokemon| pokemon.types.include?(:fire) }
 
-# Somme de tous les niveaux
+# Sum of all levels
 total_levels = registry.sum { |pokemon| pokemon.level }
 ```
 
-- `count` sans bloc retourne le nombre total. Avec un bloc, il compte ceux qui satisfont la condition.
+- `count` without a block returns the total number. With a block, it counts those that satisfy the condition.
 
-## Prédicats : any?, all?, none?
+## Predicates: any?, all?, none?
 
-Ces méthodes retournent `true` ou `false` :
+These methods return `true` or `false`:
 
 ```ruby
-# Y a-t-il au moins un Pokémon Eau ?
+# Is there at least one Water-type Pokemon?
 registry.any? { |pokemon| pokemon.types.include?(:water) }    # => true
 
-# Tous les Pokémon sont-ils au-dessus du niveau 10 ?
+# Are all Pokemon above level 10?
 registry.all? { |pokemon| pokemon.level > 10 }                # => true
 
-# Aucun Pokémon n'est KO ?
+# No Pokemon is KO'd?
 registry.none? { |pokemon| pokemon.ko? }                      # => true
 ```
 
-## Découper : take et drop
+## Slicing: take and drop
 
 ```ruby
-# Les 3 premiers Pokémon
+# The first 3 Pokemon
 first_three = registry.take(3)
 
-# Tous sauf les 2 premiers
+# All except the first 2
 without_first_two = registry.drop(2)
 ```
 
-## Chaîner les appels
+## Chaining calls
 
-On peut enchaîner plusieurs méthodes Enumerable pour construire des requêtes complexes :
+You can chain multiple Enumerable methods to build complex queries:
 
 ```ruby
-# Les 3 noms des Pokémon de plus haut niveau
+# The names of the 3 highest-level Pokemon
 top_three = registry
   .sort_by { |pokemon| -pokemon.level }
   .take(3)
   .map { |pokemon| pokemon.name }
 ```
 
-- Chaque méthode retourne un Array, ce qui permet d'appeler la suivante dessus.
-- L'ordre des opérations compte : filtrer **avant** de trier est plus performant.
+- Each method returns an Array, which allows calling the next one on it.
+- The order of operations matters: filtering **before** sorting is more efficient.
 
-## Le module Comparable
+## The Comparable module
 
-Comparable fonctionne sur le même principe qu'Enumerable : on inclut le module et on définit **une seule méthode**, l'opérateur `<=>` (spaceship). En retour, on obtient `<`, `>`, `<=`, `>=`, `between?` et `clamp`.
+Comparable works on the same principle as Enumerable: you include the module and define **a single method**, the `<=>` (spaceship) operator. In return, you get `<`, `>`, `<=`, `>=`, `between?` and `clamp`.
 
-```ruby live
+```ruby
 class Pokemon
   include Comparable
 
@@ -233,24 +233,24 @@ class Pokemon
 end
 
 pikachu = Pokemon.new('Pikachu', 25)
-charizard = Pokemon.new('Dracaufeu', 50)
+charizard = Pokemon.new('Charizard', 50)
 
 puts pikachu < charizard                                    # => true
 puts charizard > pikachu                                    # => true
 puts pikachu.between?(Pokemon.new('Min', 10), charizard)    # => true
 ```
 
-- `<=>` retourne `-1` si `self` est inférieur, `0` si égal, `1` si supérieur.
-- Une fois `<=>` défini, `.sort` fonctionne automatiquement sans bloc.
+- `<=>` returns `-1` if `self` is less, `0` if equal, `1` if greater.
+- Once `<=>` is defined, `.sort` works automatically without a block.
 
 ## Conclusion
 
-- Inclure `Enumerable` et définir `each` donne accès à plus de 50 méthodes.
-- `map` transforme, `flat_map` transforme et aplatit.
-- `select`/`reject` filtrent, `find` trouve le premier.
-- `reduce` accumule une valeur. `sum` est un raccourci pour les additions.
-- `sort_by` trie par critère. `min_by`/`max_by` trouvent les extrêmes.
-- `group_by` regroupe, `tally` compte les occurrences.
-- `count` compte, `any?`/`all?`/`none?` vérifient des conditions.
-- Inclure `Comparable` et définir `<=>` donne `<`, `>`, `<=`, `>=`, `between?`, `clamp`.
-- On peut chaîner les appels Enumerable pour des requêtes complexes.
+- Including `Enumerable` and defining `each` gives access to over 50 methods.
+- `map` transforms, `flat_map` transforms and flattens.
+- `select`/`reject` filter, `find` finds the first match.
+- `reduce` accumulates a value. `sum` is a shortcut for additions.
+- `sort_by` sorts by criterion. `min_by`/`max_by` find the extremes.
+- `group_by` groups, `tally` counts occurrences.
+- `count` counts, `any?`/`all?`/`none?` check conditions.
+- Including `Comparable` and defining `<=>` gives `<`, `>`, `<=`, `>=`, `between?`, `clamp`.
+- You can chain Enumerable calls for complex queries.

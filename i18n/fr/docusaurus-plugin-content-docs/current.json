@@ -1,0 +1,30 @@
+{
+  "version.label": {
+    "message": "Actuel",
+    "description": "The label for version current"
+  },
+  "sidebar.mainSidebar.category.Getting Started": {
+    "message": "Démarrage",
+    "description": "The label for category 'Getting Started' in sidebar 'mainSidebar'"
+  },
+  "sidebar.mainSidebar.category.PSDK": {
+    "message": "PSDK",
+    "description": "The label for category 'PSDK' in sidebar 'mainSidebar'"
+  },
+  "sidebar.mainSidebar.category.UI Development": {
+    "message": "Développement UI",
+    "description": "The label for category 'UI Development' in sidebar 'mainSidebar'"
+  },
+  "sidebar.mainSidebar.category.Battle Engine": {
+    "message": "Moteur de Combat",
+    "description": "The label for category 'Battle Engine' in sidebar 'mainSidebar'"
+  },
+  "sidebar.mainSidebar.category.RPG Maker XP": {
+    "message": "RPG Maker XP",
+    "description": "The label for category 'RPG Maker XP' in sidebar 'mainSidebar'"
+  },
+  "sidebar.mainSidebar.category.Ruby": {
+    "message": "Cours Ruby",
+    "description": "The label for category 'Ruby' in sidebar 'mainSidebar'"
+  }
+}

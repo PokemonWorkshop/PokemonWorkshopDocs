@@ -1,26 +1,26 @@
 ---
-title: "Comment gérer les entrées clavier dans PSDK ?"
-slug: gerer-les-entrees-clavier
+title: "How to handle keyboard input in PSDK?"
+slug: handle-keyboard-input
 sidebar_position: 4
-description: "Ce guide explique comment gérer les inputs clavier dans une scène UI."
+description: "This guide explains how to handle keyboard input in a UI scene."
 ---
 
-Ce guide explique comment gérer les inputs clavier dans une scène UI. Il fait suite aux guides 001 à 003 : le lecteur dispose d'une scène Mystery Gift avec une Composition et des composants visuels. Ici, on ajoute le fichier Input.rb au plugin pour mapper les boutons et la navigation.
+This guide explains how to handle keyboard input in a UI scene. It builds on guides 001 to 003: the reader already has a Mystery Gift scene with a Composition and visual components. Here, we add the Input.rb file to the plugin to map buttons and navigation.
 
-## Principe
+## Principle
 
-La gestion des inputs clavier est scindée en deux mécanismes distincts :
+Keyboard input handling is split into two distinct mechanisms:
 
-- **Boutons d'action** (A/B/X/Y) : gérés par `automatic_input_update(AIU_KEY2METHOD)` qui appelle `Input.trigger?` -- le bouton ne se déclenche qu'une seule fois par appui.
-- **Touches directionnelles** (UP/DOWN) : gérées avec `Input.repeat?` -- le bouton se déclenche en continu tant qu'il est maintenu, avec un délai initial avant la répétition.
+- **Button keys** (A/B/X/Y): handled by `automatic_input_update(AIU_KEY2METHOD)` which calls `Input.trigger?` -- the button fires only once per press.
+- **Directional keys** (UP/DOWN): handled with `Input.repeat?` -- the button fires continuously while held, with an initial delay before repetition.
 
-La logique d'input est placée dans un fichier séparé (Input.rb) qui réouvre la classe de scène. Les mêmes méthodes d'action (`action_a`, `action_b`) sont appelées à la fois par le clavier **et** par la souris.
+Input logic goes in a separate file (Input.rb) that reopens the scene class. The same action methods (`action_a`, `action_b`) are called by both keyboard **and** mouse.
 
-Point important : `update_inputs`, `AIU_KEY2METHOD` et `MOUSE_BUTTON_ACTIONS` doivent rester **publics** (au-dessus du mot-clé `private`). Le framework appelle `update_inputs` depuis l'extérieur de la classe. Seules les méthodes d'action et la navigation vont sous `private`.
+Important point: `update_inputs`, `AIU_KEY2METHOD`, and `MOUSE_BUTTON_ACTIONS` must remain **public** (above the `private` keyword). The framework calls `update_inputs` from outside the class. Only action methods and navigation go under `private`.
 
-## Fichier Input complet
+## Complete Input file
 
-Le fichier Input.rb réouvre la classe de scène pour y ajouter les méthodes de gestion des inputs. Ce n'est pas un nouveau fichier de classe : il réouvre la même classe définie dans Main.rb.
+The Input.rb file reopens the scene class to add input handling methods. This is not a new class file: it reopens the same class defined in Main.rb.
 
 ```ruby
 module GamePlay
@@ -69,18 +69,18 @@ module GamePlay
 end
 ```
 
-- `AIU_KEY2METHOD` et `update_inputs` sont déclarés **au-dessus** du mot-clé `private`. C'est obligatoire : le framework appelle `update_inputs` depuis l'extérieur de la classe. Si ces éléments sont sous `private`, le framework ne pourra pas y accéder.
-- `@composition.done?` bloque les inputs pendant les animations. Sans cette vérification, le joueur pourrait interagir pendant une transition visuelle.
-- `automatic_input_update` vérifie `Input.trigger?` pour chaque clé du hash `AIU_KEY2METHOD` et appelle la méthode correspondante si la touche est pressée. S'il trouve une touche pressée, il retourne `false` pour consommer l'input.
-- `update_navigation` gère les touches directionnelles séparément avec `Input.repeat?`. Elle retourne `false` pour consommer l'input, `true` pour laisser le traitement continuer.
-- `Input.repeat?` vs `Input.trigger?` : `repeat?` se déclenche en continu tant que la touche est maintenue (avec un délai initial avant la répétition), `trigger?` se déclenche une seule fois par appui.
-- `play_cursor_se`, `play_decision_se` et `play_cancel_se` sont les effets sonores standards pour la navigation, la confirmation et l'annulation.
-- `action_a` appelle `open_code_input`, une méthode de logique métier qui sera définie dans Logic.rb (guide suivant).
-- `action_b` met `@running` à `false` pour quitter la scène.
+- `AIU_KEY2METHOD` and `update_inputs` are declared **above** the `private` keyword. This is mandatory: the framework calls `update_inputs` from outside the class. If these elements are under `private`, the framework will not be able to access them.
+- `@composition.done?` blocks input during animations. Without this check, the player could interact during a visual transition.
+- `automatic_input_update` checks `Input.trigger?` for each key in the `AIU_KEY2METHOD` hash and calls the corresponding method if the key is pressed. If it finds a pressed key, it returns `false` to consume the input.
+- `update_navigation` handles directional keys separately with `Input.repeat?`. It returns `false` to consume the input, `true` to let other processing continue.
+- `Input.repeat?` vs `Input.trigger?`: `repeat?` fires continuously while the key is held (with an initial delay before repetition), `trigger?` fires only once per press.
+- `play_cursor_se`, `play_decision_se`, and `play_cancel_se` are the standard sound effects for navigation, confirmation, and cancellation.
+- `action_a` calls `open_code_input`, a business logic method that will be defined in Logic.rb (next guide).
+- `action_b` sets `@running` to `false` to exit the scene.
 
 ## Navigation wrapping vs clamping
 
-Le plugin Mystery Gift utilise `.clamp` pour borner l'index : le curseur s'arrête aux extrémités de la liste. C'est le comportement de `@composition.move_selection` qui gère le clamp en interne. Pour une navigation circulaire (le curseur revient au début après le dernier élément), on utilise le modulo :
+The Mystery Gift plugin uses `.clamp` to bound the index: the cursor stops at the edges of the list. This is the behavior of `@composition.move_selection` which handles clamping internally. For circular navigation (the cursor wraps back to the beginning after the last element), use modulo:
 
 ```ruby
 # Update the selected index with wrapping (loops around)
@@ -92,15 +92,15 @@ def update_index(new_index)
 end
 ```
 
-- `% max` fait boucler l'index : descendre après le dernier élément ramène au premier, monter avant le premier ramène au dernier.
-- Utilisez `.clamp(0, max - 1)` si vous préférez que le curseur s'arrête aux bornes sans boucler.
-- Le choix entre wrapping et clamping dépend de la scène : un menu principal utilise souvent le wrapping, une liste de cadeaux utilise le clamping.
+- `% max` wraps the index around: going past the last element returns to the first, going before the first returns to the last.
+- Use `.clamp(0, max - 1)` if you prefer the cursor to stop at the boundaries without looping.
+- The choice between wrapping and clamping depends on the scene: a main menu often uses wrapping, a gift list uses clamping.
 
 ## Conclusion
 
-- `update_inputs` et `AIU_KEY2METHOD` doivent être publics (au-dessus de `private`). Le framework appelle `update_inputs` depuis l'extérieur.
-- Les boutons d'action (A/B) utilisent `Input.trigger?` via `automatic_input_update`.
-- Les touches directionnelles (UP/DOWN) utilisent `Input.repeat?` dans une méthode `update_navigation` séparée.
-- Les mêmes méthodes d'action sont partagées entre le clavier et la souris.
-- Vérifiez toujours `@composition.done?` avant d'accepter les inputs.
-- Utilisez le modulo pour une navigation circulaire, `.clamp` pour une navigation bornée.
+- `update_inputs` and `AIU_KEY2METHOD` must be public (above `private`). The framework calls `update_inputs` from outside.
+- Button keys (A/B) use `Input.trigger?` via `automatic_input_update`.
+- Directional keys (UP/DOWN) use `Input.repeat?` in a separate `update_navigation` method.
+- The same action methods are shared between keyboard and mouse.
+- Always check `@composition.done?` before accepting input.
+- Use modulo for circular navigation, `.clamp` for bounded navigation.

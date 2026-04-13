@@ -1,29 +1,29 @@
 ---
-title: "Comment utiliser les modules en Ruby ?"
+title: "How to use modules in Ruby?"
 slug: modules
 sidebar_position: 10
-description: "Ce chapitre présente les **modules**, un outil pour organiser le code et partager du comportement entre classes. Les modules sont le complément naturel des classes et de l'héritage."
+description: "This chapter introduces **modules**, a tool for organizing code and sharing behavior between classes. Modules are the natural complement to classes and inheritance."
 ---
 
-Ce chapitre présente les **modules**, un outil pour organiser le code et partager du comportement entre classes. Les modules sont le complément naturel des classes et de l'héritage.
+This chapter introduces **modules**, a tool for organizing code and sharing behavior between classes. Modules are the natural complement to classes and inheritance.
 
-## Principe
+## Principle
 
-Au chapitre 9, on a vu que l'héritage permet de spécialiser une classe. Mais il a une limite : en Ruby, une classe ne peut hériter que d'**un seul** parent. Que faire si on veut donner des capacités d'affichage à `Pokemon` **et** à `Team`, deux classes sans lien de parenté ?
+In chapter 9, we saw that inheritance allows specializing a class. But it has a limitation: in Ruby, a class can only inherit from **one** parent. What if we want to give display capabilities to `Pokemon` **and** `Team`, two classes with no parent-child relationship?
 
-C'est le rôle des **modules**. Un module est un conteneur de méthodes et de constantes. Il ressemble à une classe, mais avec deux différences majeures :
+That is the role of **modules**. A module is a container for methods and constants. It looks like a class, but with two major differences:
 
-- On **ne peut pas** créer d'instance d'un module (pas de `.new`)
-- On peut l'**inclure** dans autant de classes qu'on veut
+- You **cannot** create an instance of a module (no `.new`)
+- You can **include** it in as many classes as you want
 
-Un module a deux usages principaux :
+A module has two main uses:
 
-- **Espace de noms** : regrouper des classes et constantes sous un même toit pour éviter les conflits de noms
-- **Mixin** : partager des méthodes entre plusieurs classes sans héritage
+- **Namespace**: grouping classes and constants under the same roof to avoid name conflicts
+- **Mixin**: sharing methods between multiple classes without inheritance
 
-## Les espaces de noms
+## Namespaces
 
-Imaginons qu'on ait une classe `Pokemon` pour le Pokédex et une autre `Pokemon` pour le combat. Sans module, c'est un conflit de noms. Les modules résolvent ce problème :
+Imagine we have a `Pokemon` class for the Pokedex and another `Pokemon` for combat. Without a module, this is a name conflict. Modules solve this problem:
 
 ```ruby
 module Pokedex
@@ -48,17 +48,17 @@ module Combat
   end
 end
 
-# Deux classes Pokemon, sans conflit
+# Two Pokemon classes, no conflict
 entry = Pokedex::Pokemon.new('Pikachu', [:electric])
 fighter = Combat::Pokemon.new('Pikachu', 55)
 ```
 
-- `module Pokedex ... end` crée un espace de noms. `Pokedex::Pokemon` et `Combat::Pokemon` coexistent sans problème.
-- `::` (double deux-points) est l'opérateur de **résolution de portée**. Il permet de naviguer dans les modules : `Pokedex::Pokemon` signifie "la classe `Pokemon` à l'intérieur du module `Pokedex`".
+- `module Pokedex ... end` creates a namespace. `Pokedex::Pokemon` and `Combat::Pokemon` coexist without issue.
+- `::` (double colon) is the **scope resolution** operator. It navigates through modules: `Pokedex::Pokemon` means "the class `Pokemon` inside the module `Pokedex`".
 
-## Constantes dans un module
+## Constants in a module
 
-Un module peut contenir des constantes :
+A module can contain constants:
 
 ```ruby
 module Pokedex
@@ -70,12 +70,12 @@ puts Pokedex::VERSION          # => 1.0.0
 puts Pokedex::MAX_TEAM_SIZE    # => 6
 ```
 
-- Les constantes sont accessibles depuis l'extérieur avec `::`.
-- À l'intérieur du module, on y accède directement par leur nom.
+- Constants are accessible from the outside with `::`.
+- Inside the module, they are accessed directly by their name.
 
-## Modules imbriqués
+## Nested modules
 
-Les modules peuvent s'imbriquer les uns dans les autres :
+Modules can be nested inside each other:
 
 ```ruby
 module Pokedex
@@ -93,16 +93,16 @@ end
 pikachu = Pokedex::Data::Pokemon.new('Pikachu')
 ```
 
-- `Pokedex::Data::Pokemon` : on enchaîne les `::` pour naviguer dans les niveaux d'imbrication.
+- `Pokedex::Data::Pokemon`: we chain `::` to navigate through nesting levels.
 
-On peut aussi **rouvrir** un module pour y ajouter du contenu plus tard :
+You can also **reopen** a module to add content later:
 
 ```ruby
 module Pokedex
   VERSION = '1.0.0'
 end
 
-# Plus loin dans le code (ou dans un autre fichier)
+# Later in the code (or in another file)
 module Pokedex
   MAX_TEAM_SIZE = 6
 end
@@ -111,16 +111,16 @@ puts Pokedex::VERSION          # => 1.0.0
 puts Pokedex::MAX_TEAM_SIZE    # => 6
 ```
 
-- Ruby fusionne les déclarations. C'est très courant quand le code est réparti sur plusieurs fichiers.
+- Ruby merges the declarations. This is very common when code is spread across multiple files.
 
-## include — partager du comportement (mixin)
+## include — sharing behavior (mixin)
 
-`include` injecte les méthodes d'un module dans une classe. Les méthodes du module deviennent des **méthodes d'instance** de la classe :
+`include` injects a module's methods into a class. The module's methods become **instance methods** of the class:
 
-```ruby live
+```ruby
 module Displayable
   def summary
-    return "#{@name} Niv.#{@level}"
+    return "#{@name} Lvl.#{@level}"
   end
 end
 
@@ -143,31 +143,31 @@ class Trainer
 end
 
 pikachu = Pokemon.new('Pikachu', 25)
-sacha = Trainer.new('Sacha', 10)
+sacha = Trainer.new('Ash', 10)
 
-puts pikachu.summary    # => Pikachu Niv.25
-puts sacha.summary      # => Sacha Niv.10
+puts pikachu.summary    # => Pikachu Lvl.25
+puts sacha.summary      # => Ash Lvl.10
 ```
 
-- `include Displayable` donne la méthode `summary` à `Pokemon` **et** à `Trainer`. On a partagé du comportement sans héritage.
-- Le module accède aux variables d'instance (`@name`, `@level`) de l'objet qui l'inclut. Il faut donc que la classe définisse ces variables.
-- C'est ce qu'on appelle un **mixin** : on "mixe" les méthodes du module dans la classe.
+- `include Displayable` gives the `summary` method to `Pokemon` **and** `Trainer`. We shared behavior without inheritance.
+- The module accesses the instance variables (`@name`, `@level`) of the object that includes it. So the class must define those variables.
+- This is what we call a **mixin**: we "mix" the module's methods into the class.
 
-## include et la chaîne des ancêtres
+## include and the ancestor chain
 
-Quand on inclut un module, il apparaît dans `.ancestors` :
+When you include a module, it appears in `.ancestors`:
 
 ```ruby
 puts Pokemon.ancestors.inspect
 # => [Pokemon, Displayable, Object, Kernel, BasicObject]
 ```
 
-- Ruby cherche les méthodes dans l'ordre de `.ancestors` : d'abord dans la classe, puis dans les modules inclus, puis dans la classe parent.
-- Si plusieurs modules définissent la même méthode, le **dernier inclus** a la priorité.
+- Ruby looks for methods in the order of `.ancestors`: first in the class, then in the included modules, then in the parent class.
+- If multiple modules define the same method, the **last included** one takes priority.
 
-## extend — méthodes de classe
+## extend — class methods
 
-`extend` fonctionne comme `include`, mais les méthodes deviennent des **méthodes de classe** au lieu de méthodes d'instance :
+`extend` works like `include`, but the methods become **class methods** instead of instance methods:
 
 ```ruby
 module Searchable
@@ -189,23 +189,23 @@ end
 
 team = [
   Pokemon.new('Pikachu', [:electric]),
-  Pokemon.new('Dracaufeu', [:fire, :flying]),
-  Pokemon.new('Tortank', [:water])
+  Pokemon.new('Charizard', [:fire, :flying]),
+  Pokemon.new('Blastoise', [:water])
 ]
 
-# Appel sur la classe (pas sur un objet)
+# Called on the class (not on an object)
 fire_pokemon = Pokemon.find_by_type(team, :fire)
-puts fire_pokemon.first.name    # => Dracaufeu
+puts fire_pokemon.first.name    # => Charizard
 ```
 
-- `include` → méthodes d'instance (appelées sur un objet : `pikachu.summary`)
-- `extend` → méthodes de classe (appelées sur la classe : `Pokemon.find_by_type(...)`)
+- `include` -> instance methods (called on an object: `pikachu.summary`)
+- `extend` -> class methods (called on the class: `Pokemon.find_by_type(...)`)
 
-## module_function — fonctions utilitaires
+## module_function — utility functions
 
-`module_function` rend des méthodes appelables directement sur le module, comme des fonctions utilitaires :
+`module_function` makes methods callable directly on the module, like utility functions:
 
-```ruby live
+```ruby
 module Pokedex
   module Combat
     def calculate_damage(attack, defense, power)
@@ -218,10 +218,10 @@ end
 puts Pokedex::Combat.calculate_damage(55, 40, 60)    # => 80
 ```
 
-- `module_function :calculate_damage` rend la méthode appelable directement sur le module.
-- C'est le même mécanisme que `Math.sqrt(4)` en Ruby : `Math` est un module, et `sqrt` est une `module_function`.
+- `module_function :calculate_damage` makes the method callable directly on the module.
+- This is the same mechanism as `Math.sqrt(4)` in Ruby: `Math` is a module, and `sqrt` is a `module_function`.
 
-On peut aussi écrire `module_function` sans argument pour que **toutes** les méthodes qui suivent soient des fonctions de module :
+You can also write `module_function` without an argument so that **all** methods that follow become module functions:
 
 ```ruby
 module Pokedex
@@ -239,9 +239,9 @@ module Pokedex
 end
 ```
 
-## Résolution absolue avec
+## Absolute resolution with ::
 
-Si un module interne porte le même nom qu'un module externe, on peut forcer la résolution depuis la racine avec `::` en préfixe :
+If an inner module has the same name as an outer module, you can force resolution from the root with a `::` prefix:
 
 ```ruby
 module Pokedex
@@ -251,9 +251,9 @@ module Pokedex
     REGION = 'Johto'
 
     def self.display_regions
-      puts REGION              # => Johto (résolution relative)
-      puts Pokedex::REGION     # => Kanto (résolution explicite)
-      puts ::Pokedex::REGION   # => Kanto (résolution absolue depuis la racine)
+      puts REGION              # => Johto (relative resolution)
+      puts Pokedex::REGION     # => Kanto (explicit resolution)
+      puts ::Pokedex::REGION   # => Kanto (absolute resolution from the root)
     end
   end
 end
@@ -261,15 +261,15 @@ end
 Pokedex::Data.display_regions
 ```
 
-- `::Pokedex::REGION` : le `::` initial force Ruby à chercher depuis le niveau le plus haut. C'est rarement nécessaire, mais utile en cas d'ambiguïté.
+- `::Pokedex::REGION`: the leading `::` forces Ruby to search from the top level. This is rarely needed, but useful in case of ambiguity.
 
 ## Conclusion
 
-- Un **module** est un conteneur de méthodes et de constantes. On ne peut pas en créer d'instance.
-- Les modules servent d'**espaces de noms** pour éviter les conflits (`Pokedex::Pokemon` vs `Combat::Pokemon`).
-- `include` injecte les méthodes d'un module comme **méthodes d'instance**. C'est le mixin.
-- `extend` injecte les méthodes comme **méthodes de classe**.
-- `module_function` rend des méthodes appelables directement sur le module (comme `Math.sqrt`).
-- `::` navigue dans les modules. `::Module` en préfixe force la résolution depuis la racine.
-- Les modules s'imbriquent et se rouvrent librement. Ruby fusionne les déclarations.
-- Les modules inclus apparaissent dans `.ancestors`, ce qui influence l'ordre de recherche des méthodes.
+- A **module** is a container for methods and constants. You cannot create instances of it.
+- Modules serve as **namespaces** to avoid conflicts (`Pokedex::Pokemon` vs `Combat::Pokemon`).
+- `include` injects a module's methods as **instance methods**. This is the mixin.
+- `extend` injects the methods as **class methods**.
+- `module_function` makes methods callable directly on the module (like `Math.sqrt`).
+- `::` navigates through modules. `::Module` as a prefix forces resolution from the root.
+- Modules can be nested and reopened freely. Ruby merges the declarations.
+- Included modules appear in `.ancestors`, which influences the method lookup order.

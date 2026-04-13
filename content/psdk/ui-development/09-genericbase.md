@@ -1,36 +1,36 @@
 ---
-title: "Comment personnaliser GenericBase dans PSDK ?"
-slug: personnaliser-genericbase
+title: "How to customize GenericBase in PSDK?"
+slug: customize-genericbase
 sidebar_position: 9
-description: "Ce guide explique comment personnaliser l'apparence des scènes qui héritent de GenericBase : background, barre de boutons et ctrl buttons."
+description: "This guide explains how to customize the appearance of scenes that inherit from GenericBase: background, button bar and ctrl buttons."
 ---
 
-Ce guide explique comment personnaliser l'apparence des scènes qui héritent de GenericBase : background, barre de boutons et ctrl buttons. Il utilise le plugin Mystery Gift comme exemple concret. Il suppose que les guides 001 à 003 ont été lus (le lecteur dispose d'une scène fonctionnelle avec GenericBase).
+This guide explains how to customize the appearance of scenes that inherit from GenericBase: background, button bar and ctrl buttons. It uses the Mystery Gift plugin as a concrete example. It assumes guides 001 to 003 have been read (the reader has a working scene with GenericBase).
 
-## Principe
+## Principle
 
-GenericBase est le socle de toute scène UI -- il fournit le background, la barre de boutons, les ctrl buttons et le win_text. Il ne faut jamais reconstruire ces éléments de zéro : on sous-classe GenericBase et on override ses méthodes privées.
+GenericBase is the foundation of every UI scene -- it provides the background, button bar, ctrl buttons and win_text. Never rebuild these elements from scratch: always subclass GenericBase and override its private methods.
 
-GenericBase utilise le pattern Template Method : les valeurs codées en dur sont extraites dans des méthodes privées qu'on peut override. Pour la personnalisation des ControlButton, on utilise l'héritage (sous-classe) et non `prepend` -- le prepend est global et affecte toutes les scènes du jeu.
+GenericBase uses the Template Method pattern: hardcoded values are extracted into private methods you can override. For ControlButton customization, use inheritance (subclass) rather than `prepend` -- prepend is global and affects all scenes in the game.
 
-## Méthodes overridables
+## Overridable methods
 
-| Besoin                                   | Classe                    | Méthode à override            | Valeur par défaut           |
-| ---------------------------------------- | ------------------------- | ----------------------------- | --------------------------- |
-| Background différent                     | sous-classe GenericBase   | `background_filename`         | `'team/Fond'`               |
-| Barre de boutons différente              | sous-classe GenericBase   | `button_background_filename`  | `'tcard/button_background'` |
-| Pas d'animation de background            | sous-classe GenericBase   | `create_background_animation` | Animation de scrolling      |
-| Classe de ctrl buttons personnalisée     | sous-classe GenericBase   | `control_button_class`        | `ControlButton`             |
-| Boutons cachés différents sur win_text   | sous-classe GenericBase   | `hidden_button_indexes`       | 0..2                        |
-| Texture de bouton différente             | sous-classe ControlButton | `button_texture`              | `'buttons'`                 |
-| Disposition du texte différente          | sous-classe ControlButton | `text_rect`                   | `[17, 3, 51, 13]`           |
-| Position de l'icône de touche différente | sous-classe ControlButton | `key_button_position`         | `[0, 1]`                    |
-| Couleur de texte différente              | sous-classe ControlButton | `text_color(index)`           | 20 ou 21                    |
-| Police différente                        | sous-classe ControlButton | `text_font`                   | 20                          |
+| Need | Class | Method to override | Default value |
+|---|---|---|---|
+| Different background | GenericBase subclass | `background_filename` | `'team/Fond'` |
+| Different button bar | GenericBase subclass | `button_background_filename` | `'tcard/button_background'` |
+| No background animation | GenericBase subclass | `create_background_animation` | Scrolling animation |
+| Custom ctrl button class | GenericBase subclass | `control_button_class` | `ControlButton` |
+| Different hidden buttons on win_text | GenericBase subclass | `hidden_button_indexes` | 0..2 |
+| Different button texture | ControlButton subclass | `button_texture` | `'buttons'` |
+| Different button text layout | ControlButton subclass | `text_rect` | `[17, 3, 51, 13]` |
+| Different key icon position | ControlButton subclass | `key_button_position` | `[0, 1]` |
+| Different text color | ControlButton subclass | `text_color(index)` | 20 or 21 |
+| Different font | ControlButton subclass | `text_font` | 20 |
 
-## Exemple complet : Mystery Gift
+## Full example: Mystery Gift
 
-Le plugin Mystery Gift personnalise à la fois le background, la barre de boutons et la texture des ctrl buttons. Tout est regroupé dans une seule sous-classe de GenericBase.
+The Mystery Gift plugin customizes the background, button bar and ctrl button texture. Everything is grouped into a single GenericBase subclass.
 
 ```ruby
 module UI
@@ -79,49 +79,47 @@ module UI
 end
 ```
 
-- `MysteryGiftBase` hérite de `GenericBase` -- tout le comportement de base (barre, ctrl buttons, win_text) est préservé.
-- `background_filename` et `button_background_filename` retournent les noms des images spécifiques au plugin.
-- `create_background_animation` est override comme méthode vide (no-op) pour désactiver l'effet de scrolling du background.
-- `control_button_class` retourne la sous-classe `ControlButton` imbriquée -- `create_control_button` (hérité) l'utilise automatiquement pour instancier les boutons. Pas besoin de réécrire `create_control_button`.
-- La classe `ControlButton` est définie comme sous-classe de `GenericBase::ControlButton` -- elle hérite de tout le comportement (état appuyé, affichage des touches, texte) et override uniquement `button_texture`.
-- `control_button_default_cache` retourne `:interface` pour charger les textures depuis `graphics/interface/` au lieu de `graphics/pokedex/`. Tous les assets du plugin sont ainsi regroupés au même endroit. Pas besoin d'override `initialize` sur ControlButton.
-- La texture doit suivre le même format de spritesheet : grille 2x2 (colonne 0 = A/X/Y, colonne 1 = B, ligne 0 = normal, ligne 1 = appuyé), séparées par 1px transparent.
+- `MysteryGiftBase` inherits from `GenericBase` -- all base behavior (bar, ctrl buttons, win_text) is preserved.
+- `background_filename` and `button_background_filename` return the plugin-specific image names.
+- `create_background_animation` is overridden as an empty method (no-op) to disable the background scrolling effect.
+- `control_button_class` returns the nested `ControlButton` subclass -- `create_control_button` (inherited) uses it automatically to instantiate buttons. No need to rewrite `create_control_button`.
+- The `ControlButton` class is defined as a subclass of `GenericBase::ControlButton` -- it inherits all behavior (pressed state, key display, text) and only overrides `button_texture`.
+- `control_button_default_cache` returns `:interface` to load textures from `graphics/interface/` instead of `graphics/pokedex/`. This keeps all plugin assets in the same location. No need to override `initialize` on ControlButton.
+- The texture must follow the same spritesheet format: 2x2 grid (col 0 = A/X/Y, col 1 = B, row 0 = normal, row 1 = pressed), separated by 1px transparent.
 
-## Pourquoi l'héritage et pas prepend pour ControlButton
+## Why inheritance and not prepend for ControlButton
 
-`prepend` insère un module dans la chaîne de lookup de la classe originale -- il affecte TOUS les ControlButton du jeu, dans toutes les scènes. Si un plugin utilise `prepend` pour changer la texture des boutons, les boutons de l'équipe, du PC et de toutes les autres scènes changent aussi.
+`prepend` inserts a module into the lookup chain of the original class -- it affects ALL ControlButtons in the game, across every scene. If a plugin uses `prepend` to change button texture, the team, PC and every other scene's buttons change too.
 
-L'héritage (sous-classe imbriquée) n'affecte que la scène qui instancie cette sous-classe. Le plugin Mystery Gift instancie `ControlButton` (sa sous-classe locale) dans `create_control_button` -- les autres scènes continuent d'utiliser `GenericBase::ControlButton` sans être affectées.
+Inheritance (nested subclass) only affects the scene that instantiates that subclass. The Mystery Gift plugin instantiates `ControlButton` (its local subclass) in `create_control_button` -- other scenes continue using `GenericBase::ControlButton` unaffected.
 
 ## GenericBaseMultiMode
 
 ```ruby
 # Create base UI with multiple button configurations
 texts = [
-  [scene_text(0), nil, nil, scene_text(1)],           # mode 0: Confirm + Back
+  [scene_text(0), nil, nil, scene_text(1)],       # mode 0: Confirm + Back
   [scene_text(2), scene_text(3), nil, scene_text(1)]  # mode 1: Edit + Delete + Back
 ]
-
 keys = [
   %i[A X Y B],
   %i[A X Y B]
 ]
-
 @base_ui = UI::GenericBaseMultiMode.new(@viewport, texts, keys)
 
 # Switch mode later
 @base_ui.mode = 1  # changes to Edit + Delete + Back
 ```
 
-- GenericBaseMultiMode s'utilise quand différents états de la scène ont besoin de labels de boutons différents.
-- Toutes les configurations de boutons sont passées à la construction via les tableaux `texts` et `keys`.
-- On change de mode avec `mode=` -- les labels des ctrl buttons se mettent à jour automatiquement.
-- Le tableau `keys` définit les icônes de touches affichées dans chaque mode.
+- Use GenericBaseMultiMode when different scene states need different button labels.
+- All button configurations are passed at construction via the `texts` and `keys` arrays.
+- Switch mode with `mode=` -- the ctrl button labels update automatically.
+- The `keys` array defines which key icons are displayed in each mode.
 
 ## Conclusion
 
-- Toujours sous-classer GenericBase pour les backgrounds et barres de boutons personnalisés -- override `background_filename`, `button_background_filename` et `create_background_animation`.
-- Utiliser l'héritage (sous-classe imbriquée de `GenericBase::ControlButton`) pour personnaliser la texture des boutons -- jamais `prepend`, qui est global et affecte toutes les scènes.
-- Override `control_button_class` pour retourner la sous-classe locale -- pas besoin de réécrire `create_control_button`.
-- Les textures de boutons personnalisées doivent suivre le format de spritesheet 2x2 (colonne A/X/Y, colonne B, ligne normal, ligne appuyé).
-- Utiliser GenericBaseMultiMode quand la scène a besoin de labels de boutons différents selon les états.
+- Always subclass GenericBase for custom backgrounds and button bars -- override `background_filename`, `button_background_filename` and `create_background_animation`.
+- Use inheritance (nested subclass of `GenericBase::ControlButton`) to customize button textures -- never `prepend`, which is global and affects all scenes.
+- Override `control_button_class` to return the local ControlButton subclass -- no need to rewrite `create_control_button`.
+- Custom button textures must follow the 2x2 spritesheet format (A/X/Y column, B column, normal row, pressed row).
+- Use GenericBaseMultiMode when the scene needs different button labels for different states.

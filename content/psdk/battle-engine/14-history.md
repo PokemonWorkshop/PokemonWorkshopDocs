@@ -1,42 +1,38 @@
 ---
-title: "Comment créer un historique de combat dans PSDK ?"
-slug: creer-un-historique
-sidebar_position: 15
-description: "Ce guide explique comment créer un historique personnalisé sur un PokemonBattler, en suivant le même pattern que MoveHistory, DamageHistory et StatHistory."
+title: "How to create a battle history in PSDK?"
+slug: how-to-create-a-history
+sidebar_position: 14
+description: "This guide explains how to create a custom history on a PokemonBattler, following the same pattern as MoveHistory, DamageHistory, and StatHistory."
 ---
 
-## Principe
+## Principle
 
-Un historique est composé de quatre éléments :
+A history is composed of four elements:
 
-1. **Une classe d'historique** : stocke les données d'une entrée (tour, données contextuelles, méthodes utilitaires).
-2. **Un `attr_reader`** sur `PokemonBattler` : expose le tableau d'entrées.
-3. **Une initialisation** dans le constructeur de `PokemonBattler` : crée le tableau vide.
-4. **Une méthode `add_X_to_history`** sur `PokemonBattler` : ajoute une entrée au tableau.
+1. **A history class**: stores the data of an entry (turn, contextual data, utility methods).
+2. **An `attr_reader`** on `PokemonBattler`: exposes the array of entries.
+3. **An initialization** in the `PokemonBattler` constructor: creates the empty array.
+4. **An `add_X_to_history` method** on `PokemonBattler`: adds an entry to the array.
 
-L'alimentation se fait depuis le handler ou la procédure concernée, au moment où l'action a lieu.
+The feeding is done from the handler or procedure concerned, at the moment the action occurs.
 
-## Étape 1 : créer la classe d'historique
+## Step 1: create the history class
 
-Créer un fichier dans `5 Battle/03 PokemonBattler/` (ex: `103 HealHistory.rb`).
+Create a file in `5 Battle/03 PokemonBattler/` (e.g., `103 HealHistory.rb`).
 
 ```ruby
 module PFM
   class PokemonBattler
     class HealHistory
-      # @return [Integer] le tour où le soin a eu lieu
+      # @return [Integer] the turn when the heal occurred
       attr_reader :turn
-      # @return [Integer] montant de PV soignés
+      # @return [Integer] amount of HP healed
       attr_reader :amount
-      # @return [PFM::PokemonBattler, nil] lanceur du soin
+      # @return [PFM::PokemonBattler, nil] launcher of the heal
       attr_reader :launcher
-      # @return [Battle::Move, nil] attaque ayant causé le soin
+      # @return [Battle::Move, nil] move that caused the heal
       attr_reader :move
 
-      # Create a new Heal History
-      # @param amount [Integer] amount of HP healed
-      # @param launcher [PFM::PokemonBattler, nil]
-      # @param move [Battle::Move, nil]
       def initialize(amount, launcher, move)
         @turn = $game_temp.battle_turn
         @amount = amount
@@ -44,14 +40,10 @@ module PFM
         @move = move
       end
 
-      # Tell if the heal happened during the current turn
-      # @return [Boolean]
       def current_turn?
         return @turn == $game_temp.battle_turn
       end
 
-      # Tell if the heal happened during the last turn
-      # @return [Boolean]
       def last_turn?
         return @turn == $game_temp.battle_turn - 1
       end
@@ -60,13 +52,13 @@ module PFM
 end
 ```
 
-- Le `turn` est toujours capturé depuis `$game_temp.battle_turn` dans le constructeur.
-- Les méthodes `current_turn?` et `last_turn?` sont le pattern standard de tous les historiques.
-- Les attributs dépendent de ce qu'on veut tracer.
+- The `turn` is always captured from `$game_temp.battle_turn` in the constructor.
+- The `current_turn?` and `last_turn?` methods are the standard pattern across all histories.
+- The attributes depend on what you want to track.
 
-## Étape 2 : déclarer l'attribut sur PokemonBattler
+## Step 2: declare the attribute on PokemonBattler
 
-Dans `001 PokemonBattler.rb`, ajouter l'`attr_reader` :
+In `001 PokemonBattler.rb`, add the `attr_reader`:
 
 ```ruby
 # Get the heal history
@@ -74,84 +66,80 @@ Dans `001 PokemonBattler.rb`, ajouter l'`attr_reader` :
 attr_reader :heal_history
 ```
 
-## Étape 3 : initialiser le tableau
+## Step 3: initialize the array
 
-Dans la méthode `initialize` de `PokemonBattler`, ajouter l'initialisation :
+In the `initialize` method of `PokemonBattler`, add the initialization:
 
 ```ruby
 @heal_history = []
 ```
 
-## Étape 4 : créer la méthode d'ajout
+## Step 4: create the add method
 
-Dans `PokemonBattler`, ajouter la méthode qui crée et ajoute une entrée :
+In `PokemonBattler`, add the method that creates and appends an entry:
 
 ```ruby
-# Add a heal to the heal history
-# @param amount [Integer] amount of HP healed
-# @param launcher [PFM::PokemonBattler, nil]
-# @param move [Battle::Move, nil]
 def add_heal_to_history(amount, launcher, move)
   @heal_history << HealHistory.new(amount, launcher, move)
 end
 ```
 
-## Alimenter l'historique
+## Feeding the history
 
-Appeler `add_X_to_history` depuis le handler ou la procédure qui effectue l'action. Voici où les historiques existants sont alimentés :
+Call `add_X_to_history` from the handler or procedure that performs the action. Here is where existing histories are fed:
 
-| Historique                | Alimenté depuis                              |
+| History                   | Fed from                                     |
 | ------------------------- | -------------------------------------------- |
-| `move_history`            | `proceed_internal` (toujours, même si échec) |
-| `successful_move_history` | `proceed_internal` (uniquement si réussi)    |
+| `move_history`            | `proceed_internal` (always, even on failure) |
+| `successful_move_history` | `proceed_internal` (only on success)         |
 | `damage_history`          | `DamageHandler#damage_change`                |
 | `stat_history`            | `StatChangeHandler#stat_change`              |
 
-Pour un historique personnalisé, l'appel se place au même endroit que l'action :
+For a custom history, the call goes in the same place as the action:
 
 ```ruby
-# Dans le handler ou la procédure concernée
+# In the relevant handler or procedure
 target.add_heal_to_history(amount, launcher, skill)
 ```
 
-## Historiques existants — référence
+## Existing histories -- reference
 
 ### MoveHistory
 
-| Attribut        | Type                         | Description                        |
-| --------------- | ---------------------------- | ---------------------------------- |
-| `turn`          | `Integer`                    | Tour de l'utilisation              |
-| `move`          | `Battle::Move`               | Copie (`dup`) de l'attaque         |
-| `original_move` | `Battle::Move`               | Référence directe à l'objet move   |
-| `targets`       | `Array<PFM::PokemonBattler>` | Cibles affectées                   |
-| `attack_order`  | `Integer`                    | Ordre d'attaque du Pokémon ce tour |
+| Attribute       | Type                         | Description                         |
+| --------------- | ---------------------------- | ----------------------------------- |
+| `turn`          | `Integer`                    | Turn of use                         |
+| `move`          | `Battle::Move`               | Copy (`dup`) of the move            |
+| `original_move` | `Battle::Move`               | Direct reference to the move object |
+| `targets`       | `Array<PFM::PokemonBattler>` | Affected targets                    |
+| `attack_order`  | `Integer`                    | Pokémon's attack order this turn    |
 
-`SuccessfulMoveHistory` hérite de `MoveHistory` sans ajout.
+`SuccessfulMoveHistory` inherits from `MoveHistory` without additions.
 
 ### DamageHistory
 
-| Attribut   | Type                       | Description                    |
-| ---------- | -------------------------- | ------------------------------ |
-| `turn`     | `Integer`                  | Tour des dégâts                |
-| `damage`   | `Integer`                  | Montant de dégâts subis        |
-| `launcher` | `PFM::PokemonBattler, nil` | Lanceur des dégâts             |
-| `move`     | `Battle::Move, nil`        | Attaque ayant causé les dégâts |
-| `ko`       | `Boolean`                  | Si le Pokémon a été mis KO     |
+| Attribute  | Type                       | Description                  |
+| ---------- | -------------------------- | ---------------------------- |
+| `turn`     | `Integer`                  | Turn of damage               |
+| `damage`   | `Integer`                  | Amount of damage taken       |
+| `launcher` | `PFM::PokemonBattler, nil` | Launcher of the damage       |
+| `move`     | `Battle::Move, nil`        | Move that caused the damage  |
+| `ko`       | `Boolean`                  | Whether the Pokémon was KO'd |
 
 ### StatHistory
 
-| Attribut   | Type                       | Description                                            |
+| Attribute  | Type                       | Description                                            |
 | ---------- | -------------------------- | ------------------------------------------------------ |
-| `turn`     | `Integer`                  | Tour du changement                                     |
+| `turn`     | `Integer`                  | Turn of the change                                     |
 | `stat`     | `Symbol`                   | `:atk`, `:dfe`, `:spd`, `:ats`, `:dfs`, `:acc`, `:eva` |
-| `power`    | `Integer`                  | Puissance (positif = hausse)                           |
-| `target`   | `PFM::PokemonBattler`      | Cible du changement                                    |
-| `launcher` | `PFM::PokemonBattler, nil` | Lanceur du changement                                  |
-| `move`     | `Battle::Move, nil`        | Attaque ayant causé le changement                      |
+| `power`    | `Integer`                  | Power (positive = increase)                            |
+| `target`   | `PFM::PokemonBattler`      | Target of the change                                   |
+| `launcher` | `PFM::PokemonBattler, nil` | Launcher of the change                                 |
+| `move`     | `Battle::Move, nil`        | Move that caused the change                            |
 
 ## Conclusion
 
-- Créer une classe d'historique avec `turn`, `current_turn?`, `last_turn?` et les attributs spécifiques.
-- Déclarer un `attr_reader` sur `PokemonBattler` et initialiser le tableau dans `initialize`.
-- Ajouter une méthode `add_X_to_history` qui crée et ajoute l'entrée.
-- Appeler cette méthode depuis le handler ou la procédure au moment de l'action.
+- Create a history class with `turn`, `current_turn?`, `last_turn?`, and specific attributes.
+- Declare an `attr_reader` on `PokemonBattler` and initialize the array in `initialize`.
+- Add an `add_X_to_history` method that creates and appends the entry.
+- Call this method from the handler or procedure at the moment of the action.

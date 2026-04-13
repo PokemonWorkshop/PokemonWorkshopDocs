@@ -1,25 +1,25 @@
 ---
-title: "Comment étendre du code existant avec prepend en Ruby ?"
-slug: etendre-du-code-avec-prepend
+title: "How to extend existing code with prepend in Ruby?"
+slug: extending-code-with-prepend
 sidebar_position: 11
-description: "Ce chapitre présente les techniques pour **étendre du code existant** sans le modifier directement. C'est un concept fondamental en Ruby : on peut enrichir une classe après sa création, même si on n'a pas accès au fichier source."
+description: "This chapter presents techniques for **extending existing code** without modifying it directly. This is a fundamental concept in Ruby: you can enrich a class after its creation, even if you do not have access to the source file."
 ---
 
-Ce chapitre présente les techniques pour **étendre du code existant** sans le modifier directement. C'est un concept fondamental en Ruby : on peut enrichir une classe après sa création, même si on n'a pas accès au fichier source.
+This chapter presents techniques for **extending existing code** without modifying it directly. This is a fundamental concept in Ruby: you can enrich a class after its creation, even if you do not have access to the source file.
 
-## Principe
+## Principle
 
-Imaginons qu'on utilise une classe `Pokemon` écrite par quelqu'un d'autre. On veut ajouter un système de log qui affiche un message à chaque fois qu'un Pokémon subit des dégâts. Mais on ne veut pas (et parfois on ne peut pas) modifier le fichier original.
+Imagine we are using a `Pokemon` class written by someone else. We want to add a logging system that displays a message every time a Pokemon takes damage. But we do not want to (and sometimes cannot) modify the original file.
 
-Ruby offre trois solutions :
+Ruby offers three solutions:
 
-- **Réouverture de classes** : on rouvre la classe pour ajouter ou modifier des méthodes. Simple mais risqué si on écrase une méthode existante.
-- **alias** : l'ancienne technique pour sauvegarder une méthode avant de la redéfinir. Fragile.
-- **prepend** : la technique moderne et sûre. On insère un module **avant** la classe dans la chaîne d'ancêtres.
+- **Reopening classes**: we reopen the class to add or modify methods. Simple but risky if we overwrite an existing method.
+- **alias**: the old technique for saving a method before redefining it. Fragile.
+- **prepend**: the modern and safe technique. We insert a module **before** the class in the ancestor chain.
 
-## Réouverture de classes
+## Reopening classes
 
-En Ruby, les classes ne sont jamais "fermées". On peut les rouvrir pour ajouter des méthodes :
+In Ruby, classes are never "closed". You can reopen them to add methods:
 
 ```ruby
 class Pokemon
@@ -31,11 +31,11 @@ class Pokemon
   end
 
   def to_s
-    return "#{@name} Niv.#{@level}"
+    return "#{@name} Lvl.#{@level}"
   end
 end
 
-# Plus loin dans le code (ou dans un autre fichier)
+# Later in the code (or in another file)
 class Pokemon
   def can_evolve?
     return @level >= 16
@@ -44,37 +44,37 @@ end
 
 pikachu = Pokemon.new('Pikachu', 25)
 puts pikachu.can_evolve?      # => true
-puts pikachu                  # => Pikachu Niv.25 (to_s fonctionne toujours)
+puts pikachu                  # => Pikachu Lvl.25 (to_s still works)
 ```
 
-- **Ajouter** une méthode en rouvrant la classe est sans risque. L'original n'est pas touché.
-- **Redéfinir** une méthode existante est risqué : le comportement original est perdu.
+- **Adding** a method by reopening the class is safe. The original is not touched.
+- **Redefining** an existing method is risky: the original behavior is lost.
 
-## alias — l'ancienne technique (à éviter)
+## alias — the old technique (to avoid)
 
-`alias` sauvegarde une méthode sous un autre nom avant de la redéfinir :
+`alias` saves a method under another name before redefining it:
 
 ```ruby
 class Pokemon
   alias original_to_s to_s
 
   def to_s
-    return "[Modifié] #{original_to_s}"
+    return "[Modified] #{original_to_s}"
   end
 end
 
-puts Pokemon.new('Pikachu', 25)    # => [Modifié] Pikachu Niv.25
+puts Pokemon.new('Pikachu', 25)    # => [Modified] Pikachu Lvl.25
 ```
 
-- `alias original_to_s to_s` crée une copie de `to_s` sous le nom `original_to_s`.
-- Le problème : si **deux plugins** font `alias` sur la même méthode, le second écrase le premier. C'est fragile et source de bugs difficiles à diagnostiquer.
-- `alias` est une technique historique. On ne l'utilise plus en Ruby moderne.
+- `alias original_to_s to_s` creates a copy of `to_s` under the name `original_to_s`.
+- The problem: if **two plugins** use `alias` on the same method, the second overwrites the first. This is fragile and a source of bugs that are hard to diagnose.
+- `alias` is a historical technique. It is no longer used in modern Ruby.
 
-## prepend — la technique moderne
+## prepend — the modern technique
 
-`prepend` insère un module **avant** la classe dans la chaîne d'ancêtres. Le module peut appeler `super` pour exécuter la méthode originale :
+`prepend` inserts a module **before** the class in the ancestor chain. The module can call `super` to execute the original method:
 
-```ruby live
+```ruby
 class Pokemon
   attr_reader :name, :hp
 
@@ -89,59 +89,59 @@ class Pokemon
   end
 end
 
-# Le module qui étend le comportement
+# The module that extends the behavior
 module DamageLog
   def take_damage(amount)
-    puts "#{name} subit #{amount} dégâts !"
+    puts "#{name} takes #{amount} damage!"
     super
-    puts "#{name} a #{hp} PV restants."
+    puts "#{name} has #{hp} HP remaining."
   end
 end
 
-# On insère le module AVANT la classe
+# We insert the module BEFORE the class
 Pokemon.prepend(DamageLog)
 
 pikachu = Pokemon.new('Pikachu', 100)
 pikachu.take_damage(30)
 ```
 
-Affiche :
+Output:
 
 ```
-Pikachu subit 30 dégâts !
-Pikachu a 70 PV restants.
+Pikachu takes 30 damage!
+Pikachu has 70 HP remaining.
 ```
 
-- `super` dans le module appelle la méthode **de la classe originale**. Le comportement original est préservé et enrichi.
-- Le module peut exécuter du code **avant** et **après** `super`.
-- Contrairement à `alias`, plusieurs modules peuvent être prependés sans conflit. Chaque `super` appelle le suivant dans la chaîne.
+- `super` in the module calls the method **from the original class**. The original behavior is preserved and enriched.
+- The module can execute code **before** and **after** `super`.
+- Unlike `alias`, multiple modules can be prepended without conflict. Each `super` calls the next one in the chain.
 
-## La chaîne d'ancêtres avec prepend
+## The ancestor chain with prepend
 
-`prepend` modifie l'ordre dans `.ancestors` :
+`prepend` modifies the order in `.ancestors`:
 
 ```ruby
 puts Pokemon.ancestors.inspect
-# Avant : [Pokemon, Object, Kernel, BasicObject]
+# Before: [Pokemon, Object, Kernel, BasicObject]
 
 Pokemon.prepend(DamageLog)
 
 puts Pokemon.ancestors.inspect
-# Après : [DamageLog, Pokemon, Object, Kernel, BasicObject]
+# After: [DamageLog, Pokemon, Object, Kernel, BasicObject]
 ```
 
-- Le module `DamageLog` est maintenant **en tête** de la chaîne, avant `Pokemon`.
-- Quand on appelle `pikachu.take_damage(30)`, Ruby cherche la méthode dans l'ordre : d'abord dans `DamageLog`, puis dans `Pokemon`.
-- `super` dans `DamageLog` passe au prochain élément de la chaîne : `Pokemon`.
+- The module `DamageLog` is now **at the head** of the chain, before `Pokemon`.
+- When we call `pikachu.take_damage(30)`, Ruby looks for the method in order: first in `DamageLog`, then in `Pokemon`.
+- `super` in `DamageLog` passes to the next element in the chain: `Pokemon`.
 
-## Plusieurs prepend
+## Multiple prepends
 
-On peut prependre plusieurs modules. Chaque `super` remonte la chaîne :
+You can prepend multiple modules. Each `super` goes up the chain:
 
 ```ruby
 module DamageLog
   def take_damage(amount)
-    puts "[LOG] #{name} subit #{amount} dégâts"
+    puts "[LOG] #{name} takes #{amount} damage"
     super
   end
 end
@@ -149,7 +149,7 @@ end
 module MagicShield
   def take_damage(amount)
     reduced_damage = (amount * 0.8).to_i
-    puts "[BOUCLIER] Dégâts réduits de #{amount} à #{reduced_damage}"
+    puts "[SHIELD] Damage reduced from #{amount} to #{reduced_damage}"
     super(reduced_damage)
   end
 end
@@ -161,52 +161,52 @@ puts Pokemon.ancestors.inspect
 # => [MagicShield, DamageLog, Pokemon, Object, ...]
 ```
 
-- Le dernier module prependé est en tête. L'ordre d'appel est : `MagicShield` → `DamageLog` → `Pokemon`.
-- `super(reduced_damage)` dans `MagicShield` passe les dégâts réduits à `DamageLog`, qui appelle `super` vers `Pokemon`.
-- C'est ce qui rend `prepend` si puissant : chaque plugin s'empile sans casser les autres.
+- The last prepended module is at the head. The call order is: `MagicShield` -> `DamageLog` -> `Pokemon`.
+- `super(reduced_damage)` in `MagicShield` passes the reduced damage to `DamageLog`, which calls `super` toward `Pokemon`.
+- This is what makes `prepend` so powerful: each plugin stacks without breaking the others.
 
 ## include vs prepend vs extend
 
-Récapitulatif des trois façons d'injecter un module :
+Summary of the three ways to inject a module:
 
 ```ruby
 class Pokemon
-  include Displayable    # Après la classe (utilitaires)
-  prepend DamageLog      # Avant la classe (interception)
-  extend Search          # Méthodes de classe
+  include Displayable    # After the class (utilities)
+  prepend DamageLog      # Before the class (interception)
+  extend Search          # Class methods
 end
 
 puts Pokemon.ancestors.inspect
 # => [DamageLog, Pokemon, Displayable, Object, ...]
 ```
 
-| Méthode   | Position dans ancestors | Appel via                        | Usage                   |
-| --------- | ----------------------- | -------------------------------- | ----------------------- |
-| `include` | Après la classe         | Instance (`pikachu.fiche`)       | Ajouter des utilitaires |
-| `prepend` | Avant la classe         | Instance (`pikachu.take_damage`) | Intercepter et enrichir |
-| `extend`  | Hors de la chaîne       | Classe (`Pokemon.search(...)`)   | Méthodes de classe      |
+| Method    | Position in ancestors | Called via                        | Usage                    |
+| --------- | --------------------- | -------------------------------- | ------------------------ |
+| `include` | After the class       | Instance (`pikachu.fiche`)       | Adding utilities         |
+| `prepend` | Before the class      | Instance (`pikachu.take_damage`) | Intercepting & enriching |
+| `extend`  | Outside the chain     | Class (`Pokemon.search(...)`)    | Class methods            |
 
-- `include` : le module s'insère **après** la classe. La classe a la priorité. C'est pour le partage de comportement (Enumerable, Comparable).
-- `prepend` : le module s'insère **avant** la classe. Le module a la priorité. C'est pour l'interception et l'extension.
-- `extend` : les méthodes deviennent des méthodes de classe. Pas dans `.ancestors` des instances.
+- `include`: the module is inserted **after** the class. The class takes priority. Used for behavior sharing (Enumerable, Comparable).
+- `prepend`: the module is inserted **before** the class. The module takes priority. Used for interception and extension.
+- `extend`: the methods become class methods. Not in the instances' `.ancestors`.
 
-## Règle importante
+## Important rule
 
-Ne jamais remplacer une classe existante par une autre hiérarchie. Toujours utiliser `prepend` pour ajouter du comportement :
+Never replace an existing class with another hierarchy. Always use `prepend` to add behavior:
 
 ```ruby
-# Ne PAS faire
+# Do NOT do this
 class Pokemon
   def take_damage(amount)
-    # réécriture complète, le comportement original est perdu
+    # complete rewrite, the original behavior is lost
   end
 end
 
-# Faire à la place
+# Do this instead
 module MyExtension
   def take_damage(amount)
-    # code ajouté
-    super    # le comportement original est préservé
+    # added code
+    super    # the original behavior is preserved
   end
 end
 Pokemon.prepend(MyExtension)
@@ -214,9 +214,9 @@ Pokemon.prepend(MyExtension)
 
 ## Conclusion
 
-- Les classes Ruby sont ouvertes. Ajouter des méthodes en rouvrant est sûr. Écraser des méthodes existantes perd le comportement original.
-- `alias` est l'ancienne technique, fragile et obsolète. Ne plus l'utiliser.
-- `prepend` insère un module **avant** la classe dans `.ancestors`. `super` appelle la méthode originale.
-- Plusieurs modules prependés s'empilent sans conflit. Chaque `super` passe au suivant.
-- `include` ajoute après la classe (utilitaires). `prepend` ajoute avant (interception). `extend` ajoute des méthodes de classe.
-- Toujours utiliser `prepend` avec `super` pour étendre du code existant.
+- Ruby classes are open. Adding methods by reopening is safe. Overwriting existing methods loses the original behavior.
+- `alias` is the old technique, fragile and obsolete. Do not use it anymore.
+- `prepend` inserts a module **before** the class in `.ancestors`. `super` calls the original method.
+- Multiple prepended modules stack without conflict. Each `super` passes to the next one.
+- `include` adds after the class (utilities). `prepend` adds before (interception). `extend` adds class methods.
+- Always use `prepend` with `super` to extend existing code.

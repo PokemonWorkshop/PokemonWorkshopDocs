@@ -1,43 +1,43 @@
 ---
-title: "Comment apprendre les bases de RPG Maker XP ?"
-slug: bases-de-rpg-maker-xp
+title: "How to learn RPG Maker XP basics?"
+slug: rpg-maker-xp-basics
 sidebar_position: 1
-description: "PSDK utilise RPG Maker XP (RMXP) uniquement pour la gestion des events. Les maps sont créées avec Tiled et la base de données est gérée par Pokémon Studio. Cependant, tant que la v3 de Pokémon Studio n'est pas sortie, RMXP reste nécessaire pour les events. Ce guide oriente vers la ressource de référence et précise ce qu'il faut apprendre."
+description: "PSDK uses RPG Maker XP (RMXP) only for event management. Maps are created with Tiled and the database is managed by Pokémon Studio. However, until Pokémon Studio v3 is released, RMXP remains necessary for events. This guide points to the reference resource and clarifies what needs to be learned."
 ---
 
-PSDK utilise **RPG Maker XP** (RMXP) uniquement pour la gestion des **events**. Les maps sont créées avec **Tiled** et la base de données est gérée par **Pokémon Studio**. Cependant, tant que la v3 de Pokémon Studio n'est pas sortie, RMXP reste nécessaire pour les événements. Ce guide oriente vers la ressource de référence et précise ce qu'il faut apprendre.
+PSDK uses **RPG Maker XP** (RMXP) only for **event** management. Maps are created with **Tiled** and the database is managed by **Pokémon Studio**. However, until Pokémon Studio v3 is released, RMXP remains necessary for events. This guide points to the reference resource and clarifies what needs to be learned.
 
-## Pourquoi apprendre RPG Maker XP ?
+## Why learn RPG Maker XP?
 
-Dans un projet PSDK, c'est dans RMXP qu'on crée et modifie les events. C'est là qu'on :
+In a PSDK project, RMXP is where you create and edit events. This is where you:
 
-- Place les PNJ et définit leurs dialogues
-- Crée les interactions (ramasser un objet, déclencher un combat, ouvrir une porte)
-- Gère la logique du jeu (interrupteurs, variables, conditions)
+- Place NPCs and define their dialogues
+- Create interactions (picking up an item, triggering a battle, opening a door)
+- Manage game logic (switches, variables, conditions)
 
-Sans ces bases, on ne peut pas construire les interactions d'un projet PSDK.
+Without these basics, you cannot build the interactions of a PSDK project.
 
-## La ressource de référence
+## The reference resource
 
-Le tutoriel **RPG Maker XP** du Site du Zéro couvre tout ce qu'il faut savoir. Il est disponible ici :
+The **RPG Maker XP** tutorial from Le Site du Zéro covers everything you need to know. It is available here (in French):
 
 <https://www.yumpu.com/fr/document/read/16933960/rpg-maker-xp-le-site-du-zero>
 
-Seul le **chapitre 1** est à lire (jusqu'à la page 45 environ). Il couvre :
+Only **chapter 1** needs to be read (up to around page 45). It covers:
 
-- **L'interface de RMXP** : les différentes fenêtres, la barre d'outils, la navigation
-- **Les maps** : création, tilesets, calques, connexions entre maps (dans PSDK les maps sont créées avec Tiled, mais comprendre les concepts reste utile)
-- **Les events** : création, déclenchement, déplacement, pages d'event
-- **Les interrupteurs et variables** : le système de logique de RMXP (activer/désactiver des éléments, stocker des valeurs)
-- **Les branches conditionnelles** : exécuter des commandes selon des conditions
-- **Les interrupteurs locaux** : des interrupteurs propres à un event (utiles pour les objets ramassables, les PNJ à usage unique)
+- **The RMXP interface**: the different windows, the toolbar, navigation
+- **Maps**: creation, tilesets, layers, connections between maps (in PSDK maps are created with Tiled, but understanding the concepts is still useful)
+- **Events**: creation, triggers, movement, event pages
+- **Switches and variables**: RMXP's logic system (enabling/disabling elements, storing values)
+- **Conditional branches**: executing commands based on conditions
+- **Local switches**: switches specific to an event (useful for pickable items, one-time NPCs)
 
-## Ce qu'on n'utilise pas
+## What we don't use
 
-Le **chapitre 2** du tutoriel porte sur la **base de données** de RMXP (héros, monstres, objets, compétences, etc.). Dans PSDK, toute cette partie est remplacée par **Pokémon Studio** — c'est là qu'on définit les Pokémon, les attaques, les dresseurs, les objets et le reste. Le chapitre 2 peut donc être ignoré.
+**Chapter 2** of the tutorial covers the RMXP **database** (heroes, monsters, items, skills, etc.). In PSDK, this entire part is replaced by **Pokémon Studio** — that's where you define Pokémon, moves, trainers, items and everything else. Chapter 2 can be skipped.
 
 ## Conclusion
 
-- Lire le **chapitre 1** du tutoriel RPG Maker XP du Site du Zéro pour maîtriser les events.
-- Ignorer le **chapitre 2** (base de données) — Pokémon Studio remplace cette partie dans PSDK.
-- Une fois les bases acquises, le guide **002 Comment utiliser l'Interpreter dans un event** explique comment aller plus loin avec les commandes Script de PSDK.
+- Read **chapter 1** of the RPG Maker XP tutorial from Le Site du Zéro to master events.
+- Skip **chapter 2** (database) — Pokémon Studio replaces this part in PSDK.
+- Once the basics are acquired, guide **002 How to use the Interpreter in an event** explains how to go further with PSDK's Script commands.

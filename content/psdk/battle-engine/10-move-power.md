@@ -1,26 +1,26 @@
 ---
-title: "Comment modifier la puissance d'une attaque dans PSDK ?"
-slug: modifier-la-puissance-dune-attaque
+title: "How to change move power in PSDK?"
+slug: how-to-change-move-power
 sidebar_position: 10
-description: "Ce guide explique comment changer dynamiquement la puissance de base d'une attaque, que ce soit depuis la logique propre de l'attaque ou depuis un effet externe."
+description: "This guide explains how to dynamically change the base power of a move, whether from the move's own logic or from an external effect."
 ---
 
-## Principe
+## Principle
 
-La puissance d'une attaque peut être modifiée pour deux raisons distinctes :
+A move's power can be changed for two distinct reasons:
 
-- **Depuis l'attaque elle-même** : l'attaque recalcule sa puissance de base en fonction du contexte.
-- **Depuis un effet externe** : un effet actif applique un multiplicateur sur la puissance de base.
+- **From the move itself**: the move recalculates its base power based on the context.
+- **From an external effect**: an active effect applies a multiplier on the base power.
 
-Les deux mécanismes n'interviennent pas au même niveau : `real_base_power` retourne la **puissance de base** (valeur absolue), tandis que `base_power_multiplier` retourne un **multiplicateur** appliqué après.
+The two mechanisms operate at different levels: `real_base_power` returns the **base power** (absolute value), while `base_power_multiplier` returns a **multiplier** applied afterwards.
 
-## Depuis l'attaque
+## From the move
 
-Certaines attaques peuvent modifier leur puissance selon leurs propres règles. Par exemple, l'attaque **Acrobatie** double sa puissance si l'utilisateur n'a pas d'objet.
+Some moves can change their power based on their own rules. For example, the move **Acrobatics** doubles its power if the user has no held item.
 
-Pour gérer ce comportement, on override la méthode `real_base_power` dans la classe de l'attaque.
+To handle this behavior, override the `real_base_power` method in the move's class.
 
-### Exemple : Acrobatie
+### Example: Acrobatics
 
 ```ruby
 # Get the real base power of the move (taking in account all parameter)
@@ -35,16 +35,18 @@ def real_base_power(user, target)
 end
 ```
 
-- `power` est la puissance de base définie dans les données de l'attaque.
-- `super` retourne la puissance de base non modifiée si aucune condition n'est remplie.
+- `power` is the base power defined in the move's data.
+- The `item_consumed` check covers the case where a gem was consumed at the beginning of the turn.
+- `hold_item?` checks if the user still holds an item -- if not, the power is doubled.
+- `super` returns the unmodified base power if no condition is met.
 
-## Depuis un effet
+## From an effect
 
-Certains effets peuvent modifier la puissance d'une attaque via un multiplicateur. Par exemple, le talent **Technicien** multiplie par 1.5 la puissance des attaques de 60 ou moins.
+Some effects can modify a move's power via a multiplier. For example, the ability **Technician** multiplies by 1.5 the power of moves with 60 or less base power.
 
-Pour gérer ce comportement, on utilise la méthode `base_power_multiplier` dans la classe de l'effet.
+To handle this behavior, use the `base_power_multiplier` method in the effect's class.
 
-### Exemple : Technicien
+### Example: Technician
 
 ```ruby
 # Get the base power multiplier of this move
@@ -60,12 +62,12 @@ def base_power_multiplier(user, target, move)
 end
 ```
 
-- `super` retourne le multiplicateur par défaut (1.0) si les conditions ne sont pas remplies.
-- La vérification porte sur `move.power` (puissance de base) et non sur `real_base_power` (puissance après modifications).
-- Le retour `1.5` est un multiplicateur : la puissance finale sera `real_base_power * 1.5`.
+- `super` returns the default multiplier (1.0) if the conditions are not met.
+- The check uses `move.power` (base power) and not `real_base_power` (power after modifications).
+- Returning `1.5` is a multiplier: the final power will be `real_base_power * 1.5`.
 
 ## Conclusion
 
-- Utilisez `real_base_power` si la modification dépend de la logique propre de l'attaque. Retournez la puissance de base modifiée (`Numeric`).
-- Utilisez `base_power_multiplier` si la modification dépend d'un effet externe. Retournez un multiplicateur (`Float`).
-- `real_base_power` définit la puissance absolue, `base_power_multiplier` applique un facteur multiplicatif par-dessus.
+- Use `real_base_power` if the change depends on the move's own logic. Return the modified base power (`Numeric`).
+- Use `base_power_multiplier` if the change depends on an external effect. Return a multiplier (`Float`).
+- `real_base_power` defines the absolute power, `base_power_multiplier` applies a multiplicative factor on top.

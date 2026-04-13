@@ -1,26 +1,26 @@
 ---
-title: "Comment échouer une attaque dans PSDK ?"
-slug: echouer-une-attaque
+title: "How to make a move fail in PSDK?"
+slug: how-to-make-a-move-fail
 sidebar_position: 1
-description: "Ce guide explique comment faire échouer une attaque avant qu'elle ne soit exécutée, que ce soit depuis la logique propre de l'attaque ou depuis un effet externe."
+description: "This guide explains how to make a move fail before it is executed, whether from the move's own logic or from an external effect."
 ---
 
-## Principe
+## Principle
 
-Une attaque peut échouer pour deux raisons distinctes :
+A move can fail for two distinct reasons:
 
-- **Depuis l'attaque elle-même** : l'attaque vérifie ses propres conditions et décide qu'elle ne peut pas être utilisée.
-- **Depuis un effet externe** : un effet actif sur le Pokémon empêche l'utilisation de l'attaque.
+- **From the move itself**: the move checks its own conditions and decides it cannot be used.
+- **From an external effect**: an active effect on the Pokémon prevents the move from being used.
 
-Dans les deux cas, l'échec **doit impérativement être accompagné d'un message** indiquant clairement la raison au joueur.
+In both cases, the failure **must be accompanied by a message** clearly indicating the reason to the player.
 
-## Depuis l'attaque
+## From the move
 
-Certaines attaques peuvent échouer selon leurs propres règles. Par exemple, l'attaque **Gravité** échoue si la gravité est déjà active sur le terrain.
+Some moves can fail based on their own rules. For example, the move **Gravity** fails if gravity is already active on the field.
 
-Pour gérer ce comportement, on override la méthode `move_usable_by_user` dans la classe de l'attaque.
+To handle this behavior, override the `move_usable_by_user` method in the move's class.
 
-### Exemple : Gravité
+### Example: Gravity
 
 ```ruby
 # Function that tests if the user is able to use the move
@@ -36,17 +36,17 @@ def move_usable_by_user(user, targets)
 end
 ```
 
-- L'appel à `super` est **indispensable** pour conserver les vérifications par défaut.
-- `show_usage_failure(user)` affiche le message d'échec au joueur.
-- L'expression `&& false` garantit que la méthode retourne bien `false` après l'affichage du message.
+- The call to `super` is **mandatory** to preserve default checks.
+- `show_usage_failure(user)` displays the failure message to the player.
+- The `&& false` expression ensures the method returns `false` after displaying the message.
 
-## Depuis un effet
+## From an effect
 
-Certaines attaques peuvent échouer à cause d'un effet actif sur l'utilisateur. Par exemple, l'effet **Execu-Son** empêche l'utilisation des attaques sonores.
+Some moves can fail because of an active effect on the user. For example, the **Throat Chop** effect prevents the use of sound-based moves.
 
-Pour gérer ce comportement, on utilise la méthode `on_move_prevention_user` dans la classe de l'effet.
+To handle this behavior, use the `on_move_prevention_user` method in the effect's class.
 
-### Exemple : Execu-Son
+### Example: Throat Chop
 
 ```ruby
 # Function called when we try to use a move as the user (returns :prevent if user fails)
@@ -63,13 +63,13 @@ def on_move_prevention_user(user, targets, move)
 end
 ```
 
-- Les premières lignes vérifient que l'effet concerne bien cet utilisateur et ce type d'attaque.
-- Le message d'échec est affiché **avant** le retour `:prevent`.
-- Le retour `:prevent` signale au système que l'attaque ne peut pas continuer.
+- The first lines verify that the effect applies to this user and this type of move.
+- The failure message is displayed **before** returning `:prevent`.
+- Returning `:prevent` signals to the system that the move cannot continue.
 
 ## Conclusion
 
-- Utilisez `move_usable_by_user` si l'échec dépend de la logique propre de l'attaque.
-- Utilisez `on_move_prevention_user` si l'échec dépend d'un effet externe actif sur le Pokémon.
-- Retournez `false` (depuis l'attaque) ou `:prevent` (depuis un effet) selon le contexte.
-- Affichez toujours un message clair au joueur avant de retourner l'échec.
+- Use `move_usable_by_user` if the failure depends on the move's own logic.
+- Use `on_move_prevention_user` if the failure depends on an external effect active on the Pokémon.
+- Return `false` (from a move) or `:prevent` (from an effect) depending on the context.
+- Always display a clear message to the player before returning the failure.

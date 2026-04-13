@@ -15,7 +15,7 @@ const config: Config = {
   baseUrl: "/",
 
   organizationName: "PokemonWorkshop",
-  projectName: "pokemon-workshop-docs",
+  projectName: "PokemonWorkshopDocs",
 
   onBrokenLinks: "throw",
 
@@ -58,6 +58,9 @@ const config: Config = {
         theme: {
           customCss: "./src/css/custom.css",
         },
+        sitemap: {
+          ignorePatterns: ["/search", "/search/**"],
+        },
       } satisfies Preset.Options,
     ],
   ],
@@ -87,13 +90,10 @@ const config: Config = {
         src: "img/logo.svg",
       },
       items: [
-        { label: "Getting Started", to: "/category/getting-started", position: "left" },
-        { label: "Pokémon Studio", to: "/category/pokemon-studio", position: "left" },
-        { label: "PSDK", to: "/category/psdk", position: "left" },
-        { label: "Tiled", to: "/category/tiled", position: "left" },
-        { label: "RPG Maker XP", to: "/category/rpg-maker-xp", position: "left" },
-        { label: "Ruby", to: "/category/ruby", position: "left" },
-        { label: "Misc", to: "/category/misc", position: "left" },
+        { label: "Getting Started", to: "/getting-started", position: "left" },
+        { label: "PSDK", to: "/psdk", position: "left" },
+        { label: "RPG Maker XP", to: "/rpg-maker-xp", position: "left" },
+        { label: "Ruby", to: "/ruby", position: "left" },
         {
           type: "search",
           position: "right",

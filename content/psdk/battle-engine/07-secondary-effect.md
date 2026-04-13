@@ -1,22 +1,22 @@
 ---
-title: "Comment créer l'effet secondaire d'une attaque dans PSDK ?"
-slug: creer-leffet-secondaire-dune-attaque
+title: "How to create a move's secondary effect in PSDK?"
+slug: how-to-create-a-secondary-effect
 sidebar_position: 7
-description: "Ce guide explique comment implémenter l'effet personnalisé d'une attaque et comment valider les conditions d'application de cet effet."
+description: "This guide explains how to implement a move's custom effect and how to validate the conditions for applying that effect."
 ---
 
-## Principe
+## Principle
 
-L'implémentation de l'effet d'une attaque se fait en deux étapes :
+Implementing a move's effect is done in two steps:
 
-- **Appliquer l'effet** : la méthode `deal_effect` exécute l'effet sur les cibles valides.
-- **Valider les conditions** : une méthode de vérification détermine si l'effet peut s'appliquer. Cette méthode dépend du type d'attaque (offensive ou statut).
+- **Apply the effect**: the `deal_effect` method executes the effect on valid targets.
+- **Validate conditions**: a verification method determines whether the effect can be applied. This method depends on the move type (offensive or status).
 
-## Appliquer l'effet
+## Applying the effect
 
-Pour définir ce que fait l'attaque, on override la méthode `deal_effect` dans la classe de l'attaque. Cette méthode reçoit les cibles qui seront effectivement affectées.
+To define what the move does, override the `deal_effect` method in the move's class. This method receives the targets that will actually be affected.
 
-### Exemple : Sanction Suprême
+### Example: Core Enforcer
 
 ```ruby
 # Function that deals the effect to the pokemon
@@ -25,27 +25,29 @@ Pour définir ce que fait l'attaque, on override la méthode `deal_effect` dans 
 def deal_effect(user, actual_targets)
   actual_targets.each do |target|
     next if target.effects.has?(:ability_suppressed)
-    next unless action_played_this_turn?(target)
-    next if target.dead?
 
-    @logic.ability_change_handler.disable_ability(target, db_symbol, user, self)
+    launchers = logic.turn_actions.map(&:launcher)
+    next if launchers.first != user
+
+    @logic.ability_change_handler.disable_ability(target, :__undef__, db_symbol, user, self)
     @scene.display_message_and_wait(parse_text_with_pokemon(19, 565, target))
   end
 end
 ```
 
-- La boucle `each` sur `actual_targets` est **indispensable** pour appliquer l'effet à chaque cible individuellement.
-- `next` permet de passer à la cible suivante si les conditions ne sont pas remplies pour une cible donnée.
+- The `each` loop on `actual_targets` is **mandatory** to apply the effect to each target individually.
+- `next` skips to the next target if the conditions are not met for a given target.
+- Handlers (`ability_change_handler`) are used for standard operations (ability change, status, stats, etc.).
 
-## Valider les conditions
+## Validating conditions
 
-Les conditions d'application de l'effet sont vérifiées **avant** son exécution. Si les conditions ne sont pas remplies, l'effet est ignoré. La méthode à utiliser dépend du type de l'attaque.
+The conditions for applying the effect are checked **before** its execution. If the conditions are not met, the effect is skipped. The method to use depends on the move type.
 
-### Pour les attaques offensives
+### For offensive moves
 
-On override la méthode `effect_working?` qui détermine si l'effet secondaire de l'attaque peut s'appliquer.
+Override the `effect_working?` method which determines whether the move's secondary effect can be applied.
 
-#### Exemple : Sanction Suprême
+#### Example: Core Enforcer
 
 ```ruby
 # Test if the effect is working
@@ -53,22 +55,18 @@ On override la méthode `effect_working?` qui détermine si l'effet secondaire d
 # @param actual_targets [Array<PFM::PokemonBattler>] targets that will be affected by the move
 # @return [Boolean]
 def effect_working?(user, actual_targets)
-  return false if actual_targets.all? { |target| target.effects.has?(:ability_suppressed) }
-  return false if actual_targets.none? { |target| action_played_this_turn?(target) }
-  return false if actual_targets.all?(&:dead?)
-
-  return true
+  return actual_targets.none? { |target| target.effects.has?(:ability_suppressed) }
 end
 ```
 
-- Si la méthode retourne `false`, `deal_effect` n'est pas appelée.
-- La vérification porte sur `actual_targets` (les cibles qui ont effectivement été touchées par l'attaque).
+- If the method returns `false`, `deal_effect` is not called.
+- The check is performed on `actual_targets` (the targets that were actually hit by the move).
 
-### Pour les attaques de statut
+### For status moves
 
-On override la méthode `move_usable_by_user` qui détermine si l'attaque peut être lancée (voir guide 001 pour le détail complet).
+Override the `move_usable_by_user` method which determines whether the move can be launched (see guide 001 for full details).
 
-#### Exemple : Gravité
+#### Example: Gravity
 
 ```ruby
 # Function that tests if the user is able to use the move
@@ -84,11 +82,12 @@ def move_usable_by_user(user, targets)
 end
 ```
 
-- Si la méthode retourne `false`, l'attaque échoue entièrement (pas seulement l'effet).
-- L'appel à `super` est **indispensable** pour conserver les vérifications par défaut.
+- If the method returns `false`, the move fails entirely (not just the effect).
+- The call to `super` is **mandatory** to preserve default checks.
 
 ## Conclusion
 
-- Utilisez `deal_effect` pour implémenter l'effet de l'attaque, en itérant sur `actual_targets`.
-- Utilisez `effect_working?` pour valider les conditions d'un effet secondaire sur une attaque offensive.
-- Utilisez `move_usable_by_user` pour valider les conditions d'une attaque de statut (guide 001).
+- Use `deal_effect` to implement the move's effect, iterating over `actual_targets`.
+- Use `effect_working?` to validate conditions for a secondary effect on an offensive move.
+- Use `move_usable_by_user` to validate conditions for a status move (guide 001).
+- Use the handlers provided by the system for standard operations (stats, status, ability, etc.).

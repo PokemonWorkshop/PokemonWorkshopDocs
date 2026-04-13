@@ -1,23 +1,26 @@
 {
   "item.label.Getting Started": {
-    "message": "Démarrage"
-  },
-  "item.label.Pokémon Studio": {
-    "message": "Pokémon Studio"
+    "message": "Démarrage",
+    "description": "Navbar item with label Getting Started"
   },
   "item.label.PSDK": {
-    "message": "PSDK"
-  },
-  "item.label.Tiled": {
-    "message": "Tiled"
+    "message": "PSDK",
+    "description": "Navbar item with label PSDK"
   },
   "item.label.RPG Maker XP": {
-    "message": "RPG Maker XP"
+    "message": "RPG Maker XP",
+    "description": "Navbar item with label RPG Maker XP"
   },
   "item.label.Ruby": {
-    "message": "Ruby"
+    "message": "Cours Ruby",
+    "description": "Navbar item with label Ruby"
   },
-  "item.label.Misc": {
-    "message": "Divers"
+  "title": {
+    "message": "Pokémon Workshop Docs",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "Pokémon Workshop Logo",
+    "description": "The alt text of navbar logo"
   }
 }

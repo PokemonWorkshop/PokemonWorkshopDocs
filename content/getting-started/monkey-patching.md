@@ -1,48 +1,48 @@
 ---
-title: "Qu'est-ce que le monkey-patch et comment l'appliquer dans PSDK ?"
-slug: monkey-patch-dans-psdk
+title: "What is monkey-patching and how to apply it in PSDK?"
+slug: monkey-patching-in-psdk
 sidebar_position: 3
-description: "PSDK est un moteur qui se met à jour régulièrement. Si on modifie directement un fichier du moteur pour changer un comportement, la prochaine mise à jour écrasera les modifications. Le monkey-patching permet de modifier le comportement de PSDK depuis ses propres scripts, sans toucher au code source du moteur."
+description: "PSDK is an engine that receives regular updates. If you directly modify an engine file to change a behavior, the next update will overwrite your changes. Monkey-patching allows you to modify PSDK's behavior from your own scripts, without touching the engine's source code."
 ---
 
-PSDK est un moteur qui se met à jour régulièrement. Si on modifie directement un fichier du moteur pour changer un comportement, la prochaine mise à jour écrasera les modifications. Le monkey-patching permet de modifier le comportement de PSDK **depuis ses propres scripts**, sans toucher au code source du moteur. Ce guide couvre les différentes techniques de monkey-patching utilisées dans PSDK : `prepend` pour modifier globalement une méthode, l'héritage pour un changement local à une seule scène, et la réouverture de module pour les constantes et fonctions d'enregistrement.
+PSDK is an engine that receives regular updates. If you directly modify an engine file to change a behavior, the next update will overwrite your changes. Monkey-patching allows you to modify PSDK's behavior **from your own scripts**, without touching the engine's source code. This guide covers the different monkey-patching techniques used in PSDK: `prepend` to globally modify a method, inheritance for a change local to a single scene, and module reopening for constants and registration functions.
 
-## Qu'est-ce que le monkey-patching ?
+## What is monkey-patching?
 
-Le monkey-patching consiste à modifier, à l'exécution, le comportement d'un code existant sans toucher à son fichier source. En Ruby, c'est possible parce que les classes et les modules sont **ouverts** : on peut les rouvrir à tout moment pour ajouter, remplacer ou enrichir des méthodes.
+Monkey-patching means modifying the behavior of existing code at runtime, without touching its source file. In Ruby, this is possible because classes and modules are **open**: you can reopen them at any time to add, replace, or enrich methods.
 
-Dans PSDK, le monkey-patching est indispensable. Le code du moteur n'est pas dans le projet — il est chargé en interne par PSDK. On ne peut pas (et on ne doit pas) le modifier directement. On travaille donc depuis ses propres scripts, placés dans `scripts/`, qui sont chargés **après** le moteur.
+In PSDK, monkey-patching is essential. The engine's code is not in your project — it is loaded internally by PSDK. You cannot (and should not) modify it directly. Instead, you work from your own scripts, placed in `scripts/`, which are loaded **after** the engine.
 
-Trois techniques permettent de monkey-patcher dans PSDK :
+Three techniques allow monkey-patching in PSDK:
 
-- **`prepend`** — insérer un module avant une classe ou un module dans la chaîne d'héritage, pour intercepter ou enrichir une méthode existante. C'est la technique principale.
-- **Réouverture de module** — rouvrir un module PSDK pour y ajouter des méthodes, des constantes ou des fonctions d'enregistrement, sans modifier l'existant.
-- **Héritage** — créer une sous-classe pour un changement local à une seule scène ou un seul composant, sans affecter le reste du jeu.
+- **`prepend`** — insert a module before a class or module in the inheritance chain, to intercept or enrich an existing method. This is the primary technique.
+- **Module reopening** — reopen a PSDK module to add methods, constants, or registration functions, without modifying existing ones.
+- **Inheritance** — create a subclass for a change local to a single scene or component, without affecting the rest of the game.
 
-`prepend` est privilégié par rapport à la réouverture directe de classe (redéfinir une méthode sans module) grâce à sa **composabilité** : si plusieurs plugins modifient la même méthode, chaque `super` passe le relais au suivant dans la chaîne. Redéfinir la méthode directement écraserait les patches des autres plugins.
+`prepend` is preferred over directly reopening a class (redefining a method without a module) thanks to its **composability**: if multiple plugins modify the same method, each `super` passes control to the next one in the chain. Redefining the method directly would overwrite patches from other plugins.
 
-## Où placer ses monkey-patches
+## Where to place monkey-patches
 
-Tous les scripts utilisateur vont dans le dossier `scripts/` à la racine du projet. C'est le seul endroit où PSDK charge du code personnalisé. La structure typique :
+All user scripts go in the `scripts/` folder at the root of the project. This is the only place where PSDK loads custom code. The typical structure:
 
 ```
 scripts/
   my-project/
     001 Patches/
-      000 BattleLogic.rb <- monkey-patch sur Battle::Logic
-      001 ItemUsage.rb   <- monkey-patch sur Util::Item
+      000 BattleLogic.rb <- monkey-patch on Battle::Logic
+      001 ItemUsage.rb   <- monkey-patch on Util::Item
     002 Features/
       ...
 ```
 
-- Les scripts dans `scripts/` sont toujours chargés **après** le code interne de PSDK. Le `prepend` fonctionne donc naturellement : la classe ciblée existe déjà au moment du chargement.
-- On regroupe les patches dans un sous-dossier dédié pour les retrouver facilement.
+- Scripts in `scripts/` are always loaded **after** PSDK's internal code. So `prepend` works naturally: the target class already exists at load time.
+- Group patches in a dedicated subfolder so they are easy to find.
 
-## Prepend simple : intercepter et déléguer
+## Simple prepend: intercept and delegate
 
-Le cas le plus courant : on veut intercepter un appel à une méthode PSDK, vérifier une condition, et soit court-circuiter le comportement soit laisser PSDK faire son travail via `super`.
+The most common case: you want to intercept a call to a PSDK method, check a condition, and either short-circuit the behavior or let PSDK do its job via `super`.
 
-### Exemple : bloquer l'EXP après capture selon la génération
+### Example: block EXP after capture based on generation
 
 ```ruby
 module Battle
@@ -62,18 +62,18 @@ module Battle
 end
 ```
 
-- `module Battle` / `class Logic` : on **rouvre** la classe PSDK existante. On ne crée pas une nouvelle classe, on étend celle qui existe déjà dans le moteur.
-- Le module `EXPAfterCatchingPokemon` est déclaré **à l'intérieur** de `Battle::Logic`. C'est une convention PSDK : le module de patch vit dans la classe qu'il modifie.
-- `battle_phase_end_caught` est la méthode PSDK originale qu'on intercepte. Il faut connaître son nom exact (en lisant le code PSDK ou la documentation).
-- `return if ...` court-circuite la méthode : si la condition est vraie, on sort immédiatement sans distribuer d'EXP.
-- `super` appelle l'implémentation originale de PSDK. Sans ce `super`, le comportement original serait entièrement supprimé.
-- `prepend EXPAfterCatchingPokemon` insère le module avant `Battle::Logic` dans la chaîne d'héritage. Tout appel à `battle_phase_end_caught` passe d'abord par le module.
+- `module Battle` / `class Logic`: we **reopen** the existing PSDK class. We are not creating a new class, we are extending the one that already exists in the engine.
+- The `EXPAfterCatchingPokemon` module is declared **inside** `Battle::Logic`. This is a PSDK convention: the patch module lives in the class it modifies.
+- `battle_phase_end_caught` is the original PSDK method being intercepted. You need to know its exact name (by reading the PSDK source code or documentation).
+- `return if ...` short-circuits the method: if the condition is true, we exit immediately without distributing EXP.
+- `super` calls PSDK's original implementation. Without this `super`, the original behavior would be entirely suppressed.
+- `prepend EXPAfterCatchingPokemon` inserts the module before `Battle::Logic` in the inheritance chain. Every call to `battle_phase_end_caught` passes through the module first.
 
-## Prepend complexe : enrichir avant de déléguer
+## Complex prepend: enrich before delegating
 
-Quand on veut gérer un nouveau cas qui n'existe pas dans PSDK, puis laisser PSDK gérer tous les autres cas normalement.
+When you want to handle a new case that does not exist in PSDK, then let PSDK handle all other cases normally.
 
-### Exemple : intercepter l'utilisation d'items offensifs
+### Example: intercept offensive item usage
 
 ```ruby
 module Util
@@ -104,16 +104,16 @@ module Util
 end
 ```
 
-- `return super unless item_wrapper.attack_item && $game_temp.in_battle` : si l'item n'est pas un item offensif ou qu'on n'est pas en combat, on délègue entièrement à PSDK. Le patch est alors invisible pour tous les cas existants.
-- Les cas `chen` et `no_effect` sont des gardes supplémentaires : on affiche un message et on retourne `false` pour bloquer l'utilisation.
-- `util_attack_item_on_use_sequence` est une nouvelle méthode définie ailleurs dans nos scripts (pas dans le module de patch). Le module de patch ne contient que l'interception.
-- Le pattern `return super unless condition` est idiomatique dans PSDK : on traite son nouveau cas, et tout le reste passe par le comportement original.
+- `return super unless item_wrapper.attack_item && $game_temp.in_battle`: if the item is not an attack item or we are not in battle, we delegate entirely to PSDK. The patch is then invisible for all existing cases.
+- The `chen` and `no_effect` cases are additional guards: we display a message and return `false` to block usage.
+- `util_attack_item_on_use_sequence` is a new method defined elsewhere in our scripts (not in the patch module). The patch module only contains the interception.
+- The `return super unless condition` pattern is idiomatic in PSDK: handle your new case, and let everything else pass through the original behavior.
 
-## Prepend sur un module inclus
+## Prepend on an included module
 
-La même technique fonctionne sur les modules PSDK qui sont inclus dans des classes. On rouvre le module, on déclare le patch, et on prepend.
+The same technique works on PSDK modules that are included in classes. Reopen the module, declare the patch, and prepend.
 
-### Exemple : rediriger les items offensifs dans l'UI de combat
+### Example: redirect offensive items in the battle UI
 
 ```ruby
 module BattleUI
@@ -136,14 +136,14 @@ module BattleUI
 end
 ```
 
-- `BattleUI::PlayerChoiceAbstraction` est un module PSDK inclus dans plusieurs classes de scène de combat. Le prepend affecte toutes les classes qui incluent ce module.
-- Le pattern est identique : `return super unless condition`, puis le traitement spécifique.
+- `BattleUI::PlayerChoiceAbstraction` is a PSDK module included in several battle scene classes. The prepend affects all classes that include this module.
+- The pattern is identical: `return super unless condition`, then the specific handling.
 
-## Extension d'une API d'enregistrement
+## Extending a registration API
 
-Quand PSDK expose un hash ou une structure d'enregistrement via `module_function`, on peut étendre cette structure sans prepend. On rouvre le module et on ajoute de nouvelles fonctions d'enregistrement.
+When PSDK exposes a hash or registration structure via `module_function`, you can extend that structure without prepend. Reopen the module and add new registration functions.
 
-### Exemple : ajouter une API d'enregistrement d'items offensifs
+### Example: add an offensive item registration API
 
 ```ruby
 module PFM
@@ -180,16 +180,16 @@ module PFM
 end
 ```
 
-- `EXTEND_DATAS` est un hash existant dans PSDK. On ne le recrée pas, on y ajoute des entrées via `||=`.
-- `module_function` rend `define_on_attack_item_use` appelable comme `PFM::ItemDescriptor.define_on_attack_item_use(...)`.
-- La classe `Wrapper` est rouverte pour y ajouter de nouveaux attributs. Cela fonctionne parce que les constantes PSDK ne sont **pas gelées** avec `.freeze`.
-- Cette approche est non-destructive : les enregistrements existants dans `EXTEND_DATAS` restent intacts.
+- `EXTEND_DATAS` is an existing hash in PSDK. We do not recreate it, we add entries via `||=`.
+- `module_function` makes `define_on_attack_item_use` callable as `PFM::ItemDescriptor.define_on_attack_item_use(...)`.
+- The `Wrapper` class is reopened to add new attributes. This works because PSDK constants are **not frozen** with `.freeze`.
+- This approach is non-destructive: existing registrations in `EXTEND_DATAS` remain intact.
 
-## Héritage : monkey-patching local
+## Inheritance: local monkey-patching
 
-Le `prepend` est **global** : il affecte toutes les instances de la classe dans tout le jeu. Quand on veut un changement local (une seule scène, un seul composant), l'héritage est la technique de monkey-patching à privilégier.
+`prepend` is **global**: it affects all instances of the class across the entire game. When you want a local change (a single scene, a single component), inheritance is the monkey-patching technique to prefer.
 
-### Exemple : personnaliser GenericBase pour une scène spécifique
+### Example: customize GenericBase for a specific scene
 
 ```ruby
 module UI
@@ -209,25 +209,25 @@ module UI
 end
 ```
 
-- `MysteryGiftBase < GenericBase` crée une sous-classe qui n'affecte que la scène Mystery Gift.
-- Si on avait utilisé `prepend` sur `GenericBase`, **toutes** les scènes du jeu auraient été affectées.
-- Règle : si le changement est propre à une seule scène et ne doit pas affecter les autres, préférer l'héritage au `prepend`.
+- `MysteryGiftBase < GenericBase` creates a subclass that only affects the Mystery Gift scene.
+- If we had used `prepend` on `GenericBase`, **all** scenes in the game would have been affected.
+- Rule: if the change is specific to a single scene and should not affect others, prefer inheritance over `prepend`.
 
-## Règles de survie
+## Survival rules
 
-Quelques règles essentielles pour un monkey-patching propre dans PSDK :
+A few essential rules for clean monkey-patching in PSDK:
 
-- **Toujours appeler `super`** : sauf si le but explicite est de bloquer le comportement original. Oublier `super` casse silencieusement la chaîne.
-- **Jamais de `.freeze` sur les constantes** : `.freeze` empêche l'extension des structures via `prepend` ou réouverture. Il faudrait alors supprimer et reconstruire la constante au lieu de simplement ajouter.
-- **Un module par classe patchée** : si on patche trois méthodes d'une même classe, on peut les grouper dans un seul module de patch. Mais ne jamais mélanger des patches de classes différentes dans un même module.
-- **Nommer le module de patch explicitement** : le nom doit décrire ce que fait le patch (`EXPAfterCatchingPokemon`, `AttackItemPatch`), pas juste `Patch` ou `Fix`.
-- **Documenter les méthodes patchées** : noter quelque part (README, commentaire en tête de fichier) quelles méthodes PSDK sont modifiées. Lors d'une mise à jour de PSDK, cela permet de vérifier rapidement si les méthodes patchées ont changé.
+- **Always call `super`**: unless the explicit goal is to block the original behavior. Forgetting `super` silently breaks the chain.
+- **Never use `.freeze` on constants**: `.freeze` prevents extending structures via `prepend` or reopening. You would then have to delete and rebuild the constant instead of simply adding to it.
+- **One module per patched class**: if you patch three methods of the same class, they can be grouped in a single patch module. But never mix patches of different classes in the same module.
+- **Name the patch module explicitly**: the name should describe what the patch does (`EXPAfterCatchingPokemon`, `AttackItemPatch`), not just `Patch` or `Fix`.
+- **Document patched methods**: note somewhere (README, comment at the top of the file) which PSDK methods are modified. When PSDK updates, this lets you quickly check if the patched methods have changed.
 
 ## Conclusion
 
-- Le monkey-patching est **nécessaire** dans PSDK : modifier directement le moteur serait écrasé à la prochaine mise à jour. On travaille toujours depuis ses propres scripts.
-- `prepend` est le mécanisme standard pour modifier une méthode PSDK existante. Il préserve la chaîne d'appel via `super` et permet à plusieurs patches de coexister.
-- Le pattern idiomatique est `return super unless condition` : on traite son nouveau cas, et tout le reste passe par le comportement original.
-- Pour étendre une API d'enregistrement, on rouvre le module et on ajoute de nouvelles fonctions sans écraser l'existant.
-- L'héritage est préférable au `prepend` quand le changement est local à une seule scène ou composant.
-- Ne jamais oublier `super`, ne jamais utiliser `.freeze`, et toujours documenter les méthodes patchées.
+- Monkey-patching is **necessary** in PSDK: directly modifying the engine would be overwritten on the next update. Always work from your own scripts.
+- `prepend` is the standard mechanism to modify an existing PSDK method. It preserves the call chain via `super` and allows multiple patches to coexist.
+- The idiomatic pattern is `return super unless condition`: handle your new case, and let everything else pass through the original behavior.
+- To extend a registration API, reopen the module and add new functions without overwriting existing ones.
+- Inheritance is preferable to `prepend` when the change is local to a single scene or component.
+- Never forget `super`, never use `.freeze`, and always document patched methods.

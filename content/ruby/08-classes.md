@@ -1,28 +1,28 @@
 ---
-title: "Comment créer des classes et des objets en Ruby ?"
-slug: classes-et-objets
+title: "How to create classes and objects in Ruby?"
+slug: classes-and-objects
 sidebar_position: 8
-description: "Ce chapitre introduit les **classes**, le mécanisme central pour organiser le code en Ruby. Une classe regroupe des données et des comportements dans un seul endroit."
+description: "This chapter introduces **classes**, the central mechanism for organizing code in Ruby. A class groups data and behaviors in a single place."
 ---
 
-Ce chapitre introduit les **classes**, le mécanisme central pour organiser le code en Ruby. Une classe regroupe des données et des comportements dans un seul endroit.
+This chapter introduces **classes**, the central mechanism for organizing code in Ruby. A class groups data and behaviors in a single place.
 
-## Principe
+## Principle
 
-Jusqu'ici, on a utilisé des Hash pour représenter un Pokémon : `{ name: 'Pikachu', level: 25 }`. Ça fonctionne, mais ça a des limites :
+Up until now, we used Hashes to represent a Pokemon: `{ name: 'Pikachu', level: 25 }`. It works, but it has limitations:
 
-- On ne peut pas contrôler les valeurs (rien n'empêche de mettre un niveau négatif)
-- On ne peut pas attacher de comportement au Hash (pas de méthode `heal` ou `take_damage`)
-- On peut faire des fautes de frappe dans les clés sans que Ruby ne prévienne
+- You cannot control the values (nothing prevents setting a negative level)
+- You cannot attach behavior to the Hash (no `heal` or `take_damage` method)
+- You can make typos in the keys without Ruby warning you
 
-Une **classe** résout tout cela. C'est un plan de construction qui définit :
+A **class** solves all of this. It is a blueprint that defines:
 
-- Quelles **données** l'objet contient (variables d'instance `@`)
-- Quels **comportements** il a (méthodes)
+- What **data** the object contains (instance variables `@`)
+- What **behaviors** it has (methods)
 
-Un **objet** est une instance créée à partir de ce plan.
+An **object** is an instance created from this blueprint.
 
-## Définir une classe
+## Defining a class
 
 ```ruby
 class Pokemon
@@ -36,21 +36,21 @@ pikachu = Pokemon.new('Pikachu', 25)
 p pikachu    # => #<Pokemon @name="Pikachu", @level=25>
 ```
 
-- `class Pokemon ... end` définit la classe. Le nom commence par une majuscule (convention `CamelCase`).
-- `initialize` est une méthode spéciale appelée automatiquement par `.new`. C'est le **constructeur** : il reçoit les arguments et initialise les variables d'instance.
-- `@name` et `@level` sont des **variables d'instance**. Elles appartiennent à l'objet et persistent entre les appels de méthodes.
-- `Pokemon.new('Pikachu', 25)` crée un nouvel objet et appelle `initialize` avec ces arguments.
+- `class Pokemon ... end` defines the class. The name starts with a capital letter (`CamelCase` convention).
+- `initialize` is a special method called automatically by `.new`. It is the **constructor**: it receives the arguments and initializes the instance variables.
+- `@name` and `@level` are **instance variables**. They belong to the object and persist between method calls.
+- `Pokemon.new('Pikachu', 25)` creates a new object and calls `initialize` with these arguments.
 
-## Variables d'instance et accesseurs
+## Instance variables and accessors
 
-Les variables d'instance (`@name`, `@level`) sont **privées** par défaut. On ne peut pas y accéder depuis l'extérieur :
+Instance variables (`@name`, `@level`) are **private** by default. You cannot access them from outside:
 
 ```ruby
 pikachu = Pokemon.new('Pikachu', 25)
-# pikachu.name    # => Erreur ! NoMethodError
+# pikachu.name    # => Error! NoMethodError
 ```
 
-Pour autoriser la lecture, on utilise `attr_reader` :
+To allow reading, use `attr_reader`:
 
 ```ruby
 class Pokemon
@@ -65,23 +65,23 @@ end
 pikachu = Pokemon.new('Pikachu', 25)
 puts pikachu.name     # => Pikachu
 puts pikachu.level    # => 25
-# pikachu.level = 50  # => Erreur ! Pas de setter
+# pikachu.level = 50  # => Error! No setter
 ```
 
-- `attr_reader :name, :level` crée des méthodes de lecture (getters) pour `@name` et `@level`.
+- `attr_reader :name, :level` creates reader methods (getters) for `@name` and `@level`.
 
-Il existe aussi :
+There are also:
 
-- `attr_writer :level` : crée un setter uniquement (`pikachu.level = 50`)
-- `attr_accessor :level` : crée getter **et** setter
+- `attr_writer :level`: creates a setter only (`pikachu.level = 50`)
+- `attr_accessor :level`: creates getter **and** setter
 
-Mais `attr_accessor` ne fait aucune vérification. Si on veut contrôler les valeurs, on écrit un setter personnalisé.
+But `attr_accessor` does not perform any validation. If you want to control the values, you write a custom setter.
 
-## Setters personnalisés
+## Custom setters
 
-Un setter personnalisé est une méthode dont le nom se termine par `=`. Ruby traduit `pikachu.level = 50` en appel de cette méthode :
+A custom setter is a method whose name ends with `=`. Ruby translates `pikachu.level = 50` into a call to this method:
 
-```ruby live
+```ruby
 class Pokemon
   attr_reader :name, :level
 
@@ -90,29 +90,29 @@ class Pokemon
     self.level = level
   end
 
-  # Setter personnalisé : le niveau est toujours entre 1 et 100
+  # Custom setter: level is always between 1 and 100
   def level=(new_level)
     @level = new_level.clamp(1, 100)
     return @level
   end
 end
 
-pokemon = Pokemon.new('Dracaufeu', 150)
-puts pokemon.level    # => 100 (limité par le setter)
+pokemon = Pokemon.new('Charizard', 150)
+puts pokemon.level    # => 100 (clamped by the setter)
 
 pokemon.level = -5
-puts pokemon.level    # => 1 (limité par le setter)
+puts pokemon.level    # => 1 (clamped by the setter)
 ```
 
-- `def level=(new_level)` : le `=` fait partie du nom de la méthode. C'est ce qui permet d'écrire `pokemon.level = 50`.
-- `.clamp(1, 100)` borne la valeur entre 1 et 100.
-- `self.level = level` dans `initialize` appelle le setter (et donc la validation). Si on écrivait `@level = level`, on contournerait la validation.
+- `def level=(new_level)`: the `=` is part of the method name. This is what allows writing `pokemon.level = 50`.
+- `.clamp(1, 100)` bounds the value between 1 and 100.
+- `self.level = level` in `initialize` calls the setter (and therefore the validation). If we wrote `@level = level`, we would bypass the validation.
 
-## Méthodes d'instance
+## Instance methods
 
-Les méthodes définies dans une classe sont des **méthodes d'instance**. Elles opèrent sur les données de l'objet :
+Methods defined inside a class are **instance methods**. They operate on the object's data:
 
-```ruby live
+```ruby
 class Pokemon
   attr_reader :name, :hp, :max_hp
 
@@ -143,19 +143,19 @@ puts pikachu.hp             # => 25
 puts pikachu.fainted?       # => false
 
 pikachu.take_damage(50)
-puts pikachu.hp             # => 0 (ne descend pas en dessous de 0)
+puts pikachu.hp             # => 0 (does not go below 0)
 puts pikachu.fainted?       # => true
 
 pikachu.heal
 puts pikachu.hp             # => 55
 ```
 
-- Chaque méthode accède aux variables d'instance de l'objet sur lequel elle est appelée.
-- `fainted?` se termine par `?` : convention Ruby pour les méthodes qui retournent un booléen.
+- Each method accesses the instance variables of the object it is called on.
+- `fainted?` ends with `?`: a Ruby convention for methods that return a boolean.
 
-## self — l'objet courant
+## self -- the current object
 
-`self` fait référence à l'objet courant. Dans une méthode d'instance, `self` est l'objet sur lequel la méthode a été appelée :
+`self` refers to the current object. Inside an instance method, `self` is the object on which the method was called:
 
 ```ruby
 class Pokemon
@@ -166,21 +166,21 @@ class Pokemon
   end
 
   def introduce
-    puts "Je suis #{self.name} !"
-    # Équivalent à :
-    puts "Je suis #{name} !"
-    # Équivalent à :
-    puts "Je suis #{@name} !"
+    puts "I am #{self.name}!"
+    # Equivalent to:
+    puts "I am #{name}!"
+    # Equivalent to:
+    puts "I am #{@name}!"
   end
 end
 ```
 
-- `self.name`, `name` et `@name` accèdent tous à la même donnée ici. `self.` est optionnel pour les getters.
-- `self` est **obligatoire** pour appeler un setter : `self.level = 50`. Sans `self.`, Ruby penserait qu'on crée une variable locale.
+- `self.name`, `name`, and `@name` all access the same data here. `self.` is optional for getters.
+- `self` is **required** to call a setter: `self.level = 50`. Without `self.`, Ruby would think you are creating a local variable.
 
-## Méthodes de classe
+## Class methods
 
-Une méthode de classe est appelée sur la classe elle-même, pas sur un objet. On la définit avec `def self.` :
+A class method is called on the class itself, not on an object. You define it with `def self.`:
 
 ```ruby
 class Pokemon
@@ -191,7 +191,7 @@ class Pokemon
     @level = level
   end
 
-  # Méthode de classe : crée un starter au niveau 5
+  # Class method: creates a starter at level 5
   def self.starter(name)
     return Pokemon.new(name, 5)
   end
@@ -201,10 +201,10 @@ pikachu = Pokemon.starter('Pikachu')
 puts pikachu.level    # => 5
 ```
 
-- `def self.starter` est appelée via `Pokemon.starter(...)`, pas via un objet.
-- C'est un pattern de **fabrique** : une méthode qui crée des objets avec une configuration prédéfinie.
+- `def self.starter` is called via `Pokemon.starter(...)`, not via an object.
+- This is a **factory** pattern: a method that creates objects with a predefined configuration.
 
-Pour regrouper plusieurs méthodes de classe, on peut utiliser `class << self` :
+To group multiple class methods, you can use `class << self`:
 
 ```ruby
 class Pokemon
@@ -220,9 +220,9 @@ class Pokemon
 end
 ```
 
-## Visibilité : public, private, protected
+## Visibility: public, private, protected
 
-Par défaut, toutes les méthodes sont **publiques**. On peut restreindre l'accès :
+By default, all methods are **public**. You can restrict access:
 
 ```ruby
 class Pokemon
@@ -233,31 +233,31 @@ class Pokemon
     @level = level
   end
 
-  # Publique : accessible de l'extérieur
+  # Public: accessible from outside
   def summary
-    puts "#{@name} Niv.#{@level}"
+    puts "#{@name} Lvl.#{@level}"
     puts "  PV max : #{calculate_max_hp}"
   end
 
   private
 
-  # Privée : accessible uniquement depuis l'intérieur de la classe
+  # Private: accessible only from inside the class
   def calculate_max_hp
     return @level * 3 + 10
   end
 end
 
 pikachu = Pokemon.new('Pikachu', 25)
-pikachu.summary              # Fonctionne
-# pikachu.calculate_max_hp  # => Erreur ! NoMethodError
+pikachu.summary              # Works
+# pikachu.calculate_max_hp  # => Error! NoMethodError
 ```
 
-- `private` : tout ce qui est en dessous de ce mot-clé devient privé. Ces méthodes ne sont accessibles que depuis l'intérieur de la classe.
-- `protected` : comme `private`, mais les méthodes sont accessibles entre instances de la même classe. Utile pour les comparaisons entre objets.
+- `private`: everything below this keyword becomes private. These methods are only accessible from inside the class.
+- `protected`: like `private`, but methods are accessible between instances of the same class. Useful for comparisons between objects.
 
-## to_s — affichage lisible
+## to_s -- readable display
 
-`to_s` est une méthode spéciale : Ruby l'appelle automatiquement quand on utilise `puts` ou l'interpolation `#{}` :
+`to_s` is a special method: Ruby calls it automatically when you use `puts` or string interpolation `#{}`:
 
 ```ruby
 class Pokemon
@@ -267,18 +267,18 @@ class Pokemon
   end
 
   def to_s
-    return "#{@name} Niv.#{@level}"
+    return "#{@name} Lvl.#{@level}"
   end
 end
 
 pikachu = Pokemon.new('Pikachu', 25)
-puts pikachu              # => Pikachu Niv.25
-puts "Go, #{pikachu} !"   # => Go, Pikachu Niv.25 !
+puts pikachu              # => Pikachu Lvl.25
+puts "Go, #{pikachu} !"   # => Go, Pikachu Lvl.25 !
 ```
 
-- Sans `to_s`, `puts pikachu` afficherait quelque chose comme `#<Pokemon:0x00007f...>`, ce qui n'est pas très utile.
+- Without `to_s`, `puts pikachu` would display something like `#<Pokemon:0x00007f...>`, which is not very useful.
 
-## Constantes dans une classe
+## Constants inside a class
 
 ```ruby
 class Pokemon
@@ -293,16 +293,16 @@ end
 puts Pokemon::MAX_LEVEL    # => 100
 ```
 
-- Les constantes définies dans une classe sont accessibles avec `::` depuis l'extérieur.
-- À l'intérieur de la classe, on y accède directement par leur nom.
+- Constants defined inside a class are accessible with `::` from outside.
+- Inside the class, you access them directly by name.
 
 ## Conclusion
 
-- `class ClassName ... end` définit une classe. `.new` crée un objet et appelle `initialize`.
-- Les variables d'instance (`@var`) stockent les données de l'objet. Elles sont privées par défaut.
-- `attr_reader` crée des getters. `attr_accessor` crée getters + setters (sans validation).
-- Les setters personnalisés (`def level=(value)`) permettent de valider les données.
-- `self` est l'objet courant. Obligatoire pour appeler un setter (`self.level = 50`).
-- `def self.method_name` définit une méthode de classe (appelée sur la classe, pas sur un objet).
-- `private` rend les méthodes accessibles uniquement à l'intérieur de la classe.
-- `to_s` définit l'affichage lisible d'un objet pour `puts` et l'interpolation.
+- `class ClassName ... end` defines a class. `.new` creates an object and calls `initialize`.
+- Instance variables (`@var`) store the object's data. They are private by default.
+- `attr_reader` creates getters. `attr_accessor` creates getters + setters (without validation).
+- Custom setters (`def level=(value)`) allow validating the data.
+- `self` is the current object. Required to call a setter (`self.level = 50`).
+- `def self.method_name` defines a class method (called on the class, not on an object).
+- `private` makes methods accessible only from inside the class.
+- `to_s` defines the readable display of an object for `puts` and interpolation.

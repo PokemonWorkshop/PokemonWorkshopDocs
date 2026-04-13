@@ -1,29 +1,29 @@
 ---
-title: "Comment utiliser les variables et les types de données en Ruby ?"
-slug: variables-et-types-de-donnees
+title: "How to use variables and data types in Ruby?"
+slug: variables-and-data-types
 sidebar_position: 1
-description: "Ce guide est le premier d'une série de cours Ruby. Dans ce premier chapitre, on découvre comment stocker des informations dans des variables."
+description: "This guide is the first in a series of Ruby courses. In this first chapter, we learn how to store information in variables."
 ---
 
-Ce guide est le premier d'une série de cours Ruby. Dans ce premier chapitre, on découvre comment stocker des informations dans des variables.
+This guide is the first in a series of Ruby courses. In this first chapter, we learn how to store information in variables.
 
-Aucune connaissance préalable en programmation n'est requise. On part de zéro.
+No prior programming knowledge is required. We start from scratch.
 
-## Prérequis
+## Prerequisites
 
-Avant de commencer, il faut avoir Ruby et un éditeur de code installés sur sa machine. Si ce n'est pas encore fait, suivre le guide "Comment préparer son environnement de développement" dans la section Divers des tutoriels.
+Before starting, Ruby and a code editor must be installed on your machine. If this is not yet done, follow the guide "How to set up your development environment" in the Miscellaneous section of the tutorials.
 
-## Tester du code avec IRB
+## Testing code with IRB
 
-Tout au long de ce chapitre, on va écrire de petits bouts de code pour comprendre chaque concept. Le moyen le plus rapide de tester du Ruby est d'utiliser **IRB** (Interactive Ruby). C'est une console qui exécute du Ruby ligne par ligne et affiche immédiatement le résultat.
+Throughout this chapter, we will write small bits of code to understand each concept. The quickest way to test Ruby is to use **IRB** (Interactive Ruby). It is a console that executes Ruby line by line and immediately displays the result.
 
-Pour lancer IRB, ouvrir un terminal (dans VSCode : menu Terminal > New Terminal) et taper :
+To launch IRB, open a terminal (in VSCode: menu Terminal > New Terminal) and type:
 
 ```bash
 irb
 ```
 
-On obtient un prompt `irb(main):001:0>` où l'on peut taper du Ruby :
+You get a prompt `irb(main):001:0>` where you can type Ruby:
 
 ```
 irb(main):001:0> 1 + 1
@@ -32,63 +32,63 @@ irb(main):002:0> 'Pikachu'.length
 => 7
 ```
 
-- Chaque ligne est exécutée immédiatement. Le résultat est affiché après `=>`.
-- Pour quitter IRB, taper `exit`.
-- IRB est parfait pour tester une opération rapide, vérifier un comportement, ou expérimenter. On l'utilisera beaucoup dans les premiers chapitres.
+- Each line is executed immediately. The result is displayed after `=>`.
+- To quit IRB, type `exit`.
+- IRB is perfect for testing a quick operation, checking a behavior, or experimenting. We will use it a lot in the first chapters.
 
-## Principe
+## Principle
 
-Un programme manipule des données : un nom, un nombre, une liste. Pour pouvoir utiliser ces données, il faut les stocker quelque part. C'est le rôle d'une **variable** : un nom qui pointe vers une valeur.
+A program manipulates data: a name, a number, a list. To use this data, it needs to be stored somewhere. That is the role of a **variable**: a name that points to a value.
 
-On peut voir une variable comme une étiquette collée sur une boîte. L'étiquette (le nom) permet de retrouver ce que contient la boîte (la valeur). À tout moment, on peut changer le contenu de la boîte sans changer l'étiquette.
+You can think of a variable as a label stuck on a box. The label (the name) lets you find what the box contains (the value). At any time, you can change the contents of the box without changing the label.
 
-## Créer une variable
+## Creating a variable
 
-En Ruby, créer une variable est aussi simple qu'écrire un nom, le signe `=`, puis la valeur qu'on veut stocker :
+In Ruby, creating a variable is as simple as writing a name, the `=` sign, then the value you want to store:
 
 ```ruby
 name = 'Pikachu'
 level = 25
 ```
 
-- `name` est le nom de la variable. On a choisi ce nom, il pourrait être n'importe quoi d'autre.
-- `=` est l'opérateur d'affectation. Il dit "la variable à gauche contient maintenant la valeur à droite".
-- `'Pikachu'` est la valeur qu'on stocke : ici, un texte (qu'on appelle une **chaîne de caractères** ou **String**).
-- `level` stocke un nombre entier (**Integer**).
+- `name` is the variable name. We chose this name; it could be anything else.
+- `=` is the assignment operator. It says "the variable on the left now contains the value on the right".
+- `'Pikachu'` is the value we store: here, text (called a **character string** or **String**).
+- `level` stores an integer (**Integer**).
 
-On peut ensuite utiliser ces variables partout où on aurait mis la valeur directement :
-
-```ruby live
-name = 'Pikachu'
-level = 25
-
-puts name     # Affiche : Pikachu
-puts level    # Affiche : 25
-```
-
-- `puts` est une commande qui affiche une valeur à l'écran. C'est l'un des premiers outils qu'on utilise pour vérifier que notre code fait bien ce qu'on attend.
-
-## Changer la valeur d'une variable
-
-On peut remplacer le contenu d'une variable à tout moment. L'ancienne valeur est simplement oubliée :
+We can then use these variables anywhere we would have used the value directly:
 
 ```ruby
 name = 'Pikachu'
-puts name          # Affiche : Pikachu
+level = 25
 
-name = 'Évoli'
-puts name          # Affiche : Évoli
+puts name     # Displays: Pikachu
+puts level    # Displays: 25
 ```
 
-- La variable `name` pointe d'abord vers `'Pikachu'`, puis vers `'Évoli'`. Le nom ne change pas, seul le contenu change.
+- `puts` is a command that displays a value on screen. It is one of the first tools we use to verify that our code does what we expect.
 
-## Les types de données
+## Changing the value of a variable
 
-Toutes les valeurs ne se ressemblent pas. Un nom est du texte, un niveau est un nombre, un statut légendaire est vrai ou faux. Ruby distingue ces différents **types de données**. Voyons les principaux.
+You can replace the contents of a variable at any time. The old value is simply forgotten:
 
-### Les nombres entiers (Integer)
+```ruby
+name = 'Pikachu'
+puts name          # Displays: Pikachu
 
-Un Integer est un nombre sans virgule. On l'utilise pour les niveaux, les numéros de Pokédex, les points de vie :
+name = 'Eevee'
+puts name          # Displays: Eevee
+```
+
+- The variable `name` first points to `'Pikachu'`, then to `'Eevee'`. The name does not change, only the contents change.
+
+## Data types
+
+Not all values are alike. A name is text, a level is a number, a legendary status is true or false. Ruby distinguishes these different **data types**. Let's look at the main ones.
+
+### Integers (Integer)
+
+An Integer is a number without a decimal point. It is used for levels, Pokedex numbers, hit points:
 
 ```ruby
 pokedex_number = 25
@@ -96,77 +96,77 @@ level = 50
 max_team_size = 6
 ```
 
-Pour les grands nombres, Ruby autorise les underscores `_` pour faciliter la lecture. Le programme les ignore complètement :
+For large numbers, Ruby allows underscores `_` to make reading easier. The program ignores them completely:
 
 ```ruby
-# Ces deux lignes sont identiques pour Ruby
+# These two lines are identical for Ruby
 experience = 1000000
 experience = 1_000_000
 ```
 
-### Les nombres décimaux (Float)
+### Decimal numbers (Float)
 
-Un Float est un nombre avec une virgule (en Ruby, on utilise le point `.` comme séparateur décimal) :
+A Float is a number with a decimal point:
 
 ```ruby
 damage_multiplier = 1.5
 capture_rate = 0.75
 ```
 
-- On utilise les Float quand on a besoin de précision décimale, comme les multiplicateurs de dégâts.
+- Floats are used when decimal precision is needed, such as damage multipliers.
 
-### Le texte (String)
+### Text (String)
 
-Une String est une suite de caractères entourée de guillemets. Ruby accepte les guillemets simples `'...'` ou doubles `"..."` :
+A String is a sequence of characters surrounded by quotes. Ruby accepts single quotes `'...'` or double quotes `"..."`:
 
 ```ruby
 pokemon_name = 'Pikachu'
-description = "Un adorable Pokémon de type Électrik"
+description = "An adorable Electric-type Pokémon"
 ```
 
-La différence entre les deux est importante. Les guillemets doubles permettent d'**insérer des variables dans le texte** grâce à la syntaxe `#{}`. C'est ce qu'on appelle l'**interpolation** :
+The difference between the two is important. Double quotes allow you to **insert variables into text** using the `#{}` syntax. This is called **interpolation**:
 
-```ruby live
+```ruby
 name = 'Pikachu'
 level = 25
 
-# Avec les guillemets doubles : l'interpolation fonctionne
-puts "#{name} est niveau #{level}"    # Affiche : Pikachu est niveau 25
+# With double quotes: interpolation works
+puts "#{name} is level #{level}"    # Displays: Pikachu is level 25
 
-# Avec les guillemets simples : l'interpolation ne fonctionne PAS
-puts '#{name} est niveau #{level}'    # Affiche : #{name} est niveau #{level}
+# With single quotes: interpolation does NOT work
+puts '#{name} is level #{level}'    # Displays: #{name} is level #{level}
 ```
 
-- L'interpolation est très pratique pour construire des phrases à partir de variables. On l'utilisera constamment.
-- Règle simple : si le texte contient des variables, utiliser les guillemets doubles. Sinon, les guillemets simples suffisent.
+- Interpolation is very handy for building sentences from variables. We will use it constantly.
+- Simple rule: if the text contains variables, use double quotes. Otherwise, single quotes are fine.
 
-### Les symboles (Symbol)
+### Symbols (Symbol)
 
-Un Symbol ressemble à une String, mais il commence par `:` et n'a pas de guillemets :
+A Symbol looks like a String, but it starts with `:` and has no quotes:
 
 ```ruby
 pokemon_type = :electric
 status = :healthy
 ```
 
-Quelle différence avec une String ? Un Symbol est un **identifiant figé**. On ne le modifie jamais, on le compare. C'est comme une étiquette gravée dans le marbre, alors qu'une String est un texte qu'on peut réécrire.
+What is the difference from a String? A Symbol is a **fixed identifier**. You never modify it; you compare it. It is like a label carved in stone, while a String is text that can be rewritten.
 
-En pratique :
+In practice:
 
-- On utilise un Symbol quand la valeur est un **identifiant** : un type de Pokémon (`:fire`, `:water`), un statut (`:poisoned`), une nature (`:adamant`).
-- On utilise une String quand la valeur est un **texte affiché à l'utilisateur** : un nom, une description, un message.
+- Use a Symbol when the value is an **identifier**: a Pokemon type (`:fire`, `:water`), a status (`:poisoned`), a nature (`:adamant`).
+- Use a String when the value is **text displayed to the user**: a name, a description, a message.
 
 ```ruby
-# Symbol -- un identifiant, toujours le même
+# Symbol -- an identifier, always the same
 pokemon_type = :electric
 
-# String -- du texte destiné à l'affichage
+# String -- text intended for display
 pokemon_name = 'Pikachu'
 ```
 
-### Les booléens (true / false)
+### Booleans (true / false)
 
-Un booléen représente une valeur qui est soit vraie (`true`), soit fausse (`false`). On l'utilise pour les questions dont la réponse est oui ou non :
+A boolean represents a value that is either true (`true`) or false (`false`). It is used for questions whose answer is yes or no:
 
 ```ruby
 is_legendary = false
@@ -174,23 +174,23 @@ is_alive = true
 has_mega_evolution = true
 ```
 
-- Il n'y a pas de classe `Boolean` en Ruby. `true` est de type `TrueClass` et `false` est de type `FalseClass`. C'est une curiosité du langage, pas besoin de s'en souvenir pour l'instant.
+- There is no `Boolean` class in Ruby. `true` is of type `TrueClass` and `false` is of type `FalseClass`. This is a quirk of the language; no need to remember it for now.
 
-### L'absence de valeur (nil)
+### The absence of value (nil)
 
-Parfois, une variable n'a tout simplement pas de valeur. En Ruby, on utilise `nil` pour dire "rien", "vide", "pas défini" :
+Sometimes a variable simply has no value. In Ruby, `nil` is used to say "nothing", "empty", "not defined":
 
 ```ruby
 held_item = nil
 secondary_type = nil
 ```
 
-- `nil` n'est pas zéro, ni une chaîne vide. C'est l'absence totale de valeur.
-- Un Pokémon mono-type n'a pas de type secondaire. `nil` exprime exactement cette idée.
+- `nil` is not zero, nor an empty string. It is the total absence of value.
+- A single-type Pokemon has no secondary type. `nil` expresses exactly this idea.
 
-## Connaître le type d'une valeur
+## Knowing the type of a value
 
-Ruby permet de demander à n'importe quelle valeur quel est son type. Deux outils sont utiles pour cela :
+Ruby allows you to ask any value what its type is. Two tools are useful for this:
 
 ```ruby
 puts 'Pikachu'.class     # => String
@@ -201,9 +201,9 @@ puts true.class          # => TrueClass
 puts nil.class           # => NilClass
 ```
 
-- `.class` demande à une valeur "de quel type es-tu ?".
+- `.class` asks a value "what type are you?".
 
-On peut aussi poser la question autrement : "es-tu de tel type ?" :
+You can also ask the question differently: "are you of this type?":
 
 ```ruby
 puts 25.is_a?(Integer)        # => true
@@ -211,32 +211,32 @@ puts 25.is_a?(Float)          # => false
 puts 'Pikachu'.is_a?(String)  # => true
 ```
 
-- `.is_a?` répond par `true` ou `false`. Le `?` à la fin du nom est une convention Ruby : les méthodes qui posent une question se terminent par `?`.
+- `.is_a?` answers with `true` or `false`. The `?` at the end of the name is a Ruby convention: methods that ask a question end with `?`.
 
-## Afficher et déboguer
+## Displaying and debugging
 
-On a vu `puts` pour afficher. Il existe un second outil très utile : `p`.
+We saw `puts` for displaying. There is a second very useful tool: `p`.
 
 ```ruby
 name = 'Pikachu'
 types = [:electric]
 
-puts name    # => Pikachu       (affichage propre, pour l'utilisateur)
-p name       # => "Pikachu"     (affichage technique, pour le développeur)
+puts name    # => Pikachu       (clean display, for the user)
+p name       # => "Pikachu"     (technical display, for the developer)
 
-puts types   # => electric       (affiche chaque élément sur une ligne)
-p types      # => [:electric]    (montre la structure complète)
+puts types   # => electric       (displays each element on a line)
+p types      # => [:electric]    (shows the complete structure)
 
-puts nil     # =>                (affiche une ligne vide)
-p nil        # => nil            (affiche le mot nil)
+puts nil     # =>                (displays an empty line)
+p nil        # => nil            (displays the word nil)
 ```
 
-- `puts` affiche la valeur de façon lisible. C'est ce qu'on utilise pour les messages destinés à l'utilisateur.
-- `p` affiche la valeur de façon technique, avec les guillemets, les crochets, etc. C'est ce qu'on utilise quand on veut comprendre exactement ce que contient une variable. C'est un outil de **debug**.
+- `puts` displays the value in a readable way. It is what we use for messages intended for the user.
+- `p` displays the value in a technical way, with quotes, brackets, etc. It is what we use when we want to understand exactly what a variable contains. It is a **debug** tool.
 
-## Les opérateurs d'affectation composés
+## Compound assignment operators
 
-On a souvent besoin de modifier une variable en fonction de sa valeur actuelle. Par exemple, augmenter l'expérience de 100 points. On pourrait écrire :
+We often need to modify a variable based on its current value. For example, increasing experience by 100 points. We could write:
 
 ```ruby
 experience = 0
@@ -244,50 +244,50 @@ experience = experience + 100
 puts experience    # => 100
 ```
 
-Ruby offre un raccourci avec `+=` :
+Ruby offers a shortcut with `+=`:
 
 ```ruby
 experience = 0
-experience += 100    # Équivalent à : experience = experience + 100
+experience += 100    # Equivalent to: experience = experience + 100
 puts experience      # => 100
 ```
 
-Voici les principaux raccourcis :
+Here are the main shortcuts:
 
 ```ruby
 experience = 100
 experience += 50     # addition         => 150
-experience -= 20     # soustraction     => 130
+experience -= 20     # subtraction      => 130
 experience *= 2      # multiplication   => 260
 experience /= 4      # division         => 65
-experience %= 10     # modulo (reste de la division) => 5
+experience %= 10     # modulo (remainder of division) => 5
 ```
 
-- `+=` est de loin le plus courant. Les autres sont utiles mais moins fréquents.
-- Le modulo (`%`) retourne le reste d'une division. `10 % 3` donne `1` car 10 divisé par 3 fait 3 reste 1.
+- `+=` is by far the most common. The others are useful but less frequent.
+- The modulo (`%`) returns the remainder of a division. `10 % 3` gives `1` because 10 divided by 3 is 3 remainder 1.
 
-## Nommer ses variables
+## Naming your variables
 
-En Ruby, les noms de variables suivent une convention appelée `snake_case` : tout en minuscules, les mots séparés par des underscores :
+In Ruby, variable names follow a convention called `snake_case`: all lowercase, words separated by underscores:
 
 ```ruby
-# Bons noms
+# Good names
 pokemon_name = 'Pikachu'
 max_health_points = 142
 is_legendary = false
 
-# Mauvais noms -- à éviter
-pokemonName = 'Pikachu'    # c'est du camelCase, pas utilisé en Ruby
-n = 'Pikachu'              # trop court, impossible à comprendre
-x = 142                    # même problème
+# Bad names -- avoid these
+pokemonName = 'Pikachu'    # this is camelCase, not used in Ruby
+n = 'Pikachu'              # too short, impossible to understand
+x = 142                    # same problem
 ```
 
-- Un bon nom de variable décrit ce qu'elle contient. Quelqu'un qui lit le code doit comprendre sans effort ce que représente chaque variable.
-- Jamais d'abréviation : `pokemon_name` et jamais `pkmn_name` ou `pn`.
+- A good variable name describes what it contains. Anyone reading the code should understand without effort what each variable represents.
+- Never abbreviate: `pokemon_name` and never `pkmn_name` or `pn`.
 
-## Les constantes
+## Constants
 
-Certaines valeurs ne changent jamais pendant l'exécution du programme. Le nombre maximum de Pokémon dans une équipe est toujours 6. On les définit comme des **constantes**, en majuscules :
+Some values never change during program execution. The maximum number of Pokemon in a team is always 6. They are defined as **constants**, in uppercase:
 
 ```ruby
 MAX_TEAM_SIZE = 6
@@ -295,15 +295,15 @@ POKEDEX_VERSION = '0.1.0'
 TYPE_FIRE = :fire
 ```
 
-- Les constantes utilisent le `SCREAMING_SNAKE_CASE` : tout en majuscules, séparé par des underscores.
-- Ruby affiche un avertissement si on modifie une constante, mais ne l'empêche pas. C'est une convention, pas une interdiction technique.
+- Constants use `SCREAMING_SNAKE_CASE`: all uppercase, separated by underscores.
+- Ruby displays a warning if you modify a constant, but does not prevent it. It is a convention, not a technical restriction.
 
 ## Conclusion
 
-- Une **variable** est un nom qui pointe vers une valeur. On la crée avec `=`.
-- Ruby a 6 types fondamentaux : **Integer** (nombre entier), **Float** (nombre décimal), **String** (texte), **Symbol** (identifiant), **Boolean** (`true`/`false`), et **nil** (absence de valeur).
-- Les **Symbol** servent d'identifiants (`:fire`, `:water`). Les **String** servent pour le texte affiché.
-- L'**interpolation** (`"#{variable}"`) insère une variable dans un texte. Elle ne fonctionne qu'avec les guillemets doubles.
-- `puts` affiche pour l'utilisateur, `p` affiche pour le debug.
-- Les noms de variables utilisent le `snake_case`. Les constantes utilisent le `SCREAMING_SNAKE_CASE`.
-- `.class` donne le type d'une valeur. `.is_a?` vérifie si une valeur est d'un certain type.
+- A **variable** is a name that points to a value. It is created with `=`.
+- Ruby has 6 fundamental types: **Integer** (whole number), **Float** (decimal number), **String** (text), **Symbol** (identifier), **Boolean** (`true`/`false`), and **nil** (absence of value).
+- **Symbols** serve as identifiers (`:fire`, `:water`). **Strings** serve for displayed text.
+- **Interpolation** (`"#{variable}"`) inserts a variable into text. It only works with double quotes.
+- `puts` displays for the user, `p` displays for debugging.
+- Variable names use `snake_case`. Constants use `SCREAMING_SNAKE_CASE`.
+- `.class` gives the type of a value. `.is_a?` checks whether a value is of a certain type.

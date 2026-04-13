@@ -1,21 +1,21 @@
 ---
-title: "Comment utiliser les fonctionnalités avancées des classes en Ruby ?"
-slug: fonctionnalites-avancees-des-classes
+title: "How to use advanced class features in Ruby?"
+slug: advanced-class-features
 sidebar_position: 16
-description: "Ce chapitre présente des fonctionnalités avancées des classes : la surcharge d'opérateurs, le duck typing, `Struct` et la gestion de l'identité des objets. Ces outils rendent les classes plus expressives et naturelles à utiliser."
+description: "This chapter introduces advanced class features: operator overloading, duck typing, `Struct`, and object identity management. These tools make classes more expressive and natural to use."
 ---
 
-Ce chapitre présente des fonctionnalités avancées des classes : la surcharge d'opérateurs, le duck typing, `Struct` et la gestion de l'identité des objets. Ces outils rendent les classes plus expressives et naturelles à utiliser.
+This chapter introduces advanced class features: operator overloading, duck typing, `Struct`, and object identity management. These tools make classes more expressive and natural to use.
 
-## Principe
+## Principle
 
-En Ruby, les opérateurs comme `==`, `+`, `[]` sont en réalité des **méthodes**. Écrire `a == b` revient à appeler `a.==(b)`. On peut donc les redéfinir dans nos propres classes pour leur donner un comportement logique.
+In Ruby, operators like `==`, `+`, `[]` are actually **methods**. Writing `a == b` is the same as calling `a.==(b)`. You can therefore redefine them in your own classes to give them meaningful behavior.
 
-Ruby repose aussi sur le **duck typing** : ce qui compte n'est pas le type d'un objet, mais les méthodes auxquelles il répond. "Si ça marche comme un canard et que ça fait coin-coin comme un canard, alors c'est un canard."
+Ruby also relies on **duck typing**: what matters is not the type of an object, but the methods it responds to. "If it walks like a duck and quacks like a duck, then it is a duck."
 
-## Surcharger == (égalité)
+## Overloading == (equality)
 
-Par défaut, `==` vérifie si deux variables pointent vers le **même objet** en mémoire. Ce n'est généralement pas ce qu'on veut :
+By default, `==` checks whether two variables point to the **same object** in memory. This is generally not what you want:
 
 ```ruby
 class Pokemon
@@ -29,10 +29,10 @@ end
 
 a = Pokemon.new('Pikachu', 25)
 b = Pokemon.new('Pikachu', 25)
-puts a == b    # => false (deux objets différents en mémoire !)
+puts a == b    # => false (two different objects in memory!)
 ```
 
-Pour comparer par **valeur**, on redéfinit `==` :
+To compare by **value**, redefine `==`:
 
 ```ruby
 class Pokemon
@@ -52,17 +52,17 @@ end
 
 a = Pokemon.new('Pikachu', 25)
 b = Pokemon.new('Pikachu', 25)
-puts a == b    # => true (mêmes valeurs)
+puts a == b    # => true (same values)
 ```
 
-- `other.is_a?(Pokemon)` vérifie le type pour éviter les erreurs si on compare un Pokémon avec autre chose.
-- On compare les attributs qui définissent l'identité logique de l'objet.
+- `other.is_a?(Pokemon)` checks the type to avoid errors if you compare a Pokemon with something else.
+- You compare the attributes that define the logical identity of the object.
 
-## Surcharger [] et []= (accès par clé)
+## Overloading [] and []= (key access)
 
-On a vu que `pikachu[:attack]` fonctionne quand `pikachu` est un Hash. Mais si `pikachu` est un objet `Pokemon`, ça ne marche pas par défaut. On peut changer ça en définissant les méthodes `[]` et `[]=`.
+We saw that `pikachu[:attack]` works when `pikachu` is a Hash. But if `pikachu` is a `Pokemon` object, it does not work by default. You can change that by defining the `[]` and `[]=` methods.
 
-L'idée : un Pokémon a plusieurs stats (PV, attaque, défense...) stockées dans un Hash interne. Plutôt que d'écrire `pikachu.stats[:attack]`, on aimerait écrire directement `pikachu[:attack]`, comme si le Pokémon lui-même était un Hash.
+The idea: a Pokemon has several stats (HP, attack, defense...) stored in an internal Hash. Instead of writing `pikachu.stats[:attack]`, we would like to write `pikachu[:attack]` directly, as if the Pokemon itself were a Hash.
 
 ```ruby
 class Pokemon
@@ -74,12 +74,12 @@ class Pokemon
     @stats = stats
   end
 
-  # Quand on écrit pikachu[:attack], Ruby appelle cette méthode
+  # When we write pikachu[:attack], Ruby calls this method
   def [](stat_name)
     return @stats[stat_name]
   end
 
-  # Quand on écrit pikachu[:attack] = 60, Ruby appelle cette méthode
+  # When we write pikachu[:attack] = 60, Ruby calls this method
   def []=(stat_name, value)
     @stats[stat_name] = value
     return value
@@ -93,58 +93,58 @@ pikachu[:attack] = 60
 puts pikachu[:attack]    # => 60
 ```
 
-- `def [](stat_name)` est une méthode dont le nom est `[]`. La syntaxe est inhabituelle, mais c'est bien un nom de méthode comme un autre. Quand Ruby voit `pikachu[:attack]`, il traduit ça en `pikachu.[](: attack)`.
-- `def []=(stat_name, value)` fonctionne de la même façon : `pikachu[:attack] = 60` devient `pikachu.[]=(:attack, 60)`.
-- C'est le même principe que le setter `level=` vu au chapitre 8 : Ruby traduit une syntaxe naturelle en appel de méthode.
+- `def [](stat_name)` is a method whose name is `[]`. The syntax is unusual, but it is a method name like any other. When Ruby sees `pikachu[:attack]`, it translates it to `pikachu.[](:attack)`.
+- `def []=(stat_name, value)` works the same way: `pikachu[:attack] = 60` becomes `pikachu.[]=(:attack, 60)`.
+- This is the same principle as the `level=` setter seen in chapter 8: Ruby translates natural syntax into a method call.
 
-## Duck typing et respond_to?
+## Duck typing and respond_to?
 
-Le duck typing signifie qu'on ne vérifie pas le **type** d'un objet, mais les **méthodes** qu'il possède :
+Duck typing means you do not check the **type** of an object, but the **methods** it has:
 
 ```ruby
 def display_creature(creature)
-  puts "#{creature.name} Niv.#{creature.level}" if creature.respond_to?(:name)
+  puts "#{creature.name} Lvl.#{creature.level}" if creature.respond_to?(:name)
 end
 ```
 
-- `respond_to?(:name)` retourne `true` si l'objet possède une méthode `name`, quelle que soit sa classe.
-- Cela permet à une méthode d'accepter n'importe quel objet qui a les bonnes méthodes, pas seulement des instances d'une classe précise.
+- `respond_to?(:name)` returns `true` if the object has a `name` method, regardless of its class.
+- This allows a method to accept any object that has the right methods, not only instances of a specific class.
 
-## Struct — classes de données rapides
+## Struct — quick data classes
 
-`Struct` crée automatiquement une classe avec constructeur, getters, setters, `==` et `to_s` :
+`Struct` automatically creates a class with a constructor, getters, setters, `==`, and `to_s`:
 
 ```ruby
 Move = Struct.new(:name, :type, :power, :accuracy)
 
-thunderbolt = Move.new('Tonnerre', :electric, 90, 100)
-puts thunderbolt.name      # => Tonnerre
+thunderbolt = Move.new('Thunder', :electric, 90, 100)
+puts thunderbolt.name      # => Thunder
 puts thunderbolt.power     # => 90
 
-# == compare automatiquement toutes les valeurs
-other = Move.new('Tonnerre', :electric, 90, 100)
+# == automatically compares all values
+other = Move.new('Thunder', :electric, 90, 100)
 puts thunderbolt == other  # => true
 ```
 
-- `Struct.new` crée une classe complète en une seule ligne. C'est parfait pour les objets de données simples comme les attaques.
-- On peut ajouter des méthodes au Struct avec un bloc :
+- `Struct.new` creates a complete class in a single line. It is perfect for simple data objects like moves.
+- You can add methods to a Struct with a block:
 
 ```ruby
 Move = Struct.new(:name, :type, :power, :accuracy) do
   def to_s
-    return "#{name} (#{type}) — Puissance : #{power}"
+    return "#{name} (#{type}) — Power: #{power}"
   end
 end
 
-puts Move.new('Tonnerre', :electric, 90, 100)
-# => Tonnerre (electric) — Puissance : 90
+puts Move.new('Thunder', :electric, 90, 100)
+# => Thunder (electric) — Power: 90
 ```
 
-## method_missing — interception dynamique
+## method_missing — dynamic interception
 
-`method_missing` est appelée quand on invoque une méthode qui n'existe pas. On peut l'utiliser pour créer des accesseurs dynamiques :
+`method_missing` is called when you invoke a method that does not exist. You can use it to create dynamic accessors:
 
-```ruby live
+```ruby
 class Pokemon
   KNOWN_STATS = [:hp, :attack, :defense, :speed]
 
@@ -172,26 +172,26 @@ puts pikachu.respond_to?(:attack)    # => true
 puts pikachu.respond_to?(:unknown)   # => false
 ```
 
-- `method_missing` intercepte l'appel. Si le nom correspond à une stat connue, on retourne sa valeur. Sinon, `super` propage l'erreur normalement.
-- **Toujours** implémenter `respond_to_missing?` en parallèle. Sans elle, `respond_to?` retournerait `false` même si `method_missing` gère l'appel.
-- Ce mécanisme est puissant mais à utiliser avec **parcimonie** : il rend le code plus difficile à comprendre. Préférer les méthodes explicites quand c'est possible.
+- `method_missing` intercepts the call. If the name matches a known stat, it returns its value. Otherwise, `super` propagates the error normally.
+- **Always** implement `respond_to_missing?` alongside it. Without it, `respond_to?` would return `false` even if `method_missing` handles the call.
+- This mechanism is powerful but should be used **sparingly**: it makes code harder to understand. Prefer explicit methods when possible.
 
-## Identité des objets
+## Object identity
 
-Ruby a plusieurs niveaux de comparaison :
+Ruby has several levels of comparison:
 
 ```ruby
 a = 'Pikachu'
 b = 'Pikachu'
 
-puts a == b         # => true  (même valeur)
-puts a.equal?(b)    # => false (objets différents en mémoire)
-puts a.eql?(b)      # => true  (même valeur et même type)
+puts a == b         # => true  (same value)
+puts a.equal?(b)    # => false (different objects in memory)
+puts a.eql?(b)      # => true  (same value and same type)
 ```
 
-- `==` : égalité par valeur (la plus courante, celle qu'on redéfinit)
-- `.equal?` : identité mémoire (même objet). **Ne jamais la redéfinir.**
-- `.eql?` : utilisée par les Hash pour les clés. Si on redéfinit `==`, redéfinir aussi `eql?` et `hash` :
+- `==`: value equality (the most common, the one you redefine)
+- `.equal?`: memory identity (same object). **Never redefine it.**
+- `.eql?`: used by Hashes for keys. If you redefine `==`, also redefine `eql?` and `hash`:
 
 ```ruby
 class Pokemon
@@ -211,42 +211,42 @@ class Pokemon
 end
 ```
 
-- `eql?` et `hash` doivent être cohérents avec `==` : deux objets égaux doivent avoir le même `hash`.
-- Sans ça, utiliser un Pokémon comme clé de Hash donnerait des résultats incohérents.
+- `eql?` and `hash` must be consistent with `==`: two equal objects must have the same `hash`.
+- Without this, using a Pokemon as a Hash key would give inconsistent results.
 
-## freeze, dup et clone
+## freeze, dup and clone
 
-`freeze` rend un objet immutable :
+`freeze` makes an object immutable:
 
 ```ruby
 name = 'Pikachu'
 name.freeze
 puts name.frozen?    # => true
-# name.upcase!       # => Erreur ! FrozenError
+# name.upcase!       # => Error! FrozenError
 ```
 
-`dup` crée une copie superficielle :
+`dup` creates a shallow copy:
 
 ```ruby
 original = { name: 'Pikachu', stats: { hp: 35 } }
 copy = original.dup
 
-copy[:name] = 'Raichu'          # Ne modifie PAS l'original
-copy[:stats][:hp] = 999         # MODIFIE l'original aussi !
+copy[:name] = 'Raichu'          # Does NOT modify the original
+copy[:stats][:hp] = 999         # DOES modify the original too!
 ```
 
-- `dup` copie le Hash lui-même, mais les valeurs imbriquées (comme le Hash `stats`) sont **partagées**. C'est une copie "superficielle".
-- `clone` est similaire à `dup` mais préserve aussi l'état `frozen`.
-- Pour une copie profonde, on peut utiliser `Marshal.dump` + `Marshal.load` (vu au chapitre 13).
+- `dup` copies the Hash itself, but nested values (like the `stats` Hash) are **shared**. This is a "shallow" copy.
+- `clone` is similar to `dup` but also preserves the `frozen` state.
+- For a deep copy, you can use `Marshal.dump` + `Marshal.load` (seen in chapter 14).
 
-Note : dans certains projets Ruby, on ne met pas `.freeze` sur les constantes car cela peut empêcher certaines techniques d'extension du code. C'est un choix de conception.
+Note: in some Ruby projects, `.freeze` is not used on constants because it can prevent certain code extension techniques. This is a design choice.
 
 ## Conclusion
 
-- Les opérateurs Ruby (`==`, `[]`, `[]=`, `<=>`, `to_s`) sont des méthodes qu'on peut redéfinir.
-- Redéfinir `==` pour comparer par valeur. Toujours vérifier le type avec `is_a?`.
-- `respond_to?` vérifie les capacités d'un objet plutôt que son type (duck typing).
-- `Struct` crée des classes de données complètes en une ligne.
-- `method_missing` intercepte les appels à des méthodes inexistantes. Toujours implémenter `respond_to_missing?`. À utiliser avec parcimonie.
-- Si on redéfinit `==`, redéfinir aussi `eql?` et `hash` pour la cohérence avec les Hash.
-- `freeze` rend un objet immutable. `dup` crée une copie superficielle.
+- Ruby operators (`==`, `[]`, `[]=`, `<=>`, `to_s`) are methods that you can redefine.
+- Redefine `==` to compare by value. Always check the type with `is_a?`.
+- `respond_to?` checks an object's capabilities rather than its type (duck typing).
+- `Struct` creates complete data classes in a single line.
+- `method_missing` intercepts calls to nonexistent methods. Always implement `respond_to_missing?`. Use sparingly.
+- If you redefine `==`, also redefine `eql?` and `hash` for consistency with Hashes.
+- `freeze` makes an object immutable. `dup` creates a shallow copy.

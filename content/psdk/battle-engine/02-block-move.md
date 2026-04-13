@@ -1,28 +1,28 @@
 ---
-title: "Comment bloquer une attaque dans PSDK ?"
-slug: bloquer-une-attaque
+title: "How to block a move in PSDK?"
+slug: how-to-block-a-move
 sidebar_position: 2
-description: "Ce guide explique comment empêcher une attaque d'atteindre sa cible, que ce soit depuis la logique propre de l'attaque ou depuis un effet actif sur la cible."
+description: "This guide explains how to prevent a move from reaching its target, whether from the move's own logic or from an effect active on the target."
 ---
 
-## Principe
+## Principle
 
-Une attaque peut être bloquée pour deux raisons distinctes :
+A move can be blocked for two distinct reasons:
 
-- **Depuis l'attaque elle-même** : l'attaque vérifie les conditions de la cible et décide qu'elle ne peut pas l'atteindre.
-- **Depuis un effet externe** : un effet actif sur la cible empêche l'attaque de l'atteindre.
+- **From the move itself**: the move checks the target's conditions and decides it cannot reach it.
+- **From an external effect**: an active effect on the target prevents the move from reaching it.
 
-Dans les deux cas, le blocage **doit impérativement être accompagné d'un message** indiquant clairement la raison au joueur.
+In both cases, the block **must be accompanied by a message** clearly indicating the reason to the player.
 
-> **Différence avec l'échec** (guide 001) : l'échec empêche l'**utilisateur** de lancer l'attaque (`move_usable_by_user`), tandis que le blocage empêche l'attaque d'atteindre la **cible** (`move_blocked_by_target?`).
+> **Difference with failure** (guide 001): failure prevents the **user** from launching the move (`move_usable_by_user`), while blocking prevents the move from reaching the **target** (`move_blocked_by_target?`).
 
-## Depuis l'attaque
+## From the move
 
-Certaines attaques peuvent être bloquées selon leurs propres règles. Par exemple, l'attaque **Entrave** est bloquée si la cible est déjà sous l'effet d'Entrave ou si elle n'a pas encore utilisé d'attaque.
+Some moves can be blocked based on their own rules. For example, the move **Disable** is blocked if the target is already under the Disable effect or if it has not yet used a move.
 
-Pour gérer ce comportement, on override la méthode `move_blocked_by_target?` dans la classe de l'attaque.
+To handle this behavior, override the `move_blocked_by_target?` method in the move's class.
 
-### Exemple : Entrave
+### Example: Disable
 
 ```ruby
 # Function that tests if the target blocks the move
@@ -39,17 +39,17 @@ def move_blocked_by_target?(user, target)
 end
 ```
 
-- L'appel à `super` est **indispensable** pour conserver les vérifications par défaut.
-- Chaque condition affiche un message puis retourne `true` via l'expression `&& true`.
-- La méthode retourne `false` par défaut si aucune condition de blocage n'est remplie.
+- The call to `super` is **mandatory** to preserve default checks.
+- Each condition displays a message then returns `true` via the `&& true` expression.
+- The method returns `false` by default if no blocking condition is met.
 
-## Depuis un effet
+## From an effect
 
-Certaines attaques peuvent être bloquées par un effet actif sur la cible. Par exemple, le talent **Corps en Or** bloque toutes les attaques de statut mono-cible.
+Some moves can be blocked by an effect active on the target. For example, the ability **Good as Gold** blocks all single-target status moves.
 
-Pour gérer ce comportement, on utilise la méthode `on_move_prevention_target` dans la classe de l'effet.
+To handle this behavior, use the `on_move_prevention_target` method in the effect's class.
 
-### Exemple : Corps en Or
+### Example: Good as Gold
 
 ```ruby
 # Function called when we try to check if the target evades the move
@@ -70,13 +70,13 @@ def on_move_prevention_target(user, target, move)
 end
 ```
 
-- Les premières lignes vérifient que la cible est bien le porteur de l'effet et que l'attaque est de type statut mono-cible.
-- L'animation du talent est affichée avec `show_ability` avant le message (pattern standard pour les talents).
-- Le retour `true` signale au système que l'attaque est bloquée par la cible.
+- The first lines verify that the target is the effect holder and that the move is a single-target status move.
+- The ability animation is displayed with `show_ability` before the message (standard pattern for abilities).
+- Returning `true` signals to the system that the move is blocked by the target.
 
 ## Conclusion
 
-- Utilisez `move_blocked_by_target?` si le blocage dépend de la logique propre de l'attaque.
-- Utilisez `on_move_prevention_target` si le blocage dépend d'un effet externe actif sur la cible.
-- Retournez `true` pour signaler que l'attaque est bloquée.
-- Affichez toujours un message clair au joueur avant de retourner le blocage.
+- Use `move_blocked_by_target?` if the block depends on the move's own logic.
+- Use `on_move_prevention_target` if the block depends on an external effect active on the target.
+- Return `true` to signal that the move is blocked.
+- Always display a clear message to the player before returning the block.

@@ -1,35 +1,35 @@
 ---
-title: "Comment créer des animations dans PSDK ?"
-slug: creer-des-animations
+title: "How to create animations in PSDK?"
+slug: create-animations
 sidebar_position: 8
-description: "Ce guide explique comment créer des animations UI avec Yuki::Animation, en utilisant le plugin Mystery Gift comme exemple concret."
+description: "This guide explains how to create UI animations with Yuki::Animation, using the Mystery Gift plugin as a concrete example."
 ---
 
-Ce guide explique comment créer des animations UI avec `Yuki::Animation`, en utilisant le plugin Mystery Gift comme exemple concret. Le plugin utilise un composant `ReceivedBanner` qui encapsule ses propres sprites et animations, puis la Composition orchestre le tout. Il suppose que les guides 001 à 003 ont été lus (le lecteur dispose d'une scène fonctionnelle avec une Composition).
+This guide explains how to create UI animations with `Yuki::Animation`, using the Mystery Gift plugin as a concrete example. The plugin uses a `ReceivedBanner` component that encapsulates its own sprites and animations, then the Composition orchestrates everything. It assumes guides 001 to 003 have been read (the reader has a working scene with a Composition).
 
-## Principe
+## Principle
 
-PSDK utilise `Yuki::Animation` pour toutes les animations UI. L'idiome standard dans le codebase est `ya = Yuki::Animation` pour raccourcir les appels.
+PSDK uses `Yuki::Animation` for all UI animations. The standard idiom throughout the codebase is `ya = Yuki::Animation` to shorten calls.
 
-Deux modes de composition existent :
+Two composition modes exist:
 
-- `ya.player(...)` exécute les animations les unes après les autres (séquentiel).
-- `ya.parallel(...)` exécute les animations en même temps (simultané).
+- `ya.player(...)` runs animations one after another (sequential).
+- `ya.parallel(...)` runs animations at the same time (simultaneous).
 
-Les briques de base sont :
+The building blocks are:
 
-- `ya.scalar(duration, obj, :setter=, from, to)` interpole progressivement une valeur numérique.
-- `ya.move(duration, sprite, x1, y1, x2, y2)` déplace un sprite entre deux positions.
-- `ya.send_command_to(obj, :method, args)` appelle une méthode à un point précis de la séquence.
-- `ya.wait(duration)` met la séquence en pause.
+- `ya.scalar(duration, obj, :setter=, from, to)` smoothly interpolates a numeric value.
+- `ya.move(duration, sprite, x1, y1, x2, y2)` moves a sprite between two positions.
+- `ya.send_command_to(obj, :method, args)` calls a method at a specific point in the sequence.
+- `ya.wait(duration)` pauses the sequence.
 
-Les animations sont gérées via un `Animation::Handler` qui fournit `done?` à la scène. La méthode `done?` de la Composition doit vérifier le handler pour que la scène bloque les inputs pendant les animations.
+Animations are tracked via an `Animation::Handler` that provides `done?` to the scene. The Composition's `done?` method should check the handler so the scene blocks input during animations.
 
-## Composant avec animation intégrée : ReceivedBanner
+## Component with built-in animation: ReceivedBanner
 
-L'approche recommandée est de laisser chaque composant créer ses propres animations. Le composant possède ses sprites et sait comment les animer. Il retourne l'animation sans la démarrer, ce qui permet à la Composition de la chaîner avec d'autres étapes.
+The recommended approach is to let each component create its own animations. The component owns its sprites and knows how to animate them. It returns the animation without starting it, which lets the Composition chain it with other steps.
 
-Voici le composant `ReceivedBanner` du plugin Mystery Gift :
+Here is the `ReceivedBanner` component from the Mystery Gift plugin:
 
 ```ruby
 module UI
@@ -90,17 +90,17 @@ module UI
 end
 ```
 
-- Le composant hérite de `SpriteStack` et gère ses propres sprites (fond et texte).
-- `create_show_animation` retourne l'animation sans la démarrer. C'est le pattern clé : le composant décrit l'animation, l'appelant décide quand la jouer.
-- `ya.player(...)` enchaîne les étapes dans l'ordre : assignation du texte, visibilité, fondu entrant, pause, fondu sortant, masquage.
-- `ya.parallel(...)` fait apparaître le fond et le texte en même temps pendant le fondu.
-- `ya.send_command_to(self, :visible=, true)` rend le composant visible au bon moment de la séquence.
-- `ya.wait(1.0)` laisse le joueur lire le message pendant une seconde.
-- Le composant est créé invisible (`self.visible = false`) et l'animation contrôle sa visibilité.
+- The component inherits from `SpriteStack` and manages its own sprites (background and text).
+- `create_show_animation` returns the animation without starting it. This is the key pattern: the component describes the animation, the caller decides when to play it.
+- `ya.player(...)` chains steps in order: text assignment, visibility, fade in, pause, fade out, hide.
+- `ya.parallel(...)` fades in the background and text at the same time.
+- `ya.send_command_to(self, :visible=, true)` makes the component visible at the right moment in the sequence.
+- `ya.wait(1.0)` lets the player read the message for one second.
+- The component is created invisible (`self.visible = false`) and the animation controls its visibility.
 
-## Animation Handler dans la Composition
+## Animation Handler in the Composition
 
-Le handler se crée dans le constructeur, se met à jour à chaque frame, et expose `done?` pour que la scène sache si une animation est en cours :
+The handler is created in the constructor, updated each frame, and exposes `done?` so the scene knows whether an animation is playing:
 
 ```ruby
 module UI
@@ -134,14 +134,14 @@ module UI
 end
 ```
 
-- `@animation_handler = Yuki::Animation::Handler.new` crée le handler dans le constructeur.
-- `@animation_handler.update` fait avancer les animations à chaque frame -- à appeler dans le `update` de la Composition.
-- `done?` délègue au handler : retourne `true` quand aucune animation n'est en cours, `false` pendant qu'une animation joue.
-- `@received_banner = ReceivedBanner.new(viewport)` crée le composant bannière. La Composition possède le composant mais ne gère pas ses sprites directement.
+- `@animation_handler = Yuki::Animation::Handler.new` creates the handler in the constructor.
+- `@animation_handler.update` advances animations each frame -- call it in the Composition's `update`.
+- `done?` delegates to the handler: returns `true` when no animation is playing, `false` while an animation runs.
+- `@received_banner = ReceivedBanner.new(viewport)` creates the banner component. The Composition owns the component but does not manage its sprites directly.
 
-## Orchestration dans la Composition
+## Orchestration in the Composition
 
-La Composition utilise le composant `ReceivedBanner` pour démarrer l'animation. Elle chaîne l'animation du composant avec un callback de rafraîchissement, puis la stocke dans le handler :
+The Composition uses the `ReceivedBanner` component to start the animation. It chains the component's animation with a refresh callback, then stores it in the handler:
 
 ```ruby
 # Start the gift received animation
@@ -156,15 +156,15 @@ def start_gift_animation(gift_name)
 end
 ```
 
-- `return unless done?` empêche de démarrer une animation si une autre est déjà en cours.
-- `@received_banner.create_show_animation(gift_name)` demande au composant de créer son animation. Le composant la retourne sans la démarrer.
-- `Yuki::Animation.player(animation, ...)` chaîne l'animation du composant avec un callback. Ici, `refresh` est appelé après l'animation de la bannière.
-- `full_animation.start` déclenche l'animation complète.
-- `@animation_handler[:gift_received] = full_animation` stocke l'animation avec une clé nommée dans le handler. Pendant qu'elle joue, `done?` retourne `false`, ce qui bloque les inputs dans la scène.
+- `return unless done?` prevents starting an animation if one is already playing.
+- `@received_banner.create_show_animation(gift_name)` asks the component to create its animation. The component returns it without starting it.
+- `Yuki::Animation.player(animation, ...)` chains the component's animation with a callback. Here, `refresh` is called after the banner animation.
+- `full_animation.start` triggers the complete animation.
+- `@animation_handler[:gift_received] = full_animation` stores the animation with a named key in the handler. While it plays, `done?` returns `false`, which blocks input in the scene.
 
-## Valeurs scalaires
+## Scalar values
 
-`ya.scalar` interpole n'importe quelle valeur numérique via un setter. C'est la brique la plus polyvalente :
+`ya.scalar` interpolates any numeric value via a setter. It is the most versatile building block:
 
 ```ruby
 ya = Yuki::Animation
@@ -179,13 +179,13 @@ bar_fill = ya.scalar(0.3, @bar.src_rect, :width=, old_width, new_width)
 zoom_in = ya.scalar(0.2, @icon, :zoom_x=, 1.0, 1.2)
 ```
 
-- `ya.scalar(duration, target, :setter=, start_value, end_value)` fonctionne avec n'importe quel setter : `opacity=`, `x=`, `y=`, `zoom_x=`, `width=`, etc.
-- La cible peut être n'importe quel objet Ruby qui possède le setter indiqué (sprite, src_rect, etc.).
-- La durée est en secondes.
+- `ya.scalar(duration, target, :setter=, start_value, end_value)` works with any setter: `opacity=`, `x=`, `y=`, `zoom_x=`, `width=`, etc.
+- The target can be any Ruby object that has the specified setter (sprite, src_rect, etc.).
+- Duration is in seconds.
 
-## Animation en boucle
+## Looped animation
 
-Pour les animations au repos qui tournent indéfiniment (flèche rebondissante, icône pulsante), utiliser `ya.timed_loop_animation` :
+For idle animations that run indefinitely (bouncing arrows, pulsing icons), use `ya.timed_loop_animation`:
 
 ```ruby
 # Create a bouncing arrow animation for the gift list
@@ -202,17 +202,17 @@ def create_arrow_loop(arrow)
 end
 ```
 
-- `ya.timed_loop_animation(duration, [animations])` crée une animation qui boucle indéfiniment.
-- `ya.shift(duration, sprite, dx1, dy1, dx2, dy2)` déplace un sprite par des offsets relatifs puis revient.
-- Doit être démarrée manuellement avec `.start` et mise à jour à chaque frame via le handler.
-- Les animations en boucle ne bloquent pas `done?` -- elles sont gérées séparément du flux principal.
+- `ya.timed_loop_animation(duration, [animations])` creates an animation that loops forever.
+- `ya.shift(duration, sprite, dx1, dy1, dx2, dy2)` moves a sprite by relative offsets and back.
+- Must be started manually with `.start` and updated each frame via the handler.
+- Looped animations do not block `done?` -- they are managed separately from the main flow.
 
 ## Conclusion
 
-- Les composants peuvent créer leurs propres animations et les retourner sans les démarrer. La Composition chaîne et orchestre les animations via `Animation::Handler`.
-- Utiliser `ya = Yuki::Animation` comme idiome standard pour raccourcir les appels.
-- `ya.player(...)` pour les animations séquentielles, `ya.parallel(...)` pour les simultanées -- les deux peuvent être imbriqués.
-- `ya.scalar` pour toute valeur numérique, `ya.move` pour les déplacements, `ya.wait` pour les pauses, `ya.send_command_to` pour les callbacks.
-- `@animation_handler[:key] = animation` stocke les animations avec des clés nommées. Pendant qu'une animation joue, `done?` retourne `false` et bloque les inputs dans la scène.
-- Toujours vérifier `done?` avant de démarrer une nouvelle animation pour empêcher les chevauchements.
-- Utiliser `timed_loop_animation` pour les animations répétitives au repos (flèches, pulsations).
+- Components can create their own animations and return them without starting them. The Composition chains and orchestrates animations via `Animation::Handler`.
+- Use `ya = Yuki::Animation` as the standard idiom to shorten calls.
+- `ya.player(...)` for sequential animations, `ya.parallel(...)` for simultaneous -- both can be nested.
+- `ya.scalar` for any numeric value, `ya.move` for movement, `ya.wait` for pauses, `ya.send_command_to` for callbacks.
+- `@animation_handler[:key] = animation` stores animations with named keys. While an animation plays, `done?` returns `false` and blocks input in the scene.
+- Always check `done?` before starting a new animation to prevent overlapping.
+- Use `timed_loop_animation` for repeating idle animations (arrows, pulsing effects).

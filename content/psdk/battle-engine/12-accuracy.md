@@ -1,37 +1,37 @@
 ---
-title: "Comment modifier la précision d'une attaque dans PSDK ?"
-slug: modifier-la-precision-dune-attaque
-sidebar_position: 13
-description: "Ce guide explique comment modifier dynamiquement la précision d'une attaque, que ce soit en la contournant complètement ou en appliquant un multiplicateur depuis un effet externe."
+title: "How to modify move accuracy in PSDK?"
+slug: how-to-modify-move-accuracy
+sidebar_position: 12
+description: "This guide explains how to dynamically modify a move's accuracy, whether by bypassing it entirely or by applying a multiplier from an external effect."
 ---
 
-## Principe
+## Principle
 
-La précision d'une attaque est calculée par la méthode `chance_of_hit` selon la formule :
+A move's accuracy is calculated by the `chance_of_hit` method using the formula:
 
 ```
-chance_of_hit = factor × accuracy
+chance_of_hit = factor x accuracy
 ```
 
-Où `factor` est le produit de trois éléments :
+Where `factor` is the product of three elements:
 
-- Les multiplicateurs de tous les effets actifs (`chance_of_hit_multiplier`).
-- Le modificateur de précision de l'utilisateur (`accuracy_mod`).
-- Le modificateur d'esquive de la cible (`evasion_mod`).
+- Multipliers from all active effects (`chance_of_hit_multiplier`).
+- The user's accuracy modifier (`accuracy_mod`).
+- The target's evasion modifier (`evasion_mod`).
 
-Si `bypass_chance_of_hit?` retourne `true`, le test de précision est ignoré et l'attaque touche automatiquement.
+If `bypass_chance_of_hit?` returns `true`, the accuracy check is skipped and the move always hits.
 
 :::note
-**Astuce Pokémon Studio** : mettre la précision d'une attaque à `0` dans Pokémon Studio suffit à la rendre infaillible. Le système considère une précision inférieure ou égale à 0 comme un bypass automatique du test de précision.
+**Pokémon Studio tip**: setting a move's accuracy to `0` in Pokémon Studio is enough to make it never miss. The system treats an accuracy of 0 or less as an automatic bypass of the accuracy check.
 :::
 
-## Depuis l'attaque
+## From the move
 
-Certaines attaques modifient leur précision selon le contexte. Par exemple, l'attaque **Fatal-Foudre** a une précision de 50 au soleil, touche automatiquement sous la pluie, et conserve sa précision normale sinon.
+Some moves change their accuracy based on context. For example, the move **Thunder** has 50 accuracy in sun, always hits in rain, and keeps its normal accuracy otherwise.
 
-Pour gérer ce comportement, on override la méthode `accuracy` dans la sous-classe de l'attaque. Si les conditions ne sont pas remplies, on retourne `super` pour conserver la valeur définie dans Pokémon Studio.
+To handle this behavior, override the `accuracy` method in the move's subclass. If the conditions are not met, return `super` to keep the value defined in Pokémon Studio.
 
-### Exemple : Fatal-Foudre
+### Example: Thunder
 
 ```ruby
 # Return the current accuracy of the move
@@ -44,11 +44,11 @@ def accuracy
 end
 ```
 
-- `return 50` réduit la précision à 50% au soleil.
-- `return 0` rend l'attaque infaillible sous la pluie (précision de 0 = bypass automatique).
-- `return super` conserve la précision définie dans Pokémon Studio pour tous les autres cas.
+- `return 50` reduces accuracy to 50% in sun.
+- `return 0` makes the move never miss in rain (accuracy of 0 = automatic bypass).
+- `return super` keeps the accuracy defined in Pokémon Studio for all other cases.
 
-On peut également override `bypass_chance_of_hit?` pour ignorer complètement le test de précision selon des conditions spécifiques. Par exemple, une attaque qui touche toujours si la cible utilise Lilliput :
+You can also override `bypass_chance_of_hit?` to completely skip the accuracy check based on specific conditions. For example, a move that always hits if the target used Minimize:
 
 ```ruby
 # Check if the move bypass chance of hit and cannot fail
@@ -62,15 +62,15 @@ def bypass_chance_of_hit?(user, target)
 end
 ```
 
-- `bypass_chance_of_hit?` est utile quand le bypass dépend d'une condition externe (état de la cible, talent, etc.) plutôt que d'un changement de valeur de précision.
+- `bypass_chance_of_hit?` is useful when the bypass depends on an external condition (target's state, ability, etc.) rather than a change in accuracy value.
 
-## Depuis un effet
+## From an effect
 
-Certains effets peuvent modifier la précision d'une attaque via un multiplicateur. Par exemple, le talent **Oeil Composé** multiplie par 1.3 la précision de toutes les attaques de l'utilisateur.
+Some effects can modify a move's accuracy via a multiplier. For example, the ability **Compound Eyes** multiplies accuracy by 1.3 for all of the user's moves.
 
-Pour gérer ce comportement, on utilise la méthode `chance_of_hit_multiplier` dans la classe de l'effet.
+To handle this behavior, use the `chance_of_hit_multiplier` method in the effect's class.
 
-### Exemple : Oeil Composé
+### Example: Compound Eyes
 
 ```ruby
 # Return the chance of hit multiplier
@@ -85,11 +85,11 @@ def chance_of_hit_multiplier(user, target, move)
 end
 ```
 
-- `super` retourne le multiplicateur par défaut (`1`), à utiliser si les conditions ne sont pas remplies.
-- Retourner une valeur supérieure à `1` augmente la précision, inférieure à `1` la réduit.
-- Tous les multiplicateurs des effets actifs sont multipliés entre eux avant d'être appliqués à la formule.
+- `super` returns the default multiplier (`1`), to use when conditions are not met.
+- Returning a value greater than `1` increases accuracy, less than `1` decreases it.
+- All multipliers from active effects are multiplied together before being applied to the formula.
 
-### Exemple : Agitation
+### Example: Hustle
 
 ```ruby
 # Return the chance of hit multiplier
@@ -104,12 +104,12 @@ def chance_of_hit_multiplier(user, target, move)
 end
 ```
 
-- Ici le multiplicateur est conditionnel : `0.8` pour les attaques physiques, `1` pour les autres.
-- Le talent Agitation réduit la précision des attaques physiques en échange d'un bonus d'attaque.
+- Here the multiplier is conditional: `0.8` for physical moves, `1` for others.
+- The Hustle ability reduces accuracy of physical moves in exchange for an attack bonus.
 
 ## Conclusion
 
-- Surchargez `accuracy` dans la sous-classe de l'attaque pour modifier la précision selon le contexte. Retournez `super` si les conditions ne sont pas remplies.
-- Surchargez `bypass_chance_of_hit?` pour ignorer le test de précision selon une condition. Retournez `super` sinon.
-- Utilisez `chance_of_hit_multiplier` pour appliquer un multiplicateur sur la précision depuis un effet. Retournez un `Float`.
-- La formule finale est : `factor × accuracy`, où `factor` est le produit de tous les multiplicateurs, de la précision de l'utilisateur et de l'esquive de la cible.
+- Override `accuracy` in the move's subclass to change accuracy based on context. Return `super` if the conditions are not met.
+- Override `bypass_chance_of_hit?` to skip the accuracy check based on a condition. Return `super` otherwise.
+- Use `chance_of_hit_multiplier` to apply a multiplier on accuracy from an effect. Return a `Float`.
+- The final formula is: `factor x accuracy`, where `factor` is the product of all multipliers, user accuracy, and target evasion.

@@ -1,65 +1,57 @@
 ---
-title: "Comment créer une météo dans PSDK ?"
-slug: creer-une-meteo-et-ses-effets
-sidebar_position: 12
-description: "Ce guide explique comment ajouter une nouvelle météo au système de combat, créer ses effets, ajouter les textes associés, et la déclencher via une attaque ou un effet."
+title: "How to create a weather in PSDK?"
+slug: how-to-create-a-weather
+sidebar_position: 15
+description: "This guide explains how to add a new weather to the battle system, create its effects, add the associated text messages, and trigger it via a move or an effect."
 ---
 
-## Principe
+## Principle
 
-L'ajout d'une météo se fait en quatre étapes :
+Adding a weather involves four steps:
 
-- **Ajouter les textes** : les messages affichés lors de l'activation, de la fin et à chaque tour.
-- **Créer la classe d'effet** : le comportement mécanique de la météo (multiplicateurs de type, dégâts par tour, etc.).
-- **Enregistrer la météo dans le handler** : lier le symbole de la météo aux messages.
-- **La déclencher** : permettre son activation via une attaque ou un effet.
+- **Add the text messages**: the messages displayed on activation, end, and each turn.
+- **Create the effect class**: the mechanical behavior of the weather (type multipliers, per-turn damage, etc.).
+- **Register the weather in the handler**: link the weather symbol to the messages.
+- **Trigger it**: allow its activation via a move or an effect.
 
-## Ajouter les textes
+## Adding text messages
 
-Les messages de météo sont stockés dans le fichier 100018 sur Pokémon Studio. Il faut ajouter jusqu'à trois messages :
+Weather messages are stored in file 100018 in Pokémon Studio. Up to three messages need to be added:
 
-- Un message **d'activation** (quand la météo apparaît) — ex : _"It started to rain!"_
-- Un message **de fin** (quand la météo s'estompe) — ex : _"The rain stopped."_
-- Un message **de tour** (affiché à chaque fin de tour, optionnel) — ex : _"The sandstorm rages."_
+- An **activation** message (when the weather appears) -- e.g., *"It started to rain!"*
+- An **end** message (when the weather fades) -- e.g., *"The rain stopped."*
+- A **turn** message (displayed at the end of each turn, optional) -- e.g., *"The sandstorm rages."*
 
-Notez les numéros de ligne de ces messages dans Pokémon Studio, ils seront nécessaires pour l'enregistrement dans le handler.
+Note the line numbers of these messages in Pokémon Studio, they will be needed for registration in the handler.
 
-Les météos existantes utilisent ces numéros de lignes dans le fichier 18 :
+Existing weathers use these line numbers in file 18:
 
-| Météo     | Activation | Fin | Tour |
+| Weather   | Activation | End | Turn |
 | --------- | ---------- | --- | ---- |
-| Rain      | 88         | 93  | —    |
-| Sunny     | 87         | 92  | —    |
+| Rain      | 88         | 93  | --   |
+| Sunny     | 87         | 92  | --   |
 | Sandstorm | 89         | 94  | 98   |
 | Hail      | 90         | 95  | 99   |
-| Fog       | 91         | 96  | —    |
+| Fog       | 91         | 96  | --   |
 | Snow      | 287        | 288 | 289  |
 
-## Créer la classe d'effet
+## Creating the effect class
 
-Les météos héritent de `Battle::Effects::Weather` et se placent dans le dossier `5 Battle/06 Effects/06 Weather Effects/`.
+Weathers inherit from `Battle::Effects::Weather` and are placed in the `5 Battle/06 Effects/06 Weather Effects/` folder.
 
-Voici le minimum requis pour une météo fonctionnelle :
+Here is the minimum required for a working weather:
 
 ```ruby
 module Battle
   module Effects
     class Weather
       class VoidWeather < Weather
-        # Function called at the end of a turn
-        # @param logic [Battle::Logic] logic of the battle
-        # @param scene [Battle::Scene] battle scene
-        # @param battlers [Array<PFM::PokemonBattler>] all alive battlers
         def on_end_turn_event(logic, scene, battlers)
           if $env.decrease_weather_duration
             scene.display_message_and_wait(parse_text(id_file, id_text))
             logic.weather_change_handler.weather_change(:none, 0)
           end
-
-          # Add custom per-turn behavior here (damage, healing, etc.)
         end
-
-        # Add custom behavior here (type multipliers, status prevention, etc.)
       end
       register(:void_weather, VoidWeather)
     end
@@ -67,24 +59,24 @@ module Battle
 end
 ```
 
-Le strict minimum est :
+The strict minimum is:
 
-- `on_end_turn_event` : gère la durée de la météo. `$env.decrease_weather_duration` décompte les tours et affiche le message de fin (ici ligne 401) quand la météo expire. Sans cette méthode, la météo dure indéfiniment.
-- `register(:void_weather, VoidWeather)` : lie le symbole à la météo via le pattern factory. Sans cet appel, la météo ne peut pas être instanciée.
+- `on_end_turn_event`: manages the weather's duration. `$env.decrease_weather_duration` counts down turns and the weather expires when it returns true. Without this method, the weather lasts indefinitely.
+- `register(:void_weather, VoidWeather)`: ties the symbol to the weather via the factory pattern. Without this call, the weather cannot be instantiated.
 
-Entre ces deux éléments, on ajoute le comportement souhaité en overridant les hooks de `EffectBase`. Par exemple, Rain override `mod1_multiplier` pour booster les attaques Eau (x1.5) et affaiblir les attaques Feu (x0.5). Les météos existantes dans `5 Battle/06 Effects/06 Weather Effects/` montrent les différentes possibilités.
+Between these two elements, you add the desired behavior by overriding `EffectBase` hooks. For example, Rain overrides `mod1_multiplier` to boost Water moves (x1.5) and weaken Fire moves (x0.5). Existing weathers in `5 Battle/06 Effects/06 Weather Effects/` show the different possibilities.
 
-### Hooks disponibles
+### Available hooks
 
-Les météos peuvent override n'importe quel hook de `EffectBase`. La liste complète se trouve dans `5 Battle/06 Effects/100 EffectBase.rb`.
+Weathers can override any hook from `EffectBase`. The full list can be found in `5 Battle/06 Effects/100 EffectBase.rb`.
 
-## Enregistrer la météo dans le handler
+## Registering the weather in the handler
 
-Le `WeatherChangeHandler` gère l'application et les messages des météos. Deux constantes doivent être mises à jour.
+The `WeatherChangeHandler` manages weather application and messages. Two constants need to be updated.
 
-### Ajouter le symbole dans WEATHER_NAMES
+### Adding the symbol to WEATHER_NAMES
 
-Le tableau `WEATHER_NAMES` dans `PFM::Environment` liste tous les symboles de météo connus :
+The `WEATHER_NAMES` array in `PFM::Environment` lists all known weather symbols:
 
 ```ruby
 module PFM
@@ -94,47 +86,42 @@ module PFM
 end
 ```
 
-### Ajouter le message d'activation dans WEATHER_SYM_TO_MSG
+### Adding the activation message to WEATHER_SYM_TO_MSG
 
-Le hash `WEATHER_SYM_TO_MSG` contient la correspondance entre les symboles de météo et les numéros de messages d'activation. Il n'est pas frozen, on peut donc simplement y ajouter une entrée :
+The `WEATHER_SYM_TO_MSG` hash contains the mapping between weather symbols and message line numbers. It is not frozen, so you can simply add entries:
 
 ```ruby
 module Battle
   module Logic
     class WeatherChangeHandler
-      # Register activation message (terrain symbol => message line)
       WEATHER_SYM_TO_MSG[:void_terrain] = 400
-
-      # Register end message (none => { terrain symbol => message line })
       WEATHER_SYM_TO_MSG[:none][:void_terrain] = 401
     end
   end
 end
 ```
 
-La structure du hash est la suivante :
+The hash structure is as follows:
 
-- `WEATHER_SYM_TO_MSG[:void_terrain] = 400` : le message d'activation (ligne 400 du fichier texte 60).
-- `WEATHER_SYM_TO_MSG[:none][:void_terrain] = 401` : le message de fin (ligne 401), affiché quand le terrain passe à `:none`.
+- `WEATHER_SYM_TO_MSG[:void_terrain] = 400`: the activation message (line 400 from text file 60).
+- `WEATHER_SYM_TO_MSG[:none][:void_terrain] = 401`: the end message (line 401), displayed when the terrain changes to `:none`.
 
-Les numéros `400` et `401` correspondent aux lignes des messages ajoutés dans Pokémon Studio à la première étape.
+## Triggering the weather via a move
 
-## Déclencher la météo via une attaque
+To create a move that invokes the weather:
 
-Pour créer une attaque qui invoque la météo :
+### Configure the move in Pokémon Studio
 
-### Configurer l'attaque dans Pokémon Studio
+Create the move in Pokémon Studio with these properties:
 
-Créez l'attaque dans Pokémon Studio avec ces propriétés :
+- **Procedure**: `s_weather`
+- **Category**: Status
+- **PP**: 5 (typical)
+- **Target**: All Pokemon
 
-- **Procédure** : `s_weather`
-- **Catégorie** : Statut
-- **PP** : 5 (typique)
-- **Cible** : Tous les Pokémon
+### Register the move in WeatherMove
 
-### Enregistrer l'attaque dans WeatherMove
-
-Le hash `WEATHER_MOVES` associe le `db_symbol` de l'attaque au symbole de la météo. Il suffit d'y ajouter une entrée — le `db_symbol` de l'attaque créée dans Pokémon Studio doit correspondre à la clé :
+The `WEATHER_MOVES` hash maps a move's `db_symbol` to the weather symbol. Simply add an entry:
 
 ```ruby
 module Battle
@@ -146,11 +133,9 @@ module Battle
 end
 ```
 
-Le système utilise `WEATHER_MOVES[db_symbol]` pour trouver la météo à appliquer.
+### Register the duration extension item (optional)
 
-### Enregistrer l'objet d'extension de durée (optionnel)
-
-Si un objet prolonge la durée de la météo (de 5 à 8 tours), ajoutez-le dans `WEATHER_ITEMS` :
+If an item extends the weather duration (from 5 to 8 turns), add it to `WEATHER_ITEMS`:
 
 ```ruby
 module Battle
@@ -162,11 +147,9 @@ module Battle
 end
 ```
 
-Le système vérifie automatiquement si le lanceur tient cet objet pour ajuster la durée.
+## Triggering the weather via an effect
 
-## Déclencher la météo via un effet
-
-L'exemple ci-dessous montre un effet de talent, mais les mêmes méthodes s'appliquent pour un objet ou tout autre effet qui déclenche une météo :
+The example below shows an ability effect, but the same methods apply for an item or any other effect that triggers a weather:
 
 ```ruby
 module Battle
@@ -175,14 +158,10 @@ module Battle
       class VoidStream < Drizzle
         private
 
-        # Return the weather type
-        # @return [Symbol]
         def weather
           return :void_weather
         end
 
-        # Return the item that extends the weather duration
-        # @return [Symbol]
         def item_db_symbol
           return :void_rock
         end
@@ -193,20 +172,18 @@ module Battle
 end
 ```
 
-L'effet hérite de `Drizzle` (ou de n'importe quel effet de météo existant) et override uniquement `weather` (le symbole de la météo) et `item_db_symbol` (l'objet d'extension de durée). Le système gère automatiquement la durée (5 tours, ou 8 avec l'objet).
+The effect inherits from `Drizzle` (or any existing weather effect) and only overrides `weather` (the weather symbol) and `item_db_symbol` (the duration extension item). The system automatically handles the duration (5 turns, or 8 with the item).
 
-Les exemples de référence se trouvent dans le fichier `050 Weather Setting Abilitites.rb`.
+Reference examples can be found in `050 Weather Setting Abilitites.rb`.
 
-## Ajouter un test de météo
+## Adding a weather query method
 
-Pour pouvoir vérifier la météo active dans le code (par exemple `logic.weather_effect.void_weather?`), il faut ajouter une méthode de requête dans la classe de base :
+To be able to check the active weather in code (e.g., `logic.weather_effect.void_weather?`), you need to add a query method to the base class:
 
 ```ruby
 module Battle
   module Effects
     class Weather
-      # Test if the weather is void
-      # @return [Boolean]
       def void_weather?
         return @db_symbol == :void_weather
       end
@@ -215,24 +192,22 @@ module Battle
 end
 ```
 
-## Récapitulatif des fichiers
+## File summary
 
-Pour créer une météo complète, voici les fichiers à créer ou modifier :
-
-| Fichier                                          | Action                                                       |
+| File                                             | Action                                                       |
 | ------------------------------------------------ | ------------------------------------------------------------ |
-| Studio → Système de combat (fichier texte 18)    | Ajouter les messages d'activation, de fin et de tour         |
-| `my-project/scripts/001 Weather.rb`              | Ajouter le symbole dans `WEATHER_NAMES`                      |
-| `my-project/scripts/002 WeatherChangeHandler.rb` | Ajouter l'entrée dans `WEATHER_SYM_TO_MSG`                   |
-| `my-project/scripts/003 WeatherEffect.rb`        | Créer la classe d'effet de la météo                          |
-| `my-project/scripts/004 WeatherMove.rb`          | Ajouter dans `WEATHER_MOVES` et `WEATHER_ITEMS` (si attaque) |
-| `my-project/scripts/005 Ability.rb`              | Créer l'effet (si effet)                                     |
-| Studio → Attaques                                | Créer l'attaque avec la procédure `s_weather` (si attaque)   |
+| Studio -> Battle System (file 100018)            | Add activation, end and turn messages                        |
+| `my-project/scripts/001 Weather.rb`              | Add symbol to `WEATHER_NAMES`                                |
+| `my-project/scripts/002 WeatherChangeHandler.rb` | Add entry to `WEATHER_SYM_TO_MSG`                            |
+| `my-project/scripts/003 WeatherEffect.rb`        | Create the weather effect class                              |
+| `my-project/scripts/004 WeatherMove.rb`          | Add to `WEATHER_MOVES` and `WEATHER_ITEMS` (if move)         |
+| `my-project/scripts/005 Ability.rb`              | Create the effect (if effect)                                |
+| Studio -> Moves                                  | Create the move with `s_weather` procedure (if move)         |
 
 ## Conclusion
 
-- Ajoutez d'abord les **messages** dans Pokémon Studio (fichier texte 18), car ils sont nécessaires pour le handler.
-- Créez la **classe d'effet** en héritant de `Weather` avec au minimum `on_end_turn_event` et `register`.
-- Ajoutez le symbole dans `WEATHER_NAMES` et l'entrée dans `WEATHER_SYM_TO_MSG` pour lier les messages.
-- Ajoutez l'entrée dans `WEATHER_MOVES` pour les attaques, ou héritez de `Drizzle` pour les effets.
-- Les météos existantes dans `5 Battle/06 Effects/06 Weather Effects/` servent de référence pour les comportements possibles.
+- First add the **messages** in Studio (file 100018), as they are needed for the handler.
+- Create the **effect class** by inheriting from `Weather` with at minimum `on_end_turn_event` and `register`.
+- Add the symbol to `WEATHER_NAMES` and the entry to `WEATHER_SYM_TO_MSG` to link the messages.
+- Add the entry to `WEATHER_MOVES` for moves, or inherit from `Drizzle` for effects.
+- Existing weathers in `5 Battle/06 Effects/06 Weather Effects/` serve as reference for possible behaviors.

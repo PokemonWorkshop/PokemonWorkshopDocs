@@ -1,21 +1,21 @@
 ---
-title: "Comment utiliser l'Interpreter dans un event ?"
-slug: utiliser-linterpreter-dans-un-event
+title: "How to use the Interpreter in an event?"
+slug: using-the-interpreter-in-an-event
 sidebar_position: 2
-description: "Dans RMXP, quand on crée un event, on dispose de commandes classiques : afficher un message, donner un objet, téléporter le joueur. Mais ces commandes sont limitées. PSDK met à disposition des dizaines de méthodes prêtes à l'emploi qu'on peut appeler directement depuis la commande Script d'un event."
+description: "In RMXP, when creating an event, you have access to standard commands: show a message, give an item, teleport the player. But these commands are limited. PSDK provides dozens of ready-to-use methods that can be called directly from an event's Script command."
 ---
 
-Dans RMXP, quand on crée un event, on dispose de commandes classiques : afficher un message, donner un objet, téléporter le joueur. Mais ces commandes sont limitées. PSDK met à disposition des dizaines de méthodes prêtes à l'emploi qu'on peut appeler directement depuis la commande **Script** d'un event. Ce guide explique d'où viennent ces méthodes, comment les utiliser, et surtout comment les trouver.
+In RMXP, when creating an event, you have access to standard commands: show a message, give an item, teleport the player. But these commands are limited. PSDK provides dozens of ready-to-use methods that can be called directly from an event's **Script** command. This guide explains where these methods come from, how to use them, and most importantly how to find them.
 
-## Qu'est-ce que l'Interpreter ?
+## What is the Interpreter?
 
-Quand un event s'exécute sur la map, c'est un objet appelé **Interpreter** qui traite chaque commande une par une. Cet objet est créé au lancement de la map et vit tant que la map est active. Chaque commande RMXP (afficher un message, déplacer un event, jouer un son) correspond à une méthode de cet objet.
+When an event runs on the map, an object called the **Interpreter** processes each command one by one. This object is created when the map loads and lives as long as the map is active. Each RMXP command (show a message, move an event, play a sound) corresponds to a method on this object.
 
-Ce qui rend l'Interpreter puissant dans PSDK, c'est que le moteur l'**enrichit** avec de nombreuses méthodes supplémentaires. Là où RMXP de base ne sait faire que des choses simples, PSDK ajoute des méthodes pour gérer les Pokémon, lancer des combats, ouvrir des menus, déplacer la caméra, et bien plus.
+What makes the Interpreter powerful in PSDK is that the engine **extends** it with many additional methods. Where base RMXP can only do simple things, PSDK adds methods to manage Pokémon, start battles, open menus, move the camera, and much more.
 
-## La commande Script
+## The Script command
 
-La commande **Script** de RMXP permet d'écrire du code Ruby qui s'exécute **à l'intérieur** de l'Interpreter. Cela signifie qu'on peut appeler directement toutes ses méthodes, sans préfixe :
+The RMXP **Script** command lets you write Ruby code that runs **inside** the Interpreter. This means you can call all its methods directly, without any prefix:
 
 ```ruby
 message("Hello!")
@@ -23,101 +23,101 @@ add_pokemon(:pikachu, 10)
 emotion(:exclamation)
 ```
 
-Ces trois lignes appellent trois méthodes de l'Interpreter. On n'a pas besoin d'écrire `self.message(...)` ou de référencer un objet — le code s'exécute déjà dans le bon contexte.
+These three lines call three Interpreter methods. You don't need to write `self.message(...)` or reference any object — the code already runs in the right context.
 
-On peut aussi écrire n'importe quelle expression Ruby valide. On a accès aux variables globales (`$game_variables`, `$game_switches`, `$actors`, `$bag`...) et à tout le code du moteur.
+You can also write any valid Ruby expression. You have access to global variables (`$game_variables`, `$game_switches`, `$actors`, `$bag`...) and all of the engine's code.
 
-## Les raccourcis d'accès
+## Access shortcuts
 
-L'Interpreter expose des raccourcis pour accéder rapidement aux objets globaux du jeu :
+The Interpreter exposes shortcuts to quickly access the game's global objects:
 
-| Raccourci | Retourne                 | Nom complet            |
-| --------- | ------------------------ | ---------------------- |
-| `gv`      | Les variables du jeu     | `$game_variables`      |
-| `gs`      | Les interrupteurs du jeu | `$game_switches`       |
-| `gt`      | Les données temporaires  | `$game_temp`           |
-| `gm`      | La map actuelle          | `$game_map`            |
-| `gp`      | Le joueur                | `$game_player`         |
-| `ge(id)`  | Un event de la map       | `$game_map.events[id]` |
-| `party`   | L'état du jeu            | `PFM.game_state`       |
+| Shortcut | Returns | Full name |
+|---|---|---|
+| `gv` | Game variables | `$game_variables` |
+| `gs` | Game switches | `$game_switches` |
+| `gt` | Game temp | `$game_temp` |
+| `gm` | Game map | `$game_map` |
+| `gp` | Game player | `$game_player` |
+| `ge(id)` | A map event | `$game_map.events[id]` |
+| `party` | Game state | `PFM.game_state` |
 
-Par exemple :
+For example:
 
 ```ruby
-# Modifier la variable 10
+# Set variable 10 to 42
 gv[10] = 42
 
-# Activer l'interrupteur 5
+# Enable switch 5
 gs[5] = true
 
-# Récupérer la vitesse du joueur
+# Get the player's speed
 gp.move_speed
 
-# Accéder à l'event 3 de la map
+# Get event 3 on the current map
 ge(3)
 ```
 
-Ces raccourcis sont simplement des méthodes qui retournent les objets globaux correspondants. On les utilise pour écrire du code plus concis dans la commande Script.
+These shortcuts are simply methods that return the corresponding global objects. They are used to write more concise code in the Script command.
 
-## Les conditions Script
+## Script conditions
 
-Dans RMXP, la commande **Branche conditionnelle** possède un onglet **Script**. Le code écrit ici s'exécute aussi dans l'Interpreter, mais il doit retourner une valeur : si elle est **truthy** (ni `false` ni `nil`), la condition est vraie.
+In RMXP, the **Conditional Branch** command has a **Script** tab. The code written there also runs inside the Interpreter, but it must return a value: if it's **truthy** (neither `false` nor `nil`), the condition is true.
 
 ```ruby
-# Le joueur a-t-il un Pikachu ?
+# Does the player have a Pikachu?
 $actors.any? { |pokemon| pokemon.db_symbol == :pikachu }
 
-# La variable 10 est-elle supérieure à 50 ?
+# Is variable 10 greater than 50?
 gv[10] >= 50
 
-# L'équipe est-elle complète ?
+# Is the party full?
 $actors.size == 6
 
-# Le joueur possède-t-il une Master Ball ?
+# Does the player have a Master Ball?
 $bag.contain_item?(:master_ball)
 ```
 
-N'importe quelle expression Ruby fonctionne. C'est là que les raccourcis (`gv`, `gs`, etc.) deviennent très utiles pour garder le code court.
+Any Ruby expression works. This is where the shortcuts (`gv`, `gs`, etc.) become very useful to keep code short.
 
-## Où trouver les méthodes disponibles
+## Where to find available methods
 
-C'est la question clé : comment savoir quelles méthodes existent et quels paramètres elles acceptent ?
+This is the key question: how to know which methods exist and what parameters they accept?
 
-### La documentation en ligne
+### The online documentation
 
-La documentation YARD de PSDK est disponible à cette adresse :
+The PSDK YARD documentation is available at:
 
 <https://psdk.pokemonworkshop.fr/yard/Interpreter.html>
 
-La classe `Interpreter` y est documentée avec toutes ses méthodes, leurs paramètres, et leurs types. C'est la référence la plus accessible — elle ne nécessite aucune installation.
+The `Interpreter` class is documented there with all its methods, their parameters, and their types. This is the most accessible reference — it requires no installation.
 
-### Les fichiers source
+### The source files
 
-Pour ceux qui préfèrent lire le code directement, toutes les méthodes de l'Interpreter sont définies dans le dossier `pokemonsdk/scripts/2 PSDK Event Interpreter/`. Chaque fichier correspond à un thème :
+For those who prefer reading the code directly, all Interpreter methods are defined in `pokemonsdk/scripts/2 PSDK Event Interpreter/`. Each file corresponds to a theme:
 
-| Fichier                            | Thème                                     |
-| ---------------------------------- | ----------------------------------------- |
-| `100 Interpreter_Environnement.rb` | Détection du joueur, suppression d'events |
-| `105 Interpreter_Camera.rb`        | Déplacement de la caméra                  |
-| `110 Interpreter_Pokemon.rb`       | Ajout, retrait, modification de Pokémon   |
-| `120 Interpreter_Shortcut.rb`      | Raccourcis, émotions, menus, pathfinding  |
-| `121 Interpreter_add_item.rb`      | Gestion des objets                        |
-| `125 Interpreter_Fiber.rb`         | Messages et choix                         |
-| `130 Interpreter_Sequences.rb`     | Séquences de combat, échanges             |
-| `140 Interpreter_Player.rb`        | Gestion du profil joueur                  |
-| `150 Interpreter_Time.rb`          | Événements temporisés                     |
-| `160 Interpreter_Overlay.rb`       | Overlays de map                           |
-| `165 Interpreter_Message_Font.rb`  | Police des messages                       |
+| File | Theme |
+|---|---|
+| `100 Interpreter_Environnement.rb` | Player detection, event deletion |
+| `105 Interpreter_Camera.rb` | Camera movement |
+| `110 Interpreter_Pokemon.rb` | Add, remove, modify Pokémon |
+| `120 Interpreter_Shortcut.rb` | Shortcuts, emotions, menus, pathfinding |
+| `121 Interpreter_add_item.rb` | Item management |
+| `125 Interpreter_Fiber.rb` | Messages and choices |
+| `130 Interpreter_Sequences.rb` | Battle sequences, trades |
+| `140 Interpreter_Player.rb` | Player profile management |
+| `150 Interpreter_Time.rb` | Timed events |
+| `160 Interpreter_Overlay.rb` | Map overlays |
+| `165 Interpreter_Message_Font.rb` | Message font |
 
-Ces fichiers font partie du code interne de PSDK. Pour y accéder, il faut suivre le guide **003 Comment préparer son environnement de développement** qui explique comment récupérer le code source du moteur.
+These files are part of PSDK's internal code. To access them, you need to follow guide **003 How to set up the development environment** which explains how to retrieve the engine's source code. Without this step, the `pokemonsdk/` folder is not visible in the project.
 
-Chaque méthode dans ces fichiers est documentée avec des commentaires YARD qui décrivent les paramètres et leur type. En lisant un fichier, on découvre rapidement tout ce qui est disponible pour un thème donné.
+Each method in these files is documented with YARD comments that describe the parameters and their types. By reading a file, you can quickly discover everything available for a given theme.
 
-## Ajouter ses propres méthodes
+## Adding your own methods
 
-L'Interpreter est une classe Ruby comme une autre. On peut la **rouvrir** depuis ses propres scripts pour y ajouter des méthodes. Tous les scripts placés dans le dossier `scripts/` à la racine du projet sont chargés par PSDK après le code du moteur.
+The Interpreter is a Ruby class like any other. You can **reopen** it from your own scripts to add methods. All scripts placed in the `scripts/` folder at the root of the project are loaded by PSDK after the engine's code.
 
-Par exemple, si on veut une méthode réutilisable pour soigner toute l'équipe :
+For example, if you want a reusable method to heal the entire party:
 
 ```ruby
 # my-project/scripts/001 Interpreter.rb
@@ -133,24 +133,24 @@ class Interpreter
 end
 ```
 
-Une fois ce fichier en place, la méthode est disponible dans tous les events du jeu :
+Once this file is in place, the method is available in all events in the game:
 
 ```ruby
 # In a Script command
 heal_all_pokemon
-message("Your Pokémon have been fully healed!")
+message("Your Pokemon have been fully healed!")
 ```
 
-C'est le même principe que le monkey-patching décrit dans le guide **001 Qu'est-ce que le monkey-patch et comment l'appliquer dans PSDK** : on rouvre la classe, on ajoute une méthode, et elle devient accessible partout. La différence est qu'ici on ne modifie pas une méthode existante — on en crée une nouvelle.
+This is the same principle as the monkey-patching described in guide **001 What is monkey-patching and how to apply it in PSDK**: you reopen the class, add a method, and it becomes accessible everywhere. The difference is that here you're not modifying an existing method — you're creating a new one.
 
-C'est utile pour plusieurs raisons :
+This is useful for several reasons:
 
-- **Factoriser** : au lieu de copier-coller le même bloc Script dans plusieurs events, on l'écrit une fois dans une méthode et on l'appelle par son nom.
-- **Simplifier les events** : l'éditeur d'events de RMXP n'est pas conçu pour gérer de la logique complexe. Les branches conditionnelles imbriquées, les events à rallonge et le mélange commandes RMXP / blocs Script deviennent vite illisibles. En déplaçant cette logique dans une méthode Ruby, l'event se réduit à un simple appel, et le code est plus facile à lire, tester et modifier.
+- **Factoring out code**: instead of copy-pasting the same Script block in multiple events, you write it once in a method and call it by name.
+- **Simplifying events**: RMXP's event editor is not designed to handle complex logic. Nested conditional branches, lengthy events and mixing RMXP commands with Script blocks quickly become unreadable. By moving that logic into a Ruby method, the event is reduced to a simple call, and the code is easier to read, test and modify.
 
 ## Conclusion
 
-- L'**Interpreter** est l'objet qui exécute les commandes des events. PSDK l'enrichit avec des dizaines de méthodes supplémentaires.
-- La commande **Script** et l'onglet **Script** des branches conditionnelles exécutent du Ruby directement dans l'Interpreter.
-- Les raccourcis (`gv`, `gs`, `gp`, `ge`, `party`) simplifient l'accès aux données du jeu.
-- Pour découvrir les méthodes disponibles : consulter la [documentation YARD](https://psdk.pokemonworkshop.fr/yard/) ou lire les fichiers source après avoir suivi le guide **003**.
+- The **Interpreter** is the object that executes event commands. PSDK extends it with dozens of additional methods.
+- The **Script** command and the **Script** tab in conditional branches execute Ruby directly inside the Interpreter.
+- The shortcuts (`gv`, `gs`, `gp`, `ge`, `party`) simplify access to game data.
+- To discover available methods: check the [YARD documentation](https://psdk.pokemonworkshop.fr/yard/) or read the source files after following guide **003**.

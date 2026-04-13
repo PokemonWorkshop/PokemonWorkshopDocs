@@ -1,121 +1,121 @@
 ---
-title: "Comment utiliser les tables associatives en Ruby ?"
-slug: tables-associatives
+title: "How to use hashes in Ruby?"
+slug: hashes
 sidebar_position: 4
-description: "Ce chapitre présente les **Hash** (tables associatives), une structure qui associe des **clés** à des **valeurs**. Là où un Array range les éléments par position (index 0, 1, 2...), un Hash les range par nom."
+description: "This chapter introduces **Hashes**, a structure that associates **keys** with **values**. Where an Array stores elements by position (index 0, 1, 2...), a Hash stores them by name."
 ---
 
-Ce chapitre présente les **Hash** (tables associatives), une structure qui associe des **clés** à des **valeurs**. Là où un Array range les éléments par position (index 0, 1, 2...), un Hash les range par nom.
+This chapter introduces **Hashes**, a structure that associates **keys** with **values**. Where an Array stores elements by position (index 0, 1, 2...), a Hash stores them by name.
 
-## Principe
+## Principle
 
-Avec un Array, on accède à un élément par son numéro : `team[0]`. C'est pratique pour les listes ordonnées, mais pas pour décrire un objet. Pour regrouper les informations d'un Pokémon (nom, niveau, type), il faudrait se rappeler que l'index 0 est le nom, l'index 1 le niveau, etc. C'est fragile et illisible.
+With an Array, you access an element by its number: `team[0]`. This is handy for ordered lists, but not for describing an object. To group a Pokemon's information (name, level, type), you would need to remember that index 0 is the name, index 1 the level, etc. This is fragile and unreadable.
 
-Un Hash résout ce problème : chaque valeur est associée à une **clé** qu'on choisit. On accède à la valeur par sa clé, pas par sa position. C'est comme un dictionnaire : on cherche un mot (la clé) pour trouver sa définition (la valeur).
+A Hash solves this problem: each value is associated with a **key** that you choose. You access the value by its key, not by its position. It is like a dictionary: you look up a word (the key) to find its definition (the value).
 
-## Créer un Hash
+## Creating a Hash
 
-La façon la plus courante de créer un Hash utilise les accolades `{}` avec des clés Symbol :
+The most common way to create a Hash uses curly braces `{}` with Symbol keys:
 
 ```ruby
 pikachu = { name: 'Pikachu', type: :electric, level: 25 }
 p pikachu    # => {:name=>"Pikachu", :type=>:electric, :level=>25}
 ```
 
-- `name:` est la clé (un Symbol `:name`), `'Pikachu'` est la valeur.
-- Les paires clé-valeur sont séparées par des virgules.
-- La syntaxe `name: 'Pikachu'` est un raccourci pour `:name => 'Pikachu'`. Les deux formes sont équivalentes.
+- `name:` is the key (a Symbol `:name`), `'Pikachu'` is the value.
+- Key-value pairs are separated by commas.
+- The syntax `name: 'Pikachu'` is a shortcut for `:name => 'Pikachu'`. Both forms are equivalent.
 
-On peut aussi écrire les clés avec la **syntaxe flèche** `=>` :
+You can also write keys with the **rocket syntax** `=>`:
 
 ```ruby
-# Syntaxe flèche (ancienne, mais encore utilisée pour les clés non-Symbol)
+# Rocket syntax (older, but still used for non-Symbol keys)
 pikachu = { :name => 'Pikachu', :type => :electric }
 
-# Avec des clés String (rare, mais possible)
+# With String keys (rare, but possible)
 translations = { 'fire' => 'feu', 'water' => 'eau' }
 ```
 
-- La syntaxe raccourcie `name: valeur` ne fonctionne qu'avec des clés Symbol. Pour les clés String ou Integer, il faut utiliser `=>`.
-- En pratique, on utilise presque toujours des clés Symbol avec la syntaxe raccourcie.
+- The shorthand syntax `name: value` only works with Symbol keys. For String or Integer keys, you must use `=>`.
+- In practice, Symbol keys with the shorthand syntax are used almost all the time.
 
-Un Hash vide se crée avec `{}` :
+An empty Hash is created with `{}`:
 
 ```ruby
 empty = {}
 p empty    # => {}
 ```
 
-## Accéder aux valeurs
+## Accessing values
 
-On accède à une valeur en passant sa clé entre crochets :
+You access a value by passing its key in square brackets:
 
 ```ruby
 pikachu = { name: 'Pikachu', type: :electric, level: 25 }
 
 puts pikachu[:name]     # => Pikachu
 puts pikachu[:level]    # => 25
-puts pikachu[:ability]  # => nil (la clé n'existe pas)
+puts pikachu[:ability]  # => nil (the key does not exist)
 ```
 
-- Si la clé n'existe pas, `[]` retourne `nil` sans erreur. C'est silencieux, ce qui peut être un piège si on fait une faute de frappe.
+- If the key does not exist, `[]` returns `nil` without error. This is silent, which can be a trap if you make a typo.
 
-Pour éviter ce piège, on peut utiliser `.fetch` qui lève une erreur si la clé n'existe pas :
+To avoid this trap, you can use `.fetch`, which raises an error if the key does not exist:
 
 ```ruby
 pikachu = { name: 'Pikachu', type: :electric, level: 25 }
 
 puts pikachu.fetch(:name)              # => Pikachu
-# pikachu.fetch(:ability)              # => Erreur ! KeyError
+# pikachu.fetch(:ability)              # => Error! KeyError
 
-# Avec une valeur par défaut, pas d'erreur
+# With a default value, no error
 puts pikachu.fetch(:ability, 'aucun')  # => aucun
 ```
 
-- `.fetch` sans valeur par défaut provoque une erreur si la clé manque. C'est utile quand l'absence de la clé est un bug qu'on veut détecter.
-- `.fetch(:clé, valeur_par_défaut)` retourne la valeur par défaut si la clé n'existe pas, sans erreur.
+- `.fetch` without a default value raises an error if the key is missing. This is useful when a missing key is a bug you want to detect.
+- `.fetch(:key, default_value)` returns the default value if the key does not exist, without error.
 
-## Ajouter et modifier des entrées
+## Adding and modifying entries
 
 ```ruby
 pikachu = { name: 'Pikachu', type: :electric }
 
-# Ajouter une nouvelle clé
+# Add a new key
 pikachu[:level] = 25
 pikachu[:ability] = :static
 p pikachu               # => {:name=>"Pikachu", :type=>:electric, :level=>25, :ability=>:static}
 
-# Modifier une clé existante
+# Modify an existing key
 pikachu[:level] = 30
 puts pikachu[:level]    # => 30
 ```
 
-- La syntaxe est identique pour ajouter et modifier : `hash[:clé] = valeur`. Si la clé existe, la valeur est remplacée. Sinon, elle est créée.
+- The syntax is the same for adding and modifying: `hash[:key] = value`. If the key exists, the value is replaced. Otherwise, it is created.
 
-## Vérifier et supprimer
+## Checking and deleting
 
 ```ruby
 pikachu = { name: 'Pikachu', type: :electric, level: 25 }
 
-# Vérifier la présence d'une clé
+# Check for the presence of a key
 puts pikachu.key?(:name)      # => true
 puts pikachu.key?(:ability)   # => false
 
-# Taille et vide
+# Size and emptiness
 puts pikachu.size             # => 3
 puts pikachu.empty?           # => false
 puts {}.empty?                # => true
 
-# Supprimer une clé
+# Delete a key
 deleted = pikachu.delete(:level)
-puts deleted                  # => 25 (la valeur supprimée est retournée)
+puts deleted                  # => 25 (the deleted value is returned)
 p pikachu                     # => {:name=>"Pikachu", :type=>:electric}
 ```
 
-- `.key?` vérifie si une clé existe. C'est plus fiable que `hash[:clé]` car une clé peut exister avec la valeur `nil`.
-- `.delete` supprime la paire clé-valeur et retourne la valeur supprimée.
+- `.key?` checks whether a key exists. This is more reliable than `hash[:key]` because a key can exist with the value `nil`.
+- `.delete` removes the key-value pair and returns the deleted value.
 
-## Extraire les clés et les valeurs
+## Extracting keys and values
 
 ```ruby
 pikachu = { name: 'Pikachu', type: :electric, level: 25 }
@@ -124,9 +124,9 @@ p pikachu.keys     # => [:name, :type, :level]
 p pikachu.values   # => ["Pikachu", :electric, 25]
 ```
 
-- `.keys` retourne un Array de toutes les clés. `.values` retourne un Array de toutes les valeurs.
+- `.keys` returns an Array of all keys. `.values` returns an Array of all values.
 
-## Parcourir un Hash
+## Iterating over a Hash
 
 ```ruby
 pikachu = { name: 'Pikachu', type: :electric, level: 25 }
@@ -136,7 +136,7 @@ pikachu.each do |key, value|
 end
 ```
 
-Affiche :
+Displays:
 
 ```
 name : Pikachu
@@ -144,82 +144,82 @@ type : electric
 level : 25
 ```
 
-- `.each` passe deux valeurs au bloc : la clé et la valeur. C'est la différence avec les Array où `.each` ne passe qu'un seul élément.
+- `.each` passes two values to the block: the key and the value. This is the difference from Arrays, where `.each` passes only a single element.
 
-On peut aussi parcourir uniquement les clés ou les valeurs :
+You can also iterate over only the keys or only the values:
 
 ```ruby
 pikachu.each_key { |key| puts key }
 pikachu.each_value { |value| puts value }
 ```
 
-## Filtrer un Hash
+## Filtering a Hash
 
-Comme les Array, les Hash ont `.select` et `.reject` :
+Like Arrays, Hashes have `.select` and `.reject`:
 
 ```ruby
-pokemon = { name: 'Dracaufeu', type: :fire, level: 36, hp: 150 }
+pokemon = { name: 'Charizard', type: :fire, level: 36, hp: 150 }
 
-# Garder seulement les paires dont la valeur est un Integer
+# Keep only pairs whose value is an Integer
 numbers = pokemon.select { |key, value| value.is_a?(Integer) }
 p numbers    # => {:level=>36, :hp=>150}
 ```
 
-- `.select` sur un Hash retourne un **nouveau Hash** (contrairement à `.map` qui retourne un Array).
+- `.select` on a Hash returns a **new Hash** (unlike `.map`, which returns an Array).
 
-## Fusionner deux Hash
+## Merging two Hashes
 
-```ruby live
+```ruby
 base = { hp: 78, attack: 84 }
 bonus = { attack: 100, speed: 120 }
 
 result = base.merge(bonus)
 p result      # => {:hp=>78, :attack=>100, :speed=>120}
-p base        # => {:hp=>78, :attack=>84}  (inchangé)
+p base        # => {:hp=>78, :attack=>84}  (unchanged)
 ```
 
-- `.merge` retourne un **nouveau** Hash. En cas de clé en commun, la valeur du second Hash gagne.
-- L'original n'est pas modifié.
+- `.merge` returns a **new** Hash. In case of a shared key, the value from the second Hash wins.
+- The original is not modified.
 
-## Hash imbriqués
+## Nested Hashes
 
-Un Hash peut contenir d'autres Hash comme valeurs. C'est très courant pour modéliser des données complexes :
+A Hash can contain other Hashes as values. This is very common for modeling complex data:
 
 ```ruby
-dracaufeu = {
-  name: 'Dracaufeu',
+charizard = {
+  name: 'Charizard',
   types: [:fire, :flying],
   stats: { hp: 78, attack: 84, speed: 100 }
 }
 
-puts dracaufeu[:stats][:hp]       # => 78
-puts dracaufeu[:stats][:speed]    # => 100
+puts charizard[:stats][:hp]       # => 78
+puts charizard[:stats][:speed]    # => 100
 ```
 
-- On enchaîne les `[]` pour accéder aux niveaux imbriqués : `hash[:clé1][:clé2]`.
+- You chain `[]` to access nested levels: `hash[:key1][:key2]`.
 
-Le problème arrive quand un niveau intermédiaire n'existe pas :
+The problem arises when an intermediate level does not exist:
 
 ```ruby
-# Si :stats n'existait pas, on aurait une erreur
-# dracaufeu[:moves][:first]    # => Erreur ! NoMethodError (nil n'a pas de [])
+# If :stats did not exist, we would get an error
+# charizard[:moves][:first]    # => Error! NoMethodError (nil has no [])
 ```
 
-Pour éviter ce problème, Ruby offre `.dig` qui navigue en profondeur sans erreur :
+To avoid this problem, Ruby offers `.dig`, which navigates deeply without error:
 
 ```ruby
-puts dracaufeu.dig(:stats, :hp)       # => 78
-puts dracaufeu.dig(:moves, :first)    # => nil (pas d'erreur)
+puts charizard.dig(:stats, :hp)       # => 78
+puts charizard.dig(:moves, :first)    # => nil (no error)
 ```
 
-- `.dig` retourne `nil` si un niveau intermédiaire n'existe pas, au lieu de lever une erreur.
+- `.dig` returns `nil` if an intermediate level does not exist, instead of raising an error.
 
-## Hash avec valeur par défaut
+## Hash with default value
 
-Normalement, accéder à une clé inexistante retourne `nil`. On peut changer ce comportement avec `Hash.new` :
+Normally, accessing a nonexistent key returns `nil`. You can change this behavior with `Hash.new`:
 
-```ruby live
-# Compteur : chaque clé inexistante vaut 0 par défaut
+```ruby
+# Counter: each nonexistent key defaults to 0
 counter = Hash.new(0)
 
 counter[:fire] += 1
@@ -228,20 +228,20 @@ counter[:water] += 1
 
 puts counter[:fire]     # => 2
 puts counter[:water]    # => 1
-puts counter[:grass]    # => 0 (valeur par défaut, la clé n'a pas été créée)
+puts counter[:grass]    # => 0 (default value, the key has not been created)
 p counter               # => {:fire=>2, :water=>1}
 ```
 
-- `Hash.new(0)` crée un Hash dont la valeur par défaut est `0`. Quand on accède à une clé inexistante, on obtient `0` au lieu de `nil`.
-- C'est très pratique pour les compteurs : on peut faire `+= 1` sans vérifier si la clé existe déjà.
+- `Hash.new(0)` creates a Hash whose default value is `0`. When you access a nonexistent key, you get `0` instead of `nil`.
+- This is very handy for counters: you can do `+= 1` without checking whether the key already exists.
 
 ## Conclusion
 
-- Un **Hash** associe des clés à des valeurs. Créer avec `{ clé: valeur }` pour les clés Symbol.
-- `[]` retourne `nil` si la clé manque. `.fetch` lève une erreur ou retourne un défaut explicite.
-- `[]=` ajoute ou modifie une entrée. `.delete` supprime une paire.
-- `.key?` vérifie la présence d'une clé. `.keys` et `.values` retournent des Array.
-- `.each` parcourt les paires clé-valeur. `.select` filtre et retourne un nouveau Hash.
-- `.merge` fusionne deux Hash (le second gagne en cas de conflit).
-- Les Hash imbriqués modélisent les données complexes. `.dig` y navigue sans risque d'erreur.
-- `Hash.new(valeur_par_défaut)` définit la valeur retournée pour les clés inexistantes.
+- A **Hash** associates keys with values. Create with `{ key: value }` for Symbol keys.
+- `[]` returns `nil` if the key is missing. `.fetch` raises an error or returns an explicit default.
+- `[]=` adds or modifies an entry. `.delete` removes a pair.
+- `.key?` checks for the presence of a key. `.keys` and `.values` return Arrays.
+- `.each` iterates over key-value pairs. `.select` filters and returns a new Hash.
+- `.merge` merges two Hashes (the second wins in case of conflict).
+- Nested Hashes model complex data. `.dig` navigates them without risk of error.
+- `Hash.new(default_value)` sets the value returned for nonexistent keys.

@@ -1,259 +1,259 @@
 ---
-title: "Comment utiliser les boucles et les itérateurs en Ruby ?"
-slug: boucles-et-iterateurs
+title: "How to use loops and iterators in Ruby?"
+slug: loops-and-iterators
 sidebar_position: 6
-description: "Ce chapitre présente les outils qui permettent de **répéter** des instructions : les boucles classiques et les itérateurs. On découvre aussi comment lire ce que l'utilisateur tape au clavier."
+description: "This chapter introduces the tools that allow you to **repeat** instructions: classic loops and iterators. We also discover how to read what the user types on the keyboard."
 ---
 
-Ce chapitre présente les outils qui permettent de **répéter** des instructions : les boucles classiques et les itérateurs. On découvre aussi comment lire ce que l'utilisateur tape au clavier.
+This chapter introduces the tools that allow you to **repeat** instructions: classic loops and iterators. We also discover how to read what the user types on the keyboard.
 
-## Principe
+## Principle
 
-On a déjà vu `.each` au chapitre 3 pour parcourir un Array. Mais parfois, on a besoin de répéter du code sans avoir de collection : attendre une action de l'utilisateur, simuler des tours de combat, ou afficher un compte à rebours.
+We already saw `.each` in chapter 3 for iterating over an Array. But sometimes, we need to repeat code without having a collection: waiting for a user action, simulating combat turns, or displaying a countdown.
 
-Ruby propose deux familles d'outils :
+Ruby provides two families of tools:
 
-- **Les boucles** (`while`, `until`, `loop`) : répètent un bloc tant qu'une condition est vraie (ou jusqu'à ce qu'on décide d'arrêter). Utiles quand on ne sait pas à l'avance combien de fois on va boucler.
-- **Les itérateurs** (`times`, `upto`, `downto`, `each`) : parcourent un nombre fixe de fois ou une collection. C'est la manière idiomatique de Ruby.
+- **Loops** (`while`, `until`, `loop`): repeat a block as long as a condition is true (or until we decide to stop). Useful when we don't know in advance how many times we'll loop.
+- **Iterators** (`times`, `upto`, `downto`, `each`): iterate a fixed number of times or over a collection. This is the idiomatic Ruby way.
 
-## Lire une entrée utilisateur
+## Reading user input
 
-Avant de construire des menus, il faut savoir lire ce que l'utilisateur tape. Ruby offre `gets` :
+Before building menus, we need to know how to read what the user types. Ruby provides `gets`:
 
-```ruby
-print 'Quel est ton nom ? '
+~~~ruby
+print 'What is your name? '
 name = gets.chomp
-puts "Bonjour, #{name} !"
-```
+puts "Hello, #{name}!"
+~~~
 
-- `print` affiche du texte **sans** retour à la ligne (contrairement à `puts`). Le curseur reste sur la même ligne, ce qui est pratique pour les questions.
-- `gets` attend que l'utilisateur tape quelque chose et appuie sur Entrée. Il retourne le texte sous forme de String.
-- `.chomp` supprime le retour à la ligne `\n` à la fin. Sans `.chomp`, la String contiendrait un saut de ligne invisible.
+- `print` displays text **without** a newline (unlike `puts`). The cursor stays on the same line, which is convenient for questions.
+- `gets` waits for the user to type something and press Enter. It returns the text as a String.
+- `.chomp` removes the trailing newline `\n`. Without `.chomp`, the String would contain an invisible line break.
 
-Pour lire un nombre, on ajoute `.to_i` :
+To read a number, add `.to_i`:
 
-```ruby
-print 'Niveau du Pokémon : '
+~~~ruby
+print 'Pokémon level: '
 level = gets.chomp.to_i
-puts "Niveau : #{level}"
-```
+puts "Level: #{level}"
+~~~
 
-- `.to_i` convertit la String en Integer. Si l'utilisateur tape autre chose qu'un nombre, `.to_i` retourne 0.
+- `.to_i` converts the String to an Integer. If the user types something other than a number, `.to_i` returns 0.
 
-## La boucle while
+## The while loop
 
-`while` répète un bloc **tant que** la condition est vraie :
+`while` repeats a block **as long as** the condition is true:
 
-```ruby live
+~~~ruby
 level = 1
 
 while level < 5
-  puts "Pikachu est au niveau #{level}"
+  puts "Pikachu is at level #{level}"
   level += 1
 end
-```
+~~~
 
-Affiche :
+Outputs:
 
-```
-Pikachu est au niveau 1
-Pikachu est au niveau 2
-Pikachu est au niveau 3
-Pikachu est au niveau 4
-```
+~~~
+Pikachu is at level 1
+Pikachu is at level 2
+Pikachu is at level 3
+Pikachu is at level 4
+~~~
 
-- La condition `level < 5` est évaluée **avant** chaque tour. Quand `level` atteint 5, la condition devient fausse et la boucle s'arrête.
-- `level += 1` est indispensable. Sans lui, `level` resterait à 1 et la boucle tournerait indéfiniment (boucle infinie). Si ça arrive, appuyer sur Ctrl+C pour interrompre le programme.
+- The condition `level < 5` is evaluated **before** each iteration. When `level` reaches 5, the condition becomes false and the loop stops.
+- `level += 1` is essential. Without it, `level` would stay at 1 and the loop would run forever (infinite loop). If that happens, press Ctrl+C to interrupt the program.
 
-## La boucle until
+## The until loop
 
-`until` est l'inverse de `while` : elle répète **tant que** la condition est **fausse** (autrement dit, **jusqu'à ce que** la condition devienne vraie) :
+`until` is the opposite of `while`: it repeats **as long as** the condition is **false** (in other words, **until** the condition becomes true):
 
-```ruby
+~~~ruby
 hp = 50
 max_hp = 120
 
 until hp >= max_hp
   hp += 10
-  puts "Soin en cours... PV : #{hp}/#{max_hp}"
+  puts "Healing... HP: #{hp}/#{max_hp}"
 end
 
-puts 'Soin terminé !'
-```
+puts 'Healing complete!'
+~~~
 
-- `until hp >= max_hp` se lit : "répéter jusqu'à ce que les PV atteignent le maximum".
-- `until` est parfois plus lisible que `while` quand on pense en termes de "jusqu'à ce que".
+- `until hp >= max_hp` reads as: "repeat until the HP reach the maximum".
+- `until` is sometimes more readable than `while` when thinking in terms of "until".
 
-## La boucle loop
+## The loop loop
 
-`loop` crée une boucle infinie. On en sort avec `break` :
+`loop` creates an infinite loop. You exit it with `break`:
 
-```ruby
+~~~ruby
 loop do
-  print 'Tape "quit" pour sortir : '
+  print 'Type "quit" to exit: '
   input = gets.chomp
 
   break if input == 'quit'
 
-  puts "Tu as tapé : #{input}"
+  puts "You typed: #{input}"
 end
 
-puts 'Sorti de la boucle !'
-```
+puts 'Exited the loop!'
+~~~
 
-- `loop do ... end` tourne indéfiniment jusqu'à ce qu'un `break` soit atteint.
-- `break if input == 'quit'` quitte la boucle quand l'utilisateur tape "quit".
-- C'est le pattern idéal pour les **menus interactifs** : on affiche les options, on lit le choix, on traite, et on recommence.
+- `loop do ... end` runs indefinitely until a `break` is reached.
+- `break if input == 'quit'` exits the loop when the user types "quit".
+- This is the ideal pattern for **interactive menus**: display the options, read the choice, process it, and start again.
 
-## L'itérateur times
+## The times iterator
 
-`times` exécute un bloc un nombre fixe de fois :
+`times` executes a block a fixed number of times:
 
-```ruby
+~~~ruby
 3.times do
-  puts 'Pikachu utilise Tonnerre !'
+  puts 'Pikachu uses Thunderbolt!'
 end
-```
+~~~
 
-On peut aussi récupérer le numéro du tour :
+You can also retrieve the iteration number:
 
-```ruby
+~~~ruby
 5.times do |turn|
-  puts "Tour #{turn + 1}"
+  puts "Turn #{turn + 1}"
 end
-```
+~~~
 
-Affiche :
+Outputs:
 
-```
-Tour 1
-Tour 2
-Tour 3
-Tour 4
-Tour 5
-```
+~~~
+Turn 1
+Turn 2
+Turn 3
+Turn 4
+Turn 5
+~~~
 
-- `|turn|` reçoit le numéro de l'itération, en commençant à **0**. On ajoute 1 pour un affichage humain.
-- `times` est parfait quand on connaît le nombre de répétitions à l'avance.
+- `|turn|` receives the iteration number, starting at **0**. We add 1 for human-readable display.
+- `times` is perfect when you know the number of repetitions in advance.
 
-## Les itérateurs upto et downto
+## The upto and downto iterators
 
-Pour parcourir un intervalle de nombres :
+To iterate over a range of numbers:
 
-```ruby
-# Compter de 1 à 5
+~~~ruby
+# Count from 1 to 5
 1.upto(5) do |level|
-  puts "Niveau #{level}"
+  puts "Level #{level}"
 end
-```
+~~~
 
-```ruby
-# Compte à rebours
+~~~ruby
+# Countdown
 5.downto(1) do |count|
   puts "#{count}..."
 end
-puts 'Évolution !'
-```
+puts 'Evolution!'
+~~~
 
-- `1.upto(5)` parcourt de 1 à 5 inclus, dans l'ordre croissant.
-- `5.downto(1)` parcourt de 5 à 1 inclus, dans l'ordre décroissant.
+- `1.upto(5)` iterates from 1 to 5 inclusive, in ascending order.
+- `5.downto(1)` iterates from 5 to 1 inclusive, in descending order.
 
-## Rappel : each et each_with_index
+## Reminder: each and each_with_index
 
-On a déjà vu `each` au chapitre 3. C'est **la** méthode de parcours en Ruby :
+We already saw `each` in chapter 3. It is **the** iteration method in Ruby:
 
-```ruby live
-team = ['Pikachu', 'Dracaufeu', 'Tortank']
+~~~ruby
+team = ['Pikachu', 'Charizard', 'Blastoise']
 
 team.each { |pokemon| puts "Go, #{pokemon} !" }
 
 team.each_with_index do |pokemon, index|
   puts "#{index + 1}. #{pokemon}"
 end
-```
+~~~
 
-Pour parcourir un Hash (vu au chapitre 4), le bloc reçoit la clé et la valeur :
+To iterate over a Hash (seen in chapter 4), the block receives the key and the value:
 
-```ruby
+~~~ruby
 stats = { hp: 35, attack: 55, defense: 40 }
 
 stats.each do |stat, value|
   puts "#{stat} : #{value}"
 end
-```
+~~~
 
-## La boucle for
+## The for loop
 
-`for` existe en Ruby mais n'est presque jamais utilisée. On la mentionne parce qu'on peut la croiser dans du code ancien :
+`for` exists in Ruby but is almost never used. We mention it because you may encounter it in older code:
 
-```ruby
+~~~ruby
 types = [:fire, :water, :grass]
 
 for type in types
   puts "Type : #{type}"
 end
-```
+~~~
 
-- `for` est du sucre syntaxique pour `each`, mais avec un défaut : la variable `type` continue d'exister après la boucle. Avec `each`, la variable du bloc est locale. C'est pour ça que les développeurs Ruby préfèrent `each`.
+- `for` is syntactic sugar for `each`, but with a drawback: the variable `type` continues to exist after the loop. With `each`, the block variable is local. That is why Ruby developers prefer `each`.
 
-## Contrôle de flux : break et next
+## Flow control: break and next
 
-### break — sortir de la boucle
+### break -- exit the loop
 
-`break` quitte la boucle immédiatement :
+`break` exits the loop immediately:
 
-```ruby
-team = ['Pikachu', 'Dracaufeu', 'Tortank', 'Florizarre']
+~~~ruby
+team = ['Pikachu', 'Charizard', 'Blastoise', 'Venusaur']
 
 team.each do |pokemon|
-  break if pokemon == 'Tortank'
+  break if pokemon == 'Blastoise'
 
-  puts "Vérification de #{pokemon}..."
+  puts "Checking #{pokemon}..."
 end
 
-puts 'Tortank trouvé !'
-```
+puts 'Blastoise found!'
+~~~
 
-Affiche :
+Outputs:
 
-```
-Vérification de Pikachu...
-Vérification de Dracaufeu...
-Tortank trouvé !
-```
+~~~
+Checking Pikachu...
+Checking Charizard...
+Blastoise found!
+~~~
 
-- Dès que `pokemon` vaut `'Tortank'`, `break` arrête le `each`. Les éléments suivants ne sont pas parcourus.
+- As soon as `pokemon` equals `'Blastoise'`, `break` stops the `each`. The remaining elements are not iterated.
 
-### next — passer à l'itération suivante
+### next -- skip to the next iteration
 
-`next` saute le reste du bloc et passe à l'élément suivant :
+`next` skips the rest of the block and moves to the next element:
 
-```ruby
+~~~ruby
 levels = [5, 0, 12, 0, 8]
 
 levels.each do |level|
   next if level == 0
 
-  puts "Pokémon de niveau #{level}"
+  puts "Level #{level} Pokémon"
 end
-```
+~~~
 
-Affiche :
+Outputs:
 
-```
-Pokémon de niveau 5
-Pokémon de niveau 12
-Pokémon de niveau 8
-```
+~~~
+Level 5 Pokémon
+Level 12 Pokémon
+Level 8 Pokémon
+~~~
 
-- `next if level == 0` saute les Pokémon de niveau 0 (KO). Le `puts` n'est pas exécuté pour eux, mais la boucle continue avec les éléments suivants.
+- `next if level == 0` skips Pokemon with level 0 (fainted). The `puts` is not executed for them, but the loop continues with the remaining elements.
 
 ## Conclusion
 
-- `while` répète tant qu'une condition est vraie. `until` répète jusqu'à ce qu'elle le devienne.
-- `loop` avec `break` est le pattern standard pour les menus interactifs.
-- `times` répète un nombre fixe de fois. `upto`/`downto` parcourent un intervalle.
-- `each` est la méthode idiomatique pour parcourir les collections. Préférer `each` à `for`.
-- `break` sort de la boucle. `next` saute à l'itération suivante.
-- `gets.chomp` lit l'entrée utilisateur. `.to_i` la convertit en nombre.
-- `print` affiche sans retour à la ligne (utile pour les questions).
+- `while` repeats as long as a condition is true. `until` repeats until it becomes true.
+- `loop` with `break` is the standard pattern for interactive menus.
+- `times` repeats a fixed number of times. `upto`/`downto` iterate over a range.
+- `each` is the idiomatic method for iterating over collections. Prefer `each` over `for`.
+- `break` exits the loop. `next` skips to the next iteration.
+- `gets.chomp` reads user input. `.to_i` converts it to a number.
+- `print` displays text without a newline (useful for questions).

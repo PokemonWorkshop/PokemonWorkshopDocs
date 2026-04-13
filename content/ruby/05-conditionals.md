@@ -1,248 +1,248 @@
 ---
-title: "Comment utiliser les conditions en Ruby ?"
-slug: conditions
+title: "How to use conditionals in Ruby?"
+slug: conditionals
 sidebar_position: 5
-description: "Ce chapitre présente les **conditions**, le mécanisme qui permet à un programme de prendre des décisions. Selon la situation, le code exécute une branche ou une autre."
+description: "This chapter introduces **conditionals**, the mechanism that allows a program to make decisions. Depending on the situation, the code executes one branch or another."
 ---
 
-Ce chapitre présente les **conditions**, le mécanisme qui permet à un programme de prendre des décisions. Selon la situation, le code exécute une branche ou une autre.
+This chapter introduces **conditionals**, the mechanism that allows a program to make decisions. Depending on the situation, the code executes one branch or another.
 
-## Principe
+## Principle
 
-Jusqu'ici, nos programmes s'exécutaient de haut en bas, ligne par ligne. Mais un programme utile doit pouvoir réagir : si le Pokémon est KO, afficher un message. Si l'attaque est super efficace, doubler les dégâts. C'est le rôle des conditions : tester une situation et agir en conséquence.
+Up until now, our programs ran from top to bottom, line by line. But a useful program needs to be able to react: if the Pokemon is fainted, display a message. If the attack is super effective, double the damage. That is the role of conditionals: test a situation and act accordingly.
 
-## Vrai ou faux en Ruby (truthiness)
+## True or false in Ruby (truthiness)
 
-Avant de voir les conditions, il faut comprendre comment Ruby décide si quelque chose est "vrai" ou "faux".
+Before looking at conditionals, we need to understand how Ruby decides if something is "true" or "false".
 
-La règle est très simple : **seuls `false` et `nil` sont considérés comme faux**. Tout le reste est vrai, même les valeurs qui semblent "vides" dans d'autres langages :
+The rule is very simple: **only `false` and `nil` are considered false**. Everything else is true, even values that seem "empty" in other languages:
 
-```ruby
-# Ces valeurs sont toutes considérées comme vraies
-puts 'oui' if 0          # 0 est vrai !
-puts 'oui' if ''         # une String vide est vraie !
-puts 'oui' if []         # un Array vide est vrai !
+~~~ruby
+# These values are all considered true
+puts 'oui' if 0          # 0 is true!
+puts 'oui' if ''         # an empty String is true!
+puts 'oui' if []         # an empty Array is true!
 
-# Seuls false et nil sont faux
-puts 'oui' if false      # pas affiché
-puts 'oui' if nil         # pas affiché
-```
+# Only false and nil are false
+puts 'oui' if false      # not printed
+puts 'oui' if nil         # not printed
+~~~
 
-- C'est une particularité de Ruby. Dans d'autres langages, `0` ou `""` sont souvent faux. Pas en Ruby.
-- Pour tester si un nombre vaut zéro, on écrit `number == 0`. Pour tester si une String est vide, on utilise `.empty?`.
+- This is a Ruby-specific behavior. In other languages, `0` or `""` are often false. Not in Ruby.
+- To test if a number equals zero, write `number == 0`. To test if a String is empty, use `.empty?`.
 
 ## if / elsif / else
 
-La structure la plus courante pour exécuter du code selon une condition :
+The most common structure for executing code based on a condition:
 
-```ruby live
+~~~ruby
 level = 50
 
 if level >= 100
-  puts 'Niveau maximum atteint !'
+  puts 'Maximum level reached!'
 elsif level >= 50
-  puts 'Pokémon de haut niveau'
+  puts 'High-level Pokémon'
 elsif level >= 20
-  puts 'Pokémon de niveau moyen'
+  puts 'Medium-level Pokémon'
 else
-  puts 'Pokémon de bas niveau'
+  puts 'Low-level Pokémon'
 end
-```
+~~~
 
-- Ruby évalue chaque condition de haut en bas et exécute la **première** qui est vraie.
-- `elsif` (pas `elseif` ni `else if`) ajoute des conditions supplémentaires.
-- `else` s'exécute quand aucune condition précédente n'est vraie. Il est optionnel.
-- Le bloc se termine par `end`.
+- Ruby evaluates each condition from top to bottom and executes the **first** one that is true.
+- `elsif` (not `elseif` or `else if`) adds additional conditions.
+- `else` executes when none of the previous conditions are true. It is optional.
+- The block ends with `end`.
 
-Un `if` simple sans `elsif` ni `else` :
+A simple `if` without `elsif` or `else`:
 
-```ruby
+~~~ruby
 health_points = 0
 
 if health_points <= 0
-  puts 'Le Pokémon est KO !'
+  puts 'The Pokémon is KO!'
 end
-```
+~~~
 
 ## unless
 
-`unless` est l'inverse de `if`. Il exécute le code quand la condition est **fausse** :
+`unless` is the opposite of `if`. It executes the code when the condition is **false**:
 
-```ruby
+~~~ruby
 held_item = nil
 
 unless held_item
-  puts 'Le Pokémon ne tient aucun objet.'
+  puts 'The Pokémon holds no item.'
 end
-```
+~~~
 
-- `unless held_item` veut dire "si `held_item` est faux (c'est-à-dire `nil` ou `false`)".
-- `unless` rend le code plus lisible quand on teste une négation simple. La règle d'or est d'éviter les **doubles négations** : `unless !condition` est déroutant, un simple `if condition` est bien plus clair. `unless` avec `&&` est acceptable tant que la phrase reste facile à comprendre. En revanche, éviter `unless` avec `else` : si on a besoin d'un `else`, c'est qu'un `if` serait plus lisible.
+- `unless held_item` means "if `held_item` is false (i.e., `nil` or `false`)".
+- `unless` makes the code more readable when testing a simple negation. The golden rule is to avoid **double negations**: `unless !condition` is confusing, a simple `if condition` is much clearer. `unless` with `&&` is acceptable as long as the sentence remains easy to understand. However, avoid `unless` with `else`: if you need an `else`, then an `if` would be more readable.
 
-## Forme postfixe (sur une ligne)
+## Postfix form (one-liner)
 
-Quand le code à exécuter tient sur une seule ligne, on peut mettre la condition à la fin :
+When the code to execute fits on a single line, you can put the condition at the end:
 
-```ruby
+~~~ruby
 level = 100
 health_points = 0
 
-puts 'Niveau maximum !' if level >= 100
-puts 'Le Pokémon est KO !' if health_points <= 0
-puts 'Le Pokémon est en forme.' unless health_points <= 0
-```
+puts 'Maximum level!' if level >= 100
+puts 'The Pokémon is KO!' if health_points <= 0
+puts 'The Pokémon is healthy.' unless health_points <= 0
+~~~
 
-- C'est exactement la même chose qu'un `if ... end`, mais plus compact.
-- On lit naturellement : "affiche ce message **si** le niveau est supérieur ou égal à 100".
-- À utiliser uniquement quand le code tient sur une ligne. Pour les blocs plus longs, garder la forme classique.
+- This is exactly the same as an `if ... end`, but more compact.
+- It reads naturally: "print this message **if** the level is greater than or equal to 100".
+- Use it only when the code fits on one line. For longer blocks, use the classic form.
 
 ## case / when
 
-Quand on compare une même valeur à plusieurs possibilités, `case/when` est plus lisible qu'une série de `if/elsif` :
+When comparing the same value against multiple possibilities, `case/when` is more readable than a chain of `if/elsif`:
 
-```ruby live
+~~~ruby
 pokemon_type = :fire
 
 case pokemon_type
 when :fire
-  puts 'Fort contre Plante, faible contre Eau'
+  puts 'Strong against Grass, weak against Water'
 when :water
-  puts 'Fort contre Feu, faible contre Plante'
+  puts 'Strong against Fire, weak against Grass'
 when :grass
-  puts 'Fort contre Eau, faible contre Feu'
+  puts 'Strong against Water, weak against Fire'
 when :electric
-  puts 'Fort contre Eau'
+  puts 'Strong against Water'
 else
-  puts "Type inconnu : #{pokemon_type}"
+  puts "Unknown type: #{pokemon_type}"
 end
-```
+~~~
 
-- `case` prend la valeur à comparer. Chaque `when` teste une possibilité.
-- Un seul `when` s'exécute (pas de "fall-through" comme en C ou JavaScript).
-- `else` est optionnel, il couvre tous les cas non listés.
+- `case` takes the value to compare. Each `when` tests a possibility.
+- Only one `when` executes (no "fall-through" like in C or JavaScript).
+- `else` is optional, it covers all cases not listed.
 
-`case/when` fonctionne aussi avec des **ranges** (intervalles) :
+`case/when` also works with **ranges** (intervals):
 
-```ruby
+~~~ruby
 level = 45
 
 case level
 when 1..30
-  puts 'Bas niveau'
+  puts 'Low level'
 when 31..60
-  puts 'Niveau moyen'
+  puts 'Medium level'
 when 61..100
-  puts 'Haut niveau'
+  puts 'High level'
 end
-```
+~~~
 
-- `1..30` est un Range (intervalle) qui inclut 1 et 30. Ruby vérifie si `level` est dans cet intervalle.
+- `1..30` is a Range (interval) that includes 1 and 30. Ruby checks if `level` falls within this interval.
 
-Et avec des **classes** (types) :
+And with **classes** (types):
 
-```ruby
+~~~ruby
 value = 42
 
 case value
 when Integer
-  puts 'Un nombre entier'
+  puts 'An integer'
 when String
-  puts 'Du texte'
+  puts 'Some text'
 when Symbol
-  puts 'Un symbole'
+  puts 'A symbol'
 end
-```
+~~~
 
-## Les opérateurs de comparaison
+## Comparison operators
 
-```ruby
-puts 50 == 50     # => true   (égal)
-puts 50 != 75     # => true   (différent)
-puts 50 < 75      # => true   (inférieur)
-puts 50 > 75      # => false  (supérieur)
-puts 50 <= 50     # => true   (inférieur ou égal)
-puts 50 >= 75     # => false  (supérieur ou égal)
-```
+~~~ruby
+puts 50 == 50     # => true   (equal)
+puts 50 != 75     # => true   (not equal)
+puts 50 < 75      # => true   (less than)
+puts 50 > 75      # => false  (greater than)
+puts 50 <= 50     # => true   (less than or equal)
+puts 50 >= 75     # => false  (greater than or equal)
+~~~
 
-- `==` compare les **valeurs**. Attention à ne pas confondre avec `=` qui est l'affectation.
+- `==` compares **values**. Be careful not to confuse it with `=` which is assignment.
 
-Il existe aussi l'opérateur "vaisseau spatial" `<=>` qui retourne -1, 0 ou 1 :
+There is also the "spaceship" operator `<=>` which returns -1, 0, or 1:
 
-```ruby
-puts 10 <=> 20    # => -1  (10 est plus petit)
-puts 20 <=> 20    # => 0   (égaux)
-puts 30 <=> 20    # => 1   (30 est plus grand)
-```
+~~~ruby
+puts 10 <=> 20    # => -1  (10 is smaller)
+puts 20 <=> 20    # => 0   (equal)
+puts 30 <=> 20    # => 1   (30 is larger)
+~~~
 
-- `<=>` est utilisé par `.sort` pour comparer les éléments entre eux. On le reverra dans les chapitres suivants.
+- `<=>` is used by `.sort` to compare elements against each other. We will revisit it in later chapters.
 
-## Les opérateurs logiques
+## Logical operators
 
-Pour combiner plusieurs conditions, on utilise `&&` (et), `||` (ou) et `!` (non) :
+To combine multiple conditions, use `&&` (and), `||` (or), and `!` (not):
 
-```ruby
+~~~ruby
 level = 80
 is_legendary = false
 
-# && : les DEUX conditions doivent être vraies
+# && : BOTH conditions must be true
 if level >= 50 && !is_legendary
-  puts 'Pokémon puissant et non légendaire'
+  puts 'Powerful and non-legendary Pokémon'
 end
 
-# || : au moins UNE condition doit être vraie
+# || : at least ONE condition must be true
 if is_legendary || level >= 80
-  puts 'Pokémon rare !'
+  puts 'Rare Pokémon!'
 end
 
-# ! : inverse la valeur
+# ! : inverts the value
 if !is_legendary
-  puts 'Pokémon non légendaire'
+  puts 'Non-legendary Pokémon'
 end
-```
+~~~
 
-- `&&` retourne `true` si les deux côtés sont vrais.
-- `||` retourne `true` si au moins un côté est vrai.
-- `!` inverse : `!true` donne `false`, `!false` donne `true`, `!nil` donne `true`.
+- `&&` returns `true` if both sides are true.
+- `||` returns `true` if at least one side is true.
+- `!` inverts: `!true` gives `false`, `!false` gives `true`, `!nil` gives `true`.
 
-Ruby propose aussi `and`, `or` et `not` qui font la même chose mais avec une priorité plus basse. En pratique, **toujours utiliser `&&`, `||` et `!`** pour éviter les surprises.
+Ruby also provides `and`, `or`, and `not` which do the same thing but with lower precedence. In practice, **always use `&&`, `||`, and `!`** to avoid surprises.
 
-## L'opérateur ||= (ou-égal)
+## The ||= operator (or-equals)
 
-`||=` est un raccourci très courant. Il assigne une valeur uniquement si la variable est `nil` ou `false` :
+`||=` is a very common shortcut. It assigns a value only if the variable is `nil` or `false`:
 
-```ruby
+~~~ruby
 ability = nil
 ability ||= :static
-puts ability    # => static (ability était nil, donc :static a été assigné)
+puts ability    # => static (ability was nil, so :static was assigned)
 
 ability ||= :lightning_rod
-puts ability    # => static (ability avait déjà une valeur, rien ne change)
-```
+puts ability    # => static (ability already had a value, nothing changes)
+~~~
 
-- `ability ||= :static` est équivalent à `ability = ability || :static`.
-- Si `ability` est `nil`, `||` prend la valeur de droite (`:static`). Si `ability` a déjà une valeur, `||` garde celle de gauche.
-- C'est très pratique pour définir des valeurs par défaut.
+- `ability ||= :static` is equivalent to `ability = ability || :static`.
+- If `ability` is `nil`, `||` takes the right-hand value (`:static`). If `ability` already has a value, `||` keeps the left-hand one.
+- This is very useful for defining default values.
 
-## L'opérateur ternaire
+## The ternary operator
 
-Pour choisir entre deux valeurs en une seule ligne :
+To choose between two values in a single line:
 
-```ruby
+~~~ruby
 level = 50
-category = level >= 50 ? 'fort' : 'faible'
+category = level >= 50 ? 'strong' : 'weak'
 puts category    # => fort
-```
+~~~
 
-- `condition ? valeur_si_vrai : valeur_si_faux` est un raccourci pour un `if/else` qui retourne une valeur.
-- À utiliser quand le choix est simple et tient sur une ligne. Pour les cas plus complexes, préférer `if/else`.
+- `condition ? value_if_true : value_if_false` is a shortcut for an `if/else` that returns a value.
+- Use it when the choice is simple and fits on one line. For more complex cases, prefer `if/else`.
 
 ## Conclusion
 
-- En Ruby, seuls `false` et `nil` sont faux. Tout le reste (`0`, `""`, `[]`) est vrai.
-- `if/elsif/else/end` pour les conditions. Le mot-clé est `elsif` (pas `elseif`).
-- `unless` pour les négations simples. Ne pas l'utiliser avec `else` ou des conditions composées.
-- La forme postfixe (`puts 'message' if condition`) est idéale pour les lignes simples.
-- `case/when` compare une valeur à plusieurs possibilités (valeurs, ranges, classes).
-- `==` compare les valeurs. `&&` (et), `||` (ou), `!` (non) combinent les conditions.
-- `||=` assigne une valeur uniquement si la variable est `nil` ou `false`.
-- L'opérateur ternaire `condition ? vrai : faux` choisit entre deux valeurs en une ligne.
+- In Ruby, only `false` and `nil` are false. Everything else (`0`, `""`, `[]`) is true.
+- `if/elsif/else/end` for conditionals. The keyword is `elsif` (not `elseif`).
+- `unless` for simple negations. Do not use it with `else` or compound conditions.
+- The postfix form (`puts 'message' if condition`) is ideal for simple one-liners.
+- `case/when` compares a value against multiple possibilities (values, ranges, classes).
+- `==` compares values. `&&` (and), `||` (or), `!` (not) combine conditions.
+- `||=` assigns a value only if the variable is `nil` or `false`.
+- The ternary operator `condition ? true : false` chooses between two values in one line.

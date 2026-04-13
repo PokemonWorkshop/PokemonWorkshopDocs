@@ -1,76 +1,76 @@
 ---
-title: "Comment gérer les erreurs en Ruby ?"
-slug: gestion-des-erreurs
+title: "How to handle errors in Ruby?"
+slug: error-handling
 sidebar_position: 14
-description: "Ce chapitre présente la **gestion des exceptions**, le mécanisme qui permet de réagir quand quelque chose tourne mal dans un programme. Au lieu de crash silencieux ou de valeurs `nil` inexpliquées, on apprend à lever, capturer et traiter les erreurs proprement."
+description: "This chapter introduces **exception handling**, the mechanism that allows you to react when something goes wrong in a program. Instead of silent crashes or unexplained `nil` values, you will learn how to raise, catch, and handle errors properly."
 ---
 
-Ce chapitre présente la **gestion des exceptions**, le mécanisme qui permet de réagir quand quelque chose tourne mal dans un programme. Au lieu de crash silencieux ou de valeurs `nil` inexpliquées, on apprend à lever, capturer et traiter les erreurs proprement.
+This chapter introduces **exception handling**, the mechanism that allows you to react when something goes wrong in a program. Instead of silent crashes or unexplained `nil` values, you will learn how to raise, catch, and handle errors properly.
 
-## Principe
+## Principle
 
-Imaginons qu'on essaie de charger un fichier de sauvegarde qui n'existe pas, ou qu'un utilisateur entre un niveau négatif pour un Pokémon. Sans gestion d'erreurs, le programme crash avec un message cryptique.
+Imagine trying to load a save file that does not exist, or a user entering a negative level for a Pokemon. Without error handling, the program crashes with a cryptic message.
 
-En Ruby, les erreurs sont des **objets**. Quand quelque chose tourne mal, on **lève** (raise) une exception. Le programme remonte la pile d'appels jusqu'à trouver un bloc `rescue` capable de la capturer. Si aucun `rescue` ne la capture, le programme s'arrête.
+In Ruby, errors are **objects**. When something goes wrong, you **raise** an exception. The program walks back up the call stack until it finds a `rescue` block able to catch it. If no `rescue` catches it, the program stops.
 
-Ce mécanisme sépare le code normal du code de gestion d'erreurs : on écrit le chemin normal, et on traite les cas problématiques dans des blocs dédiés.
+This mechanism separates normal code from error-handling code: you write the happy path, and you handle problematic cases in dedicated blocks.
 
-## Lever une exception avec raise
+## Raising an exception with raise
 
-`raise` interrompt l'exécution et crée un objet exception :
+`raise` interrupts execution and creates an exception object:
 
 ```ruby
-# Forme simple : crée un RuntimeError
-raise 'Pokémon introuvable'
+# Simple form: creates a RuntimeError
+raise 'Pokémon not found'
 
-# Avec une classe spécifique
-raise ArgumentError, 'Le niveau doit être entre 1 et 100'
+# With a specific class
+raise ArgumentError, 'Level must be between 1 and 100'
 ```
 
-- `raise 'message'` crée un `RuntimeError` par défaut.
-- `raise ArgumentError, 'message'` crée une erreur d'un type précis. C'est la forme recommandée car elle permet de capturer les erreurs par type.
-- Une fois levée, l'exception interrompt tout : les lignes suivantes ne sont pas exécutées.
+- `raise 'message'` creates a `RuntimeError` by default.
+- `raise ArgumentError, 'message'` creates an error of a specific type. This is the recommended form because it allows catching errors by type.
+- Once raised, the exception interrupts everything: the following lines are not executed.
 
-## Capturer avec begin...rescue...end
+## Catching with begin...rescue...end
 
-Le bloc `begin...rescue...end` capture les exceptions :
+The `begin...rescue...end` block catches exceptions:
 
-```ruby live
+```ruby
 begin
   level = -5
-  raise ArgumentError, 'Le niveau doit être positif' if level < 1
+  raise ArgumentError, 'Level must be positive' if level < 1
 
-  puts "Niveau : #{level}"
+  puts "Level: #{level}"
 rescue ArgumentError => error
-  puts "Erreur : #{error.message}"
+  puts "Error: #{error.message}"
 end
 
 puts 'Le programme continue normalement.'
 ```
 
-Affiche :
+Outputs:
 
 ```
-Erreur : Le niveau doit être positif
+Error: Level must be positive
 Le programme continue normalement.
 ```
 
-- `rescue ArgumentError => error` capture les `ArgumentError` et stocke l'objet dans `error`.
-- `error.message` retourne le message passé à `raise`.
-- Le code après le `end` s'exécute normalement : le programme ne crash pas.
+- `rescue ArgumentError => error` catches `ArgumentError` exceptions and stores the object in `error`.
+- `error.message` returns the message passed to `raise`.
+- The code after `end` runs normally: the program does not crash.
 
-## rescue dans une méthode
+## rescue inside a method
 
-Quand le `rescue` couvre toute la méthode, on peut se passer de `begin` :
+When the `rescue` covers the entire method, you can omit `begin`:
 
 ```ruby
 def create_pokemon(name, level)
-  raise ArgumentError, 'Le nom ne peut pas être vide' if name.empty?
-  raise ArgumentError, 'Le niveau doit être entre 1 et 100' unless (1..100).include?(level)
+  raise ArgumentError, 'Name cannot be empty' if name.empty?
+  raise ArgumentError, 'Level must be between 1 and 100' unless (1..100).include?(level)
 
   return { name: name, level: level }
 rescue ArgumentError => error
-  puts "Erreur de création : #{error.message}"
+  puts "Creation error: #{error.message}"
   return nil
 end
 
@@ -81,34 +81,34 @@ result = create_pokemon('Pikachu', 25)
 puts result.inspect    # => {:name=>"Pikachu", :level=>25}
 ```
 
-- Le `rescue` s'applique à tout le corps de la méthode.
-- On retourne `nil` dans le `rescue` pour que l'appelant puisse vérifier si la création a réussi.
+- The `rescue` applies to the entire body of the method.
+- We return `nil` in the `rescue` so the caller can check whether the creation succeeded.
 
-## Capturer plusieurs types d'exceptions
+## Catching multiple exception types
 
-On peut enchaîner plusieurs `rescue` pour gérer différents types d'erreurs :
+You can chain multiple `rescue` clauses to handle different types of errors:
 
 ```ruby
 def load_pokemon(name)
-  raise ArgumentError, 'Nom vide' if name.empty?
-  raise RuntimeError, "Pokémon #{name} introuvable" unless name == 'Pikachu'
+  raise ArgumentError, 'Empty name' if name.empty?
+  raise RuntimeError, "Pokémon #{name} not found" unless name == 'Pikachu'
 
   return { name: name, level: 25 }
 rescue ArgumentError => error
-  puts "Argument invalide : #{error.message}"
+  puts "Invalid argument: #{error.message}"
   return nil
 rescue RuntimeError => error
-  puts "Erreur : #{error.message}"
+  puts "Error: #{error.message}"
   return nil
 end
 ```
 
-- Ruby essaie chaque `rescue` dans l'ordre. Le premier qui correspond est exécuté.
-- Toujours placer les exceptions **les plus spécifiques en premier**. Sinon, une clause générale les attraperait toutes.
+- Ruby tries each `rescue` in order. The first one that matches is executed.
+- Always place the **most specific exceptions first**. Otherwise, a general clause would catch them all.
 
-## La hiérarchie des exceptions
+## The exception hierarchy
 
-Les exceptions Ruby forment une hiérarchie de classes (comme l'héritage vu au chapitre 9) :
+Ruby exceptions form a class hierarchy (like the inheritance seen in chapter 9):
 
 ```
 Exception
@@ -117,7 +117,7 @@ Exception
   ScriptError
     SyntaxError
     LoadError
-  StandardError            ← rescue capture ça par défaut
+  StandardError            ← rescue catches this by default
     ArgumentError
     RuntimeError
     TypeError
@@ -129,72 +129,72 @@ Exception
     IndexError
 ```
 
-- `rescue` sans type capture `StandardError` et tous ses descendants. C'est le comportement correct dans 99% des cas.
-- **Ne jamais écrire `rescue Exception`** : cela capture aussi `SignalException` (Ctrl+C), ce qui rend le programme impossible à interrompre.
+- `rescue` without a type catches `StandardError` and all its descendants. This is the correct behavior in 99% of cases.
+- **Never write `rescue Exception`**: this also catches `SignalException` (Ctrl+C), making the program impossible to interrupt.
 
-## retry — réessayer
+## retry — try again
 
-`retry` reprend l'exécution au début du bloc `begin`. Il faut **toujours** un compteur pour éviter les boucles infinies :
+`retry` restarts execution at the beginning of the `begin` block. You must **always** use a counter to avoid infinite loops:
 
 ```ruby
 attempts = 0
 
 begin
   attempts += 1
-  puts "Tentative #{attempts}..."
+  puts "Attempt #{attempts}..."
 
-  # Simuler une erreur aléatoire
-  raise 'Échec du chargement' if rand(3) != 0
+  # Simulate a random error
+  raise 'Loading failed' if rand(3) != 0
 
-  puts 'Chargement réussi !'
+  puts 'Loading succeeded!'
 rescue RuntimeError => error
-  puts "Erreur : #{error.message}"
+  puts "Error: #{error.message}"
   retry if attempts < 3
-  puts 'Abandon après 3 tentatives.'
+  puts 'Giving up after 3 attempts.'
 end
 ```
 
-- `retry` revient au `begin` et réexécute tout le bloc.
-- Sans le compteur `attempts < 3`, la boucle serait infinie en cas d'erreur permanente.
-- `raise` sans argument (seul) dans un `rescue` relève l'exception courante, utile pour abandonner après les tentatives.
+- `retry` goes back to `begin` and re-executes the entire block.
+- Without the `attempts < 3` counter, the loop would be infinite if the error is permanent.
+- `raise` without an argument (alone) inside a `rescue` re-raises the current exception, useful for giving up after all attempts.
 
-## ensure — exécuter quoi qu'il arrive
+## ensure — execute no matter what
 
-Le bloc `ensure` s'exécute **toujours**, qu'une exception ait été levée ou non :
+The `ensure` block **always** executes, whether an exception was raised or not:
 
 ```ruby
 def save(data, filename)
-  puts 'Sauvegarde en cours...'
-  raise 'Erreur de sauvegarde' if data.nil?
+  puts 'Saving in progress...'
+  raise 'Save error' if data.nil?
 
-  puts "Sauvegardé dans #{filename}"
+  puts "Saved to #{filename}"
 rescue RuntimeError => error
-  puts "Échec : #{error.message}"
+  puts "Failure: #{error.message}"
 ensure
-  puts 'Nettoyage terminé.'
+  puts 'Cleanup complete.'
 end
 
 save({ name: 'Pikachu' }, 'save.dat')
 save(nil, 'save.dat')
 ```
 
-Affiche :
+Outputs:
 
 ```
-Sauvegarde en cours...
-Sauvegardé dans save.dat
-Nettoyage terminé.
-Sauvegarde en cours...
-Échec : Erreur de sauvegarde
-Nettoyage terminé.
+Saving in progress...
+Saved to save.dat
+Cleanup complete.
+Saving in progress...
+Failure: Save error
+Cleanup complete.
 ```
 
-- `ensure` s'exécute dans **tous** les cas : après le code normal, après un `rescue`, même après un `return`.
-- C'est l'endroit idéal pour fermer des fichiers, libérer des ressources, ou afficher un message final.
+- `ensure` runs in **all** cases: after normal code, after a `rescue`, even after a `return`.
+- It is the ideal place to close files, release resources, or display a final message.
 
-## Créer ses propres exceptions
+## Creating your own exceptions
 
-Pour les erreurs spécifiques à son programme, on crée des classes qui héritent de `StandardError` :
+For errors specific to your program, create classes that inherit from `StandardError`:
 
 ```ruby
 module Pokedex
@@ -204,56 +204,56 @@ module Pokedex
 end
 ```
 
-On les utilise ensuite comme n'importe quelle exception :
+Then use them like any other exception:
 
 ```ruby
 def add_pokemon(team, pokemon)
-  raise Pokedex::TeamFullError, "L'équipe est pleine (6 max)" if team.size >= 6
-  raise Pokedex::DuplicateError, "#{pokemon} est déjà dans l'équipe" if team.include?(pokemon)
+  raise Pokedex::TeamFullError, "The team is full (6 max)" if team.size >= 6
+  raise Pokedex::DuplicateError, "#{pokemon} is already in the team" if team.include?(pokemon)
 
   team << pokemon
   return team
 end
 
 begin
-  team = ['Pikachu', 'Dracaufeu', 'Tortank', 'Florizarre', 'Dracolosse', 'Ectoplasma']
+  team = ['Pikachu', 'Charizard', 'Blastoise', 'Venusaur', 'Dragonite', 'Gengar']
   add_pokemon(team, 'Mewtwo')
 rescue Pokedex::TeamFullError => error
   puts error.message
 end
 ```
 
-Affiche : `L'équipe est pleine (6 max)`
+Outputs: `The team is full (6 max)`
 
-- Hériter de `StandardError` garantit que `rescue` sans type les capture.
-- Le nom de la classe décrit le problème : `TeamFullError` est plus parlant que `RuntimeError`.
-- Regrouper les exceptions dans un module évite les conflits de noms.
+- Inheriting from `StandardError` ensures that `rescue` without a type catches them.
+- The class name describes the problem: `TeamFullError` is more meaningful than `RuntimeError`.
+- Grouping exceptions inside a module avoids name conflicts.
 
-## Relever une exception
+## Re-raising an exception
 
-`raise` sans argument dans un `rescue` relève l'exception courante. C'est utile pour afficher un message tout en laissant l'erreur remonter :
+`raise` without an argument inside a `rescue` re-raises the current exception. This is useful for logging a message while letting the error propagate:
 
 ```ruby
 def process_pokemon(data)
-  puts "Traitement de #{data[:name]}..."
-  raise 'Données corrompues' if data[:level].nil?
+  puts "Processing #{data[:name]}..."
+  raise 'Corrupted data' if data[:level].nil?
 
   return data
 rescue RuntimeError => error
-  puts "Échec : #{error.message}"
+  puts "Failure: #{error.message}"
   raise
 end
 ```
 
-- `raise` seul relève exactement la même exception. L'appelant devra la capturer à son tour.
+- `raise` alone re-raises the exact same exception. The caller will have to catch it in turn.
 
 ## Conclusion
 
-- `raise` lève une exception. Préférer `raise ClassName, 'message'` pour des erreurs typées.
-- `begin...rescue...end` capture les exceptions. `rescue` dans un `def` fonctionne sans `begin`.
-- Placer les clauses `rescue` les plus spécifiques en premier.
-- Ne **jamais** écrire `rescue Exception`. Capturer `StandardError` ou plus spécifique.
-- `retry` reprend au `begin`. Toujours protéger avec un compteur.
-- `ensure` s'exécute toujours, même après une erreur ou un `return`.
-- Créer des classes d'erreur qui héritent de `StandardError` pour les erreurs métier.
-- `raise` sans argument dans un `rescue` relève l'exception courante.
+- `raise` raises an exception. Prefer `raise ClassName, 'message'` for typed errors.
+- `begin...rescue...end` catches exceptions. `rescue` inside a `def` works without `begin`.
+- Place the most specific `rescue` clauses first.
+- **Never** write `rescue Exception`. Catch `StandardError` or something more specific.
+- `retry` restarts at `begin`. Always protect it with a counter.
+- `ensure` always runs, even after an error or a `return`.
+- Create error classes that inherit from `StandardError` for domain-specific errors.
+- `raise` without an argument inside a `rescue` re-raises the current exception.

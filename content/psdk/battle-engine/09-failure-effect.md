@@ -1,33 +1,34 @@
 ---
-title: "Comment créer un effet à l'échec d'une attaque dans PSDK ?"
-slug: creer-un-effet-a-lechec-dune-attaque
+title: "How to create a move failure effect in PSDK?"
+slug: how-to-create-a-failure-effect
 sidebar_position: 9
-description: "Ce guide explique comment exécuter un effet spécifique lorsqu'une attaque échoue (manque sa cible, est immunisée, etc.), que ce soit depuis l'attaque elle-même ou depuis un effet externe."
+description: "This guide explains how to execute a specific effect when a move fails (misses its target, is immunized, etc.), whether from the move itself or from an external effect."
 ---
 
-## Principe
+## Principle
 
-Certaines attaques ou certains effets déclenchent un comportement lorsqu'une attaque échoue. Par exemple, **Pied Sauté** inflige des dégâts de recul à l'utilisateur si l'attaque rate.
+Some moves or effects trigger a behavior when a move fails. For example, **Jump Kick** deals recoil damage to the user if the move misses.
 
-Ce comportement peut être géré de deux façons :
+This behavior can be handled in two ways:
 
-- **Depuis l'attaque elle-même** : l'attaque définit sa propre réaction à l'échec.
-- **Depuis un effet externe** : un talent, un objet ou un autre effet réagit à l'échec d'une attaque.
+- **From the move itself**: the move defines its own reaction to failure.
+- **From an external effect**: an ability, item, or other effect reacts to a move's failure.
 
-## Raisons d'échec
+## Failure reasons
 
-La méthode `on_move_failure` reçoit un paramètre `reason` qui indique pourquoi l'attaque a échoué :
+The `on_move_failure` method receives a `reason` parameter that indicates why the move failed:
 
-- `:usable_by_user` : l'attaque a échoué dans `move_usable_by_user` (guide 001)
-- `:no_target` : toutes les cibles sont KO (aucune cible valide)
-- `:accuracy` : l'attaque a raté sa cible (jet de précision)
-- `:immunity` : la cible est immunisée à l'attaque (guide 004) ou bien a bloqué l'attaque (guide 002)
+- `:usable_by_user`: the move failed in `move_usable_by_user` (guide 001)
+- `:no_target`: all targets are KO (no valid target available)
+- `:accuracy`: the move missed its target (accuracy check)
+- `:immunity`: the target is immune to the move (guide 004)
+- `:pp`: the move has no PP left (this reason is no longer sent by the system, but remains defined for backward compatibility)
 
-## Depuis l'attaque
+## From the move
 
-Pour définir un comportement à l'échec depuis l'attaque, on override la méthode `on_move_failure` dans la classe de l'attaque.
+To define a failure behavior from the move, override the `on_move_failure` method in the move's class.
 
-### Exemple : Pied Sauté
+### Example: Jump Kick
 
 ```ruby
 # Event called if the move failed
@@ -43,19 +44,19 @@ def on_move_failure(user, targets, reason)
 end
 ```
 
-- La raison `:usable_by_user` est exclue car le recul ne s'applique que si l'attaque a été réellement tentée.
-- `damage_handler.damage_change` est utilisé pour infliger les dégâts de recul via le handler standard.
-- Le message de recul est affiché après l'application des dégâts.
+- The `:usable_by_user` reason is excluded because recoil only applies if the move was actually attempted.
+- `damage_handler.damage_change` is used to deal recoil damage via the standard handler.
+- The recoil message is displayed after the damage is applied.
 
-## Depuis un effet
+## From an effect
 
-Certains effets peuvent réagir à l'échec d'une attaque. Par exemple, un talent ou un objet pourrait déclencher un comportement quand l'attaque de son porteur échoue.
+Some effects can react to a move's failure. For example, an ability or item could trigger a behavior when its holder's move fails.
 
-Pour gérer ce comportement, on utilise la méthode `on_move_failure` dans la classe de l'effet.
+To handle this behavior, use the `on_move_failure` method in the effect's class.
 
-### Exemple : Boost de précision quand l'attaque rate
+### Example: Accuracy boost when a move misses
 
-Cet effet augmente la précision de l'utilisateur d'un cran chaque fois qu'une de ses attaques rate sa cible.
+This effect raises the user's accuracy by one stage each time one of their moves misses its target.
 
 ```ruby
 # Function called when a move fails during its execution
@@ -64,23 +65,24 @@ Cet effet augmente la précision de l'utilisateur d'un cran chaque fois qu'une d
 # @param move [Battle::Move] the move that failed
 # @param reason [Symbol] why the move failed: :usable_by_user, :no_target, :accuracy, :immunity
 def on_move_failure(user, targets, move, reason)
-  return if user != @pokemon || reason != :accuracy
-  return if @logic.stat_change_handler.stat_increasable?(:acc, 1, user, user)
+  return if user != @pokemon
+  return if reason != :accuracy
 
-
-  @logic.stat_change_handler.stat_change(:acc, 1, user, user)
+  @logic.stat_change_handler.stat_change_with_process(:acc, 1, user)
 end
 ```
 
-- On vérifie que l'utilisateur est bien le porteur de l'effet (`@pokemon`).
-- On filtre sur `:accuracy` pour ne réagir qu'aux attaques qui ont raté leur cible (pas les immunités ou l'absence de cible).
+- We check that the user is the effect holder (`@pokemon`).
+- We filter on `:accuracy` to only react when the move missed its target (not immunities or lack of targets).
+- `stat_change_with_process` automatically handles messages and limit checks.
 
 :::note
-**Différence avec la version attaque** : la signature de l'effet reçoit un paramètre `move` supplémentaire car l'effet ne connaît pas automatiquement quelle attaque a échoué.
+**Difference with the move version**: the effect signature receives an additional `move` parameter because the effect does not automatically know which move failed.
 :::
 
 ## Conclusion
 
-- Utilisez `on_move_failure` dans l'attaque pour définir un effet propre à cette attaque quand elle échoue.
-- Utilisez `on_move_failure` dans un effet pour réagir à l'échec de n'importe quelle attaque.
-- Filtrez les raisons d'échec avec le paramètre `reason` pour ne réagir qu'aux cas pertinents.
+- Use `on_move_failure` in the move to define an effect specific to that move when it fails.
+- Use `on_move_failure` in an effect to react to any move's failure.
+- Filter failure reasons with the `reason` parameter to only react to relevant cases.
+- Use the handlers provided by the system (`damage_handler`, `stat_change_handler`, etc.) for standard operations.

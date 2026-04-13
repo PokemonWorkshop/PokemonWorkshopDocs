@@ -1,28 +1,28 @@
 ---
-title: "Et maintenant ?"
-slug: et-maintenant
+title: "What now?"
+slug: what-now
 sidebar_position: 13
-description: "Si vous êtes arrivé jusqu'ici, vous avez toutes les connaissances Ruby nécessaires pour lire et écrire du code dans un projet PSDK :"
+description: "If you have made it this far, you have all the Ruby knowledge needed to read and write code in a PSDK project:"
 ---
 
-Si vous êtes arrivé jusqu'ici, vous avez toutes les connaissances Ruby nécessaires pour lire et écrire du code dans un projet PSDK :
+If you have made it this far, you have all the Ruby knowledge needed to read and write code in a PSDK project:
 
-- **Les fondamentaux** (001-006) : variables, types, chaînes, tableaux, hash, conditions, boucles — les briques de base de tout programme Ruby.
-- **L'architecture** (007-010) : méthodes, classes, héritage, modules — les outils pour structurer du code propre et réutilisable.
-- **Les outils PSDK** (011-012) : prepend pour étendre du code existant sans le casser, Enumerable pour manipuler les collections avec élégance.
+- **The fundamentals** (001-006): variables, types, strings, arrays, hashes, conditions, loops — the building blocks of any Ruby program.
+- **Architecture** (007-010): methods, classes, inheritance, modules — the tools for writing clean, reusable code.
+- **PSDK tools** (011-012): prepend to extend existing code without breaking it, Enumerable to manipulate collections with elegance.
 
-Vous pouvez dès maintenant passer aux tutoriels pratiques :
+You can now move on to the practical tutorials:
 
-- **Divers** : monkey-patching, Git, environnement de développement
-- **UI** : créer des scènes, des compositions, des composants visuels
-- **Battle Engine** : créer des attaques, des talents, des effets de combat
+- **Miscellaneous**: monkey-patching, Git, development environment
+- **UI**: creating scenes, compositions, visual components
+- **Battle Engine**: creating moves, abilities, battle effects
 
-## Pour aller plus loin
+## Going further
 
-Les trois derniers chapitres (013-015) couvrent des sujets utiles mais pas indispensables pour commencer à travailler sur PSDK :
+The last three chapters (013-015) cover topics that are useful but not essential to get started working on PSDK:
 
-- **013 — Gestion des erreurs** : lever et capturer des exceptions, créer ses propres classes d'erreur. Utile quand on écrit du code robuste qui doit gérer les cas limites.
-- **014 — Fichiers et sérialisation** : lire et écrire des fichiers, sauvegarder des objets avec Marshal et JSON. Utile si on travaille sur la persistence des données.
-- **015 — Classes avancées** : surcharge d'opérateurs, Struct, duck typing, method_missing. Utile pour comprendre les mécanismes internes du moteur.
+- **013 — Error handling**: raising and catching exceptions, creating your own error classes. Useful when writing robust code that needs to handle edge cases.
+- **014 — Files and serialization**: reading and writing files, saving objects with Marshal and JSON. Useful if you work on data persistence.
+- **015 — Advanced classes**: operator overloading, Struct, duck typing, method_missing. Useful for understanding the engine's internal mechanisms.
 
-Ces chapitres sont là si vous en avez besoin. Ils ne sont pas obligatoires pour contribuer à PSDK.
+These chapters are there if you need them. They are not required to contribute to PSDK.

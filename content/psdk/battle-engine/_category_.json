@@ -1,7 +1,8 @@
 {
-  "label": "Moteur de Combat",
+  "label": "Battle Engine",
   "position": 2,
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "slug": "/psdk/battle-engine"
   }
 }

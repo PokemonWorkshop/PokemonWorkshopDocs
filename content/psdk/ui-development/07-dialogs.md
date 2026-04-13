@@ -1,24 +1,24 @@
 ---
-title: "Comment utiliser les dialogues de confirmation dans PSDK ?"
-slug: utiliser-les-dialogues-de-confirmation
+title: "How to use confirmation dialogs in PSDK?"
+slug: use-confirmation-dialogs
 sidebar_position: 7
-description: "Ce guide explique comment ajouter de la logique métier à une scène UI en utilisant les dialogues de confirmation et les messages bloquants."
+description: "This guide explains how to add business logic to a UI scene using confirmation dialogs and blocking messages."
 ---
 
-Ce guide explique comment ajouter de la logique métier à une scène UI en utilisant les dialogues de confirmation et les messages bloquants. Il fait suite aux guides 001 à 007 : le lecteur dispose d'une scène Mystery Gift complète avec Composition, inputs clavier et souris, GenericBase et texte multilingue. Ici, on ajoute le fichier Logic.rb au plugin pour gérer la validation des codes, les dialogues de confirmation et la récupération des cadeaux.
+This guide explains how to add business logic to a UI scene using confirmation dialogs and blocking messages. It builds on guides 001 to 007: the reader has a complete Mystery Gift scene with Composition, keyboard and mouse inputs, GenericBase, and i18n text. Here, we add the Logic.rb file to the plugin to handle code validation, confirmation dialogs, and gift claiming.
 
-## Principe
+## Principle
 
-PSDK fournit deux mécanismes pour communiquer avec le joueur :
+PSDK provides two mechanisms for communicating with the player:
 
-- `display_message_and_wait` bloque la game loop et attend la réponse du joueur. Il sert aussi bien pour les messages simples (le joueur valide avec A) que pour les dialogues Oui/Non.
-- `show_win_text` / `hide_win_text` affichent un message dans la barre inférieure sans bloquer la game loop.
+- `display_message_and_wait` blocks the game loop and waits for the player's response. It serves both for simple messages (the player dismisses with A) and for Yes/No dialogs.
+- `show_win_text` / `hide_win_text` display a message in the bottom bar without blocking the game loop.
 
-La logique métier est placée dans un fichier séparé (Logic.rb) qui réouvre la classe de scène. Les méthodes de logique sont appelées depuis les méthodes d'action définies dans Input.rb.
+The business logic is placed in a separate file (Logic.rb) that reopens the scene class. The logic methods are called from the action methods defined in Input.rb.
 
-## Fichier Logic complet
+## Complete Logic file
 
-Le fichier Logic.rb réouvre la classe de scène pour y ajouter la logique métier. Il gère trois responsabilités : ouvrir la saisie de code, valider le code entré, et réclamer le cadeau après confirmation.
+The Logic.rb file reopens the scene class to add the business logic. It handles three responsibilities: opening the code input, validating the entered code, and claiming the gift after confirmation.
 
 ```ruby
 module GamePlay
@@ -68,20 +68,20 @@ module GamePlay
 end
 ```
 
-- `open_code_input` utilise `call_scene` pour ouvrir la scène `GamePlay::NameInput` par-dessus la scène courante. Le bloc capture le code saisi via `scene.return_name`. Si le joueur annule ou laisse le champ vide, la méthode fait un return early.
-- `call_scene` empile une sous-scène par-dessus la scène courante. Le bloc est exécuté à la fermeture de la sous-scène, ce qui permet de récupérer la valeur de retour.
-- `process_code` récupère les données de persistence et valide le code entré. Le `case` dispatch vers trois branches : code invalide, code déjà utilisé, ou code valide.
-- Pour les branches `:invalid` et `:already_claimed`, `display_message_and_wait(message)` affiche un message simple que le joueur valide en appuyant sur A. La game loop est bloquée pendant l'affichage.
-- `claim_gift` affiche un dialogue Oui/Non avec `display_message_and_wait(message, default, choice1, choice2)`. Le premier argument est le message, le deuxième est l'index du choix par défaut, les suivants sont les labels des choix.
-- Le deuxième argument `1` définit le choix par défaut sur Non (index 1). C'est la convention pour les actions destructives : le joueur doit activement choisir Oui pour confirmer.
-- La méthode retourne l'index du choix sélectionné : 0 pour le premier choix (Oui), 1 pour le second (Non). On ne continue que si `choice == 0`.
-- Les textes Oui/Non sont stockés dans le CSV du plugin (`gift_text(TEXT_YES)`, `gift_text(TEXT_NO)`). Il ne faut pas dépendre d'un CSV externe qui pourrait ne pas exister dans le projet du joueur.
-- `format(gift_text(TEXT_RECEIVED), gift_name)` remplace `%s` dans la chaîne par le nom du cadeau. La méthode `format` de Ruby fonctionne comme `sprintf`.
-- `@composition.refresh` met à jour l'affichage après le changement d'état pour refléter le cadeau fraîchement réclamé dans la liste.
+- `open_code_input` uses `call_scene` to open the `GamePlay::NameInput` scene on top of the current scene. The block captures the entered code via `scene.return_name`. If the player cancels or leaves the field empty, the method returns early.
+- `call_scene` pushes a sub-scene on top of the current scene. The block is executed when the sub-scene closes, which allows retrieving the return value.
+- `process_code` retrieves the persistence data and validates the entered code. The `case` dispatches to three branches: invalid code, already claimed code, or valid code.
+- For the `:invalid` and `:already_claimed` branches, `display_message_and_wait(message)` shows a simple message that the player dismisses by pressing A. The game loop is blocked during display.
+- `claim_gift` shows a Yes/No dialog with `display_message_and_wait(message, default, choice1, choice2)`. The first argument is the message, the second is the default choice index, and the remaining are the choice labels.
+- The second argument `1` sets the default choice to No (index 1). This is the convention for destructive actions: the player must actively choose Yes to confirm.
+- The method returns the index of the selected choice: 0 for the first choice (Yes), 1 for the second (No). We only continue if `choice == 0`.
+- The Yes/No texts are stored in the plugin's own CSV (`gift_text(TEXT_YES)`, `gift_text(TEXT_NO)`). Do not rely on an external CSV that may not exist in the player's project.
+- `format(gift_text(TEXT_RECEIVED), gift_name)` replaces `%s` in the string with the gift name. Ruby's `format` method works like `sprintf`.
+- `@composition.refresh` updates the display after the state change to reflect the freshly claimed gift in the list.
 
-## Sous-scène avec call_scene
+## Sub-scene with call_scene
 
-`call_scene` ouvre une scène par-dessus la scène courante. Le bloc reçu est exécuté à la fermeture de la sous-scène.
+`call_scene` opens a scene on top of the current scene. The block is executed when the sub-scene closes.
 
 ```ruby
 # Open the NameInput scene to type a gift code
@@ -96,13 +96,13 @@ def open_code_input
 end
 ```
 
-- La variable `code` est déclarée avant `call_scene` pour être accessible après le bloc. Le bloc assigne la valeur de retour de la sous-scène à cette variable.
-- Les arguments de `call_scene` après la classe de scène sont passés directement au constructeur de `GamePlay::NameInput`. Ici : chaîne vide (valeur initiale), longueur maximale du code, `nil` (pas de Pokémon), et `phrase:` pour le message d'invite.
-- Le guard clause `return if code.nil? || code.empty?` gère le cas où le joueur a annulé la saisie en appuyant sur B dans la scène NameInput.
+- The `code` variable is declared before `call_scene` so it remains accessible after the block. The block assigns the sub-scene's return value to this variable.
+- The arguments to `call_scene` after the scene class are passed directly to the `GamePlay::NameInput` constructor. Here: empty string (initial value), maximum code length, `nil` (no Pokémon), and `phrase:` for the prompt message.
+- The guard clause `return if code.nil? || code.empty?` handles the case where the player cancelled the input by pressing B in the NameInput scene.
 
-## Message simple
+## Simple message
 
-`display_message_and_wait` appelé avec un seul argument affiche un message que le joueur valide avec A.
+`display_message_and_wait` called with a single argument shows a message that the player dismisses with A.
 
 ```ruby
 # Validate and process the entered code
@@ -122,13 +122,13 @@ def process_code(code)
 end
 ```
 
-- `display_message_and_wait(gift_text(TEXT_INVALID))` affiche le message d'erreur et bloque la game loop. Le joueur appuie sur A pour fermer le message, puis la méthode retourne et la scène reprend normalement.
-- Le `case/when` utilise des symboles Ruby (`:invalid`, `:already_claimed`, `:valid`). Ce pattern est clair et extensible si de nouveaux cas de validation sont ajoutés plus tard.
-- Chaque branche d'erreur se contente d'afficher un message. Seule la branche `:valid` déclenche la logique de récupération du cadeau.
+- `display_message_and_wait(gift_text(TEXT_INVALID))` shows the error message and blocks the game loop. The player presses A to close the message, then the method returns and the scene resumes normally.
+- The `case/when` uses Ruby symbols (`:invalid`, `:already_claimed`, `:valid`). This pattern is clear and extensible if new validation cases are added later.
+- Each error branch simply shows a message. Only the `:valid` branch triggers the gift claiming logic.
 
-## Dialogue Oui/Non
+## Yes/No dialog
 
-`display_message_and_wait` avec des arguments supplémentaires affiche un dialogue avec des choix.
+`display_message_and_wait` with additional arguments shows a dialog with choices.
 
 ```ruby
 # Claim a valid gift after confirmation
@@ -144,19 +144,19 @@ def claim_gift(code, mystery_data)
 end
 ```
 
-- `display_message_and_wait(message, default, choice1, choice2)` : le premier argument est le texte du message, le deuxième est l'index du choix sélectionné par défaut, les suivants sont les labels des choix.
-- Avec `default = 1`, le curseur démarre sur Non. Le joueur doit volontairement bouger le curseur pour sélectionner Oui. C'est la convention pour les actions potentiellement destructives.
-- La valeur de retour est l'index du choix sélectionné : 0 pour le premier label (Oui), 1 pour le second (Non).
-- `return unless choice == 0` annule l'opération si le joueur a choisi Non ou a annulé le dialogue.
-- Après récupération du cadeau, `format(gift_text(TEXT_RECEIVED), gift_name)` insère le nom du cadeau dans le message de confirmation via `%s`.
-- `@composition.refresh` reconstruit les éléments visuels pour refléter le nouvel état des données.
+- `display_message_and_wait(message, default, choice1, choice2)`: the first argument is the message text, the second is the default selected choice index, and the remaining are the choice labels.
+- With `default = 1`, the cursor starts on No. The player must deliberately move the cursor to select Yes. This is the convention for potentially destructive actions.
+- The return value is the index of the selected choice: 0 for the first label (Yes), 1 for the second (No).
+- `return unless choice == 0` cancels the operation if the player chose No or dismissed the dialog.
+- After claiming the gift, `format(gift_text(TEXT_RECEIVED), gift_name)` inserts the gift name into the confirmation message via `%s`.
+- `@composition.refresh` rebuilds the visual elements to reflect the new data state.
 
 ## Conclusion
 
-- Utiliser `display_message_and_wait(message)` pour les messages simples que le joueur valide avec A -- la game loop est bloquée pendant l'affichage.
-- Utiliser `display_message_and_wait(message, default, choice1, choice2)` pour les dialogues Oui/Non -- retourne 0 pour le premier choix, 1 pour le second.
-- Toujours définir le choix par défaut sur l'option sûre (généralement Non = index 1) pour les actions destructives.
-- Stocker les textes Oui/Non dans le CSV du plugin plutôt que de dépendre d'un CSV externe.
-- Utiliser `call_scene` avec un bloc pour ouvrir une sous-scène et récupérer sa valeur de retour.
-- Utiliser `format` pour insérer des paramètres dynamiques (`%s`, `%d`) dans les textes traduits.
-- Appeler `@composition.refresh` après un changement d'état pour mettre à jour l'affichage.
+- Use `display_message_and_wait(message)` for simple messages the player dismisses with A -- the game loop is blocked during display.
+- Use `display_message_and_wait(message, default, choice1, choice2)` for Yes/No dialogs -- returns 0 for the first choice, 1 for the second.
+- Always set the default choice to the safe option (usually No = index 1) for destructive actions.
+- Store Yes/No texts in the plugin's own CSV rather than relying on an external CSV.
+- Use `call_scene` with a block to open a sub-scene and retrieve its return value.
+- Use `format` to insert dynamic parameters (`%s`, `%d`) into translated texts.
+- Call `@composition.refresh` after a state change to update the display.

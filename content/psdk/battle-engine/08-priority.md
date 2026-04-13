@@ -1,26 +1,26 @@
 ---
-title: "Comment modifier la priorité d'une attaque dans PSDK ?"
-slug: modifier-la-priorite-dune-attaque
+title: "How to change move priority in PSDK?"
+slug: how-to-change-move-priority
 sidebar_position: 8
-description: "Ce guide explique comment changer dynamiquement la priorité d'une attaque au moment de son utilisation, que ce soit depuis la logique propre de l'attaque ou depuis un effet externe."
+description: "This guide explains how to dynamically change the priority of a move at the time of use, whether from the move's own logic or from an external effect."
 ---
 
-## Principe
+## Principle
 
-La priorité d'une attaque peut être modifiée pour deux raisons distinctes :
+A move's priority can be changed for two distinct reasons:
 
-- **Depuis l'attaque elle-même** : l'attaque recalcule sa priorité en fonction du contexte de combat.
-- **Depuis un effet externe** : un effet actif modifie la priorité de l'attaque avant la détermination de l'ordre du tour.
+- **From the move itself**: the move recalculates its priority based on the battle context.
+- **From an external effect**: an active effect modifies the move's priority before turn order is determined.
 
-Dans les deux cas, la valeur retournée est un `Integer` représentant la priorité finale.
+In both cases, the returned value is an `Integer` representing the final priority.
 
-## Depuis l'attaque
+## From the move
 
-Certaines attaques peuvent modifier leur priorité selon leurs propres règles. Par exemple, l'attaque **Gliss'Herbe** gagne +1 en priorité si le terrain herbu est actif et que le lanceur est au sol.
+Some moves can change their priority based on their own rules. For example, the move **Grassy Glide** gains +1 priority if the grassy terrain is active and the user is grounded.
 
-Pour gérer ce comportement, on override la méthode `priority` dans la classe de l'attaque.
+To handle this behavior, override the `priority` method in the move's class.
 
-### Exemple : Gliss'Herbe
+### Example: Grassy Glide
 
 ```ruby
 # Return the priority of the skill
@@ -35,17 +35,17 @@ def priority(user = nil)
 end
 ```
 
-- `super` récupère la priorité de base définie dans les données de l'attaque.
-- Les conditions sont vérifiées séquentiellement : si l'une échoue, la priorité de base est retournée inchangée.
-- La méthode ajoute +1 à la priorité de base au lieu de retourner une valeur fixe, ce qui respecte les modifications antérieures.
+- `super` retrieves the base priority defined in the move's data.
+- Conditions are checked sequentially: if any fails, the base priority is returned unchanged.
+- The method adds +1 to the base priority instead of returning a fixed value, which respects prior modifications.
 
-## Depuis un effet
+## From an effect
 
-Certains effets peuvent modifier la priorité d'une attaque. Par exemple, le talent **Farceur** donne +1 en priorité aux attaques de statut.
+Some effects can change a move's priority. For example, the ability **Prankster** gives +1 priority to status moves.
 
-Pour gérer ce comportement, on utilise la méthode `on_move_priority_change` dans la classe de l'effet.
+To handle this behavior, use the `on_move_priority_change` method in the effect's class.
 
-### Exemple : Farceur
+### Example: Prankster
 
 ```ruby
 # Function called when we try to check if the effect changes the definitive priority of the move
@@ -61,13 +61,13 @@ def on_move_priority_change(user, priority, move)
 end
 ```
 
-- La première ligne vérifie que l'utilisateur est bien le porteur du talent.
-- La deuxième ligne vérifie que l'attaque est de type statut.
-- Le paramètre `priority` contient la priorité actuelle, potentiellement déjà modifiée par d'autres effets.
-- Le retour `nil` (implicite) laisse la priorité inchangée.
+- The first line checks that the user is the ability holder.
+- The second line checks that the move is a status move.
+- The `priority` parameter contains the current priority, potentially already modified by other effects.
+- Returning `nil` (implicit) leaves the priority unchanged.
 
 ## Conclusion
 
-- Utilisez `priority` si la modification dépend de la logique propre de l'attaque. Retournez un `Integer`.
-- Utilisez `on_move_priority_change` si la modification dépend d'un effet externe. Retournez un `Integer` ou `nil`.
-- Modifiez toujours la priorité de manière relative (`base_priority + 1`) plutôt qu'absolue pour respecter les autres modifications.
+- Use `priority` if the change depends on the move's own logic. Return an `Integer`.
+- Use `on_move_priority_change` if the change depends on an external effect. Return an `Integer` or `nil`.
+- Always modify priority relatively (`base_priority + 1`) rather than absolutely to respect other modifications.

@@ -1,23 +1,23 @@
 ---
-title: "Comment créer un composant SpriteStack dans PSDK ?"
-slug: creer-un-composant-spritestack
+title: "How to create a SpriteStack component in PSDK?"
+slug: create-a-spritestack-component
 sidebar_position: 3
-description: "Ce guide explique comment créer un sous-composant visuel en étendant SpriteStack, en utilisant le plugin Mystery Gift comme exemple concret."
+description: "This guide explains how to create a visual sub-component by extending SpriteStack, using the Mystery Gift plugin as a concrete example."
 ---
 
-Ce guide explique comment créer un sous-composant visuel en étendant SpriteStack, en utilisant le plugin Mystery Gift comme exemple concret. On construit GiftRow, la ligne qui affiche un cadeau réclamé (nom à gauche, code à droite). Il suppose que les guides 001 et 002 ont été lus (le lecteur dispose d'une scène avec une Composition).
+This guide explains how to create a visual sub-component by extending SpriteStack, using the Mystery Gift plugin as a concrete example. We build GiftRow, the row that displays a claimed gift (name on the left, code on the right). It assumes guides 001 and 002 have been read (the reader has a scene with a Composition).
 
-## Principe
+## Principle
 
-Un sous-composant est une classe qui étend SpriteStack et regroupe des sprites liés entre eux : un fond, un ou plusieurs textes, une icône forment ensemble un seul bloc visuel réutilisable.
+A sub-component is a class that extends SpriteStack and groups related sprites together: a background, one or more texts, an icon together form a single reusable visual building block.
 
-Toutes les positions à l'intérieur d'un SpriteStack sont relatives à l'origine du stack, définie par `super(viewport, x, y)`. Le composant ne connaît pas sa position absolue à l'écran — il raisonne uniquement en coordonnées locales.
+All positions inside a SpriteStack are relative to the stack's origin, defined by `super(viewport, x, y)`. The component does not know its absolute position on screen -- it only reasons in local coordinates.
 
-La Composition crée et orchestre les sous-composants. Elle peut les push dans son propre stack via `push_sprite` pour le lifecycle management (dispose automatique), mais chaque sous-composant reste un SpriteStack indépendant avec son propre état interne.
+Composition creates and orchestrates sub-components. It can push them into its own stack via `push_sprite` for lifecycle management (automatic dispose), but each sub-component remains an independent SpriteStack with its own internal state.
 
-## API SpriteStack
+## SpriteStack API
 
-Les méthodes principales pour construire le contenu d'un SpriteStack :
+The key methods for building a SpriteStack's content:
 
 ### add_background
 
@@ -25,7 +25,7 @@ Les méthodes principales pour construire le contenu d'un SpriteStack :
 @background = add_background('mystery_gift/gift_row')
 ```
 
-- `add_background` charge un sprite depuis le cache interface et l'ajoute à la position (0, 0) du stack.
+- `add_background` loads a sprite from the interface cache and adds it at position (0, 0) of the stack.
 
 ### add_sprite
 
@@ -33,8 +33,8 @@ Les méthodes principales pour construire le contenu d'un SpriteStack :
 @icon = add_sprite(120, 6, 'mystery_gift/icon')
 ```
 
-- `add_sprite(x, y, filename)` ajoute un sprite à la position (stack.x + x, stack.y + y).
-- Les coordonnées sont relatives à l'origine du stack.
+- `add_sprite(x, y, filename)` adds a sprite at position (stack.x + x, stack.y + y).
+- Coordinates are relative to the stack's origin.
 
 ### add_text
 
@@ -42,9 +42,9 @@ Les méthodes principales pour construire le contenu d'un SpriteStack :
 @label = add_text(8, 4, 80, 16, 'Hello', color: 10)
 ```
 
-- `add_text(x, y, w, h, text, color: N)` ajoute un texte avec une couleur de la palette.
-- Le paramètre `align` (3e argument positionnel après le texte) contrôle l'alignement : 0 = gauche (par défaut), 1 = centré, 2 = droite.
-- Attention : cette méthode applique le FOY offset (voir section suivante).
+- `add_text(x, y, w, h, text, color: N)` adds text with a palette color.
+- The `align` parameter (3rd positional argument after the text) controls alignment: 0 = left (default), 1 = center, 2 = right.
+- Warning: this method applies the FOY offset (see next section).
 
 ### push_sprite
 
@@ -53,9 +53,9 @@ custom_sprite = Sprite.new(@viewport)
 push_sprite(custom_sprite)
 ```
 
-- `push_sprite(sprite)` ajoute un sprite créé extérieurement dans le stack.
-- Le sprite est ajouté à la liste des enfants sans modification de position.
-- Utile pour intégrer un sous-composant SpriteStack dans le lifecycle d'un parent.
+- `push_sprite(sprite)` adds an externally created sprite to the stack.
+- The sprite is added to the children list without position modification.
+- Useful for integrating a sub-component SpriteStack into a parent's lifecycle.
 
 ### set_rect_div
 
@@ -63,26 +63,26 @@ push_sprite(custom_sprite)
 @background.set_rect_div(0, 0, 2, 1)
 ```
 
-- `set_rect_div(col, row, ncols, nrows)` découpe le bitmap en une grille et affiche une seule cellule.
-- Les arguments sont : colonne, ligne, nombre total de colonnes, nombre total de lignes.
-- Permet de gérer les spritesheets : une image contient plusieurs états visuels, on en affiche un seul à la fois.
+- `set_rect_div(col, row, ncols, nrows)` slices the bitmap into a grid and displays a single cell.
+- The arguments are: column, row, total number of columns, total number of rows.
+- Used for spritesheets: one image contains multiple visual states, only one is displayed at a time.
 
-## Piège du FOY
+## The FOY trap
 
-`add_text` soustrait 2 pixels à la position Y passée en paramètre. FOY signifie Font Offset Y. Concrètement :
+`add_text` subtracts 2 pixels from the Y position passed as parameter. FOY stands for Font Offset Y. In practice:
 
 ```ruby
 # Place the text at y = 18, NOT y = 20
 @label = add_text(10, 20, 80, 16, 'text')
 ```
 
-- L'appel `add_text(10, 20, ...)` place le texte à y = 18, pas à y = 20.
-- Cet offset de 2 pixels est systématique et invisible dans le code.
-- Pour un placement pixel-perfect, il faut toujours en tenir compte : si le texte doit être à y = 20, passer y = 22.
+- The call `add_text(10, 20, ...)` places text at y = 18, not y = 20.
+- This 2-pixel offset is systematic and invisible in the code.
+- For pixel-perfect placement, always account for it: if text should be at y = 20, pass y = 22.
 
-## Piège de visible=
+## The visible= trap
 
-Quand on assigne `visible = true` sur un SpriteStack, la visibilité se propage à TOUS les enfants, y compris ceux qu'on avait volontairement cachés. Si certains enfants doivent rester cachés, il faut override `visible=` :
+Setting `visible = true` on a SpriteStack propagates to ALL children, including ones you intentionally hid. If some children should stay hidden, override `visible=`:
 
 ```ruby
 # Set visibility of the component
@@ -93,13 +93,13 @@ def visible=(value)
 end
 ```
 
-- `super(value)` propage la visibilité à tous les enfants du stack.
-- Ensuite on force `@hidden_sprite.visible = false` pour maintenir le sprite caché.
-- Sans cet override, activer la visibilité du composant rendrait visible des sprites qui ne devraient pas l'être.
+- `super(value)` propagates visibility to all children of the stack.
+- Then `@hidden_sprite.visible = false` is forced to keep the sprite hidden.
+- Without this override, enabling the component's visibility would reveal sprites that should remain hidden.
 
-## Exemple : composant GiftRow
+## Example: GiftRow component
 
-Voici le composant GiftRow complet du plugin Mystery Gift. Il affiche une ligne avec le nom du cadeau à gauche et le code à droite :
+Here is the complete GiftRow component from the Mystery Gift plugin. It displays a row with the gift name on the left and the code on the right:
 
 ```ruby
 module UI
@@ -171,19 +171,19 @@ module UI
 end
 ```
 
-- Le constructeur reçoit un viewport et une position (x, y) -- `super(viewport, x, y, default_cache: :interface)` définit l'origine du stack et le cache de sprites par défaut.
-- `create_background` utilise `add_sprite(0, 0, ...)` au lieu de `add_background` pour pouvoir appeler `set_rect_div` ensuite. Le sprite est une spritesheet 2x1 : deux colonnes (normal et sélectionné), une seule ligne.
-- `set_rect_div(0, 0, 2, 1)` affiche la colonne 0 (état normal). `set_rect_div(1, 0, 2, 1)` affiche la colonne 1 (état sélectionné).
-- `hovered?` délègue le hit-testing au sprite de fond via `simple_mouse_in?` -- le composant possède sa propre logique de détection du survol.
-- `selected=` bascule l'apparence du fond entre les deux colonnes de la spritesheet. Le constructeur appelle `self.selected = false` pour initialiser l'état visuel.
-- `data=` est l'API publique pour mettre à jour le contenu affiché. Il reçoit soit un hash avec `:name` et `:code`, soit nil pour cacher la ligne.
-- `create_name_text` crée le texte aligné à gauche (alignement par défaut) avec la couleur 10 (blanc).
-- `create_code_text` crée le texte aligné à droite en passant `2` comme argument d'alignement, avec la couleur 9 (gris).
-- Le paramètre `nil` entre l'alignement et `color:` correspond au font_id -- nil utilise la police par défaut.
+- The constructor receives a viewport and a position (x, y) -- `super(viewport, x, y, default_cache: :interface)` sets the stack's origin and the default sprite cache.
+- `create_background` uses `add_sprite(0, 0, ...)` instead of `add_background` so that `set_rect_div` can be called afterward. The sprite is a 2x1 spritesheet: two columns (normal and selected), one row.
+- `set_rect_div(0, 0, 2, 1)` displays column 0 (normal state). `set_rect_div(1, 0, 2, 1)` displays column 1 (selected state).
+- `hovered?` delegates hit-testing to the background sprite via `simple_mouse_in?` -- the component owns its own hover detection logic.
+- `selected=` toggles the background appearance between the two spritesheet columns. The constructor calls `self.selected = false` to initialize the visual state.
+- `data=` is the public API for updating the displayed content. It receives either a hash with `:name` and `:code`, or nil to hide the row.
+- `create_name_text` creates left-aligned text (default alignment) with color 10 (white).
+- `create_code_text` creates right-aligned text by passing `2` as the alignment argument, with color 9 (grey).
+- The `nil` parameter between alignment and `color:` corresponds to the font_id -- nil uses the default font.
 
-## Intégration dans Composition
+## Integration in Composition
 
-La Composition crée les instances de GiftRow et les intègre dans son lifecycle :
+Composition creates GiftRow instances and integrates them into its lifecycle:
 
 ```ruby
 # Create the gift rows
@@ -195,17 +195,17 @@ def create_gift_rows
 end
 ```
 
-- `Array.new(VISIBLE_ROWS)` crée un nombre fixe de lignes, positionnées verticalement avec un espacement régulier (`GIFT_ROW_PITCH`).
-- Chaque GiftRow est créé avec `@viewport` et des coordonnées calculées -- le sous-composant ne connaît pas sa position dans la liste.
-- `push_sprite(row)` ajoute le sous-composant dans le stack de la Composition pour le lifecycle management : quand la Composition est dispose, les GiftRow le sont aussi automatiquement.
-- La Composition expose ensuite des méthodes de recherche comme `find_hovered_row_index` pour que la scène puisse interroger l'état des sous-composants sans les manipuler directement.
+- `Array.new(VISIBLE_ROWS)` creates a fixed number of rows, positioned vertically with regular spacing (`GIFT_ROW_PITCH`).
+- Each GiftRow is created with `@viewport` and computed coordinates -- the sub-component does not know its position in the list.
+- `push_sprite(row)` adds the sub-component to Composition's stack for lifecycle management: when Composition is disposed, the GiftRows are automatically disposed too.
+- Composition then exposes finder methods like `find_hovered_row_index` so the scene can query sub-component state without manipulating them directly.
 
 ## Conclusion
 
-- Un sous-composant étend SpriteStack et regroupe des sprites liés entre eux (fond, textes, icônes).
-- Toutes les positions internes sont relatives à l'origine du stack, définie dans `super(viewport, x, y)`.
-- Utiliser `set_rect_div(col, row, ncols, nrows)` pour les spritesheets : une seule image contient plusieurs états visuels.
-- `add_text` applique un FOY offset de 2 pixels -- en tenir compte pour les placements pixel-perfect.
-- `visible=` propage à tous les enfants -- override si certains doivent rester cachés.
-- Le sous-composant possède son propre hit-testing via `simple_mouse_in?` et expose une API publique (`data=`, `selected=`) pour que la Composition le pilote.
-- La Composition orchestre les sous-composants : elle les crée, les stocke, et expose des finder methods pour la scène.
+- A sub-component extends SpriteStack and groups related sprites together (background, texts, icons).
+- All internal positions are relative to the stack's origin set in `super(viewport, x, y)`.
+- Use `set_rect_div(col, row, ncols, nrows)` for spritesheets: one image contains multiple visual states.
+- `add_text` applies a FOY offset of 2 pixels -- account for it in pixel-perfect layouts.
+- `visible=` propagates to all children -- override if some must stay hidden.
+- The sub-component owns its hit-testing via `simple_mouse_in?` and exposes a public API (`data=`, `selected=`) so Composition can drive it.
+- Composition orchestrates sub-components: it creates them, stores them, and exposes finder methods for the scene.

@@ -1,21 +1,17 @@
 ---
 slug: /
 sidebar_position: 0
-title: Pokémon Workshop Docs
+title: "Pokémon Workshop Docs"
+description: "Centralized documentation for the Pokémon Workshop ecosystem: PSDK tutorials, Ruby course, RPG Maker XP guides, and Pokémon Studio references."
 ---
 
-# Pokémon Workshop Docs
+Centralized documentation for the Pokémon Workshop ecosystem: PSDK tutorials, Ruby course, RPG Maker XP guides, and Pokémon Studio references.
 
-Bienvenue sur la documentation centralisée de l'écosystème PSDK.
+## Table of Contents
 
-## Sommaire
-
-| Section                                       | Description                                                      |
-| --------------------------------------------- | ---------------------------------------------------------------- |
-| [Démarrage](category/getting-started)         | Configurez votre environnement, Git et le monkey-patching PSDK.  |
-| [Pokémon Studio](category/pokemon-studio)     | Guides pour Pokémon Studio.                                      |
-| [PSDK](category/psdk)                         | Développement UI et moteur de combat.                            |
-| [Tiled](category/tiled)                       | Guides pour l'éditeur de cartes Tiled.                           |
-| [RPG Maker](category/rpg-maker-xp)            | Apprenez les bases de RPG Maker XP et son utilisation avec PSDK. |
-| [Ruby](category/ruby)                         | Un cours complet de Ruby orienté PSDK, à suivre dans l'ordre.    |
-| [Divers](category/divers)                     | Guides divers et ressources complémentaires.                     |
+| Section                                        | Description                                                       |
+| ---------------------------------------------- | ----------------------------------------------------------------- |
+| [Getting Started](/getting-started)   | Set up your environment, Git and PSDK monkey-patching.            |
+| [PSDK](/psdk)                         | UI development and battle engine.                                 |
+| [RPG Maker XP](/rpg-maker-xp)         | Learn the basics of RPG Maker XP and how it integrates with PSDK. |
+| [Ruby](/ruby)                         | A complete Ruby course oriented towards PSDK, to follow in order. |

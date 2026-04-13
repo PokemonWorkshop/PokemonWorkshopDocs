@@ -1,21 +1,21 @@
 ---
-title: "Comment modifier la formule de calcul des dégâts d'une attaque dans PSDK ?"
-slug: modifier-la-formule-de-degats
+title: "How to change the damage formula in PSDK?"
+slug: how-to-change-the-damage-formula
 sidebar_position: 11
-description: "Ce guide explique comment remplacer la formule de calcul des dégâts d'une attaque pour des cas spéciaux comme les dégâts fixes."
+description: "This guide explains how to replace the damage calculation formula of a move for special cases like fixed damage."
 ---
 
-## Principe
+## Principle
 
-La formule de calcul des dégâts est définie dans la méthode `damages`. Par défaut, elle utilise la formule standard de Pokémon (puissance, attaque, défense, STAB, efficacité, etc.).
+The damage calculation formula is defined in the `damages` method. By default, it uses the standard Pokemon formula (power, attack, defense, STAB, effectiveness, etc.).
 
-Certaines attaques nécessitent de remplacer entièrement cette formule. Par exemple, **Draco-Rage** inflige toujours 40 PV de dégâts fixes, indépendamment des stats.
+Some moves require replacing this formula entirely. For example, **Dragon Rage** always deals a fixed 40 HP of damage, regardless of stats.
 
-## Remplacer la formule complète
+## Replacing the complete formula
 
-Pour gérer ce comportement, on override la méthode `damages` dans la classe de l'attaque.
+To handle this behavior, override the `damages` method in the move's class.
 
-### Exemple : Attaques à dégâts fixes
+### Example: Fixed damage moves
 
 ```ruby
 # Fixed damage values for specific moves
@@ -38,26 +38,27 @@ def damages(user, target)
 end
 ```
 
-- `@critical = false` désactive le coup critique pour cette attaque.
-- `@effectiveness = 1` force l'efficacité à neutre (pas de "super efficace" sur des dégâts fixes).
+- `@critical = false` disables critical hits for this move.
+- `@effectiveness = 1` forces effectiveness to neutral (no "super effective" on fixed damage).
+- `FIXED_DAMAGE_VALUES` allows easily adding other fixed damage moves via monkey patch.
 
-## Modifier des sous-étapes de la formule
+## Modifying sub-steps of the formula
 
-Si vous ne souhaitez pas remplacer la formule complète mais ajuster une étape spécifique, plusieurs méthodes internes à `damages` peuvent être overridées :
+If you don't want to replace the complete formula but adjust a specific step, several internal methods within `damages` can be overridden:
 
-- `calc_critical_hit` : calcul du coup critique
-- `calc_sp_atk` : stat d'attaque (physique ou spéciale)
-- `calc_sp_def` : stat de défense (physique ou spéciale)
-- `calc_mod1` : premier modificateur (pré-critique)
-- `calc_ch` : multiplicateur de coup critique
-- `calc_mod2` : deuxième modificateur (post-critique)
-- `calc_stab` : bonus STAB (Same Type Attack Bonus)
-- `calc_mod3` : troisième modificateur (post-STAB)
+- `calc_critical_hit`: critical hit calculation
+- `calc_sp_atk`: attack stat (physical or special)
+- `calc_sp_def`: defense stat (physical or special)
+- `calc_mod1`: first modifier (pre-critical)
+- `calc_ch`: critical hit multiplier
+- `calc_mod2`: second modifier (post-critical)
+- `calc_stab`: STAB bonus (Same Type Attack Bonus)
+- `calc_mod3`: third modifier (post-STAB)
 
-Certaines de ces méthodes appellent à leur tour des hooks accessibles depuis les effets.
+Some of these methods in turn call hooks accessible from effects.
 
 ## Conclusion
 
-- Utilisez `damages` pour remplacer entièrement la formule de calcul des dégâts.
-- Utilisez les sous-méthodes (`calc_critical_hit`, `calc_stab`, etc.) pour modifier une étape spécifique de la formule standard.
-- Pour les dégâts fixes, pensez à désactiver le critique (`@critical = false`) et l'efficacité (`@effectiveness = 1`).
+- Use `damages` to entirely replace the damage calculation formula.
+- Use the sub-methods (`calc_critical_hit`, `calc_stab`, etc.) to modify a specific step of the standard formula.
+- For fixed damage, remember to disable criticals (`@critical = false`) and effectiveness (`@effectiveness = 1`).

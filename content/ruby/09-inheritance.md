@@ -1,27 +1,27 @@
 ---
-title: "Comment utiliser l'héritage en Ruby ?"
-slug: heritage
+title: "How to use inheritance in Ruby?"
+slug: inheritance
 sidebar_position: 9
-description: "Ce chapitre présente l'**héritage**, le mécanisme qui permet à une classe de reprendre tout ce qu'une autre classe définit et d'y ajouter ses propres spécificités."
+description: "This chapter introduces **inheritance**, the mechanism that allows a class to take everything another class defines and add its own specifics on top."
 ---
 
-Ce chapitre présente l'**héritage**, le mécanisme qui permet à une classe de reprendre tout ce qu'une autre classe définit et d'y ajouter ses propres spécificités.
+This chapter introduces **inheritance**, the mechanism that allows a class to take everything another class defines and add its own specifics on top.
 
-## Principe
+## Principle
 
-On a créé une classe `Pokemon` au chapitre 8. Mais tous les Pokémon ne sont pas identiques : un Pokémon sauvage a une zone d'apparition et un taux de capture, un Pokémon de dresseur a un propriétaire et peut-être un surnom.
+We created a `Pokemon` class in chapter 8. But not all Pokemon are the same: a wild Pokemon has a spawn area and a catch rate, a trainer's Pokemon has an owner and possibly a nickname.
 
-On pourrait copier-coller la classe `Pokemon` et la modifier pour chaque cas, mais ce serait du gaspillage. Si on corrige un bug dans `Pokemon`, il faudrait le corriger dans toutes les copies.
+We could copy-paste the `Pokemon` class and modify it for each case, but that would be wasteful. If we fix a bug in `Pokemon`, we would have to fix it in all the copies.
 
-L'**héritage** résout ce problème. On crée une classe **enfant** qui **hérite** de la classe **parent**. L'enfant reçoit automatiquement toutes les méthodes et attributs du parent, et peut en ajouter ou en modifier.
+**Inheritance** solves this problem. We create a **child** class that **inherits** from the **parent** class. The child automatically receives all methods and attributes from the parent, and can add or modify them.
 
-On dit que `WildPokemon` **est un** `Pokemon` avec des propriétés supplémentaires. C'est la relation "est un" qui guide l'héritage.
+We say that `WildPokemon` **is a** `Pokemon` with additional properties. It is the "is a" relationship that guides inheritance.
 
-## Hériter d'une classe
+## Inheriting from a class
 
-La syntaxe est `class Enfant < Parent` :
+The syntax is `class Child < Parent`:
 
-```ruby live
+```ruby
 class Pokemon
   attr_reader :name, :level
 
@@ -31,7 +31,7 @@ class Pokemon
   end
 
   def to_s
-    return "#{@name} Niv.#{@level}"
+    return "#{@name} Lvl.#{@level}"
   end
 
   def cry
@@ -49,19 +49,19 @@ class WildPokemon < Pokemon
 end
 
 wild = WildPokemon.new('Rattata', 3, 'Route 1')
-puts wild           # => Rattata Niv.3
+puts wild           # => Rattata Lvl.3
 puts wild.name      # => Rattata
 puts wild.area      # => Route 1
 puts wild.cry       # => Rattata !
 ```
 
-- `class WildPokemon < Pokemon` : `WildPokemon` hérite de `Pokemon`. Il reçoit `name`, `level`, `to_s`, `cry` — tout ce que `Pokemon` définit.
-- `super(name, level)` dans `initialize` appelle le constructeur du parent. Sans cet appel, `@name` et `@level` ne seraient pas initialisés.
-- `@area` est un attribut propre à `WildPokemon`. Le parent `Pokemon` ne le connaît pas.
+- `class WildPokemon < Pokemon`: `WildPokemon` inherits from `Pokemon`. It receives `name`, `level`, `to_s`, `cry` — everything that `Pokemon` defines.
+- `super(name, level)` in `initialize` calls the parent's constructor. Without this call, `@name` and `@level` would not be initialized.
+- `@area` is an attribute specific to `WildPokemon`. The parent `Pokemon` does not know about it.
 
-## super — appeler la méthode du parent
+## super — calling the parent's method
 
-`super` est le mot-clé qui appelle la méthode du parent portant le **même nom**. Il existe trois formes :
+`super` is the keyword that calls the parent's method with the **same name**. There are three forms:
 
 ```ruby
 class Pokemon
@@ -73,26 +73,26 @@ end
 
 class WildPokemon < Pokemon
   def initialize(name, level, area)
-    # super avec des arguments : transmet exactement ces arguments au parent
+    # super with arguments: passes exactly these arguments to the parent
     super(name, level)
     @area = area
   end
 end
 ```
 
-Les trois formes de `super` :
+The three forms of `super`:
 
-- `super(name, level)` : transmet exactement les arguments spécifiés. C'est la forme la plus courante et la plus explicite.
-- `super` (sans parenthèses) : transmet **tous** les arguments reçus par la méthode courante, tels quels. Pratique quand l'enfant reçoit les mêmes arguments que le parent.
-- `super()` (parenthèses vides) : ne transmet **aucun** argument. Utile quand le parent n'attend rien.
+- `super(name, level)`: passes exactly the specified arguments. This is the most common and most explicit form.
+- `super` (without parentheses): passes **all** the arguments received by the current method, as-is. Handy when the child receives the same arguments as the parent.
+- `super()` (empty parentheses): passes **no** arguments. Useful when the parent expects nothing.
 
-Attention : confondre `super` et `super()` est une source fréquente de bugs. Si le parent attend des arguments et qu'on écrit `super()`, Ruby lèvera une erreur.
+Beware: confusing `super` and `super()` is a common source of bugs. If the parent expects arguments and you write `super()`, Ruby will raise an error.
 
-## Surcharger une méthode
+## Overriding a method
 
-L'enfant peut **redéfinir** une méthode du parent pour changer son comportement :
+The child can **redefine** a parent method to change its behavior:
 
-```ruby live
+```ruby
 class Pokemon
   attr_reader :name, :level
 
@@ -102,7 +102,7 @@ class Pokemon
   end
 
   def to_s
-    return "#{@name} Niv.#{@level}"
+    return "#{@name} Lvl.#{@level}"
   end
 
   def cry
@@ -118,28 +118,28 @@ class WildPokemon < Pokemon
     @area = area
   end
 
-  # Surcharge : enrichit l'affichage du parent
+  # Override: enriches the parent's display
   def to_s
-    return "#{super} [Sauvage - #{@area}]"
+    return "#{super} [Wild - #{@area}]"
   end
 
-  # Surcharge : remplace complètement le comportement du parent
+  # Override: completely replaces the parent's behavior
   def cry
-    return "Un #{@name} sauvage apparaît !"
+    return "A wild #{@name} appears!"
   end
 end
 
 wild = WildPokemon.new('Rattata', 3, 'Route 1')
-puts wild       # => Rattata Niv.3 [Sauvage - Route 1]
-puts wild.cry   # => Un Rattata sauvage apparaît !
+puts wild       # => Rattata Lvl.3 [Wild - Route 1]
+puts wild.cry   # => A wild Rattata appears!
 ```
 
-- `to_s` appelle `super` pour récupérer l'affichage du parent (`"Rattata Niv.3"`) et y ajoute des informations. C'est la surcharge par **enrichissement**.
-- `cry` ne fait pas appel à `super`. Le comportement du parent est entièrement remplacé. C'est la surcharge par **remplacement**.
+- `to_s` calls `super` to retrieve the parent's display (`"Rattata Lvl.3"`) and adds information to it. This is override by **enrichment**.
+- `cry` does not call `super`. The parent's behavior is entirely replaced. This is override by **replacement**.
 
-On choisit l'un ou l'autre selon le besoin. L'enrichissement est plus courant car il évite de dupliquer la logique du parent.
+You choose one or the other depending on the need. Enrichment is more common because it avoids duplicating the parent's logic.
 
-## Un second enfant
+## A second child
 
 ```ruby
 class TrainerPokemon < Pokemon
@@ -151,24 +151,24 @@ class TrainerPokemon < Pokemon
   end
 
   def to_s
-    return "#{super} [Dresseur : #{@trainer_name}]"
+    return "#{super} [Trainer: #{@trainer_name}]"
   end
 
   def cry
-    return "#{@trainer_name} envoie #{@name} !"
+    return "#{@trainer_name} sends out #{@name}!"
   end
 end
 
-trainer_pokemon = TrainerPokemon.new('Dracaufeu', 36, 'Red')
-puts trainer_pokemon       # => Dracaufeu Niv.36 [Dresseur : Red]
-puts trainer_pokemon.cry   # => Red envoie Dracaufeu !
+trainer_pokemon = TrainerPokemon.new('Charizard', 36, 'Red')
+puts trainer_pokemon       # => Charizard Lvl.36 [Trainer: Red]
+puts trainer_pokemon.cry   # => Red sends out Charizard!
 ```
 
-- `TrainerPokemon` et `WildPokemon` héritent tous les deux de `Pokemon` mais ajoutent des comportements différents. C'est le **polymorphisme** : le même appel (`cry`) produit un résultat différent selon la classe de l'objet.
+- `TrainerPokemon` and `WildPokemon` both inherit from `Pokemon` but add different behaviors. This is **polymorphism**: the same call (`cry`) produces a different result depending on the object's class.
 
-## Héritage en chaîne
+## Chain inheritance
 
-Une classe enfant peut elle-même être parent d'une autre classe :
+A child class can itself be the parent of another class:
 
 ```ruby
 class LegendaryPokemon < WildPokemon
@@ -180,36 +180,36 @@ class LegendaryPokemon < WildPokemon
   end
 
   def to_s
-    return "#{super} | Attaque signature : #{@signature_move}"
+    return "#{super} | Signature move: #{@signature_move}"
   end
 end
 
-mewtwo = LegendaryPokemon.new('Mewtwo', 70, 'Grotte Azurée', 'Frappe Psy')
+mewtwo = LegendaryPokemon.new('Mewtwo', 70, 'Azure Cave', 'Psychic Strike')
 puts mewtwo
-# => Mewtwo Niv.70 [Sauvage - Grotte Azurée] | Attaque signature : Frappe Psy
+# => Mewtwo Lvl.70 [Wild - Azure Cave] | Signature move: Psychic Strike
 ```
 
-- `LegendaryPokemon` hérite de `WildPokemon`, qui hérite de `Pokemon`. La chaîne `super` remonte automatiquement.
-- `to_s` appelle `super` qui appelle le `to_s` de `WildPokemon`, qui appelle lui-même le `to_s` de `Pokemon`. Chaque niveau ajoute ses informations.
+- `LegendaryPokemon` inherits from `WildPokemon`, which inherits from `Pokemon`. The `super` chain goes up automatically.
+- `to_s` calls `super` which calls `WildPokemon`'s `to_s`, which itself calls `Pokemon`'s `to_s`. Each level adds its own information.
 
-## Inspecter la hiérarchie
+## Inspecting the hierarchy
 
-Ruby offre plusieurs outils pour examiner les relations entre classes :
+Ruby offers several tools to examine relationships between classes:
 
 ```ruby
-mewtwo = LegendaryPokemon.new('Mewtwo', 70, 'Grotte Azurée', 'Frappe Psy')
+mewtwo = LegendaryPokemon.new('Mewtwo', 70, 'Azure Cave', 'Psychic Strike')
 
-# is_a? vérifie la classe ET tous ses ancêtres
+# is_a? checks the class AND all its ancestors
 puts mewtwo.is_a?(LegendaryPokemon)           # => true
 puts mewtwo.is_a?(WildPokemon)                # => true
 puts mewtwo.is_a?(Pokemon)                    # => true
 puts mewtwo.is_a?(TrainerPokemon)             # => false
 
-# instance_of? vérifie UNIQUEMENT la classe exacte
+# instance_of? checks ONLY the exact class
 puts mewtwo.instance_of?(LegendaryPokemon)    # => true
 puts mewtwo.instance_of?(Pokemon)             # => false
 
-# Inspection de la hiérarchie
+# Hierarchy inspection
 puts mewtwo.class                             # => LegendaryPokemon
 puts LegendaryPokemon.superclass              # => WildPokemon
 puts WildPokemon.superclass                   # => Pokemon
@@ -217,25 +217,25 @@ p LegendaryPokemon.ancestors
 # => [LegendaryPokemon, WildPokemon, Pokemon, Object, ...]
 ```
 
-- `.is_a?` est le plus utilisé : il vérifie si l'objet est une instance de la classe **ou de l'un de ses ancêtres**.
-- `.instance_of?` est strict : uniquement la classe exacte.
-- `.superclass` retourne le parent direct d'une classe. On l'appelle sur la **classe**, pas sur un objet.
-- `.ancestors` retourne la chaîne complète de la hiérarchie. C'est un outil utile pour comprendre dans quel ordre Ruby cherche les méthodes.
+- `.is_a?` is the most used: it checks if the object is an instance of the class **or any of its ancestors**.
+- `.instance_of?` is strict: only the exact class.
+- `.superclass` returns the direct parent of a class. It is called on the **class**, not on an object.
+- `.ancestors` returns the full hierarchy chain. It is a useful tool to understand in what order Ruby looks for methods.
 
-## Héritage vs composition
+## Inheritance vs composition
 
-L'héritage n'est pas toujours le bon outil. La règle est simple :
+Inheritance is not always the right tool. The rule is simple:
 
-- **Héritage** quand la relation est "**est un**" : un `WildPokemon` **est un** `Pokemon`.
-- **Composition** quand la relation est "**a un**" ou "**utilise un**" : un `Pokemon` **a des** attaques, une équipe **utilise un** Array de Pokémon. Dans ces cas, on stocke l'objet dans une variable d'instance au lieu d'en hériter.
+- **Inheritance** when the relationship is "**is a**": a `WildPokemon` **is a** `Pokemon`.
+- **Composition** when the relationship is "**has a**" or "**uses a**": a `Pokemon` **has** attacks, a team **uses** an Array of Pokemon. In these cases, you store the object in an instance variable instead of inheriting from it.
 
-Si on hésite, la composition est souvent le choix le plus flexible. On verra la composition en détail avec les modules au chapitre 10.
+When in doubt, composition is often the more flexible choice. We will see composition in detail with modules in chapter 10.
 
 ## Conclusion
 
-- `class Enfant < Parent` crée une classe qui hérite de tout ce que le parent définit.
-- `super(arguments)` appelle la méthode du parent. Toujours appeler `super` dans `initialize`.
-- Surcharger une méthode = la redéfinir dans l'enfant. On peut appeler `super` pour enrichir le comportement du parent, ou ne pas l'appeler pour le remplacer entièrement.
-- `.is_a?` vérifie la classe et ses ancêtres. `.instance_of?` vérifie uniquement la classe exacte.
-- `.superclass` retourne le parent direct d'une classe. `.ancestors` montre la chaîne complète de recherche des méthodes.
-- Utiliser l'héritage pour les relations "est un". Préférer la composition pour les relations "a un" ou "utilise un".
+- `class Child < Parent` creates a class that inherits everything the parent defines.
+- `super(arguments)` calls the parent's method. Always call `super` in `initialize`.
+- Overriding a method = redefining it in the child. You can call `super` to enrich the parent's behavior, or not call it to replace it entirely.
+- `.is_a?` checks the class and its ancestors. `.instance_of?` checks only the exact class.
+- `.superclass` returns the direct parent of a class. `.ancestors` shows the full method lookup chain.
+- Use inheritance for "is a" relationships. Prefer composition for "has a" or "uses a" relationships.

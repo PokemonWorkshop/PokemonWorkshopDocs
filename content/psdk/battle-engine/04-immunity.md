@@ -1,28 +1,28 @@
 ---
-title: "Comment être immunisé à une attaque dans PSDK ?"
-slug: etre-immunise-a-une-attaque
+title: "How to be immune to a move in PSDK?"
+slug: how-to-be-immune-to-a-move
 sidebar_position: 4
-description: "Ce guide explique comment rendre un Pokémon immunisé à une attaque, que ce soit depuis la logique propre de l'attaque ou depuis un effet externe."
+description: "This guide explains how to make a Pokémon immune to a move, whether from the move's own logic or from an external effect."
 ---
 
-## Principe
+## Principle
 
-Un Pokémon peut être immunisé à une attaque pour deux raisons distinctes :
+A Pokémon can be immune to a move for two distinct reasons:
 
-- **Depuis l'attaque elle-même** : l'attaque vérifie les conditions de la cible et décide qu'elle n'a aucun effet.
-- **Depuis un effet externe** : un effet actif sur la cible empêche l'attaque de l'affecter.
+- **From the move itself**: the move checks the target's conditions and decides it has no effect.
+- **From an external effect**: an active effect on the target prevents the move from affecting it.
 
-Dans les deux cas, l'immunité est signalée par un retour `true`.
+In both cases, immunity is signaled by returning `true`.
 
-> **Différence avec le blocage** (guide 002) : le blocage empêche l'attaque d'atteindre la cible et affiche un message. L'immunité signifie que l'attaque atteint la cible mais n'a **aucun effet** — le système affiche automatiquement le message "Ça n'affecte pas [Pokémon]...".
+> **Difference with blocking** (guide 002): blocking prevents the move from reaching the target and displays a message. Immunity means the move reaches the target but has **no effect** -- the system automatically displays the message "It doesn't affect [Pokémon]...".
 
-## Depuis l'attaque
+## From the move
 
-Certaines attaques peuvent ne pas affecter la cible selon leurs propres règles. Par exemple, l'attaque **Attraction** n'a aucun effet si les deux Pokémon ne sont pas de genres opposés ou si la cible est déjà sous l'effet d'Attraction.
+Some moves can have no effect on the target based on their own rules. For example, the move **Attract** has no effect if both Pokémon are not of opposite genders or if the target is already under the Attract effect.
 
-Pour gérer ce comportement, on override la méthode `target_immune?` dans la classe de l'attaque.
+To handle this behavior, override the `target_immune?` method in the move's class.
 
-### Exemple : Attraction
+### Example: Attract
 
 ```ruby
 # Test if the target is immune
@@ -38,17 +38,17 @@ def target_immune?(user, target)
 end
 ```
 
-- L'appel à `super` est **indispensable** pour conserver les vérifications par défaut.
-- `user.gender * target.gender == 2` vérifie que les deux Pokémon sont de genres opposés (mâle=1, femelle=2, donc 1*2=2).
-- La méthode retourne `false` par défaut si aucune condition d'immunité n'est remplie.
+- The call to `super` is **mandatory** to preserve default checks.
+- `user.gender * target.gender == 2` checks that both Pokémon are of opposite genders (male=1, female=2, so 1*2=2).
+- The method returns `false` by default if no immunity condition is met.
 
-## Depuis un effet
+## From an effect
 
-Certains effets peuvent immuniser un Pokémon contre certaines attaques. Par exemple, le talent **Pare-Balles** immunise contre les attaques balistiques.
+Some effects can make a Pokémon immune to certain moves. For example, the ability **Bulletproof** grants immunity to ballistic moves.
 
-Pour gérer ce comportement, on utilise la méthode `on_move_ability_immunity` dans la classe de l'effet. Malgré le nom de la méthode qui contient `ability`, elle concerne bien **tous les types d'effets**.
+To handle this behavior, use the `on_move_ability_immunity` method in the effect's class. Despite the method name containing `ability`, it applies to **all types of effects**.
 
-### Exemple : Pare-Balles
+### Example: Bulletproof
 
 ```ruby
 # Function called when we try to check if the Pokemon is immune to a move due to its effect
@@ -67,13 +67,13 @@ def on_move_ability_immunity(user, target, move)
 end
 ```
 
-- Les premières lignes vérifient que la cible est bien le porteur du talent et que l'attaque est balistique.
-- `can_be_lowered_or_canceled?` vérifie que le talent de l'utilisateur peut être neutralisé (certains talents ignorent les immunités).
-- L'animation du talent est affichée avec `show_ability` pour indiquer visuellement l'immunité.
+- The first lines verify that the target is the effect holder and that the move is ballistic.
+- `can_be_lowered_or_canceled?` checks that the user's ability can be neutralized (some abilities ignore immunities).
+- The ability animation is displayed with `show_ability` to visually indicate the immunity.
 
 ## Conclusion
 
-- Utilisez `target_immune?` si l'immunité dépend de la logique propre de l'attaque.
-- Utilisez `on_move_ability_immunity` si l'immunité dépend d'un effet externe actif sur la cible.
-- Retournez `true` pour signaler l'immunité — le message est affiché automatiquement par le système.
-- Pour les effets de type talent, pensez à afficher l'animation du talent avec `show_ability`.
+- Use `target_immune?` if the immunity depends on the move's own logic.
+- Use `on_move_ability_immunity` if the immunity depends on an external effect active on the target.
+- Return `true` to signal immunity -- the message is automatically displayed by the system.
+- For ability-type effects, remember to display the ability animation with `show_ability`.

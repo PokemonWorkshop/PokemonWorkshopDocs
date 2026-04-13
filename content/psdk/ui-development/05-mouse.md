@@ -1,25 +1,25 @@
 ---
-title: "Comment gérer la souris dans PSDK ?"
-slug: gerer-la-souris
+title: "How to handle mouse input in PSDK?"
+slug: handle-mouse-input
 sidebar_position: 5
-description: "Ce guide explique comment gérer les interactions souris dans une scène UI."
+description: "This guide explains how to handle mouse interactions in a UI scene."
 ---
 
-Ce guide explique comment gérer les interactions souris dans une scène UI. Il fait suite aux guides 001 à 004 : le lecteur dispose déjà d'une scène avec gestion des inputs clavier et une Composition fonctionnelle. L'exemple utilise la scène Mystery Gift.
+This guide explains how to handle mouse interactions in a UI scene. It builds on guides 001 through 004: the reader already has a scene with keyboard input handling and a working Composition. The example uses the Mystery Gift scene.
 
-## Principe
+## Principle
 
-La gestion de la souris suit des conventions précises dans PSDK :
+Mouse handling follows precise conventions in PSDK:
 
-- Elle est placée dans un fichier séparé (XXX Mouse.rb) qui réouvre la classe de scène.
-- La méthode `update_mouse(moved)` et la constante `MOUSE_BUTTON_ACTIONS` doivent être **publiques** -- le framework les appelle depuis l'extérieur de la classe.
-- Le traitement est décomposé en quatre étapes ordonnées : wheel, hover, click, ctrl buttons.
-- Les sous-composants possèdent leur propre détection de collision via `simple_mouse_in?`.
-- La scène route les événements souris, elle ne vérifie pas les collisions directement.
+- It is placed in a separate file (003 Mouse.rb) that reopens the scene class.
+- The method `update_mouse(moved)` and the constant `MOUSE_BUTTON_ACTIONS` must be **public** -- the framework calls them from outside the class.
+- Processing is decomposed into four ordered steps: wheel, hover, click, ctrl buttons.
+- Sub-components own their collision detection via `simple_mouse_in?`.
+- The scene routes mouse events, it does not check collisions directly.
 
-## Structure de update_mouse
+## Structure of update_mouse
 
-La méthode `update_mouse` orchestre les quatre types d'interactions souris dans un ordre précis. Chaque sous-méthode retourne `true` si elle a consommé l'événement, ce qui interrompt le traitement.
+The `update_mouse` method orchestrates all four types of mouse interactions in a precise order. Each sub-method returns `true` if it consumed the event, which stops further processing.
 
 ```ruby
 module GamePlay
@@ -42,15 +42,15 @@ module GamePlay
 end
 ```
 
-- `update_mouse` et `MOUSE_BUTTON_ACTIONS` sont déclarés sans `private` -- ils doivent rester publics car le framework les appelle depuis l'extérieur de la classe.
-- `@composition.done?` bloque les inputs souris pendant les animations, exactement comme pour le clavier.
-- Chaque sous-méthode retourne `true` si elle a consommé l'événement, ce qui arrête la chaîne via `return false`.
-- L'ordre est important : la molette est prioritaire, puis le hover (uniquement si le curseur a bougé), puis le click, et enfin les ctrl buttons en dernier recours.
-- `MOUSE_BUTTON_ACTIONS` mappe les positions `[A, X, Y, B]` de la barre du bas aux méthodes d'action. `nil` signifie qu'aucune action n'est associée à cette position -- Mystery Gift n'utilise que A et B.
+- `update_mouse` and `MOUSE_BUTTON_ACTIONS` are declared without `private` -- they must remain public because the framework calls them from outside the class.
+- `@composition.done?` blocks mouse input during animations, exactly like keyboard input.
+- Each sub-method returns `true` if it consumed the event, which stops the chain via `return false`.
+- Order matters: wheel has priority, then hover (only if the cursor moved), then click, and finally ctrl buttons as a fallback.
+- `MOUSE_BUTTON_ACTIONS` maps positions `[A, X, Y, B]` of the bottom bar to action methods. `nil` means no action is associated with that position -- Mystery Gift only uses A and B.
 
-## Scroll avec la molette
+## Scroll with the wheel
 
-La molette permet de faire défiler la liste des cadeaux sans passer par les flèches du clavier.
+The wheel allows scrolling through the gift list without using keyboard arrows.
 
 ```ruby
 # Handle mouse wheel scrolling
@@ -65,14 +65,14 @@ def update_mouse_wheel
 end
 ```
 
-- `Mouse.wheel` retourne le delta de scroll : positif vers le haut, négatif vers le bas.
-- `Mouse.wheel = 0` remet la valeur à zéro après lecture. Ce reset est obligatoire : sans lui, la valeur persiste et la molette boucle indéfiniment à chaque frame.
-- `@composition.move_selection` déplace la sélection d'un cran dans la direction indiquée et retourne `true` si la sélection a changé.
-- `play_cursor_se` n'est joué que si la sélection a effectivement bougé.
+- `Mouse.wheel` returns the scroll delta: positive for up, negative for down.
+- `Mouse.wheel = 0` resets the value to zero after reading. This reset is mandatory: without it, the value persists and the wheel loops infinitely every frame.
+- `@composition.move_selection` moves the selection by one step in the given direction and returns `true` if the selection changed.
+- `play_cursor_se` is only played if the selection actually moved.
 
-## Survol
+## Hover
 
-Le survol met à jour la sélection quand le curseur passe au-dessus d'une ligne de cadeau.
+Hovering updates the selection when the cursor passes over a gift row.
 
 ```ruby
 # Handle mouse hover over gift rows
@@ -88,14 +88,14 @@ def update_mouse_hover
 end
 ```
 
-- La Composition expose `find_hovered_row_index` qui interroge ses sous-composants via `simple_mouse_in?`. La scène demande simplement "quel élément est survolé ?", elle ne vérifie pas les sprites directement.
-- Si aucun élément n'est survolé (`nil`) ou si l'élément survolé est déjà sélectionné, on retourne `false` pour laisser la chaîne continuer.
-- `@composition.selected_index` permet de comparer avec l'index courant sans maintenir un `@index` dupliqué dans la scène.
-- Ce pattern respecte le principe de Composition : chaque couche gère sa responsabilité.
+- The Composition exposes `find_hovered_row_index` which queries its sub-components via `simple_mouse_in?`. The scene simply asks "which row is hovered?", it does not check sprites directly.
+- If no item is hovered (`nil`) or the hovered item is already selected, we return `false` to let the chain continue.
+- `@composition.selected_index` allows comparing with the current index without maintaining a duplicate `@index` in the scene.
+- This pattern respects the Composition principle: each layer handles its own responsibility.
 
-## Clic
+## Click
 
-Le clic gauche sélectionne un élément sous le curseur.
+A left click selects the item under the cursor.
 
 ```ruby
 # Handle mouse clicks on gift rows
@@ -112,13 +112,13 @@ def update_mouse_click
 end
 ```
 
-- `Mouse.trigger?(:LEFT)` retourne `true` une seule fois par clic (pas à chaque frame où le bouton est maintenu).
-- La méthode réutilise `find_hovered_row_index` de la Composition pour déterminer quel élément est sous le curseur.
-- Un clic sur n'importe quelle ligne sélectionne cette ligne et joue le son de curseur.
+- `Mouse.trigger?(:LEFT)` returns `true` only once per click (not every frame the button is held).
+- The method reuses `find_hovered_row_index` from the Composition to determine which item is under the cursor.
+- Clicking any row selects that row and plays the cursor sound.
 
 ## Ctrl buttons
 
-Les ctrl buttons sont les boutons de la barre inférieure. Leur gestion est déléguée à un helper hérité de `GamePlay::Base`.
+Ctrl buttons are the bottom bar buttons. Their handling is delegated to a helper inherited from `GamePlay::Base`.
 
 ```ruby
 # Handle ctrl button mouse interaction
@@ -129,13 +129,13 @@ def update_ctrl_button_mouse
 end
 ```
 
-- `update_mouse_ctrl_buttons` est un helper intégré à `GamePlay::Base`. Il gère l'animation de pression, et le déclenchement de la méthode d'action au clic.
-- `MOUSE_BUTTON_ACTIONS` mappe les positions `[A, X, Y, B]` aux noms de méthodes. Les positions à `nil` sont ignorées.
-- C'est le dernier maillon de la chaîne dans `update_mouse` : il ne s'exécute que si aucun autre gestionnaire n'a consommé l'événement.
+- `update_mouse_ctrl_buttons` is a built-in helper from `GamePlay::Base`. It handles hover highlighting, press animation, and triggers the action method on click.
+- `MOUSE_BUTTON_ACTIONS` maps positions `[A, X, Y, B]` to method names. Positions set to `nil` are skipped.
+- This is the last link in the `update_mouse` chain: it only executes if no other handler consumed the event.
 
-## Hit testing dans les composants
+## Hit testing in components
 
-Chaque composant visuel est responsable de sa propre détection de collision. La Composition interroge ses composants, et la scène interroge la Composition.
+Each visual component is responsible for its own collision detection. The Composition queries its components, and the scene queries the Composition.
 
 ```ruby
 # Tell if the mouse is hovering this component
@@ -145,14 +145,14 @@ def hovered?
 end
 ```
 
-- `simple_mouse_in?` vérifie si le curseur de la souris se trouve dans le rectangle englobant du sprite.
-- Le composant possède cette vérification, la Composition l'interroge via `find_hovered_row_index`, et la scène interroge la Composition. Cette délégation à trois niveaux garde chaque couche concentrée sur sa responsabilité.
+- `simple_mouse_in?` checks if the mouse cursor is within the sprite's bounding box.
+- The component owns this check, Composition queries it via `find_hovered_row_index`, and the scene queries Composition. This three-layer delegation keeps each layer focused on its responsibility.
 
 ## Conclusion
 
-- `update_mouse` et `MOUSE_BUTTON_ACTIONS` doivent rester publics -- le framework les appelle depuis l'extérieur.
-- Décomposez `update_mouse` en wheel, hover, click, ctrl buttons, chaque étape retournant `true` pour interrompre le traitement.
-- Remettez toujours `Mouse.wheel` à 0 après lecture, sinon la molette boucle indéfiniment.
-- Les sous-composants possèdent leur détection de collision via `simple_mouse_in?`, la scène interroge la Composition (jamais les sprites directement).
-- Utilisez `Mouse.trigger?(:LEFT)` pour les clics et `Mouse.wheel` pour le scroll.
-- `MOUSE_BUTTON_ACTIONS` associe les positions `[A, X, Y, B]` des ctrl buttons aux méthodes d'action, avec `nil` pour ignorer une position.
+- `update_mouse` and `MOUSE_BUTTON_ACTIONS` must remain public -- the framework calls them from outside.
+- Decompose `update_mouse` into wheel, hover, click, ctrl buttons, each step returning `true` to stop processing.
+- Always reset `Mouse.wheel` to 0 after reading, otherwise the wheel loops infinitely.
+- Sub-components own their collision detection via `simple_mouse_in?`, the scene queries the Composition (never sprites directly).
+- Use `Mouse.trigger?(:LEFT)` for clicks and `Mouse.wheel` for scrolling.
+- `MOUSE_BUTTON_ACTIONS` maps positions `[A, X, Y, B]` of ctrl buttons to action methods, with `nil` to skip a position.

@@ -1,53 +1,53 @@
 ---
-title: "Comment préparer son environnement de développement ?"
-slug: preparer-son-environnement
+title: "How to set up the development environment?"
+slug: setup-development-environment
 sidebar_position: 1
-description: "Avant de pouvoir écrire des scripts pour son projet PSDK, il faut installer Ruby, configurer un éditeur de code, et mettre en place l'autocomplétion pour avoir accès à la documentation et aux méthodes de PSDK pendant qu'on code. Ce guide couvre l'installation complète étape par étape."
+description: "Before writing scripts for a PSDK project, you need to install Ruby, configure a code editor, and set up autocompletion to have access to PSDK documentation and methods while coding. This guide covers the complete installation step by step."
 ---
 
-Avant de pouvoir écrire des scripts pour son projet PSDK, il faut installer Ruby, configurer un éditeur de code, et mettre en place l'autocomplétion pour avoir accès à la documentation et aux méthodes de PSDK pendant qu'on code. Ce guide couvre l'installation complète étape par étape.
+Before writing scripts for a PSDK project, you need to install Ruby, configure a code editor, and set up autocompletion to have access to PSDK documentation and methods while coding. This guide covers the complete installation step by step.
 
-## Principe
+## Principle
 
-L'environnement de développement PSDK repose sur trois piliers :
+The PSDK development environment relies on three pillars:
 
-- **Ruby** : le langage dans lequel PSDK est écrit. Il faut l'installer sur sa machine.
-- **Visual Studio Code (VSCode)** : l'éditeur de code recommandé. Avec les bonnes extensions, il offre l'autocomplétion, la documentation au survol, et le linting.
-- **Solargraph** : un serveur de langage Ruby qui analyse le code PSDK et fournit l'autocomplétion. Il a besoin d'accéder au code source de PSDK pour fonctionner.
+- **Ruby**: the language PSDK is written in. It must be installed on your machine.
+- **Visual Studio Code (VSCode)**: the recommended code editor. With the right extensions, it provides autocompletion, hover documentation, and linting.
+- **Solargraph**: a Ruby language server that analyzes PSDK code and provides autocompletion. It needs access to the PSDK source code to work.
 
-## Installer Ruby
+## Installing Ruby
 
-1. Se rendre sur [rubyinstaller.org](https://rubyinstaller.org/downloads/).
-2. Télécharger **Ruby 3.0.6** avec le devkit (version `Ruby+Devkit 3.0.X (x64)`).
-3. Lancer l'installeur et suivre les étapes. Quand MSYS2 est proposé, accepter l'installation.
-4. Vérifier l'installation en ouvrant un terminal et en tapant :
+1. Go to [rubyinstaller.org](https://rubyinstaller.org/downloads/).
+2. Download **Ruby 3.0.6** with the devkit (`Ruby+Devkit 3.0.X (x64)` version).
+3. Run the installer and follow the steps. When MSYS2 is offered, accept the installation.
+4. Verify the installation by opening a terminal and typing:
 
 ```bash
 ruby --version
 ```
 
-La version affichée doit commencer par `3.0`.
+The displayed version should start with `3.0`.
 
-## Installer Visual Studio Code
+## Installing Visual Studio Code
 
-1. Télécharger [Visual Studio Code](https://code.visualstudio.com).
-2. Installer et lancer VSCode.
-3. Installer les extensions suivantes depuis le panneau Extensions (Ctrl+Shift+X) :
-   - **Ruby Solargraph** : autocomplétion, documentation au survol, diagnostics.
-   - **Ruby LSP** : support avancé du langage Ruby (highlighting, navigation, formatting).
+1. Download [Visual Studio Code](https://code.visualstudio.com).
+2. Install and launch VSCode.
+3. Install the following extensions from the Extensions panel (Ctrl+Shift+X):
+   - **Ruby Solargraph**: autocompletion, hover documentation, diagnostics.
+   - **Ruby LSP**: advanced Ruby language support (highlighting, navigation, formatting).
 
-## Installer les gems
+## Installing the gems
 
-Ouvrir un terminal **en mode administrateur** (clic droit sur l'invite de commandes, "Exécuter en tant qu'administrateur") et installer Solargraph et Ruby LSP :
+Open a terminal **as administrator** (right-click on Command Prompt, "Run as administrator") and install Solargraph and Ruby LSP:
 
 ```bash
 gem install solargraph
 gem install ruby-lsp
 ```
 
-## Configurer VSCode
+## Configuring VSCode
 
-Ouvrir les paramètres JSON de VSCode : Ctrl+Shift+P, puis chercher "Preferences: Open User Settings (JSON)". Ajouter les lignes suivantes :
+Open VSCode JSON settings: Ctrl+Shift+P, then search for "Preferences: Open User Settings (JSON)". Add the following lines:
 
 ```json
 "editor.tabSize": 2,
@@ -77,22 +77,22 @@ Ouvrir les paramètres JSON de VSCode : Ctrl+Shift+P, puis chercher "Preferences
 "rubyLsp.rubyExecutablePath": "C:\\Ruby30\\bin"
 ```
 
-- Adapter le chemin `C:\\Ruby30\\bin` au dossier `bin` de votre installation Ruby. En général `C:\\Ruby30` pour Ruby 3.0, `C:\\Ruby31` pour Ruby 3.1, etc.
-- `editor.tabSize: 2` : PSDK utilise une indentation de 2 espaces.
-- `solargraph.diagnostics: true` : active les diagnostics RuboCop via Solargraph.
+- Adapt the path `C:\\Ruby30\\bin` to the `bin` folder of your Ruby installation. Usually `C:\\Ruby30` for Ruby 3.0, `C:\\Ruby31` for Ruby 3.1, etc.
+- `editor.tabSize: 2`: PSDK uses 2-space indentation.
+- `solargraph.diagnostics: true`: enables RuboCop diagnostics through Solargraph.
 
-## Rendre le code PSDK visible à Solargraph
+## Making PSDK code visible to Solargraph
 
-Solargraph a besoin d'accéder au code source de PSDK pour proposer l'autocomplétion sur les classes du moteur (`Battle::Logic`, `GamePlay::Base`, `UI::SpriteStack`, etc.). Comme le code PSDK n'est pas directement dans le dossier `scripts/`, il faut indiquer à Solargraph où le trouver.
+Solargraph needs access to the PSDK source code to provide autocompletion on engine classes (`Battle::Logic`, `GamePlay::Base`, `UI::SpriteStack`, etc.). Since PSDK code is not directly in the `scripts/` folder, you need to tell Solargraph where to find it.
 
-Il y a deux façons d'accéder au code PSDK, et le choix détermine comment les mises à jour fonctionnent :
+There are two ways to access the PSDK code, and the choice determines how updates work:
 
-- **Via le lien symbolique** : les fichiers pointent vers l'installation Pokémon Studio. Quand on met à jour PSDK depuis Pokémon Studio, ces fichiers sont mis à jour automatiquement.
-- **Via le dépôt pokemonsdk** : le dépôt forké devient la source de vérité. Les mises à jour de PSDK ne sont **pas** automatiques — il faut synchroniser soi-même le dépôt avec l'officiel (voir le guide 002, section "Maintenir son fork à jour").
+- **Via the symbolic link**: the files point to the Pokémon Studio installation. When you update PSDK from Pokémon Studio, these files are updated automatically.
+- **Via the pokemonsdk repository**: the forked repository becomes the source of truth. PSDK updates are **not** automatic — you must synchronize the repository with the official one yourself (see guide 002, section "Keeping your fork up to date").
 
-### Si le dépôt pokemonsdk est dans le projet
+### If the pokemonsdk repository is in the project
 
-Si le dossier `pokemonsdk/` existe à la racine du projet (après avoir forké et cloné le dépôt, voir le guide 002), le fichier `solargraph.yml` dans `scripts/` doit contenir :
+If the `pokemonsdk/` folder exists at the project root (after forking and cloning the repository, see guide 002), the `solargraph.yml` file in `scripts/` should contain:
 
 ```yaml
 ---
@@ -120,25 +120,25 @@ plugins: []
 max_files: 5000
 ```
 
-- `"../pokemonsdk/**/*.rb"` : indique à Solargraph d'inclure tous les fichiers Ruby du dépôt pokemonsdk. C'est le chemin relatif depuis `scripts/`.
-- `./**/*.rb` : inclut aussi tous les scripts utilisateur dans `scripts/`.
+- `"../pokemonsdk/**/*.rb"`: tells Solargraph to include all Ruby files from the pokemonsdk repository. This is the relative path from `scripts/`.
+- `./**/*.rb`: also includes all user scripts in `scripts/`.
 
-### Si le dépôt n'est pas dans le projet
+### If the repository is not in the project (standard Pokémon Studio project)
 
-Pour un projet sans fork du dépôt, les scripts PSDK sont embarqués en interne par Pokémon Studio. Il faut créer un **lien symbolique** pour que Solargraph puisse y accéder.
+For a project created with Pokémon Studio without forking the repository, the PSDK scripts are bundled internally by Pokémon Studio. You need to create a **symbolic link** so Solargraph can access them.
 
-Ouvrir **cmd** (invite de commandes) **en mode administrateur**, se placer dans le dossier `scripts/` du projet, et créer le lien :
+Open **cmd** (Command Prompt) **as administrator**, navigate to the `scripts/` folder of the project, and create the link:
 
 ```bash
-cd C:\chemin\vers\votre-projet\scripts
+cd C:\path\to\your-project\scripts
 mklink /D psdk_scripts "%temp%\..\Programs\pokemon-studio\resources\psdk-binaries\pokemonsdk\scripts"
 ```
 
-- `mklink /D` crée un lien symbolique de dossier. Le mode administrateur est requis. Cette commande est propre à cmd (ne pas utiliser PowerShell).
-- `psdk_scripts` est le nom du dossier virtuel qui apparaîtra dans `scripts/`. Ne pas y mettre ses propres scripts.
-- Le chemin cible pointe vers les sources Ruby de PSDK dans l'installation Pokémon Studio. `%temp%` permet d'atteindre le dossier `Programs` de l'utilisateur.
+- `mklink /D` creates a directory symbolic link. Administrator mode is required. This command is specific to cmd (do not use PowerShell).
+- `psdk_scripts` is the name of the virtual folder that will appear in `scripts/`. Do not put your own scripts in it.
+- The target path points to the PSDK Ruby sources in the Pokémon Studio installation. `%temp%` is used to reach the user's `Programs` folder.
 
-Ensuite, adapter le `solargraph.yml` pour inclure ce lien :
+Then adapt the `solargraph.yml` to include this link:
 
 ```yaml
 ---
@@ -147,50 +147,50 @@ include:
   - ./**/*.rb
 ```
 
-Le reste du fichier reste identique.
+The rest of the file remains identical.
 
-### Générer le fichier solargraph.yml
+### Generating the solargraph.yml file
 
-Si le fichier `solargraph.yml` n'existe pas encore dans `scripts/`, le générer :
+If the `solargraph.yml` file does not yet exist in `scripts/`, generate it:
 
 ```bash
 cd scripts
 solargraph config
 ```
 
-Puis modifier le fichier généré pour ajouter le chemin vers PSDK dans la section `include`.
+Then edit the generated file to add the path to PSDK in the `include` section.
 
-## Configurer RuboCop
+## Configuring RuboCop
 
-RuboCop vérifie que le code respecte les conventions de PSDK (retours explicites, pas de `for`, etc.). La configuration est dans le fichier `.rubocop.yml`. Si ce fichier n'existe pas dans `scripts/`, le copier depuis le dépôt pokemonsdk :
+RuboCop checks that code follows PSDK conventions (explicit returns, no `for` loops, etc.). The configuration is in the `.rubocop.yml` file. If this file does not exist in `scripts/`, copy it from the pokemonsdk repository:
 
 ```bash
 cp pokemonsdk/scripts/.rubocop.yml scripts/.rubocop.yml
 ```
 
-Pour un projet sans le dépôt, copier le fichier depuis le lien symbolique :
+For a project without the repository, copy the file from the symbolic link:
 
 ```bash
 cp scripts/psdk_scripts/.rubocop.yml scripts/.rubocop.yml
 ```
 
-RuboCop s'active automatiquement via Solargraph. Les lignes de code qui ne respectent pas les conventions seront soulignées en bleu dans VSCode.
+RuboCop activates automatically through Solargraph. Code lines that do not follow conventions will be underlined in blue in VSCode.
 
-## Ouvrir le bon dossier dans VSCode
+## Opening the right folder in VSCode
 
-Toujours ouvrir le dossier `scripts/` dans VSCode, pas la racine du projet :
+Always open the `scripts/` folder in VSCode, not the project root:
 
 ```bash
 code scripts
 ```
 
-C'est dans ce dossier que Solargraph et RuboCop cherchent leurs fichiers de configuration (`solargraph.yml`, `.rubocop.yml`). Si on ouvre un autre dossier, l'autocomplétion et le linting ne fonctionneront pas.
+This is the folder where Solargraph and RuboCop look for their configuration files (`solargraph.yml`, `.rubocop.yml`). If you open a different folder, autocompletion and linting will not work.
 
-Si Solargraph ne se lance pas correctement après l'ouverture, le redémarrer manuellement : Ctrl+Shift+P, puis chercher "Restart Solargraph".
+If Solargraph does not launch correctly after opening, restart it manually: Ctrl+Shift+P, then search for "Restart Solargraph".
 
-## Tester l'environnement
+## Testing the environment
 
-Pour vérifier que tout fonctionne, créer un script de test dans `scripts/` :
+To verify everything works, create a test script in `scripts/`:
 
 ```ruby
 # Get the name of a Pokemon from its db_symbol
@@ -201,28 +201,28 @@ def pokemon_name(db_symbol)
 end
 ```
 
-- En tapant `data_`, Solargraph doit proposer `data_creature` en autocomplétion. Si c'est le cas, l'environnement est correctement configuré.
-- En survolant `pokemon_name` avec la souris, VSCode doit afficher la documentation YARD (description, paramètre, retour).
-- Si des lignes sont soulignées en bleu, RuboCop fonctionne. Corriger les avertissements pour vérifier que la configuration PSDK est bien active.
+- When typing `data_`, Solargraph should suggest `data_creature` in autocompletion. If it does, the environment is correctly configured.
+- When hovering over `pokemon_name` with the mouse, VSCode should display the YARD documentation (description, parameter, return).
+- If lines are underlined in blue, RuboCop is working. Fix the warnings to verify that the PSDK configuration is active (for example, explicit `return` should **not** be flagged as redundant).
 
-Pour tester en jeu, lancer le projet depuis le terminal du projet :
+To test in-game, launch the project from the project terminal:
 
 ```bash
 psdk debug skip_title
 ```
 
-Charger une partie, puis appeler la méthode dans la console de debug :
+Load a save, then call the method in the debug console:
 
 ```
 pokemon_name(:pikachu)
 ```
 
-Si la console affiche "Pikachu", tout est en place.
+If the console displays "Pikachu", everything is in place.
 
 ## Conclusion
 
-- Installer Ruby 3.0.6 avec le devkit, puis les gems `solargraph` et `ruby-lsp`.
-- Installer VSCode avec les extensions Ruby Solargraph et Ruby LSP. Configurer les paramètres JSON pour le tabsize, les diagnostics, et le chemin Ruby.
-- Rendre le code PSDK visible à Solargraph via le `solargraph.yml` : soit un chemin relatif vers `pokemonsdk/`, soit un lien symbolique `psdk_scripts/`.
-- Copier le `.rubocop.yml` de PSDK dans `scripts/` pour que RuboCop utilise les conventions du projet.
-- Toujours ouvrir le dossier `scripts/` dans VSCode pour que Solargraph et RuboCop trouvent leurs configurations.
+- Install Ruby 3.0.6 with the devkit, then the gems `solargraph` and `ruby-lsp`.
+- Install VSCode with the Ruby Solargraph and Ruby LSP extensions. Configure the JSON settings for tabsize, diagnostics, and the Ruby path.
+- Make PSDK code visible to Solargraph via `solargraph.yml`: either a relative path to `pokemonsdk/`, or a `psdk_scripts/` symbolic link.
+- Copy PSDK's `.rubocop.yml` into `scripts/` so RuboCop uses the project conventions.
+- Always open the `scripts/` folder in VSCode so Solargraph and RuboCop find their configurations.

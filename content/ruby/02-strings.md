@@ -1,221 +1,221 @@
 ---
-title: "Comment manipuler les chaînes et les symboles en Ruby ?"
-slug: chaines-et-symboles
+title: "How to manipulate strings and symbols in Ruby?"
+slug: strings-and-symbols
 sidebar_position: 2
-description: "Ce guide approfondit les String et les Symbol introduits au chapitre 1. On découvre les outils que Ruby offre pour transformer, formater et comparer du texte."
+description: "This guide goes deeper into String and Symbol, introduced in chapter 1. We discover the tools Ruby offers to transform, format, and compare text."
 ---
 
-Ce guide approfondit les String et les Symbol introduits au chapitre 1. On découvre les outils que Ruby offre pour transformer, formater et comparer du texte.
+This guide goes deeper into String and Symbol, introduced in chapter 1. We discover the tools Ruby offers to transform, format, and compare text.
 
-## Principe
+## Principle
 
-On a vu qu'une String est du texte et qu'un Symbol est un identifiant. Dans ce chapitre, on va apprendre à manipuler les String : les modifier, les découper, les aligner. On verra aussi pourquoi les Symbol sont si importants et comment passer de l'un à l'autre.
+We saw that a String is text and that a Symbol is an identifier. In this chapter, we will learn how to manipulate Strings: modify them, split them, align them. We will also see why Symbols are so important and how to convert between the two.
 
-## Rappel : guillemets simples et doubles
+## Reminder: single and double quotes
 
-Les guillemets simples créent un texte brut. Les guillemets doubles permettent l'interpolation (`#{}`) et les séquences d'échappement :
+Single quotes create raw text. Double quotes allow interpolation (`#{}`) and escape sequences:
 
-```ruby live
+~~~ruby
 name = 'Pikachu'
 
-# Guillemets simples : texte brut, pas d'interpolation
-puts 'Bonjour, #{name}'     # Affiche : Bonjour, #{name}
+# Single quotes: raw text, no interpolation
+puts 'Hello, #{name}'     # Displays: Hello, #{name}
 
-# Guillemets doubles : interpolation et séquences d'échappement
-puts "Bonjour, #{name} !"   # Affiche : Bonjour, Pikachu !
-puts "Ligne 1\nLigne 2"     # Affiche sur deux lignes
-```
+# Double quotes: interpolation and escape sequences
+puts "Hello, #{name}!"   # Displays: Hello, Pikachu!
+puts "Line 1\nLine 2"     # Displays on two lines
+~~~
 
-- `\n` crée un retour à la ligne. `\t` crée une tabulation. Ces séquences ne fonctionnent qu'avec les guillemets doubles.
-- Règle simple : guillemets simples par défaut, guillemets doubles si on a besoin d'interpolation ou de `\n`.
+- `\n` creates a line break. `\t` creates a tab. These sequences only work with double quotes.
+- Simple rule: single quotes by default, double quotes if you need interpolation or `\n`.
 
-## Les textes multi-lignes (heredoc)
+## Multi-line text (heredoc)
 
-Pour écrire un texte sur plusieurs lignes sans enchaîner les `\n`, Ruby propose les **heredoc** :
+To write text over multiple lines without chaining `\n`, Ruby offers **heredoc**:
 
-```ruby
+~~~ruby
 description = <<~TEXT
-  Pikachu est un Pokémon de type Électrik.
-  Il évolue depuis Pichu par bonheur.
+  Pikachu is an Electric-type Pokémon.
+  It evolves from Pichu through happiness.
 TEXT
 
 puts description
-```
+~~~
 
-- `<<~TEXT` ouvre le heredoc. Le texte se termine quand Ruby rencontre `TEXT` seul sur une ligne.
-- Le `~` supprime l'indentation commune, ce qui permet d'indenter le texte dans le code sans que les espaces apparaissent à l'affichage.
-- Le mot `TEXT` est un choix arbitraire. On pourrait écrire `<<~DESCRIPTION` ou n'importe quel autre mot.
+- `<<~TEXT` opens the heredoc. The text ends when Ruby encounters `TEXT` alone on a line.
+- The `~` removes common indentation, which allows indenting the text in the code without the spaces appearing in the output.
+- The word `TEXT` is an arbitrary choice. You could write `<<~DESCRIPTION` or any other word.
 
-## Interpolation vs concaténation
+## Interpolation vs concatenation
 
-Il y a deux façons de combiner du texte et des variables. La première, l'interpolation, on la connaît déjà :
+There are two ways to combine text and variables. The first, interpolation, we already know:
 
-```ruby
-name = 'Dracaufeu'
+~~~ruby
+name = 'Charizard'
 level = 36
 
-# Interpolation (à privilégier)
-puts "#{name} est niveau #{level}"
+# Interpolation (preferred)
+puts "#{name} is level #{level}"
 
-# Concaténation (à éviter)
-puts name + ' est niveau ' + level.to_s
-```
+# Concatenation (avoid)
+puts name + ' is level ' + level.to_s
+~~~
 
-- L'interpolation convertit automatiquement les valeurs en texte. La concaténation exige un appel à `.to_s` sinon Ruby lève une erreur.
-- L'interpolation est plus lisible, plus courte, et plus performante. C'est toujours le bon choix.
+- Interpolation automatically converts values to text. Concatenation requires a call to `.to_s`, otherwise Ruby raises an error.
+- Interpolation is more readable, shorter, and more performant. It is always the right choice.
 
-## Connaître la taille d'une String
+## Getting the size of a String
 
-```ruby
+~~~ruby
 puts 'Pikachu'.length    # => 7
 puts 'Pikachu'.size      # => 7
 puts ''.length           # => 0
-```
+~~~
 
-- `.length` et `.size` font exactement la même chose. Utiliser l'un ou l'autre, c'est une question de préférence.
+- `.length` and `.size` do exactly the same thing. Using one or the other is a matter of preference.
 
-## Changer la casse
+## Changing case
 
-Ruby offre plusieurs méthodes pour changer les majuscules et minuscules :
+Ruby offers several methods to change uppercase and lowercase:
 
-```ruby live
+~~~ruby
 puts 'pikachu'.upcase        # => PIKACHU
 puts 'PIKACHU'.downcase      # => pikachu
 puts 'pikachu'.capitalize    # => Pikachu
 puts 'Pikachu'.swapcase      # => pIKACHU
-```
+~~~
 
-- `.upcase` met tout en majuscules. `.downcase` met tout en minuscules.
-- `.capitalize` met la première lettre en majuscule et le reste en minuscules.
-- `.swapcase` inverse chaque lettre (majuscule devient minuscule et vice versa). C'est rarement utile, mais bon à connaître.
+- `.upcase` converts everything to uppercase. `.downcase` converts everything to lowercase.
+- `.capitalize` capitalizes the first letter and lowercases the rest.
+- `.swapcase` inverts each letter (uppercase becomes lowercase and vice versa). It is rarely useful, but good to know.
 
-## Supprimer les espaces
+## Removing whitespace
 
-```ruby
+~~~ruby
 name = '  Pikachu  '
 
-puts name.strip     # => "Pikachu"   (supprime les espaces des deux côtés)
-puts name.lstrip    # => "Pikachu  " (supprime à gauche seulement)
-puts name.rstrip    # => "  Pikachu" (supprime à droite seulement)
-```
+puts name.strip     # => "Pikachu"   (removes spaces on both sides)
+puts name.lstrip    # => "Pikachu  " (removes on the left only)
+puts name.rstrip    # => "  Pikachu" (removes on the right only)
+~~~
 
-- `.strip` est très utile quand on récupère du texte saisi par un utilisateur, qui contient souvent des espaces en trop.
+- `.strip` is very useful when dealing with text entered by a user, which often contains extra spaces.
 
-## Chercher dans une String
+## Searching in a String
 
-```ruby
-puts 'Bulbizarre'.include?('zarre')       # => true
-puts 'Bulbizarre'.include?('Feu')         # => false
-puts 'Bulbizarre'.start_with?('Bulb')     # => true
-puts 'Bulbizarre'.end_with?('zarre')      # => true
-```
+~~~ruby
+puts 'Bulbasaur'.include?('saur')       # => true
+puts 'Bulbasaur'.include?('Fire')         # => false
+puts 'Bulbasaur'.start_with?('Bulb')     # => true
+puts 'Bulbasaur'.end_with?('saur')      # => true
+~~~
 
-- Ces méthodes retournent `true` ou `false`. Le `?` à la fin est la convention Ruby pour les méthodes qui posent une question.
-- La recherche est sensible à la casse : `'Pikachu'.include?('pika')` retourne `false`.
+- These methods return `true` or `false`. The `?` at the end is the Ruby convention for methods that ask a question.
+- The search is case-sensitive: `'Pikachu'.include?('pika')` returns `false`.
 
-## Remplacer du texte
+## Replacing text
 
-```ruby
-phrase = 'Pikachu utilise Tonnerre. Pikachu gagne !'
+~~~ruby
+phrase = 'Pikachu uses Thunderbolt. Pikachu wins!'
 
-# Remplacer la première occurrence
+# Replace the first occurrence
 puts phrase.sub('Pikachu', 'Raichu')
-# => Raichu utilise Tonnerre. Pikachu gagne !
+# => Raichu uses Thunderbolt. Pikachu wins!
 
-# Remplacer toutes les occurrences
+# Replace all occurrences
 puts phrase.gsub('Pikachu', 'Raichu')
-# => Raichu utilise Tonnerre. Raichu gagne !
-```
+# => Raichu uses Thunderbolt. Raichu wins!
+~~~
 
-- `.sub` remplace uniquement la **première** occurrence. `.gsub` remplace **toutes** les occurrences (le `g` signifie "global").
-- Ces méthodes retournent une nouvelle String. L'originale n'est pas modifiée.
+- `.sub` replaces only the **first** occurrence. `.gsub` replaces **all** occurrences (the `g` stands for "global").
+- These methods return a new String. The original is not modified.
 
-## Répéter une String
+## Repeating a String
 
-L'opérateur `*` permet de répéter une String :
+The `*` operator allows repeating a String:
 
-```ruby
+~~~ruby
 puts '=' * 30       # => ==============================
 puts 'Pika' * 3     # => PikaPikaPika
-```
+~~~
 
-- C'est très pratique pour créer des lignes de séparation ou des barres visuelles.
+- This is very handy for creating separator lines or visual bars.
 
-## Aligner du texte
+## Aligning text
 
-Ruby permet d'aligner du texte dans un espace de largeur fixe :
+Ruby allows aligning text in a fixed-width space:
 
-```ruby
+~~~ruby
 puts 'Pikachu'.ljust(15)          # => "Pikachu        "
 puts 'Pikachu'.rjust(15)          # => "        Pikachu"
 puts 'Pikachu'.center(15)         # => "    Pikachu    "
 puts 'Pikachu'.center(15, '-')    # => "----Pikachu----"
-```
+~~~
 
-- `.ljust(n)` aligne à gauche sur `n` caractères en remplissant avec des espaces à droite.
-- `.rjust(n)` aligne à droite. `.center(n)` centre le texte.
-- On peut remplacer l'espace par un autre caractère en le passant en second argument.
+- `.ljust(n)` aligns to the left over `n` characters by padding with spaces on the right.
+- `.rjust(n)` aligns to the right. `.center(n)` centers the text.
+- You can replace the space with another character by passing it as a second argument.
 
-## Formater des nombres dans du texte
+## Formatting numbers in text
 
-Pour afficher un nombre avec un format précis (zéros en tête, décimales fixes), Ruby offre la méthode `format` :
+To display a number with a precise format (leading zeros, fixed decimals), Ruby offers the `format` method:
 
-```ruby
+~~~ruby
 pokedex_number = 6
 health = 88.5
 
 puts format('No.%03d', pokedex_number)    # => No.006
 puts format('PV: %.1f%%', health)         # => PV: 88.5%
-```
+~~~
 
-- `%03d` signifie : un entier (`d`) sur au moins 3 caractères (`3`), complété par des zéros (`0`).
-- `%.1f` signifie : un nombre décimal (`f`) avec 1 chiffre après la virgule.
-- `%%` affiche un vrai `%` (sinon Ruby pense que c'est un format).
+- `%03d` means: an integer (`d`) on at least 3 characters (`3`), padded with zeros (`0`).
+- `%.1f` means: a decimal number (`f`) with 1 digit after the decimal point.
+- `%%` displays a literal `%` (otherwise Ruby thinks it is a format specifier).
 
-## Les Symbol en profondeur
+## Symbols in depth
 
-On a vu au chapitre 1 que les Symbol sont des identifiants. Voyons pourquoi ils sont différents des String :
+We saw in chapter 1 that Symbols are identifiers. Let's see why they differ from Strings:
 
-```ruby
-# Deux Symbol identiques sont le même objet en mémoire
-puts :fire.object_id            # => toujours le même nombre
-puts :fire.object_id            # => exactement le même nombre
+~~~ruby
+# Two identical Symbols are the same object in memory
+puts :fire.object_id            # => always the same number
+puts :fire.object_id            # => exactly the same number
 
-# Deux String identiques sont des objets différents
-puts 'fire'.object_id           # => un nombre
-puts 'fire'.object_id           # => un nombre différent !
-```
+# Two identical Strings are different objects
+puts 'fire'.object_id           # => a number
+puts 'fire'.object_id           # => a different number!
+~~~
 
-- Chaque fois qu'on écrit `'fire'`, Ruby crée un **nouvel objet** en mémoire. Chaque fois qu'on écrit `:fire`, Ruby réutilise le **même objet**.
-- C'est pour cela que la comparaison entre Symbol est instantanée : Ruby compare juste un numéro, pas chaque caractère un par un.
+- Every time you write `'fire'`, Ruby creates a **new object** in memory. Every time you write `:fire`, Ruby reuses the **same object**.
+- This is why comparison between Symbols is instantaneous: Ruby just compares a number, not each character one by one.
 
-## Convertir entre String et Symbol
+## Converting between String and Symbol
 
-```ruby
+~~~ruby
 type_symbol = :fire
 type_string = type_symbol.to_s    # => "fire"
 
 type_string = 'water'
 type_symbol = type_string.to_sym  # => :water
-```
+~~~
 
-- `.to_s` convertit un Symbol en String. `.to_sym` convertit une String en Symbol.
-- On a parfois besoin de ces conversions pour afficher un Symbol (qui ne peut pas être interpolé tel quel sans `.to_s`, mais l'interpolation appelle `.to_s` automatiquement).
+- `.to_s` converts a Symbol to a String. `.to_sym` converts a String to a Symbol.
+- These conversions are sometimes needed to display a Symbol (which cannot be interpolated as-is without `.to_s`, but interpolation calls `.to_s` automatically).
 
-## Quand utiliser String vs Symbol
+## When to use String vs Symbol
 
-- **Symbol** : pour tout ce qui est un identifiant interne. Un type de Pokémon (`:fire`), un statut (`:poisoned`), une clé dans une structure de données.
-- **String** : pour tout ce qui est du texte affiché ou manipulé. Un nom de Pokémon (`'Pikachu'`), une description, un message.
+- **Symbol**: for anything that is an internal identifier. A Pokemon type (`:fire`), a status (`:poisoned`), a key in a data structure.
+- **String**: for anything that is displayed or manipulated text. A Pokemon name (`'Pikachu'`), a description, a message.
 
-En cas de doute : est-ce qu'on va afficher cette valeur à l'utilisateur ? Si oui, c'est une String. Est-ce qu'on va l'utiliser comme étiquette pour identifier quelque chose ? Si oui, c'est un Symbol.
+When in doubt: will you display this value to the user? If yes, it is a String. Will you use it as a label to identify something? If yes, it is a Symbol.
 
 ## Conclusion
 
-- Les guillemets simples créent un texte brut. Les guillemets doubles permettent l'interpolation et les séquences d'échappement (`\n`, `\t`).
-- Toujours préférer l'interpolation à la concaténation.
-- `.upcase`, `.downcase`, `.capitalize` changent la casse. `.strip` supprime les espaces.
-- `.include?`, `.start_with?`, `.end_with?` cherchent dans une String.
-- `.sub` remplace la première occurrence, `.gsub` toutes les occurrences.
-- `*` répète une String. `.ljust`, `.rjust`, `.center` alignent du texte.
-- `format` permet de formater des nombres avec des zéros en tête ou des décimales fixes.
-- Les Symbol sont immuables et uniques en mémoire. Utiliser `.to_s` et `.to_sym` pour convertir.
+- Single quotes create raw text. Double quotes allow interpolation and escape sequences (`\n`, `\t`).
+- Always prefer interpolation over concatenation.
+- `.upcase`, `.downcase`, `.capitalize` change case. `.strip` removes whitespace.
+- `.include?`, `.start_with?`, `.end_with?` search within a String.
+- `.sub` replaces the first occurrence, `.gsub` all occurrences.
+- `*` repeats a String. `.ljust`, `.rjust`, `.center` align text.
+- `format` allows formatting numbers with leading zeros or fixed decimals.
+- Symbols are immutable and unique in memory. Use `.to_s` and `.to_sym` to convert.

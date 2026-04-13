@@ -1,73 +1,73 @@
 ---
-title: "Comment utiliser les méthodes et les blocs en Ruby ?"
-slug: methodes-et-blocs
+title: "How to use methods and blocks in Ruby?"
+slug: methods-and-blocks
 sidebar_position: 7
-description: "Ce chapitre présente les **méthodes** (des morceaux de code nommés et réutilisables) et les **blocs** (des morceaux de code qu'on passe à une méthode). C'est un chapitre fondamental : à partir de maintenant, on peut structurer son code au lieu de tout écrire dans un seul script."
+description: "This chapter introduces **methods** (named, reusable pieces of code) and **blocks** (pieces of code that you pass to a method). This is a fundamental chapter: from now on, we can structure our code instead of writing everything in a single script."
 ---
 
-Ce chapitre présente les **méthodes** (des morceaux de code nommés et réutilisables) et les **blocs** (des morceaux de code qu'on passe à une méthode). C'est un chapitre fondamental : à partir de maintenant, on peut structurer son code au lieu de tout écrire dans un seul script.
+This chapter introduces **methods** (named, reusable pieces of code) and **blocks** (pieces of code that you pass to a method). This is a fundamental chapter: from now on, we can structure our code instead of writing everything in a single script.
 
-## Principe
+## Principle
 
-Jusqu'ici, tout notre code s'exécutait de haut en bas. Si on voulait réutiliser un calcul ou un affichage, il fallait copier-coller les lignes. C'est fragile : si on corrige un bug, il faut le corriger partout.
+Up until now, all our code ran from top to bottom. If we wanted to reuse a calculation or a display, we had to copy-paste the lines. This is fragile: if we fix a bug, we have to fix it everywhere.
 
-Une **méthode** résout ce problème. C'est un ensemble d'instructions qu'on nomme une fois, et qu'on peut appeler autant de fois qu'on veut. On peut aussi lui passer des **paramètres** pour la rendre flexible.
+A **method** solves this problem. It is a set of instructions that you name once, and can call as many times as you want. You can also pass it **parameters** to make it flexible.
 
-Un **bloc** est un morceau de code qu'on passe à une méthode. On l'a déjà utilisé sans le savoir avec `.each`, `.map`, `.select` : le code entre `{ }` ou `do...end` est un bloc.
+A **block** is a piece of code that you pass to a method. We have already used them without knowing it with `.each`, `.map`, `.select`: the code between `{ }` or `do...end` is a block.
 
-## Définir une méthode
+## Defining a method
 
-On crée une méthode avec `def`, un nom, et `end` :
+You create a method with `def`, a name, and `end`:
 
-```ruby
+~~~ruby
 def greet
-  puts 'Bonjour, dresseur !'
+  puts 'Hello, trainer!'
 end
 
-greet    # Affiche : Bonjour, dresseur !
-greet    # Affiche : Bonjour, dresseur !
-```
+greet    # Prints: Hello, trainer!
+greet    # Prints: Hello, trainer!
+~~~
 
-- `def greet` déclare la méthode. Le code à l'intérieur n'est **pas** exécuté à ce moment-là.
-- `greet` appelle la méthode. Le code s'exécute à chaque appel.
-- Le nom d'une méthode suit la convention `snake_case`, comme les variables.
+- `def greet` declares the method. The code inside is **not** executed at that point.
+- `greet` calls the method. The code runs on each call.
+- Method names follow the `snake_case` convention, just like variables.
 
-## Paramètres
+## Parameters
 
-Une méthode peut recevoir des **paramètres** qui la rendent flexible :
+A method can receive **parameters** that make it flexible:
 
-```ruby
+~~~ruby
 def greet_pokemon(name)
   puts "Go, #{name} !"
 end
 
-greet_pokemon('Pikachu')     # Affiche : Go, Pikachu !
-greet_pokemon('Dracaufeu')   # Affiche : Go, Dracaufeu !
-```
+greet_pokemon('Pikachu')     # Prints: Go, Pikachu !
+greet_pokemon('Charizard')   # Prints: Go, Charizard!
+~~~
 
-- `name` est un paramètre. Quand on appelle la méthode, on lui passe une valeur qui remplace ce paramètre.
-- Si on appelle `greet_pokemon` sans argument, Ruby lève une erreur.
+- `name` is a parameter. When you call the method, you pass a value that replaces this parameter.
+- If you call `greet_pokemon` without an argument, Ruby raises an error.
 
-### Valeurs par défaut
+### Default values
 
-On peut donner une valeur par défaut à un paramètre :
+You can give a parameter a default value:
 
-```ruby live
+~~~ruby
 def greet_pokemon(name, greeting = 'Go')
   puts "#{greeting}, #{name} !"
 end
 
-greet_pokemon('Pikachu')              # Affiche : Go, Pikachu !
-greet_pokemon('Pikachu', 'En avant')  # Affiche : En avant, Pikachu !
-```
+greet_pokemon('Pikachu')              # Prints: Go, Pikachu !
+greet_pokemon('Pikachu', 'Onward')  # Prints: En avant, Pikachu !
+~~~
 
-- `greeting = 'Go'` : si l'argument n'est pas fourni, `greeting` vaut `'Go'`.
+- `greeting = 'Go'`: if the argument is not provided, `greeting` defaults to `'Go'`.
 
-### Paramètres nommés (keyword)
+### Named parameters (keyword)
 
-Pour les méthodes avec plusieurs paramètres optionnels, les paramètres nommés sont plus lisibles :
+For methods with multiple optional parameters, named parameters are more readable:
 
-```ruby live
+~~~ruby
 def create_pokemon(name, level:, type: :normal)
   return { name: name, level: level, type: type }
 end
@@ -76,35 +76,35 @@ pikachu = create_pokemon('Pikachu', level: 25, type: :electric)
 rattata = create_pokemon('Rattata', level: 3)
 p pikachu    # => {:name=>"Pikachu", :level=>25, :type=>:electric}
 p rattata    # => {:name=>"Rattata", :level=>3, :type=>:normal}
-```
+~~~
 
-- `level:` est un paramètre nommé **obligatoire** (pas de valeur par défaut).
-- `type: :normal` est un paramètre nommé avec valeur par défaut.
-- À l'appel, on écrit `level: 25` au lieu de juste `25`. C'est plus long mais bien plus clair quand il y a plusieurs paramètres.
+- `level:` is a **required** named parameter (no default value).
+- `type: :normal` is a named parameter with a default value.
+- At the call site, you write `level: 25` instead of just `25`. It is longer but much clearer when there are multiple parameters.
 
-### Le splat \*args
+### The splat *args
 
-Le splat collecte un nombre variable d'arguments dans un Array :
+The splat collects a variable number of arguments into an Array:
 
-```ruby
+~~~ruby
 def display_team(trainer, *pokemon_names)
-  puts "Équipe de #{trainer} :"
+  puts "Team of #{trainer}:"
   pokemon_names.each do |pokemon_name|
     puts "  - #{pokemon_name}"
   end
 end
 
-display_team('Sacha', 'Pikachu', 'Dracaufeu', 'Tortank')
-```
+display_team('Ash', 'Pikachu', 'Charizard', 'Blastoise')
+~~~
 
-- `*pokemon_names` rassemble tous les arguments après `trainer` dans un Array.
-- On peut passer 0, 1 ou 100 noms — le splat s'adapte.
+- `*pokemon_names` gathers all arguments after `trainer` into an Array.
+- You can pass 0, 1, or 100 names -- the splat adapts.
 
-### Le double-splat \*\*options
+### The double-splat **options
 
-Le double-splat collecte les paramètres nommés non déclarés dans un Hash :
+The double-splat collects undeclared named parameters into a Hash:
 
-```ruby
+~~~ruby
 def create_pokemon(name, level:, **stats)
   pokemon = { name: name, level: level }
   return pokemon.merge(stats)
@@ -112,87 +112,87 @@ end
 
 pikachu = create_pokemon('Pikachu', level: 25, attack: 55, speed: 90)
 p pikachu    # => {:name=>"Pikachu", :level=>25, :attack=>55, :speed=>90}
-```
+~~~
 
-- `**stats` attrape `attack: 55, speed: 90` dans un Hash `{ attack: 55, speed: 90 }`.
-- `.merge(stats)` fusionne ce Hash avec le Hash de base.
+- `**stats` catches `attack: 55, speed: 90` into a Hash `{ attack: 55, speed: 90 }`.
+- `.merge(stats)` merges this Hash with the base Hash.
 
-## Valeurs de retour
+## Return values
 
-Toute méthode Ruby retourne une valeur. On peut la retourner explicitement avec `return` :
+Every Ruby method returns a value. You can return it explicitly with `return`:
 
-```ruby
+~~~ruby
 def calculate_damage(attack, defense)
   return attack - defense
 end
 
 damage = calculate_damage(55, 30)
-puts "Dégâts : #{damage}"    # Affiche : Dégâts : 25
-```
+puts "Damage: #{damage}"    # Prints: Dégâts : 25
+~~~
 
-Sans `return`, Ruby retourne automatiquement la **dernière expression évaluée** :
+Without `return`, Ruby automatically returns the **last evaluated expression**:
 
-```ruby
+~~~ruby
 def calculate_damage(attack, defense)
   attack - defense
 end
-```
+~~~
 
-Les deux formes fonctionnent. Dans cette série de tutoriels, on utilise `return` explicitement pour que l'intention soit claire, surtout quand on débute.
+Both forms work. In this tutorial series, we use `return` explicitly so the intent is clear, especially for beginners.
 
-`return` peut aussi servir à **sortir prématurément** d'une méthode :
+`return` can also be used to **exit a method early**:
 
-```ruby
+~~~ruby
 def heal(pokemon)
   if pokemon[:hp] >= pokemon[:max_hp]
-    puts "#{pokemon[:name]} a déjà tous ses PV !"
+    puts "#{pokemon[:name]} already has full HP!"
     return
   end
 
   pokemon[:hp] = pokemon[:max_hp]
-  puts "#{pokemon[:name]} est soigné !"
+  puts "#{pokemon[:name]} is healed!"
 end
-```
+~~~
 
-- Le premier `return` sort immédiatement de la méthode si le Pokémon est déjà au maximum. Le reste du code n'est pas exécuté.
+- The first `return` exits the method immediately if the Pokemon is already at maximum HP. The rest of the code is not executed.
 
-## Les blocs en profondeur
+## Blocks in depth
 
-On utilise des blocs depuis le chapitre 3 avec `.each`, `.map`, `.select`. Voyons comment créer nos propres méthodes qui acceptent des blocs.
+We have been using blocks since chapter 3 with `.each`, `.map`, `.select`. Let's see how to create our own methods that accept blocks.
 
-### yield — exécuter le bloc
+### yield -- execute the block
 
-`yield` permet à une méthode d'exécuter le bloc qu'on lui passe :
+`yield` allows a method to execute the block that was passed to it:
 
-```ruby
+~~~ruby
 def with_announcement(pokemon_name)
-  puts "--- Début ---"
+  puts "--- Start ---"
   yield(pokemon_name)
-  puts "--- Fin ---"
+  puts "--- End ---"
 end
 
 with_announcement('Pikachu') do |name|
-  puts "#{name} utilise Tonnerre !"
+  puts "#{name} uses Thunderbolt!"
 end
-```
+~~~
 
-Affiche :
+Outputs:
 
-```
---- Début ---
-Pikachu utilise Tonnerre !
---- Fin ---
-```
+~~~
+--- Start ---
+Pikachu uses Thunderbolt!
+--- End ---
+~~~
 
-- `yield(pokemon_name)` exécute le bloc en lui passant `pokemon_name` comme argument.
-- Le bloc reçoit cet argument dans `|name|`.
-- La méthode contrôle ce qui se passe **avant** et **après** le bloc.
+- `yield(pokemon_name)` executes the block, passing `pokemon_name` as an argument.
+- The block receives this argument in `|name|`.
+- The method controls what happens **before** and **after** the block.
 
-### block_given? — vérifier si un bloc est passé
+### block_given? -- check if a block was passed
 
-```ruby
+~~~ruby
 def display_pokemon(pokemon)
-  puts "#{pokemon[:name]} Niv.#{pokemon[:level]}"
+  puts "#{pokemon[:name]} Lvl.#{pokemon[:level]}"
 
   if block_given?
     yield(pokemon)
@@ -203,23 +203,23 @@ end
 
 pikachu = { name: 'Pikachu', level: 25, type: :electric, hp: 35, max_hp: 55 }
 
-# Sans bloc : affichage par défaut
+# Without a block: default display
 display_pokemon(pikachu)
 
-# Avec bloc : affichage personnalisé
+# With a block: custom display
 display_pokemon(pikachu) do |pokemon|
   puts "  PV : #{pokemon[:hp]}/#{pokemon[:max_hp]}"
 end
-```
+~~~
 
-- `block_given?` retourne `true` si un bloc a été passé, `false` sinon.
-- Cela permet d'avoir un comportement par défaut que l'appelant peut personnaliser.
+- `block_given?` returns `true` if a block was passed, `false` otherwise.
+- This allows having a default behavior that the caller can customize.
 
-### &block — capturer le bloc en objet
+### &block -- capture the block as an object
 
-Le préfixe `&` convertit un bloc en objet **Proc**, qu'on peut stocker et appeler avec `.call` :
+The `&` prefix converts a block into a **Proc** object, which can be stored and called with `.call`:
 
-```ruby
+~~~ruby
 def find_pokemon(team, &condition)
   team.each do |pokemon|
     return pokemon if condition.call(pokemon)
@@ -229,57 +229,57 @@ end
 
 team = [
   { name: 'Pikachu', level: 25 },
-  { name: 'Dracaufeu', level: 36 },
-  { name: 'Tortank', level: 40 }
+  { name: 'Charizard', level: 36 },
+  { name: 'Blastoise', level: 40 }
 ]
 
 result = find_pokemon(team) { |pokemon| pokemon[:level] >= 35 }
-puts "Trouvé : #{result[:name]}"    # Affiche : Trouvé : Dracaufeu
-```
+puts "Found: #{result[:name]}"    # Prints: Found: Charizard
+~~~
 
-- `&condition` capture le bloc et le transforme en un objet Proc stocké dans `condition`.
-- `condition.call(pokemon)` exécute ce Proc avec `pokemon` comme argument.
-- La différence avec `yield` : le Proc peut être stocké dans une variable ou passé à une autre méthode.
+- `&condition` captures the block and transforms it into a Proc object stored in `condition`.
+- `condition.call(pokemon)` executes this Proc with `pokemon` as an argument.
+- The difference from `yield`: the Proc can be stored in a variable or passed to another method.
 
-## Proc et lambda
+## Proc and lambda
 
-Ruby permet aussi de créer des blocs "autonomes" qu'on stocke dans des variables :
+Ruby also allows creating "standalone" blocks that you store in variables:
 
-```ruby
-# Lambda (recommandé)
+~~~ruby
+# Lambda (recommended)
 calculate = lambda do |attack, defense|
   return attack - defense
 end
 
 puts calculate.call(55, 30)    # => 25
 
-# Syntaxe raccourcie (stabby lambda)
+# Shorthand syntax (stabby lambda)
 calculate = ->(attack, defense) { attack - defense }
 
 puts calculate.call(55, 30)    # => 25
-```
+~~~
 
-- Un **lambda** est un bloc autonome stocké dans une variable. On l'appelle avec `.call`.
-- `->() { }` est un raccourci pour `lambda do ... end`.
+- A **lambda** is a standalone block stored in a variable. You call it with `.call`.
+- `->() { }` is a shorthand for `lambda do ... end`.
 
-Il existe aussi `Proc.new`, qui fonctionne de façon similaire mais avec une différence importante : `return` dans un Proc sort de la **méthode englobante**, tandis que `return` dans un lambda sort seulement du lambda. Pour cette raison, préférer `lambda` qui est plus prévisible.
+There is also `Proc.new`, which works similarly but with an important difference: `return` inside a Proc exits the **enclosing method**, while `return` inside a lambda only exits the lambda. For this reason, prefer `lambda` which is more predictable.
 
-On peut passer un lambda à une méthode qui attend un bloc avec `&` :
+You can pass a lambda to a method that expects a block using `&`:
 
-```ruby
+~~~ruby
 high_level = ->(pokemon) { pokemon[:level] >= 35 }
 
 result = team.select(&high_level)
-```
+~~~
 
-- `&high_level` convertit le lambda en bloc pour le passer à `.select`.
+- `&high_level` converts the lambda into a block to pass it to `.select`.
 
 ## Conclusion
 
-- `def method_name(params) ... end` définit une méthode. Jamais en une seule ligne.
-- Les paramètres peuvent être obligatoires, avec défaut, nommés (`key:`), splat (`*args`) ou double-splat (`**options`).
-- Utiliser `return` explicitement pour clarifier ce que la méthode retourne.
-- `yield` exécute le bloc passé à la méthode. `block_given?` vérifie sa présence.
-- `&block` capture le bloc en Proc pour le stocker ou le transmettre.
-- Un **lambda** est un bloc autonome stocké dans une variable. Préférer `lambda` à `Proc.new`.
-- `&variable` convertit un lambda/Proc en bloc pour le passer à une méthode.
+- `def method_name(params) ... end` defines a method. Never on a single line.
+- Parameters can be required, with defaults, named (`key:`), splat (`*args`), or double-splat (`**options`).
+- Use `return` explicitly to clarify what the method returns.
+- `yield` executes the block passed to the method. `block_given?` checks its presence.
+- `&block` captures the block as a Proc for storing or forwarding.
+- A **lambda** is a standalone block stored in a variable. Prefer `lambda` over `Proc.new`.
+- `&variable` converts a lambda/Proc into a block to pass it to a method.

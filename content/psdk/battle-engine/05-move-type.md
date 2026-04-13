@@ -1,26 +1,26 @@
 ---
-title: "Comment modifier le type d'une attaque dans PSDK ?"
-slug: modifier-le-type-dune-attaque
+title: "How to change a move type in PSDK?"
+slug: how-to-change-a-move-type
 sidebar_position: 5
-description: "Ce guide explique comment changer dynamiquement le type d'une attaque au moment de son utilisation, que ce soit depuis la logique propre de l'attaque ou depuis un effet externe."
+description: "This guide explains how to dynamically change the type of a move at the time of use, whether from the move's own logic or from an external effect."
 ---
 
-## Principe
+## Principle
 
-Le type d'une attaque peut être modifié pour deux raisons distinctes :
+A move's type can be changed for two distinct reasons:
 
-- **Depuis l'attaque elle-même** : l'attaque détermine son type en fonction de l'utilisateur ou du contexte.
-- **Depuis un effet externe** : un effet actif modifie le type de l'attaque avant son exécution.
+- **From the move itself**: the move determines its type based on the user or the context.
+- **From an external effect**: an active effect modifies the move's type before execution.
 
-Les deux mécanismes n'ont pas le même format de retour : `definitive_types` retourne un `Array<Integer>` (liste de types), tandis que `on_move_type_change` retourne un `Integer` unique ou `nil`.
+The two mechanisms have different return formats: `definitive_types` returns an `Array<Integer>` (list of types), while `on_move_type_change` returns a single `Integer` or `nil`.
 
-## Depuis l'attaque
+## From the move
 
-Certaines attaques peuvent changer de type selon leurs propres règles. Par exemple, l'attaque **Taurogne** adapte son type en fonction de la forme de Tauros qui l'utilise.
+Some moves can change type based on their own rules. For example, the move **Raging Bull** adapts its type based on the form of Tauros using it.
 
-Pour gérer ce comportement, on override la méthode `definitive_types` dans la classe de l'attaque.
+To handle this behavior, override the `definitive_types` method in the move's class.
 
-### Exemple : Taurogne
+### Example: Raging Bull
 
 ```ruby
 # @return [Array<Symbol>]
@@ -46,17 +46,17 @@ def definitive_types(user, target)
 end
 ```
 
-- La constante `RAGING_BULL_USERS` limite l'effet aux Pokémon concernés, permettant un monkey patch facile.
-- `data_type(:symbol).id` convertit un symbole de type en son identifiant numérique.
-- La méthode retourne toujours un `Array<Integer>`, même pour un seul type (`[type]`).
+- The `RAGING_BULL_USERS` constant limits the effect to the relevant Pokemon, allowing easy monkey patching.
+- `data_type(:symbol).id` converts a type symbol to its numeric identifier.
+- The method always returns an `Array<Integer>`, even for a single type (`[type]`).
 
-## Depuis un effet
+## From an effect
 
-Certains effets peuvent modifier le type d'une attaque avant son exécution. Par exemple, l'effet **Déluge Plasmique** transforme les attaques de type Normal en type Électrik.
+Some effects can modify a move's type before execution. For example, the **Ion Deluge** effect transforms Normal-type moves into Electric-type.
 
-Pour gérer ce comportement, on utilise la méthode `on_move_type_change` dans la classe de l'effet.
+To handle this behavior, use the `on_move_type_change` method in the effect's class.
 
-### Exemple : Déluge Plasmique
+### Example: Ion Deluge
 
 ```ruby
 # Function called when we try to get the definitive type of a move
@@ -72,11 +72,11 @@ def on_move_type_change(user, target, move, type)
 end
 ```
 
-- Le paramètre `type` contient le type actuel de l'attaque, potentiellement déjà modifié par d'autres effets.
-- La méthode retourne le nouveau type (`Integer`) si la condition est remplie, ou `nil` implicitement pour ne pas modifier le type.
+- The `type` parameter contains the current type of the move, potentially already modified by other effects.
+- The method returns the new type (`Integer`) if the condition is met, or implicitly `nil` to leave the type unchanged.
 
 ## Conclusion
 
-- Utilisez `definitive_types` si le changement de type dépend de la logique propre de l'attaque. Retournez un `Array<Integer>`.
-- Utilisez `on_move_type_change` si le changement dépend d'un effet externe. Retournez un `Integer` ou `nil`.
-- Utilisez `data_type(:symbol).id` pour convertir un symbole de type en identifiant numérique.
+- Use `definitive_types` if the type change depends on the move's own logic. Return an `Array<Integer>`.
+- Use `on_move_type_change` if the change depends on an external effect. Return an `Integer` or `nil`.
+- Use `data_type(:symbol).id` to convert a type symbol to a numeric identifier.
