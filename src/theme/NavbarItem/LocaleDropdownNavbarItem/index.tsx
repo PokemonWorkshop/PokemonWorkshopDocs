@@ -18,7 +18,7 @@ export default function LocaleDropdownNavbarItem({
   dropdownItemsAfter = [],
   queryString = "",
   ...props
-}: Props): JSX.Element {
+}: Props): React.JSX.Element {
   const {
     i18n: { currentLocale, localeConfigs },
   } = useDocusaurusContext();
@@ -37,8 +37,8 @@ export default function LocaleDropdownNavbarItem({
     if (mapped) return mapped;
 
     // Fallback: simple prefix swap
-    if (currentLocale === "fr") return `/en${currentPath}`;
-    return currentPath.replace(/^\/en/, "") || "/";
+    if (currentLocale === "en") return `/fr${currentPath}`;
+    return currentPath.replace(/^\/fr/, "") || "/";
   }
 
   const localeItems = Object.entries(localeConfigs).map(([locale, config]) => ({

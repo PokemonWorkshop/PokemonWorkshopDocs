@@ -39,31 +39,31 @@ module.exports = function localeDocMapPlugin(context) {
     name: "locale-doc-map",
 
     async loadContent() {
-      const frDir = path.join(context.siteDir, "content");
-      const enDir = path.join(
+      const enDir = path.join(context.siteDir, "content");
+      const frDir = path.join(
         context.siteDir,
         "i18n",
-        "en",
+        "fr",
         "docusaurus-plugin-content-docs",
         "current"
       );
 
-      const frDocs = walkDocs(frDir, frDir);
       const enDocs = walkDocs(enDir, enDir);
+      const frDocs = walkDocs(frDir, frDir);
 
-      // Build bidirectional mapping: frPath <-> enPath
+      // Build bidirectional mapping: enPath <-> frPath
       const mapping = {};
 
-      for (const frDoc of frDocs) {
-        const enDoc = enDocs.find((d) => d.docId === frDoc.docId);
-        if (!enDoc) continue;
+      for (const enDoc of enDocs) {
+        const frDoc = frDocs.find((d) => d.docId === enDoc.docId);
+        if (!frDoc) continue;
 
-        const frPath = docToPath(frDoc);
-        const enPath =
-          enDoc.slug === "/" ? "/en" : `/en${docToPath(enDoc)}`;
+        const enPath = docToPath(enDoc);
+        const frPath =
+          frDoc.slug === "/" ? "/fr" : `/fr${docToPath(frDoc)}`;
 
-        mapping[frPath] = enPath;
         mapping[enPath] = frPath;
+        mapping[frPath] = enPath;
       }
 
       return mapping;
