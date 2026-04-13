@@ -3,7 +3,7 @@
 /* === Fonts === */
 @font-face {
   font-family: "Gilroy";
-  src: url("/fonts/Gilroy-SemiBold.ttf") format("truetype");
+  src: url("/fonts/Gilroy-SemiBold.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -11,7 +11,7 @@
 
 @font-face {
   font-family: "Gilroy";
-  src: url("/fonts/Gilroy-Bold.ttf") format("truetype");
+  src: url("/fonts/Gilroy-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -19,7 +19,7 @@
 
 @font-face {
   font-family: "Avenir Next";
-  src: url("/fonts/AvenirNext-Regular.ttf") format("truetype");
+  src: url("/fonts/AvenirNext-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -27,7 +27,7 @@
 
 @font-face {
   font-family: "Avenir Next";
-  src: url("/fonts/AvenirNext-Medium.ttf") format("truetype");
+  src: url("/fonts/AvenirNext-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -35,7 +35,7 @@
 
 @font-face {
   font-family: "Avenir Next";
-  src: url("/fonts/AvenirNext-DemiBold.ttf") format("truetype");
+  src: url("/fonts/AvenirNext-DemiBold.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -43,7 +43,7 @@
 
 @font-face {
   font-family: "Source Code Pro";
-  src: url("/fonts/SourceCodePro-Regular.ttf") format("truetype");
+  src: url("/fonts/SourceCodePro-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
