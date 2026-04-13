@@ -63,12 +63,12 @@ end
 
 The main modes:
 
-| Mode   | Meaning                                            |
-| ------ | -------------------------------------------------- |
+| Mode   | Meaning                                              |
+| ------ | ---------------------------------------------------- |
 | `'r'`  | Read-only (default). Error if the file doesn't exist |
-| `'w'`  | Write. Creates the file or **overwrites** content  |
-| `'a'`  | Append. Creates the file or adds to the end        |
-| `'r+'` | Read and write                                     |
+| `'w'`  | Write. Creates the file or **overwrites** content    |
+| `'a'`  | Append. Creates the file or adds to the end          |
+| `'r+'` | Read and write                                       |
 
 - Always prefer `File.open` with a block over `File.open` without one. Without a block, you must remember to close the file manually.
 
@@ -173,13 +173,13 @@ loaded_data = JSON.parse(File.read('pokedex.json'))
 
 ## Marshal vs JSON
 
-|                    | Marshal                                  | JSON                                       |
-| ------------------ | ---------------------------------------- | ------------------------------------------ |
-| **Format**         | Binary (unreadable)                      | Text (readable)                            |
-| **Ruby types**     | Preserved (Symbol, classes)              | Lost (everything becomes String/Array/Hash)|
-| **Portability**    | Ruby only                                | All languages                              |
-| **Reconstruction** | Automatic                                | Manual (you must rebuild the objects)      |
-| **Security**       | Never load untrusted data                | Safe                                       |
+|                    | Marshal                     | JSON                                        |
+| ------------------ | --------------------------- | ------------------------------------------- |
+| **Format**         | Binary (unreadable)         | Text (readable)                             |
+| **Ruby types**     | Preserved (Symbol, classes) | Lost (everything becomes String/Array/Hash) |
+| **Portability**    | Ruby only                   | All languages                               |
+| **Reconstruction** | Automatic                   | Manual (you must rebuild the objects)       |
+| **Security**       | Never load untrusted data   | Safe                                        |
 
 - **Marshal** is perfect for internal saves within a Ruby program.
 - **JSON** is perfect for exchanging data with other programs or for readable configuration files.

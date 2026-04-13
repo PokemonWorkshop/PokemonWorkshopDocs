@@ -18,9 +18,9 @@ Adding a weather involves four steps:
 
 Weather messages are stored in file 100018 in Pokémon Studio. Up to three messages need to be added:
 
-- An **activation** message (when the weather appears) -- e.g., *"It started to rain!"*
-- An **end** message (when the weather fades) -- e.g., *"The rain stopped."*
-- A **turn** message (displayed at the end of each turn, optional) -- e.g., *"The sandstorm rages."*
+- An **activation** message (when the weather appears) -- e.g., _"It started to rain!"_
+- An **end** message (when the weather fades) -- e.g., _"The rain stopped."_
+- A **turn** message (displayed at the end of each turn, optional) -- e.g., _"The sandstorm rages."_
 
 Note the line numbers of these messages in Pokémon Studio, they will be needed for registration in the handler.
 
@@ -194,15 +194,15 @@ end
 
 ## File summary
 
-| File                                             | Action                                                       |
-| ------------------------------------------------ | ------------------------------------------------------------ |
-| Studio -> Battle System (file 100018)            | Add activation, end and turn messages                        |
-| `my-project/scripts/001 Weather.rb`              | Add symbol to `WEATHER_NAMES`                                |
-| `my-project/scripts/002 WeatherChangeHandler.rb` | Add entry to `WEATHER_SYM_TO_MSG`                            |
-| `my-project/scripts/003 WeatherEffect.rb`        | Create the weather effect class                              |
-| `my-project/scripts/004 WeatherMove.rb`          | Add to `WEATHER_MOVES` and `WEATHER_ITEMS` (if move)         |
-| `my-project/scripts/005 Ability.rb`              | Create the effect (if effect)                                |
-| Studio -> Moves                                  | Create the move with `s_weather` procedure (if move)         |
+| File                                             | Action                                               |
+| ------------------------------------------------ | ---------------------------------------------------- |
+| Studio -> Battle System (file 100018)            | Add activation, end and turn messages                |
+| `my-project/scripts/001 Weather.rb`              | Add symbol to `WEATHER_NAMES`                        |
+| `my-project/scripts/002 WeatherChangeHandler.rb` | Add entry to `WEATHER_SYM_TO_MSG`                    |
+| `my-project/scripts/003 WeatherEffect.rb`        | Create the weather effect class                      |
+| `my-project/scripts/004 WeatherMove.rb`          | Add to `WEATHER_MOVES` and `WEATHER_ITEMS` (if move) |
+| `my-project/scripts/005 Ability.rb`              | Create the effect (if effect)                        |
+| Studio -> Moves                                  | Create the move with `s_weather` procedure (if move) |
 
 ## Conclusion
 

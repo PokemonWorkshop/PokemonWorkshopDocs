@@ -18,8 +18,8 @@ Adding a field terrain involves four steps:
 
 Terrain messages are stored in file 100060 in Pokémon Studio. Two messages need to be added:
 
-- An **activation** message (when the terrain appears) -- e.g., *"An electric current runs across the battlefield!"*
-- An **end** message (when the terrain fades) -- e.g., *"The electricity disappeared from the battlefield."*
+- An **activation** message (when the terrain appears) -- e.g., _"An electric current runs across the battlefield!"_
+- An **end** message (when the terrain fades) -- e.g., _"The electricity disappeared from the battlefield."_
 
 Note the line numbers of these messages in Pokémon Studio, they will be needed for registration in the handler.
 
@@ -148,14 +148,14 @@ end
 
 ## File summary
 
-| File                                              | Action                                                     |
-| ------------------------------------------------- | ---------------------------------------------------------- |
-| Studio -> Battle System (file 100060)             | Add activation and end messages                            |
-| `my-project/scripts/001 FTerrainChangeHandler.rb` | Register messages in the handler                           |
-| `my-project/scripts/002 FieldTerrain.rb`          | Create the terrain effect class                            |
-| `my-project/scripts/003 TerrainMove.rb`           | Link the move to the terrain (if move)                     |
-| `my-project/scripts/004 Ability.rb`               | Create the effect (if effect)                              |
-| Studio -> Moves                                   | Create the move with `s_terrain` procedure (if move)       |
+| File                                              | Action                                               |
+| ------------------------------------------------- | ---------------------------------------------------- |
+| Studio -> Battle System (file 100060)             | Add activation and end messages                      |
+| `my-project/scripts/001 FTerrainChangeHandler.rb` | Register messages in the handler                     |
+| `my-project/scripts/002 FieldTerrain.rb`          | Create the terrain effect class                      |
+| `my-project/scripts/003 TerrainMove.rb`           | Link the move to the terrain (if move)               |
+| `my-project/scripts/004 Ability.rb`               | Create the effect (if effect)                        |
+| Studio -> Moves                                   | Create the move with `s_terrain` procedure (if move) |
 
 ## Conclusion
 

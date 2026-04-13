@@ -19,14 +19,14 @@ A **block** is a piece of code that you pass to a method. We have already used t
 
 You create a method with `def`, a name, and `end`:
 
-~~~ruby
+```ruby
 def greet
   puts 'Hello, trainer!'
 end
 
 greet    # Prints: Hello, trainer!
 greet    # Prints: Hello, trainer!
-~~~
+```
 
 - `def greet` declares the method. The code inside is **not** executed at that point.
 - `greet` calls the method. The code runs on each call.
@@ -36,14 +36,14 @@ greet    # Prints: Hello, trainer!
 
 A method can receive **parameters** that make it flexible:
 
-~~~ruby
+```ruby
 def greet_pokemon(name)
   puts "Go, #{name} !"
 end
 
 greet_pokemon('Pikachu')     # Prints: Go, Pikachu !
 greet_pokemon('Charizard')   # Prints: Go, Charizard!
-~~~
+```
 
 - `name` is a parameter. When you call the method, you pass a value that replaces this parameter.
 - If you call `greet_pokemon` without an argument, Ruby raises an error.
@@ -52,14 +52,14 @@ greet_pokemon('Charizard')   # Prints: Go, Charizard!
 
 You can give a parameter a default value:
 
-~~~ruby
+```ruby
 def greet_pokemon(name, greeting = 'Go')
   puts "#{greeting}, #{name} !"
 end
 
 greet_pokemon('Pikachu')              # Prints: Go, Pikachu !
 greet_pokemon('Pikachu', 'Onward')  # Prints: En avant, Pikachu !
-~~~
+```
 
 - `greeting = 'Go'`: if the argument is not provided, `greeting` defaults to `'Go'`.
 
@@ -67,7 +67,7 @@ greet_pokemon('Pikachu', 'Onward')  # Prints: En avant, Pikachu !
 
 For methods with multiple optional parameters, named parameters are more readable:
 
-~~~ruby
+```ruby
 def create_pokemon(name, level:, type: :normal)
   return { name: name, level: level, type: type }
 end
@@ -76,17 +76,17 @@ pikachu = create_pokemon('Pikachu', level: 25, type: :electric)
 rattata = create_pokemon('Rattata', level: 3)
 p pikachu    # => {:name=>"Pikachu", :level=>25, :type=>:electric}
 p rattata    # => {:name=>"Rattata", :level=>3, :type=>:normal}
-~~~
+```
 
 - `level:` is a **required** named parameter (no default value).
 - `type: :normal` is a named parameter with a default value.
 - At the call site, you write `level: 25` instead of just `25`. It is longer but much clearer when there are multiple parameters.
 
-### The splat *args
+### The splat \*args
 
 The splat collects a variable number of arguments into an Array:
 
-~~~ruby
+```ruby
 def display_team(trainer, *pokemon_names)
   puts "Team of #{trainer}:"
   pokemon_names.each do |pokemon_name|
@@ -95,16 +95,16 @@ def display_team(trainer, *pokemon_names)
 end
 
 display_team('Ash', 'Pikachu', 'Charizard', 'Blastoise')
-~~~
+```
 
 - `*pokemon_names` gathers all arguments after `trainer` into an Array.
 - You can pass 0, 1, or 100 names -- the splat adapts.
 
-### The double-splat **options
+### The double-splat \*\*options
 
 The double-splat collects undeclared named parameters into a Hash:
 
-~~~ruby
+```ruby
 def create_pokemon(name, level:, **stats)
   pokemon = { name: name, level: level }
   return pokemon.merge(stats)
@@ -112,7 +112,7 @@ end
 
 pikachu = create_pokemon('Pikachu', level: 25, attack: 55, speed: 90)
 p pikachu    # => {:name=>"Pikachu", :level=>25, :attack=>55, :speed=>90}
-~~~
+```
 
 - `**stats` catches `attack: 55, speed: 90` into a Hash `{ attack: 55, speed: 90 }`.
 - `.merge(stats)` merges this Hash with the base Hash.
@@ -121,28 +121,28 @@ p pikachu    # => {:name=>"Pikachu", :level=>25, :attack=>55, :speed=>90}
 
 Every Ruby method returns a value. You can return it explicitly with `return`:
 
-~~~ruby
+```ruby
 def calculate_damage(attack, defense)
   return attack - defense
 end
 
 damage = calculate_damage(55, 30)
 puts "Damage: #{damage}"    # Prints: Dégâts : 25
-~~~
+```
 
 Without `return`, Ruby automatically returns the **last evaluated expression**:
 
-~~~ruby
+```ruby
 def calculate_damage(attack, defense)
   attack - defense
 end
-~~~
+```
 
 Both forms work. In this tutorial series, we use `return` explicitly so the intent is clear, especially for beginners.
 
 `return` can also be used to **exit a method early**:
 
-~~~ruby
+```ruby
 def heal(pokemon)
   if pokemon[:hp] >= pokemon[:max_hp]
     puts "#{pokemon[:name]} already has full HP!"
@@ -152,7 +152,7 @@ def heal(pokemon)
   pokemon[:hp] = pokemon[:max_hp]
   puts "#{pokemon[:name]} is healed!"
 end
-~~~
+```
 
 - The first `return` exits the method immediately if the Pokemon is already at maximum HP. The rest of the code is not executed.
 
@@ -164,7 +164,7 @@ We have been using blocks since chapter 3 with `.each`, `.map`, `.select`. Let's
 
 `yield` allows a method to execute the block that was passed to it:
 
-~~~ruby
+```ruby
 def with_announcement(pokemon_name)
   puts "--- Start ---"
   yield(pokemon_name)
@@ -174,15 +174,15 @@ end
 with_announcement('Pikachu') do |name|
   puts "#{name} uses Thunderbolt!"
 end
-~~~
+```
 
 Outputs:
 
-~~~
+```
 --- Start ---
 Pikachu uses Thunderbolt!
 --- End ---
-~~~
+```
 
 - `yield(pokemon_name)` executes the block, passing `pokemon_name` as an argument.
 - The block receives this argument in `|name|`.
@@ -190,7 +190,7 @@ Pikachu uses Thunderbolt!
 
 ### block_given? -- check if a block was passed
 
-~~~ruby
+```ruby
 def display_pokemon(pokemon)
   puts "#{pokemon[:name]} Lvl.#{pokemon[:level]}"
 
@@ -210,7 +210,7 @@ display_pokemon(pikachu)
 display_pokemon(pikachu) do |pokemon|
   puts "  PV : #{pokemon[:hp]}/#{pokemon[:max_hp]}"
 end
-~~~
+```
 
 - `block_given?` returns `true` if a block was passed, `false` otherwise.
 - This allows having a default behavior that the caller can customize.
@@ -219,7 +219,7 @@ end
 
 The `&` prefix converts a block into a **Proc** object, which can be stored and called with `.call`:
 
-~~~ruby
+```ruby
 def find_pokemon(team, &condition)
   team.each do |pokemon|
     return pokemon if condition.call(pokemon)
@@ -235,7 +235,7 @@ team = [
 
 result = find_pokemon(team) { |pokemon| pokemon[:level] >= 35 }
 puts "Found: #{result[:name]}"    # Prints: Found: Charizard
-~~~
+```
 
 - `&condition` captures the block and transforms it into a Proc object stored in `condition`.
 - `condition.call(pokemon)` executes this Proc with `pokemon` as an argument.
@@ -245,7 +245,7 @@ puts "Found: #{result[:name]}"    # Prints: Found: Charizard
 
 Ruby also allows creating "standalone" blocks that you store in variables:
 
-~~~ruby
+```ruby
 # Lambda (recommended)
 calculate = lambda do |attack, defense|
   return attack - defense
@@ -257,7 +257,7 @@ puts calculate.call(55, 30)    # => 25
 calculate = ->(attack, defense) { attack - defense }
 
 puts calculate.call(55, 30)    # => 25
-~~~
+```
 
 - A **lambda** is a standalone block stored in a variable. You call it with `.call`.
 - `->() { }` is a shorthand for `lambda do ... end`.
@@ -266,11 +266,11 @@ There is also `Proc.new`, which works similarly but with an important difference
 
 You can pass a lambda to a method that expects a block using `&`:
 
-~~~ruby
+```ruby
 high_level = ->(pokemon) { pokemon[:level] >= 35 }
 
 result = team.select(&high_level)
-~~~
+```
 
 - `&high_level` converts the lambda into a block to pass it to `.select`.
 

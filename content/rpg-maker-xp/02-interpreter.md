@@ -31,15 +31,15 @@ You can also write any valid Ruby expression. You have access to global variable
 
 The Interpreter exposes shortcuts to quickly access the game's global objects:
 
-| Shortcut | Returns | Full name |
-|---|---|---|
-| `gv` | Game variables | `$game_variables` |
-| `gs` | Game switches | `$game_switches` |
-| `gt` | Game temp | `$game_temp` |
-| `gm` | Game map | `$game_map` |
-| `gp` | Game player | `$game_player` |
-| `ge(id)` | A map event | `$game_map.events[id]` |
-| `party` | Game state | `PFM.game_state` |
+| Shortcut | Returns        | Full name              |
+| -------- | -------------- | ---------------------- |
+| `gv`     | Game variables | `$game_variables`      |
+| `gs`     | Game switches  | `$game_switches`       |
+| `gt`     | Game temp      | `$game_temp`           |
+| `gm`     | Game map       | `$game_map`            |
+| `gp`     | Game player    | `$game_player`         |
+| `ge(id)` | A map event    | `$game_map.events[id]` |
+| `party`  | Game state     | `PFM.game_state`       |
 
 For example:
 
@@ -95,19 +95,19 @@ The `Interpreter` class is documented there with all its methods, their paramete
 
 For those who prefer reading the code directly, all Interpreter methods are defined in `pokemonsdk/scripts/2 PSDK Event Interpreter/`. Each file corresponds to a theme:
 
-| File | Theme |
-|---|---|
-| `100 Interpreter_Environnement.rb` | Player detection, event deletion |
-| `105 Interpreter_Camera.rb` | Camera movement |
-| `110 Interpreter_Pokemon.rb` | Add, remove, modify Pokémon |
-| `120 Interpreter_Shortcut.rb` | Shortcuts, emotions, menus, pathfinding |
-| `121 Interpreter_add_item.rb` | Item management |
-| `125 Interpreter_Fiber.rb` | Messages and choices |
-| `130 Interpreter_Sequences.rb` | Battle sequences, trades |
-| `140 Interpreter_Player.rb` | Player profile management |
-| `150 Interpreter_Time.rb` | Timed events |
-| `160 Interpreter_Overlay.rb` | Map overlays |
-| `165 Interpreter_Message_Font.rb` | Message font |
+| File                               | Theme                                   |
+| ---------------------------------- | --------------------------------------- |
+| `100 Interpreter_Environnement.rb` | Player detection, event deletion        |
+| `105 Interpreter_Camera.rb`        | Camera movement                         |
+| `110 Interpreter_Pokemon.rb`       | Add, remove, modify Pokémon             |
+| `120 Interpreter_Shortcut.rb`      | Shortcuts, emotions, menus, pathfinding |
+| `121 Interpreter_add_item.rb`      | Item management                         |
+| `125 Interpreter_Fiber.rb`         | Messages and choices                    |
+| `130 Interpreter_Sequences.rb`     | Battle sequences, trades                |
+| `140 Interpreter_Player.rb`        | Player profile management               |
+| `150 Interpreter_Time.rb`          | Timed events                            |
+| `160 Interpreter_Overlay.rb`       | Map overlays                            |
+| `165 Interpreter_Message_Font.rb`  | Message font                            |
 
 These files are part of PSDK's internal code. To access them, you need to follow guide **003 How to set up the development environment** which explains how to retrieve the engine's source code. Without this step, the `pokemonsdk/` folder is not visible in the project.
 

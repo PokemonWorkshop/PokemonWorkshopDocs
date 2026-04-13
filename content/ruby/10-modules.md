@@ -239,7 +239,7 @@ module Pokedex
 end
 ```
 
-## Absolute resolution with ::
+## Absolute resolution with
 
 If an inner module has the same name as an outer module, you can force resolution from the root with a `::` prefix:
 

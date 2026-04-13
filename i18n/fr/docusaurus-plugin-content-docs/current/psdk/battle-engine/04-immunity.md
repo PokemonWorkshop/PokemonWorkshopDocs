@@ -39,7 +39,7 @@ end
 ```
 
 - L'appel à `super` est **indispensable** pour conserver les vérifications par défaut.
-- `user.gender * target.gender == 2` vérifie que les deux Pokémon sont de genres opposés (mâle=1, femelle=2, donc 1*2=2).
+- `user.gender * target.gender == 2` vérifie que les deux Pokémon sont de genres opposés (mâle=1, femelle=2, donc 1\*2=2).
 - La méthode retourne `false` par défaut si aucune condition d'immunité n'est remplie.
 
 ## Depuis un effet

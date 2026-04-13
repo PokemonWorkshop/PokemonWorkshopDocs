@@ -15,18 +15,18 @@ GenericBase uses the Template Method pattern: hardcoded values are extracted int
 
 ## Overridable methods
 
-| Need | Class | Method to override | Default value |
-|---|---|---|---|
-| Different background | GenericBase subclass | `background_filename` | `'team/Fond'` |
-| Different button bar | GenericBase subclass | `button_background_filename` | `'tcard/button_background'` |
-| No background animation | GenericBase subclass | `create_background_animation` | Scrolling animation |
-| Custom ctrl button class | GenericBase subclass | `control_button_class` | `ControlButton` |
-| Different hidden buttons on win_text | GenericBase subclass | `hidden_button_indexes` | 0..2 |
-| Different button texture | ControlButton subclass | `button_texture` | `'buttons'` |
-| Different button text layout | ControlButton subclass | `text_rect` | `[17, 3, 51, 13]` |
-| Different key icon position | ControlButton subclass | `key_button_position` | `[0, 1]` |
-| Different text color | ControlButton subclass | `text_color(index)` | 20 or 21 |
-| Different font | ControlButton subclass | `text_font` | 20 |
+| Need                                 | Class                  | Method to override            | Default value               |
+| ------------------------------------ | ---------------------- | ----------------------------- | --------------------------- |
+| Different background                 | GenericBase subclass   | `background_filename`         | `'team/Fond'`               |
+| Different button bar                 | GenericBase subclass   | `button_background_filename`  | `'tcard/button_background'` |
+| No background animation              | GenericBase subclass   | `create_background_animation` | Scrolling animation         |
+| Custom ctrl button class             | GenericBase subclass   | `control_button_class`        | `ControlButton`             |
+| Different hidden buttons on win_text | GenericBase subclass   | `hidden_button_indexes`       | 0..2                        |
+| Different button texture             | ControlButton subclass | `button_texture`              | `'buttons'`                 |
+| Different button text layout         | ControlButton subclass | `text_rect`                   | `[17, 3, 51, 13]`           |
+| Different key icon position          | ControlButton subclass | `key_button_position`         | `[0, 1]`                    |
+| Different text color                 | ControlButton subclass | `text_color(index)`           | 20 or 21                    |
+| Different font                       | ControlButton subclass | `text_font`                   | 20                          |
 
 ## Full example: Mystery Gift
 

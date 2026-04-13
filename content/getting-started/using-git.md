@@ -57,15 +57,15 @@ By default, the main remote is called `origin`. We will see later how to add a s
 
 ### Essential commands
 
-| Command | Purpose |
-|---|---|
-| `git status` | see modified/added/deleted files |
-| `git add <file>` | add a file to the next commit |
-| `git commit -m "message"` | create a commit |
-| `git log --oneline` | view commit history |
-| `git push` | send commits to the remote |
-| `git pull` | fetch commits from the remote |
-| `git checkout <branch>` | switch branch |
+| Command                    | Purpose                           |
+| -------------------------- | --------------------------------- |
+| `git status`               | see modified/added/deleted files  |
+| `git add <file>`           | add a file to the next commit     |
+| `git commit -m "message"`  | create a commit                   |
+| `git log --oneline`        | view commit history               |
+| `git push`                 | send commits to the remote        |
+| `git pull`                 | fetch commits from the remote     |
+| `git checkout <branch>`    | switch branch                     |
 | `git checkout -b <branch>` | create and switch to a new branch |
 
 ## Forking the PSDK repository
@@ -141,10 +141,10 @@ git remote add upstream git@gitlab.com:pokemonsdk/pokemonsdk.git
 
 You now have two remotes:
 
-| Remote     | Points to             | Usage                                            |
-| ---------- | --------------------- | ------------------------------------------------ |
-| `origin`   | your fork             | pushing your branches                            |
-| `upstream` | official repository   | fetching new commits to keep up to date          |
+| Remote     | Points to           | Usage                                   |
+| ---------- | ------------------- | --------------------------------------- |
+| `origin`   | your fork           | pushing your branches                   |
+| `upstream` | official repository | fetching new commits to keep up to date |
 
 You can verify with `git remote -v`.
 

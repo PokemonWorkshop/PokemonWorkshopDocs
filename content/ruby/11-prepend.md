@@ -180,7 +180,7 @@ puts Pokemon.ancestors.inspect
 # => [DamageLog, Pokemon, Displayable, Object, ...]
 ```
 
-| Method    | Position in ancestors | Called via                        | Usage                    |
+| Method    | Position in ancestors | Called via                       | Usage                    |
 | --------- | --------------------- | -------------------------------- | ------------------------ |
 | `include` | After the class       | Instance (`pikachu.fiche`)       | Adding utilities         |
 | `prepend` | Before the class      | Instance (`pikachu.take_damage`) | Intercepting & enriching |
