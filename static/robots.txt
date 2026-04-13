@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /search
+
+Sitemap: https://docs.pokemonworkshop.com/sitemap.xml
+Sitemap: https://docs.pokemonworkshop.com/fr/sitemap.xml
