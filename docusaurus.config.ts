@@ -5,7 +5,7 @@ import { themes as prismThemes } from "prism-react-renderer";
 const config: Config = {
   title: "Pokémon Workshop Docs",
   tagline: "Tutorials and guides for the PSDK ecosystem",
-  favicon: "img/favicon.ico",
+  favicon: "favicon.svg",
 
   future: {
     v4: true,
@@ -72,6 +72,44 @@ const config: Config = {
         name: "description",
         content:
           "Official documentation for Pokémon Workshop: PSDK tutorials, Ruby courses, RPG Maker guides, and Pokémon Studio references.",
+      },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "icon",
+        type: "image/png",
+        sizes: "96x96",
+        href: "/favicon-96x96.png",
+      },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "shortcut icon",
+        href: "/favicon.ico",
+      },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "apple-touch-icon",
+        sizes: "180x180",
+        href: "/apple-touch-icon.png",
+      },
+    },
+    {
+      tagName: "meta",
+      attributes: {
+        name: "apple-mobile-web-app-title",
+        content: "Pokémon Workshop Docs",
+      },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "manifest",
+        href: "/site.webmanifest",
       },
     },
   ],
