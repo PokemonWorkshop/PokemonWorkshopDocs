@@ -1,7 +1,5 @@
 # Contributing to Pokémon Workshop Docs
 
-> **Version française** : consultez le [guide de contribution](https://docs.pokemonworkshop.com/divers/contribuer) sur le site.
-
 This guide explains how to add or edit documentation pages, the style conventions to follow, and the contribution workflow via Pull Request.
 
 ## Prerequisites
@@ -20,45 +18,61 @@ cd PokemonWorkshopDocs
 bun install
 ```
 
-Start the development server:
+The site uses Docusaurus with two locales: English (default) and French. The dev server can only run one locale at a time, so the right command depends on what you want to test:
 
-```bash
-bun start
-```
+| Command            | What it serves                                                                                                                                                                                |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bun start`        | The English version on `localhost:3000`. Hot reload.                                                                                                                                          |
+| `bun run start:fr` | The French version on `localhost:3000`. Hot reload.                                                                                                                                           |
+| `bun run preview`  | A full production build of both locales together on `localhost:3000`. Slower to start (full build) but the only way to test the locale dropdown and cross-locale navigation.                  |
 
-The site is available at `http://localhost:3000`. Changes are automatically reloaded.
+For everyday content edits, `bun start` (or `bun run start:fr`) is the right tool. Switch to `bun run preview` whenever you change navigation, slugs, or anything that touches both locales.
 
 ## Project Structure
 
-Documentation lives in the `content/` directory, organized by section:
+The repository is structured around the i18n architecture:
 
+```text
+.
+├── content/                  # English source docs (default locale)
+│   ├── index.md
+│   ├── getting-started/
+│   ├── psdk/
+│   │   ├── battle-engine/
+│   │   └── ui-development/
+│   ├── rpg-maker-xp/
+│   └── ruby/
+├── i18n/fr/
+│   ├── docusaurus-plugin-content-docs/
+│   │   ├── current/          # French translations of every English page
+│   │   └── current.json      # French sidebar category labels
+│   ├── docusaurus-theme-classic/
+│   │   ├── navbar.json       # Navbar item translations
+│   │   ├── footer.json
+│   │   └── code.json         # Other UI string translations
+└── …
 ```
-content/
-├── index.md                  # Home page
-├── getting-started/          # Getting Started
-├── ruby-course/              # Ruby Course
-├── rpg-maker/                # RPG Maker
-├── psdk/                     # PSDK (battle-engine, ui-development)
-│   ├── battle-engine/
-│   └── ui-development/
-├── studio/                   # Studio
-├── tiled/                    # Tiled
-└── divers/                   # Miscellaneous guides
-```
 
-Each directory contains a `_category_.json` file that defines the label and position of the section in the sidebar. The sidebar is auto-generated from the directory structure.
+Each section in `content/` has a `_category_.json` file declaring its label, position in the sidebar, and explicit URL slug. The sidebar is auto-generated from this directory structure.
 
-## Adding a Page
+## Adding or Editing a Page
 
-### Create the File
+Pages have to be created or edited in **both** locales:
 
-Create a `.md` file in the appropriate section directory. The filename determines the default URL (unless a `slug` is defined in the frontmatter).
+1. Add or edit the English source under `content/<section>/`.
+2. Add or edit the French translation under `i18n/fr/docusaurus-plugin-content-docs/current/<section>/` at the **same relative path**.
 
-To order pages in the sidebar, prefix the filename with a number: `01-my-topic.md`, `02-another-topic.md`.
+The two files share the same docId (relative path under the docs root) and the same `sidebar_position`, but may have different slugs and different content. Skipping the French file results in a fallback to the English source on the French site, which is rarely what you want.
+
+### File creation rules
+
+- Create the `.md` file in the appropriate section directory.
+- Prefix the filename with a number to control the sidebar order: `01-my-topic.md`, `02-another-topic.md`. The number must match the `sidebar_position` declared in the frontmatter.
+- The English and French versions must have identical filenames.
 
 ### Required Frontmatter
 
-Each page starts with a YAML frontmatter block:
+Every page starts with a YAML frontmatter block:
 
 ```markdown
 ---
@@ -69,10 +83,10 @@ description: "Concise description of the content. This description is reused as 
 ---
 ```
 
-- **title**: always phrased as a question (`"How to do X?"`, `"What is X?"`). Wrapped in quotes.
-- **slug**: the URL identifier, in kebab-case, without accents. No leading slash.
-- **sidebar_position**: position within the section (1, 2, 3...). Check existing positions to avoid duplicates.
-- **description**: one or two sentence summary. This text is repeated verbatim as the first paragraph of the page body.
+- **title**: phrased as a question (`"How to do X?"`, `"What is X?"`). Wrapped in quotes.
+- **slug**: URL identifier, in kebab-case, without accents. No leading slash. The English and French versions can have different slugs (e.g., `how-to-create-a-weather` vs `creer-une-meteo`).
+- **sidebar_position**: position within the section. Must match the filename prefix and be identical between locales.
+- **description**: one or two sentence summary. Repeated verbatim as the first paragraph of the page body.
 
 ### First Paragraph
 
@@ -80,31 +94,38 @@ The first paragraph after the frontmatter must repeat the `description` word for
 
 ### Adding a Section
 
-To create a new section (a new directory in `content/`), add a `_category_.json` file:
+To create a new section (a new directory under `content/`), add a `_category_.json` file:
 
 ```json
 {
   "label": "Section name",
   "position": 8,
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "slug": "/section-name"
   }
 }
 ```
 
-Adjust `position` to place the section correctly in the sidebar.
+The explicit `slug` keeps the section index page at `/section-name` rather than the default `/category/section-name`. Pages inside the section then live at `/section-name/<page-slug>`.
 
-## Editing an Existing Page
+To translate the section label in French, add an entry under `i18n/fr/docusaurus-plugin-content-docs/current.json`:
 
-Open the corresponding `.md` file, make your changes, and verify the rendering locally with `bun start`. Make sure internal links still work after the edit.
+```json
+{
+  "sidebar.mainSidebar.category.Section name": {
+    "message": "Nom de la section"
+  }
+}
+```
 
 ## Style Conventions
 
 ### Language and Tone
 
-- Write in **French** (primary content language).
-- Use the impersonal **on** rather than "vous" or "tu": _"On crée un commit"_, not _"Vous créez un commit"_.
-- Direct, educational tone. Explain the **why**, not just the **how**.
+- The English source in `content/` is the canonical text. French translations in `i18n/fr/...` should mirror it page-for-page.
+- French translations use the impersonal **on** rather than "vous" or "tu": _"On crée un commit"_, not _"Vous créez un commit"_.
+- Both languages keep a direct, educational tone. Explain the **why**, not just the **how**.
 
 ### Page Structure
 
@@ -116,7 +137,7 @@ Open the corresponding `.md` file, make your changes, and verify the rendering l
 
 ### Formatting
 
-- **Bold** for concept names, buttons, or menus: \*Click on **Add key\***.
+- **Bold** for concept names, buttons, or menus: _Click on **Add key**_.
 - `Inline code` for filenames, commands, methods, variables: _The file `solargraph.yml`_.
 - Code blocks with the language specified:
 
@@ -135,10 +156,10 @@ Supported languages: `ruby`, `bash`, `json`, `yaml`, `markdown`.
 
 ### Internal Links
 
-Use relative paths or slugs for links between pages:
+Use absolute paths starting with `/` for internal links. Docusaurus automatically prepends the locale prefix (`/fr/...`) on French pages.
 
 ```markdown
-See the guide [How to use Git with PSDK?](/utiliser-git-avec-psdk).
+See the guide [How to use Git with PSDK?](/getting-started/using-git-with-psdk).
 ```
 
 Do not use file paths (`content/getting-started/using-git.md`).
@@ -155,55 +176,86 @@ Accepted formats: PNG, SVG. Prefer SVG for diagrams.
 
 ## Contribution Workflow
 
-### 1. Create a Branch
+### 1. Open or Pick an Issue
+
+Every change should map to an issue. Either open one using the appropriate template (User Story for content, Technical Story for tooling) or pick an existing issue to work on.
+
+### 2. Create a Branch
 
 From an up-to-date `main`:
 
 ```bash
-git checkout main
+git switch main
 git pull
-git checkout -b docs/page-topic
+git switch -c <type>/<short-topic>
 ```
 
-Name the branch `docs/` followed by a short kebab-case summary.
+The branch name follows the same `<type>/<topic>` convention as the commit prefixes (see step 4). Examples:
 
-### 2. Write and Verify
+- `docs/font-setting-page`
+- `fix/locale-dropdown-fallback`
+- `chore/upgrade-docusaurus`
 
-- Write the page following the conventions above.
-- Verify the rendering locally with `bun start`.
-- Ensure the build passes without errors:
+### 3. Write and Verify
+
+- Write the page in `content/` and translate it in `i18n/fr/docusaurus-plugin-content-docs/current/` following the conventions above.
+- Verify the rendering locally with `bun start` (English) or `bun run start:fr` (French).
+- For locale-switcher or cross-locale checks, use `bun run preview`.
+- Run the type checker:
+
+```bash
+bun run typecheck
+```
+
+- Run the production build to catch broken links:
 
 ```bash
 bun run build
 ```
 
-### 3. Commit
+### 4. Commit
+
+Use [Conventional Commits](https://www.conventionalcommits.org/) for commit messages. The type prefix mirrors the branch type:
+
+| Type       | When to use                                              |
+| ---------- | -------------------------------------------------------- |
+| `docs`     | Documentation content (new pages, edits, translations)   |
+| `feat`     | New site feature (custom component, plugin)              |
+| `fix`      | Bug fix                                                  |
+| `chore`    | Tooling, configuration, repo meta                        |
+| `ci`       | CI/CD workflow changes                                   |
+| `refactor` | Code restructuring without behavior change               |
+| `perf`     | Performance improvement                                  |
+| `style`    | Formatting, whitespace, linter pass                      |
+| `test`     | Tests                                                    |
 
 One commit per logical change. Message in English, concise, present tense:
 
 ```bash
-git add content/psdk/battle-engine/17-new-topic.md
-git commit -m "Add guide for new battle engine topic"
+git add content/psdk/battle-engine/17-new-topic.md \
+        i18n/fr/docusaurus-plugin-content-docs/current/psdk/battle-engine/17-new-topic.md
+git commit -m "docs: add guide for new battle engine topic"
 ```
 
-### 4. Push and Open a Pull Request
+### 5. Push and Open a Pull Request
 
 ```bash
-git push -u origin docs/page-topic
+git push -u origin <type>/<short-topic>
 ```
 
-Open a Pull Request on GitHub targeting `main`. In the description:
+Open a Pull Request on GitHub targeting `main`. The PR template pre-fills the description; fill in:
 
-- Summarize the content added or changed.
-- Mention the impacted sections.
-- Add a screenshot of the rendering if it's a new page.
+- A short summary of the change.
+- The related issue (`Closes #N`) so it auto-closes on merge.
+- The test plan describing how you verified the change.
+- Screenshots if it's a new or modified page.
 
-### 5. Review and Merge
+### 6. Review and Merge
 
-A reviewer checks:
+The CI workflow runs typecheck and build on every PR. A reviewer also checks:
 
 - Compliance with style conventions.
+- That both English and French versions are present and consistent.
 - Technical accuracy of the content.
-- Proper functioning of links and the build.
 
-After approval, the PR is merged into `main`.
+After approval and a green CI, the PR is merged into `main`. A push to `main` automatically deploys the site to `docs.pokemonworkshop.com` via GitHub Actions.
