@@ -1,0 +1,48 @@
+name: User Story
+description: A user-facing need (new page, new feature, content gap, UX request).
+title: ""
+labels: ["user-story"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template when the issue describes something a **user** wants. For tooling, infra or dev experience, use the **Technical Story** template instead.
+
+  - type: textarea
+    id: user-story
+    attributes:
+      label: User Story
+      description: As a... I want... So that...
+      placeholder: |
+        As a Pokémon Studio user
+        I want to have a page about setting Fonts in Studio
+        So that I can learn how to set a default font, different fonts and sizes
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Issue description
+      description: Context, rationale, links to discussions if any.
+    validations:
+      required: true
+
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Tasks
+      description: Checklist of concrete work items.
+      value: |
+        - [ ]
+        - [ ]
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Out-of-scope items, edge cases, related issues, screenshots…
+    validations:
+      required: false

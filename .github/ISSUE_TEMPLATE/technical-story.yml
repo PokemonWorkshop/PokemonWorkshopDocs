@@ -1,0 +1,53 @@
+name: Technical Story
+description: A technical change with no direct user-facing value (tooling, refactor, infra, CI, dev experience).
+title: ""
+labels: ["technical-story"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for tooling, infra, refactors, or dev-experience improvements. For content or user-facing features, use the **User Story** template instead.
+
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: One sentence describing the technical outcome.
+      placeholder: Recommend the markdownlint VS Code extension to enforce a consistent Markdown style across contributions.
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context / Motivation
+      description: Why this matters technically, what pain it solves, current behavior if any.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: Concrete approach. Snippets, file paths, commands welcome.
+    validations:
+      required: true
+
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Tasks
+      description: Checklist of concrete work items.
+      value: |
+        - [ ]
+        - [ ]
+    validations:
+      required: false
+
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of scope / Follow-ups
+      description: Things that could come later but don't belong to this issue.
+    validations:
+      required: false
