@@ -1,0 +1,109 @@
+.container {
+  border: 1px solid #2b2a32;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 1.5rem;
+  background: #1d1c22;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.chapterLabel {
+  font-family: "Gilroy", "Avenir Next", sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #6562f8;
+  white-space: nowrap;
+}
+
+.chapterTitle {
+  font-family: "Avenir Next", sans-serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: #9191a1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.barTrack {
+  height: 6px;
+  background: #2b2a32;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.barFill {
+  height: 100%;
+  background: #6562f8;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #2b2a32;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.dot:hover {
+  transform: scale(1.3);
+}
+
+.dotVisited {
+  background: #35dd83;
+  border-color: #35dd83;
+}
+
+.dotCurrent {
+  background: #6562f8;
+  border-color: #6562f8;
+  box-shadow: 0 0 0 3px rgba(101, 98, 248, 0.3);
+}
+
+/* Tooltip */
+.dotWrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  background: #131216;
+  border: 1px solid #2b2a32;
+  border-radius: 6px;
+  font-family: "Avenir Next", sans-serif;
+  font-size: 0.7rem;
+  color: #f4f4f5;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 10;
+}
+
+.dotWrapper:hover .tooltip {
+  opacity: 1;
+}

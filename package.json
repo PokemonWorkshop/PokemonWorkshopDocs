@@ -1,0 +1,65 @@
+{
+  "name": "pokemon-workshop-docs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Official documentation for the Pokémon Workshop ecosystem: PSDK tutorials, Ruby course, RPG Maker XP, and Pokémon Studio guides.",
+  "license": "MIT",
+  "author": "Pokémon Workshop",
+  "homepage": "https://docs.pokemonworkshop.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PokemonWorkshop/PokemonWorkshopDocs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PokemonWorkshop/PokemonWorkshopDocs/issues"
+  },
+  "scripts": {
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "start:fr": "docusaurus start --locale fr",
+    "build": "docusaurus build",
+    "preview": "docusaurus build && docusaurus serve",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@docusaurus/core": "3.10.0",
+    "@docusaurus/faster": "3.10.0",
+    "@docusaurus/preset-classic": "3.10.0",
+    "@easyops-cn/docusaurus-search-local": "^0.55.1",
+    "@mdx-js/react": "^3.0.0",
+    "clsx": "^2.0.0",
+    "prism-react-renderer": "^2.3.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "3.10.0",
+    "@docusaurus/tsconfig": "3.10.0",
+    "@docusaurus/types": "3.10.0",
+    "typescript": "~5.6.2"
+  },
+  "overrides": {
+    "webpackbar": "^7.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 3 chrome version",
+      "last 3 firefox version",
+      "last 5 safari version"
+    ]
+  },
+  "engines": {
+    "node": ">=20.0"
+  }
+}

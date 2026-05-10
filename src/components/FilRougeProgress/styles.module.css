@@ -1,0 +1,98 @@
+.container {
+  border: 1px solid #2b2a32;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 1.5rem;
+  background: #1d1c22;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.projectLabel {
+  font-family: "Gilroy", "Avenir Next", sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #6562f8;
+  white-space: nowrap;
+}
+
+.stepTitle {
+  font-family: "Avenir Next", sans-serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: #9191a1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.barTrack {
+  height: 6px;
+  background: #2b2a32;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.barFill {
+  height: 100%;
+  background: #6562f8;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.steps {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: #2b2a32 transparent;
+}
+
+.step {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border: 1px solid #2b2a32;
+  border-radius: 6px;
+  background: transparent;
+  font-family: "Avenir Next", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #9191a1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.step:hover {
+  border-color: #6562f8;
+  color: #f4f4f5;
+  text-decoration: none;
+}
+
+.stepVisited {
+  background: rgba(53, 221, 131, 0.1);
+  border-color: #35dd83;
+  color: #35dd83;
+}
+
+.stepCurrent {
+  background: rgba(101, 98, 248, 0.15);
+  border-color: #6562f8;
+  color: #f4f4f5;
+  font-weight: 600;
+}
+
+.stepIcon {
+  font-size: 0.6rem;
+  line-height: 1;
+}

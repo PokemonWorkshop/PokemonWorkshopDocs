@@ -1,0 +1,104 @@
+/* Pokémon Studio Theme for Docusaurus */
+
+/* === Fonts === */
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/Gilroy-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/Gilroy-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Avenir Next";
+  src: url("/fonts/AvenirNext-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Avenir Next";
+  src: url("/fonts/AvenirNext-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Avenir Next";
+  src: url("/fonts/AvenirNext-DemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Source Code Pro";
+  src: url("/fonts/SourceCodePro-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* === Dark Theme (Studio Colors) === */
+[data-theme="dark"] {
+  --ifm-color-primary: #6562f8;
+  --ifm-color-primary-dark: #4845f6;
+  --ifm-color-primary-darker: #3a36f5;
+  --ifm-color-primary-darkest: #1410f0;
+  --ifm-color-primary-light: #8280fa;
+  --ifm-color-primary-lighter: #9190fb;
+  --ifm-color-primary-lightest: #b7b6fc;
+
+  --ifm-color-danger: #f53d5c;
+  --ifm-color-info: #35aff3;
+  --ifm-color-warning: #f5ab3d;
+  --ifm-color-success: #35dd83;
+
+  --ifm-background-color: #131216;
+  --ifm-background-surface-color: #1d1c22;
+  --ifm-navbar-background-color: #1d1c22;
+  --ifm-footer-background-color: #131216;
+
+  --ifm-font-color-base: #f4f4f5;
+  --ifm-font-color-secondary: #9191a1;
+  --ifm-heading-color: #f4f4f5;
+
+  --ifm-font-family-base: "Avenir Next", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ifm-heading-font-family: "Gilroy", "Avenir Next", sans-serif;
+  --ifm-font-family-monospace: "Source Code Pro", "Fira Code", monospace;
+  --ifm-heading-font-weight: 600;
+
+  --ifm-global-border-color: #2b2a32;
+}
+
+/* Cards: single column by default, 2 columns above 1440px */
+article .col.col--6 {
+  --ifm-col-width: 100%;
+  max-width: 100%;
+  flex: 0 0 100%;
+  padding: 8px;
+  margin-bottom: 0;
+}
+
+article .row {
+  margin: -8px;
+}
+
+@media (min-width: 1440px) {
+  article .col.col--6 {
+    --ifm-col-width: 50%;
+    max-width: 50%;
+    flex: 0 0 50%;
+  }
+}
+
