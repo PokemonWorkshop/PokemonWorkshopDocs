@@ -5,6 +5,12 @@ sidebar_position: 2
 description: "In RMXP, when creating an event, you have access to standard commands: show a message, give an item, teleport the player. But these commands are limited. PSDK provides dozens of ready-to-use methods that can be called directly from an event's Script command."
 ---
 
+:::warning This section will be archived when Pokémon Studio v3.0 is released
+
+Pokémon Studio v3.0 will move away from RPG Maker. When that release ships, this RPG Maker XP section will be archived: the pages will remain available as reference but will no longer be updated.
+
+:::
+
 In RMXP, when creating an event, you have access to standard commands: show a message, give an item, teleport the player. But these commands are limited. PSDK provides dozens of ready-to-use methods that can be called directly from an event's **Script** command. This guide explains where these methods come from, how to use them, and most importantly how to find them.
 
 ## What is the Interpreter?
