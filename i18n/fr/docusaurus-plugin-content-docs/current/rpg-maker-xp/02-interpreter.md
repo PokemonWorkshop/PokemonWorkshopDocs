@@ -5,7 +5,7 @@ sidebar_position: 2
 description: "Dans RMXP, quand on crée un event, on dispose de commandes classiques : afficher un message, donner un objet, téléporter le joueur. Mais ces commandes sont limitées. PSDK met à disposition des dizaines de méthodes prêtes à l'emploi qu'on peut appeler directement depuis la commande Script d'un event."
 ---
 
-:::warning Section archivée à la sortie de Pokémon Studio v3.0
+:::warning[Section archivée à la sortie de Pokémon Studio v3.0]
 
 Pokémon Studio v3.0 abandonnera RPG Maker. À ce moment-là, cette section sera archivée : les pages resteront accessibles comme référence mais ne seront plus mises à jour.
 
