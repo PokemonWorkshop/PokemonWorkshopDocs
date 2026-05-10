@@ -32,7 +32,10 @@ const config: Config = {
     },
   },
 
-  plugins: [require.resolve("./plugins/locale-doc-map")],
+  plugins: [
+    require.resolve("./plugins/locale-doc-map"),
+    require.resolve("./plugins/raw-markdown"),
+  ],
 
   themes: [
     [
