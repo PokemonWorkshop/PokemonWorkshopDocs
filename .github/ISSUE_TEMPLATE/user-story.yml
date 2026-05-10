@@ -1,6 +1,6 @@
 name: User Story
 description: A user-facing need (new page, new feature, content gap, UX request).
-title: "[User Story] "
+title: ""
 labels: ["user-story"]
 body:
   - type: markdown

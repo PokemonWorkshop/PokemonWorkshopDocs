@@ -1,6 +1,6 @@
 name: Technical Story
 description: A technical change with no direct user-facing value (tooling, refactor, infra, CI, dev experience).
-title: "[Technical Story] "
+title: ""
 labels: ["technical-story"]
 body:
   - type: markdown
