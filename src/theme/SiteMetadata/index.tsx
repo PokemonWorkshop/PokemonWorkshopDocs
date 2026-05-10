@@ -89,6 +89,31 @@ function AlternateLangHeaders(): ReactNode {
   );
 }
 
+function OrganizationSchema(): ReactNode {
+  const {
+    siteConfig: { url: siteUrl },
+  } = useDocusaurusContext();
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Pokémon Workshop",
+    url: "https://pokemonworkshop.com",
+    logo: `${siteUrl}/img/logo.png`,
+    sameAs: [
+      "https://discord.com/invite/0noB0gBDd91B8pMk",
+      "https://x.com/pokemonworkshop",
+      "https://github.com/PokemonWorkshop",
+    ],
+  };
+
+  return (
+    <Head>
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
+    </Head>
+  );
+}
+
 function useDefaultCanonicalUrl() {
   const {
     siteConfig: { url: siteUrl, baseUrl, trailingSlash },
@@ -136,6 +161,8 @@ export default function SiteMetadata(): ReactNode {
       <CanonicalUrlHeaders />
 
       <AlternateLangHeaders />
+
+      <OrganizationSchema />
 
       <SearchMetadata tag={DEFAULT_SEARCH_TAG} locale={currentLocale} />
 

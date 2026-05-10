@@ -102,3 +102,56 @@ article .row {
   }
 }
 
+/* === Footer === */
+
+/* Hide external link icons in the footer (visual noise, redundant
+   with the "Community" section context). Icons elsewhere on the
+   site stay intact since this only targets .footer__link-item. */
+.footer__link-item svg {
+  display: none;
+}
+
+/* Layout: logo on the left, link columns on the right, copyright
+   spanning the full width below. Uses display: contents on the
+   internal footer__bottom wrapper so the logo and copyright become
+   direct grid children of .container. */
+.footer > .container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "logo links"
+    "copyright copyright";
+  align-items: start;
+  gap: 1.5rem 3rem;
+}
+
+.footer__links {
+  grid-area: links;
+  margin: 0;
+}
+
+.footer__bottom {
+  display: contents;
+}
+
+.footer__bottom > .margin-bottom--sm {
+  grid-area: logo;
+  margin: 0;
+}
+
+.footer__copyright {
+  grid-area: copyright;
+  text-align: left;
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .footer > .container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "logo"
+      "links"
+      "copyright";
+  }
+}
+
