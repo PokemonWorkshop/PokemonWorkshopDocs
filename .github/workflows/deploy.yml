@@ -28,7 +28,7 @@ jobs:
         uses: oven-sh/setup-bun@v2
 
       - name: Cache bun install store
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.bun/install/cache
           key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
@@ -42,7 +42,7 @@ jobs:
         run: bun run typecheck
 
       - name: Cache Docusaurus build
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: .docusaurus
           key: ${{ runner.os }}-docusaurus-${{ hashFiles('docusaurus.config.ts', 'sidebars.ts', 'content/**', 'i18n/**', 'src/**') }}
