@@ -1,8 +1,6 @@
 import { useDocsSidebar } from "@docusaurus/plugin-content-docs/client";
 import { useEffect, useMemo, useState } from "react";
 
-/* ── Types ── */
-
 export interface ChapterInfo {
   docId: string;
   label: string;
@@ -14,8 +12,6 @@ interface ChapterProgressResult {
   currentIndex: number;
   visitedIds: Set<string>;
 }
-
-/* ── Sidebar extraction ── */
 
 function extractDirectLinks(items: any[]): ChapterInfo[] {
   const links: ChapterInfo[] = [];
@@ -40,11 +36,9 @@ function findCategoryChapters(
   function search(items: any[]): ChapterInfo[] | null {
     for (const item of items) {
       if (item.type === "category" && item.items) {
-        // Depth-first: check sub-categories before this one
         const deeper = search(item.items);
         if (deeper) return deeper;
 
-        // Check direct links of this category
         const links = extractDirectLinks(item.items);
         if (links.some((l) => l.docId === docId)) return links;
       }
@@ -54,8 +48,6 @@ function findCategoryChapters(
 
   return search(sidebar.items);
 }
-
-/* ── Hook ── */
 
 export function useChapterProgress(
   storageKey: string,

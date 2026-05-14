@@ -366,5 +366,17 @@
   "theme.tags.tagsPageTitle": {
     "message": "Tags",
     "description": "The title of the tag list page"
+  },
+  "progressTracker.barAriaLabel": {
+    "message": "Progression : {current} sur {total}",
+    "description": "ARIA label for the progress tracker bar"
+  },
+  "progressTracker.ruby.label": {
+    "message": "Chapitre",
+    "description": "Label prefix for the Ruby course chapters in the progress tracker"
+  },
+  "progressTracker.uiDev.label": {
+    "message": "Mystery Gift — Etape",
+    "description": "Label prefix for the UI Development tutorial steps in the progress tracker"
   }
 }
