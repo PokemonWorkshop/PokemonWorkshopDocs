@@ -3,6 +3,7 @@
   "position": 7,
   "link": {
     "type": "generated-index",
-    "slug": "/misc"
+    "slug": "/misc",
+    "description": "Miscellaneous guides for the Pokémon Workshop ecosystem that do not fit into the main sections. Content will land here as it is written."
   }
 }

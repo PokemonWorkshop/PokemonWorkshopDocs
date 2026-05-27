@@ -3,6 +3,7 @@
   "position": 2,
   "link": {
     "type": "generated-index",
-    "slug": "/psdk/battle-engine"
+    "slug": "/psdk/battle-engine",
+    "description": "Step-by-step guides to extend PSDK's battle engine: custom moves, types, immunities, weathers, terrains, damage formulas and histories."
   }
 }
