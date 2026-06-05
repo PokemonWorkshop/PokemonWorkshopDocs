@@ -11,6 +11,10 @@
     "message": "PSDK",
     "description": "The label for category 'PSDK' in sidebar 'mainSidebar'"
   },
+  "sidebar.mainSidebar.category.Pokémon Studio": {
+    "message": "Pokémon Studio",
+    "description": "The label for category 'Pokémon Studio' in sidebar 'mainSidebar'"
+  },
   "sidebar.mainSidebar.category.UI Development": {
     "message": "Développement UI",
     "description": "The label for category 'UI Development' in sidebar 'mainSidebar'"
