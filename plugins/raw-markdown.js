@@ -1,15 +1,27 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
+
+const FRONTMATTER_OPEN = "---\n";
+const FRONTMATTER_CLOSE = "\n---\n";
 
 /**
- * Read a markdown file, split frontmatter from body.
- * Returns null if the file has no frontmatter (the docs convention).
+ * Read a markdown file and split its leading frontmatter from the body.
+ * Returns null when the file has no frontmatter block (the docs convention).
+ * Assumes LF line endings, enforced repo-wide via .gitattributes.
  */
 function readMarkdown(filePath) {
   const content = fs.readFileSync(filePath, "utf8");
-  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
-  if (!match) return null;
-  return { frontmatter: match[1], body: content.slice(match[0].length) };
+  if (!content.startsWith(FRONTMATTER_OPEN)) return null;
+
+  const closeIndex = content.indexOf(
+    FRONTMATTER_CLOSE,
+    FRONTMATTER_OPEN.length,
+  );
+  if (closeIndex === -1) return null;
+
+  const frontmatter = content.slice(FRONTMATTER_OPEN.length, closeIndex);
+  const body = content.slice(closeIndex + FRONTMATTER_CLOSE.length);
+  return { frontmatter, body };
 }
 
 function extractSlug(frontmatter) {
@@ -18,43 +30,36 @@ function extractSlug(frontmatter) {
 }
 
 /**
- * Walk a docs source tree, write `.md` files into outDir at their slug-based
- * URL path. Skips the home page (slug "/"). Files are written without
- * frontmatter so they read as clean markdown for clipboards / LLMs.
+ * Build the slug-based URL path (without extension) for a doc, mirroring the
+ * rendered route: the source directory tree plus the page slug.
+ */
+function toUrlPath(relPath, slug) {
+  const relDir = path.dirname(relPath).replace(/\\/g, "/");
+  const cleanSlug = slug.startsWith("/") ? slug.slice(1) : slug;
+  if (!relDir || relDir === ".") return cleanSlug;
+  return `${relDir}/${cleanSlug}`;
+}
+
+/**
+ * Walk a docs source tree and write a clean `.md` file (frontmatter stripped)
+ * into outDir at each page's slug-based URL path. Skips the home page
+ * (slug "/"). Returns the number of files written.
  */
 function copyMarkdownTree(sourceDir, outDir) {
   if (!fs.existsSync(sourceDir)) return 0;
 
   let count = 0;
-  const stack = [sourceDir];
+  for (const relPath of fs.globSync("**/*.{md,mdx}", { cwd: sourceDir })) {
+    const parsed = readMarkdown(path.join(sourceDir, relPath));
+    if (!parsed) continue;
 
-  while (stack.length > 0) {
-    const dir = stack.pop();
-    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-      const fullPath = path.join(dir, entry.name);
-      if (entry.isDirectory()) {
-        stack.push(fullPath);
-        continue;
-      }
-      if (!/\.mdx?$/.test(entry.name)) continue;
+    const slug = extractSlug(parsed.frontmatter);
+    if (!slug || slug === "/") continue;
 
-      const parsed = readMarkdown(fullPath);
-      if (!parsed) continue;
-
-      const slug = extractSlug(parsed.frontmatter);
-      if (!slug || slug === "/") continue;
-
-      const relDir = path
-        .relative(sourceDir, path.dirname(fullPath))
-        .replace(/\\/g, "/");
-      const cleanSlug = slug.startsWith("/") ? slug.slice(1) : slug;
-      const urlPath = relDir && relDir !== "." ? `${relDir}/${cleanSlug}` : cleanSlug;
-
-      const dstPath = path.join(outDir, `${urlPath}.md`);
-      fs.mkdirSync(path.dirname(dstPath), { recursive: true });
-      fs.writeFileSync(dstPath, parsed.body);
-      count++;
-    }
+    const dstPath = path.join(outDir, `${toUrlPath(relPath, slug)}.md`);
+    fs.mkdirSync(path.dirname(dstPath), { recursive: true });
+    fs.writeFileSync(dstPath, parsed.body);
+    count++;
   }
 
   return count;
@@ -78,7 +83,9 @@ module.exports = function rawMarkdownPlugin() {
           );
 
       const count = copyMarkdownTree(sourceDir, outDir);
-      console.log(`[raw-markdown] ${currentLocale}: copied ${count} markdown files`);
+      console.log(
+        `[raw-markdown] ${currentLocale}: copied ${count} markdown files`,
+      );
     },
   };
 };
