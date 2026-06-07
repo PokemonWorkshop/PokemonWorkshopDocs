@@ -7,24 +7,60 @@
     "message": "Démarrage",
     "description": "The label for category 'Getting Started' in sidebar 'mainSidebar'"
   },
+  "sidebar.mainSidebar.category.Getting Started.link.generated-index.description": {
+    "message": "Installer l'environnement de développement PSDK, apprendre Git pour PSDK et découvrir le monkey-patching pour personnaliser le moteur sans risque.",
+    "description": "The generated-index page description for category Getting Started in sidebar mainSidebar"
+  },
   "sidebar.mainSidebar.category.PSDK": {
     "message": "PSDK",
     "description": "The label for category 'PSDK' in sidebar 'mainSidebar'"
+  },
+  "sidebar.mainSidebar.category.PSDK.link.generated-index.description": {
+    "message": "Plongée dans les internes de PSDK : créer des scènes UI personnalisées et étendre le moteur de combat avec des capacités, météos, terrains et effets.",
+    "description": "The generated-index page description for category PSDK in sidebar mainSidebar"
   },
   "sidebar.mainSidebar.category.UI Development": {
     "message": "Développement UI",
     "description": "The label for category 'UI Development' in sidebar 'mainSidebar'"
   },
+  "sidebar.mainSidebar.category.UI Development.link.generated-index.description": {
+    "message": "Construire un plugin Mystery Gift complet et maîtriser la couche UI de PSDK : scènes, compositions, entrées, animations et i18n.",
+    "description": "The generated-index page description for category UI Development in sidebar mainSidebar"
+  },
   "sidebar.mainSidebar.category.Battle Engine": {
     "message": "Moteur de Combat",
     "description": "The label for category 'Battle Engine' in sidebar 'mainSidebar'"
+  },
+  "sidebar.mainSidebar.category.Battle Engine.link.generated-index.description": {
+    "message": "Guides pas à pas pour étendre le moteur de combat PSDK : capacités, types, immunités, météos, terrains, formules de dégâts et historiques personnalisés.",
+    "description": "The generated-index page description for category Battle Engine in sidebar mainSidebar"
   },
   "sidebar.mainSidebar.category.RPG Maker XP": {
     "message": "RPG Maker XP",
     "description": "The label for category 'RPG Maker XP' in sidebar 'mainSidebar'"
   },
+  "sidebar.mainSidebar.category.RPG Maker XP.link.generated-index.description": {
+    "message": "Apprendre les bases de RPG Maker XP nécessaires aux événements PSDK, et appeler les méthodes PSDK directement depuis la commande Script d'un événement.",
+    "description": "The generated-index page description for category RPG Maker XP in sidebar mainSidebar"
+  },
   "sidebar.mainSidebar.category.Ruby": {
     "message": "Cours Ruby",
     "description": "The label for category 'Ruby' in sidebar 'mainSidebar'"
+  },
+  "sidebar.mainSidebar.category.Ruby.link.generated-index.description": {
+    "message": "Un cours Ruby complet orienté PSDK, des variables et tableaux aux modules, prepend et classes avancées — à suivre dans l'ordre.",
+    "description": "The generated-index page description for category Ruby in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Pokémon Studio.link.generated-index.description": {
+    "message": "Documentation de Pokémon Studio, l'éditeur moderne du Pokémon Workshop. Les guides de référence et tutoriels arriveront ici au fil de la rédaction.",
+    "description": "The generated-index page description for category Pokémon Studio in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Tiled.link.generated-index.description": {
+    "message": "Documentation de Tiled, l'éditeur de cartes utilisé par les projets PSDK. Les guides de référence et tutoriels arriveront ici au fil de la rédaction.",
+    "description": "The generated-index page description for category Tiled in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Misc.link.generated-index.description": {
+    "message": "Guides divers de l'écosystème Pokémon Workshop qui ne rentrent pas dans les sections principales. Le contenu arrivera ici au fil de la rédaction.",
+    "description": "The generated-index page description for category Misc in sidebar mainSidebar"
   }
 }

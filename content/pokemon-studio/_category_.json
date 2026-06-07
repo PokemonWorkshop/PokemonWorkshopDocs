@@ -3,6 +3,7 @@
   "position": 2,
   "link": {
     "type": "generated-index",
-    "slug": "/pokemon-studio"
+    "slug": "/pokemon-studio",
+    "description": "Documentation for Pokémon Studio, the modern Pokémon Workshop editor. Reference guides and how-tos will land here as they are written."
   }
 }

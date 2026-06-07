@@ -3,6 +3,7 @@
   "position": 6,
   "link": {
     "type": "generated-index",
-    "slug": "/ruby"
+    "slug": "/ruby",
+    "description": "A complete Ruby course oriented towards PSDK, from variables and arrays to modules, prepend and advanced classes — follow in order."
   }
 }

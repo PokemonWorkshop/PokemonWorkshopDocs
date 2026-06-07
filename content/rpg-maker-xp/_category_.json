@@ -3,6 +3,7 @@
   "position": 5,
   "link": {
     "type": "generated-index",
-    "slug": "/rpg-maker-xp"
+    "slug": "/rpg-maker-xp",
+    "description": "Learn the RPG Maker XP basics needed for PSDK events, and call PSDK's ready-to-use methods directly from an event's Script command."
   }
 }
