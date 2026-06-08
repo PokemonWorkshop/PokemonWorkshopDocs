@@ -2,23 +2,25 @@
 title: "Comment créer une Composition dans PSDK ?"
 slug: creer-une-composition
 sidebar_position: 2
-description: "Ce guide explique comment créer une Composition, la classe centrale de l'UI qui regroupe tous les composants visuels d'une scène."
+description: "Ce guide explique comment créer une Composition, la classe UI centrale qui regroupe tous les composants visuels d'une scène."
 ---
 
-Ce guide explique comment créer une Composition, la classe centrale de l'UI qui regroupe tous les composants visuels d'une scène. Il fait suite au guide 001 : le lecteur dispose déjà d'une scène Mystery Gift minimale fonctionnelle.
+Ce guide s'appuie sur le [guide de la scène](./01-ui-scene.md) : vous avez déjà une scène Mystery Gift minimale qui s'affiche et se ferme avec B. Ici, on ajoute la **Composition**, la classe UI centrale qui regroupe tous les composants visuels d'une scène.
 
 ## Principe
 
-La Composition est la classe qui orchestre **tout** le rendu visuel d'une scène. Elle suit des règles précises :
+La Composition orchestre **tout** le rendu visuel d'une scène. Elle suit des règles précises :
 
-- Elle hérite de `SpriteStack` et se nomme `UI::X::Composition`.
-- Elle est le **seul point de contact** entre la scène GamePlay et la couche UI.
-- La scène lui délègue la création et la mise à jour de tous les éléments visuels.
+- Elle étend `SpriteStack` et s'appelle `UI::X::Composition`.
+- C'est le **seul point de contact** entre la scène GamePlay et la couche UI.
+- La scène délègue toute la création et la mise à jour de l'UI à la Composition.
 - Elle doit toujours exposer les méthodes `update()` et `done?()` pour que le framework de scène puisse la piloter.
 
-## Module de constantes
+## Fichier de constantes
 
-Avant de créer la Composition, il faut définir les constantes du module UI. Elles centralisent les identifiants de texte, les dimensions et les positions utilisés par tous les fichiers UI.
+La Composition (et tous les autres fichiers UI) lisent des valeurs partagées dans un module de constantes : IDs de texte, dimensions et positions. On les centralise dans un fichier dès maintenant, et chaque constante est utilisée au fur et à mesure qu'on construit la pièce correspondante -- le [guide i18n](./07-i18n.md) explique les IDs de texte en détail.
+
+Créez `scripts/20 MysteryGift/001 Constants.rb` :
 
 ```ruby
 module UI
@@ -26,10 +28,20 @@ module UI
   module MysteryGift
     # CSV file ID for i18n text
     TEXT_FILE_ID = 311_125
-    # Text IDs
+
+    # Text row IDs (match Data/Text/Dialogs/311125.csv row order)
     TEXT_ENTER_CODE = 0
     TEXT_QUIT = 1
     TEXT_TITLE = 2
+    TEXT_PROMPT = 3
+    TEXT_INVALID = 4
+    TEXT_ALREADY_CLAIMED = 5
+    TEXT_RECEIVED = 6
+    TEXT_NO_GIFTS = 7
+    TEXT_CONFIRM = 8
+    TEXT_GIFT_RECEIVED = 9
+    TEXT_YES = 10
+    TEXT_NO = 11
 
     # Layout constants (320x240 resolution)
     HEADER_Y = 0
@@ -37,18 +49,31 @@ module UI
     FRAME_Y = 22
     FRAME_WIDTH = 304
     FRAME_HEIGHT = 188
+
+    # Gift row layout (centered inside the frame with margins)
+    GIFT_ROW_MARGIN = 8
+    GIFT_ROW_X = FRAME_X + GIFT_ROW_MARGIN
+    GIFT_ROW_Y = FRAME_Y + GIFT_ROW_MARGIN + 4
+    GIFT_ROW_WIDTH = FRAME_WIDTH - GIFT_ROW_MARGIN * 2
+    GIFT_ROW_PITCH = 28
+    VISIBLE_ROWS = 6
+
+    # Maximum code length for NameInput
+    CODE_MAX_LENGTH = 20
   end
 end
 ```
 
-- `TEXT_FILE_ID` est l'identifiant du fichier CSV contenant les textes traduits de la scène, utilisé avec `ext_text`.
-- `TEXT_ENTER_CODE`, `TEXT_QUIT`, `TEXT_TITLE` sont les index des lignes dans ce CSV. Nommer les index au lieu d'utiliser des nombres bruts rend le code lisible et maintenable.
-- Les constantes de layout (`HEADER_Y`, `FRAME_X`, etc.) centralisent les positions et dimensions. Si la résolution change, on modifie un seul endroit.
-- Ces constantes sont placées dans le module `UI::MysteryGift`. La Composition, déclarée à l'intérieur de ce module, y accède directement. La scène GamePlay y accède via `include UI::MysteryGift`.
+- `TEXT_FILE_ID` identifie le fichier CSV (`Data/Text/Dialogs/311125.csv`, installé dans le guide de préparation). Les constantes `TEXT_*` sont des index de ligne dans ce fichier -- les nommer évite les nombres magiques dans le code.
+- Les constantes de layout centralisent les positions et dimensions. Si la résolution change, vous modifiez un seul endroit.
+- `001 Constants.rb` est chargé avant le dossier `001 PFM/` et tout ce qui suit, donc ces constantes sont disponibles pour tous les fichiers qu'on crée ensuite.
+- Certaines constantes (`GIFT_ROW_*`, `CODE_MAX_LENGTH`, plusieurs `TEXT_*`) ne sont pas encore utilisées -- on s'en sert au moment de construire les lignes de cadeaux, l'entrée et les dialogues dans les guides suivants.
 
-## Composition basique
+## Composition de base
 
-La Composition hérite de `SpriteStack` et reçoit le viewport en paramètre. Elle crée les éléments visuels dans son constructeur et expose les méthodes requises par le framework.
+La Composition étend `SpriteStack` et reçoit le viewport. Elle crée ses éléments visuels dans le constructeur et expose les deux méthodes requises par le framework. Pour l'instant elle dessine l'en-tête et le cadre ; on ajoute la liste de cadeaux, les données et les animations dans les guides suivants.
+
+Créez `scripts/20 MysteryGift/002 UI/999 Composition.rb` :
 
 ```ruby
 module UI
@@ -91,23 +116,39 @@ module UI
 end
 ```
 
-- `super(viewport, 0, 0, default_cache: :interface)` initialise le SpriteStack à la position (0, 0) avec le cache d'interface par défaut. Le paramètre `default_cache: :interface` indique que tous les sprites ajoutés ensuite chargent leurs images depuis le cache d'interface.
-- `add_sprite` crée un sprite positionné relativement à l'origine du stack. Le troisième argument est le nom de l'image dans le cache.
-- `set_z(2)` et `@title.z = 3` contrôlent l'ordre de profondeur : le titre s'affiche au-dessus du header.
-- `add_text` crée un texte avec `ext_text(TEXT_FILE_ID, TEXT_TITLE)` qui charge le texte traduit depuis le CSV. Le paramètre `1` est l'alignement (centre), `nil` est le font optionnel, et `color: 10` définit la couleur du texte.
-- `done?` retourne `true` en dur car il n'y a pas encore d'animations. Ce sera modifié dans les guides suivants.
+- `super(viewport, 0, 0, default_cache: :interface)` initialise le SpriteStack en position (0, 0). `default_cache: :interface` signifie que chaque sprite ajouté ensuite charge son image depuis `graphics/interface/`.
+- `add_sprite(x, y, filename)` crée un sprite à la position donnée ; le filename est le nom de l'image dans le cache (`mystery_gift/header` → `graphics/interface/mystery_gift/header.png`).
+- `set_z(2)` et `@title.z = 3` contrôlent l'ordre de profondeur : le titre s'affiche au-dessus de l'en-tête.
+- `add_text` charge le titre traduit via `ext_text(TEXT_FILE_ID, TEXT_TITLE)`. Le `1` est l'alignement (centré), `nil` est la police optionnelle, et `color: 10` est le blanc.
+- `done?` renvoie `true` sans condition car il n'y a pas encore d'animation. On change ça dans le [guide animations](./09-animations.md).
 - `update` est vide mais **obligatoire** : le framework l'appelle à chaque frame.
-- Les constantes `HEADER_Y`, `FRAME_X`, `TEXT_FILE_ID`, `TEXT_TITLE` sont accessibles directement car la Composition est déclarée à l'intérieur du module `UI::MysteryGift`.
+- Les constantes (`HEADER_Y`, `FRAME_X`, `TEXT_FILE_ID`, `TEXT_TITLE`) sont accessibles directement car la Composition est déclarée à l'intérieur du module `UI::MysteryGift`.
 
-## Brancher dans la scène
+## Branchement dans la scène
 
-La scène crée la Composition dans `create_graphics` et la met à jour dans `update_graphics`. L'ajout de `include UI::MysteryGift` permet d'accéder aux constantes et à la classe Composition sans préfixe.
+La scène crée la Composition dans `create_graphics` et la met à jour dans `update_graphics`. Ajouter `include UI::MysteryGift` donne à la scène un accès direct aux constantes et à la classe `Composition` sans préfixe.
+
+Modifiez `scripts/20 MysteryGift/003 GamePlay/001 Main.rb` :
 
 ```ruby
 module GamePlay
+  # Mystery Gift scene -- displays the header, title and frame
   class MysteryGift < BaseCleanUpdate::FrameBalanced
     include UI::MysteryGift
 
+    # Create the scene
+    def initialize
+      super
+      @running = true
+    end
+
+    # Handle keyboard input each frame
+    # @return [Boolean]
+    def update_inputs
+      return automatic_input_update
+    end
+
+    # Update graphics each frame
     def update_graphics
       @base_ui.update_background_animation
       @composition.update
@@ -115,6 +156,7 @@ module GamePlay
 
     private
 
+    # Create all the graphics for the scene
     def create_graphics
       create_viewport
       create_base_ui
@@ -122,45 +164,57 @@ module GamePlay
       Graphics.sort_z
     end
 
+    # Create the base UI with button texts
+    def create_base_ui
+      @base_ui = UI::MysteryGiftBase.new(@viewport, button_texts)
+    end
+
+    # Create the composition
     def create_composition
       @composition = Composition.new(@viewport)
     end
-  end
-end
-```
 
-- `include UI::MysteryGift` donne accès aux constantes directement (`TEXT_FILE_ID` au lieu de `UI::MysteryGift::TEXT_FILE_ID`) et à la classe `Composition` sans préfixe. Cela fonctionne aussi dans les fichiers Input.rb et Mouse.rb puisqu'ils réouvrent la même classe.
-- `create_composition` instancie la Composition et la stocke dans `@composition`. Le viewport est passé en paramètre pour que tous les sprites appartiennent au même viewport.
-- `@composition.update` dans `update_graphics` fait avancer les animations à chaque frame.
-- `done?` sera utilisé dans `update_inputs` (guide suivant) pour bloquer les inputs pendant les animations.
+    # Return the button texts for the ctrl buttons [A, X, Y, B]
+    # @return [Array<String, nil>]
+    def button_texts
+      return [nil, nil, nil, 'Quit']
+    end
 
-## Réouverture de classe
-
-Les fichiers UI numérotés peuvent réouvrir la classe Composition pour lui ajouter des méthodes. Ce n'est ni de l'héritage, ni un include : le fichier réouvre littéralement la même classe.
-
-```ruby
-module UI
-  module MysteryGift
-    # Add code input methods to Composition
-    class Composition < SpriteStack
-      # Update the display after the player enters a character
-      # @param code [String] the current code string
-      def update_code_display(code)
-        # update visuals based on current code
-      end
+    # Action triggered by the B button -- quit the scene
+    def action_b
+      @running = false
     end
   end
 end
+
+GamePlay.mystery_gift_class = GamePlay::MysteryGift
 ```
 
-- C'est la convention PSDK pour découper les Compositions volumineuses en plusieurs fichiers.
-- Chaque fichier ajoute des méthodes à la même classe, sans créer de sous-classe ni utiliser de module.
-- L'ordre de chargement est déterminé par les préfixes numériques des fichiers.
+- `include UI::MysteryGift` donne un accès direct aux constantes (`TEXT_FILE_ID` au lieu de `UI::MysteryGift::TEXT_FILE_ID`) et à la classe `Composition` sans préfixe.
+- `create_composition` instancie la Composition et la stocke dans `@composition`. Le viewport est passé pour que tous les sprites appartiennent au même viewport.
+- `@composition.update` dans `update_graphics` fait avancer la composition à chaque frame.
+
+## Découper une classe sur plusieurs fichiers
+
+PSDK charge les fichiers numérotés dans l'ordre, et plusieurs fichiers peuvent **rouvrir** la même classe pour lui ajouter des méthodes. Ce n'est ni de l'héritage ni un include de module -- le fichier rouvre littéralement la classe.
+
+On utilise ça pour la scène elle-même : `001 Main.rb`, `002 Logic.rb`, `003 Input.rb` et `004 Mouse.rb` rouvrent tous `GamePlay::MysteryGift`, chacun ajoutant une partie de son comportement (création, logique métier, clavier, souris). La Composition, elle, reste dans un seul fichier. L'ordre de chargement est déterminé par les préfixes numériques.
+
+## Essayez
+
+Rouvrez la scène :
+
+```ruby
+GamePlay.open_mystery_gift
+```
+
+Vous devriez maintenant voir la barre d'en-tête avec le titre « Mystery Gift » et le cadre de contenu, par-dessus le fond. B ferme toujours la scène.
 
 ## Conclusion
 
-- La Composition hérite de `SpriteStack` et vit dans le module `UI::X`.
+- La Composition étend `SpriteStack` et vit dans le module `UI::X`.
 - Elle doit exposer `update()` et `done?()` pour le framework de scène.
 - La scène la crée dans `create_graphics` et la met à jour dans `update_graphics`.
-- `include UI::X` dans la classe de scène donne accès direct aux constantes et à la classe Composition.
-- Découpez les Compositions volumineuses via la réouverture de classe, pas via des modules ou de l'héritage.
+- `include UI::MysteryGift` dans la classe de scène donne un accès direct aux constantes et à la classe Composition.
+- Centralisez les constantes dans `001 Constants.rb` ; le fichier se charge avant tout ce qui les utilise.
+- La classe de scène est découpée sur plusieurs fichiers numérotés via la réouverture de classe, pas via des modules ou de l'héritage.

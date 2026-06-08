@@ -3,6 +3,7 @@
   "position": 1,
   "link": {
     "type": "generated-index",
-    "slug": "/getting-started"
+    "slug": "/getting-started",
+    "description": "Install the PSDK development environment, learn Git workflows for PSDK, and discover monkey-patching to safely customize the engine."
   }
 }

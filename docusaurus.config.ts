@@ -144,6 +144,39 @@ const config: Config = {
     },
     footer: {
       style: "dark",
+      logo: {
+        alt: "Pokémon Workshop Logo",
+        src: "img/logo.svg",
+        width: 48,
+        height: 48,
+      },
+      links: [
+        {
+          title: "Documentation",
+          items: [
+            { label: "Getting Started", to: "/getting-started" },
+            { label: "PSDK", to: "/psdk" },
+            { label: "RPG Maker XP", to: "/rpg-maker-xp" },
+            { label: "Ruby", to: "/ruby" },
+          ],
+        },
+        {
+          title: "Community",
+          items: [
+            { label: "Website", href: "https://pokemonworkshop.com" },
+            {
+              label: "Discord",
+              href: "https://discord.com/invite/0noB0gBDd91B8pMk",
+            },
+            {
+              label: "X",
+              href: "https://x.com/pokemonworkshop",
+              "aria-label": "X (formerly Twitter)",
+            },
+            { label: "GitHub", href: "https://github.com/PokemonWorkshop" },
+          ],
+        },
+      ],
       copyright: `Copyright © ${new Date().getFullYear()} Pokémon Workshop. Built with Docusaurus.`,
     },
     prism: {

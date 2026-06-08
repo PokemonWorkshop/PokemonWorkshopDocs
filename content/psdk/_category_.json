@@ -3,6 +3,7 @@
   "position": 3,
   "link": {
     "type": "generated-index",
-    "slug": "/psdk"
+    "slug": "/psdk",
+    "description": "Deep dives into PSDK internals: build custom UI scenes and extend the battle engine with new moves, weathers, terrains and effects."
   }
 }

@@ -1,6 +1,50 @@
 {
   "copyright": {
-    "message": "Copyright © 2026 Pokémon Workshop. Built with Docusaurus.",
+    "message": "Copyright © 2026 Pokémon Workshop. Réalisé avec Docusaurus.",
     "description": "The footer copyright"
+  },
+  "link.title.Documentation": {
+    "message": "Documentation",
+    "description": "The title of the footer links column with title=Documentation in the footer"
+  },
+  "link.title.Community": {
+    "message": "Communauté",
+    "description": "The title of the footer links column with title=Community in the footer"
+  },
+  "link.item.label.Getting Started": {
+    "message": "Getting Started",
+    "description": "The label of footer link with label=Getting Started linking to /getting-started"
+  },
+  "link.item.label.PSDK": {
+    "message": "PSDK",
+    "description": "The label of footer link with label=PSDK linking to /psdk"
+  },
+  "link.item.label.RPG Maker XP": {
+    "message": "RPG Maker XP",
+    "description": "The label of footer link with label=RPG Maker XP linking to /rpg-maker-xp"
+  },
+  "link.item.label.Ruby": {
+    "message": "Ruby",
+    "description": "The label of footer link with label=Ruby linking to /ruby"
+  },
+  "link.item.label.Website": {
+    "message": "Site",
+    "description": "The label of footer link with label=Website linking to https://pokemonworkshop.com"
+  },
+  "link.item.label.Discord": {
+    "message": "Discord",
+    "description": "The label of footer link with label=Discord linking to https://discord.com/invite/0noB0gBDd91B8pMk"
+  },
+  "link.item.label.X": {
+    "message": "X",
+    "description": "The label of footer link with label=X linking to https://x.com/pokemonworkshop"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "The label of footer link with label=GitHub linking to https://github.com/PokemonWorkshop"
+  },
+  "logo.alt": {
+    "message": "Pokémon Workshop Logo",
+    "description": "The alt text of footer logo"
   }
 }
