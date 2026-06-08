@@ -2,7 +2,7 @@
 title: "Comment gérer les erreurs en Ruby ?"
 slug: gestion-des-erreurs
 sidebar_position: 14
-description: "Ce chapitre présente la **gestion des exceptions**, le mécanisme qui permet de réagir quand quelque chose tourne mal dans un programme. Au lieu de crash silencieux ou de valeurs `nil` inexpliquées, on apprend à lever, capturer et traiter les erreurs proprement."
+description: "Ce chapitre présente la gestion des exceptions, le mécanisme qui permet de réagir quand quelque chose tourne mal dans un programme. Au lieu de crash silencieux ou de valeurs nil inexpliquées, on apprend à lever, capturer et traiter les erreurs proprement."
 ---
 
 Ce chapitre présente la **gestion des exceptions**, le mécanisme qui permet de réagir quand quelque chose tourne mal dans un programme. Au lieu de crash silencieux ou de valeurs `nil` inexpliquées, on apprend à lever, capturer et traiter les erreurs proprement.
