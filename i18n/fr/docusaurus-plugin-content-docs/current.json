@@ -19,6 +19,10 @@
     "message": "Plongée dans les internes de PSDK : créer des scènes UI personnalisées et étendre le moteur de combat avec des capacités, météos, terrains et effets.",
     "description": "The generated-index page description for category PSDK in sidebar mainSidebar"
   },
+  "sidebar.mainSidebar.category.Pokémon Studio": {
+    "message": "Pokémon Studio",
+    "description": "The label for category 'Pokémon Studio' in sidebar 'mainSidebar'"
+  },
   "sidebar.mainSidebar.category.UI Development": {
     "message": "Développement UI",
     "description": "The label for category 'UI Development' in sidebar 'mainSidebar'"
