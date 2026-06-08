@@ -2,7 +2,7 @@
 title: "How to use loops and iterators?"
 slug: loops-and-iterators
 sidebar_position: 6
-description: "This chapter introduces the tools that allow you to **repeat** instructions: classic loops and iterators. We also discover how to read what the user types on the keyboard."
+description: "This chapter introduces the tools that allow you to repeat instructions: classic loops and iterators. We also discover how to read what the user types on the keyboard."
 ---
 
 This chapter introduces the tools that allow you to **repeat** instructions: classic loops and iterators. We also discover how to read what the user types on the keyboard.

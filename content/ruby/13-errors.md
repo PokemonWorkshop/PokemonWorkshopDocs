@@ -2,7 +2,7 @@
 title: "How to handle errors?"
 slug: error-handling
 sidebar_position: 14
-description: "This chapter introduces **exception handling**, the mechanism that allows you to react when something goes wrong in a program. Instead of silent crashes or unexplained `nil` values, you will learn how to raise, catch, and handle errors properly."
+description: "This chapter introduces exception handling, the mechanism that allows you to react when something goes wrong in a program. Instead of silent crashes or unexplained nil values, you will learn how to raise, catch, and handle errors properly."
 ---
 
 This chapter introduces **exception handling**, the mechanism that allows you to react when something goes wrong in a program. Instead of silent crashes or unexplained `nil` values, you will learn how to raise, catch, and handle errors properly.

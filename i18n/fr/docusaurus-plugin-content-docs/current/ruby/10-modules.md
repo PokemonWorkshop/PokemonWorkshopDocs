@@ -2,7 +2,7 @@
 title: "Comment utiliser les modules ?"
 slug: modules
 sidebar_position: 10
-description: "Ce chapitre présente les **modules**, un outil pour organiser le code et partager du comportement entre classes. Les modules sont le complément naturel des classes et de l'héritage."
+description: "Ce chapitre présente les modules, un outil pour organiser le code et partager du comportement entre classes. Les modules sont le complément naturel des classes et de l'héritage."
 ---
 
 Ce chapitre présente les **modules**, un outil pour organiser le code et partager du comportement entre classes. Les modules sont le complément naturel des classes et de l'héritage.

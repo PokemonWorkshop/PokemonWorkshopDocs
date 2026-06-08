@@ -2,7 +2,7 @@
 title: "How to use modules?"
 slug: modules
 sidebar_position: 10
-description: "This chapter introduces **modules**, a tool for organizing code and sharing behavior between classes. Modules are the natural complement to classes and inheritance."
+description: "This chapter introduces modules, a tool for organizing code and sharing behavior between classes. Modules are the natural complement to classes and inheritance."
 ---
 
 This chapter introduces **modules**, a tool for organizing code and sharing behavior between classes. Modules are the natural complement to classes and inheritance.

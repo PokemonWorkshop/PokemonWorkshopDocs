@@ -2,7 +2,7 @@
 title: "Comment utiliser les fonctionnalités avancées des classes ?"
 slug: fonctionnalites-avancees-des-classes
 sidebar_position: 16
-description: "Ce chapitre présente des fonctionnalités avancées des classes : la surcharge d'opérateurs, le duck typing, `Struct` et la gestion de l'identité des objets. Ces outils rendent les classes plus expressives et naturelles à utiliser."
+description: "Ce chapitre présente des fonctionnalités avancées des classes : la surcharge d'opérateurs, le duck typing, Struct et la gestion de l'identité des objets. Ces outils rendent les classes plus expressives et naturelles à utiliser."
 ---
 
 Ce chapitre présente des fonctionnalités avancées des classes : la surcharge d'opérateurs, le duck typing, `Struct` et la gestion de l'identité des objets. Ces outils rendent les classes plus expressives et naturelles à utiliser.

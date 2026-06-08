@@ -2,7 +2,7 @@
 title: "Comment utiliser l'héritage ?"
 slug: heritage
 sidebar_position: 9
-description: "Ce chapitre présente l'**héritage**, le mécanisme qui permet à une classe de reprendre tout ce qu'une autre classe définit et d'y ajouter ses propres spécificités."
+description: "Ce chapitre présente l'héritage, le mécanisme qui permet à une classe de reprendre tout ce qu'une autre classe définit et d'y ajouter ses propres spécificités."
 ---
 
 Ce chapitre présente l'**héritage**, le mécanisme qui permet à une classe de reprendre tout ce qu'une autre classe définit et d'y ajouter ses propres spécificités.

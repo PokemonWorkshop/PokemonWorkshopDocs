@@ -2,7 +2,7 @@
 title: "How to use conditionals?"
 slug: conditionals
 sidebar_position: 5
-description: "This chapter introduces **conditionals**, the mechanism that allows a program to make decisions. Depending on the situation, the code executes one branch or another."
+description: "This chapter introduces conditionals, the mechanism that allows a program to make decisions. Depending on the situation, the code executes one branch or another."
 ---
 
 This chapter introduces **conditionals**, the mechanism that allows a program to make decisions. Depending on the situation, the code executes one branch or another.

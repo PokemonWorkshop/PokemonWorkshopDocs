@@ -2,7 +2,7 @@
 title: "How to use Enumerable?"
 slug: enumerable
 sidebar_position: 12
-description: "This chapter introduces **Enumerable**, a module that provides over 50 collection manipulation methods. We also discover **Comparable**, which allows comparing objects with each other."
+description: "This chapter introduces Enumerable, a module that provides over 50 collection manipulation methods. We also discover Comparable, which allows comparing objects with each other."
 ---
 
 This chapter introduces **Enumerable**, a module that provides over 50 collection manipulation methods. We also discover **Comparable**, which allows comparing objects with each other.
