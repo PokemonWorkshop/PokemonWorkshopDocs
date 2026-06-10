@@ -1,7 +1,7 @@
 ---
 title: "How to customize the Main Menu in PSDK?"
 slug: customize-main-menu
-sidebar_position: 11
+sidebar_position: 2
 description: "This guide explains how the Main Menu works and how to customize it: adding a button, changing a button's look and defining a custom button order. It is one of the simplest UI customizations in PSDK, perfect as a first contact with the engine's UI code."
 ---
 
