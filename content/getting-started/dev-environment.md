@@ -18,7 +18,7 @@ The PSDK development environment relies on three pillars:
 ## Installing Ruby
 
 1. Go to [rubyinstaller.org](https://rubyinstaller.org/downloads/).
-2. Download **Ruby 3.0.6** with the devkit (`Ruby+Devkit 3.0.X (x64)` version).
+2. Download **Ruby 4.0.1** with the devkit (`Ruby+Devkit 4.0.1 (x64)` version).
 3. Run the installer and follow the steps. When MSYS2 is offered, accept the installation.
 4. Verify the installation by opening a terminal and typing:
 
@@ -26,7 +26,7 @@ The PSDK development environment relies on three pillars:
 ruby --version
 ```
 
-The displayed version should start with `3.0`.
+The displayed version should start with `4.0`.
 
 ## Installing Visual Studio Code
 
@@ -74,10 +74,10 @@ Open VSCode JSON settings: Ctrl+Shift+P, then search for "Preferences: Open User
     "typeHierarchy": true
 },
 "rubyLsp.formatter": "none",
-"rubyLsp.rubyExecutablePath": "C:\\Ruby30\\bin"
+"rubyLsp.rubyExecutablePath": "C:\\Ruby40-x64\\bin"
 ```
 
-- Adapt the path `C:\\Ruby30\\bin` to the `bin` folder of your Ruby installation. Usually `C:\\Ruby30` for Ruby 3.0, `C:\\Ruby31` for Ruby 3.1, etc.
+- Adapt the path `C:\\Ruby40-x64\\bin` to the `bin` folder of your Ruby installation. The RubyInstaller folder name reflects the installed version (for example `C:\\Ruby40-x64` for Ruby 4.0, `C:\\Ruby34-x64` for Ruby 3.4).
 - `editor.tabSize: 2`: PSDK uses 2-space indentation.
 - `solargraph.diagnostics: true`: enables RuboCop diagnostics through Solargraph.
 
@@ -221,7 +221,7 @@ If the console displays "Pikachu", everything is in place.
 
 ## Conclusion
 
-- Install Ruby 3.0.6 with the devkit, then the gems `solargraph` and `ruby-lsp`.
+- Install Ruby 4.0.1 with the devkit, then the gems `solargraph` and `ruby-lsp`.
 - Install VSCode with the Ruby Solargraph and Ruby LSP extensions. Configure the JSON settings for tabsize, diagnostics, and the Ruby path.
 - Make PSDK code visible to Solargraph via `solargraph.yml`: either a relative path to `pokemonsdk/`, or a `psdk_scripts/` symbolic link.
 - Copy PSDK's `.rubocop.yml` into `scripts/` so RuboCop uses the project conventions.
