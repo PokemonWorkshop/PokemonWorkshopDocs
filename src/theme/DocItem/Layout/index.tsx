@@ -31,7 +31,7 @@ export default function DocItemLayout(props: Props) {
           label={rubyChapterLabel}
         />
       )}
-      {metadata.sourceDirName === "psdk/ui-development" && (
+      {metadata.sourceDirName === "psdk/ui-development/mystery-gift" && (
         <ProgressTracker
           storageKey="fil-rouge-progress"
           label={uiDevStepLabel}

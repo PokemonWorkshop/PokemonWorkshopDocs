@@ -4,6 +4,6 @@
   "link": {
     "type": "generated-index",
     "slug": "/psdk/ui-development",
-    "description": "Build a full Mystery Gift plugin from scratch and master PSDK's UI layer: scenes, compositions, input, animations and i18n."
+    "description": "Master PSDK's UI layer: a step-by-step Mystery Gift series, plus standalone guides such as customizing the Main Menu."
   }
 }

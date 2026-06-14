@@ -28,8 +28,16 @@
     "description": "The label for category 'UI Development' in sidebar 'mainSidebar'"
   },
   "sidebar.mainSidebar.category.UI Development.link.generated-index.description": {
-    "message": "Construire un plugin Mystery Gift complet et maîtriser la couche UI de PSDK : scènes, compositions, entrées, animations et i18n.",
+    "message": "Maîtriser la couche UI de PSDK : une série Mystery Gift pas à pas, plus des guides autonomes comme la personnalisation du menu principal.",
     "description": "The generated-index page description for category UI Development in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Mystery Gift": {
+    "message": "Mystery Gift",
+    "description": "The label for category 'Mystery Gift' in sidebar 'mainSidebar'"
+  },
+  "sidebar.mainSidebar.category.Mystery Gift.link.generated-index.description": {
+    "message": "Une série en 11 étapes qui construit un plugin Mystery Gift complet de zéro : scènes, compositions, entrées, animations et i18n. À suivre dans l'ordre.",
+    "description": "The generated-index page description for category Mystery Gift in sidebar mainSidebar"
   },
   "sidebar.mainSidebar.category.Battle Engine": {
     "message": "Moteur de Combat",
