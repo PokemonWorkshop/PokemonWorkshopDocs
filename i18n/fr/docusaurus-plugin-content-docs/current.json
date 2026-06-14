@@ -39,6 +39,14 @@
     "message": "Guides pas à pas pour étendre le moteur de combat PSDK : capacités, types, immunités, météos, terrains, formules de dégâts et historiques personnalisés.",
     "description": "The generated-index page description for category Battle Engine in sidebar mainSidebar"
   },
+  "sidebar.mainSidebar.category.Battle Scripting": {
+    "message": "Combats par Script",
+    "description": "The label for category 'Battle Scripting' in sidebar 'mainSidebar'"
+  },
+  "sidebar.mainSidebar.category.Battle Scripting.link.generated-index.description": {
+    "message": "Lancer des combats entièrement personnalisés depuis un script : construire un Battle::Logic::BattleInfo, assembler les équipes et sacs des dresseurs, puis démarrer la scène de combat.",
+    "description": "The generated-index page description for category Battle Scripting in sidebar mainSidebar"
+  },
   "sidebar.mainSidebar.category.RPG Maker XP": {
     "message": "RPG Maker XP",
     "description": "The label for category 'RPG Maker XP' in sidebar 'mainSidebar'"
