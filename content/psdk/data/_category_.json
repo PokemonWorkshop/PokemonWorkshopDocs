@@ -1,0 +1,9 @@
+{
+  "label": "Data",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "slug": "/psdk/data",
+    "description": "Read the game data from your scripts: accessors, iterators and the Studio data classes that describe items, creatures, moves and more."
+  }
+}

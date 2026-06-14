@@ -1,5 +1,5 @@
 ---
-title: "Comment être immunisé à une attaque dans PSDK ?"
+title: "Comment être immunisé à une attaque ?"
 slug: etre-immunise-a-une-attaque
 sidebar_position: 4
 description: "Ce guide explique comment rendre un Pokémon immunisé à une attaque, que ce soit depuis la logique propre de l'attaque ou depuis un effet externe."

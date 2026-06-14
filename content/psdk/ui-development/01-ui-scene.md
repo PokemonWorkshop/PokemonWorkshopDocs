@@ -1,5 +1,5 @@
 ---
-title: "How to create a UI scene in PSDK?"
+title: "How to create a UI scene?"
 slug: create-a-ui-scene
 sidebar_position: 1
 description: "This is the first code guide in a series where we build a complete Mystery Gift UI step by step. This system lets players enter codes to claim rewards. Here we create the file structure and a minimal scene that displays and closes with B."
