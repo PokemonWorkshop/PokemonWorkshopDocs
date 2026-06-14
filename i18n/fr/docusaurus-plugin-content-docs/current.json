@@ -39,6 +39,14 @@
     "message": "Guides pas à pas pour étendre le moteur de combat PSDK : capacités, types, immunités, météos, terrains, formules de dégâts et historiques personnalisés.",
     "description": "The generated-index page description for category Battle Engine in sidebar mainSidebar"
   },
+  "sidebar.mainSidebar.category.3D Camera": {
+    "message": "Caméra 3D",
+    "description": "The label for category '3D Camera' in sidebar 'mainSidebar'"
+  },
+  "sidebar.mainSidebar.category.3D Camera.link.generated-index.description": {
+    "message": "Construire des fonds de combat et des transitions pour la caméra de combat 3D dynamique de PSDK.",
+    "description": "The generated-index page description for category 3D Camera in sidebar mainSidebar"
+  },
   "sidebar.mainSidebar.category.Battle Scripting": {
     "message": "Combats par Script",
     "description": "The label for category 'Battle Scripting' in sidebar 'mainSidebar'"
