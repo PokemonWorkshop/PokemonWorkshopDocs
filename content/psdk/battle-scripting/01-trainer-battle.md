@@ -40,8 +40,11 @@ The full attribute list is documented in the [BattleInfo YARD reference](https:/
 
 - `battle_bgm`: music played when the battle starts.
 - `victory_bgm`: music played on victory.
-- `vs_type`: number of Pokémon sent out on each side (1 for a single battle, 2 for a double).
+- `defeat_bgm`: music played on defeat.
+- `vs_type`: number of Pokémon sent out on each side (1 for a single battle, 2 for a double, 3 for a triple).
 - `max_level`: level cap. Pokémon above it are brought down to this level.
+- `background_name`: the battleback filename. Defaults to the map's current battleback.
+- `battle_id`: the battle id used to load the fight's events (default `-1`, no events).
 - `fishing`: whether the battle was triggered by a fishing rod.
 
 Every attribute has a default, so none of them are mandatory. Audio attributes accept either a plain filename (volume and pitch default to 100) or an `[filename, volume, pitch]` array. When you leave `battle_bgm` or `victory_bgm` out, RMXP uses whatever the event commands configured.
@@ -86,8 +89,8 @@ bi.add_party(0, *bi.player_basic_info)
 - `bag`: the trainer's bag. The AI draws the items it uses from it.
 - `base_money`: the base prize money (total reward is `base_money * level of the last Pokémon`).
 - `ai_level`: the AI strength, from `0` (basic) to the highest available.
-- `victory_text`: the message shown when this trainer is defeated (added in .26).
-- `defeat_text`: the message shown when this trainer wins (added in .26).
+- `victory_text`: the message shown when this trainer is defeated.
+- `defeat_text`: the message shown when this trainer wins.
 
 ```ruby
 party = []
@@ -104,6 +107,8 @@ bi.add_party(1, party, 'Yuri', 'Bad Trainer', 'dp_33', bag, 255, 7)
 
 `PFM::Pokemon.generate_from_hash` builds each Pokémon from a hash: `id` (db_symbol), `level`, `shiny`, `given_name` (nickname), `trainer_name`, `trainer_id`, `item` (held item), and many more keys are available.
 
+You can call `add_party` more than once on the same bank: add a second party to bank 0 for an ally fighting alongside the player, or to bank 1 for a multi-trainer enemy side.
+
 :::note[Allowing mega evolution]
 Mega evolution is not unlocked by one specific key item: any bag item flagged **"allows mega evolution"** in Studio (`isAllowingMega`) enables it. `:mega_glasses` is one such default item, and the Pokémon still needs to hold its mega stone (here `:gardevoirite`). Drop the item from the bag and the AI keeps a normal, non-mega team.
 :::
@@ -115,6 +120,25 @@ Once the BattleInfo is fully set up, hand it to the battle scene:
 ```ruby
 $scene.call_scene(Battle::Scene, bi)
 ```
+
+### Step 5: read the outcome
+
+`call_scene` runs the battle and then returns to the map, so the result is delivered through a callback you register **before** launching. When the battle ends, the scene calls `$game_temp.battle_proc` with the result code:
+
+```ruby
+$game_temp.battle_proc = proc do |result|
+  # result: 0 = player won, 1 = player fled, 2 = player lost, 3 = enemy fled
+  case result
+  when 0
+    # handle victory
+  when 2
+    # handle defeat
+  end
+end
+$scene.call_scene(Battle::Scene, bi)
+```
+
+The same outcome also sets the global switches `BT_Victory`, `BT_Player_Flee`, `BT_Defeat` and `BT_Wild_Flee`, so an event running after the battle can test them directly.
 
 ## Full script
 
@@ -134,6 +158,10 @@ bag.add_item(:full_restore, 50)
 bag.add_item(:mega_glasses, 1)
 
 bi.add_party(1, party, 'Yuri', 'Bad Trainer', 'dp_33', bag, 255, 7)
+
+$game_temp.battle_proc = proc do |result|
+  # 0 = player won, 1 = player fled, 2 = player lost, 3 = enemy fled
+end
 $scene.call_scene(Battle::Scene, bi)
 ```
 
@@ -158,4 +186,5 @@ So if you call `add_party(1, party)` with just the bank and the party (no `name`
 - Add the **trainer** on bank 1 with `add_party`, providing at least a `name` so the fight counts as a trainer battle.
 - Build each Pokémon with `PFM::Pokemon.generate_from_hash` and the trainer's items with `PFM::Bag`.
 - Launch the fight with `$scene.call_scene(Battle::Scene, bi)`.
+- Read the result through `$game_temp.battle_proc` (or the `BT_Victory` / `BT_Defeat` switches) to branch your event.
 - Since the setup is plain Ruby, the team can depend on the player's level, party or any variable, which is exactly what fixed Studio trainers cannot do.

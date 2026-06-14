@@ -40,8 +40,11 @@ La liste complète des attributs est documentée dans la [référence YARD de Ba
 
 - `battle_bgm` : musique jouée au début du combat.
 - `victory_bgm` : musique jouée à la victoire.
-- `vs_type` : nombre de Pokémon envoyés de chaque côté (1 pour un combat simple, 2 pour un double).
+- `defeat_bgm` : musique jouée à la défaite.
+- `vs_type` : nombre de Pokémon envoyés de chaque côté (1 pour un combat simple, 2 pour un double, 3 pour un triple).
 - `max_level` : plafond de niveau. Les Pokémon au-dessus y sont ramenés.
+- `background_name` : le nom de fichier du fond de combat. Par défaut, celui de la carte courante.
+- `battle_id` : l'identifiant de combat utilisé pour charger les événements du combat (par défaut `-1`, aucun événement).
 - `fishing` : si le combat a été déclenché par une canne.
 
 Chaque attribut a une valeur par défaut, donc aucun n'est obligatoire. Les attributs audio acceptent soit un simple nom de fichier (volume et tonalité valent alors 100), soit un tableau `[fichier, volume, tonalité]`. Si on omet `battle_bgm` ou `victory_bgm`, RMXP utilise ce que les commandes d'événement ont configuré.
@@ -86,8 +89,8 @@ bi.add_party(0, *bi.player_basic_info)
 - `bag` : le sac du dresseur. L'IA y puise les objets qu'elle utilise.
 - `base_money` : l'argent de base remporté (la récompense totale vaut `base_money * niveau du dernier Pokémon`).
 - `ai_level` : la force de l'IA, de `0` (basique) au plus haut niveau disponible.
-- `victory_text` : le message affiché quand ce dresseur est vaincu (ajouté en .26).
-- `defeat_text` : le message affiché quand ce dresseur gagne (ajouté en .26).
+- `victory_text` : le message affiché quand ce dresseur est vaincu.
+- `defeat_text` : le message affiché quand ce dresseur gagne.
 
 ```ruby
 party = []
@@ -104,6 +107,8 @@ bi.add_party(1, party, 'Yuri', 'Bad Trainer', 'dp_33', bag, 255, 7)
 
 `PFM::Pokemon.generate_from_hash` construit chaque Pokémon à partir d'un hash : `id` (db_symbol), `level`, `shiny`, `given_name` (surnom), `trainer_name`, `trainer_id`, `item` (objet tenu), et bien d'autres clés sont disponibles.
 
+On peut appeler `add_party` plusieurs fois sur le même banc : ajouter une seconde équipe au banc 0 pour un allié qui combat aux côtés du joueur, ou au banc 1 pour un côté ennemi à plusieurs dresseurs.
+
 :::note[Autoriser l'évolution méga]
 L'évolution méga n'est pas débloquée par un objet-clé précis : tout objet du sac marqué **« autorise l'évolution méga »** dans Studio (`isAllowingMega`) l'active. `:mega_glasses` est l'un de ces objets par défaut, et le Pokémon doit toujours tenir sa méga-gemme (ici `:gardevoirite`). Si on retire l'objet du sac, l'IA garde une équipe normale, sans méga.
 :::
@@ -115,6 +120,25 @@ Une fois le BattleInfo entièrement configuré, on le transmet à la scène de c
 ```ruby
 $scene.call_scene(Battle::Scene, bi)
 ```
+
+### Étape 5 : lire le résultat
+
+`call_scene` joue le combat puis revient à la carte : le résultat est donc transmis par un callback que l'on enregistre **avant** de lancer le combat. À la fin du combat, la scène appelle `$game_temp.battle_proc` avec le code de résultat :
+
+```ruby
+$game_temp.battle_proc = proc do |result|
+  # result: 0 = player won, 1 = player fled, 2 = player lost, 3 = enemy fled
+  case result
+  when 0
+    # handle victory
+  when 2
+    # handle defeat
+  end
+end
+$scene.call_scene(Battle::Scene, bi)
+```
+
+Le même résultat positionne aussi les interrupteurs globaux `BT_Victory`, `BT_Player_Flee`, `BT_Defeat` et `BT_Wild_Flee`, qu'un événement lancé après le combat peut tester directement.
 
 ## Script complet
 
@@ -134,6 +158,10 @@ bag.add_item(:full_restore, 50)
 bag.add_item(:mega_glasses, 1)
 
 bi.add_party(1, party, 'Yuri', 'Bad Trainer', 'dp_33', bag, 255, 7)
+
+$game_temp.battle_proc = proc do |result|
+  # 0 = player won, 1 = player fled, 2 = player lost, 3 = enemy fled
+end
 $scene.call_scene(Battle::Scene, bi)
 ```
 
@@ -158,4 +186,5 @@ Donc si on appelle `add_party(1, party)` avec juste le banc et l'équipe (sans `
 - Ajouter le **dresseur** sur le banc 1 avec `add_party`, en fournissant au moins un `name` pour que le combat compte comme un combat de dresseur.
 - Construire chaque Pokémon avec `PFM::Pokemon.generate_from_hash` et les objets du dresseur avec `PFM::Bag`.
 - Lancer le combat avec `$scene.call_scene(Battle::Scene, bi)`.
+- Lire le résultat via `$game_temp.battle_proc` (ou les interrupteurs `BT_Victory` / `BT_Defeat`) pour aiguiller son événement.
 - Puisque la configuration est du Ruby pur, l'équipe peut dépendre du niveau du joueur, de son équipe ou de n'importe quelle variable, ce que les dresseurs Studio figés ne savent pas faire.
