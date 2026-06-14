@@ -97,7 +97,7 @@ $scene.call_scene(Battle::Scene, bi)
 
 ### Example: a rival that counters the player's starter
 
-Rather than building three near-identical rivals per fight in Studio, author **one** and swap its lead to the counter of the player's starter when the battle starts:
+Rather than building three near-identical rivals per fight in Studio, author **one** and add the counter of the player's starter to its team when the battle starts:
 
 ```ruby
 # Replace this with however your project records the chosen starter (here a game variable holding a db_symbol).
@@ -106,7 +106,7 @@ counter = { bulbasaur: :charmander, charmander: :squirtle, squirtle: :bulbasaur 
 
 trainer = data_trainer(:rival_route_1)
 party = trainer.party.map(&:to_creature)
-party[0] = PFM::Pokemon.generate_from_hash(id: counter, level: party[0].level)
+party << PFM::Pokemon.generate_from_hash(id: counter, level: party.map(&:level).max)
 
 bag = PFM::Bag.new
 trainer.bag_entries.each { |entry| bag.add_item(entry[:dbSymbol], entry[:amount]) }

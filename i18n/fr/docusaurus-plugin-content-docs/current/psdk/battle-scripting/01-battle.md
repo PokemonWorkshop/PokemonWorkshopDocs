@@ -97,7 +97,7 @@ $scene.call_scene(Battle::Scene, bi)
 
 ### Exemple : un rival qui contre le starter du joueur
 
-Au lieu de construire trois rivaux quasi identiques par affrontement dans Studio, on en écrit **un** et on remplace son meneur par le contre du starter du joueur au lancement du combat :
+Au lieu de construire trois rivaux quasi identiques par affrontement dans Studio, on en écrit **un** et on ajoute à son équipe le contre du starter du joueur au lancement du combat :
 
 ```ruby
 # Replace this with however your project records the chosen starter (here a game variable holding a db_symbol).
@@ -106,7 +106,7 @@ counter = { bulbasaur: :charmander, charmander: :squirtle, squirtle: :bulbasaur 
 
 trainer = data_trainer(:rival_route_1)
 party = trainer.party.map(&:to_creature)
-party[0] = PFM::Pokemon.generate_from_hash(id: counter, level: party[0].level)
+party << PFM::Pokemon.generate_from_hash(id: counter, level: party.map(&:level).max)
 
 bag = PFM::Bag.new
 trainer.bag_entries.each { |entry| bag.add_item(entry[:dbSymbol], entry[:amount]) }
