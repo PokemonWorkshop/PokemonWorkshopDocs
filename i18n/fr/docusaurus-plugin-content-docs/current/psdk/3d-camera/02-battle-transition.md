@@ -2,10 +2,10 @@
 title: "Comment créer une transition de combat personnalisée ?"
 slug: creer-une-transition-de-combat
 sidebar_position: 2
-description: "Ce guide explique comment créer une transition de combat : écrire une classe de transition 2D, l'enregistrer, et laisser PSDK l'importer automatiquement dans la caméra 3D, ainsi que personnaliser le comportement 3D quand c'est nécessaire."
+description: "Ce guide explique comment les transitions de combat fonctionnent avec la caméra 3D : on écrit une classe de transition 2D et PSDK l'importe automatiquement dans la caméra 3D. Il couvre aussi la personnalisation du comportement 3D et la migration depuis les anciennes classes de transition 3D autonomes."
 ---
 
-Ce guide explique comment créer une transition de combat : écrire une classe de transition 2D, l'enregistrer, et laisser PSDK l'importer automatiquement dans la caméra 3D, ainsi que personnaliser le comportement 3D quand c'est nécessaire.
+Ce guide explique comment les transitions de combat fonctionnent avec la caméra 3D : on écrit une classe de transition 2D et PSDK l'importe automatiquement dans la caméra 3D. Il couvre aussi la personnalisation du comportement 3D et la migration depuis les anciennes classes de transition 3D autonomes.
 
 ## On écrit une transition 2D, la caméra 3D est automatique
 
