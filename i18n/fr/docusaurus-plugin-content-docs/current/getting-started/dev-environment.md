@@ -162,13 +162,15 @@ Puis modifier le fichier généré pour ajouter le chemin vers PSDK dans la sect
 
 ## Configurer RuboCop
 
-RuboCop vérifie que le code respecte les conventions de PSDK (retours explicites, pas de `for`, etc.). La configuration est dans le fichier `.rubocop.yml`. Si ce fichier n'existe pas dans `scripts/`, le copier depuis le dépôt pokemonsdk :
+RuboCop vérifie que le code respecte les conventions de PSDK (retours explicites, pas de `for`, etc.). La configuration est dans le fichier `.rubocop.yml`. Si ce fichier n'existe pas dans `scripts/`, le copier. On lance la commande **depuis la racine du projet**, dans PowerShell.
+
+Si on a forké le dépôt pokemonsdk, le copier depuis celui-ci :
 
 ```bash
 cp pokemonsdk/scripts/.rubocop.yml scripts/.rubocop.yml
 ```
 
-Pour un projet sans le dépôt, copier le fichier depuis le lien symbolique :
+Pour un projet Pokémon Studio standard, le copier depuis le lien symbolique créé plus tôt (donc uniquement après que le lien existe) :
 
 ```bash
 cp scripts/psdk_scripts/.rubocop.yml scripts/.rubocop.yml
