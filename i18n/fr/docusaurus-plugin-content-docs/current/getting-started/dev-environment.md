@@ -151,7 +151,7 @@ Le reste du fichier reste identique.
 
 ### Générer le fichier solargraph.yml
 
-Si le fichier `solargraph.yml` n'existe pas encore dans `scripts/`, le générer :
+Si le fichier `solargraph.yml` n'existe pas encore dans `scripts/`, le générer. Dans **cmd**, depuis la **racine du projet** :
 
 ```bash
 cd scripts
@@ -162,23 +162,25 @@ Puis modifier le fichier généré pour ajouter le chemin vers PSDK dans la sect
 
 ## Configurer RuboCop
 
-RuboCop vérifie que le code respecte les conventions de PSDK (retours explicites, pas de `for`, etc.). La configuration est dans le fichier `.rubocop.yml`. Si ce fichier n'existe pas dans `scripts/`, le copier depuis le dépôt pokemonsdk :
+RuboCop vérifie que le code respecte les conventions de PSDK (retours explicites, pas de `for`, etc.). La configuration est dans le fichier `.rubocop.yml`. Si ce fichier n'existe pas dans `scripts/`, le copier. On lance la commande dans **cmd**, depuis la **racine du projet**.
+
+Si on a forké le dépôt pokemonsdk, le copier depuis celui-ci :
 
 ```bash
-cp pokemonsdk/scripts/.rubocop.yml scripts/.rubocop.yml
+copy pokemonsdk\scripts\.rubocop.yml scripts\.rubocop.yml
 ```
 
-Pour un projet sans le dépôt, copier le fichier depuis le lien symbolique :
+Pour un projet Pokémon Studio standard, le copier depuis le lien symbolique créé plus tôt (donc uniquement après que le lien existe) :
 
 ```bash
-cp scripts/psdk_scripts/.rubocop.yml scripts/.rubocop.yml
+copy scripts\psdk_scripts\.rubocop.yml scripts\.rubocop.yml
 ```
 
 RuboCop s'active automatiquement via Solargraph. Les lignes de code qui ne respectent pas les conventions seront soulignées en bleu dans VSCode.
 
 ## Ouvrir le bon dossier dans VSCode
 
-Toujours ouvrir le dossier `scripts/` dans VSCode, pas la racine du projet :
+Toujours ouvrir le dossier `scripts/` dans VSCode, pas la racine du projet. Dans **cmd**, depuis la **racine du projet** :
 
 ```bash
 code scripts
@@ -205,7 +207,7 @@ end
 - En survolant `pokemon_name` avec la souris, VSCode doit afficher la documentation YARD (description, paramètre, retour).
 - Si des lignes sont soulignées en bleu, RuboCop fonctionne. Corriger les avertissements pour vérifier que la configuration PSDK est bien active.
 
-Pour tester en jeu, lancer le projet depuis le terminal du projet :
+Pour tester en jeu, lancer le projet. Dans **cmd**, depuis la **racine du projet** :
 
 ```bash
 psdk debug skip_title
