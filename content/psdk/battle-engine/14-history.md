@@ -1,5 +1,5 @@
 ---
-title: "How to create a battle history in PSDK?"
+title: "How to create a battle history?"
 slug: how-to-create-a-history
 sidebar_position: 14
 description: "This guide explains how to create a custom history on a PokemonBattler, following the same pattern as MoveHistory, DamageHistory, and StatHistory."

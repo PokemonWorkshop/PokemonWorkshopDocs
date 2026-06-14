@@ -1,0 +1,9 @@
+{
+  "label": "3D Camera",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "slug": "/psdk/3d-camera",
+    "description": "Build battlebacks and transitions for PSDK's dynamic 3D battle camera."
+  }
+}

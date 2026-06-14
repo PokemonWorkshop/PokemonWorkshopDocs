@@ -1,5 +1,5 @@
 ---
-title: "What is monkey-patching and how to apply it in PSDK?"
+title: "What is monkey-patching and how to apply it?"
 slug: monkey-patching-in-psdk
 sidebar_position: 3
 description: "PSDK is an engine that receives regular updates. If you directly modify an engine file to change a behavior, the next update will overwrite your changes. Monkey-patching allows you to modify PSDK's behavior from your own scripts, without touching the engine's source code."

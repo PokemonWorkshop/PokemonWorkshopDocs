@@ -18,7 +18,7 @@ L'environnement de développement PSDK repose sur trois piliers :
 ## Installer Ruby
 
 1. Se rendre sur [rubyinstaller.org](https://rubyinstaller.org/downloads/).
-2. Télécharger **Ruby 3.0.6** avec le devkit (version `Ruby+Devkit 3.0.X (x64)`).
+2. Télécharger **Ruby 4.0.1** avec le devkit (version `Ruby+Devkit 4.0.1 (x64)`).
 3. Lancer l'installeur et suivre les étapes. Quand MSYS2 est proposé, accepter l'installation.
 4. Vérifier l'installation en ouvrant un terminal et en tapant :
 
@@ -26,7 +26,7 @@ L'environnement de développement PSDK repose sur trois piliers :
 ruby --version
 ```
 
-La version affichée doit commencer par `3.0`.
+La version affichée doit commencer par `4.0`.
 
 ## Installer Visual Studio Code
 
@@ -74,10 +74,10 @@ Ouvrir les paramètres JSON de VSCode : Ctrl+Shift+P, puis chercher "Preferences
     "typeHierarchy": true
 },
 "rubyLsp.formatter": "none",
-"rubyLsp.rubyExecutablePath": "C:\\Ruby30\\bin"
+"rubyLsp.rubyExecutablePath": "C:\\Ruby40-x64\\bin"
 ```
 
-- Adapter le chemin `C:\\Ruby30\\bin` au dossier `bin` de votre installation Ruby. En général `C:\\Ruby30` pour Ruby 3.0, `C:\\Ruby31` pour Ruby 3.1, etc.
+- Adapter le chemin `C:\\Ruby40-x64\\bin` au dossier `bin` de votre installation Ruby. Le nom du dossier RubyInstaller reflète la version installée (par exemple `C:\\Ruby40-x64` pour Ruby 4.0, `C:\\Ruby34-x64` pour Ruby 3.4).
 - `editor.tabSize: 2` : PSDK utilise une indentation de 2 espaces.
 - `solargraph.diagnostics: true` : active les diagnostics RuboCop via Solargraph.
 
@@ -221,7 +221,7 @@ Si la console affiche "Pikachu", tout est en place.
 
 ## Conclusion
 
-- Installer Ruby 3.0.6 avec le devkit, puis les gems `solargraph` et `ruby-lsp`.
+- Installer Ruby 4.0.1 avec le devkit, puis les gems `solargraph` et `ruby-lsp`.
 - Installer VSCode avec les extensions Ruby Solargraph et Ruby LSP. Configurer les paramètres JSON pour le tabsize, les diagnostics, et le chemin Ruby.
 - Rendre le code PSDK visible à Solargraph via le `solargraph.yml` : soit un chemin relatif vers `pokemonsdk/`, soit un lien symbolique `psdk_scripts/`.
 - Copier le `.rubocop.yml` de PSDK dans `scripts/` pour que RuboCop utilise les conventions du projet.

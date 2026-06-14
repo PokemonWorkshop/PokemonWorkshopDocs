@@ -1,5 +1,5 @@
 ---
-title: "How to create a move's secondary effect in PSDK?"
+title: "How to create a move's secondary effect?"
 slug: how-to-create-a-secondary-effect
 sidebar_position: 7
 description: "This guide explains how to implement a move's custom effect and how to validate the conditions for applying that effect."

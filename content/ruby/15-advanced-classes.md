@@ -1,5 +1,5 @@
 ---
-title: "How to use advanced class features in Ruby?"
+title: "How to use advanced class features?"
 slug: advanced-class-features
 sidebar_position: 16
 description: "This chapter introduces advanced class features: operator overloading, duck typing, `Struct`, and object identity management. These tools make classes more expressive and natural to use."

@@ -1,5 +1,5 @@
 ---
-title: "How to use confirmation dialogs in PSDK?"
+title: "How to use confirmation dialogs?"
 slug: use-confirmation-dialogs
 sidebar_position: 8
 description: "This guide adds the business logic of the scene: entering a code, validating it, and claiming a gift through confirmation dialogs and blocking messages."

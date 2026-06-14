@@ -1,5 +1,5 @@
 ---
-title: "Comment modifier l'efficacité d'une attaque dans PSDK ?"
+title: "Comment modifier l'efficacité d'une attaque ?"
 slug: modifier-lefficacite-dune-attaque
 sidebar_position: 6
 description: "Ce guide explique comment modifier le multiplicateur de type d'une attaque, que ce soit depuis la logique propre de l'attaque ou depuis un effet externe."
