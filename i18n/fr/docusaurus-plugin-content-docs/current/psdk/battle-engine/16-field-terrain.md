@@ -1,5 +1,5 @@
 ---
-title: "Comment créer un terrain dans PSDK ?"
+title: "Comment créer un terrain ?"
 slug: creer-un-terrain
 sidebar_position: 16
 description: "Ce guide explique comment ajouter un nouveau terrain au système de combat, créer ses effets, ajouter les textes associés, et le déclencher via une attaque ou un effet."

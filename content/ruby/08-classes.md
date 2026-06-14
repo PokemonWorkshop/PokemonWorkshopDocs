@@ -1,5 +1,5 @@
 ---
-title: "How to create classes and objects in Ruby?"
+title: "How to create classes and objects?"
 slug: classes-and-objects
 sidebar_position: 8
 description: "This chapter introduces **classes**, the central mechanism for organizing code in Ruby. A class groups data and behaviors in a single place."

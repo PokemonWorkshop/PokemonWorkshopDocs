@@ -1,5 +1,5 @@
 ---
-title: "How to create a Composition in PSDK?"
+title: "How to create a Composition?"
 slug: create-a-composition
 sidebar_position: 2
 description: "This guide explains how to create a Composition, the central UI class that groups all visual components of a scene."

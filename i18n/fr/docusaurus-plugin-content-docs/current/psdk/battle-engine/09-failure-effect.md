@@ -1,5 +1,5 @@
 ---
-title: "Comment créer un effet à l'échec d'une attaque dans PSDK ?"
+title: "Comment créer un effet à l'échec d'une attaque ?"
 slug: creer-un-effet-a-lechec-dune-attaque
 sidebar_position: 9
 description: "Ce guide explique comment exécuter un effet spécifique lorsqu'une attaque échoue (manque sa cible, est immunisée, etc.), que ce soit depuis l'attaque elle-même ou depuis un effet externe."
