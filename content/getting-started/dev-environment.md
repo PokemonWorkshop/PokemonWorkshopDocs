@@ -151,7 +151,7 @@ The rest of the file remains identical.
 
 ### Generating the solargraph.yml file
 
-If the `solargraph.yml` file does not yet exist in `scripts/`, generate it:
+If the `solargraph.yml` file does not yet exist in `scripts/`, generate it. In **cmd**, from the **project root**:
 
 ```bash
 cd scripts
@@ -162,23 +162,25 @@ Then edit the generated file to add the path to PSDK in the `include` section.
 
 ## Configuring RuboCop
 
-RuboCop checks that code follows PSDK conventions (explicit returns, no `for` loops, etc.). The configuration is in the `.rubocop.yml` file. If this file does not exist in `scripts/`, copy it from the pokemonsdk repository:
+RuboCop checks that code follows PSDK conventions (explicit returns, no `for` loops, etc.). The configuration is in the `.rubocop.yml` file. If this file does not exist in `scripts/`, copy it. Run the command in **cmd**, from the **project root**.
+
+If you forked the pokemonsdk repository, copy it from there:
 
 ```bash
-cp pokemonsdk/scripts/.rubocop.yml scripts/.rubocop.yml
+copy pokemonsdk\scripts\.rubocop.yml scripts\.rubocop.yml
 ```
 
-For a project without the repository, copy the file from the symbolic link:
+For a standard Pokémon Studio project, copy it from the symbolic link created earlier (so do this only after the link exists):
 
 ```bash
-cp scripts/psdk_scripts/.rubocop.yml scripts/.rubocop.yml
+copy scripts\psdk_scripts\.rubocop.yml scripts\.rubocop.yml
 ```
 
 RuboCop activates automatically through Solargraph. Code lines that do not follow conventions will be underlined in blue in VSCode.
 
 ## Opening the right folder in VSCode
 
-Always open the `scripts/` folder in VSCode, not the project root:
+Always open the `scripts/` folder in VSCode, not the project root. In **cmd**, from the **project root**:
 
 ```bash
 code scripts
@@ -205,7 +207,7 @@ end
 - When hovering over `pokemon_name` with the mouse, VSCode should display the YARD documentation (description, parameter, return).
 - If lines are underlined in blue, RuboCop is working. Fix the warnings to verify that the PSDK configuration is active (for example, explicit `return` should **not** be flagged as redundant).
 
-To test in-game, launch the project from the project terminal:
+To test in-game, launch the project. In **cmd**, from the **project root**:
 
 ```bash
 psdk debug skip_title
