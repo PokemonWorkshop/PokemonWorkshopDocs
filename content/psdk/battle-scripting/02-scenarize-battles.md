@@ -43,15 +43,21 @@ Avoid two files sharing the same five digits (`00005 Brock.rb` and `00005 Misty.
 
 ## Registering an event
 
-Inside the file, register a block for each moment you want to hook into with `Battle::Scene.register_event`:
+An event file reopens `Battle::Scene` and registers a block for each moment you want to hook into. Reopening the class groups every event of the file together and avoids repeating the `Battle::Scene.` prefix on each call:
 
 ```ruby
-Battle::Scene.register_event(:battle_begin) do |scene|
-  # ...
+module Battle
+  class Scene
+    register_event(:battle_begin) do |scene|
+      # ...
+    end
+  end
 end
 ```
 
 The block always receives the battle `scene` as its first argument; some events pass more. Only one block can be registered per event name: registering the same event twice keeps the last block.
+
+The snippets below show the `register_event` calls on their own; each one goes inside that `module Battle` / `class Scene` block. The fully qualified form `Battle::Scene.register_event(...)` works too at the top level of the file, it is just more verbose.
 
 ## Showing mid-battle dialogue
 
@@ -115,7 +121,7 @@ PSDK fires eight events over the course of a battle. They are all registered the
 `:logic_init` runs before any animation, while the logic exists but nothing is on screen yet. It is the place to add starting effects:
 
 ```ruby
-Battle::Scene.register_event(:logic_init) do |scene|
+register_event(:logic_init) do |scene|
   scene.logic.bank_effects[1].add(Battle::Effects::LightScreen.new(scene.logic, 1, 0, Float::INFINITY))
   scene.logic.bank_effects[1].add(Battle::Effects::Reflect.new(scene.logic, 1, 0, Float::INFINITY))
 end
@@ -128,7 +134,7 @@ The battle now starts with Light Screen and Reflect already up on the enemy side
 Five events pass only `scene`, so any of them can call `show_event_message`; they differ only in timing (see the table). A line before the player's first move uses `:battle_begin`:
 
 ```ruby
-Battle::Scene.register_event(:battle_begin) do |scene|
+register_event(:battle_begin) do |scene|
   scene.show_event_message("You actually made it this far? Let me show you a real battle!")
 end
 ```
@@ -136,7 +142,7 @@ end
 A first-turn-only line uses `:trainer_dialog` with a turn guard:
 
 ```ruby
-Battle::Scene.register_event(:trainer_dialog) do |scene|
+register_event(:trainer_dialog) do |scene|
   next if $game_temp.battle_turn != 1 # only on the first turn
 
   scene.show_event_message("Oh, I forgot to mention, I never intended to play fair.")
@@ -146,7 +152,7 @@ end
 A "down to the last Pokémon" boast uses `:battle_turn_end` (which fires after fainted Pokémon are replaced), with a flag so it runs only once:
 
 ```ruby
-Battle::Scene.register_event(:battle_turn_end) do |scene|
+register_event(:battle_turn_end) do |scene|
   next if scene.logic.alive_battlers_without_check(1).size > 1
   next if scene.instance_variable_get(:@ace_dialog_done)
 
@@ -162,7 +168,7 @@ The `@ace_dialog_done` flag, stored on the long-lived scene, stops the event fro
 `:after_attack` fires after every move, with the attacker (`launcher`) and the `move`. Use the move's public predicates to react, no need to reach into its internals:
 
 ```ruby
-Battle::Scene.register_event(:after_attack) do |scene, launcher, move|
+register_event(:after_attack) do |scene, launcher, move|
   next if launcher.bank != 0 # only react to the player's moves
   next if scene.instance_variable_get(:@praised_player)
 
@@ -185,7 +191,7 @@ end
 `:AI_force_action` fires once per AI (`index` is its position, `ai` is the AI). Return an array of actions to override its turn, or `nil` to let the default AI decide:
 
 ```ruby
-Battle::Scene.register_event(:AI_force_action) do |scene, ai, index|
+register_event(:AI_force_action) do |scene, ai, index|
   next if index != 0 # only the first AI
 
   controlled = ai.controlled_pokemon
@@ -201,13 +207,54 @@ end
 
 This forces the first AI to switch its active Pokémon for a random benched ally. `Battle::Actions::Switch.new(scene, out, in)` builds a switch action (the first Pokémon leaves, the second comes in), and returning the array makes the AI perform it.
 
+## Defining your own events
+
+The eight events above are the ones the battle scene fires, but `register_event` accepts any symbol, so a plugin can expose its own hooks. Triggering an event goes through `call_event`, which is private on the scene, so mirror the engine's own `on_after_attack` / `on_pre_battle_begin` wrappers and add a public method that calls it:
+
+```ruby
+module Battle
+  class Scene
+    def on_low_hp_taunt(launcher)
+      call_event(:low_hp_taunt, launcher)
+    end
+  end
+end
+```
+
+Call `scene.on_low_hp_taunt(...)` wherever your logic needs the hook (typically from a prepended battle method), and event files react to it like any built-in event:
+
+```ruby
+register_event(:low_hp_taunt) do |scene, launcher|
+  # ...
+end
+```
+
+This is exactly how the engine fires `:after_attack`, `:pre_battle_begin` and `:battle_turn_end` internally.
+
 ## Putting it together
 
-A battle event file is simply several `register_event` calls in one file. Set the battle's `battle_id` to the file's digits (from a script with `bi.battle_id = 2`, or via the trainer's Battle Group ID in Studio), add the `show_event_message` helper to a custom script, and the scene runs each block at the right moment.
+A battle event file is several `register_event` calls inside one reopened `Battle::Scene`:
+
+```ruby
+module Battle
+  class Scene
+    register_event(:logic_init) do |scene|
+      scene.logic.bank_effects[1].add(Battle::Effects::LightScreen.new(scene.logic, 1, 0, Float::INFINITY))
+    end
+
+    register_event(:battle_begin) do |scene|
+      scene.show_event_message("So you finally made it. Do not expect me to go easy on you!")
+    end
+  end
+end
+```
+
+Set the battle's `battle_id` to the file's digits (from a script with `bi.battle_id = 2`, or via the trainer's Battle Group ID in Studio), add the `show_event_message` helper to a custom script, and the scene runs each block at the right moment.
 
 ## Conclusion
 
 - Battle events are Ruby files in `Data/Events/Battle/NNNNN*.rb`, selected by `battle_id` (default `-1`, which loads nothing; `1` for wild battles).
-- Register one block per moment with `Battle::Scene.register_event(:event)`; the block always receives `scene` first.
+- Reopen `Battle::Scene` and register one block per moment with `register_event(:event)`; the block always receives `scene` first.
 - Use the dialogue events with the `show_event_message` helper for mid-battle lines, `:logic_init` for starting effects, `:after_attack` to react to moves, and `:AI_force_action` to script the AI.
 - Set `battle_id` from a `BattleInfo` (`bi.battle_id = N`) or via the trainer's Battle Group ID in Studio.
+- Beyond the eight built-in events, register your own symbol and trigger it with a public `on_*` wrapper around `call_event` to expose battle hooks from a plugin.
