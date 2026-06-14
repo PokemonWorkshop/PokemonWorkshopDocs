@@ -47,6 +47,14 @@
     "message": "Lancer des combats entièrement personnalisés depuis un script : construire un Battle::Logic::BattleInfo, assembler les équipes et sacs des dresseurs, puis démarrer la scène de combat.",
     "description": "The generated-index page description for category Battle Scripting in sidebar mainSidebar"
   },
+  "sidebar.mainSidebar.category.Data": {
+    "message": "Données",
+    "description": "The label for category 'Data' in sidebar 'mainSidebar'"
+  },
+  "sidebar.mainSidebar.category.Data.link.generated-index.description": {
+    "message": "Lire les données du jeu depuis ses scripts : accesseurs, itérateurs et les classes de données Studio qui décrivent objets, créatures, capacités et plus.",
+    "description": "The generated-index page description for category Data in sidebar mainSidebar"
+  },
   "sidebar.mainSidebar.category.RPG Maker XP": {
     "message": "RPG Maker XP",
     "description": "The label for category 'RPG Maker XP' in sidebar 'mainSidebar'"
