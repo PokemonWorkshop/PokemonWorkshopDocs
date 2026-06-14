@@ -1,5 +1,5 @@
 ---
-title: "How to use methods and blocks in Ruby?"
+title: "How to use methods and blocks?"
 slug: methods-and-blocks
 sidebar_position: 7
 description: "This chapter introduces **methods** (named, reusable pieces of code) and **blocks** (pieces of code that you pass to a method). This is a fundamental chapter: from now on, we can structure our code instead of writing everything in a single script."

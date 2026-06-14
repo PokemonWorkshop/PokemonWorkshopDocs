@@ -1,5 +1,5 @@
 ---
-title: "How to prepare the assets and text before creating a UI in PSDK?"
+title: "How to prepare the assets and text before creating a UI?"
 slug: prepare-ui-assets
 sidebar_position: 0
 description: "Before writing any Ruby, a UI needs its graphics and its translated text in place. This preparation step installs the Mystery Gift assets and CSV so the scene actually renders."

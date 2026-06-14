@@ -1,5 +1,5 @@
 ---
-title: "Comment échouer une attaque dans PSDK ?"
+title: "Comment échouer une attaque ?"
 slug: echouer-une-attaque
 sidebar_position: 1
 description: "Ce guide explique comment faire échouer une attaque avant qu'elle ne soit exécutée, que ce soit depuis la logique propre de l'attaque ou depuis un effet externe."

@@ -1,5 +1,5 @@
 ---
-title: "How to handle mouse input in PSDK?"
+title: "How to handle mouse input?"
 slug: handle-mouse-input
 sidebar_position: 6
 description: "This guide explains how to handle mouse interactions in a UI scene: wheel, hover, click and ctrl buttons."

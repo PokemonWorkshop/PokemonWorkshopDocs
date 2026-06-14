@@ -1,5 +1,5 @@
 ---
-title: "How to change move effectiveness in PSDK?"
+title: "How to change move effectiveness?"
 slug: how-to-change-move-effectiveness
 sidebar_position: 6
 description: "This guide explains how to modify the type multiplier of a move, whether from the move's own logic or from an external effect."

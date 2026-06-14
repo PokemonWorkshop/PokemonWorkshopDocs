@@ -1,5 +1,5 @@
 ---
-title: "How to make a move fail in PSDK?"
+title: "How to make a move fail?"
 slug: how-to-make-a-move-fail
 sidebar_position: 1
 description: "This guide explains how to make a move fail before it is executed, whether from the move's own logic or from an external effect."

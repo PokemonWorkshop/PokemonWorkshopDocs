@@ -1,5 +1,5 @@
 ---
-title: "How to use variables and data types in Ruby?"
+title: "How to use variables and data types?"
 slug: variables-and-data-types
 sidebar_position: 1
 description: "This guide is the first in a series of Ruby courses. In this first chapter, we learn how to store information in variables."

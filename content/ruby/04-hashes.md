@@ -1,5 +1,5 @@
 ---
-title: "How to use hashes in Ruby?"
+title: "How to use hashes?"
 slug: hashes
 sidebar_position: 4
 description: "This chapter introduces **Hashes**, a structure that associates **keys** with **values**. Where an Array stores elements by position (index 0, 1, 2...), a Hash stores them by name."

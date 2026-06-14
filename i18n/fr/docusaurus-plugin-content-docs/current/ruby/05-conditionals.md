@@ -1,5 +1,5 @@
 ---
-title: "Comment utiliser les conditions en Ruby ?"
+title: "Comment utiliser les conditions ?"
 slug: conditions
 sidebar_position: 5
 description: "Ce chapitre présente les **conditions**, le mécanisme qui permet à un programme de prendre des décisions. Selon la situation, le code exécute une branche ou une autre."

@@ -1,5 +1,5 @@
 ---
-title: "Comment gérer les entrées clavier dans PSDK ?"
+title: "Comment gérer les entrées clavier ?"
 slug: gerer-les-entrees-clavier
 sidebar_position: 5
 description: "Ce guide explique comment gérer les inputs clavier dans une scène UI : touches boutons, navigation dans la liste, et déplacement de la gestion des entrées dans son propre fichier."
