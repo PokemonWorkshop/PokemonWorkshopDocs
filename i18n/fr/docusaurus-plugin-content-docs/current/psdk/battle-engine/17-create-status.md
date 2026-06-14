@@ -7,7 +7,7 @@ description: "Ce guide explique comment créer un statut personnalisé dans PSDK
 
 Ce guide explique comment créer un statut personnalisé dans PSDK : déclarer son ID, coder ses méthodes de lecture et d'application, l'enregistrer dans les handlers de combat, créer sa classe d'effet, et ajouter son icône.
 
-:::info Versions requises
+:::info[Versions requises]
 Les statuts personnalisés reposent sur l'analyseur de statuts introduit dans **PSDK .26.34** et **Pokémon Studio 2.4.0**. On vérifie que le projet est à jour avant de commencer.
 :::
 

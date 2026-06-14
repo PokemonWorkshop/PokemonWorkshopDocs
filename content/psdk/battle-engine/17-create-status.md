@@ -7,7 +7,7 @@ description: "This guide explains how to create a custom status in PSDK: declari
 
 This guide explains how to create a custom status in PSDK: declaring its ID, coding its query and apply methods, registering it in the battle handlers, creating its effect class, and adding its battle icon.
 
-:::info Required versions
+:::info[Required versions]
 Custom statuses rely on the status parser introduced in **PSDK .26.34** and **Pokémon Studio 2.4.0**. Make sure your project is up to date before starting.
 :::
 
