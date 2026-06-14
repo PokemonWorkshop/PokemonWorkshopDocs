@@ -1,0 +1,30 @@
+# Normalize line endings to LF in the repository and on checkout, regardless of
+# each contributor's core.autocrlf setting. This keeps the working tree LF on
+# every platform, so build tooling (e.g. plugins/raw-markdown.js) never has to
+# deal with CRLF.
+* text=auto eol=lf
+
+# Source and content — always LF.
+*.md    text eol=lf
+*.mdx   text eol=lf
+*.ts    text eol=lf
+*.tsx   text eol=lf
+*.js    text eol=lf
+*.jsx   text eol=lf
+*.json  text eol=lf
+*.css   text eol=lf
+*.svg   text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+
+# Binary assets — never normalize.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.webp  binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary

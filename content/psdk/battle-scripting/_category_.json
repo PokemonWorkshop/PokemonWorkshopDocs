@@ -1,0 +1,9 @@
+{
+  "label": "Battle Scripting",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "slug": "/psdk/battle-scripting",
+    "description": "Start fully custom battles from a script: build a Battle::Logic::BattleInfo, assemble trainer parties and bags, and launch the battle scene."
+  }
+}

@@ -1,5 +1,5 @@
 ---
-title: "How to prevent move selection in PSDK?"
+title: "How to prevent move selection?"
 slug: how-to-prevent-move-selection
 sidebar_position: 3
 description: "This guide explains how to make a move non-selectable in the battle menu, whether from the move's own logic or from an external effect."

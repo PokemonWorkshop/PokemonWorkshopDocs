@@ -1,5 +1,5 @@
 ---
-title: "Comment utiliser les modules en Ruby ?"
+title: "Comment utiliser les modules ?"
 slug: modules
 sidebar_position: 10
 description: "Ce chapitre présente les modules, un outil pour organiser le code et partager du comportement entre classes. Les modules sont le complément naturel des classes et de l'héritage."

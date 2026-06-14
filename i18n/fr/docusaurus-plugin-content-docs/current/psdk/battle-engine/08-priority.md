@@ -1,5 +1,5 @@
 ---
-title: "Comment modifier la priorité d'une attaque dans PSDK ?"
+title: "Comment modifier la priorité d'une attaque ?"
 slug: modifier-la-priorite-dune-attaque
 sidebar_position: 8
 description: "Ce guide explique comment changer dynamiquement la priorité d'une attaque au moment de son utilisation, que ce soit depuis la logique propre de l'attaque ou depuis un effet externe."

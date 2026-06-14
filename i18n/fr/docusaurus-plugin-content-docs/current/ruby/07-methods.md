@@ -1,5 +1,5 @@
 ---
-title: "Comment utiliser les méthodes et les blocs en Ruby ?"
+title: "Comment utiliser les méthodes et les blocs ?"
 slug: methodes-et-blocs
 sidebar_position: 7
 description: "Ce chapitre présente les méthodes (des morceaux de code nommés et réutilisables) et les blocs (des morceaux de code qu'on passe à une méthode). C'est un chapitre fondamental : à partir de maintenant, on peut structurer son code au lieu de tout écrire dans un seul script."

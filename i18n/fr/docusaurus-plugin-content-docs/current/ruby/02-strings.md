@@ -1,5 +1,5 @@
 ---
-title: "Comment manipuler les chaînes et les symboles en Ruby ?"
+title: "Comment manipuler les chaînes et les symboles ?"
 slug: chaines-et-symboles
 sidebar_position: 2
 description: "Ce guide approfondit les String et les Symbol introduits au chapitre 1. On découvre les outils que Ruby offre pour transformer, formater et comparer du texte."

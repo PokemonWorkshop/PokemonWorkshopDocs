@@ -1,0 +1,9 @@
+{
+  "label": "Mystery Gift",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "slug": "/psdk/ui-development/mystery-gift",
+    "description": "An 11-step series building a complete Mystery Gift plugin from scratch: scenes, compositions, input, animations and i18n. Follow it in order."
+  }
+}

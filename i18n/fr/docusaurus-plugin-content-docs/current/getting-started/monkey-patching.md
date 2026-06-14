@@ -1,5 +1,5 @@
 ---
-title: "Qu'est-ce que le monkey-patch et comment l'appliquer dans PSDK ?"
+title: "Qu'est-ce que le monkey-patch et comment l'appliquer ?"
 slug: monkey-patch-dans-psdk
 sidebar_position: 3
 description: "PSDK est un moteur qui se met à jour régulièrement. Si on modifie directement un fichier du moteur pour changer un comportement, la prochaine mise à jour écrasera les modifications. Le monkey-patching permet de modifier le comportement de PSDK depuis ses propres scripts, sans toucher au code source du moteur."

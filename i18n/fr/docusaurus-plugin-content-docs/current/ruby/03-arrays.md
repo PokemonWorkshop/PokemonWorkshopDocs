@@ -1,5 +1,5 @@
 ---
-title: "Comment utiliser les tableaux en Ruby ?"
+title: "Comment utiliser les tableaux ?"
 slug: tableaux
 sidebar_position: 3
 description: "Ce chapitre présente les Array (tableaux), la structure de données la plus utilisée en Ruby. Un Array permet de stocker plusieurs valeurs dans une seule variable."

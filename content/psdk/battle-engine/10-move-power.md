@@ -1,5 +1,5 @@
 ---
-title: "How to change move power in PSDK?"
+title: "How to change move power?"
 slug: how-to-change-move-power
 sidebar_position: 10
 description: "This guide explains how to dynamically change the base power of a move, whether from the move's own logic or from an external effect."

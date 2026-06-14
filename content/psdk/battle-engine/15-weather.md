@@ -1,5 +1,5 @@
 ---
-title: "How to create a weather in PSDK?"
+title: "How to create a weather?"
 slug: how-to-create-a-weather
 sidebar_position: 15
 description: "This guide explains how to add a new weather to the battle system, create its effects, add the associated text messages, and trigger it via a move or an effect."
