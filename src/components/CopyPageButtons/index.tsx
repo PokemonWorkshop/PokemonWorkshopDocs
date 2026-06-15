@@ -1,4 +1,5 @@
 import { useLocation } from "@docusaurus/router";
+import { translate } from "@docusaurus/Translate";
 import { useState } from "react";
 import styles from "./styles.module.css";
 
@@ -77,7 +78,19 @@ export default function CopyPageButtons() {
         aria-live="polite"
       >
         <ClipboardIcon />
-        <span>{copied ? "Copied!" : "Copy page"}</span>
+        <span>
+          {copied
+            ? translate({
+                id: "copyPageButtons.copied",
+                message: "Copied!",
+                description: "Confirmation shown after copying the page Markdown",
+              })
+            : translate({
+                id: "copyPageButtons.copy",
+                message: "Copy page",
+                description: "Label of the button that copies the page Markdown",
+              })}
+        </span>
       </button>
       <a
         href={markdownUrl}
@@ -86,7 +99,13 @@ export default function CopyPageButtons() {
         className={styles.button}
       >
         <ExternalIcon />
-        <span>View</span>
+        <span>
+          {translate({
+            id: "copyPageButtons.view",
+            message: "View",
+            description: "Label of the link that opens the page Markdown in a new tab",
+          })}
+        </span>
       </a>
     </div>
   );

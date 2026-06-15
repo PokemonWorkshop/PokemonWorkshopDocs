@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { translate } from "@docusaurus/Translate";
 import styles from "./styles.module.css";
 
 // Singleton: shared Ruby VM across all playgrounds on the page
@@ -50,7 +51,19 @@ function loadScript(src: string): Promise<void> {
     const script = document.createElement("script");
     script.src = src;
     script.onload = () => resolve();
-    script.onerror = () => reject(new Error(`Impossible de charger ${src}`));
+    script.onerror = () =>
+      reject(
+        new Error(
+          translate(
+            {
+              id: "rubyPlayground.scriptLoadError",
+              message: "Unable to load {src}",
+              description: "Error thrown when a Ruby WebAssembly CDN script fails to load",
+            },
+            { src },
+          ),
+        ),
+      );
     document.head.appendChild(script);
   });
 }
@@ -80,6 +93,28 @@ interface Props {
   code: string;
 }
 
+function runButtonLabel(status: Status): string {
+  if (status === "loading") {
+    return translate({
+      id: "rubyPlayground.button.loading",
+      message: "Loading...",
+      description: "Run button label while the Ruby VM is loading",
+    });
+  }
+  if (status === "running") {
+    return translate({
+      id: "rubyPlayground.button.running",
+      message: "Running...",
+      description: "Run button label while user code is executing",
+    });
+  }
+  return translate({
+    id: "rubyPlayground.button.run",
+    message: "Run",
+    description: "Run button label in its idle state",
+  });
+}
+
 function RubyPlaygroundInner({ code: initialCode }: Props) {
   const [code, setCode] = useState(initialCode);
   const [output, setOutput] = useState("");
@@ -97,7 +132,13 @@ function RubyPlaygroundInner({ code: initialCode }: Props) {
 
   const run = useCallback(async () => {
     setStatus("loading");
-    setOutput("Chargement de Ruby WebAssembly...");
+    setOutput(
+      translate({
+        id: "rubyPlayground.loadingWasm",
+        message: "Loading Ruby WebAssembly...",
+        description: "Status message shown while the Ruby WebAssembly runtime loads",
+      }),
+    );
 
     try {
       const vm = await getVM();
@@ -132,10 +173,26 @@ function RubyPlaygroundInner({ code: initialCode }: Props) {
         display += (display ? "\n" : "") + "=> " + result;
       }
 
-      setOutput(display || "(pas de sortie)");
+      setOutput(
+        display ||
+          translate({
+            id: "rubyPlayground.noOutput",
+            message: "(no output)",
+            description: "Placeholder shown when executed code produced no output",
+          }),
+      );
       setStatus(display ? "done" : "idle");
     } catch (e) {
-      setOutput("Erreur de chargement: " + String(e));
+      setOutput(
+        translate(
+          {
+            id: "rubyPlayground.loadError",
+            message: "Loading error: {error}",
+            description: "Status message shown when the Ruby runtime fails to load",
+          },
+          { error: String(e) },
+        ),
+      );
       setStatus("error");
     }
   }, [code]);
@@ -179,13 +236,13 @@ function RubyPlaygroundInner({ code: initialCode }: Props) {
           className={styles.runButton}
           onClick={run}
           disabled={status === "loading" || status === "running"}
-          title="Ctrl+Enter pour exécuter"
+          title={translate({
+            id: "rubyPlayground.runHint",
+            message: "Ctrl+Enter to run",
+            description: "Tooltip on the run button explaining the keyboard shortcut",
+          })}
         >
-          {status === "loading"
-            ? "Chargement..."
-            : status === "running"
-              ? "Exécution..."
-              : "Exécuter"}
+          {runButtonLabel(status)}
         </button>
       </div>
       <textarea
@@ -200,9 +257,20 @@ function RubyPlaygroundInner({ code: initialCode }: Props) {
         autoCapitalize="off"
       />
       <div className={styles.outputSection}>
-        <div className={styles.outputHeader}>Sortie</div>
+        <div className={styles.outputHeader}>
+          {translate({
+            id: "rubyPlayground.outputHeader",
+            message: "Output",
+            description: "Header above the Ruby playground output area",
+          })}
+        </div>
         <div className={outputClass}>
-          {output || "Clique sur Exécuter ou appuie sur Ctrl+Enter"}
+          {output ||
+            translate({
+              id: "rubyPlayground.placeholder",
+              message: "Click Run or press Ctrl+Enter",
+              description: "Placeholder shown in the output area before any run",
+            })}
         </div>
       </div>
     </div>
