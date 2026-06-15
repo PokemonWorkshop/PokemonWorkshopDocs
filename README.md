@@ -70,7 +70,8 @@ The site will be available at `http://localhost:3000` with hot reload.
 │       ├── footer.json
 │       └── code.json                     # UI string translations
 ├── plugins/
-│   └── locale-doc-map.js                 # Bidirectional locale routing plugin
+│   ├── locale-doc-map.js                 # Bidirectional locale routing plugin
+│   └── raw-markdown.js                    # postBuild hook: strips frontmatter, serves .md for CopyPageButtons
 ├── src/
 │   ├── components/                       # Custom React components
 │   ├── theme/                            # Theme overrides (swizzled)
