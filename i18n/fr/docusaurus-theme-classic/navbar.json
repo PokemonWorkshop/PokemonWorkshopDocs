@@ -3,20 +3,24 @@
     "message": "Démarrage",
     "description": "Navbar item with label Getting Started"
   },
+  "item.label.Studio": {
+    "message": "Studio",
+    "description": "Navbar item with label Studio"
+  },
   "item.label.PSDK": {
     "message": "PSDK",
     "description": "Navbar item with label PSDK"
   },
-  "item.label.RPG Maker XP": {
-    "message": "RPG Maker XP",
-    "description": "Navbar item with label RPG Maker XP"
+  "item.label.RMXP": {
+    "message": "RMXP",
+    "description": "Navbar item with label RMXP"
   },
   "item.label.Ruby": {
-    "message": "Cours Ruby",
+    "message": "Ruby",
     "description": "Navbar item with label Ruby"
   },
   "title": {
-    "message": "Pokémon Workshop Docs",
+    "message": "Accueil",
     "description": "The title in the navbar"
   },
   "logo.alt": {

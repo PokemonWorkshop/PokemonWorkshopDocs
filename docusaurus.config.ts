@@ -125,15 +125,16 @@ const config: Config = {
       respectPrefersColorScheme: false,
     },
     navbar: {
-      title: "Pokémon Workshop Docs",
+      title: "Home",
       logo: {
         alt: "Pokémon Workshop Logo",
         src: "img/logo.svg",
       },
       items: [
         { label: "Getting Started", to: "/getting-started", position: "left" },
+        { label: "Studio", to: "/pokemon-studio", position: "left" },
         { label: "PSDK", to: "/psdk", position: "left" },
-        { label: "RPG Maker XP", to: "/rpg-maker-xp", position: "left" },
+        { label: "RMXP", to: "/rpg-maker-xp", position: "left" },
         { label: "Ruby", to: "/ruby", position: "left" },
         {
           type: "search",
@@ -158,8 +159,9 @@ const config: Config = {
           title: "Documentation",
           items: [
             { label: "Getting Started", to: "/getting-started" },
+            { label: "Studio", to: "/pokemon-studio" },
             { label: "PSDK", to: "/psdk" },
-            { label: "RPG Maker XP", to: "/rpg-maker-xp" },
+            { label: "RMXP", to: "/rpg-maker-xp" },
             { label: "Ruby", to: "/ruby" },
           ],
         },
