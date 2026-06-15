@@ -6,12 +6,7 @@ import { translate } from "@docusaurus/Translate";
 import DropdownNavbarItem from "@theme/NavbarItem/DropdownNavbarItem";
 import IconLanguage from "@theme/Icon/Language";
 import type { Props } from "@theme/NavbarItem/LocaleDropdownNavbarItem";
-
-function normalize(pathname: string): string {
-  return pathname.length > 1 && pathname.endsWith("/")
-    ? pathname.slice(0, -1)
-    : pathname;
-}
+import { normalizePathname } from "../../../utils/locale";
 
 export default function LocaleDropdownNavbarItem({
   mobile,
@@ -28,7 +23,7 @@ export default function LocaleDropdownNavbarItem({
     | Record<string, string>
     | undefined;
 
-  const currentPath = normalize(location.pathname);
+  const currentPath = normalizePathname(location.pathname);
 
   function getLocalePath(locale: string): string {
     if (locale === currentLocale) return currentPath;
