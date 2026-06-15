@@ -81,6 +81,84 @@
   --ifm-global-border-color: #2b2a32;
 }
 
+/* === Navbar === */
+
+/* A touch more side gutter so the brand and right-side controls don't kiss
+   the viewport edge on wide screens. Kept full-bleed (no centered wrapper):
+   a docs navbar should stay aligned with the sidebar, not float to a column. */
+.navbar {
+  --ifm-navbar-padding-horizontal: 1.5rem;
+}
+
+/* Never let a section label or the brand title wrap to a second line: the bar
+   has a fixed height, so a wrapped label spills over the page content. The
+   short section labels (Studio, RMXP, Ruby...) leave ample room on one line
+   just above the 996px desktop breakpoint, so this is only a safety net. */
+.navbar__link,
+.navbar__title {
+  white-space: nowrap;
+}
+
+/* Slightly larger logo now that the long title is gone (kept under the 60px
+   navbar height to avoid cramping). */
+.navbar__logo {
+  height: 2.25rem;
+}
+
+/* Brand sits flush above the sidebar; add breathing room before the nav links
+   so the brand and the navigation read as two distinct clusters. */
+.navbar__brand {
+  margin-right: 1.5rem;
+}
+
+/* === Search === */
+
+/* The search bar shows a Ctrl/Cmd+K shortcut hint (kbd badges inside
+   .navbar__search). The plugin only hides it below 576px, so it lingers on
+   tablets and large phones where the shortcut is meaningless (no physical
+   keyboard). Hide it on touch devices (coarse pointer, no hover) at any width;
+   keep it where a fine pointer implies a mouse, hence a keyboard. There is no
+   CSS media feature for "has keyboard", so pointer/hover is the standard proxy
+   (same heuristic Algolia DocSearch uses). */
+@media (hover: none) and (pointer: coarse) {
+  .navbar__search kbd {
+    display: none;
+  }
+}
+
+/* Keep the full desktop input above the small-phone collapse. Infima shrinks it
+   to 9rem below 996px, but in tablet/mobile mode the nav links move into the
+   hamburger, leaving ample room, so a fuller input keeps the placeholder (and
+   the shortcut, where shown) readable. Also reserve right padding for the hint,
+   since Infima leaves only 0.5rem and the placeholder would slide under it.
+   Scoped above 576px: below that the plugin collapses the input to an icon and
+   hides the hint, which we keep. */
+@media (min-width: 577px) {
+  .navbar__search-input {
+    width: 12.5rem;
+    padding-right: 4rem;
+  }
+}
+
+/* === Pagination === */
+
+/* Infima lays the prev/next paginator as a permanent 2-column grid: the
+   container sets `grid-template-columns: repeat(2, 1fr)` AND the next link
+   pins itself with `grid-column: 2/3`. On phones, two buttons side by side
+   with long page titles wrap and cramp. Below the tablet breakpoint, collapse
+   to a single column and release the next link from its forced column so the
+   two buttons stack full-width. Both overrides are required: dropping only one
+   leaves the next link recreating an implicit second track. */
+@media (max-width: 767px) {
+  .pagination-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .pagination-nav__link--next {
+    grid-column: auto;
+  }
+}
+
 /* === Footer === */
 
 /* Hide external link icons in the footer (visual noise, redundant
