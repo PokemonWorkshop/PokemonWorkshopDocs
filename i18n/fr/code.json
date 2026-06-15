@@ -378,5 +378,57 @@
   "progressTracker.uiDev.label": {
     "message": "Mystery Gift — Etape",
     "description": "Label prefix for the UI Development tutorial steps in the progress tracker"
+  },
+  "copyPageButtons.copy": {
+    "message": "Copier la page",
+    "description": "Label of the button that copies the page Markdown"
+  },
+  "copyPageButtons.copied": {
+    "message": "Copié !",
+    "description": "Confirmation shown after copying the page Markdown"
+  },
+  "copyPageButtons.view": {
+    "message": "Voir",
+    "description": "Label of the link that opens the page Markdown in a new tab"
+  },
+  "rubyPlayground.scriptLoadError": {
+    "message": "Impossible de charger {src}",
+    "description": "Error thrown when a Ruby WebAssembly CDN script fails to load"
+  },
+  "rubyPlayground.loadingWasm": {
+    "message": "Chargement de Ruby WebAssembly...",
+    "description": "Status message shown while the Ruby WebAssembly runtime loads"
+  },
+  "rubyPlayground.noOutput": {
+    "message": "(pas de sortie)",
+    "description": "Placeholder shown when executed code produced no output"
+  },
+  "rubyPlayground.loadError": {
+    "message": "Erreur de chargement : {error}",
+    "description": "Status message shown when the Ruby runtime fails to load"
+  },
+  "rubyPlayground.button.loading": {
+    "message": "Chargement...",
+    "description": "Run button label while the Ruby VM is loading"
+  },
+  "rubyPlayground.button.running": {
+    "message": "Exécution...",
+    "description": "Run button label while user code is executing"
+  },
+  "rubyPlayground.button.run": {
+    "message": "Exécuter",
+    "description": "Run button label in its idle state"
+  },
+  "rubyPlayground.runHint": {
+    "message": "Ctrl+Enter pour exécuter",
+    "description": "Tooltip on the run button explaining the keyboard shortcut"
+  },
+  "rubyPlayground.outputHeader": {
+    "message": "Sortie",
+    "description": "Header above the Ruby playground output area"
+  },
+  "rubyPlayground.placeholder": {
+    "message": "Clique sur Exécuter ou appuie sur Ctrl+Enter",
+    "description": "Placeholder shown in the output area before any run"
   }
 }
