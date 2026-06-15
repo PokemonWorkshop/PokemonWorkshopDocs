@@ -1,5 +1,5 @@
 ---
-title: "What now?"
+title: "Where to go next"
 slug: what-now
 sidebar_position: 13
 description: "If you have made it this far, you have all the Ruby knowledge needed to read and write code in a PSDK project:"

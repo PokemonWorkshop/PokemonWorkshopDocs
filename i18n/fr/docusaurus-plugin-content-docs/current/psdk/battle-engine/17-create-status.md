@@ -1,5 +1,5 @@
 ---
-title: "Comment créer un statut personnalisé ?"
+title: "Créer un statut personnalisé"
 slug: creer-un-statut-personnalise
 sidebar_position: 17
 description: "Ce guide explique comment créer un statut personnalisé dans PSDK : déclarer son ID, coder ses méthodes de lecture et d'application, l'enregistrer dans les handlers de combat, créer sa classe d'effet, et ajouter son icône."

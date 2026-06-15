@@ -1,5 +1,5 @@
 ---
-title: "How to use modules?"
+title: "Modules"
 slug: modules
 sidebar_position: 10
 description: "This chapter introduces modules, a tool for organizing code and sharing behavior between classes. Modules are the natural complement to classes and inheritance."

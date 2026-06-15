@@ -1,5 +1,5 @@
 ---
-title: "Et maintenant ?"
+title: "Pour aller plus loin"
 slug: et-maintenant
 sidebar_position: 13
 description: "Si vous êtes arrivé jusqu'ici, vous avez toutes les connaissances Ruby nécessaires pour lire et écrire du code dans un projet PSDK :"

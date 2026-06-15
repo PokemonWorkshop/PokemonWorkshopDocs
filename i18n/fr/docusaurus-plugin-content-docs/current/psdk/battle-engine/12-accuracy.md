@@ -1,5 +1,5 @@
 ---
-title: "Comment modifier la précision d'une attaque ?"
+title: "Modifier la précision d'une attaque"
 slug: modifier-la-precision-dune-attaque
 sidebar_position: 12
 description: "Ce guide explique comment modifier dynamiquement la précision d'une attaque, que ce soit en la contournant complètement ou en appliquant un multiplicateur depuis un effet externe."

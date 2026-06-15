@@ -1,5 +1,5 @@
 ---
-title: "How to customize GenericBase?"
+title: "Customize GenericBase"
 slug: customize-genericbase
 sidebar_position: 10
 description: "This guide finishes the base UI: customizing the background, button bar and ctrl buttons by subclassing GenericBase."

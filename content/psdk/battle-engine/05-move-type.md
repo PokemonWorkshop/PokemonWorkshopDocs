@@ -1,5 +1,5 @@
 ---
-title: "How to change a move type?"
+title: "Change a move's type"
 slug: how-to-change-a-move-type
 sidebar_position: 5
 description: "This guide explains how to dynamically change the type of a move at the time of use, whether from the move's own logic or from an external effect."

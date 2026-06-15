@@ -1,5 +1,5 @@
 ---
-title: "How to modify critical hit chance?"
+title: "Change critical hit chance"
 slug: how-to-modify-critical-hit-chance
 sidebar_position: 13
 description: "This guide explains how to modify a move's critical hit rate and the critical damage multiplier."

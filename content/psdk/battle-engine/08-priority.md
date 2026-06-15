@@ -1,5 +1,5 @@
 ---
-title: "How to change move priority?"
+title: "Change move priority"
 slug: how-to-change-move-priority
 sidebar_position: 8
 description: "This guide explains how to dynamically change the priority of a move at the time of use, whether from the move's own logic or from an external effect."

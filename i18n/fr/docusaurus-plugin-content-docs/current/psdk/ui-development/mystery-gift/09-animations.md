@@ -1,5 +1,5 @@
 ---
-title: "Comment créer des animations ?"
+title: "Créer des animations"
 slug: creer-des-animations
 sidebar_position: 9
 description: "Ce guide ajoute des animations UI avec Yuki::Animation : un composant bannière en fondu, un handler d'animation dans la Composition, et leur usage à la réclamation d'un cadeau."

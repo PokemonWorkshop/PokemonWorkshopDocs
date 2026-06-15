@@ -1,5 +1,5 @@
 ---
-title: "How to create a field terrain?"
+title: "Create a field terrain"
 slug: how-to-create-a-field-terrain
 sidebar_position: 16
 description: "This guide explains how to add a new field terrain to the battle system, create its effects, add the associated text messages, and trigger it via a move or an effect."

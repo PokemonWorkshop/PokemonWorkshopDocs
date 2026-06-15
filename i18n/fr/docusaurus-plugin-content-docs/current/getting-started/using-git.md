@@ -1,5 +1,5 @@
 ---
-title: "Comment utiliser Git avec PSDK ?"
+title: "Utiliser Git avec PSDK"
 slug: utiliser-git-avec-psdk
 sidebar_position: 2
 description: "Git est l'outil de versioning utilisé par PSDK. Il permet de suivre l'historique des modifications, de travailler sur plusieurs fonctionnalités en parallèle, et de synchroniser son travail avec le dépôt officiel. Ce guide couvre les bases de Git, comment forker le dépôt PSDK sur GitLab, et comment maintenir son fork à jour."

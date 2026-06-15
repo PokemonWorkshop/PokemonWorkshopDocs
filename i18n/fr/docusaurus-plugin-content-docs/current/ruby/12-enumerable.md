@@ -1,5 +1,5 @@
 ---
-title: "Comment utiliser Enumerable ?"
+title: "Enumerable"
 slug: enumerable
 sidebar_position: 12
 description: "Ce chapitre présente Enumerable, un module qui donne plus de 50 méthodes de manipulation de collections. On découvre aussi Comparable, qui permet de comparer des objets entre eux."

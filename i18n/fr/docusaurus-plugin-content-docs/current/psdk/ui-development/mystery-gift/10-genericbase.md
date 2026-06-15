@@ -1,5 +1,5 @@
 ---
-title: "Comment personnaliser GenericBase ?"
+title: "Personnaliser GenericBase"
 slug: personnaliser-genericbase
 sidebar_position: 10
 description: "Ce guide termine la base UI : personnaliser le fond, la barre de boutons et les boutons ctrl en héritant de GenericBase."

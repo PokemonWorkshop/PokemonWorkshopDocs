@@ -1,5 +1,5 @@
 ---
-title: "How to create a SpriteStack component?"
+title: "Create a SpriteStack component"
 slug: create-a-spritestack-component
 sidebar_position: 3
 description: "This guide explains how to create a visual sub-component by extending SpriteStack, using the Mystery Gift gift row as a concrete example."

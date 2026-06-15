@@ -1,5 +1,5 @@
 ---
-title: "How to define an item's behavior in PSDK?"
+title: "Define an item's behavior"
 slug: item-descriptor
 sidebar_position: 2
 description: "This guide explains how PSDK turns item data into in-game behavior with the ItemDescriptor module: the wrapper read by every UI, and the definition functions telling what an item does from the bag, on a creature or on a move."

@@ -1,5 +1,5 @@
 ---
-title: "Comment bloquer une attaque ?"
+title: "Bloquer une attaque"
 slug: bloquer-une-attaque
 sidebar_position: 2
 description: "Ce guide explique comment empêcher une attaque d'atteindre sa cible, que ce soit depuis la logique propre de l'attaque ou depuis un effet actif sur la cible."

@@ -76,17 +76,17 @@ Every page starts with a YAML frontmatter block:
 
 ```markdown
 ---
-title: "Page title as a question"
+title: "Page title as a declarative phrase"
 slug: page-url-slug
 sidebar_position: 1
 description: "Concise description of the content. This description is reused as the first paragraph of the page."
 ---
 ```
 
-- **title**: phrased as a question (`"How to do X?"`, `"What is X?"`). Wrapped in quotes.
+- **title**: a declarative phrase, keyword first, no leading "How to" / "Comment" and no trailing question mark (`"Make a move fail"` / `"Faire échouer une attaque"`, `"Arrays"` / `"Les tableaux"`). Use an imperative/infinitive verb phrase for action guides and a noun phrase for course chapters. Do not append the section name (no `"… in PSDK"` / `"… dans PSDK"`); the section is already carried by the sidebar, breadcrumb, slug and description. Wrapped in quotes.
 - **slug**: URL identifier, in kebab-case, without accents. No leading slash. The English and French versions can have different slugs (e.g., `how-to-create-a-weather` vs `creer-une-meteo`).
 - **sidebar_position**: position within the section. Must match the filename prefix and be identical between locales.
-- **description**: one or two sentence summary, in **plain text** — no Markdown. This field feeds the SEO `<meta name="description">` tag and the category index cards, both of which render it as raw text, so `**bold**` or `` `code` `` markers would show up literally. The page's first paragraph repeats the same wording (see below).
+- **description**: one or two sentence summary, in **plain text** — no Markdown. This field feeds the SEO `<meta name="description">` tag and the category index list, both of which render it as raw text, so `**bold**` or `` `code` `` markers would show up literally. The page's first paragraph repeats the same wording (see below).
 
 ### First Paragraph
 

@@ -1,5 +1,5 @@
 ---
-title: "How to be immune to a move?"
+title: "Make a target immune to a move"
 slug: how-to-be-immune-to-a-move
 sidebar_position: 4
 description: "This guide explains how to make a Pokémon immune to a move, whether from the move's own logic or from an external effect."

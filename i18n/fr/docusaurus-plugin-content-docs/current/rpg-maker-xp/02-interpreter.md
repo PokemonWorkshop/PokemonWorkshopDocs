@@ -1,5 +1,5 @@
 ---
-title: "Comment utiliser l'Interpreter dans un event ?"
+title: "Utiliser l'Interpreter dans un event"
 slug: utiliser-linterpreter-dans-un-event
 sidebar_position: 2
 description: "Dans RMXP, quand on crée un event, on dispose de commandes classiques : afficher un message, donner un objet, téléporter le joueur. Mais ces commandes sont limitées. PSDK met à disposition des dizaines de méthodes prêtes à l'emploi qu'on peut appeler directement depuis la commande Script d'un event."

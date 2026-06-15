@@ -1,5 +1,5 @@
 ---
-title: "Comment scénariser un combat ?"
+title: "Scénariser un combat"
 slug: scenariser-un-combat
 sidebar_position: 2
 description: "Ce guide explique comment utiliser les battle events : des hooks Ruby dans la scène de combat qui affichent des dialogues en plein combat, mettent en place des effets initiaux, réagissent aux attaques et forcent l'IA, sélectionnés par combat via son battle id."

@@ -1,5 +1,5 @@
 ---
-title: "Comment modifier le type d'une attaque ?"
+title: "Modifier le type d'une attaque"
 slug: modifier-le-type-dune-attaque
 sidebar_position: 5
 description: "Ce guide explique comment changer dynamiquement le type d'une attaque au moment de son utilisation, que ce soit depuis la logique propre de l'attaque ou depuis un effet externe."

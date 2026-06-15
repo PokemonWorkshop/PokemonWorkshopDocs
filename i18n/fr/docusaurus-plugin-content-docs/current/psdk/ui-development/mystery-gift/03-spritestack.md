@@ -1,5 +1,5 @@
 ---
-title: "Comment créer un composant SpriteStack ?"
+title: "Créer un composant SpriteStack"
 slug: creer-un-composant-spritestack
 sidebar_position: 3
 description: "Ce guide explique comment créer un sous-composant visuel en étendant SpriteStack, avec la ligne de cadeau de Mystery Gift comme exemple concret."

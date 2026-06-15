@@ -1,5 +1,5 @@
 ---
-title: "How to use arrays?"
+title: "Arrays"
 slug: arrays
 sidebar_position: 3
 description: "This chapter introduces Arrays, the most commonly used data structure in Ruby. An Array allows storing multiple values in a single variable."

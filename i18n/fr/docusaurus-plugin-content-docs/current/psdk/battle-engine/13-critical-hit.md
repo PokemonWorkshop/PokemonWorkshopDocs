@@ -1,5 +1,5 @@
 ---
-title: "Comment modifier le taux de critique ?"
+title: "Modifier le taux de critique"
 slug: modifier-le-taux-de-critique
 sidebar_position: 13
 description: "Ce guide explique comment modifier le taux de coup critique d'une attaque et le multiplicateur de dégâts critique."

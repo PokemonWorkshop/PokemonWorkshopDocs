@@ -1,5 +1,5 @@
 ---
-title: "Comment utiliser les variables et les types de données ?"
+title: "Les variables et les types de données"
 slug: variables-et-types-de-donnees
 sidebar_position: 1
 description: "Ce guide est le premier d'une série de cours Ruby. Dans ce premier chapitre, on découvre comment stocker des informations dans des variables."

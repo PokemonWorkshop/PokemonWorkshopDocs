@@ -1,5 +1,5 @@
 ---
-title: "Comment utiliser les dialogues de confirmation ?"
+title: "Utiliser les dialogues de confirmation"
 slug: utiliser-les-dialogues-de-confirmation
 sidebar_position: 8
 description: "Ce guide ajoute la logique métier de la scène : entrer un code, le valider, et réclamer un cadeau via des dialogues de confirmation et des messages bloquants."

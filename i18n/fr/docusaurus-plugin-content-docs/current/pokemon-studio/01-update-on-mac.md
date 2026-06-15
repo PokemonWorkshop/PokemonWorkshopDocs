@@ -1,5 +1,5 @@
 ---
-title: "Comment mettre à jour Pokémon Studio et corriger l'erreur « endommagé » sur macOS ?"
+title: "Mettre à jour Pokémon Studio et corriger l'erreur « endommagé » sur macOS"
 slug: mettre-a-jour-pokemon-studio-macos
 sidebar_position: 1
 description: "Sur macOS, Pokémon Studio ne se met pas à jour automatiquement, et une version fraîchement téléchargée refuse souvent de s'ouvrir avec une erreur trompeuse indiquant qu'elle est « endommagée ». Ce guide explique pourquoi cela arrive et comment mettre à jour Pokémon Studio manuellement puis le débloquer."

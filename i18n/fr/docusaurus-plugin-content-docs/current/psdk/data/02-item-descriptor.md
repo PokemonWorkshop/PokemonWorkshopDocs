@@ -1,5 +1,5 @@
 ---
-title: "Comment définir le comportement d'un objet dans PSDK ?"
+title: "Définir le comportement d'un objet"
 slug: definir-le-comportement-d-un-objet
 sidebar_position: 2
 description: "Ce guide explique comment PSDK transforme les données d'un objet en comportement en jeu avec le module ItemDescriptor : le wrapper lu par toutes les UI, et les fonctions de définition qui disent ce qu'un objet fait depuis le sac, sur une créature ou sur une capacité."

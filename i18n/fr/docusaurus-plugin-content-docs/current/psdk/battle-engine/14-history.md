@@ -1,5 +1,5 @@
 ---
-title: "Comment créer un historique de combat ?"
+title: "Créer un historique de combat"
 slug: creer-un-historique
 sidebar_position: 14
 description: "Ce guide explique comment créer un historique personnalisé sur un PokemonBattler, en suivant le même pattern que MoveHistory, DamageHistory et StatHistory."

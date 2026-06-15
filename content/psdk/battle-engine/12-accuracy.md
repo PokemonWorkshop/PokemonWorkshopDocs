@@ -1,5 +1,5 @@
 ---
-title: "How to modify move accuracy?"
+title: "Change move accuracy"
 slug: how-to-modify-move-accuracy
 sidebar_position: 12
 description: "This guide explains how to dynamically modify a move's accuracy, whether by bypassing it entirely or by applying a multiplier from an external effect."

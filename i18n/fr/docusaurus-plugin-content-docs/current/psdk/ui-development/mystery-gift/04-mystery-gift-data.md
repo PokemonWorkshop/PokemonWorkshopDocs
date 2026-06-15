@@ -1,5 +1,5 @@
 ---
-title: "Comment ajouter une couche de données avec PFM ?"
+title: "Ajouter une couche de données avec PFM"
 slug: ajouter-une-couche-de-donnees
 sidebar_position: 4
 description: "Ce guide ajoute la couche de persistence PFM qui stocke les codes cadeaux déjà réclamés par le joueur, et la branche dans la Composition pour que les lignes affichent de vraies données."

@@ -1,5 +1,5 @@
 ---
-title: "How to manipulate strings and symbols?"
+title: "Strings and symbols"
 slug: strings-and-symbols
 sidebar_position: 2
 description: "This guide goes deeper into String and Symbol, introduced in chapter 1. We discover the tools Ruby offers to transform, format, and compare text."

@@ -1,5 +1,5 @@
 ---
-title: "How to extend existing code with prepend?"
+title: "Extending code with prepend"
 slug: extending-code-with-prepend
 sidebar_position: 11
 description: "This chapter presents techniques for extending existing code without modifying it directly. This is a fundamental concept in Ruby: you can enrich a class after its creation, even if you do not have access to the source file."

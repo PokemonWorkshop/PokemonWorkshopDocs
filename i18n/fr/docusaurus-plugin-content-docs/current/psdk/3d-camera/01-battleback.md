@@ -1,5 +1,5 @@
 ---
-title: "Comment créer un fond de combat pour la caméra 3D ?"
+title: "Créer un fond de combat pour la caméra 3D"
 slug: creer-un-fond-de-combat-3d
 sidebar_position: 1
 description: "Ce guide explique comment construire un fond de combat pour la caméra de combat 3D dynamique de PSDK : une classe Ruby qui empile des couches de sprites, les anime, et est sélectionnée par le nom de fond du combat."

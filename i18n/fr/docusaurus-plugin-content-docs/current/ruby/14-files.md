@@ -1,5 +1,5 @@
 ---
-title: "Comment lire et écrire des fichiers ?"
+title: "Lire et écrire des fichiers"
 slug: lire-et-ecrire-des-fichiers
 sidebar_position: 15
 description: "Ce chapitre présente la lecture et l'écriture de fichiers, puis la sérialisation : transformer des objets Ruby en données qu'on peut sauvegarder et recharger plus tard."

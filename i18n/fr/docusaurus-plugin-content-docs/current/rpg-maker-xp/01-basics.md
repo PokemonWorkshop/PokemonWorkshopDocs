@@ -1,5 +1,5 @@
 ---
-title: "Comment apprendre les bases de RPG Maker XP ?"
+title: "Les bases de RPG Maker XP"
 slug: bases-de-rpg-maker-xp
 sidebar_position: 1
 description: "PSDK utilise RPG Maker XP (RMXP) uniquement pour la gestion des events. Les maps sont créées avec Tiled et la base de données est gérée par Pokémon Studio. Cependant, tant que la v3 de Pokémon Studio n'est pas sortie, RMXP reste nécessaire pour les events. Ce guide oriente vers la ressource de référence et précise ce qu'il faut apprendre."
