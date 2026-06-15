@@ -8,12 +8,7 @@ import { useLocation } from "@docusaurus/router";
 import { applyTrailingSlash } from "@docusaurus/utils-common";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import SearchMetadata from "@theme/SearchMetadata";
-
-function normalize(pathname: string): string {
-  return pathname.length > 1 && pathname.endsWith("/")
-    ? pathname.slice(0, -1)
-    : pathname;
-}
+import { normalizePathname } from "../../utils/locale";
 
 function resolveLocalePaths(
   currentLocale: string,
@@ -46,7 +41,7 @@ function AlternateLangHeaders(): ReactNode {
     | Record<string, string>
     | undefined;
 
-  const currentPath = normalize(location.pathname);
+  const currentPath = normalizePathname(location.pathname);
   const paths = resolveLocalePaths(currentLocale, currentPath, localeMap);
 
   const currentHtmlLang = localeConfigs[currentLocale]!.htmlLang;
