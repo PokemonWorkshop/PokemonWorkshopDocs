@@ -1,5 +1,5 @@
 ---
-title: "How to access game data in PSDK?"
+title: "Access game data"
 slug: access-game-data
 sidebar_position: 1
 description: "This guide explains how to read game data (items, creatures, moves, types and more) from your PSDK scripts: the data accessors, the iterators, and the gotchas to know about unknown entries and creature forms."

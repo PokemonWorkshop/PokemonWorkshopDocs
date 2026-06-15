@@ -1,5 +1,5 @@
 ---
-title: "Comment accéder aux données du jeu dans PSDK ?"
+title: "Accéder aux données du jeu"
 slug: acceder-aux-donnees-du-jeu
 sidebar_position: 1
 description: "Ce guide explique comment lire les données du jeu (objets, créatures, capacités, types et plus) depuis vos scripts PSDK : les accesseurs de données, les itérateurs, et les pièges à connaître sur les entrées inconnues et les formes de créatures."

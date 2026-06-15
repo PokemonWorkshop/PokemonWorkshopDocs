@@ -1,5 +1,5 @@
 ---
-title: "Comment personnaliser le menu principal dans PSDK ?"
+title: "Personnaliser le menu principal"
 slug: personnaliser-le-menu-principal
 sidebar_position: 2
 description: "Ce guide explique le fonctionnement du menu principal et comment le personnaliser : ajouter un bouton, changer l'apparence d'un bouton et définir un ordre personnalisé. C'est l'une des personnalisations d'UI les plus simples de PSDK, parfaite comme premier contact avec le code d'interface du moteur."

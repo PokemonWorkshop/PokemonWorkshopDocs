@@ -1,5 +1,5 @@
 ---
-title: "Comment préparer son environnement de développement ?"
+title: "Préparer son environnement de développement"
 slug: preparer-son-environnement
 sidebar_position: 1
 description: "Avant de pouvoir écrire des scripts pour son projet PSDK, il faut installer Ruby, configurer un éditeur de code, et mettre en place l'autocomplétion pour avoir accès à la documentation et aux méthodes de PSDK pendant qu'on code. Ce guide couvre l'installation complète étape par étape."

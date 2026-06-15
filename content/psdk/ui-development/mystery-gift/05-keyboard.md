@@ -1,5 +1,5 @@
 ---
-title: "How to handle keyboard input?"
+title: "Handle keyboard input"
 slug: handle-keyboard-input
 sidebar_position: 5
 description: "This guide explains how to handle keyboard input in a UI scene: button keys, list navigation, and moving the input handling into its own file."

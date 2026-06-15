@@ -1,5 +1,5 @@
 ---
-title: "Comment modifier la puissance d'une attaque ?"
+title: "Modifier la puissance d'une attaque"
 slug: modifier-la-puissance-dune-attaque
 sidebar_position: 10
 description: "Ce guide explique comment changer dynamiquement la puissance de base d'une attaque, que ce soit depuis la logique propre de l'attaque ou depuis un effet externe."

@@ -1,5 +1,5 @@
 ---
-title: "How to script a battle?"
+title: "Script a battle"
 slug: how-to-script-a-battle
 sidebar_position: 1
 description: "This guide explains how to start a battle from a script: a wild battle against a custom Pokémon, or a trainer battle built from Studio data, for the cases Pokémon Studio's editor alone cannot cover."

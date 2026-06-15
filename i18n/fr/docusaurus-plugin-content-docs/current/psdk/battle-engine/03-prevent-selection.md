@@ -1,5 +1,5 @@
 ---
-title: "Comment empêcher la sélection d'une attaque ?"
+title: "Empêcher la sélection d'une attaque"
 slug: empecher-la-selection-dune-attaque
 sidebar_position: 3
 description: "Ce guide explique comment rendre une attaque non sélectionnable dans le menu de combat, que ce soit depuis la logique propre de l'attaque ou depuis un effet externe."

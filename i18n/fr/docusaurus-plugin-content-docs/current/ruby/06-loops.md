@@ -1,8 +1,8 @@
 ---
-title: "Comment utiliser les boucles et les itérateurs ?"
+title: "Les boucles et les itérateurs"
 slug: boucles-et-iterateurs
 sidebar_position: 6
-description: "Ce chapitre présente les outils qui permettent de **répéter** des instructions : les boucles classiques et les itérateurs. On découvre aussi comment lire ce que l'utilisateur tape au clavier."
+description: "Ce chapitre présente les outils qui permettent de répéter des instructions : les boucles classiques et les itérateurs. On découvre aussi comment lire ce que l'utilisateur tape au clavier."
 ---
 
 Ce chapitre présente les outils qui permettent de **répéter** des instructions : les boucles classiques et les itérateurs. On découvre aussi comment lire ce que l'utilisateur tape au clavier.

@@ -1,8 +1,8 @@
 ---
-title: "Comment créer des classes et des objets ?"
+title: "Les classes et les objets"
 slug: classes-et-objets
 sidebar_position: 8
-description: "Ce chapitre introduit les **classes**, le mécanisme central pour organiser le code en Ruby. Une classe regroupe des données et des comportements dans un seul endroit."
+description: "Ce chapitre introduit les classes, le mécanisme central pour organiser le code en Ruby. Une classe regroupe des données et des comportements dans un seul endroit."
 ---
 
 Ce chapitre introduit les **classes**, le mécanisme central pour organiser le code en Ruby. Une classe regroupe des données et des comportements dans un seul endroit.

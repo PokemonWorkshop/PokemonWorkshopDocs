@@ -1,5 +1,5 @@
 ---
-title: "How to scenarize a battle?"
+title: "Scenarize a battle"
 slug: how-to-scenarize-a-battle
 sidebar_position: 2
 description: "This guide explains how to use battle events: Ruby hooks into the battle scene that show mid-battle dialogue, set up initial effects, react to moves and force the AI, selected per battle by its battle id."

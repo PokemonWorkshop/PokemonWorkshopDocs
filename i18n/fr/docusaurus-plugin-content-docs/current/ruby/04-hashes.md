@@ -1,8 +1,8 @@
 ---
-title: "Comment utiliser les tables associatives ?"
+title: "Les tables associatives"
 slug: tables-associatives
 sidebar_position: 4
-description: "Ce chapitre présente les **Hash** (tables associatives), une structure qui associe des **clés** à des **valeurs**. Là où un Array range les éléments par position (index 0, 1, 2...), un Hash les range par nom."
+description: "Ce chapitre présente les Hash (tables associatives), une structure qui associe des clés à des valeurs. Là où un Array range les éléments par position (index 0, 1, 2...), un Hash les range par nom."
 ---
 
 Ce chapitre présente les **Hash** (tables associatives), une structure qui associe des **clés** à des **valeurs**. Là où un Array range les éléments par position (index 0, 1, 2...), un Hash les range par nom.

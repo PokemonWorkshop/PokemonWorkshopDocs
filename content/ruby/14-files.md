@@ -1,8 +1,8 @@
 ---
-title: "How to read and write files?"
+title: "Reading and writing files"
 slug: reading-and-writing-files
 sidebar_position: 15
-description: "This chapter introduces reading and writing files, then **serialization**: turning Ruby objects into data that can be saved and reloaded later."
+description: "This chapter introduces reading and writing files, then serialization: turning Ruby objects into data that can be saved and reloaded later."
 ---
 
 This chapter introduces reading and writing files, then **serialization**: turning Ruby objects into data that can be saved and reloaded later.

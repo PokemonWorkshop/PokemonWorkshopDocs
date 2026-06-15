@@ -1,8 +1,8 @@
 ---
-title: "How to use inheritance?"
+title: "Inheritance"
 slug: inheritance
 sidebar_position: 9
-description: "This chapter introduces **inheritance**, the mechanism that allows a class to take everything another class defines and add its own specifics on top."
+description: "This chapter introduces inheritance, the mechanism that allows a class to take everything another class defines and add its own specifics on top."
 ---
 
 This chapter introduces **inheritance**, the mechanism that allows a class to take everything another class defines and add its own specifics on top.

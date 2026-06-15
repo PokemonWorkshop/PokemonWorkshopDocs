@@ -1,5 +1,5 @@
 ---
-title: "How to create a battleback for the 3D camera?"
+title: "Create a battleback for the 3D camera"
 slug: how-to-create-a-3d-battleback
 sidebar_position: 1
 description: "This guide explains how to build a battleback for PSDK's dynamic 3D battle camera: a Ruby class that stacks sprite layers, animates them, and is selected by the battle's background name."

@@ -1,5 +1,5 @@
 ---
-title: "How to create a move failure effect?"
+title: "Create a move failure effect"
 slug: how-to-create-a-failure-effect
 sidebar_position: 9
 description: "This guide explains how to execute a specific effect when a move fails (misses its target, is immunized, etc.), whether from the move itself or from an external effect."

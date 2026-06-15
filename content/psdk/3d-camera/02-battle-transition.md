@@ -1,5 +1,5 @@
 ---
-title: "How to create a custom battle transition?"
+title: "Create a custom battle transition"
 slug: how-to-create-a-battle-transition
 sidebar_position: 2
 description: "This guide explains how battle transitions work with the 3D camera: you write a 2D transition class and PSDK imports it into the 3D camera automatically. It also covers customizing the 3D behavior and migrating from the old standalone 3D transition classes."

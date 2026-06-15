@@ -1,5 +1,5 @@
 ---
-title: "How to block a move?"
+title: "Block a move"
 slug: how-to-block-a-move
 sidebar_position: 2
 description: "This guide explains how to prevent a move from reaching its target, whether from the move's own logic or from an effect active on the target."

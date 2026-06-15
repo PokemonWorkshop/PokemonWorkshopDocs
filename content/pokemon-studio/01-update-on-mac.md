@@ -1,5 +1,5 @@
 ---
-title: "How to update Pokémon Studio and fix the \"damaged\" error on macOS?"
+title: "Update Pokémon Studio and fix the \"damaged\" error on macOS"
 slug: update-pokemon-studio-macos
 sidebar_position: 1
 description: "On macOS, Pokémon Studio does not auto-update, and a freshly downloaded release often refuses to open with a misleading \"damaged\" error. This guide explains why it happens and how to update Pokémon Studio manually and unblock it."

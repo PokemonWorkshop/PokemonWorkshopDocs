@@ -76,21 +76,21 @@ Every page starts with a YAML frontmatter block:
 
 ```markdown
 ---
-title: "Page title as a question"
+title: "Page title as a declarative phrase"
 slug: page-url-slug
 sidebar_position: 1
 description: "Concise description of the content. This description is reused as the first paragraph of the page."
 ---
 ```
 
-- **title**: phrased as a question (`"How to do X?"`, `"What is X?"`). Wrapped in quotes.
+- **title**: a declarative phrase, keyword first, no leading "How to" / "Comment" and no trailing question mark (`"Make a move fail"` / `"Faire échouer une attaque"`, `"Arrays"` / `"Les tableaux"`). Use an imperative/infinitive verb phrase for action guides and a noun phrase for course chapters. Do not append the section name (no `"… in PSDK"` / `"… dans PSDK"`); the section is already carried by the sidebar, breadcrumb, slug and description. Wrapped in quotes.
 - **slug**: URL identifier, in kebab-case, without accents. No leading slash. The English and French versions can have different slugs (e.g., `how-to-create-a-weather` vs `creer-une-meteo`).
 - **sidebar_position**: position within the section. Must match the filename prefix and be identical between locales.
-- **description**: one or two sentence summary. Repeated verbatim as the first paragraph of the page body.
+- **description**: one or two sentence summary, in **plain text** — no Markdown. This field feeds the SEO `<meta name="description">` tag and the category index list, both of which render it as raw text, so `**bold**` or `` `code` `` markers would show up literally. The page's first paragraph repeats the same wording (see below).
 
 ### First Paragraph
 
-The first paragraph after the frontmatter must repeat the `description` word for word. This ensures consistency between previews (lists, search engines) and the actual page content.
+The first paragraph after the frontmatter must repeat the `description`'s wording. The paragraph may add Markdown emphasis (`**bold**`, `` `inline code` ``) for readability, but the `description` field itself stays plain text. This keeps previews (lists, search engines, cards) consistent with the page content while keeping the meta tag clean.
 
 ### Adding a Section
 
@@ -130,7 +130,7 @@ To translate the section label in French, add an entry under `i18n/fr/docusaurus
 ### Page Structure
 
 1. **Frontmatter** with title, slug, sidebar_position, description.
-2. **Introduction paragraph** (identical to the description).
+2. **Introduction paragraph** (same wording as the description; may add `**bold**` / `` `code` `` emphasis).
 3. **`##` sections** for major parts.
 4. **`###` subsections** if needed. Do not go deeper than `###`.
 5. **`## Conclusion` section** at the end: bullet list summarizing key points.

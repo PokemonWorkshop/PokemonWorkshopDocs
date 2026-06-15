@@ -1,5 +1,5 @@
 ---
-title: "Comment gérer la souris ?"
+title: "Gérer la souris"
 slug: gerer-la-souris
 sidebar_position: 6
 description: "Ce guide explique comment gérer les interactions souris dans une scène UI : molette, survol, clic et boutons ctrl."

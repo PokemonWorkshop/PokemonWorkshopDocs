@@ -1,5 +1,5 @@
 ---
-title: "Comment modifier la formule de calcul des dégâts d'une attaque ?"
+title: "Modifier la formule de calcul des dégâts"
 slug: modifier-la-formule-de-degats
 sidebar_position: 11
 description: "Ce guide explique comment remplacer la formule de calcul des dégâts d'une attaque pour des cas spéciaux comme les dégâts fixes."

@@ -1,5 +1,5 @@
 ---
-title: "How to change the damage formula?"
+title: "Change the damage formula"
 slug: how-to-change-the-damage-formula
 sidebar_position: 11
 description: "This guide explains how to replace the damage calculation formula of a move for special cases like fixed damage."

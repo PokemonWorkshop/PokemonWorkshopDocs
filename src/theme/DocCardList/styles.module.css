@@ -1,0 +1,77 @@
+/**
+ * Compact list rendering for category index pages (generated-index).
+ * Replaces the stock boxed-card grid with one scannable row per entry.
+ * See ./index.tsx for the rationale.
+ */
+
+.list {
+  margin: 0;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.8rem 0.75rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+
+  --ifm-link-color: var(--ifm-color-emphasis-900);
+  --ifm-link-hover-color: var(--ifm-color-emphasis-900);
+  --ifm-link-hover-decoration: none;
+
+  transition: background-color var(--ifm-transition-fast) ease;
+}
+
+/* Rows are direct children of the list, so no trailing separator at the end. */
+.row:last-child {
+  border-bottom: none;
+}
+
+.row:hover {
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+/* Numbered badge for ordered sequences (see index.tsx). */
+.index {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.7rem;
+  height: 1.7rem;
+  padding: 0 0.4rem;
+  border-radius: 999px;
+  background-color: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  transition: background-color var(--ifm-transition-fast) ease,
+    color var(--ifm-transition-fast) ease;
+}
+
+.row:hover .index {
+  background-color: var(--ifm-color-primary);
+  color: var(--ifm-color-white);
+}
+
+/* min-width: 0 keeps a long title from pushing the chevron off the row. */
+.title {
+  min-width: 0;
+  flex: 1 1 auto;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.chevron {
+  flex: 0 0 auto;
+  font-size: 1.4rem;
+  color: var(--ifm-color-emphasis-500);
+  transition: transform var(--ifm-transition-fast) ease;
+}
+
+.row:hover .chevron {
+  color: var(--ifm-color-primary);
+  transform: translateX(3px);
+}

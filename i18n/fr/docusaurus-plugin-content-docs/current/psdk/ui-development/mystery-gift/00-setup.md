@@ -1,5 +1,5 @@
 ---
-title: "Comment préparer les assets et les textes avant de créer une UI ?"
+title: "Préparer les assets et les textes avant de créer une UI"
 slug: preparer-assets-ui
 sidebar_position: 0
 description: "Avant d'écrire la moindre ligne de Ruby, une UI a besoin de ses graphismes et de ses textes traduits. Cette étape de préparation installe les assets et le CSV de Mystery Gift pour que la scène s'affiche vraiment."

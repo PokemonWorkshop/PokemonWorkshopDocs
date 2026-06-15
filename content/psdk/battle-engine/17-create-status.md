@@ -1,5 +1,5 @@
 ---
-title: "How to create a custom status?"
+title: "Create a custom status"
 slug: how-to-create-a-status
 sidebar_position: 17
 description: "This guide explains how to create a custom status in PSDK: declaring its ID, coding its query and apply methods, registering it in the battle handlers, creating its effect class, and adding its battle icon."

@@ -1,5 +1,5 @@
 ---
-title: "How to create animations?"
+title: "Create animations"
 slug: create-animations
 sidebar_position: 9
 description: "This guide adds UI animations with Yuki::Animation: a fade-in banner component, an animation handler in the Composition, and using them when a gift is claimed."

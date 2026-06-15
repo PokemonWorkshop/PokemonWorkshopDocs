@@ -1,5 +1,5 @@
 ---
-title: "Comment créer une scène UI ?"
+title: "Créer une scène UI"
 slug: creer-une-scene-ui
 sidebar_position: 1
 description: "C'est le premier guide de code d'une série où l'on construit pas à pas une UI Mystery Gift complète. Ce système permet aux joueurs d'entrer des codes pour recevoir des récompenses. Ici, on crée la structure de fichiers et une scène minimale qui s'affiche et se ferme avec B."

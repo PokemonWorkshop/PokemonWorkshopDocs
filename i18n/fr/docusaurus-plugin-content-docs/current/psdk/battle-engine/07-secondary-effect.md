@@ -1,5 +1,5 @@
 ---
-title: "Comment créer l'effet secondaire d'une attaque ?"
+title: "Créer l'effet secondaire d'une attaque"
 slug: creer-leffet-secondaire-dune-attaque
 sidebar_position: 7
 description: "Ce guide explique comment implémenter l'effet personnalisé d'une attaque et comment valider les conditions d'application de cet effet."

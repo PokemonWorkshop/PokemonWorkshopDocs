@@ -1,5 +1,5 @@
 ---
-title: "Comment créer une météo ?"
+title: "Créer une météo"
 slug: creer-une-meteo-et-ses-effets
 sidebar_position: 15
 description: "Ce guide explique comment ajouter une nouvelle météo au système de combat, créer ses effets, ajouter les textes associés, et la déclencher via une attaque ou un effet."

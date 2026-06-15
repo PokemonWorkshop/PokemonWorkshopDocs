@@ -1,8 +1,8 @@
 ---
-title: "Comment étendre du code existant avec prepend ?"
+title: "Étendre du code avec prepend"
 slug: etendre-du-code-avec-prepend
 sidebar_position: 11
-description: "Ce chapitre présente les techniques pour **étendre du code existant** sans le modifier directement. C'est un concept fondamental en Ruby : on peut enrichir une classe après sa création, même si on n'a pas accès au fichier source."
+description: "Ce chapitre présente les techniques pour étendre du code existant sans le modifier directement. C'est un concept fondamental en Ruby : on peut enrichir une classe après sa création, même si on n'a pas accès au fichier source."
 ---
 
 Ce chapitre présente les techniques pour **étendre du code existant** sans le modifier directement. C'est un concept fondamental en Ruby : on peut enrichir une classe après sa création, même si on n'a pas accès au fichier source.

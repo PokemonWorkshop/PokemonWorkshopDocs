@@ -1,5 +1,5 @@
 ---
-title: "Comment scripter un combat ?"
+title: "Scripter un combat"
 slug: scripter-un-combat
 sidebar_position: 1
 description: "Ce guide explique comment lancer un combat depuis un script : un combat sauvage contre un Pokémon personnalisé, ou un combat de dresseur construit à partir des données Studio, pour les cas que l'éditeur de Pokémon Studio seul ne couvre pas."

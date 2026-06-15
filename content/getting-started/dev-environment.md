@@ -1,5 +1,5 @@
 ---
-title: "How to set up the development environment?"
+title: "Set up the development environment"
 slug: setup-development-environment
 sidebar_position: 1
 description: "Before writing scripts for a PSDK project, you need to install Ruby, configure a code editor, and set up autocompletion to have access to PSDK documentation and methods while coding. This guide covers the complete installation step by step."

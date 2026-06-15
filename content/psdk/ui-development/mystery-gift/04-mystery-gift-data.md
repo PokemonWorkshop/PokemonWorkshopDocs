@@ -1,5 +1,5 @@
 ---
-title: "How to add a data layer with PFM?"
+title: "Add a data layer with PFM"
 slug: add-the-data-layer
 sidebar_position: 4
 description: "This guide adds the PFM persistence layer that stores which gift codes the player has claimed, and wires it into the Composition so the gift rows show real data."
