@@ -31,6 +31,31 @@
   background-color: var(--ifm-color-emphasis-100);
 }
 
+/* Numbered badge for ordered sequences (see index.tsx). */
+.index {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.7rem;
+  height: 1.7rem;
+  padding: 0 0.4rem;
+  border-radius: 999px;
+  background-color: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  transition: background-color var(--ifm-transition-fast) ease,
+    color var(--ifm-transition-fast) ease;
+}
+
+.row:hover .index {
+  background-color: var(--ifm-color-primary);
+  color: var(--ifm-color-white);
+}
+
 /* min-width: 0 lets the truncated description ellipsis work inside flex. */
 .body {
   display: flex;

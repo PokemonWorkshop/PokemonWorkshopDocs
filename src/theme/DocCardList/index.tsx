@@ -33,20 +33,29 @@ import styles from "./styles.module.css";
  *
  * Descriptions are rendered as plain text: the frontmatter `description` is the
  * SEO meta tag and is kept Markdown-free by convention (see CONTRIBUTING.md).
+ *
+ * A numbered badge is shown when the list is a sequence (every entry is a leaf
+ * doc), which signals an ordered course/table of contents (Ruby, the battle
+ * engine, the Mystery Gift series). Hub pages that list sub-categories get no
+ * number, since their entries are sections rather than steps.
  */
 
 type RowProps = {
   href: string;
   title: string;
   description?: string;
+  index?: number;
 };
 
-function Row({ href, title, description }: RowProps): ReactNode {
+function Row({ href, title, description, index }: RowProps): ReactNode {
   return (
     <Link
       href={href}
       className={clsx(ThemeClassNames.docs.docCard.container, styles.row)}
     >
+      {typeof index === "number" && (
+        <span className={styles.index}>{index}</span>
+      )}
       <span className={styles.body}>
         <span className={styles.title}>{title}</span>
         {description && (
@@ -60,32 +69,58 @@ function Row({ href, title, description }: RowProps): ReactNode {
   );
 }
 
-function CategoryRow({ item }: { item: PropSidebarItemCategory }): ReactNode {
+function CategoryRow({
+  item,
+  index,
+}: {
+  item: PropSidebarItemCategory;
+  index?: number;
+}): ReactNode {
   const href = findFirstSidebarItemLink(item);
   // Categories with no linkable child are filtered out upstream; guard anyway.
   if (!href) {
     return null;
   }
-  return <Row href={href} title={item.label} description={item.description} />;
+  return (
+    <Row
+      href={href}
+      title={item.label}
+      description={item.description}
+      index={index}
+    />
+  );
 }
 
-function LinkRow({ item }: { item: PropSidebarItemLink }): ReactNode {
+function LinkRow({
+  item,
+  index,
+}: {
+  item: PropSidebarItemLink;
+  index?: number;
+}): ReactNode {
   const doc = useDocById(item.docId ?? undefined);
   return (
     <Row
       href={item.href}
       title={item.label}
       description={item.description ?? doc?.description}
+      index={index}
     />
   );
 }
 
-function DocListRow({ item }: { item: PropSidebarItem }): ReactNode {
+function DocListRow({
+  item,
+  index,
+}: {
+  item: PropSidebarItem;
+  index?: number;
+}): ReactNode {
   switch (item.type) {
     case "link":
-      return <LinkRow item={item} />;
+      return <LinkRow item={item} index={index} />;
     case "category":
-      return <CategoryRow item={item} />;
+      return <CategoryRow item={item} index={index} />;
     default:
       // "html" items never appear on generated-index pages.
       return null;
@@ -103,10 +138,19 @@ export default function DocCardList(props: Props): ReactNode {
     return <CurrentSidebarRows className={className} />;
   }
   const filteredItems = filterDocCardListItems(items);
+  // A flat list of sibling docs is an ordered sequence: number it. A list that
+  // contains a category is a hub page, where numbering would be meaningless.
+  const numbered =
+    filteredItems.length > 1 &&
+    filteredItems.every((item) => item.type === "link");
   return (
     <section className={clsx(styles.list, className)}>
       {filteredItems.map((item, index) => (
-        <DocListRow key={index} item={item} />
+        <DocListRow
+          key={index}
+          item={item}
+          index={numbered ? index + 1 : undefined}
+        />
       ))}
     </section>
   );
