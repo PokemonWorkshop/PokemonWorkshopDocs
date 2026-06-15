@@ -2,6 +2,8 @@
 .docusaurus/
 build/
 node_modules/
+tasks/
 
 CLAUDE.md
+
 
