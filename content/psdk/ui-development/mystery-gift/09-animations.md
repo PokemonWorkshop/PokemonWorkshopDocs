@@ -9,7 +9,7 @@ This guide builds on the [dialogs guide](./08-dialogs.md). Claiming a gift curre
 
 ## Principle
 
-PSDK uses `Yuki::Animation` for all UI animations. The standard idiom is `ya = Yuki::Animation` to shorten calls. Two composition modes exist:
+PSDK uses `Yuki::Animation` for all UI animations, covered in full on the [Animation foundations](/psdk/animation/yuki-animation) page; here we apply it. The standard idiom is `ya = Yuki::Animation` to shorten calls. Two composition modes exist:
 
 - `ya.player(...)` runs steps one after another (sequential).
 - `ya.parallel(...)` runs steps at the same time (simultaneous).

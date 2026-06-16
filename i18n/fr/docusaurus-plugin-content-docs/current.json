@@ -55,6 +55,14 @@
     "message": "Construire des fonds de combat et des transitions pour la caméra de combat 3D dynamique de PSDK.",
     "description": "The generated-index page description for category 3D Camera in sidebar mainSidebar"
   },
+  "sidebar.mainSidebar.category.Animation": {
+    "message": "Animation",
+    "description": "The label for category 'Animation' in sidebar 'mainSidebar'"
+  },
+  "sidebar.mainSidebar.category.Animation.link.generated-index.description": {
+    "message": "Construire et combiner des animations avec Yuki::Animation : d'abord les fondations basées sur le temps, puis leur application aux UIs, aux combats et aux transitions.",
+    "description": "The generated-index page description for category Animation in sidebar mainSidebar"
+  },
   "sidebar.mainSidebar.category.Battle Scripting": {
     "message": "Combats par Script",
     "description": "The label for category 'Battle Scripting' in sidebar 'mainSidebar'"
