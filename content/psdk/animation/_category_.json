@@ -1,0 +1,9 @@
+{
+  "label": "Animation",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "slug": "/psdk/animation",
+    "description": "Build and combine animations with Yuki::Animation: the time-based foundations first, then applying them to UIs, battles and transitions."
+  }
+}

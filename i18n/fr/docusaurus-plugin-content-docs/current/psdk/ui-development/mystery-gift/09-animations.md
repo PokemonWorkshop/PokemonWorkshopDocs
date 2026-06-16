@@ -9,7 +9,7 @@ Ce guide s'appuie sur le [guide dialogues](./08-dialogs.md). Réclamer un cadeau
 
 ## Principe
 
-PSDK utilise `Yuki::Animation` pour toutes les animations UI. L'idiome standard est `ya = Yuki::Animation` pour raccourcir les appels. Deux modes de composition existent :
+PSDK utilise `Yuki::Animation` pour toutes les animations UI, présenté en détail sur la page [Fondations de l'animation](/psdk/animation/les-bases) ; ici, on l'applique. L'idiome standard est `ya = Yuki::Animation` pour raccourcir les appels. Deux modes de composition existent :
 
 - `ya.player(...)` enchaîne les étapes les unes après les autres (séquentiel).
 - `ya.parallel(...)` joue les étapes en même temps (simultané).
