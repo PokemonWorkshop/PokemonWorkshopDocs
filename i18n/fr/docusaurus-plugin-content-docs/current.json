@@ -103,6 +103,10 @@
     "message": "Documentation de Tiled, l'éditeur de cartes utilisé par les projets PSDK. Les guides de référence et tutoriels arriveront ici au fil de la rédaction.",
     "description": "The generated-index page description for category Tiled in sidebar mainSidebar"
   },
+  "sidebar.mainSidebar.category.Misc": {
+    "message": "Divers",
+    "description": "The label for category 'Misc' in sidebar 'mainSidebar'"
+  },
   "sidebar.mainSidebar.category.Misc.link.generated-index.description": {
     "message": "Guides divers de l'écosystème Pokémon Workshop qui ne rentrent pas dans les sections principales. Le contenu arrivera ici au fil de la rédaction.",
     "description": "The generated-index page description for category Misc in sidebar mainSidebar"
