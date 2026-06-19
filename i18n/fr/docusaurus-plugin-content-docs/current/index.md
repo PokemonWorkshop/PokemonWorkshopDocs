@@ -9,9 +9,11 @@ Documentation centralisée de l'écosystème Pokémon Workshop : tutoriels PSDK,
 
 ## Sommaire
 
-| Section                       | Description                                                      |
-| ----------------------------- | ---------------------------------------------------------------- |
-| [Démarrage](/getting-started) | Configurez votre environnement, Git et le monkey-patching PSDK.  |
-| [PSDK](/psdk)                 | Développement UI et moteur de combat.                            |
-| [RPG Maker XP](/rpg-maker-xp) | Apprenez les bases de RPG Maker XP et son utilisation avec PSDK. |
-| [Ruby](/ruby)                 | Un cours complet de Ruby orienté PSDK, à suivre dans l'ordre.    |
+| Section                       | Description                                                                          |
+| ----------------------------- | ------------------------------------------------------------------------------------ |
+| [Démarrage](/getting-started) | Mettre en place son environnement et les workflows essentiels du développement PSDK. |
+| [Studio](/pokemon-studio)     | Guides et références pour Pokémon Studio.                                            |
+| [PSDK](/psdk)                 | Guides approfondis pour développer avec le moteur PSDK et l'étendre.                 |
+| [RMXP](/rpg-maker-xp)         | Utiliser RPG Maker XP au sein d'un projet PSDK.                                      |
+| [Ruby](/ruby)                 | Un cours Ruby complet orienté développement PSDK.                                    |
+| [Divers](/misc)               | Guides qui ne rentrent pas dans les sections principales.                            |

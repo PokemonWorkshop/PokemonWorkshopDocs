@@ -136,6 +136,7 @@ const config: Config = {
         { label: "PSDK", to: "/psdk", position: "left" },
         { label: "RMXP", to: "/rpg-maker-xp", position: "left" },
         { label: "Ruby", to: "/ruby", position: "left" },
+        { label: "Misc", to: "/misc", position: "left" },
         {
           type: "search",
           position: "right",
@@ -163,6 +164,7 @@ const config: Config = {
             { label: "PSDK", to: "/psdk" },
             { label: "RMXP", to: "/rpg-maker-xp" },
             { label: "Ruby", to: "/ruby" },
+            { label: "Misc", to: "/misc" },
           ],
         },
         {

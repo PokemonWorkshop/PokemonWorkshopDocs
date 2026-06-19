@@ -19,9 +19,9 @@
     "message": "Plongée dans les internes de PSDK : créer des scènes UI personnalisées et étendre le moteur de combat avec des capacités, météos, terrains et effets.",
     "description": "The generated-index page description for category PSDK in sidebar mainSidebar"
   },
-  "sidebar.mainSidebar.category.Pokémon Studio": {
-    "message": "Pokémon Studio",
-    "description": "The label for category 'Pokémon Studio' in sidebar 'mainSidebar'"
+  "sidebar.mainSidebar.category.Studio": {
+    "message": "Studio",
+    "description": "The label for category 'Studio' in sidebar 'mainSidebar'"
   },
   "sidebar.mainSidebar.category.UI Development": {
     "message": "Développement UI",
@@ -87,25 +87,25 @@
     "message": "Lire les données du jeu depuis ses scripts : accesseurs, itérateurs et les classes de données Studio qui décrivent objets, créatures, capacités et plus.",
     "description": "The generated-index page description for category Data in sidebar mainSidebar"
   },
-  "sidebar.mainSidebar.category.RPG Maker XP": {
-    "message": "RPG Maker XP",
-    "description": "The label for category 'RPG Maker XP' in sidebar 'mainSidebar'"
+  "sidebar.mainSidebar.category.RMXP": {
+    "message": "RMXP",
+    "description": "The label for category 'RMXP' in sidebar 'mainSidebar'"
   },
-  "sidebar.mainSidebar.category.RPG Maker XP.link.generated-index.description": {
+  "sidebar.mainSidebar.category.RMXP.link.generated-index.description": {
     "message": "Apprendre les bases de RPG Maker XP nécessaires aux événements PSDK, et appeler les méthodes PSDK directement depuis la commande Script d'un événement.",
-    "description": "The generated-index page description for category RPG Maker XP in sidebar mainSidebar"
+    "description": "The generated-index page description for category RMXP in sidebar mainSidebar"
   },
   "sidebar.mainSidebar.category.Ruby": {
-    "message": "Cours Ruby",
+    "message": "Ruby",
     "description": "The label for category 'Ruby' in sidebar 'mainSidebar'"
   },
   "sidebar.mainSidebar.category.Ruby.link.generated-index.description": {
     "message": "Un cours Ruby complet orienté PSDK, des variables et tableaux aux modules, prepend et classes avancées — à suivre dans l'ordre.",
     "description": "The generated-index page description for category Ruby in sidebar mainSidebar"
   },
-  "sidebar.mainSidebar.category.Pokémon Studio.link.generated-index.description": {
+  "sidebar.mainSidebar.category.Studio.link.generated-index.description": {
     "message": "Documentation de Pokémon Studio, l'éditeur moderne du Pokémon Workshop. Les guides de référence et tutoriels arriveront ici au fil de la rédaction.",
-    "description": "The generated-index page description for category Pokémon Studio in sidebar mainSidebar"
+    "description": "The generated-index page description for category Studio in sidebar mainSidebar"
   },
   "sidebar.mainSidebar.category.Tiled.link.generated-index.description": {
     "message": "Documentation de Tiled, l'éditeur de cartes utilisé par les projets PSDK. Les guides de référence et tutoriels arriveront ici au fil de la rédaction.",
