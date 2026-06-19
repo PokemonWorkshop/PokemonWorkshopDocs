@@ -63,6 +63,14 @@
     "message": "Construire et combiner des animations avec Yuki::Animation : d'abord les fondations basées sur le temps, puis leur application aux UIs, aux combats et aux transitions.",
     "description": "The generated-index page description for category Animation in sidebar mainSidebar"
   },
+  "sidebar.mainSidebar.category.Core Systems": {
+    "message": "Systèmes du moteur",
+    "description": "The label for category 'Core Systems' in sidebar 'mainSidebar'"
+  },
+  "sidebar.mainSidebar.category.Core Systems.link.generated-index.description": {
+    "message": "Les systèmes bas niveau du moteur que l'on script pour étendre PSDK à l'exécution, à commencer par le Scheduler qui branche son code dans le cycle de vie d'une scène.",
+    "description": "The generated-index page description for category Core Systems in sidebar mainSidebar"
+  },
   "sidebar.mainSidebar.category.Battle Scripting": {
     "message": "Combats par Script",
     "description": "The label for category 'Battle Scripting' in sidebar 'mainSidebar'"
