@@ -1,61 +1,24 @@
 ---
-title: "Script a battle"
+title: "Script a trainer battle"
 slug: how-to-script-a-battle
 sidebar_position: 1
-description: "This guide explains how to start a battle from a script: a wild battle against a custom Pokémon, or a trainer battle built from Studio data, for the cases Pokémon Studio's editor alone cannot cover."
+description: "This guide explains how to build a trainer battle from a script, for the runtime cases Pokémon Studio's editor alone cannot cover: an opposing team that depends on the game state, assembled from existing Studio data."
 ---
 
-This guide explains how to start a battle from a script: a wild battle against a custom Pokémon, or a trainer battle built from Studio data, for the cases Pokémon Studio's editor alone cannot cover.
+This guide explains how to build a trainer battle from a script, for the runtime cases Pokémon Studio's editor alone cannot cover: an opposing team that depends on the game state, assembled from existing Studio data.
 
-## Why script a battle
+To start a **wild** battle instead, see [Start a wild battle](/rpg-maker-xp/start-a-wild-battle).
 
-Pokémon Studio already authors every **static** part of a battle. A trainer carries a full team, a bag, an AI level, prize money and dialogue; a wild group lists its species, level ranges and encounter rates; and each Pokémon, on either side, can have its own form, gender, nature, IVs, EVs, held item, moves, ability and shininess. For a fixed fight, the editor is enough and a script adds nothing.
+## Why script a trainer battle
 
-You reach for a script when the battle must be decided **at runtime**:
+Pokémon Studio already authors every **static** part of a battle. A trainer carries a full team, a bag, an AI level, prize money and dialogue, and each Pokémon can have its own form, gender, nature, IVs, EVs, held item, moves, ability and shininess. For a fixed fight, the editor is enough and a script adds nothing.
 
-- A wild encounter against a **one-off custom Pokémon**: a static legendary, a boss, a shiny with a set moveset.
+You reach for a script when the opposing side must be decided **at runtime**:
+
 - A trainer whose team **depends on the game state**: a rival that counters the player's starter, or a "trainer tower" whose levels scale with the player.
 - Simply launching a battle from **your own logic** instead of a map event.
 
-The two halves below cover each side. Both run through the same battle scene, so they read their result the same way (see the last section).
-
-## Scripting a wild battle
-
-The wild battle manager, `$wild_battle`, starts a wild battle in a single call.
-
-### The simplest wild battle
-
-Pass a species (db_symbol or id) and a level:
-
-```ruby
-$wild_battle.start_battle(:pikachu, 12)
-```
-
-### Against a custom Pokémon
-
-The real value of scripting a wild battle is fighting a Pokémon you built yourself. Create it with `PFM::Pokemon.generate_from_hash` and pass the object instead of a species, the level argument is then ignored:
-
-```ruby
-legendary = PFM::Pokemon.generate_from_hash(
-  id: :mewtwo,
-  level: 70,
-  shiny: true,
-  moves: [:psystrike, :recover, :aura_sphere, :ice_beam]
-)
-$wild_battle.start_battle(legendary)
-```
-
-This is how you script a **static legendary**, a story boss, or any encounter that Studio's random groups cannot express. `generate_from_hash` accepts the same per-Pokémon keys Studio exposes (`id`, `level`, `shiny`, `form`, `given_name`, `nature`, `ability`, `item`, `moves`, IVs, EVs, and more).
-
-### A double wild battle
-
-Pass several Pokémon, as objects or as `id, level` pairs. The engine derives `vs_type` from their count (capped at 3):
-
-```ruby
-$wild_battle.start_battle(:zubat, 8, :zubat, 8)
-```
-
-## Scripting a trainer battle
+## Building the battle
 
 When you need full control over the opposing side, or a team that depends on the player, you build the battle yourself with `Battle::Logic::BattleInfo`, the object every battle ultimately runs on.
 
@@ -121,7 +84,7 @@ You author the rival once and the type matchup follows the player's choice. The 
 
 ## Reading the outcome
 
-Both paths run through the same battle scene, so they report their result the same way. Register `$game_temp.battle_proc` **before** launching; the scene calls it with the result code when the battle ends:
+Register `$game_temp.battle_proc` **before** launching the scene; it is called with the result code when the battle ends:
 
 ```ruby
 $game_temp.battle_proc = proc do |result|
@@ -133,15 +96,15 @@ $game_temp.battle_proc = proc do |result|
     # handle defeat
   end
 end
-$wild_battle.start_battle(:pikachu, 12) # or $scene.call_scene(Battle::Scene, bi)
+$scene.call_scene(Battle::Scene, bi)
 ```
 
-The same outcome also sets the global switches `BT_Victory`, `BT_Player_Flee`, `BT_Defeat` and `BT_Wild_Flee`, which an event running after the battle can test. After a wild battle, the switch `BT_Catch` tells you whether the Pokémon was caught.
+The same outcome also sets the global switches `BT_Victory`, `BT_Player_Flee` and `BT_Defeat`, which an event running after the battle can test.
 
 ## Conclusion
 
-- Studio authors the static data; you script a battle for runtime-dependent fights, custom one-off Pokémon, or to launch from your own logic.
-- For a **wild battle**, call `$wild_battle.start_battle(species, level)`, or pass a `PFM::Pokemon` built with `generate_from_hash` to fight a fully custom Pokémon.
-- For a **trainer battle**, build a `Battle::Logic::BattleInfo`, add the player on bank 0 and the trainer on bank 1, then launch with `$scene.call_scene(Battle::Scene, bi)`.
+- Studio authors the static data; you script a trainer battle for runtime-dependent fights, or to launch one from your own logic.
+- Build a `Battle::Logic::BattleInfo`, add the player on bank 0 and the trainer on bank 1, then launch with `$scene.call_scene(Battle::Scene, bi)`.
 - Load existing Studio trainers with `data_trainer` and `to_creature(level)` to **reuse and modify** their teams: scale a trainer tower, or counter the player's starter, without cloning trainers in the editor.
 - Read the result through `$game_temp.battle_proc` (or the `BT_Victory` / `BT_Defeat` switches) to branch your event.
+- For a wild battle, see the [Start a wild battle](/rpg-maker-xp/start-a-wild-battle) guide.
