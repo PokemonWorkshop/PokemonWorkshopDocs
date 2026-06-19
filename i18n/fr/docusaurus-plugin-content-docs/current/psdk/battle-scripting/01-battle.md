@@ -1,61 +1,24 @@
 ---
-title: "Scripter un combat"
+title: "Scripter un combat de dresseur"
 slug: scripter-un-combat
 sidebar_position: 1
-description: "Ce guide explique comment lancer un combat depuis un script : un combat sauvage contre un Pokémon personnalisé, ou un combat de dresseur construit à partir des données Studio, pour les cas que l'éditeur de Pokémon Studio seul ne couvre pas."
+description: "Ce guide explique comment construire un combat de dresseur depuis un script, pour les cas à l'exécution que l'éditeur de Pokémon Studio seul ne couvre pas : une équipe adverse qui dépend de l'état du jeu, assemblée à partir des données Studio existantes."
 ---
 
-Ce guide explique comment lancer un combat depuis un script : un combat sauvage contre un Pokémon personnalisé, ou un combat de dresseur construit à partir des données Studio, pour les cas que l'éditeur de Pokémon Studio seul ne couvre pas.
+Ce guide explique comment construire un combat de dresseur depuis un script, pour les cas à l'exécution que l'éditeur de Pokémon Studio seul ne couvre pas : une équipe adverse qui dépend de l'état du jeu, assemblée à partir des données Studio existantes.
 
-## Pourquoi scripter un combat
+Pour lancer un combat **sauvage** à la place, voir [Démarrer un combat sauvage](/rpg-maker-xp/demarrer-un-combat-sauvage).
 
-Pokémon Studio édite déjà toute la partie **statique** d'un combat. Un dresseur porte une équipe complète, un sac, un niveau d'IA, un gain d'argent et des dialogues ; un groupe sauvage liste ses espèces, ses fourchettes de niveau et ses taux de rencontre ; et chaque Pokémon, des deux côtés, peut avoir sa forme, son genre, sa nature, ses IV, ses EV, son objet tenu, ses capacités, son talent et son côté chromatique. Pour un combat figé, l'éditeur suffit et un script n'apporte rien.
+## Pourquoi scripter un combat de dresseur
 
-On passe au script quand le combat doit se décider **à l'exécution** :
+Pokémon Studio édite déjà toute la partie **statique** d'un combat. Un dresseur porte une équipe complète, un sac, un niveau d'IA, un gain d'argent et des dialogues, et chaque Pokémon peut avoir sa forme, son genre, sa nature, ses IV, ses EV, son objet tenu, ses capacités, son talent et son côté chromatique. Pour un combat figé, l'éditeur suffit et un script n'apporte rien.
 
-- Une rencontre sauvage contre un **Pokémon personnalisé unique** : un légendaire statique, un boss, un shiny avec un moveset défini.
+On passe au script quand le camp adverse doit se décider **à l'exécution** :
+
 - Un dresseur dont l'équipe **dépend de l'état du jeu** : un rival qui contre le starter du joueur, ou une « tour des dresseurs » dont les niveaux s'adaptent au joueur.
 - Le simple fait de lancer un combat depuis **sa propre logique** plutôt que depuis un événement de carte.
 
-Les deux moitiés ci-dessous couvrent chaque camp. Toutes deux passent par la même scène de combat, donc elles lisent leur résultat de la même façon (voir la dernière section).
-
-## Scripter un combat sauvage
-
-Le gestionnaire de combats sauvages, `$wild_battle`, lance un combat sauvage en un seul appel.
-
-### Le combat sauvage le plus simple
-
-On passe une espèce (db_symbol ou id) et un niveau :
-
-```ruby
-$wild_battle.start_battle(:pikachu, 12)
-```
-
-### Contre un Pokémon personnalisé
-
-Tout l'intérêt de scripter un combat sauvage est d'affronter un Pokémon que l'on a fabriqué soi-même. On le crée avec `PFM::Pokemon.generate_from_hash` et on passe l'objet à la place d'une espèce, le niveau en argument est alors ignoré :
-
-```ruby
-legendary = PFM::Pokemon.generate_from_hash(
-  id: :mewtwo,
-  level: 70,
-  shiny: true,
-  moves: [:psystrike, :recover, :aura_sphere, :ice_beam]
-)
-$wild_battle.start_battle(legendary)
-```
-
-C'est ainsi que l'on script un **légendaire statique**, un boss de scénario, ou toute rencontre que les groupes aléatoires de Studio ne savent pas exprimer. `generate_from_hash` accepte les mêmes clés par Pokémon que Studio expose (`id`, `level`, `shiny`, `form`, `given_name`, `nature`, `ability`, `item`, `moves`, IV, EV, et d'autres).
-
-### Un combat sauvage double
-
-On passe plusieurs Pokémon, en objets ou en paires `id, niveau`. Le moteur déduit le `vs_type` de leur nombre (plafonné à 3) :
-
-```ruby
-$wild_battle.start_battle(:zubat, 8, :zubat, 8)
-```
-
-## Scripter un combat de dresseur
+## Construire le combat
 
 Quand on a besoin du contrôle total du camp adverse, ou d'une équipe qui dépend du joueur, on construit le combat soi-même avec `Battle::Logic::BattleInfo`, l'objet sur lequel repose au final tout combat.
 
@@ -121,7 +84,7 @@ On écrit le rival une fois et le rapport de types suit le choix du joueur. La m
 
 ## Lire le résultat
 
-Les deux voies passent par la même scène de combat, donc elles rapportent leur résultat de la même façon. On enregistre `$game_temp.battle_proc` **avant** de lancer ; la scène l'appelle avec le code de résultat à la fin du combat :
+On enregistre `$game_temp.battle_proc` **avant** de lancer la scène ; il est appelé avec le code de résultat à la fin du combat :
 
 ```ruby
 $game_temp.battle_proc = proc do |result|
@@ -133,15 +96,15 @@ $game_temp.battle_proc = proc do |result|
     # handle defeat
   end
 end
-$wild_battle.start_battle(:pikachu, 12) # or $scene.call_scene(Battle::Scene, bi)
+$scene.call_scene(Battle::Scene, bi)
 ```
 
-Le même résultat positionne aussi les interrupteurs globaux `BT_Victory`, `BT_Player_Flee`, `BT_Defeat` et `BT_Wild_Flee`, qu'un événement lancé après le combat peut tester. Après un combat sauvage, l'interrupteur `BT_Catch` indique si le Pokémon a été capturé.
+Le même résultat positionne aussi les interrupteurs globaux `BT_Victory`, `BT_Player_Flee` et `BT_Defeat`, qu'un événement lancé après le combat peut tester.
 
 ## Conclusion
 
-- Studio édite les données statiques ; on script un combat pour les affrontements qui dépendent du runtime, les Pokémon personnalisés uniques, ou pour lancer depuis sa propre logique.
-- Pour un **combat sauvage**, on appelle `$wild_battle.start_battle(espèce, niveau)`, ou on passe un `PFM::Pokemon` construit avec `generate_from_hash` pour affronter un Pokémon entièrement personnalisé.
-- Pour un **combat de dresseur**, on construit un `Battle::Logic::BattleInfo`, on ajoute le joueur sur le banc 0 et le dresseur sur le banc 1, puis on lance avec `$scene.call_scene(Battle::Scene, bi)`.
+- Studio édite les données statiques ; on script un combat de dresseur pour les affrontements qui dépendent du runtime, ou pour le lancer depuis sa propre logique.
+- On construit un `Battle::Logic::BattleInfo`, on ajoute le joueur sur le banc 0 et le dresseur sur le banc 1, puis on lance avec `$scene.call_scene(Battle::Scene, bi)`.
 - On charge les dresseurs Studio existants avec `data_trainer` et `to_creature(level)` pour **réutiliser et modifier** leurs équipes : scaler une tour des dresseurs, ou contrer le starter du joueur, sans cloner de dresseurs dans l'éditeur.
 - On lit le résultat via `$game_temp.battle_proc` (ou les interrupteurs `BT_Victory` / `BT_Defeat`) pour aiguiller son événement.
+- Pour un combat sauvage, voir le guide [Démarrer un combat sauvage](/rpg-maker-xp/demarrer-un-combat-sauvage).
