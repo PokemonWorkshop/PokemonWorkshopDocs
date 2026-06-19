@@ -1,0 +1,9 @@
+{
+  "label": "Core Systems",
+  "position": 6,
+  "link": {
+    "type": "generated-index",
+    "slug": "/psdk/core-systems",
+    "description": "Low-level engine systems you script against to extend PSDK at runtime, starting with the Scheduler that hooks your code into a scene's lifecycle."
+  }
+}
