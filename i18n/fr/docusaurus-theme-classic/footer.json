@@ -31,6 +31,10 @@
     "message": "Ruby",
     "description": "The label of footer link with label=Ruby linking to /ruby"
   },
+  "link.item.label.Misc": {
+    "message": "Divers",
+    "description": "The label of footer link with label=Misc linking to /misc"
+  },
   "link.item.label.Website": {
     "message": "Site",
     "description": "The label of footer link with label=Website linking to https://pokemonworkshop.com"

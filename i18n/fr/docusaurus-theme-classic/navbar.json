@@ -19,6 +19,10 @@
     "message": "Ruby",
     "description": "Navbar item with label Ruby"
   },
+  "item.label.Misc": {
+    "message": "Divers",
+    "description": "Navbar item with label Misc"
+  },
   "title": {
     "message": "Accueil",
     "description": "The title in the navbar"
