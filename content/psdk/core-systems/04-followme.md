@@ -1,7 +1,7 @@
 ---
 title: "FollowMe and Let's Go mode"
 slug: followme
-sidebar_position: 3
+sidebar_position: 4
 description: "FollowMe is the PSDK system that makes characters trail the player on the map: party Pokémon, NPCs, or a single lead Pokémon in Let's Go mode. This guide explains the follower stack, the switches and variables that drive it from events or script, the Let's Go follower, and how to control followers and following events."
 ---
 

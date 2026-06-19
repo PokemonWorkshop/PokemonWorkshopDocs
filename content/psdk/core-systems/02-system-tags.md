@@ -1,5 +1,5 @@
 ---
-title: "System Tags"
+title: "Understanding System Tags"
 slug: system-tags
 sidebar_position: 2
 description: "System Tags are per-tile markers that tell the PSDK map engine how a tile behaves: which tiles start wild battles, let you surf, slide on ice, jump a ledge or climb stairs. This guide explains how the engine stores and reads them, the API to query the tile under or in front of a character, and the full catalogue of tags grouped by role."
@@ -283,6 +283,8 @@ end
 ```
 
 When you instead need to change what an existing engine method does around a tag, patch it with a `prepend` module calling `super` rather than editing the engine, as described in [monkey-patching](/getting-started/monkey-patching-in-psdk).
+
+To go one step further and register a brand-new tag of your own, with its own wild encounters, battle background and particles, see [Create a custom System Tag](/psdk/core-systems/create-a-custom-system-tag).
 
 ## Conclusion
 

@@ -1,7 +1,7 @@
 ---
 title: "FollowMe et le mode Let's Go"
 slug: followme
-sidebar_position: 3
+sidebar_position: 4
 description: "FollowMe est le système PSDK qui fait suivre des personnages au joueur sur la carte : Pokémon de l'équipe, PNJ, ou un seul Pokémon de tête en mode Let's Go. Ce guide explique la pile de followers, les interrupteurs et variables qui le pilotent depuis les événements ou en script, le follower Let's Go, et comment contrôler les followers et les événements suiveurs."
 ---
 

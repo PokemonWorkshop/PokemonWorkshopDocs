@@ -1,5 +1,5 @@
 ---
-title: "Les System Tags"
+title: "Comprendre les System Tags"
 slug: les-system-tags
 sidebar_position: 2
 description: "Les System Tags sont des marqueurs posés sur chaque tuile qui indiquent au moteur de carte de PSDK comment elle se comporte : quelles tuiles lancent un combat sauvage, permettent de surfer, font glisser sur la glace, sauter un rebord ou monter un escalier. Ce guide explique comment le moteur les stocke et les lit, l'API pour interroger la tuile sous ou devant un personnage, et le catalogue complet des tags groupés par rôle."
@@ -283,6 +283,8 @@ end
 ```
 
 Quand il s'agit plutôt de changer ce que fait une méthode existante du moteur autour d'un tag, on la patche avec un module `prepend` appelant `super` plutôt que de modifier le moteur, comme décrit dans [monkey-patch](/getting-started/monkey-patch-dans-psdk).
+
+Pour aller plus loin et enregistrer un tag entièrement nouveau, avec ses propres rencontres sauvages, son arrière-plan de combat et ses particules, voir [Créer un System Tag personnalisé](/psdk/core-systems/creer-un-system-tag-personnalise).
 
 ## Conclusion
 
