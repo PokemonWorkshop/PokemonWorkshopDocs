@@ -20,13 +20,27 @@ L'environnement de développement PSDK repose sur trois piliers :
 1. Se rendre sur [rubyinstaller.org](https://rubyinstaller.org/downloads/).
 2. Télécharger **Ruby 4.0.1** avec le devkit (version `Ruby+Devkit 4.0.1 (x64)`).
 3. Lancer l'installeur et suivre les étapes. Quand MSYS2 est proposé, accepter l'installation.
-4. Vérifier l'installation en ouvrant un terminal et en tapant :
+4. Vérifier l'installation en ouvrant un terminal et en tapant la commande ci-dessous. Pour ouvrir un terminal, ouvrir le menu Démarrer, taper `cmd`, et appuyer sur Entrée : c'est l'**invite de commandes** (Command Prompt), le terminal utilisé dans tout ce guide (pas PowerShell).
 
 ```bash
 ruby --version
 ```
 
 La version affichée doit commencer par `4.0`.
+
+## Installer Git
+
+Git est l'outil de gestion de versions utilisé dans tout PSDK, et VS Code s'en sert pour toutes ses fonctions de gestion de versions. Sans lui, les étapes Git des guides suivants ne fonctionneront pas.
+
+1. Télécharger [Git pour Windows](https://git-scm.com/download/win).
+2. Lancer l'installeur. Les options par défaut conviennent : continuer à cliquer sur **Next**, puis **Install**.
+3. Le vérifier dans l'invite de commandes :
+
+```bash
+git --version
+```
+
+Un numéro de version confirme que Git est installé. Fermer et rouvrir VS Code ensuite pour qu'il détecte Git.
 
 ## Installer Visual Studio Code
 
@@ -47,7 +61,7 @@ gem install ruby-lsp
 
 ## Configurer VSCode
 
-Ouvrir les paramètres JSON de VSCode : Ctrl+Shift+P, puis chercher "Preferences: Open User Settings (JSON)". Ajouter les lignes suivantes :
+Ouvrir les paramètres JSON de VSCode : Ctrl+Shift+P, puis chercher "Preferences: Open User Settings (JSON)". Ajouter les lignes suivantes à l'intérieur des `{ }` existantes, en séparant chaque entrée par une virgule :
 
 ```json
 "editor.tabSize": 2,
@@ -88,11 +102,11 @@ Solargraph a besoin d'accéder au code source de PSDK pour proposer l'autocompl�
 Il y a deux façons d'accéder au code PSDK, et le choix détermine comment les mises à jour fonctionnent :
 
 - **Via le lien symbolique** : les fichiers pointent vers l'installation Pokémon Studio. Quand on met à jour PSDK depuis Pokémon Studio, ces fichiers sont mis à jour automatiquement.
-- **Via le dépôt pokemonsdk** : le dépôt forké devient la source de vérité. Les mises à jour de PSDK ne sont **pas** automatiques — il faut synchroniser soi-même le dépôt avec l'officiel (voir le guide 002, section "Maintenir son fork à jour").
+- **Via le dépôt pokemonsdk** : le dépôt forké devient la source de vérité. Les mises à jour de PSDK ne sont **pas** automatiques — il faut synchroniser soi-même le dépôt avec l'officiel (voir [Contribuer à PSDK](/getting-started/utiliser-git-avec-psdk), section "Maintenir son fork à jour").
 
 ### Si le dépôt pokemonsdk est dans le projet
 
-Si le dossier `pokemonsdk/` existe à la racine du projet (après avoir forké et cloné le dépôt, voir le guide 002), le fichier `solargraph.yml` dans `scripts/` doit contenir :
+Si le dossier `pokemonsdk/` existe à la racine du projet (après avoir forké et cloné le dépôt, voir [Contribuer à PSDK](/getting-started/utiliser-git-avec-psdk)), le fichier `solargraph.yml` dans `scripts/` doit contenir :
 
 ```yaml
 ---
@@ -137,6 +151,8 @@ mklink /D psdk_scripts "%temp%\..\Programs\pokemon-studio\resources\psdk-binarie
 - `mklink /D` crée un lien symbolique de dossier. Le mode administrateur est requis. Cette commande est propre à cmd (ne pas utiliser PowerShell).
 - `psdk_scripts` est le nom du dossier virtuel qui apparaîtra dans `scripts/`. Ne pas y mettre ses propres scripts.
 - Le chemin cible pointe vers les sources Ruby de PSDK dans l'installation Pokémon Studio. `%temp%` permet d'atteindre le dossier `Programs` de l'utilisateur.
+
+Vérifier que le lien a fonctionné : ouvrir le nouveau dossier `scripts/psdk_scripts` dans l'explorateur de fichiers, il doit afficher les fichiers `.rb` de PSDK. S'il est vide, Pokémon Studio est installé ailleurs sur la machine ; adapter le chemin cible pour qu'il pointe vers son dossier `resources/psdk-binaries/pokemonsdk/scripts`.
 
 Ensuite, adapter le `solargraph.yml` pour inclure ce lien :
 
@@ -221,6 +237,29 @@ pokemon_name(:pikachu)
 
 Si la console affiche "Pikachu", tout est en place.
 
+## GitLens (optionnel)
+
+Quand on travaille à plusieurs (voir [Travailler à plusieurs sur un projet PSDK](/getting-started/travailler-a-plusieurs-sur-un-projet-psdk)), l'extension **GitLens** est un ajout utile à VSCode. Elle affiche, directement dans l'éditeur, qui a modifié chaque ligne en dernier, l'historique d'un fichier et les contributeurs du projet, ce qui aide à coordonner le travail et à résoudre les conflits.
+
+On l'installe depuis le panneau Extensions (Ctrl+Shift+X) en cherchant **GitLens**.
+
+On peut aussi choisir quelles vues GitLens apparaissent dans le panneau **Source Control**, en ajoutant le paramètre suivant à ses paramètres JSON. Pour chaque vue, `false` la garde visible et `true` la masque, donc la configuration ci-dessous masque les vues **Contributors** et **Tags** et garde les autres :
+
+```json
+"gitlens.views.scm.grouped.views": {
+    "branches": false,
+    "commits": false,
+    "contributors": true,
+    "launchpad": false,
+    "remotes": false,
+    "repositories": false,
+    "searchAndCompare": false,
+    "stashes": false,
+    "tags": true,
+    "worktrees": false
+}
+```
+
 ## Conclusion
 
 - Installer Ruby 4.0.1 avec le devkit, puis les gems `solargraph` et `ruby-lsp`.
@@ -228,3 +267,4 @@ Si la console affiche "Pikachu", tout est en place.
 - Rendre le code PSDK visible à Solargraph via le `solargraph.yml` : soit un chemin relatif vers `pokemonsdk/`, soit un lien symbolique `psdk_scripts/`.
 - Copier le `.rubocop.yml` de PSDK dans `scripts/` pour que RuboCop utilise les conventions du projet.
 - Toujours ouvrir le dossier `scripts/` dans VSCode pour que Solargraph et RuboCop trouvent leurs configurations.
+- Optionnellement, installer **GitLens** pour l'historique Git, le blame et les informations de contributeurs, utile quand on collabore sur un projet.
