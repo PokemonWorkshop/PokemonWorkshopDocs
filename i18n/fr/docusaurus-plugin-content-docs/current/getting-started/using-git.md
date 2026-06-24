@@ -1,112 +1,19 @@
 ---
-title: "Utiliser Git avec PSDK"
+title: "Contribuer à PSDK"
 slug: utiliser-git-avec-psdk
-sidebar_position: 2
-description: "Git est l'outil de versioning utilisé par PSDK. Il permet de suivre l'historique des modifications, de travailler sur plusieurs fonctionnalités en parallèle, et de synchroniser son travail avec le dépôt officiel. Ce guide couvre les bases de Git, comment forker le dépôt PSDK sur GitLab, et comment maintenir son fork à jour."
+sidebar_position: 4
+description: "Contribuer au moteur PSDK, c'est travailler avec Git sur le dépôt officiel GitLab : le forker, proposer ses modifications via une Merge Request, et synchroniser son fork avec le dépôt officiel. Ce guide couvre comment forker le dépôt PSDK sur GitLab, maintenir son fork à jour, et le workflow de branche pour une contribution."
 ---
 
-Git est l'outil de versioning utilisé par PSDK. Il permet de suivre l'historique des modifications, de travailler sur plusieurs fonctionnalités en parallèle, et de synchroniser son travail avec le dépôt officiel. Ce guide couvre les bases de Git, comment forker le dépôt PSDK sur GitLab, et comment maintenir son fork à jour.
+Contribuer au moteur PSDK, c'est travailler avec Git sur le dépôt officiel GitLab : le forker, proposer ses modifications via une Merge Request, et synchroniser son fork avec le dépôt officiel. Ce guide couvre comment forker le dépôt PSDK sur GitLab, maintenir son fork à jour, et le workflow de branche pour une contribution.
 
-## Les bases de Git
-
-### Le dépôt (repository)
-
-Un dépôt Git est un dossier dont l'historique de modifications est suivi. Un projet PSDK créé avec Pokémon Studio ne contient pas de dépôt Git par défaut — le code du moteur est embarqué en interne par Pokémon Studio. Le dossier `pokemonsdk/` n'apparaît que lorsqu'on fork et clone le dépôt officiel (voir la section "Forker le dépôt PSDK" plus bas). Ce dossier devient alors la source de vérité pour le code du moteur, et les mises à jour ne sont plus automatiques.
-
-### Le commit
-
-Un commit est un instantané des modifications à un moment donné. Il contient :
-
-- Les fichiers modifiés (le diff)
-- Un message décrivant la modification
-- Un auteur et une date
-- Un identifiant unique (le hash, ex: `a1b2c3d`)
-
-On crée un commit avec :
-
-```bash
-git add fichier_modifie.rb
-git commit -m "Fix damage calculation for multi-hit moves"
-```
-
-- `git add` sélectionne les fichiers à inclure dans le commit. On peut ajouter plusieurs fichiers, ou utiliser `git add .` pour tout ajouter.
-- `git commit -m "message"` crée le commit avec un message descriptif. Le message doit décrire **ce que fait** la modification, pas **comment**.
-
-### La branche
-
-Une branche est une ligne de développement indépendante. Par défaut, la branche principale de PSDK s'appelle `development`.
-
-```bash
-git branch                         # liste les branches locales
-git checkout development           # se placer sur development
-git checkout -b feature/my-change  # créer une nouvelle branche depuis la position actuelle
-```
-
-- On ne travaille **jamais** directement sur `development`. On crée une branche pour chaque fonctionnalité ou correctif.
-- Une fois le travail terminé, on fait une Merge Request (MR) pour intégrer la branche dans `development`.
-
-### Le remote
-
-Un remote est un dépôt distant hébergé sur un serveur (GitLab dans le cas de PSDK). Un dépôt local peut être connecté à plusieurs remotes :
-
-```bash
-git remote -v   # liste les remotes et leurs URLs
-```
-
-Par défaut, le remote principal s'appelle `origin`. On verra plus loin comment en ajouter un second.
-
-### Les commandes essentielles
-
-| Commande                    | Rôle                                         |
-| --------------------------- | -------------------------------------------- |
-| `git status`                | voir les fichiers modifiés/ajoutés/supprimés |
-| `git add <fichier>`         | ajouter un fichier au prochain commit        |
-| `git commit -m "message"`   | créer un commit                              |
-| `git log --oneline`         | voir l'historique des commits                |
-| `git push`                  | envoyer ses commits vers le remote           |
-| `git pull`                  | récupérer les commits du remote              |
-| `git checkout <branche>`    | changer de branche                           |
-| `git checkout -b <branche>` | créer et se placer sur une nouvelle branche  |
+Ce guide concerne la contribution au **moteur lui-même**. Si on souhaite plutôt collaborer avec d'autres makers sur son propre jeu, voir [Travailler à plusieurs sur un projet PSDK](/getting-started/travailler-a-plusieurs-sur-un-projet-psdk). Il suppose aussi qu'on est à l'aise avec les bases de Git (dépôt, commit, branche, remote) et qu'on a une clé SSH configurée ; si ce n'est pas le cas, commencer par [Découvrir Git](/getting-started/decouvrir-git). Les actions courantes (cloner, brancher, committer, pousser) se font graphiquement dans VS Code, comme dans ce guide. Les étapes qui synchronisent le fork avec le dépôt officiel (fetch, rebase, reset) n'ont pas d'équivalent graphique fiable, donc elles sont montrées dans un terminal (cmd, ou le terminal intégré de VS Code).
 
 ## Forker le dépôt PSDK
 
-Un fork est une copie personnelle du dépôt officiel sur GitLab. On travaille sur son fork, puis on propose ses modifications au dépôt officiel via une Merge Request.
+Un projet PSDK créé avec Pokémon Studio ne contient pas de dépôt Git par défaut, le code du moteur est embarqué en interne par Pokémon Studio. Le dossier `pokemonsdk/` n'apparaît que lorsqu'on fork et clone le dépôt officiel, et il devient alors la source de vérité pour le code du moteur (les mises à jour ne sont plus automatiques).
 
-### Configurer SSH pour GitLab
-
-Git utilise SSH pour communiquer avec GitLab sans avoir à entrer un mot de passe à chaque push. Il faut générer une clé SSH et l'ajouter à son compte GitLab.
-
-**Générer la clé SSH** :
-
-```bash
-ssh-keygen -t ed25519 -C "votre-email@example.com"
-```
-
-- Appuyer sur Entrée pour accepter l'emplacement par défaut (`C:\Users\votre-pseudo\.ssh\id_ed25519`).
-- Choisir une passphrase (optionnel mais recommandé) ou appuyer sur Entrée pour ne pas en mettre.
-- Deux fichiers sont créés : `id_ed25519` (clé privée, ne jamais la partager) et `id_ed25519.pub` (clé publique).
-
-**Copier la clé publique** :
-
-```bash
-cat ~/.ssh/id_ed25519.pub
-```
-
-Copier l'intégralité de la ligne affichée (commence par `ssh-ed25519`).
-
-**Ajouter la clé sur GitLab** :
-
-1. Se connecter à GitLab, aller dans **Preferences** (icône de profil en haut à gauche) > **SSH Keys**.
-2. Coller la clé publique dans le champ **Key**.
-3. Donner un titre (ex: "Mon PC") et cliquer sur **Add key**.
-
-**Vérifier la connexion** :
-
-```bash
-ssh -T git@gitlab.com
-```
-
-Si la configuration est correcte, GitLab répond `Welcome to GitLab, @votre-pseudo!`.
+Un fork est une copie personnelle du dépôt officiel sur GitLab. On travaille sur son fork, puis on propose ses modifications au dépôt officiel via une Merge Request. Pousser vers GitLab nécessite une clé SSH (voir [Configurer SSH](/getting-started/decouvrir-git#configurer-ssh)).
 
 ### Créer le fork
 
@@ -116,19 +23,17 @@ Si la configuration est correcte, GitLab répond `Welcome to GitLab, @votre-pseu
 
 ### Cloner le fork dans le projet
 
-Depuis la racine du projet PSDK, cloner son fork. Cela crée le dossier `pokemonsdk/` :
+Dans VS Code, ouvrir la **palette de commandes** (`Ctrl+Shift+P`), lancer **`Git: Clone`**, coller l'URL de son fork (l'URL SSH si on a configuré une clé SSH, sinon l'URL HTTPS), et choisir la **racine du projet PSDK** comme destination. Cela crée le dossier `pokemonsdk/`.
 
-```bash
-git clone git@gitlab.com:votre-pseudo/pokemonsdk.git
-```
+- L'URL SSH (commence par `git@gitlab.com:`) utilise la clé SSH configurée (voir [Configurer SSH](/getting-started/decouvrir-git#configurer-ssh)). Pas besoin de mot de passe à chaque push.
+- Le dossier `pokemonsdk/` apparaît à la racine du projet. Il contient tout le code source de PSDK et devient la source de vérité (voir [Préparer son environnement de développement](/getting-started/preparer-son-environnement) pour configurer Solargraph avec ce dossier).
+- `origin` pointe automatiquement vers votre fork. Quand on push, les commits vont sur votre fork, pas sur le dépôt officiel.
 
-- L'URL SSH (commence par `git@gitlab.com:`) utilise la clé configurée plus haut. Pas besoin de mot de passe à chaque push.
-- Le dossier `pokemonsdk/` apparaît à la racine du projet. Il contient tout le code source de PSDK et devient la source de vérité (voir le guide 003 pour configurer Solargraph avec ce dossier).
-- `origin` pointe automatiquement vers votre fork. Quand on fait `git push`, les commits vont sur votre fork, pas sur le dépôt officiel.
+Si on préfère le terminal, la commande équivalente depuis la racine du projet est `git clone git@gitlab.com:votre-pseudo/pokemonsdk.git`.
 
 ## Maintenir son fork à jour
 
-Le dépôt officiel PSDK évolue en permanence. Contrairement à un projet PokémonStudio classique où les mises à jour sont automatiques, avec un fork c'est à nous de synchroniser. Pour cela, il faut ajouter le dépôt officiel comme remote afin de pouvoir récupérer ses nouveaux commits et rebase notre branche `development` dessus.
+Le dépôt officiel PSDK évolue en permanence. Contrairement à un projet Pokémon Studio classique où les mises à jour sont automatiques, avec un fork c'est à nous de synchroniser. Pour cela, il faut ajouter le dépôt officiel comme remote afin de pouvoir récupérer ses nouveaux commits et rebase notre branche `development` dessus. Ces étapes de synchronisation (ajout de remote, fetch, rebase, reset) n'ont pas d'équivalent graphique fiable, donc on les fait dans un terminal (cmd) depuis le dossier `pokemonsdk`.
 
 ### Ajouter le remote officiel
 
@@ -159,7 +64,7 @@ git rebase upstream/development
 git push
 ```
 
-- `git checkout development` : se placer sur la branche `development` locale.
+- `git checkout development` : se placer sur la branche `development` (la première fois, cela crée une branche locale qui suit `origin/development`).
 - `git fetch upstream` : télécharger les nouveaux commits du dépôt officiel sans modifier aucun fichier local. C'est une opération sûre.
 - `git rebase upstream/development` : replacer sa branche `development` sur la pointe de `upstream/development`. Puisqu'on ne commit jamais directement sur `development`, c'est un simple fast-forward : Git avance le pointeur de branche sans créer de commit supplémentaire.
 - `git push` : pousser la branche mise à jour sur son fork (`origin`).
@@ -177,51 +82,39 @@ git reset --hard upstream/development
 git push --force-with-lease
 ```
 
-- `git reset --hard upstream/development` : remplace la branche `development` locale par celle du dépôt officiel. Les commits accidentels sont perdus (les copier sur une branche avant si nécessaire).
+- `git reset --hard upstream/development` : remplace la branche `development` locale par celle du dépôt officiel. **Les commits accidentels sur `development` sont perdus** — pour les garder, lancer `git branch backup-development` avant cette commande afin de les sauvegarder sur une autre branche.
 - `git push --force-with-lease` : force le push sur le fork. `--force-with-lease` est plus sûr que `--force` car il vérifie que personne d'autre n'a push entre-temps.
 
 ## Travailler sur une fonctionnalité
 
-Une fois `development` à jour, on crée une branche de travail :
+Une fois `development` à jour, on crée une branche de travail dans VS Code : on s'assure d'être sur `development` (lancer **`Git: Checkout to`** et choisir `development`), puis on lance **`Git: Create Branch`** et on la nomme `feature/my-new-feature`.
 
-```bash
-git checkout development
-git checkout -b feature/my-new-feature
-```
+On fait le travail et on le committe depuis la vue **Source Control** (indexer avec le **+**, taper un message, lancer **`Git: Commit`**). Quand c'est prêt, on publie la branche sur son fork avec **`Git: Push`** (la première fois, la commande est **`Git: Publish Branch`**).
 
-On travaille, on commit, et quand c'est prêt on push la branche sur son fork :
-
-```bash
-git push -u origin feature/my-new-feature
-```
-
-- `-u origin` associe la branche locale au remote `origin`. Les `git push` suivants sur cette branche n'auront plus besoin de préciser le remote.
-
-Avant de créer la Merge Request, s'assurer que la branche est à jour avec `development` :
+Avant de créer la Merge Request, on met la branche à jour sur la pointe de `development`. Cela repose sur un rebase sur le dépôt officiel, qui n'a pas d'équivalent graphique fiable, donc on le fait dans un terminal (cmd, ou le terminal intégré de VS Code) depuis le dossier `pokemonsdk` :
 
 ```bash
 git fetch upstream
 git rebase upstream/development
 ```
 
-S'il y a des conflits, Git s'arrête et demande de les résoudre fichier par fichier. Après résolution :
+S'il y a des conflits, Git s'arrête et demande de les résoudre fichier par fichier. On les corrige dans l'éditeur de fusion de VS Code (voir la section conflit de [Travailler à plusieurs sur un projet PSDK](/getting-started/travailler-a-plusieurs-sur-un-projet-psdk)). Après avoir cliqué sur **Complete Merge**, on revient au terminal pour terminer le rebase :
 
 ```bash
 git add fichier_resolu.rb
 git rebase --continue
 ```
 
-Une fois le rebase terminé sans conflit, push la branche :
+Une fois le rebase terminé sans conflit, on push la branche réécrite, toujours dans le terminal :
 
 ```bash
 git push --force-with-lease
 ```
 
-Le `--force-with-lease` est nécessaire après un rebase car l'historique de la branche a été réécrit.
+Le `--force-with-lease` est nécessaire après un rebase car l'historique de la branche a été réécrit. Il est plus sûr que `--force` car il vérifie que personne d'autre n'a push entre-temps.
 
 ## Conclusion
 
-- Git suit l'historique des modifications. Un commit est un instantané, une branche est une ligne de travail indépendante, un remote est un dépôt distant.
 - Forker le dépôt officiel PSDK crée une copie personnelle. On travaille sur son fork et on propose ses modifications via Merge Request.
 - Deux remotes : `origin` (votre fork) pour push, `upstream` (dépôt officiel) pour fetch.
 - Synchroniser `development` régulièrement avec `git fetch upstream` puis `git rebase upstream/development`. Puisqu'on ne commit jamais sur `development`, c'est un simple fast-forward.
