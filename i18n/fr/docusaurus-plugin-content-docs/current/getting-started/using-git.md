@@ -19,7 +19,7 @@ Un fork est une copie personnelle du dépôt officiel sur GitLab. On travaille s
 
 1. Se rendre sur le [dépôt officiel PSDK](https://gitlab.com/pokemonsdk/pokemonsdk).
 2. Cliquer sur le bouton **Créer une bifurcation**.
-3. GitLab crée une copie du dépôt sous votre compte (ex: `gitlab.com/votre-pseudo/pokemonsdk`).
+3. GitLab crée une copie du dépôt sous son compte (ex: `gitlab.com/votre-pseudo/pokemonsdk`).
 
 ### Cloner le fork dans le projet
 
@@ -27,7 +27,7 @@ Dans VS Code, ouvrir la **palette de commandes** (`Ctrl+Shift+P`), lancer **`Git
 
 - L'URL SSH (commence par `git@gitlab.com:`) utilise la clé SSH configurée (voir [Configurer SSH](/getting-started/decouvrir-git#configurer-ssh)). Pas besoin de mot de passe à chaque push.
 - Le dossier `pokemonsdk/` apparaît à la racine du projet. Il contient tout le code source de PSDK et devient la source de vérité (voir [Préparer son environnement de développement](/getting-started/preparer-son-environnement) pour configurer Solargraph avec ce dossier).
-- `origin` pointe automatiquement vers votre fork. Quand on push, les commits vont sur votre fork, pas sur le dépôt officiel.
+- `origin` pointe automatiquement vers son fork. Quand on push, les commits vont sur son fork, pas sur le dépôt officiel.
 
 Si on préfère le terminal, la commande équivalente depuis la racine du projet est `git clone git@gitlab.com:votre-pseudo/pokemonsdk.git`.
 
@@ -48,7 +48,7 @@ On a maintenant deux remotes :
 
 | Remote     | Pointe vers    | Usage                                            |
 | ---------- | -------------- | ------------------------------------------------ |
-| `origin`   | votre fork     | push de vos branches                             |
+| `origin`   | son fork       | push de ses branches                             |
 | `upstream` | dépôt officiel | fetch les nouveaux commits pour se mettre à jour |
 
 On peut vérifier avec `git remote -v`.
@@ -116,6 +116,6 @@ Le `--force-with-lease` est nécessaire après un rebase car l'historique de la 
 ## Conclusion
 
 - Forker le dépôt officiel PSDK crée une copie personnelle. On travaille sur son fork et on propose ses modifications via Merge Request.
-- Deux remotes : `origin` (votre fork) pour push, `upstream` (dépôt officiel) pour fetch.
+- Deux remotes : `origin` (son fork) pour push, `upstream` (dépôt officiel) pour fetch.
 - Synchroniser `development` régulièrement avec `git fetch upstream` puis `git rebase upstream/development`. Puisqu'on ne commit jamais sur `development`, c'est un simple fast-forward.
 - Toujours créer une branche de travail depuis `development` à jour. Ne jamais commit directement sur `development`.

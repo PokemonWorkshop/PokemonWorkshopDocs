@@ -9,7 +9,7 @@ Git is the version control tool used across the PSDK ecosystem, both to collabor
 
 ## The repository
 
-A Git repository is a folder whose change history is tracked. You turn a plain folder into a repository either by initializing a new one with `git init`, or by copying an existing one with `git clone`. Once tracked, every change you record stays in the history and can be reviewed, shared, or reverted.
+A Git repository is a folder whose change history is tracked. Once tracked, every change you record stays in the history and can be reviewed, shared, or reverted. You turn a plain folder into a repository in two ways, both in VS Code from the **Command Palette** (`Ctrl+Shift+P`): **`Git: Initialize Repository`** starts tracking the folder you have open, and **`Git: Clone`** downloads a copy of an existing repository.
 
 ## The commit
 
@@ -20,46 +20,27 @@ A commit is a snapshot of changes at a given point in time. It contains:
 - An author and a date
 - A unique identifier (the hash, e.g. `a1b2c3d`)
 
-A commit is created with:
+In **VS Code**, you create one from the **Source Control** view (the branch icon in the left bar, or `Ctrl+Shift+G`): stage the files you want to include with the **+**, type a message, then run **`Git: Commit`** from the Command Palette (`Ctrl+Shift+P`), or press `Ctrl+Enter` in the message box.
 
-```bash
-git add modified_file.rb
-git commit -m "Fix damage calculation for multi-hit moves"
-```
-
-- `git add` selects the files to include in the commit. You can add multiple files, or use `git add .` to add everything.
-- `git commit -m "message"` creates the commit with a descriptive message. The message should describe **what** the change does, not **how**.
-
-In **VS Code**, you do the same graphically: in the **Source Control** view, stage (i.e. `git add`) the files with the **+**, type the message, then run **`Git: Commit`** from the Command Palette (`Ctrl+Shift+P`), or press `Ctrl+Enter` in the message box.
+- Staging with the **+** selects which files go into the commit. You can stage a single file, several, or all of them at once.
+- The message should describe **what** the change does, not **how**, for example `Fix damage calculation for multi-hit moves`.
 
 ## The branch
 
 A branch is an independent line of development. By default, the main branch is usually called `main` (some projects use `master`, and the PSDK engine uses `development`).
 
-```bash
-git branch                         # list local branches
-git checkout main                  # switch to main
-git checkout -b feature/my-change  # create a new branch from the current position
-```
-
 - You should **never** work directly on the main branch. Create a branch for each feature or bugfix.
 - Once the work is done, you merge the branch back into the main one, usually through a **Pull Request** (GitHub) or a **Merge Request** (GitLab): a request to merge your branch that a teammate can review before it is accepted.
 
-In **VS Code**, run **`Git: Create Branch`** or **`Git: Checkout to`** from the Command Palette (`Ctrl+Shift+P`) to create or switch branches; the current branch is shown in the status bar at the bottom.
+In **VS Code**, run **`Git: Create Branch`** to start a new branch from your current position, or **`Git: Checkout to`** to switch to an existing one, both from the Command Palette (`Ctrl+Shift+P`). The current branch is always shown in the status bar at the bottom.
 
 ## The remote
 
-A remote is a distant repository hosted on a server such as GitHub or GitLab. A local repository can be connected to multiple remotes:
-
-```bash
-git remote -v   # list remotes and their URLs
-```
-
-By default, the main remote is called `origin`.
+A remote is a distant repository hosted on a server such as GitHub or GitLab. A local repository can be connected to several remotes; by default, the main one is called `origin`. In **VS Code**, run **`Git: Add Remote`** from the Command Palette (`Ctrl+Shift+P`) to connect your repository to one.
 
 ## Essential commands
 
-VS Code runs all of these graphically from the Source Control panel, but the equivalent terminal commands are handy to know:
+You can do everything above without opening a terminal. The commands below are the terminal equivalents, useful to recognize when you read about Git elsewhere, or when you move on to contributing to the engine, where a few steps need the terminal:
 
 | Command | Purpose |
 | --- | --- |
@@ -113,7 +94,7 @@ The first time, SSH asks to confirm the server's fingerprint: type `yes` and pre
 
 ## Conclusion
 
-- A Git repository tracks the history of a folder. Create one with `git init` or `git clone`.
+- A Git repository tracks the history of a folder. Create one with `Git: Initialize Repository` or `Git: Clone`.
 - A commit is a snapshot, a branch is an independent line of work, a remote is a distant repository (GitHub, GitLab).
 - Never work on the main branch directly: branch per feature, then merge through a Pull Request (GitHub) or Merge Request (GitLab).
 - Set up an SSH key once to push without a password.

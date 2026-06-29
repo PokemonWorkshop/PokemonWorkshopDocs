@@ -13,7 +13,7 @@ Avant de commencer, s'assurer d'avoir fait la [préparation de l'environnement d
 
 Un projet Pokémon Studio n'est qu'un dossier sur le disque. Le mettre sous Git se fait en trois étapes, toutes graphiques : créer un dépôt vide en ligne, ajouter un `.gitignore`, puis publier le projet depuis VS Code.
 
-Il faut d'abord un compte gratuit **GitHub** ou **GitLab**. VS Code demandera de s'y connecter à la première publication, c'est aussi ainsi qu'il obtient l'autorisation de pousser vos commits.
+Il faut d'abord un compte gratuit **GitHub** ou **GitLab**. VS Code demandera de s'y connecter à la première publication, c'est aussi ainsi qu'il obtient l'autorisation de pousser ses commits.
 
 ### Créer le dépôt sur GitHub ou GitLab
 
