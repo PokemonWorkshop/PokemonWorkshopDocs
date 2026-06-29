@@ -42,6 +42,15 @@ git --version
 
 Un numéro de version confirme que Git est installé.
 
+4. Configurer son identité pour que Git puisse signer chaque commit avec un auteur. Toujours dans **cmd**, depuis n'importe quel dossier :
+
+```bash
+git config --global user.name "Votre Nom"
+git config --global user.email "votre-email@example.com"
+```
+
+Utiliser la même adresse e-mail que son compte GitHub ou GitLab pour que ses commits soient rattachés à son profil. L'option `--global` l'applique à tous les dépôts de la machine, donc on ne le fait qu'une fois.
+
 ## Installer Visual Studio Code
 
 1. Télécharger [Visual Studio Code](https://code.visualstudio.com).
@@ -91,7 +100,7 @@ Ouvrir les **paramètres utilisateur JSON** : Ctrl+Shift+P, puis exécuter "Pref
 "rubyLsp.rubyExecutablePath": "C:\\Ruby40-x64\\bin"
 ```
 
-- Adapter le chemin `C:\\Ruby40-x64\\bin` au dossier `bin` de votre installation Ruby. Le nom du dossier RubyInstaller reflète la version installée (par exemple `C:\\Ruby40-x64` pour Ruby 4.0, `C:\\Ruby34-x64` pour Ruby 3.4).
+- Adapter le chemin `C:\\Ruby40-x64\\bin` au dossier `bin` de son installation Ruby. Le nom du dossier RubyInstaller reflète la version installée (par exemple `C:\\Ruby40-x64` pour Ruby 4.0, `C:\\Ruby34-x64` pour Ruby 3.4).
 - `editor.tabSize: 2` : PSDK utilise une indentation de 2 espaces.
 - `solargraph.diagnostics: true` : active les diagnostics RuboCop via Solargraph.
 
@@ -213,7 +222,7 @@ C'est dans ce dossier que Solargraph et RuboCop cherchent leurs fichiers de conf
 
 Si l'autocomplétion n'affiche toujours rien une fois l'analyse terminée, redémarrer Solargraph : Ctrl+Shift+P, puis exécuter "Restart Solargraph".
 
-## Comment PSDK charge vos scripts
+## Comment PSDK charge les scripts
 
 Configurer Solargraph n'affecte que l'éditeur. Cela ne change pas quels fichiers PSDK exécute réellement. Le moteur ne charge un script de `scripts/` que si son nom commence par **3 à 5 chiffres, puis un espace, puis le nom**, par exemple :
 
@@ -267,7 +276,7 @@ Quand on travaille à plusieurs (voir [Travailler à plusieurs sur un projet PSD
 
 On l'installe depuis le panneau Extensions (Ctrl+Shift+X) en cherchant **GitLens**.
 
-On peut aussi choisir quelles vues GitLens apparaissent dans le panneau **Source Control**, en ajoutant le paramètre suivant aux mêmes **paramètres utilisateur JSON** que plus haut, à l'intérieur des `{ }` existantes. Pour chaque vue, `false` la garde visible et `true` la masque, donc la configuration ci-dessous masque les vues **Contributors** et **Tags** et garde les autres :
+On peut aussi choisir quelles vues GitLens apparaissent dans la vue **Source Control**, en ajoutant le paramètre suivant aux mêmes **paramètres utilisateur JSON** que plus haut, à l'intérieur des `{ }` existantes. Pour chaque vue, `false` la garde visible et `true` la masque, donc la configuration ci-dessous masque les vues **Contributors** et **Tags** et garde les autres :
 
 ```json
 "gitlens.views.scm.grouped.views": {

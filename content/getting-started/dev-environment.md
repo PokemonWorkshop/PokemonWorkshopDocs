@@ -42,6 +42,15 @@ git --version
 
 A version number confirms Git is installed.
 
+4. Configure your identity so Git can stamp every commit with an author. Still in **cmd**, from any folder:
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your-email@example.com"
+```
+
+Use the same email as your GitHub or GitLab account so your commits are linked to your profile. The `--global` flag applies this to every repository on your machine, so you only do it once.
+
 ## Installing Visual Studio Code
 
 1. Download [Visual Studio Code](https://code.visualstudio.com).
@@ -267,7 +276,7 @@ When working with others (see [Work together on a PSDK project](/getting-started
 
 Install it from the Extensions panel (Ctrl+Shift+X) by searching for **GitLens**.
 
-You can also choose which GitLens views appear in the **Source Control** panel, by adding the following setting to the same **User Settings (JSON)** as above, inside the existing `{ }`. For each view, `false` keeps it visible and `true` hides it, so the configuration below hides the **Contributors** and **Tags** views and keeps the others:
+You can also choose which GitLens views appear in the **Source Control** view, by adding the following setting to the same **User Settings (JSON)** as above, inside the existing `{ }`. For each view, `false` keeps it visible and `true` hides it, so the configuration below hides the **Contributors** and **Tags** views and keeps the others:
 
 ```json
 "gitlens.views.scm.grouped.views": {

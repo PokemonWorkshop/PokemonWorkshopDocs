@@ -9,7 +9,7 @@ Git est l'outil de gestion de versions utilisé dans tout l'écosystème PSDK, a
 
 ## Le dépôt (repository)
 
-Un dépôt Git est un dossier dont l'historique de modifications est suivi. On transforme un simple dossier en dépôt soit en initialisant un nouveau dépôt avec `git init`, soit en copiant un dépôt existant avec `git clone`. Une fois suivi, chaque modification enregistrée reste dans l'historique et peut être consultée, partagée ou annulée.
+Un dépôt Git est un dossier dont l'historique de modifications est suivi. Une fois suivi, chaque modification enregistrée reste dans l'historique et peut être consultée, partagée ou annulée. On transforme un simple dossier en dépôt de deux façons, toutes deux dans VS Code depuis la **palette de commandes** (`Ctrl+Shift+P`) : **`Git: Initialize Repository`** met le dossier ouvert sous suivi, et **`Git: Clone`** télécharge une copie d'un dépôt existant.
 
 ## Le commit
 
@@ -20,46 +20,27 @@ Un commit est un instantané des modifications à un moment donné. Il contient 
 - Un auteur et une date
 - Un identifiant unique (le hash, ex: `a1b2c3d`)
 
-On crée un commit avec :
+Dans **VS Code**, on en crée un depuis la vue **Source Control** (l'icône de branche dans la barre de gauche, ou `Ctrl+Shift+G`) : on indexe les fichiers à inclure avec le **+**, on tape un message, puis on lance **`Git: Commit`** depuis la palette de commandes (`Ctrl+Shift+P`), ou on appuie sur `Ctrl+Entrée` dans le champ de message.
 
-```bash
-git add fichier_modifie.rb
-git commit -m "Fix damage calculation for multi-hit moves"
-```
-
-- `git add` sélectionne les fichiers à inclure dans le commit. On peut ajouter plusieurs fichiers, ou utiliser `git add .` pour tout ajouter.
-- `git commit -m "message"` crée le commit avec un message descriptif. Le message doit décrire **ce que fait** la modification, pas **comment**.
-
-Dans **VS Code**, on fait la même chose graphiquement : dans la vue **Source Control**, on indexe (c'est-à-dire `git add`) les fichiers avec le **+**, on tape le message, puis on lance **`Git: Commit`** depuis la palette de commandes (`Ctrl+Shift+P`), ou on appuie sur `Ctrl+Entrée` dans le champ de message.
+- Indexer avec le **+** sélectionne les fichiers qui entrent dans le commit. On peut en indexer un seul, plusieurs, ou tous d'un coup.
+- Le message doit décrire **ce que fait** la modification, pas **comment**, par exemple `Fix damage calculation for multi-hit moves`.
 
 ## La branche
 
 Une branche est une ligne de développement indépendante. Par défaut, la branche principale s'appelle généralement `main` (certains projets utilisent `master`, et le moteur PSDK utilise `development`).
 
-```bash
-git branch                         # liste les branches locales
-git checkout main                  # se placer sur main
-git checkout -b feature/my-change  # créer une nouvelle branche depuis la position actuelle
-```
-
 - On ne travaille **jamais** directement sur la branche principale. On crée une branche pour chaque fonctionnalité ou correctif.
 - Une fois le travail terminé, on fusionne la branche dans la principale, généralement via une **Pull Request** (GitHub) ou une **Merge Request** (GitLab) : une demande de fusion de sa branche qu'un coéquipier peut relire avant qu'elle soit acceptée.
 
-Dans **VS Code**, on lance **`Git: Create Branch`** ou **`Git: Checkout to`** depuis la palette de commandes (`Ctrl+Shift+P`) pour créer une branche ou en changer ; la branche courante est affichée dans la barre d'état en bas.
+Dans **VS Code**, on lance **`Git: Create Branch`** pour créer une nouvelle branche depuis la position actuelle, ou **`Git: Checkout to`** pour basculer sur une branche existante, depuis la palette de commandes (`Ctrl+Shift+P`). La branche courante est toujours affichée dans la barre d'état en bas.
 
 ## Le remote
 
-Un remote est un dépôt distant hébergé sur un serveur comme GitHub ou GitLab. Un dépôt local peut être connecté à plusieurs remotes :
-
-```bash
-git remote -v   # liste les remotes et leurs URLs
-```
-
-Par défaut, le remote principal s'appelle `origin`.
+Un remote est un dépôt distant hébergé sur un serveur comme GitHub ou GitLab. Un dépôt local peut être connecté à plusieurs remotes ; par défaut, le principal s'appelle `origin`. Dans **VS Code**, on lance **`Git: Add Remote`** depuis la palette de commandes (`Ctrl+Shift+P`) pour le connecter à l'un d'eux.
 
 ## Les commandes essentielles
 
-VS Code exécute tout cela graphiquement depuis le panneau Source Control, mais les commandes équivalentes dans le terminal sont utiles à connaître :
+On peut faire tout ce qui précède sans ouvrir de terminal. Les commandes ci-dessous sont les équivalents terminal, utiles à reconnaître quand on lit de la documentation Git ailleurs, ou quand on passe à la contribution au moteur, où quelques étapes nécessitent le terminal :
 
 | Commande                    | Rôle                                         |
 | --------------------------- | -------------------------------------------- |
@@ -113,7 +94,7 @@ La première fois, SSH demande de confirmer l'empreinte du serveur : taper `yes`
 
 ## Conclusion
 
-- Un dépôt Git suit l'historique d'un dossier. On en crée un avec `git init` ou `git clone`.
+- Un dépôt Git suit l'historique d'un dossier. On en crée un avec `Git: Initialize Repository` ou `Git: Clone`.
 - Un commit est un instantané, une branche est une ligne de travail indépendante, un remote est un dépôt distant (GitHub, GitLab).
 - On ne travaille jamais directement sur la branche principale : une branche par fonctionnalité, puis fusion via une Pull Request (GitHub) ou Merge Request (GitLab).
 - On configure une clé SSH une fois pour push sans mot de passe.
