@@ -42,29 +42,33 @@ La correction en découle directement : le nombre de types a augmenté, donc cha
 
 ## Les spritesheets à mettre à jour
 
-PSDK fournit six spritesheets indexées par type, toutes dans `graphics/interface/`. Chacune est une seule colonne avec une ligne par type, actuellement **19 lignes** (le type « none » plus les 18 types par défaut) :
+PSDK fournit dix spritesheets indexées par type réparties dans deux dossiers, `graphics/interface/` (combat et menus) et `graphics/pokedex/` (l'écran Pokédex). Chacune est une seule colonne avec une ligne par type, actuellement **19 lignes** (le type « none » plus les 18 types par défaut) :
 
 | Fichier | Taille actuelle | Hauteur de ligne | Ce qu'il alimente |
 | ------- | --------------- | ---------------- | ----------------- |
 | `graphics/interface/battle/types.png` | 120 × 513 | 27 px | Icône de type sur les attaques dans le menu d'attaques en combat |
 | `graphics/interface/battle_attack_dummy.png` | 155 × 1007 | 53 px | Plaque de type gérée par le helper `AttackDummySprite` |
 | `graphics/interface/types.png` | 32 × 266 | 14 px | Icônes de types dans les menus ; image de repli si aucun fichier localisé |
-| `graphics/interface/types_en.png` | 32 × 266 | 14 px | Variante anglaise de `types.png` |
-| `graphics/interface/types_fr.png` | 32 × 266 | 14 px | Variante française de `types.png` |
-| `graphics/interface/types_es.png` | 32 × 266 | 14 px | Variante espagnole de `types.png` |
+| `graphics/interface/types_en.png` | 32 × 266 | 14 px | Variante anglaise de `interface/types.png` |
+| `graphics/interface/types_fr.png` | 32 × 266 | 14 px | Variante française de `interface/types.png` |
+| `graphics/interface/types_es.png` | 32 × 266 | 14 px | Variante espagnole de `interface/types.png` |
+| `graphics/pokedex/types.png` | 48 × 304 | 16 px | Icônes de types sur l'écran Pokédex ; image de repli si aucun fichier localisé |
+| `graphics/pokedex/types_en.png` | 48 × 304 | 16 px | Variante anglaise de `pokedex/types.png` |
+| `graphics/pokedex/types_fr.png` | 48 × 304 | 16 px | Variante française de `pokedex/types.png` |
+| `graphics/pokedex/types_es.png` | 48 × 304 | 16 px | Variante espagnole de `pokedex/types.png` |
 
-Les fichiers `types_en.png`, `types_fr.png` et `types_es.png` sont des variantes localisées de `types.png` : l'icône inclut le nom du type sous forme de texte, il y a donc une image par langue. PSDK charge `types_<langue>.png` pour la langue courante et se rabat sur `types.png` quand ce fichier manque. On met à jour la variante de chaque langue présente dans son jeu ; si l'on ne garde que `types.png`, ce seul fichier suffit.
+Les deux dossiers possèdent des variantes localisées (`types_en.png`, `types_fr.png`, `types_es.png`) : l'icône inclut le nom du type sous forme de texte, il y a donc une image par langue. PSDK charge `types_<langue>.png` depuis le dossier concerné pour la langue courante et se rabat sur le `types.png` de ce même dossier quand le fichier localisé manque. On met à jour la variante de chaque langue présente dans son jeu ; si l'on ne garde que `types.png` dans un dossier, ce seul fichier y suffit.
 
 ## Ajouter la ligne de son type
 
 Pour chaque fichier du tableau, l'opération est la même :
 
 1. Ouvrir la spritesheet dans un éditeur d'images qui préserve la transparence (couche alpha du PNG).
-2. Augmenter la **hauteur du canevas** d'exactement une hauteur de ligne, la valeur du tableau : `battle/types.png` passe de 513 à 540, `battle_attack_dummy.png` de 1007 à 1060, `types.png` et ses variantes de 266 à 280. On garde la largeur inchangée.
+2. Augmenter la **hauteur du canevas** d'exactement une hauteur de ligne, la valeur du tableau : `interface/battle/types.png` passe de 513 à 540, `battle_attack_dummy.png` de 1007 à 1060, `interface/types.png` et ses variantes de 266 à 280, `pokedex/types.png` et ses variantes de 304 à 320. On garde la largeur inchangée.
 3. Dessiner l'icône de son type dans la **nouvelle ligne du bas**. Son indice de ligne est l'identifiant du type, donc le type ajouté en dernier occupe la dernière ligne.
 4. Garder toutes les lignes à la même hauteur. Le moteur suppose des lignes égales, donc une ligne mal alignée ou de demi-hauteur décale tout ce qui suit.
 
-On réenregistre chaque fichier au même chemin dans le dossier `graphics/interface/` de son projet. Copier une ligne existante comme gabarit est la façon la plus sûre de garder les dimensions et la ligne de base de la nouvelle icône cohérentes avec les autres.
+On réenregistre chaque fichier à son chemin d'origine sous `graphics/interface/` ou `graphics/pokedex/`. Copier une ligne existante comme gabarit est la façon la plus sûre de garder les dimensions et la ligne de base de la nouvelle icône cohérentes avec les autres.
 
 ## Vérifier en combat
 
@@ -72,7 +76,7 @@ Les changements d'icônes de types ne se voient qu'en jeu, jamais dans Studio :
 
 1. On lance son jeu.
 2. On démarre un combat avec une attaque qui utilise le nouveau type.
-3. On ouvre le menu d'attaques et on vérifie l'icône de type sur l'attaque, puis on ouvre le résumé d'un Pokémon pour vérifier les icônes des menus.
+3. On ouvre le menu d'attaques et on vérifie l'icône de type sur l'attaque, puis on ouvre le résumé d'un Pokémon et le Pokédex pour vérifier les icônes des menus et du Pokédex.
 
 Si une icône est décalée ou tronquée, la hauteur de la spritesheet concernée est fausse d'une ligne : on revérifie que `hauteur de l'image ÷ nombre de types` donne un nombre entier et que chaque ligne a la même hauteur.
 
@@ -80,6 +84,6 @@ Si une icône est décalée ou tronquée, la hauteur de la spritesheet concerné
 
 - **Pokémon Studio ne crée que les données du type** (`Data/Studio/types/<db_symbol>.json`) ; il ne génère ni ne redimensionne jamais les icônes.
 - PSDK découpe chaque spritesheet de types en `hauteur de l'image ÷ nombre de types` lignes, donc ajouter un type sans agrandir les images décale toutes les icônes.
-- On met à jour les six spritesheets indexées par type sous `graphics/interface/` (`battle/types.png`, `battle_attack_dummy.png`, `types.png` et les variantes `types_en/fr/es.png`), en ajoutant une ligne par nouveau type.
+- On met à jour les dix spritesheets indexées par type réparties entre `graphics/interface/` (`battle/types.png`, `battle_attack_dummy.png`, `types.png` et ses variantes `types_en/fr/es.png`) et `graphics/pokedex/` (`types.png` et ses variantes `types_en/fr/es.png`), en ajoutant une ligne par nouveau type.
 - La nouvelle icône va dans la **dernière ligne** (indice de ligne = identifiant du type), et chaque ligne doit garder la même hauteur.
-- Les icônes de types ne s'affichent qu'en jeu : on vérifie dans un vrai combat et dans le résumé, pas dans Studio.
+- Les icônes de types ne s'affichent qu'en jeu : on vérifie dans un vrai combat, dans le résumé et dans le Pokédex, pas dans Studio.
