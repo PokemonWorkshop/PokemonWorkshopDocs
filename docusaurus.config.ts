@@ -2,6 +2,40 @@ import type * as Preset from "@docusaurus/preset-classic";
 import type { Config } from "@docusaurus/types";
 import { themes as prismThemes } from "prism-react-renderer";
 
+// Pages relocated by the Getting Started / Studio / Misc restructure.
+// Key = current route (per locale, FR prefixed with /fr); value = former route
+// to preserve. Consumed by plugin-client-redirects below.
+const RELOCATED_ROUTES: Record<string, string> = {
+  "/getting-started/customize-psdk/setup-development-environment":
+    "/getting-started/setup-development-environment",
+  "/getting-started/customize-psdk/monkey-patching-in-psdk":
+    "/getting-started/monkey-patching-in-psdk",
+  "/misc/discover-git": "/getting-started/discover-git",
+  "/misc/using-git-with-psdk": "/getting-started/using-git-with-psdk",
+  "/pokemon-studio/collaboration/work-together-on-a-psdk-project":
+    "/getting-started/work-together-on-a-psdk-project",
+  "/pokemon-studio/macos/update-pokemon-studio-macos":
+    "/pokemon-studio/update-pokemon-studio-macos",
+  "/pokemon-studio/macos/run-pokemon-studio-from-source-macos":
+    "/pokemon-studio/run-pokemon-studio-from-source-macos",
+  // French routes: keyed WITHOUT the /fr prefix. Each locale builds as a
+  // standalone site, so createRedirects receives locale-relative paths and the
+  // plugin prepends /fr to the generated redirect file. FR slugs differ from EN
+  // slugs, so these never collide with the English entries above.
+  "/getting-started/customize-psdk/preparer-son-environnement":
+    "/getting-started/preparer-son-environnement",
+  "/getting-started/customize-psdk/monkey-patch-dans-psdk":
+    "/getting-started/monkey-patch-dans-psdk",
+  "/misc/decouvrir-git": "/getting-started/decouvrir-git",
+  "/misc/utiliser-git-avec-psdk": "/getting-started/utiliser-git-avec-psdk",
+  "/pokemon-studio/collaboration/travailler-a-plusieurs-sur-un-projet-psdk":
+    "/getting-started/travailler-a-plusieurs-sur-un-projet-psdk",
+  "/pokemon-studio/macos/mettre-a-jour-pokemon-studio-macos":
+    "/pokemon-studio/mettre-a-jour-pokemon-studio-macos",
+  "/pokemon-studio/macos/executer-pokemon-studio-depuis-les-sources-macos":
+    "/pokemon-studio/executer-pokemon-studio-depuis-les-sources-macos",
+};
+
 const config: Config = {
   title: "Pokémon Workshop Docs",
   tagline: "Tutorials and guides for the PSDK ecosystem",
@@ -35,6 +69,16 @@ const config: Config = {
   plugins: [
     require.resolve("./plugins/locale-doc-map"),
     require.resolve("./plugins/raw-markdown"),
+    [
+      "@docusaurus/plugin-client-redirects",
+      {
+        createRedirects(existingPath: string) {
+          const normalized = existingPath.replace(/\/$/, "");
+          const from = RELOCATED_ROUTES[normalized];
+          return from ? [from] : undefined;
+        },
+      },
+    ],
   ],
 
   themes: [
