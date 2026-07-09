@@ -272,7 +272,7 @@ Si la console affiche "Pikachu", tout est en place.
 
 ## GitLens (optionnel)
 
-Quand on travaille à plusieurs (voir [Travailler à plusieurs sur un projet PSDK](/getting-started/travailler-a-plusieurs-sur-un-projet-psdk)), l'extension **GitLens** est un ajout utile à VSCode. Elle affiche, directement dans l'éditeur, qui a modifié chaque ligne en dernier, l'historique d'un fichier et les contributeurs du projet, ce qui aide à coordonner le travail et à résoudre les conflits.
+Quand on travaille à plusieurs (voir [Travailler à plusieurs sur un projet PSDK](/pokemon-studio/collaboration/travailler-a-plusieurs-sur-un-projet-psdk)), l'extension **GitLens** est un ajout utile à VSCode. Elle affiche, directement dans l'éditeur, qui a modifié chaque ligne en dernier, l'historique d'un fichier et les contributeurs du projet, ce qui aide à coordonner le travail et à résoudre les conflits.
 
 On l'installe depuis le panneau Extensions (Ctrl+Shift+X) en cherchant **GitLens**.
 

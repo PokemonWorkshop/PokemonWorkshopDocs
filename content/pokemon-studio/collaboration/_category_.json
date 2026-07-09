@@ -1,0 +1,8 @@
+{
+  "label": "Collaboration",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Work on the same PSDK project as a team: put a Studio project under Git and keep RMXP data mergeable."
+  }
+}

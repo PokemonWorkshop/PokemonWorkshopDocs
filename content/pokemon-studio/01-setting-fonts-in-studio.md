@@ -1,7 +1,7 @@
 ---
 title: "Configure fonts, sizes and per-scene text"
 slug: configure-fonts
-sidebar_position: 3
+sidebar_position: 1
 description: "Pokémon Studio lets you add custom fonts, define extra text sizes, and pick which font your messages and choices use. This guide explains where font settings live, how to set the default font through its ID, and how to assign specific fonts to scenes and choices."
 ---
 

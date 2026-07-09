@@ -1,7 +1,7 @@
 ---
 title: "Travailler à plusieurs sur un projet PSDK"
 slug: travailler-a-plusieurs-sur-un-projet-psdk
-sidebar_position: 3
+sidebar_position: 1
 description: "Un projet PSDK créé avec Pokémon Studio ne contient pas de dépôt Git par défaut. Le mettre sous Git permet à plusieurs makers de travailler sur le même jeu sans s'écraser les modifications. La difficulté propre à PSDK est que les données RMXP sont stockées dans des fichiers .rxdata binaires que Git ne sait pas fusionner. Ce guide explique comment initialiser le dépôt, ce que doit contenir le .gitignore, le workflow .yml qui rend les données RMXP fusionnables, et les règles qui évitent que les contributeurs se marchent dessus."
 ---
 

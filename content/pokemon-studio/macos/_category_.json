@@ -1,0 +1,8 @@
+{
+  "label": "macOS",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "macOS-specific guides for Pokémon Studio: fix the \"damaged\" error, update the app, and run it from source."
+  }
+}

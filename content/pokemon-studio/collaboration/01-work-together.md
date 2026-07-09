@@ -1,7 +1,7 @@
 ---
 title: "Work together on a PSDK project"
 slug: work-together-on-a-psdk-project
-sidebar_position: 3
+sidebar_position: 1
 description: "A PSDK project created with Pokémon Studio has no Git repository by default. Putting it under Git lets several makers work on the same game without overwriting each other. The difficulty specific to PSDK is that RMXP data is stored in binary .rxdata files that Git cannot merge. This guide explains how to initialize the repository, what the .gitignore must contain, the .yml workflow that makes RMXP data mergeable, and the rules that keep contributors from stepping on each other."
 ---
 

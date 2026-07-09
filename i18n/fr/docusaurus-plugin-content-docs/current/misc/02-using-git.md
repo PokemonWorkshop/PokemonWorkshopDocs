@@ -7,7 +7,7 @@ description: "Contribuer au moteur PSDK, c'est travailler avec Git sur le dépô
 
 Contribuer au moteur PSDK, c'est travailler avec Git sur le dépôt officiel GitLab : le forker, proposer ses modifications via une Merge Request, et synchroniser son fork avec le dépôt officiel. Ce guide couvre comment forker le dépôt PSDK sur GitLab, maintenir son fork à jour, et le workflow de branche pour une contribution.
 
-Ce guide concerne la contribution au **moteur lui-même**. Si on souhaite plutôt collaborer avec d'autres makers sur son propre jeu, voir [Travailler à plusieurs sur un projet PSDK](/getting-started/travailler-a-plusieurs-sur-un-projet-psdk). Il suppose aussi qu'on est à l'aise avec les bases de Git (dépôt, commit, branche, remote) et qu'on a une clé SSH configurée ; si ce n'est pas le cas, commencer par [Découvrir Git](/misc/decouvrir-git). Les actions courantes (cloner, brancher, committer, pousser) se font graphiquement dans VS Code, comme dans ce guide. Les étapes qui synchronisent le fork avec le dépôt officiel (fetch, rebase, reset) n'ont pas d'équivalent graphique fiable, donc elles sont montrées dans un terminal (cmd, ou le terminal intégré de VS Code).
+Ce guide concerne la contribution au **moteur lui-même**. Si on souhaite plutôt collaborer avec d'autres makers sur son propre jeu, voir [Travailler à plusieurs sur un projet PSDK](/pokemon-studio/collaboration/travailler-a-plusieurs-sur-un-projet-psdk). Il suppose aussi qu'on est à l'aise avec les bases de Git (dépôt, commit, branche, remote) et qu'on a une clé SSH configurée ; si ce n'est pas le cas, commencer par [Découvrir Git](/misc/decouvrir-git). Les actions courantes (cloner, brancher, committer, pousser) se font graphiquement dans VS Code, comme dans ce guide. Les étapes qui synchronisent le fork avec le dépôt officiel (fetch, rebase, reset) n'ont pas d'équivalent graphique fiable, donc elles sont montrées dans un terminal (cmd, ou le terminal intégré de VS Code).
 
 ## Forker le dépôt PSDK
 
@@ -98,7 +98,7 @@ git fetch upstream
 git rebase upstream/development
 ```
 
-S'il y a des conflits, Git s'arrête et demande de les résoudre fichier par fichier. On les corrige dans l'éditeur de fusion de VS Code (voir la section conflit de [Travailler à plusieurs sur un projet PSDK](/getting-started/travailler-a-plusieurs-sur-un-projet-psdk)). Après avoir cliqué sur **Complete Merge**, on revient au terminal pour terminer le rebase :
+S'il y a des conflits, Git s'arrête et demande de les résoudre fichier par fichier. On les corrige dans l'éditeur de fusion de VS Code (voir la section conflit de [Travailler à plusieurs sur un projet PSDK](/pokemon-studio/collaboration/travailler-a-plusieurs-sur-un-projet-psdk)). Après avoir cliqué sur **Complete Merge**, on revient au terminal pour terminer le rebase :
 
 ```bash
 git add fichier_resolu.rb
