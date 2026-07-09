@@ -1,7 +1,7 @@
 ---
 title: "Découvrir Git"
 slug: decouvrir-git
-sidebar_position: 2
+sidebar_position: 1
 description: "Git est l'outil de gestion de versions utilisé dans tout l'écosystème PSDK, aussi bien pour collaborer sur un jeu que pour contribuer au moteur. Ce guide couvre le vocabulaire nécessaire (dépôt, commit, branche, remote), les commandes essentielles, et comment configurer une clé SSH pour pouvoir push vers GitHub ou GitLab sans taper de mot de passe."
 ---
 
@@ -57,7 +57,7 @@ On peut faire tout ce qui précède sans ouvrir de terminal. Les commandes ci-de
 
 Git utilise SSH pour communiquer avec GitHub ou GitLab sans avoir à entrer un mot de passe à chaque push. On génère une clé SSH une fois et on l'ajoute à son compte.
 
-C'est optionnel pour GitHub : on peut à la place se connecter à son compte GitHub depuis VS Code (il le demande au premier push) et utiliser l'URL HTTPS du dépôt. La clé SSH est l'option la plus simple pour GitLab, et pour contribuer au moteur PSDK (voir [Contribuer à PSDK](/getting-started/utiliser-git-avec-psdk)).
+C'est optionnel pour GitHub : on peut à la place se connecter à son compte GitHub depuis VS Code (il le demande au premier push) et utiliser l'URL HTTPS du dépôt. La clé SSH est l'option la plus simple pour GitLab, et pour contribuer au moteur PSDK (voir [Contribuer à PSDK](/misc/utiliser-git-avec-psdk)).
 
 **Générer la clé SSH** :
 

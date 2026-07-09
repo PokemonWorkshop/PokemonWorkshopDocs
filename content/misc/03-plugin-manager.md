@@ -1,7 +1,7 @@
 ---
 title: "Create a plugin for the community"
 slug: create-a-psdk-plugin
-sidebar_position: 1
+sidebar_position: 3
 description: "The Plugin Manager packages script extensions into a single installable file that handles dependencies, version checks and compatibility between plugins. This guide explains how to build, verify and distribute one."
 ---
 

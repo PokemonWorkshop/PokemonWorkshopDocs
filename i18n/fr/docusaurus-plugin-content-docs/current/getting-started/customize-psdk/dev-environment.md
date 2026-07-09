@@ -110,7 +110,7 @@ Solargraph a besoin d'accéder au code source de PSDK pour proposer l'autocompl�
 
 Il y a deux façons d'accéder au code PSDK, et le choix détermine comment les mises à jour fonctionnent :
 
-- **Via le dépôt pokemonsdk** : le dépôt forké devient la source de vérité. Les mises à jour de PSDK ne sont **pas** automatiques — il faut synchroniser soi-même le dépôt avec l'officiel (voir [Contribuer à PSDK](/getting-started/utiliser-git-avec-psdk), section "Maintenir son fork à jour").
+- **Via le dépôt pokemonsdk** : le dépôt forké devient la source de vérité. Les mises à jour de PSDK ne sont **pas** automatiques — il faut synchroniser soi-même le dépôt avec l'officiel (voir [Contribuer à PSDK](/misc/utiliser-git-avec-psdk), section "Maintenir son fork à jour").
 - **Via le lien symbolique** : les fichiers pointent vers l'installation Pokémon Studio. Quand on met à jour PSDK depuis Pokémon Studio, ces fichiers sont mis à jour automatiquement.
 
 ### Générer le fichier solargraph.yml
@@ -126,7 +126,7 @@ Ensuite, suivre le cas qui correspond au projet pour remplir la section `include
 
 ### Si le dépôt pokemonsdk est dans le projet
 
-Si le dossier `pokemonsdk/` existe à la racine du projet (après avoir forké et cloné le dépôt, voir [Contribuer à PSDK](/getting-started/utiliser-git-avec-psdk)), le fichier `solargraph.yml` dans `scripts/` doit contenir :
+Si le dossier `pokemonsdk/` existe à la racine du projet (après avoir forké et cloné le dépôt, voir [Contribuer à PSDK](/misc/utiliser-git-avec-psdk)), le fichier `solargraph.yml` dans `scripts/` doit contenir :
 
 ```yaml
 ---

@@ -1,19 +1,19 @@
 ---
 title: "Contribute to PSDK"
 slug: using-git-with-psdk
-sidebar_position: 4
+sidebar_position: 2
 description: "Contributing to the PSDK engine means working with Git on the official GitLab repository: forking it, proposing your changes through a Merge Request, and keeping your fork synchronized with the official one. This guide covers forking the PSDK repository on GitLab, keeping your fork up to date, and the branch workflow for a contribution."
 ---
 
 Contributing to the PSDK engine means working with Git on the official GitLab repository: forking it, proposing your changes through a Merge Request, and keeping your fork synchronized with the official one. This guide covers forking the PSDK repository on GitLab, keeping your fork up to date, and the branch workflow for a contribution.
 
-This guide is about contributing to the **engine itself**. If you instead want to collaborate with other makers on your own game, see [Work together on a PSDK project](/getting-started/work-together-on-a-psdk-project). It also assumes you are comfortable with the Git basics (repository, commit, branch, remote) and have an SSH key configured; if not, start with [Discover Git](/getting-started/discover-git). The everyday actions (clone, branch, commit, push) are done graphically in VS Code, as in that guide. The steps that synchronize your fork with the official repository (fetch, rebase, reset) have no reliable graphical equivalent, so they are shown in a terminal (cmd, or VS Code's integrated terminal).
+This guide is about contributing to the **engine itself**. If you instead want to collaborate with other makers on your own game, see [Work together on a PSDK project](/getting-started/work-together-on-a-psdk-project). It also assumes you are comfortable with the Git basics (repository, commit, branch, remote) and have an SSH key configured; if not, start with [Discover Git](/misc/discover-git). The everyday actions (clone, branch, commit, push) are done graphically in VS Code, as in that guide. The steps that synchronize your fork with the official repository (fetch, rebase, reset) have no reliable graphical equivalent, so they are shown in a terminal (cmd, or VS Code's integrated terminal).
 
 ## Forking the PSDK repository
 
 A PSDK project created with Pokémon Studio does not contain a Git repository by default, the engine code is bundled internally by Pokémon Studio. The `pokemonsdk/` folder only appears when you fork and clone the official repository, and it then becomes the source of truth for the engine code (updates are no longer automatic).
 
-A fork is a personal copy of the official repository on GitLab. You work on your fork, then propose your changes to the official repository via a Merge Request. Pushing to GitLab requires an SSH key (see [Setting up SSH](/getting-started/discover-git#setting-up-ssh)).
+A fork is a personal copy of the official repository on GitLab. You work on your fork, then propose your changes to the official repository via a Merge Request. Pushing to GitLab requires an SSH key (see [Setting up SSH](/misc/discover-git#setting-up-ssh)).
 
 ### Creating the fork
 
@@ -25,7 +25,7 @@ A fork is a personal copy of the official repository on GitLab. You work on your
 
 In VS Code, open the **Command Palette** (`Ctrl+Shift+P`), run **`Git: Clone`**, paste your fork's URL (the SSH URL if you set up an SSH key, otherwise the HTTPS URL), and choose the **root of the PSDK project** as the destination. This creates the `pokemonsdk/` folder.
 
-- The SSH URL (starts with `git@gitlab.com:`) uses the SSH key you configured (see [Setting up SSH](/getting-started/discover-git#setting-up-ssh)). No password needed on every push.
+- The SSH URL (starts with `git@gitlab.com:`) uses the SSH key you configured (see [Setting up SSH](/misc/discover-git#setting-up-ssh)). No password needed on every push.
 - The `pokemonsdk/` folder appears at the project root. It contains the full PSDK source code and becomes the source of truth (see [Set up the development environment](/getting-started/customize-psdk/setup-development-environment) to configure Solargraph with this folder).
 - `origin` automatically points to your fork. When you push, commits go to your fork, not to the official repository.
 
