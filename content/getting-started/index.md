@@ -8,7 +8,7 @@ Your entry point to the Pokémon Workshop ecosystem. Depending on what you want 
 
 ## Create a game
 
-To build your own Pokémon fan game, you work with two editors: **Pokémon Studio** (the modern editor for your game's data) and **RPG Maker XP** (maps and events). No scripting is required to get started.
+To build your own Pokémon fan game, you work with a few editors: **Pokémon Studio** (the modern editor for your game's data), **RPG Maker XP** (events), and **Tiled** (maps). No scripting is required to get started.
 
 Before digging into the events of the demo project, play through it first, about 3 to 4 hours of gameplay. It is the fastest way to understand how a PSDK game fits together. Then explore the [Studio](/pokemon-studio) and [RMXP](/rpg-maker-xp) sections.
 
