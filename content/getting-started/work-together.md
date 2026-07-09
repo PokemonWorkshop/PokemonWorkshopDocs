@@ -7,7 +7,7 @@ description: "A PSDK project created with Pokémon Studio has no Git repository 
 
 A PSDK project created with Pokémon Studio has no Git repository by default. Putting it under Git lets several makers work on the same game without overwriting each other. The difficulty specific to PSDK is that RMXP data is stored in binary `.rxdata` files that Git cannot merge. This guide explains how to initialize the repository, what the `.gitignore` must contain, the `.yml` workflow that makes RMXP data mergeable, and the rules that keep contributors from stepping on each other.
 
-Before starting, make sure you have done the [development environment setup](/getting-started/setup-development-environment), which installs **Git** and **VS Code**. Most steps below are done graphically in VS Code and on the GitHub or GitLab website. For the Git vocabulary used here (**commit**, **branch**, **remote**) and the optional SSH key, see [Discover Git](/getting-started/discover-git). We also recommend installing the **GitLens** extension (see [GitLens](/getting-started/setup-development-environment#gitlens-optional)).
+Before starting, make sure you have done the [development environment setup](/getting-started/customize-psdk/setup-development-environment), which installs **Git** and **VS Code**. Most steps below are done graphically in VS Code and on the GitHub or GitLab website. For the Git vocabulary used here (**commit**, **branch**, **remote**) and the optional SSH key, see [Discover Git](/getting-started/discover-git). We also recommend installing the **GitLens** extension (see [GitLens](/getting-started/customize-psdk/setup-development-environment#gitlens-optional)).
 
 ## Put your project under Git
 

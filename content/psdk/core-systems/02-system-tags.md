@@ -282,7 +282,7 @@ PFM::SKILL_PROCESS[:my_move] = proc do |_pkmn, _skill, test = false|
 end
 ```
 
-When you instead need to change what an existing engine method does around a tag, patch it with a `prepend` module calling `super` rather than editing the engine, as described in [monkey-patching](/getting-started/monkey-patching-in-psdk).
+When you instead need to change what an existing engine method does around a tag, patch it with a `prepend` module calling `super` rather than editing the engine, as described in [monkey-patching](/getting-started/customize-psdk/monkey-patching-in-psdk).
 
 To go one step further and register a brand-new tag of your own, with its own wild encounters, battle background and particles, see [Create a custom System Tag](/psdk/core-systems/create-a-custom-system-tag).
 

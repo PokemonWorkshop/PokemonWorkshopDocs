@@ -26,7 +26,7 @@ A fork is a personal copy of the official repository on GitLab. You work on your
 In VS Code, open the **Command Palette** (`Ctrl+Shift+P`), run **`Git: Clone`**, paste your fork's URL (the SSH URL if you set up an SSH key, otherwise the HTTPS URL), and choose the **root of the PSDK project** as the destination. This creates the `pokemonsdk/` folder.
 
 - The SSH URL (starts with `git@gitlab.com:`) uses the SSH key you configured (see [Setting up SSH](/getting-started/discover-git#setting-up-ssh)). No password needed on every push.
-- The `pokemonsdk/` folder appears at the project root. It contains the full PSDK source code and becomes the source of truth (see [Set up the development environment](/getting-started/setup-development-environment) to configure Solargraph with this folder).
+- The `pokemonsdk/` folder appears at the project root. It contains the full PSDK source code and becomes the source of truth (see [Set up the development environment](/getting-started/customize-psdk/setup-development-environment) to configure Solargraph with this folder).
 - `origin` automatically points to your fork. When you push, commits go to your fork, not to the official repository.
 
 If you prefer the terminal, the equivalent command from the project root is `git clone git@gitlab.com:your-username/pokemonsdk.git`.

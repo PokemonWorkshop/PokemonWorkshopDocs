@@ -13,7 +13,7 @@ The built-in System Tags cover the classic terrains: grass, cave, sea, ice, sand
 
 A **custom System Tag** is how you add that terrain without forking the engine. You declare one new constant, then plug it into the handful of engine methods that already branch on a tag, each time adding your case and falling back to the original behaviour with `super`. The result behaves like a first-class tag: you paint it in Tiled and the engine reacts to it on every step.
 
-This guide assumes you already know how a tag is read and stored. If not, start with [Understanding System Tags](/psdk/core-systems/system-tags). Every method override below follows the [monkey-patching](/getting-started/monkey-patching-in-psdk) convention, a `prepend` module calling `super`, never an `alias`.
+This guide assumes you already know how a tag is read and stored. If not, start with [Understanding System Tags](/psdk/core-systems/system-tags). Every method override below follows the [monkey-patching](/getting-started/customize-psdk/monkey-patching-in-psdk) convention, a `prepend` module calling `super`, never an `alias`.
 
 ## What a custom tag plugs into
 
@@ -27,7 +27,7 @@ A tag is not a single switch: each behaviour lives in a different part of the en
 | 4 | `Game_Map::TERRAIN_TAGS_TABLE` | The location used by `LocationBased` moves. |
 | 5 | `Game_Character::PARTICLES_METHODS` (optional) | The particle spawned when a character walks on the tile. |
 
-The five snippets can live in separate script files or be merged into one, as long as the constant from step 1 is defined before the later steps reference it. Where these scripts go in a PSDK project is covered in [monkey-patching](/getting-started/monkey-patching-in-psdk).
+The five snippets can live in separate script files or be merged into one, as long as the constant from step 1 is defined before the later steps reference it. Where these scripts go in a PSDK project is covered in [monkey-patching](/getting-started/customize-psdk/monkey-patching-in-psdk).
 
 Throughout this guide the example tag is called **CustomPuddle**, with the symbol `:custom_puddle`.
 

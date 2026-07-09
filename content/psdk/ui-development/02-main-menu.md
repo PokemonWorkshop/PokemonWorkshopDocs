@@ -40,7 +40,7 @@ If you want to replace the PSDK Main Menu with your own fully home-made Menu, as
 
 ## Where to write your customizations
 
-Never edit the engine files: the next PSDK update would overwrite your changes. Instead, write your customizations in your own script inside your project's `scripts/` folder, by reopening the `GamePlay::Menu` class. If this technique is new to you, read [What is monkey-patching and how to apply it in PSDK?](/getting-started/monkey-patching-in-psdk) first.
+Never edit the engine files: the next PSDK update would overwrite your changes. Instead, write your customizations in your own script inside your project's `scripts/` folder, by reopening the `GamePlay::Menu` class. If this technique is new to you, read [What is monkey-patching and how to apply it in PSDK?](/getting-started/customize-psdk/monkey-patching-in-psdk) first.
 
 ```ruby
 module GamePlay
@@ -85,7 +85,7 @@ A new button displays the **Quit** icon and text by default! Read on to understa
 Each button finds its icon and its text through its index in the registration list:
 
 - The icon comes from the `menu_icons` file in your project's interface graphics. It is a sprite sheet of 2 columns (normal and selected state) by 8 rows, and the button uses the row matching its index. Your first custom button has index 7, so draw its icon on the 8th row (by default that row holds the girl bag variant: replace it or use a button overwrite).
-- The text comes from the `text` method of `UI::PSDKMenuButtonBase` (`scripts/4 Systems/100 Menu/300 MenuButtonBase.rb`), which is a `case` on the index. Any index it does not know falls back to the Quit text, hence the warning above. Patch this method with `prepend`, the technique detailed in [the monkey-patching guide](/getting-started/monkey-patching-in-psdk), to add your own entry:
+- The text comes from the `text` method of `UI::PSDKMenuButtonBase` (`scripts/4 Systems/100 Menu/300 MenuButtonBase.rb`), which is a `case` on the index. Any index it does not know falls back to the Quit text, hence the warning above. Patch this method with `prepend`, the technique detailed in [the monkey-patching guide](/getting-started/customize-psdk/monkey-patching-in-psdk), to add your own entry:
 
 ```ruby
 module UI

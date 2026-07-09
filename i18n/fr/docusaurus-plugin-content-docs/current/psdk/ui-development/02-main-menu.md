@@ -40,7 +40,7 @@ Si vous voulez remplacer le menu principal de PSDK par votre propre Menu entièr
 
 ## Où écrire vos personnalisations
 
-Ne modifiez jamais les fichiers du moteur : la prochaine mise à jour de PSDK écraserait vos changements. Écrivez plutôt vos personnalisations dans votre propre script, dans le dossier `scripts/` de votre projet, en rouvrant la classe `GamePlay::Menu`. Si cette technique est nouvelle pour vous, lisez d'abord [Qu'est-ce que le monkey-patch et comment l'appliquer dans PSDK ?](/getting-started/monkey-patch-dans-psdk).
+Ne modifiez jamais les fichiers du moteur : la prochaine mise à jour de PSDK écraserait vos changements. Écrivez plutôt vos personnalisations dans votre propre script, dans le dossier `scripts/` de votre projet, en rouvrant la classe `GamePlay::Menu`. Si cette technique est nouvelle pour vous, lisez d'abord [Qu'est-ce que le monkey-patch et comment l'appliquer dans PSDK ?](/getting-started/customize-psdk/monkey-patch-dans-psdk).
 
 ```ruby
 module GamePlay
@@ -85,7 +85,7 @@ Un nouveau bouton affiche l'icône et le texte de **Quitter** par défaut ! Lise
 Chaque bouton trouve son icône et son texte grâce à son index dans la liste d'enregistrement :
 
 - L'icône vient du fichier `menu_icons` dans les graphismes d'interface de votre projet. C'est une feuille de sprites de 2 colonnes (état normal et sélectionné) par 8 lignes, et le bouton utilise la ligne correspondant à son index. Votre premier bouton personnalisé a l'index 7 : dessinez donc son icône sur la 8e ligne (par défaut, cette ligne contient la variante féminine du sac ; remplacez-la ou utilisez une surcharge de bouton).
-- Le texte vient de la méthode `text` de `UI::PSDKMenuButtonBase` (`scripts/4 Systems/100 Menu/300 MenuButtonBase.rb`), qui est un `case` sur l'index. Tout index inconnu retombe sur le texte de Quitter, d'où l'avertissement ci-dessus. Patchez cette méthode avec `prepend`, la technique détaillée dans [le guide du monkey-patch](/getting-started/monkey-patch-dans-psdk), pour ajouter votre entrée :
+- Le texte vient de la méthode `text` de `UI::PSDKMenuButtonBase` (`scripts/4 Systems/100 Menu/300 MenuButtonBase.rb`), qui est un `case` sur l'index. Tout index inconnu retombe sur le texte de Quitter, d'où l'avertissement ci-dessus. Patchez cette méthode avec `prepend`, la technique détaillée dans [le guide du monkey-patch](/getting-started/customize-psdk/monkey-patch-dans-psdk), pour ajouter votre entrée :
 
 ```ruby
 module UI

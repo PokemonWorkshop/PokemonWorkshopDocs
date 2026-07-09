@@ -27,7 +27,7 @@ Build your game in RMXP as usual, writing every dialogue in plain text in your s
 
 PSDK ships a tool, **eventtext2csv**, that reads every map, collects the text of each message and each choice, writes it into CSV files, and rewrites each event so it points at the matching row. You get one CSV file per map, named after the map: the engine uses the id `1000 + map_id`, so map 5 produces `Data/Text/Dialogs/1005.csv`.
 
-Run it from the project folder, with the project **uncompiled** so the source is available (see [Set up the development environment](/getting-started/setup-development-environment)):
+Run it from the project folder, with the project **uncompiled** so the source is available (see [Set up the development environment](/getting-started/customize-psdk/setup-development-environment)):
 
 ```bash
 psdk --util=eventtext2csv

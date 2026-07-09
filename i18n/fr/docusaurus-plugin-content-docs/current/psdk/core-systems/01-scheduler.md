@@ -11,7 +11,7 @@ Le Scheduler exécute son code à des moments précis sans modifier le moteur : 
 
 Une scène PSDK fait déjà beaucoup pendant sa vie : elle s'initialise, se met à jour à chaque frame, gère les warps, se libère. La carte fait aussi son propre travail : elle déplace le joueur, le fait sauter, compte ses pas. Quand on veut ajouter un comportement à l'un de ces moments, le mauvais réflexe est de modifier le code source du moteur. La prochaine mise à jour l'écraserait, et on se battrait contre le moteur à chaque version.
 
-Le **Scheduler** est l'alternative propre. Au lieu de modifier le moteur, on **enregistre une tâche** : un morceau de code plus le moment où il doit s'exécuter. Le moteur l'exécute au bon moment. C'est le compagnon runtime du [monkey-patch](/getting-started/monkey-patch-dans-psdk) : le monkey-patch change ce que fait une méthode, le Scheduler ajoute du code à des moments bien connus sans toucher à aucune méthode.
+Le **Scheduler** est l'alternative propre. Au lieu de modifier le moteur, on **enregistre une tâche** : un morceau de code plus le moment où il doit s'exécuter. Le moteur l'exécute au bon moment. C'est le compagnon runtime du [monkey-patch](/getting-started/customize-psdk/monkey-patch-dans-psdk) : le monkey-patch change ce que fait une méthode, le Scheduler ajoute du code à des moments bien connus sans toucher à aucune méthode.
 
 ## Deux façons de planifier
 

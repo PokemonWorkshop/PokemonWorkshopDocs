@@ -7,9 +7,9 @@
     "message": "Démarrage",
     "description": "The label for category 'Getting Started' in sidebar 'mainSidebar'"
   },
-  "sidebar.mainSidebar.category.Getting Started.link.generated-index.description": {
-    "message": "Installer l'environnement de développement PSDK, apprendre Git pour PSDK et découvrir le monkey-patching pour personnaliser le moteur sans risque.",
-    "description": "The generated-index page description for category Getting Started in sidebar mainSidebar"
+  "sidebar.mainSidebar.category.Customize PSDK": {
+    "message": "Personnaliser PSDK",
+    "description": "The label for category 'Customize PSDK' in sidebar 'mainSidebar'"
   },
   "sidebar.mainSidebar.category.PSDK": {
     "message": "PSDK",
