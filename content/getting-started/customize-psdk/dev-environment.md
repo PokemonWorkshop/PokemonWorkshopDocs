@@ -110,7 +110,7 @@ Solargraph needs access to the PSDK source code to provide autocompletion on eng
 
 There are two ways to access the PSDK code, and the choice determines how updates work:
 
-- **Via the pokemonsdk repository**: the forked repository becomes the source of truth. PSDK updates are **not** automatic — you must synchronize the repository with the official one yourself (see [Contribute to PSDK](/getting-started/using-git-with-psdk), section "Keeping your fork up to date").
+- **Via the pokemonsdk repository**: the forked repository becomes the source of truth. PSDK updates are **not** automatic — you must synchronize the repository with the official one yourself (see [Contribute to PSDK](/misc/using-git-with-psdk), section "Keeping your fork up to date").
 - **Via the symbolic link**: the files point to the Pokémon Studio installation. When you update PSDK from Pokémon Studio, these files are updated automatically.
 
 ### Generating the solargraph.yml file
@@ -126,7 +126,7 @@ Then follow the case that matches your project to fill in the `include` section.
 
 ### If the pokemonsdk repository is in the project
 
-If the `pokemonsdk/` folder exists at the project root (after forking and cloning the repository, see [Contribute to PSDK](/getting-started/using-git-with-psdk)), the `solargraph.yml` file in `scripts/` should contain:
+If the `pokemonsdk/` folder exists at the project root (after forking and cloning the repository, see [Contribute to PSDK](/misc/using-git-with-psdk)), the `solargraph.yml` file in `scripts/` should contain:
 
 ```yaml
 ---
@@ -272,7 +272,7 @@ If the console displays "Pikachu", everything is in place.
 
 ## GitLens (optional)
 
-When working with others (see [Work together on a PSDK project](/getting-started/work-together-on-a-psdk-project)), the **GitLens** extension is a useful addition to VSCode. It shows, directly in the editor, who last changed each line, the history of a file, and the contributors of the project, which helps coordinate work and resolve conflicts.
+When working with others (see [Work together on a PSDK project](/pokemon-studio/collaboration/work-together-on-a-psdk-project)), the **GitLens** extension is a useful addition to VSCode. It shows, directly in the editor, who last changed each line, the history of a file, and the contributors of the project, which helps coordinate work and resolve conflicts.
 
 Install it from the Extensions panel (Ctrl+Shift+X) by searching for **GitLens**.
 

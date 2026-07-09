@@ -11,7 +11,7 @@ The Scheduler runs your code at precise moments without editing the engine: scen
 
 A PSDK scene already does a lot during its life: it initializes, updates every frame, handles warps, disposes itself. The map does its own work too: it moves the player, makes them jump, counts steps. When you want to add behaviour at one of those moments, the wrong reflex is to edit the engine's source. The next update would overwrite it, and you would fight the engine on every release.
 
-The **Scheduler** is the clean alternative. Instead of editing the engine, you **register a task**: a piece of code plus the moment it should run. The engine runs it for you at the right time. It is the runtime companion to [monkey-patching](/getting-started/monkey-patching-in-psdk): monkey-patching changes what a method does, the Scheduler adds code at well-known moments without touching any method at all.
+The **Scheduler** is the clean alternative. Instead of editing the engine, you **register a task**: a piece of code plus the moment it should run. The engine runs it for you at the right time. It is the runtime companion to [monkey-patching](/getting-started/customize-psdk/monkey-patching-in-psdk): monkey-patching changes what a method does, the Scheduler adds code at well-known moments without touching any method at all.
 
 ## Two ways to schedule
 

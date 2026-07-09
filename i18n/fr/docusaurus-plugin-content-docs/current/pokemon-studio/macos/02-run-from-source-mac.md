@@ -7,7 +7,7 @@ description: "Exécuter Pokémon Studio depuis son code source fournit un build 
 
 Exécuter Pokémon Studio depuis son code source fournit un build de développement qui se met à jour à chaque fois que l'on récupère les dernières modifications avec Git. Ce guide détaille l'installation complète sur macOS : Homebrew, Node.js via nvm, le clonage du dépôt avec ses sous-modules, l'installation des binaires PSDK et le lancement de l'application.
 
-La version packagée pour macOS ne se met pas à jour automatiquement : compiler depuis les sources est donc la façon la plus pratique de rester sur la dernière version. Si l'on préfère continuer à utiliser une version packagée, voir [Mettre à jour Pokémon Studio et corriger l'erreur « endommagé » sur macOS](/pokemon-studio/mettre-a-jour-pokemon-studio-macos).
+La version packagée pour macOS ne se met pas à jour automatiquement : compiler depuis les sources est donc la façon la plus pratique de rester sur la dernière version. Si l'on préfère continuer à utiliser une version packagée, voir [Mettre à jour Pokémon Studio et corriger l'erreur « endommagé » sur macOS](/pokemon-studio/macos/mettre-a-jour-pokemon-studio-macos).
 
 ## Installer Homebrew et Git
 

@@ -1,7 +1,7 @@
 ---
 title: "Discover Git"
 slug: discover-git
-sidebar_position: 2
+sidebar_position: 1
 description: "Git is the version control tool used across the PSDK ecosystem, both to collaborate on a game and to contribute to the engine. This guide covers the vocabulary you need (repository, commit, branch, remote), the essential commands, and how to set up an SSH key so you can push to GitHub or GitLab without typing a password."
 ---
 
@@ -57,7 +57,7 @@ You can do everything above without opening a terminal. The commands below are t
 
 Git uses SSH to communicate with GitHub or GitLab without typing a password on every push. You generate an SSH key once and add it to your account.
 
-This is optional for GitHub: you can instead sign in to your GitHub account from VS Code (it prompts on the first push) and use the HTTPS repository URL. An SSH key is the simplest option for GitLab, and for contributing to the PSDK engine (see [Contribute to PSDK](/getting-started/using-git-with-psdk)).
+This is optional for GitHub: you can instead sign in to your GitHub account from VS Code (it prompts on the first push) and use the HTTPS repository URL. An SSH key is the simplest option for GitLab, and for contributing to the PSDK engine (see [Contribute to PSDK](/misc/using-git-with-psdk)).
 
 **Generate the SSH key**:
 

@@ -13,7 +13,7 @@ Les System Tags intégrés couvrent les terrains classiques : herbe, grotte, mer
 
 Un **System Tag personnalisé**, c'est la façon d'ajouter ce terrain sans modifier le moteur. On déclare une nouvelle constante, puis on la branche dans la poignée de méthodes du moteur qui s'aiguillent déjà sur un tag, en ajoutant à chaque fois son cas et en revenant au comportement d'origine avec `super`. Le résultat se comporte comme un tag de première classe : on le peint dans Tiled et le moteur y réagit à chaque pas.
 
-Ce guide suppose que l'on sait déjà comment un tag est lu et stocké. Sinon, commencer par [Comprendre les System Tags](/psdk/core-systems/les-system-tags). Chaque redéfinition de méthode ci-dessous suit la convention de [monkey-patch](/getting-started/monkey-patch-dans-psdk), un module `prepend` appelant `super`, jamais un `alias`.
+Ce guide suppose que l'on sait déjà comment un tag est lu et stocké. Sinon, commencer par [Comprendre les System Tags](/psdk/core-systems/les-system-tags). Chaque redéfinition de méthode ci-dessous suit la convention de [monkey-patch](/getting-started/customize-psdk/monkey-patch-dans-psdk), un module `prepend` appelant `super`, jamais un `alias`.
 
 ## Sur quoi se branche un tag personnalisé
 
@@ -27,7 +27,7 @@ Un tag n'est pas un simple interrupteur : chaque comportement vit dans une parti
 | 4 | `Game_Map::TERRAIN_TAGS_TABLE` | Le lieu utilisé par les capacités `LocationBased`. |
 | 5 | `Game_Character::PARTICLES_METHODS` (facultatif) | La particule générée quand un personnage marche sur la tuile. |
 
-Les cinq extraits peuvent vivre dans des fichiers de script séparés ou être fusionnés en un seul, du moment que la constante de l'étape 1 est définie avant que les étapes suivantes la référencent. L'emplacement de ces scripts dans un projet PSDK est traité dans [monkey-patch](/getting-started/monkey-patch-dans-psdk).
+Les cinq extraits peuvent vivre dans des fichiers de script séparés ou être fusionnés en un seul, du moment que la constante de l'étape 1 est définie avant que les étapes suivantes la référencent. L'emplacement de ces scripts dans un projet PSDK est traité dans [monkey-patch](/getting-started/customize-psdk/monkey-patch-dans-psdk).
 
 Dans tout ce guide, le tag d'exemple s'appelle **CustomPuddle**, avec le symbole `:custom_puddle`.
 

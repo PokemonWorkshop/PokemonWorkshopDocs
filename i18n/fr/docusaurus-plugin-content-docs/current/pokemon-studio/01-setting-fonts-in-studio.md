@@ -1,7 +1,7 @@
 ---
 title: "Configurer les polices, tailles et textes par scène"
 slug: configurer-les-polices
-sidebar_position: 3
+sidebar_position: 1
 description: "Pokémon Studio permet d'ajouter des polices personnalisées, de définir des tailles de texte supplémentaires et de choisir la police utilisée par les messages et les choix. Ce guide explique où se règlent les polices, comment définir la police par défaut via son ID, et comment attribuer des polices précises à des scènes et aux choix."
 ---
 

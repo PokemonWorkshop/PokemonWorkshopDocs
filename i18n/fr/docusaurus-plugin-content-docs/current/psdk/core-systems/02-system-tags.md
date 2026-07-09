@@ -282,7 +282,7 @@ PFM::SKILL_PROCESS[:my_move] = proc do |_pkmn, _skill, test = false|
 end
 ```
 
-Quand il s'agit plutôt de changer ce que fait une méthode existante du moteur autour d'un tag, on la patche avec un module `prepend` appelant `super` plutôt que de modifier le moteur, comme décrit dans [monkey-patch](/getting-started/monkey-patch-dans-psdk).
+Quand il s'agit plutôt de changer ce que fait une méthode existante du moteur autour d'un tag, on la patche avec un module `prepend` appelant `super` plutôt que de modifier le moteur, comme décrit dans [monkey-patch](/getting-started/customize-psdk/monkey-patch-dans-psdk).
 
 Pour aller plus loin et enregistrer un tag entièrement nouveau, avec ses propres rencontres sauvages, son arrière-plan de combat et ses particules, voir [Créer un System Tag personnalisé](/psdk/core-systems/creer-un-system-tag-personnalise).
 

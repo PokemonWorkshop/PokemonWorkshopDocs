@@ -1,13 +1,13 @@
 ---
 title: "Travailler à plusieurs sur un projet PSDK"
 slug: travailler-a-plusieurs-sur-un-projet-psdk
-sidebar_position: 3
+sidebar_position: 1
 description: "Un projet PSDK créé avec Pokémon Studio ne contient pas de dépôt Git par défaut. Le mettre sous Git permet à plusieurs makers de travailler sur le même jeu sans s'écraser les modifications. La difficulté propre à PSDK est que les données RMXP sont stockées dans des fichiers .rxdata binaires que Git ne sait pas fusionner. Ce guide explique comment initialiser le dépôt, ce que doit contenir le .gitignore, le workflow .yml qui rend les données RMXP fusionnables, et les règles qui évitent que les contributeurs se marchent dessus."
 ---
 
 Un projet PSDK créé avec Pokémon Studio ne contient pas de dépôt Git par défaut. Le mettre sous Git permet à plusieurs makers de travailler sur le même jeu sans s'écraser les modifications. La difficulté propre à PSDK est que les données RMXP sont stockées dans des fichiers `.rxdata` binaires que Git ne sait pas fusionner. Ce guide explique comment initialiser le dépôt, ce que doit contenir le `.gitignore`, le workflow `.yml` qui rend les données RMXP fusionnables, et les règles qui évitent que les contributeurs se marchent dessus.
 
-Avant de commencer, s'assurer d'avoir fait la [préparation de l'environnement de développement](/getting-started/preparer-son-environnement), qui installe **Git** et **VS Code**. La plupart des étapes ci-dessous se font graphiquement dans VS Code et sur le site GitHub ou GitLab. Pour le vocabulaire Git utilisé ici (**commit**, **branche**, **remote**) et la clé SSH optionnelle, voir [Découvrir Git](/getting-started/decouvrir-git). On recommande aussi d'installer l'extension **GitLens** (voir [GitLens](/getting-started/preparer-son-environnement#gitlens-optionnel)).
+Avant de commencer, s'assurer d'avoir fait la [préparation de l'environnement de développement](/getting-started/customize-psdk/preparer-son-environnement), qui installe **Git** et **VS Code**. La plupart des étapes ci-dessous se font graphiquement dans VS Code et sur le site GitHub ou GitLab. Pour le vocabulaire Git utilisé ici (**commit**, **branche**, **remote**) et la clé SSH optionnelle, voir [Découvrir Git](/misc/decouvrir-git). On recommande aussi d'installer l'extension **GitLens** (voir [GitLens](/getting-started/customize-psdk/preparer-son-environnement#gitlens-optionnel)).
 
 ## Mettre son projet sous Git
 
@@ -33,7 +33,7 @@ Sur **GitLab** :
 3. **Décocher** "Initialize repository with a README", pour que le projet reste vide.
 4. Cliquer sur **Create project**.
 
-On garde la page ouverte : elle affiche l'**URL** du dépôt dont on aura besoin plus tard. Si on s'est connecté dans VS Code, on copie l'URL **HTTPS** ; si on a configuré une clé SSH (voir [Découvrir Git](/getting-started/decouvrir-git#configurer-ssh)), on copie l'URL **SSH** (elle commence par `git@`).
+On garde la page ouverte : elle affiche l'**URL** du dépôt dont on aura besoin plus tard. Si on s'est connecté dans VS Code, on copie l'URL **HTTPS** ; si on a configuré une clé SSH (voir [Découvrir Git](/misc/decouvrir-git#configurer-ssh)), on copie l'URL **SSH** (elle commence par `git@`).
 
 ### Ajouter un .gitignore
 

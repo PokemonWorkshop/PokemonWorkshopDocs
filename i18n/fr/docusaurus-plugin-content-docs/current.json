@@ -7,9 +7,9 @@
     "message": "Démarrage",
     "description": "The label for category 'Getting Started' in sidebar 'mainSidebar'"
   },
-  "sidebar.mainSidebar.category.Getting Started.link.generated-index.description": {
-    "message": "Installer l'environnement de développement PSDK, apprendre Git pour PSDK et découvrir le monkey-patching pour personnaliser le moteur sans risque.",
-    "description": "The generated-index page description for category Getting Started in sidebar mainSidebar"
+  "sidebar.mainSidebar.category.Customize PSDK": {
+    "message": "Personnaliser PSDK",
+    "description": "The label for category 'Customize PSDK' in sidebar 'mainSidebar'"
   },
   "sidebar.mainSidebar.category.PSDK": {
     "message": "PSDK",
@@ -22,6 +22,22 @@
   "sidebar.mainSidebar.category.Studio": {
     "message": "Studio",
     "description": "The label for category 'Studio' in sidebar 'mainSidebar'"
+  },
+  "sidebar.mainSidebar.category.Collaboration": {
+    "message": "Collaboration",
+    "description": "The label for category 'Collaboration' in sidebar 'mainSidebar'"
+  },
+  "sidebar.mainSidebar.category.Collaboration.link.generated-index.description": {
+    "message": "Travailler à plusieurs sur un même projet PSDK : mettre un projet Studio sous Git et garder les données RMXP fusionnables.",
+    "description": "The generated-index page description for category Collaboration in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.macOS": {
+    "message": "macOS",
+    "description": "The label for category 'macOS' in sidebar 'mainSidebar'"
+  },
+  "sidebar.mainSidebar.category.macOS.link.generated-index.description": {
+    "message": "Guides spécifiques à macOS pour Pokémon Studio : corriger l'erreur « endommagé », mettre à jour l'application et l'exécuter depuis les sources.",
+    "description": "The generated-index page description for category macOS in sidebar mainSidebar"
   },
   "sidebar.mainSidebar.category.UI Development": {
     "message": "Développement UI",
@@ -104,7 +120,7 @@
     "description": "The generated-index page description for category Ruby in sidebar mainSidebar"
   },
   "sidebar.mainSidebar.category.Studio.link.generated-index.description": {
-    "message": "Documentation de Pokémon Studio, l'éditeur moderne du Pokémon Workshop. Les guides de référence et tutoriels arriveront ici au fil de la rédaction.",
+    "message": "Documentation de Pokémon Studio, l'éditeur moderne du Pokémon Workshop : configuration des polices, ajout de types, collaboration en équipe et guides spécifiques à macOS.",
     "description": "The generated-index page description for category Studio in sidebar mainSidebar"
   },
   "sidebar.mainSidebar.category.Tiled.link.generated-index.description": {
@@ -116,7 +132,7 @@
     "description": "The label for category 'Misc' in sidebar 'mainSidebar'"
   },
   "sidebar.mainSidebar.category.Misc.link.generated-index.description": {
-    "message": "Guides divers de l'écosystème Pokémon Workshop qui ne rentrent pas dans les sections principales. Le contenu arrivera ici au fil de la rédaction.",
+    "message": "Contenu transversal de l'écosystème Pokémon Workshop : bases de Git, contribution au moteur PSDK et création de plugins pour la communauté.",
     "description": "The generated-index page description for category Misc in sidebar mainSidebar"
   }
 }

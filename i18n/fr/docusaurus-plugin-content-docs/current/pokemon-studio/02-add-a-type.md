@@ -1,7 +1,7 @@
 ---
 title: "Ajouter un nouveau type"
 slug: ajouter-un-nouveau-type
-sidebar_position: 4
+sidebar_position: 2
 description: "Ajouter un nouveau type dans Pokémon Studio crée ses données mais pas ses graphismes, si bien que les icônes du type s'affichent mal en combat et dans les menus. Ce guide crée le type dans Studio, explique pourquoi PSDK découpe mal les spritesheets de types quand on ajoute un type, et liste chaque image à mettre à jour."
 ---
 
