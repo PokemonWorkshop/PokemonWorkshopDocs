@@ -81,7 +81,7 @@ Le `FTerrainChangeHandler` gère l'application et les messages des terrains. Le 
 
 ```ruby
 module Battle
-  module Logic
+  class Logic
     class FTerrainChangeHandler
       # Register activation message (terrain symbol => message line)
       FTERRAIN_SYM_TO_MSG[:void_terrain] = 400

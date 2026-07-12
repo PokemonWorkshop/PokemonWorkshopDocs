@@ -92,10 +92,10 @@ The `WEATHER_SYM_TO_MSG` hash contains the mapping between weather symbols and m
 
 ```ruby
 module Battle
-  module Logic
+  class Logic
     class WeatherChangeHandler
-      WEATHER_SYM_TO_MSG[:void_terrain] = 400
-      WEATHER_SYM_TO_MSG[:none][:void_terrain] = 401
+      WEATHER_SYM_TO_MSG[:void_weather] = 400
+      WEATHER_SYM_TO_MSG[:none][:void_weather] = 401
     end
   end
 end
@@ -103,8 +103,8 @@ end
 
 The hash structure is as follows:
 
-- `WEATHER_SYM_TO_MSG[:void_terrain] = 400`: the activation message (line 400 from text file 60).
-- `WEATHER_SYM_TO_MSG[:none][:void_terrain] = 401`: the end message (line 401), displayed when the terrain changes to `:none`.
+- `WEATHER_SYM_TO_MSG[:void_weather] = 400`: the activation message (line 400 from text file 18).
+- `WEATHER_SYM_TO_MSG[:none][:void_weather] = 401`: the end message (line 401), displayed when the weather changes to `:none`.
 
 ## Triggering the weather via a move
 

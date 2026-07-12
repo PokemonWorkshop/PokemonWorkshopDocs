@@ -100,13 +100,13 @@ Le hash `WEATHER_SYM_TO_MSG` contient la correspondance entre les symboles de m�
 
 ```ruby
 module Battle
-  module Logic
+  class Logic
     class WeatherChangeHandler
-      # Register activation message (terrain symbol => message line)
-      WEATHER_SYM_TO_MSG[:void_terrain] = 400
+      # Register activation message (weather symbol => message line)
+      WEATHER_SYM_TO_MSG[:void_weather] = 400
 
-      # Register end message (none => { terrain symbol => message line })
-      WEATHER_SYM_TO_MSG[:none][:void_terrain] = 401
+      # Register end message (none => { weather symbol => message line })
+      WEATHER_SYM_TO_MSG[:none][:void_weather] = 401
     end
   end
 end
@@ -114,8 +114,8 @@ end
 
 La structure du hash est la suivante :
 
-- `WEATHER_SYM_TO_MSG[:void_terrain] = 400` : le message d'activation (ligne 400 du fichier texte 60).
-- `WEATHER_SYM_TO_MSG[:none][:void_terrain] = 401` : le message de fin (ligne 401), affiché quand le terrain passe à `:none`.
+- `WEATHER_SYM_TO_MSG[:void_weather] = 400` : le message d'activation (ligne 400 du fichier texte 18).
+- `WEATHER_SYM_TO_MSG[:none][:void_weather] = 401` : le message de fin (ligne 401), affiché quand la météo passe à `:none`.
 
 Les numéros `400` et `401` correspondent aux lignes des messages ajoutés dans Pokémon Studio à la première étape.
 
