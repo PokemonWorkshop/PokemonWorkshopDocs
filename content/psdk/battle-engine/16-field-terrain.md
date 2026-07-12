@@ -75,7 +75,7 @@ The `FTerrainChangeHandler` manages terrain application and messages. The `FTERR
 
 ```ruby
 module Battle
-  module Logic
+  class Logic
     class FTerrainChangeHandler
       FTERRAIN_SYM_TO_MSG[:void_terrain] = 400
       FTERRAIN_SYM_TO_MSG[:none][:void_terrain] = 401
