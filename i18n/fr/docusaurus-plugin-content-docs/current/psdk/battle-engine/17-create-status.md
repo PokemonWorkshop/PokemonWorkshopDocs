@@ -20,6 +20,7 @@ Un statut est plus qu'une étiquette : le moteur de combat doit savoir comment l
 - **Ajouter des méthodes de lecture et d'application** à `PFM::Pokemon` pour que le reste du code puisse lire et poser le statut.
 - **L'enregistrer dans les handlers** : le `StatusChangeHandler` (application, messages, prévention) et, en option, le `CatchHandler` (bonus de capture).
 - **Créer la classe d'effet** qui porte le comportement du statut en combat.
+- **Le garder sûr en combat** avec un petit patch de compatibilité, puis, en option, lui donner une **animation de combat**.
 - **Ajouter l'icône** pour que le statut apparaisse sur l'interface de combat.
 
 Tout au long de ce guide, l'exemple fil rouge est un statut personnalisé affiché **Groggy** dans Studio, que le moteur résout vers le symbole `:custom_groggy` (voir ci-dessous). On remplace ce nom et ce symbole par les siens partout où ils apparaissent.
@@ -99,7 +100,7 @@ end
 - `status_paralyze(forcing)` applique le statut. Par défaut, il ne prend que sur un Pokémon sans statut et non K.O. ; `forcing = true` contourne ce garde-fou.
 - `can_be_paralyzed?` décide si le statut peut être appliqué, en tenant compte d'une éventuelle immunité (ici, les types Électrik).
 
-On recrée les trois mêmes méthodes pour son statut dans un script personnalisé. Si on n'a jamais ajouté de script personnalisé, chaque Démo Technique générée par Pokémon Studio fournit un guide dans son dossier `scripts`.
+On recrée les trois mêmes méthodes pour son statut dans un script personnalisé. Si on n'a jamais ajouté de script personnalisé, voir [Préparer son environnement de développement](/getting-started/customize-psdk/preparer-son-environnement#comment-psdk-charge-les-scripts), qui explique où placer le fichier et comment PSDK décide de le charger.
 
 ```ruby
 module PFM
@@ -151,18 +152,20 @@ module Battle
 end
 ```
 
-### Déclarer le message et l'animation d'application (optionnel)
+### Déclarer le message d'application (optionnel)
 
-`STATUS_APPLY_MESSAGE` et `STATUS_APPLY_ANIMATION` portent, respectivement, la ligne de texte et l'animation affichées quand le statut prend :
+`STATUS_APPLY_MESSAGE` porte la ligne de texte affichée quand le statut prend :
 
 ```ruby
       # Text line for the application message
       STATUS_APPLY_MESSAGE[:custom_groggy] = 320
-      # Animation ID played on application
-      STATUS_APPLY_ANIMATION[:custom_groggy] = 480
 ```
 
-La ligne de message renvoie au fichier de texte **100019** dans Pokémon Studio. On y ajoute son texte d'application avec Studio (jamais en éditant le CSV à la main) et on utilise son numéro de ligne. On ne définit `STATUS_APPLY_ANIMATION` que si on a réellement une animation prête, sinon on omet cette ligne.
+La ligne de message renvoie au fichier de texte **100019** dans Pokémon Studio. On y ajoute son texte d'application avec Studio (jamais en éditant le CSV à la main) et on utilise son numéro de ligne.
+
+:::note[Les numéros de ligne viennent de Studio]
+Chaque numéro de ligne pointant vers le fichier de texte 100019 dans ce guide, le `320` ci-dessus et les `285`, `282` et `330` utilisés dans les sections prévention, effet et guérison ci-dessous, est un exemple. Quand on ajoute un message dans Studio, il attribue le prochain numéro de ligne libre ; on lit ce numéro et on l'utilise dans son script au lieu de recopier ceux montrés ici.
+:::
 
 ### Empêcher le statut sous conditions personnalisées
 
@@ -236,7 +239,7 @@ module Battle
 end
 ```
 
-La valeur est un multiplicateur appliqué au taux de capture. Pour référence, les statuts officiels utilisent `1.5` (poison, brûlure, paralysie) jusqu'à `2.5` (sommeil, gel). Toute valeur positive fonctionne : un multiplicateur inférieur à `1` ferait *baisser* le taux de capture.
+La valeur est un multiplicateur appliqué au taux de capture. Pour référence, les statuts officiels utilisent `1.5` (poison, brûlure, paralysie) jusqu'à `2.5` (sommeil, gel). Toute valeur positive fonctionne : un multiplicateur inférieur à `1` ferait _baisser_ le taux de capture.
 
 ## Créer la classe d'effet du statut
 
@@ -298,6 +301,105 @@ end
 
 À partir de là, le statut est pleinement reconnu par le moteur. Pour lui donner de vrais effets (dégâts par tour, changements de stats, etc.), on surcharge les hooks d'`EffectBase`. Les statuts existants dans `5 Battle/06 Effects/03 Status Effects/` (rechercher `< Status`, ou `< EffectBase` pour l'ensemble complet des effets surchargeables) sont la référence de ce qui est possible.
 
+## Rendre les statuts personnalisés sûrs en combat
+
+Même un statut sans animation ne doit pas faire planter le combat. Quand un statut est infligé, le moteur tente inconditionnellement de jouer une animation de combat et une teinte d'écran pour lui. Chaque statut officiel enregistre les deux ; un statut personnalisé n'a ni l'une ni l'autre, et le moteur n'offre pour l'instant aucun repli : l'appliquer lève donc une erreur au moment où il prend (`undefined method '>' for nil` pour l'animation manquante, puis `undefined method '[]' for nil` pour la teinte manquante).
+
+En attendant qu'une future version de PSDK les rende optionnelles nativement, on ajoute ce patch de compatibilité une fois. Il rend l'animation et la teinte réellement optionnelles : un statut qui les enregistre les garde, un statut qui ne les enregistre pas les ignore simplement.
+
+```ruby
+# Compatibility patch: a custom status with no registered animation or screen
+# tint should simply skip them in battle, instead of crashing.
+module UI
+  class StatusAnimation
+    class << self
+      # Tell whether a status has a registered battle animation
+      # @param db_symbol [Symbol]
+      # @return [Boolean]
+      def registered?(db_symbol)
+        return @registered_status.key?(db_symbol)
+      end
+    end
+  end
+end
+
+module BattleUI
+  class PokemonSprite
+    # Make the battle animation and the screen tint optional for custom statuses
+    module OptionalCustomStatusVisuals
+      # Play the status animation only when one is registered for the status
+      # @param status [Symbol, Integer]
+      def status_animation(status)
+        symbol = status.is_a?(Integer) ? Configs.states.symbol(status) : status
+        return super if UI::StatusAnimation.registered?(symbol)
+
+        set_tone_status(symbol)
+      end
+
+      # Apply the screen tint only when the status defines one
+      # @param status [Symbol, Integer]
+      # @param switch [Boolean]
+      def set_tone_status(status, switch = false)
+        symbol = status.is_a?(Integer) ? Configs.states.symbol(status) : status
+        return if symbol.is_a?(Symbol) && !STATUS_TONE.key?(symbol)
+
+        super
+      end
+    end
+    prepend OptionalCustomStatusVisuals
+  end
+end
+```
+
+`registered?` indique si un statut possède une animation ; `status_animation` ne joue alors l'animation que si elle existe, et `set_tone_status` n'applique la teinte que si le statut en définit une. Les deux gardes délèguent à `super` pour les statuts officiels, dont le comportement reste inchangé. Avec ce patch en place, le statut fonctionne en combat, avec ou sans les visuels ci-dessous. Si on ne veut ni animation de combat ni teinte, on peut s'arrêter ici et passer à l'icône.
+
+## Ajouter une animation de combat (optionnel)
+
+L'animation jouée quand le statut prend est une planche de sprites gérée par `UI::StatusAnimation`. Pour en donner une à son statut, on en crée une sous-classe, on décrit la planche, et on enregistre la sous-classe :
+
+```ruby
+module UI
+  class StatusAnimation
+    # Battle animation for the groggy status
+    class Groggy < StatusAnimation
+      # Number of [columns, rows] in the sprite sheet
+      # @return [Array<Integer, Integer>]
+      def status_dimension
+        return [12, 10]
+      end
+
+      # Sheet path, resolved under Graphics/animations/
+      # @return [String]
+      def status_filename
+        return 'status/custom_groggy'
+      end
+
+      # Duration of the animation in seconds (optional, default 1)
+      # @return [Float]
+      def status_duration
+        return 1.2
+      end
+    end
+    register(:custom_groggy, Groggy)
+  end
+end
+```
+
+- `status_dimension` renvoie la grille `[colonnes, lignes]` de la planche, et `status_filename` son chemin. Les deux sont requises dès qu'on enregistre une sous-classe : le patch de compatibilité ci-dessus ne saute l'animation que tant que le statut n'est _pas_ enregistré.
+- `status_filename` est résolu sous `Graphics/animations/`, donc `'status/custom_groggy'` pointe vers `graphics/animations/status/custom_groggy.png`. Les planches officielles (`status/poison`, `status/burn`, etc.) sont la référence pour la taille et la disposition des frames.
+- `status_duration`, ainsi que les surcharges `x_offset` / `y_offset`, sont optionnelles.
+
+Deux touches optionnelles complètent l'effet, toutes deux indexées par le symbole du statut :
+
+```ruby
+# Screen tint pulsed while the animation plays: [red, green, blue, max_alpha, min_alpha]
+BattleUI::PokemonSprite::STATUS_TONE[:custom_groggy] = [0.4, 0, 0.49, 0.6, 0]
+# Sound effect played on application
+BattleUI::PokemonSprite::STATUS_SE[:custom_groggy] = 'moves/poison'
+```
+
+Grâce au patch de compatibilité, ce sont de vrais bonus : sans lui, une teinte manquante ferait planter le combat, et un son manquant ne joue rien.
+
 ## Ajouter l'icône du statut
 
 ### Éditer le fichier graphique
@@ -336,17 +438,20 @@ Avec un ID maximal de 20, `STATE_COUNT` vaut 21. On met cette valeur à jour cha
 
 ## Récapitulatif des fichiers
 
-| Fichier                                      | Action                                                                |
-| -------------------------------------------- | --------------------------------------------------------------------- |
-| Studio -> Attaques                           | Définir le statut personnalisé sur chaque attaque qui doit l'infliger |
-| `Data/configs/states.json`                   | Déclarer l'ID du statut                                               |
-| Studio -> Textes de combat (fichier 100019)  | Ajouter les messages d'application, de prévention et de guérison (optionnel) |
-| `mon-projet/scripts/001 PokemonStatus.rb`    | Ajouter `groggy?`, `status_groggy`, `can_be_groggy?` à `PFM::Pokemon` |
-| `mon-projet/scripts/002 StatusChange.rb`     | Enregistrer dans `STATUS_APPLY_METHODS`, les messages, la prévention   |
-| `mon-projet/scripts/003 CatchHandler.rb`     | Ajouter à `STATUS_MODIFIER` (bonus de capture optionnel)              |
-| `mon-projet/scripts/004 StatusEffect.rb`     | Ajouter la méthode de lecture parente et créer la classe d'effet      |
-| `graphics/interface/statuts[lang].png`       | Ajouter l'icône du statut                                            |
-| `mon-projet/scripts/005 StatusSprite.rb`     | Mettre à jour `STATE_COUNT`                                          |
+| Fichier                                       | Action                                                                        |
+| --------------------------------------------- | ----------------------------------------------------------------------------- |
+| Studio -> Attaques                            | Définir le statut personnalisé sur chaque attaque qui doit l'infliger         |
+| `Data/configs/states.json`                    | Déclarer l'ID du statut                                                       |
+| Studio -> Textes de combat (fichier 100019)   | Ajouter les messages d'application, de prévention et de guérison (optionnel)  |
+| `mon-projet/scripts/001 PokemonStatus.rb`     | Ajouter `groggy?`, `status_groggy`, `can_be_groggy?` à `PFM::Pokemon`         |
+| `mon-projet/scripts/002 StatusChange.rb`      | Enregistrer dans `STATUS_APPLY_METHODS`, les messages, la prévention          |
+| `mon-projet/scripts/003 CatchHandler.rb`      | Ajouter à `STATUS_MODIFIER` (bonus de capture optionnel)                      |
+| `mon-projet/scripts/004 StatusEffect.rb`      | Ajouter la méthode de lecture parente et créer la classe d'effet              |
+| `mon-projet/scripts/005 CustomStatusPatch.rb` | Coller le patch de compatibilité (rend l'animation et la teinte optionnelles) |
+| `graphics/animations/status/<nom>.png`        | Ajouter la planche d'animation de combat (optionnel)                          |
+| `mon-projet/scripts/006 StatusAnimation.rb`   | Enregistrer une sous-classe `UI::StatusAnimation` (animation optionnelle)     |
+| `graphics/interface/statuts[lang].png`        | Ajouter l'icône du statut                                                     |
+| `mon-projet/scripts/007 StatusSprite.rb`      | Mettre à jour `STATE_COUNT`                                                   |
 
 ## Conclusion
 
@@ -355,5 +460,6 @@ Avec un ID maximal de 20, `STATE_COUNT` vaut 21. On met cette valeur à jour cha
 - On reproduit les **méthodes de lecture et d'application** officielles sur `PFM::Pokemon`.
 - On l'enregistre dans le **StatusChangeHandler** (méthode d'application, messages, prévention) et, en option, dans le **CatchHandler** pour un bonus de capture.
 - On crée la **classe d'effet** avec `register`, puis on code son comportement en surchargeant les hooks d'`EffectBase`.
+- On ajoute le **patch de compatibilité** pour que le statut ne plante jamais en combat, puis, en option, on enregistre une **animation de combat** (une sous-classe `UI::StatusAnimation`) avec une teinte et un son.
 - On ajoute l'**icône** aux planches de statut et on incrémente `STATE_COUNT`.
 - Les statuts existants dans `5 Battle/06 Effects/03 Status Effects/` sont la référence pour coder des effets plus riches.
