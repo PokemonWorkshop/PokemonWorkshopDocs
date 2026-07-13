@@ -114,9 +114,9 @@ If you constantly restart your work, your project may never actually move forwar
 
 ### Example 3
 
-> **❌ Avoid**
->
-> "Now that I'm better at mapping, I'm going to remake every route."
+:::danger[Avoid]
+"Now that I'm better at mapping, I'm going to remake every route."
+:::
 
 A few months later:
 
@@ -128,9 +128,9 @@ Then:
 
 The project stops moving forward.
 
-> **✅ Instead**
->
-> Continue developing your game and only revisit older content when there's a genuine reason to do so.
+:::tip[Instead]
+Continue developing your game and only revisit older content when there's a genuine reason to do so.
+:::
 
 ## Don't Add a Feature Just Because It Exists Somewhere Else
 

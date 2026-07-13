@@ -17,7 +17,7 @@ Ce guide n'a pas pour objectif de vous apprendre à devenir chef de projet. Vous
 
 Tout au long de ce document, nous partagerons des conseils issus de situations que nous rencontrons régulièrement au sein de la communauté. Lorsque cela sera utile, nous illustrerons ces conseils avec des exemples concrets, des erreurs fréquentes et des pistes pour les éviter. L'objectif n'est pas de dire qu'il n'existe qu'une seule bonne façon de faire, mais de vous aider à prendre des décisions éclairées en comprenant les conséquences de certains choix.
 
-Il est également important d'être honnête : créer un fangame demande du temps. Beaucoup plus que ce que l'on imagine au départ. Même un projet de petite taille représente souvent plusieurs centaines d'heures de travail. C'est une réalité qui peut sembler décourageante, mais qui devient beaucoup plus facile à accepter lorsque l'on avance étape par étape, avec des objectifs réalistes.
+Il est également important d'être honnête : **créer un fangame demande du temps**. Beaucoup plus que ce que l'on imagine au départ. Même un projet de petite taille représente souvent plusieurs centaines d'heures de travail. C'est une réalité qui peut sembler décourageante, mais qui devient beaucoup plus facile à accepter lorsque l'on avance étape par étape, avec des objectifs réalistes.
 
 Enfin, gardez une chose en tête : il n'est pas nécessaire de tout appliquer à la lettre. Chaque projet est différent, chaque équipe fonctionne à sa manière et chacun développe à son rythme. Si ce guide peut vous éviter quelques erreurs classiques, vous faire gagner du temps et augmenter vos chances de mener votre projet jusqu'au bout, alors il aura atteint son objectif.
 

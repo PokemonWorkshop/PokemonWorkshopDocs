@@ -24,15 +24,15 @@ Your project may move forward more slowly than you hoped, but it will also progr
 
 ### Example 1
 
-> **❌ Avoid**
->
-> "I'm going to finish my entire first town this weekend."
+:::danger[Avoid]
+"I'm going to finish my entire first town this weekend."
+:::
 
 If that goal is too ambitious, you'll probably end Sunday feeling like you accomplished nothing.
 
-> **✅ Instead**
->
-> "This weekend, I'll finish the Pokémon Center and the main events."
+:::tip[Instead]
+"This weekend, I'll finish the Pokémon Center and the main events."
+:::
 
 This goal is more specific, more realistic, and much easier to achieve.
 
@@ -102,13 +102,13 @@ It encourages you to keep reworking things that are already good enough.
 
 ### Example 3
 
-> **❌ Avoid**
->
-> Redrawing the protagonist's sprite for the fifth time before you've even released a playable demo.
+:::danger[Avoid]
+Redrawing the protagonist's sprite for the fifth time before you've even released a playable demo.
+:::
 
-> **✅ Instead**
->
-> Use a version you're satisfied with, continue developing the game, and improve the graphics later when the project is more mature.
+:::tip[Instead]
+Use a version you're satisfied with, continue developing the game, and improve the graphics later when the project is more mature.
+:::
 
 Players will almost always prefer a complete adventure with a few imperfections over a beautiful introduction to a game that never gets finished.
 
@@ -117,37 +117,27 @@ Temporarily accepting an imperfect asset so you can keep moving forward is somet
 ## Finishing Is a Skill
 
 Starting a task is exciting.
-
 Finishing it requires discipline.
 
 Whenever possible, try to complete what you've started before opening a new project or feature.
 
 Every completed feature strengthens your game.
-
 Every unfinished feature increases its complexity.
 
 That doesn't mean you should never revisit previous work.
-
 It simply means that finishing a first version is usually far more valuable than starting a third new idea.
 
 ## Think in Versions, Not in Finished Games
 
 A fangame isn't built all at once.
-
 It evolves over time.
 
 A first demo.
-
 Then a second.
-
 Then a third.
 
 Each release is an opportunity to fix bugs, improve existing content, and add new features.
-
-This approach has one major advantage:
-
-You always have a playable game.
-
+This approach has one major advantage: You always have a playable game.
 And a playable game is much easier to improve than one that's still entirely under construction.
 
 ## Common Mistakes We Often See

@@ -38,22 +38,21 @@ If you're no longer sure where your project is going, your future contributors w
 
 ### Example 1
 
-> **❌ Avoid**
->
-> Posting an announcement like:
->
-> *"I'm looking for a team to create a Pokémon fangame. I have lots of ideas."*
+:::danger[Avoid]
+Posting an announcement like: *"I'm looking for a team to create a Pokémon fangame. I have lots of ideas."*
+:::
 
 People who are interested will have a hard time understanding what they're joining.
 
-> **✅ Instead**
->
-> Present a project that already has:
->
-> - a clear direction
-> - a few screenshots
-> - a first demo or prototype
-> - a list of specific needs
+:::tip[Instead]
+Present a project that already has:
+
+- a clear direction
+- a few screenshots
+- a first demo or prototype
+- a list of specific needs
+
+:::
 
 Contributors will immediately understand what they're signing up for.
 
@@ -109,78 +108,64 @@ A few well-chosen resources and a small first task are often enough to help some
 
 ### Example 2
 
-> **❌ Avoid**
->
-> Giving a brand-new contributor a major task before introducing them to the project.
+:::danger[Avoid]
+Giving a brand-new contributor a major task before introducing them to the project.
+:::
 
-> **✅ Instead**
->
-> Start with a small contribution.
->
-> This allows the new contributor to gradually discover the project while giving both of you time to learn how to work together.
+:::tip[Instead]
+Start with a small contribution.
+This allows the new contributor to gradually discover the project while giving both of you time to learn how to work together.
+:::
 
 ## Build Trust... Gradually
 
 Volunteer projects are built on trust.
-
 But trust isn't automatic.
 
 Give people time to find their footing.
-
 Pay attention to how they communicate, how they organize their work, and how they respond to feedback.
 
 Over time, you'll naturally feel more comfortable giving them greater responsibilities.
-
 This gradual approach benefits everyone.
-
 It avoids putting unnecessary pressure on new contributors while helping keep the project stable.
 
 ## Feedback Is Part of Development
 
 Nobody produces perfect work on the first attempt.
-
 Giving feedback isn't about criticizing a person.
-
 It's about improving the project together.
 
 Whenever possible, explain your feedback.
 
-Instead of saying:
+:::danger[Avoid]
+Saying: "This map doesn't work."
+:::
 
-> "This map doesn't work."
-
-Try saying:
-
-> "Players may have trouble understanding where they're supposed to go. If we widened this path, the map would be much easier to read."
+:::tip[Instead]
+Say: "Players may have trouble understanding where they're supposed to go. If we widened this path, the map would be much easier to read."
+:::
 
 Constructive feedback is much easier to understand and much easier to accept.
-
 Using **"we"** instead of **"you"** also matters: improving the project is a shared responsibility.
-
 Likewise, when someone gives you feedback on your own work, try to see it as an opportunity to improve your project.
 
 ## Recognize Every Contribution
 
 In an amateur project, everyone is contributing their free time.
-
 A simple "thank you," a quick review, or highlighting someone's latest work can have a huge impact on motivation.
 
 Small gestures help maintain a positive atmosphere within the team.
-
 They remind everyone that every contribution matters.
 
 ## Remember That Volunteers Have a Life Outside the Project
 
 Your teammates have school, work, family, and other hobbies.
-
 It's perfectly normal for their availability to change over time.
 
 Avoid putting unnecessary pressure on people.
-
 Instead of expecting work to be delivered by a specific date, check in regularly to see how everyone is doing.
 
 Most volunteers stay engaged because they enjoy contributing.
-
 Excessive pressure, on the other hand, often leads people to step away from the project.
 
 ## Common Mistakes We Often See
@@ -196,5 +181,4 @@ Here are some common challenges we regularly encounter in community projects.
 - Forgetting to thank people or recognize their contributions.
 
 A team doesn't move a project forward on its own.
-
 It's trust, a shared vision, and good communication that allow everyone to do their best work together.

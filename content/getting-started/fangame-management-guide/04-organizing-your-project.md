@@ -42,18 +42,19 @@ A few lines are often enough.
 
 ### Example 1
 
-> **❌ Avoid**
->
-> "I'll remember how this quest is supposed to work."
+:::danger[Avoid]
+"I'll remember how this quest is supposed to work."
+:::
 
-> **✅ Instead**
->
-> Write a short summary that explains:
->
-> - the context
-> - the characters involved
-> - the objectives
-> - the rewards
+:::tip[Instead]
+Write a short summary that explains:
+
+- the context
+- the characters involved
+- the objectives
+- the rewards
+
+:::
 
 A few months from now, you'll be glad you did.
 
@@ -132,13 +133,13 @@ Finishing a task gives you visibility, reduces your project's complexity, and ma
 
 ### Example 4
 
-> **❌ Avoid**
->
-> Having ten maps that are all 80% complete.
+:::danger[Avoid]
+Having ten maps that are all 80% complete.
+:::
 
-> **✅ Instead**
->
-> Finish one map before moving on to the next, unless a technical dependency genuinely requires you to do otherwise.
+:::tip[Instead]
+Finish one map before moving on to the next, unless a technical dependency genuinely requires you to do otherwise.
+:::
 
 ## Document for Your Future Self
 
@@ -152,13 +153,13 @@ A short note explaining **why** something exists is often much more valuable tha
 
 ### Example
 
-Instead of writing:
+:::danger[Avoid]
+Writing: "Variable 248"
+:::
 
-> "Variable 248"
-
-Prefer:
-
-> "Variable 248: the player has received permission to enter the nature reserve."
+:::tip[Instead]
+Write: "Variable 248: the player has received permission to enter the nature reserve."
+:::
 
 Just a few extra words are enough to make your project much easier to understand.
 

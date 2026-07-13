@@ -30,15 +30,15 @@ Lorsque vous définissez ce que votre jeu fera… et surtout ce qu'il ne fera pa
 
 ### Exemple 1
 
-> **❌ À éviter**
->
-> "Je veux faire le fangame Pokémon ultime."
+:::danger[À éviter]
+"Je veux faire le fangame Pokémon ultime."
+:::
 
 Cette idée paraît séduisante, mais elle ne donne aucune direction concrète. Elle conduit souvent à ajouter des fonctionnalités au fil des idées, sans jamais savoir où s'arrêter. Le fameux "Scope Creep".
 
-> **✅ Préférez**
->
-> "Je veux raconter une aventure centrée sur l'exploration d'une région inspirée des Alpes, avec peu de Fakemon mais beaucoup d'événements optionnels."
+:::tip[Préférez]
+"Je veux raconter une aventure centrée sur l'exploration d'une région inspirée des Alpes, avec peu de Fakemon mais beaucoup d'événements optionnels."
+:::
 
 Cette vision est déjà beaucoup plus claire. Elle vous aidera à faire des choix cohérents lorsque de nouvelles idées apparaîtront.
 
@@ -55,21 +55,21 @@ Si votre projet grandit avec le temps, vous pourrez toujours lui ajouter du cont
 
 ### Exemple 2
 
-> **❌ À éviter**
->
-> Commencer à créer les huit villes de votre région avant d'avoir terminé la première.
+:::danger[À éviter]
+Commencer à créer les huit villes de votre région avant d'avoir terminé la première.
+:::
 
-> **✅ Préférez**
->
-> Concevoir une première zone complète comprenant :
->
-> - une ville
-> - une route
-> - un donjon
-> - quelques combats
-> - un objectif clair pour le joueur.
->
-> Cette petite portion du jeu vous permettra déjà de tester votre gameplay, votre rythme et votre façon de travailler.
+:::tip[Préférez]
+Concevoir une première zone complète comprenant :
+
+- une ville
+- une route
+- un donjon
+- quelques combats
+- un objectif clair pour le joueur.
+
+Cette petite portion du jeu vous permettra déjà de tester votre gameplay, votre rythme et votre façon de travailler.
+:::
 
 En développement de jeux vidéo, on parle souvent de **Vertical Slice** : une petite portion du jeu qui représente fidèlement l'expérience finale. Elle permet de valider vos idées avant de produire le reste du contenu.
 Certains créateurs parlent également de **MVP** (_Minimum Viable Product_). Dans le cadre d'un fangame, il s'agit simplement de la plus petite version de votre jeu qui soit déjà agréable à jouer.
@@ -78,10 +78,10 @@ Certains créateurs parlent également de **MVP** (_Minimum Viable Product_). Da
 
 Créer un fangame, c'est avoir constamment de nouvelles idées.
 
-Un nouveau Pokémon.
-Une nouvelle mécanique.
-Une nouvelle région.
-Un mini-jeu.
+Un nouveau Pokémon.  
+Une nouvelle mécanique.  
+Une nouvelle région.  
+Un mini-jeu.  
 Une fonctionnalité originale.
 
 Ces idées sont précieuses. Elles nourrissent votre créativité.

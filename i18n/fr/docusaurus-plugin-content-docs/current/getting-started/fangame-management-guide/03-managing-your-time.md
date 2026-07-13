@@ -23,15 +23,15 @@ Votre projet avancera peut-être moins vite que vous ne l'espériez, mais il ava
 
 ### Exemple 1
 
-> **❌ À éviter**
->
-> "Je vais terminer toute la première ville ce week-end."
+:::danger[À éviter]
+"Je vais terminer toute la première ville ce week-end."
+:::
 
 Si cet objectif est trop ambitieux, vous risquez surtout de finir le dimanche avec la sensation de n'avoir rien accompli.
 
-> **✅ Préférez**
->
-> "Ce week-end, je termine le Centre Pokémon et les événements principaux."
+:::tip[Préférez]
+"Ce week-end, je termine le Centre Pokémon et les événements principaux."
+:::
 
 L'objectif est plus précis, plus réaliste et beaucoup plus facile à atteindre.
 
@@ -104,13 +104,13 @@ Il pousse à recommencer sans cesse ce qui fonctionne déjà correctement.
 
 ### Exemple 3
 
-> **❌ À éviter**
->
-> Refaire le sprite du héros pour la cinquième fois alors qu'aucune démo n'est encore jouable.
+:::danger[À éviter]
+Refaire le sprite du héros pour la cinquième fois alors qu'aucune démo n'est encore jouable.
+:::
 
-> **✅ Préférez**
->
-> Utiliser une version satisfaisante, poursuivre le développement, puis revenir améliorer les graphismes lorsque le jeu sera plus avancé.
+:::tip[Préférez]
+Utiliser une version satisfaisante, poursuivre le développement, puis revenir améliorer les graphismes lorsque le jeu sera plus avancé.
+:::
 
 Le joueur préférera presque toujours découvrir une aventure complète avec quelques imperfections plutôt qu'un projet interrompu après une introduction magnifique.
 

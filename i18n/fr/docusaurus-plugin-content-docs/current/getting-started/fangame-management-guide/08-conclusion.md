@@ -58,4 +58,6 @@ Nous espérons que ce guide vous aidera à éviter quelques erreurs classiques, 
 
 Toute l'équipe de Pokémon Workshop vous souhaite un excellent développement.
 
-> **Créer un fangame n'est pas une course de vitesse. C'est une aventure qui récompense celles et ceux qui savent garder le cap.**
+:::note
+Créer un fangame n'est pas une course de vitesse. C'est une aventure qui récompense celles et ceux qui savent garder le cap.
+:::

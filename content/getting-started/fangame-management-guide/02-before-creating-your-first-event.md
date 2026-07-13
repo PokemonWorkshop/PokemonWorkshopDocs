@@ -31,15 +31,15 @@ When you define what your game **will** do (and, more importantly, what it **won
 
 ### Example 1
 
-> **❌ Avoid**
->
-> "I want to make the ultimate Pokémon fangame."
+:::danger[Avoid]
+"I want to make the ultimate Pokémon fangame."
+:::
 
 It sounds exciting, but it doesn't provide any real direction. It often leads to adding new features every time inspiration strikes, without ever knowing where to stop. This is what's commonly known as **Scope Creep**.
 
-> **✅ Instead**
->
-> "I want to tell an adventure focused on exploring a region inspired by the Alps, with only a few Fakemon but plenty of optional events."
+:::tip[Instead]
+"I want to tell an adventure focused on exploring a region inspired by the Alps, with only a few Fakemon but plenty of optional events."
+:::
 
 This vision is already much clearer. It will help you make consistent decisions whenever new ideas come along.
 
@@ -57,21 +57,21 @@ If your project grows over time, you can always add more content later. On the o
 
 ### Example 2
 
-> **❌ Avoid**
->
-> Building all eight cities in your region before you've finished the first one.
+:::danger[Avoid]
+Building all eight cities in your region before you've finished the first one.
+:::
 
-> **✅ Instead**
->
-> Design a complete first area that includes:
->
-> - one town
-> - one route
-> - one dungeon
-> - a few Trainer battles
-> - a clear objective for the player
->
-> Even this small portion of the game will allow you to test your gameplay, pacing, and development workflow.
+:::tip[Instead]
+Design a complete first area that includes:
+
+- one town
+- one route
+- one dungeon
+- a few Trainer battles
+- a clear objective for the player
+
+Even this small portion of the game will allow you to test your gameplay, pacing, and development workflow.
+:::
 
 In game development, this is often called a **Vertical Slice**: a small section of the game that accurately represents the final experience. It allows you to validate your ideas before producing the rest of the content.
 
@@ -81,10 +81,10 @@ You may also come across the term **Minimum Viable Product (MVP)**. For a fangam
 
 Creating a fangame means constantly coming up with new ideas.
 
-A new Pokémon.
-A new mechanic.
-A new region.
-A mini-game.
+A new Pokémon.  
+A new mechanic.  
+A new region.  
+A mini-game.  
 A unique feature.
 
 These ideas are valuable. They're what fuel your creativity.
@@ -105,14 +105,10 @@ And that's perfectly normal.
 
 ## Accept That Your Project Will Evolve
 
-Your first version of the story probably won't be the last.
-
-Your first interface will change.
-
-Your first sprites will improve.
-
-Your maps will become better as your skills grow.
-
+Your first version of the story probably won't be the last.  
+Your first interface will change.  
+Your first sprites will improve.  
+Your maps will become better as your skills grow.  
 And that's actually good news.
 
 Trying to make every single element perfect from the very beginning is often counterproductive. You'll learn an incredible amount throughout development, and your project will naturally benefit from that experience.

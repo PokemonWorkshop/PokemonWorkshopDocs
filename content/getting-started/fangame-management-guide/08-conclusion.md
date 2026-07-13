@@ -59,4 +59,6 @@ We hope this guide helps you avoid a few common pitfalls, make better decisions,
 
 Everyone at Pokémon Workshop wishes you the very best with your project.
 
-> **Creating a fangame isn't a race. It's a journey that rewards those who know how to stay the course.**
+:::note
+Creating a fangame isn't a race. It's a journey that rewards those who know how to stay the course.
+:::

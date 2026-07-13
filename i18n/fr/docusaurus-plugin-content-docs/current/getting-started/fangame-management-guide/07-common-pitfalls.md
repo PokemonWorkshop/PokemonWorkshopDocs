@@ -1,6 +1,6 @@
 ---
 title: "Les pièges classiques"
-slug: les-pièges-classiques
+slug: les-pieges-classiques
 sidebar_position: 7
 description: "Évitez les erreurs les plus fréquentes des créateurs de fangames Pokémon, du perfectionnisme aux projets trop ambitieux."
 ---
@@ -30,14 +30,14 @@ Pourtant, plusieurs mois plus tard, il est parfois impossible de jouer plus de c
 Le problème n'est pas la qualité des ressources produites.
 Le problème est qu'elles ont été créées bien avant d'être réellement nécessaires.
 
-### Notre conseil
-
+:::tip[Notre conseil]
 Produisez les ressources au rythme du développement.
 
 Si votre prochaine démo s'arrête à la première arène, concentrez-vous sur les Pokémon, les personnages et les cartes que le joueur rencontrera réellement.
 Vous aurez tout le temps d'ajouter le reste plus tard.
 
 L'objectif est de produire ce dont vous avez besoin maintenant, puis d'enrichir progressivement votre jeu à chaque nouvelle **itération**.
+:::
 
 ## Vouloir créer le plus grand fangame Pokémon jamais réalisé
 
@@ -52,10 +52,10 @@ Un scénario de cinquante heures.
 Sur le papier, ces idées font rêver.
 En pratique, chacune d'elles représente des centaines d'heures de travail supplémentaires.
 
-### Notre conseil
-
+:::tip[Notre conseil]
 Commencez par un projet dont vous pouvez raisonnablement imaginer la fin.
 Un jeu plus petit, mais terminé, laissera souvent un meilleur souvenir qu'un projet gigantesque resté inachevé.
+:::
 
 ## Recommencer son projet régulièrement
 
@@ -69,11 +69,11 @@ Vous aurez donc naturellement envie de reprendre vos anciens travaux.
 Faire évoluer son projet est une bonne chose.
 Le recommencer entièrement tous les quelques mois en est une autre.
 
-### Notre conseil
-
+:::tip[Notre conseil]
 Acceptez que votre jeu reflète aussi votre progression.
 
 Ne revenez sur un ancien contenu que lorsqu'il existe une véritable raison de le faire : un problème de gameplay, une incohérence importante ou un besoin technique.
+:::
 
 ## Attendre la bonne idée avant d'avancer
 
@@ -87,10 +87,10 @@ Un meilleur système.
 Pendant ce temps, le projet reste immobile.
 Or, dans la plupart des cas, une décision raisonnable aujourd'hui vaut mieux qu'une décision parfaite prise dans plusieurs mois.
 
-### Notre conseil
-
+:::tip[Notre conseil]
 Prenez une décision avec les informations dont vous disposez aujourd'hui.
 Vous pourrez toujours l'améliorer plus tard si cela devient nécessaire.
+:::
 
 ## Changer régulièrement d'outil ou de moteur
 
@@ -108,17 +108,17 @@ Pourtant, chaque migration demande :
 - des tests
 - parfois même de recommencer une partie du travail.
 
-### Notre conseil
-
+:::tip[Notre conseil]
 Choisissez des outils qui répondent à vos besoins et apprenez à les maîtriser.
 Les meilleurs outils sont souvent ceux que vous connaissez déjà bien.
+:::
 
 ## Vouloir tout personnaliser
 
 Créer son propre système de combat.
 
-Refaire complètement l'interface.
-Modifier chaque mécanique.
+Refaire complètement l'interface.  
+Modifier chaque mécanique.  
 Développer un outil spécifique.
 
 Ces projets sont passionnants.
@@ -126,28 +126,28 @@ Mais chacun d'eux représente un projet à part entière.
 
 À vouloir tout personnaliser, on finit parfois par développer davantage les outils… que le jeu lui-même.
 
-### Notre conseil
-
+:::tip[Notre conseil]
 Demandez-vous toujours ce que cette personnalisation apporte réellement au joueur.
 Si elle ne change pas significativement son expérience, votre temps sera probablement plus utile ailleurs.
 Et si vous êtes plus intéressé par la création d'outils que par la création d'un fangame, vous pouvez plutôt participer à des projets de la communauté ou rejoindre d'autres fangames.
+:::
 
 ## Ne jamais faire tester son jeu
 
 Beaucoup de créateurs attendent que leur fangame soit "présentable".
 Ils repoussent sans cesse la première démo.
 
-Par peur des critiques.
-Par peur des bugs.
+Par peur des critiques.  
+Par peur des bugs.  
 Par peur que tout ne soit pas encore parfait.
 
 Pourtant, les premiers retours sont souvent les plus précieux.
 Ils permettent de corriger les problèmes avant qu'ils ne deviennent difficiles à résoudre.
 
-### Notre conseil
-
+:::tip[Notre conseil]
 Faites tester votre jeu régulièrement.
 Même une courte démo permet souvent d'apprendre énormément sur votre gameplay et votre progression.
+:::
 
 ## Comparer constamment son projet aux autres
 
@@ -160,10 +160,10 @@ Les bandes annonces.
 Ils montrent beaucoup plus rarement les années de travail, les difficultés ou les versions abandonnées.
 Comparer votre premier projet au résultat final d'un autre est souvent décourageant.
 
-### Notre conseil
-
+:::tip[Notre conseil]
 Comparez votre projet à celui d'il y a quelques semaines.
 Votre véritable référence est votre propre progression.
+:::
 
 ## Attendre d'être motivé pour travailler
 
@@ -176,11 +176,11 @@ C'est parfaitement normal.
 Construire un fangame est un projet qui s'étale souvent sur plusieurs années.
 Il est donc impossible de compter uniquement sur la motivation.
 
-### Notre conseil
-
-Lorsque votre emploi du temps le permet, essayez de conserver une certaine régularité.
-Même une courte session peut suffire à maintenir le lien avec votre projet.
+:::tip[Notre conseil]
+Lorsque votre emploi du temps le permet, essayez de conserver une certaine régularité.  
+Même une courte session peut suffire à maintenir le lien avec votre projet.  
 Prenez soin également de votre environnement de travail. Plus il est organisé, plus il sera simple et motivant de se remettre au travail.
+:::
 
 ## Penser que publier la première version marque la fin du projet
 
@@ -197,10 +197,10 @@ Les joueurs découvriront :
 C'est normal.
 Aucun jeu n'est parfait dès sa première version.
 
-### Notre conseil
-
-Considérez chaque publication comme une étape.
+:::tip[Notre conseil]
+Considérez chaque publication comme une étape.  
 Les retours des joueurs vous aideront à améliorer progressivement votre fangame.
+:::
 
 ## Ce qu'il faut retenir
 

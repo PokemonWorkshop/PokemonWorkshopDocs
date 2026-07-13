@@ -35,21 +35,21 @@ Si vous ne savez plus vraiment où va votre projet, vos futurs contributeurs aur
 
 ### Exemple 1
 
-> **❌ À éviter**
->
-> Publier une annonce :
-> _"Je cherche une équipe pour créer un fangame Pokémon. J'ai plein d'idées."_
+:::danger[À éviter]
+Publier une annonce : _"Je cherche une équipe pour créer un fangame Pokémon. J'ai plein d'idées."_
+:::
 
 Les personnes intéressées auront beaucoup de mal à comprendre ce qu'elles rejoignent.
 
-> **✅ Préférez**
->
-> Présenter un projet déjà concret :
->
-> - une direction claire
-> - quelques captures d'écran
-> - une première démo ou un prototype
-> - une liste de besoins précis.
+:::tip[Préférez]
+Présenter un projet déjà concret :
+
+- une direction claire
+- quelques captures d'écran
+- une première démo ou un prototype
+- une liste de besoins précis.
+
+:::
 
 Les contributeurs sauront immédiatement dans quoi ils s'engagent.
 
@@ -101,15 +101,15 @@ Quelques ressources bien choisies et une première tâche adaptée sont souvent 
 
 ### Exemple 2
 
-> **❌ À éviter**
->
-> Donner immédiatement une tâche très importante à un nouveau membre sans lui présenter le projet.
+:::danger[À éviter]
+Donner immédiatement une tâche très importante à un nouveau membre sans lui présenter le projet.
+:::
 
-> **✅ Préférez**
->
-> Commencer par une contribution de petite taille.
->
-> Cela permet au nouveau membre de découvrir progressivement le projet, tout en vous laissant le temps d'apprendre à travailler ensemble.
+:::tip[Préférez]
+Commencer par une contribution de petite taille.
+
+Cela permet au nouveau membre de découvrir progressivement le projet, tout en vous laissant le temps d'apprendre à travailler ensemble.
+:::
 
 ## Faites confiance... progressivement
 
@@ -131,13 +131,13 @@ Cela signifie améliorer le projet ensemble.
 
 Essayez de toujours expliquer vos remarques.
 
-Plutôt que :
+:::danger[À éviter]
+Plutôt que : "Ce mapping ne va pas."
+:::
 
-> "Ce mapping ne va pas."
-
-Préférez :
-
-> "Le joueur risque d'avoir du mal à comprendre où aller. Si nous élargissions ce chemin, la lecture de la carte serait plus naturelle."
+:::tip[Préférez]
+"Le joueur risque d'avoir du mal à comprendre où aller. Si nous élargissions ce chemin, la lecture de la carte serait plus naturelle."
+:::
 
 Un retour argumenté est beaucoup plus facile à comprendre et à accepter.
 Le "nous" ici est important également : la responsabilité est commune à l'équipe.

@@ -38,18 +38,19 @@ Quelques lignes suffisent souvent.
 
 ### Exemple 1
 
-> **❌ À éviter**
->
-> "Je retiendrai le scénario de cette quête."
+:::danger[À éviter]
+"Je retiendrai le scénario de cette quête."
+:::
 
-> **✅ Préférez**
->
-> Écrire un résumé de quelques lignes expliquant :
->
-> - le contexte
-> - les personnages concernés
-> - les objectifs
-> - les récompenses.
+:::tip[Préférez]
+Écrire un résumé de quelques lignes expliquant :
+
+- le contexte
+- les personnages concernés
+- les objectifs
+- les récompenses.
+
+:::
 
 Vous vous remercierez dans quelques mois.
 
@@ -129,13 +130,13 @@ Finir une tâche apporte de la visibilité, réduit la complexité du projet et 
 
 ### Exemple 4
 
-> **❌ À éviter**
->
-> Avoir dix cartes commencées à 80 %.
+:::danger[À éviter]
+Avoir dix cartes commencées à 80 %.
+:::
 
-> **✅ Préférez**
->
-> Terminer entièrement une carte avant de passer à la suivante, sauf si une dépendance technique vous oblige à faire autrement.
+:::tip[Préférez]
+Terminer entièrement une carte avant de passer à la suivante, sauf si une dépendance technique vous oblige à faire autrement.
+:::
 
 ## Documentez pour votre futur vous
 
@@ -149,13 +150,13 @@ Une petite note expliquant le "pourquoi" vaut souvent bien plus qu'une longue de
 
 ### Exemple 5
 
-Au lieu d'écrire :
+:::danger[À éviter]
+Écrire : "Variable 248"
+:::
 
-> "Variable 248"
-
-Préférez :
-
-> "Variable 248 : le joueur a obtenu l'autorisation d'accéder à la réserve naturelle."
+:::tip[Préférez]
+Écrire : "Variable 248 : le joueur a obtenu l'autorisation d'accéder à la réserve naturelle."
+:::
 
 Quelques mots suffisent à rendre votre projet beaucoup plus compréhensible.
 

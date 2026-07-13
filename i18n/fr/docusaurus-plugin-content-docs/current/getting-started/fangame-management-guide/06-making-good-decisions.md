@@ -107,9 +107,9 @@ Si vous recommencez systématiquement votre travail, votre projet risque de ne j
 
 ### Exemple 3
 
-> **❌ À éviter**
->
-> "Maintenant que je mappe mieux, je vais refaire toutes mes routes."
+:::danger[À éviter]
+"Maintenant que je mappe mieux, je vais refaire toutes mes routes."
+:::
 
 Quelques mois plus tard :
 
@@ -121,9 +121,9 @@ Puis :
 
 Le projet n'avance plus.
 
-> **✅ Préférez**
->
-> Continuer votre développement et ne revenir sur les anciennes zones que lorsqu'un véritable besoin apparaît.
+:::tip[Préférez]
+Continuer votre développement et ne revenir sur les anciennes zones que lorsqu'un véritable besoin apparaît.
+:::
 
 ## N'ajoutez pas une fonctionnalité parce qu'elle existe ailleurs
 
