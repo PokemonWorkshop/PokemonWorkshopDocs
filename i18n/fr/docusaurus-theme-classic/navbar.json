@@ -4,8 +4,8 @@
     "description": "Navbar item with label Getting Started"
   },
   "item.label.Studio": {
-    "message": "Studio",
-    "description": "Navbar item with label Studio"
+    "message": "Pokémon Studio",
+    "description": "Navbar item with label Pokémon Studio"
   },
   "item.label.PSDK": {
     "message": "PSDK",
