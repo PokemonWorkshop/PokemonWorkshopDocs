@@ -104,7 +104,7 @@ Les numéros `400` et `401` correspondent aux lignes des messages ajoutés dans 
 
 Pour créer une attaque qui invoque le terrain :
 
-### Configurer l'attaque dans PokémonStudio
+### Configurer l'attaque dans Pokémon Studio
 
 Créez l'attaque dans Pokémon Studio avec ces propriétés :
 

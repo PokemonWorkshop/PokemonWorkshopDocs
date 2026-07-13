@@ -2,7 +2,7 @@ import type * as Preset from "@docusaurus/preset-classic";
 import type { Config } from "@docusaurus/types";
 import { themes as prismThemes } from "prism-react-renderer";
 
-// Pages relocated by the Getting Started / Studio / Misc restructure.
+// Pages relocated by the Getting Started / Pokémon Studio / Misc restructure.
 // Key = current route (per locale, FR prefixed with /fr); value = former route
 // to preserve. Consumed by plugin-client-redirects below.
 const RELOCATED_ROUTES: Record<string, string> = {
@@ -176,7 +176,7 @@ const config: Config = {
       },
       items: [
         { label: "Getting Started", to: "/getting-started", position: "left" },
-        { label: "Studio", to: "/pokemon-studio", position: "left" },
+        { label: "Pokémon Studio", to: "/pokemon-studio", position: "left" },
         { label: "PSDK", to: "/psdk", position: "left" },
         { label: "RMXP", to: "/rpg-maker-xp", position: "left" },
         { label: "Ruby", to: "/ruby", position: "left" },
@@ -204,7 +204,7 @@ const config: Config = {
           title: "Documentation",
           items: [
             { label: "Getting Started", to: "/getting-started" },
-            { label: "Studio", to: "/pokemon-studio" },
+            { label: "Pokémon Studio", to: "/pokemon-studio" },
             { label: "PSDK", to: "/psdk" },
             { label: "RMXP", to: "/rpg-maker-xp" },
             { label: "Ruby", to: "/ruby" },

@@ -16,8 +16,8 @@
     "description": "The label of footer link with label=Getting Started linking to /getting-started"
   },
   "link.item.label.Studio": {
-    "message": "Studio",
-    "description": "The label of footer link with label=Studio linking to /pokemon-studio"
+    "message": "Pokémon Studio",
+    "description": "The label of footer link with label=Pokémon Studio linking to /pokemon-studio"
   },
   "link.item.label.PSDK": {
     "message": "PSDK",
