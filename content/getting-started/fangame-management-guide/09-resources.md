@@ -5,6 +5,8 @@ sidebar_position: 9
 description: "Explore recommended books, tools, project management concepts, and Pokémon Workshop resources to improve your fangame development skills."
 ---
 
+During your fangame development journey, you'll encounter many challenges and questions. Fortunately, there are numerous resources available to help you improve your skills, learn new techniques, and find inspiration.
+
 ## Glossary
 
 | Term                         | Short definition                                                                                                                           |

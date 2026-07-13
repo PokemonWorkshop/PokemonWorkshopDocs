@@ -5,6 +5,8 @@ sidebar_position: 9
 description: "Retrouvez une sélection d'outils, de concepts, d'ouvrages et de ressources pour approfondir vos connaissances en création de fangames."
 ---
 
+Durant votre parcours de création de fangame, vous rencontrerez de nombreux défis et questions. Heureusement, il existe de nombreuses ressources pour vous aider à améliorer vos compétences, apprendre de nouvelles techniques et trouver l'inspiration.
+
 ## Lexique
 
 | Terme            | Définition courte                                                  |
