@@ -142,7 +142,7 @@ Chaque version est une occasion de corriger, d'améliorer et d'ajouter du conten
 Cette façon de travailler présente un avantage important : vous obtenez régulièrement un jeu jouable.
 Et un jeu jouable est toujours plus facile à améliorer qu'un projet dont tout reste à construire.
 
-## Les erreurs que nous rencontrons le plus souvent
+## Conclusion
 
 Voici quelques habitudes qui finissent souvent par ralentir le développement.
 

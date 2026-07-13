@@ -168,7 +168,7 @@ Instead of expecting work to be delivered by a specific date, check in regularly
 Most volunteers stay engaged because they enjoy contributing.
 Excessive pressure, on the other hand, often leads people to step away from the project.
 
-## Common Mistakes We Often See
+## Conclusion
 
 Here are some common challenges we regularly encounter in community projects.
 

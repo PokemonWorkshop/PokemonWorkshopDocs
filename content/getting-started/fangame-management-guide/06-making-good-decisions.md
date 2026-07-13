@@ -159,7 +159,7 @@ The best creators aren't the ones who implement every idea they have.
 
 They're the ones who know which ideas are worth saving for later, or leaving behind altogether.
 
-## Common Mistakes We Often See
+## Conclusion
 
 Here are some decisions that regularly slow projects down.
 

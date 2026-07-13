@@ -179,7 +179,7 @@ Changer d'outil tous les mois est rarement une solution.
 Avant de chercher un nouvel outil, demandez-vous si votre méthode actuelle répond réellement à votre besoin.
 Dans la plupart des cas, quelques habitudes simples auront beaucoup plus d'impact qu'un logiciel plus sophistiqué.
 
-## Les erreurs que nous rencontrons le plus souvent
+## Conclusion
 
 Voici quelques situations que nous observons régulièrement sur les projets amateurs.
 

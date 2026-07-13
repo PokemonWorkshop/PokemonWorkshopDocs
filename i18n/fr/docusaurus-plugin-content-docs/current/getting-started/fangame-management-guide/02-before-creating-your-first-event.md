@@ -115,7 +115,7 @@ L'important est d'accepter que certaines décisions prises aujourd'hui pourront 
 
 Un fangame terminé avec quelques imperfections sera toujours plus agréable à jouer qu'un projet parfait… qui n'a jamais dépassé les premières routes.
 
-## Les erreurs que nous rencontrons le plus souvent
+## Conclusion
 
 Avant même de commencer le développement, voici quelques pièges que nous voyons régulièrement sur Pokémon Workshop.
 

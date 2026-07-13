@@ -211,7 +211,7 @@ Treat every release as another milestone.
 Player feedback will help you improve your fangame, one version at a time.
 :::
 
-## Key Takeaway
+## Conclusion
 
 The pitfalls described in this chapter aren't limited to beginners.  
 Even experienced teams encounter them.

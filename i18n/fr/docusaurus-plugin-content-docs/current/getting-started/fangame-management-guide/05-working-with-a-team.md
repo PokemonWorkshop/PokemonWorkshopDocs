@@ -162,7 +162,7 @@ Préférez demander régulièrement où chacun en est plutôt que d'attendre une
 La plupart des bénévoles restent engagés lorsqu'ils prennent du plaisir à contribuer.
 À l'inverse, une pression trop importante conduit souvent au décrochage.
 
-## Les erreurs que nous rencontrons le plus souvent
+## Conclusion
 
 Voici quelques difficultés fréquentes dans les projets communautaires.
 

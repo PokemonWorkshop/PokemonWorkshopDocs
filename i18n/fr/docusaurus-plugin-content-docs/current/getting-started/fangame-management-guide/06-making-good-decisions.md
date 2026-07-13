@@ -151,7 +151,7 @@ Cela signifie faire un choix pour permettre au reste du projet d'avancer.
 Les meilleurs créateurs ne sont pas ceux qui réalisent toutes leurs idées.
 Ce sont souvent ceux qui savent lesquelles laisser de côté.
 
-## Les erreurs que nous rencontrons le plus souvent
+## Conclusion
 
 Voici quelques décisions qui ralentissent régulièrement les projets.
 

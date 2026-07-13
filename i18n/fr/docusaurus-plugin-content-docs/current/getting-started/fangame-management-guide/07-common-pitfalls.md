@@ -202,7 +202,7 @@ Considérez chaque publication comme une étape.
 Les retours des joueurs vous aideront à améliorer progressivement votre fangame.
 :::
 
-## Ce qu'il faut retenir
+## Conclusion
 
 Les pièges présentés dans ce chapitre ne concernent pas uniquement les débutants.
 Même des équipes expérimentées peuvent y être confrontées.
@@ -211,9 +211,9 @@ La différence réside souvent dans leur capacité à reconnaître rapidement ce
 
 Créer un fangame est une aventure qui demande du temps, de la patience et beaucoup d'apprentissage.
 
-Vous ferez des erreurs.
-Vous changerez d'avis.
-Vous apprendrez de nouvelles choses.
+Vous ferez des erreurs.  
+Vous changerez d'avis.  
+Vous apprendrez de nouvelles choses.  
 Et c'est parfaitement normal.
 
 L'essentiel est de continuer à avancer, sans perdre de vue la vision que vous vous êtes fixée au début de votre projet.

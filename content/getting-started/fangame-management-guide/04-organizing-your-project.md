@@ -182,7 +182,7 @@ Before looking for a new tool, ask yourself whether your current workflow actual
 
 Most of the time, a few good habits will have a much greater impact than a more sophisticated piece of software.
 
-## Common Mistakes We Often See
+## Conclusion
 
 Here are some situations we regularly encounter in amateur projects.
 

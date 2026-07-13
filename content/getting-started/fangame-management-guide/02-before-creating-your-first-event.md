@@ -117,7 +117,7 @@ The important thing is accepting that the decisions you make today can always be
 
 A finished fangame with a few imperfections will always be more enjoyable than a perfect project that never makes it beyond its first few routes.
 
-## Common Mistakes We Often See
+## Conclusion
 
 Even before development begins, these are some of the most common pitfalls we encounter within the Pokémon Workshop community.
 

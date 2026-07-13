@@ -140,7 +140,7 @@ Each release is an opportunity to fix bugs, improve existing content, and add ne
 This approach has one major advantage: You always have a playable game.
 And a playable game is much easier to improve than one that's still entirely under construction.
 
-## Common Mistakes We Often See
+## Conclusion
 
 Here are some habits that frequently slow projects down.
 
