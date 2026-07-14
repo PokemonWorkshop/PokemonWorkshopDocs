@@ -27,3 +27,9 @@ updates:
         patterns:
           - react
           - react-dom
+    ignore:
+      # TypeScript 7 removed the `baseUrl` option, which @docusaurus/tsconfig
+      # still ships. Stay on TS 6.x until Docusaurus drops baseUrl from its
+      # shared tsconfig, then remove this entry and take the major.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
