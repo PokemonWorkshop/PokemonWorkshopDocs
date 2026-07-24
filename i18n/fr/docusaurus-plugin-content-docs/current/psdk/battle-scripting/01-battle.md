@@ -22,6 +22,8 @@ On passe au script quand le camp adverse doit se décider **à l'exécution** :
 
 Quand on a besoin du contrôle total du camp adverse, ou d'une équipe qui dépend du joueur, on construit le combat soi-même avec `Battle::Logic::BattleInfo`, l'objet sur lequel repose au final tout combat.
 
+Ce guide suppose qu'on est à l'aise avec les bases Ruby du [cours Ruby](/ruby/variables-et-types-de-donnees), en particulier les [méthodes et blocs](/ruby/methodes-et-blocs), les [chaînes et symboles](/ruby/chaines-et-symboles) et, pour la dernière section, le [prepend](/ruby/etendre-du-code-avec-prepend). Si une syntaxe ci-dessous est nouvelle, c'est là qu'on se met à jour.
+
 ### L'interface en bref
 
 ```ruby
@@ -56,14 +58,14 @@ bi.add_party(1, party, trainer.name, trainer.class_name, trainer.resources, bag,
 $scene.call_scene(Battle::Scene, bi)
 ```
 
-`data_trainer` charge le dresseur Studio (par db_symbol ou id), et `encounter.to_creature(level)` construit chacun de ses Pokémon au niveau passé, on omet l'argument pour conserver les niveaux définis dans Studio. Un seul dresseur alimente désormais toute une tour de combats de plus en plus durs.
+Ici, `$actors` est le tableau global de PSDK contenant l'équipe actuelle du joueur. `data_trainer` charge le dresseur Studio (par db_symbol ou id), et `encounter.to_creature(level)` construit chacun de ses Pokémon au niveau passé, on omet l'argument pour conserver les niveaux définis dans Studio. Un seul dresseur alimente désormais toute une tour de combats de plus en plus durs.
 
 ### Exemple : un rival qui contre le starter du joueur
 
 Au lieu de construire trois rivaux quasi identiques par affrontement dans Studio, on en écrit **un** et on ajoute à son équipe le contre du starter du joueur au lancement du combat :
 
 ```ruby
-# Replace this with however your project records the chosen starter (here a game variable holding a db_symbol).
+# À remplacer par la façon dont le projet enregistre le starter choisi (ici une variable de jeu contenant un db_symbol).
 player_starter = $game_variables[10]
 counter = { bulbasaur: :charmander, charmander: :squirtle, squirtle: :bulbasaur }[player_starter]
 
@@ -82,18 +84,89 @@ $scene.call_scene(Battle::Scene, bi)
 
 On écrit le rival une fois et le rapport de types suit le choix du joueur. La même approche « charger puis modifier » ouvre d'autres idées : un dresseur de grind dont l'équipe est tirée des Pokémon que le joueur a capturés, ou des dresseurs « fantômes » qui rejouent l'équipe d'un autre joueur.
 
+## Ajuster les Pokémon d'un dresseur à l'exécution avec extra
+
+Les exemples ci-dessus reconstruisent tout le combat. Souvent, on veut seulement retoucher **un Pokémon** d'un dresseur existant, et cela se fait sans assembler de `BattleInfo`. Chaque entrée de `trainer.party` est un `Group::Encounter` porteur d'un hash `extra` mutable, celui-là même que Studio remplit avec les réglages par Pokémon (nature, IV, objet tenu, etc.). On le mute avant que le combat démarre et le changement est appliqué à la génération de l'équipe.
+
+### Surcharger un réglage Studio à l'exécution
+
+Studio fixe déjà chacune de ces valeurs en statique. `extra` prend son intérêt quand la valeur doit dépendre de l'**état du jeu** : la difficulté, un interrupteur de scénario ou les choix du joueur. On charge le dresseur, on retouche les entrées voulues, puis on lance le combat avec `start_trainer_battle` :
+
+```ruby
+trainer = data_trainer(0)              # le dresseur écrit dans Studio
+
+if $game_switches[1]                   # un interrupteur « mode difficile », par exemple
+  boss = trainer.party[0]              # son premier Pokémon (un Group::Encounter)
+  boss.extra[:stats] = [31, 31, 31, 31, 31, 31] # IV parfaits
+  boss.extra[:item] = :leftovers                 # force un objet tenu
+end
+
+start_trainer_battle(0)                # lance le combat contre ce dresseur
+```
+
+`start_trainer_battle(id)` construit et démarre le combat de dresseur à notre place, sans aucun `BattleInfo`. Les clés que `extra` comprend reprennent les champs par Pokémon de Studio :
+
+| Champ Studio | Clé `extra` | Valeur |
+| --- | --- | --- |
+| Surnom | `:given_name` | une `String` |
+| Genre | `:gender` | `1` (mâle) ou `2` (femelle) |
+| Nature | `:nature` | un db_symbol, ex. `:adamant` |
+| IV | `:stats` | `[hp, atk, dfe, spd, ats, dfs]`, chacun de `0` à `31` |
+| EV | `:bonus` | `[hp, atk, dfe, spd, ats, dfs]` |
+| Objet tenu | `:item` | un db_symbol d'objet, ex. `:leftovers` |
+| Talent | `:ability` | un db_symbol de talent |
+| Capacités | `:moves` | un tableau de db_symbols de capacités |
+| Bonheur | `:loyalty` | un `Integer` |
+
+Régler l'une de ces valeurs dans Studio ou l'écraser ici, c'est la même opération : on ne recourt à `extra` que lorsque la valeur ne peut pas être fixée d'avance.
+
+### Transporter ses propres données avec une clé personnalisée
+
+:::note[Optionnel, avancé]
+Cette sous-section rouvre une classe et utilise `module`, `prepend` et `super`. Si les clés `extra` intégrées du tableau ci-dessus couvrent déjà le besoin, on peut la sauter.
+:::
+
+`extra` est un simple hash : on peut aussi y stocker une clé dont PSDK ignore tout :
+
+```ruby
+trainer.party[0].extra[:my_flag] = true
+```
+
+PSDK ignore les clés qu'il ne connaît pas, et il ne les recopie **pas** sur le Pokémon généré : seule, cette ligne ne fait donc rien. Pour qu'une clé personnalisée agisse, on la relit soi-même. La voie propre est d'étendre le constructeur de `PFM::Pokemon` avec un module `prepend`, la convention du [monkey-patch](/getting-started/customize-psdk/monkey-patch-dans-psdk) (sa mécanique est détaillée dans [Étendre du code avec prepend](/ruby/etendre-du-code-avec-prepend)), et de garder la valeur sur le Pokémon :
+
+```ruby
+module PFM
+  class Pokemon
+    module ExtraFlagReader
+      def initialize(*args)
+        super
+        # le hash d'options est optionnel et arrive en dernier, on le récupère prudemment
+        options = args.last.is_a?(Hash) ? args.last : {}
+        @my_flag = options[:my_flag]
+      end
+
+      # @return [Boolean, nil]
+      attr_reader :my_flag
+    end
+    prepend ExtraFlagReader
+  end
+end
+```
+
+Désormais, tout Pokémon généré depuis une entrée dont l'`extra` portait `:my_flag` répond à `pokemon.my_flag`, et l'on peut s'en servir, dans ses propres scripts ou dans un plugin, pour aiguiller. C'est ainsi qu'un plugin transforme un Pokémon écrit dans Studio en « boss » sans qu'on reconstruise le dresseur à la main.
+
 ## Lire le résultat
 
 On enregistre `$game_temp.battle_proc` **avant** de lancer la scène ; il est appelé avec le code de résultat à la fin du combat :
 
 ```ruby
 $game_temp.battle_proc = proc do |result|
-  # 0 = player won, 1 = player fled, 2 = player lost, 3 = enemy fled
+  # 0 = joueur gagne, 1 = joueur fuit, 2 = joueur perd, 3 = ennemi fuit
   case result
   when 0
-    # handle victory
+    # gérer la victoire
   when 2
-    # handle defeat
+    # gérer la défaite
   end
 end
 $scene.call_scene(Battle::Scene, bi)
@@ -106,5 +179,6 @@ Le même résultat positionne aussi les interrupteurs globaux `BT_Victory`, `BT_
 - Studio édite les données statiques ; on script un combat de dresseur pour les affrontements qui dépendent du runtime, ou pour le lancer depuis sa propre logique.
 - On construit un `Battle::Logic::BattleInfo`, on ajoute le joueur sur le banc 0 et le dresseur sur le banc 1, puis on lance avec `$scene.call_scene(Battle::Scene, bi)`.
 - On charge les dresseurs Studio existants avec `data_trainer` et `to_creature(level)` pour **réutiliser et modifier** leurs équipes : scaler une tour des dresseurs, ou contrer le starter du joueur, sans cloner de dresseurs dans l'éditeur.
+- Ajuster un seul Pokémon d'un dresseur existant via son hash `extra` : surcharger un réglage Studio à l'exécution, ou transporter une clé personnalisée que son propre `prepend` relit, puis lancer avec `start_trainer_battle`.
 - On lit le résultat via `$game_temp.battle_proc` (ou les interrupteurs `BT_Victory` / `BT_Defeat`) pour aiguiller son événement.
 - Pour un combat sauvage, voir le guide [Démarrer un combat sauvage](/rpg-maker-xp/demarrer-un-combat-sauvage).
