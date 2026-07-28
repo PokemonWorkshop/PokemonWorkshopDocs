@@ -1,7 +1,7 @@
 ---
 title: "Animated tiles"
 slug: animated-tiles
-sidebar_position: 7
+sidebar_position: 8
 description: "Tiled's animated tiles work in a PSDK project, under constraints inherited from the RPG Maker XP format the conversion targets: frames must share one tileset, durations are quantised to a fixed step, and each map has a hard budget of distinct animated tiles. This page covers building an animated tile and staying inside that budget."
 ---
 
@@ -35,6 +35,8 @@ RPG Maker XP holds animated tiles in seven autotile slots of 32 tiles each. That
 ```bash
 [RMXP ERROR] This map has too many animated diverse tiles
 ```
+
+This one does not appear in Studio. Unlike the checks above, which reject a file the moment Studio reads it, this limit is only hit later, on the engine side, so the message shows up in the compilation output rather than next to a filename.
 
 The count is not a simple total. Animated tiles are grouped by **number of frames**, and each group is rounded up to a multiple of 32. A map using 33 tiles of 4 frames and 2 tiles of 8 frames spends 64 plus 32, so 96 of its 224, not 35. Keeping animations to a small number of frame counts costs far less budget than spreading them across many.
 

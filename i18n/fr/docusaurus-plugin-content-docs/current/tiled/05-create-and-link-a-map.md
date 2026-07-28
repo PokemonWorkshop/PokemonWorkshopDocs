@@ -1,7 +1,7 @@
 ---
 title: "Créer une carte et la lier à Studio"
 slug: creer-et-lier-une-carte
-sidebar_position: 4
+sidebar_position: 5
 description: "Un fichier Tiled ne devient une carte jouable qu'une fois que Pokémon Studio le connaît. Studio propose une voie pour une carte unique et une autre pour un lot, et dans les deux cas il copie lui-même le .tmx dans le projet. Cette page couvre la création d'une carte, l'association d'un fichier Tiled à une carte existante, et la reconversion d'une carte après modification."
 ---
 

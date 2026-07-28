@@ -13,21 +13,30 @@ Tiled est un éditeur de cartes autonome, libre et open source, sans aucun lien 
 
 Il manipule deux formats de fichiers, tous deux en XML lisible :
 
-- `.tmx` pour une **carte**, c'est-à-dire la grille elle-même et ses couches.
+- `.tmx` pour une **carte**, c'est-à-dire la grille elle-même et ses calques.
 - `.tsx` pour un **tileset**, c'est-à-dire la description d'une planche de tuiles : taille des tuiles, transparence, animations.
 
 Les deux formats sont du texte lisible, ce qui compte pour un projet sous gestion de versions : deux makers peuvent travailler sur des cartes différentes sans produire de fichier binaire impossible à fusionner.
 
+## Le vocabulaire du mapping
+
+Quatre mots reviennent sur chaque page de cette section. Si on n'a jamais utilisé d'éditeur de cartes, on lit ceci d'abord :
+
+- Une **tuile** est une case de la carte, de 32 sur 32 pixels. Une carte est une grille de tuiles, et on ne dessine jamais pixel par pixel.
+- Un **tileset** est une planche de graphismes découpée en tuiles, la palette dans laquelle on pioche. Une carte en utilise autant qu'elle en a besoin.
+- Un **calque** est un niveau de dessin. Une carte en empile plusieurs : le sol, puis ce qui se pose dessus, puis ce qui passe au-dessus de la tête du joueur. Tiled les présente sous forme de liste, et on peint sur un calque à la fois.
+- L'**automapping** est une fonction de Tiled qui place les tuiles de transition à votre place, de sorte que la rencontre entre l'herbe et le sable reçoive sa bordure sans qu'on la dessine à la main.
+
 ## Pourquoi PSDK utilise Tiled
 
-Le tilemap de RPG Maker XP se limite à trois couches de tuiles superposées, à un système d'autotiles figé et à des tilesets d'une seule colonne. Tiled fait sauter ces contraintes au moment de la création : couches illimitées, dossiers de couches, animations par tuile, retournement et rotation des tuiles, et règles d'automapping qui placent les tuiles de transition à votre place.
+L'éditeur de cartes de RPG Maker XP ne propose que trois calques, aucune animation par tuile, et des tilesets d'une seule colonne. Tiled fait sauter ces limites au moment de la création : autant de calques qu'on veut, des dossiers de calques, des tuiles animées, le retournement et la rotation des tuiles, et l'automapping.
 
 La chaîne qui transforme une carte Tiled en quelque chose que le moteur sait exécuter compte deux étapes :
 
 1. **Pokémon Studio** lit le `.tmx` et ses fichiers `.tsx`, puis écrit les métadonnées de la carte dans les données Studio du projet.
 2. Un convertisseur livré avec le moteur lit ces métadonnées et produit les fichiers de données RPG Maker XP que le moteur de carte charge à l'exécution.
 
-Cette deuxième étape explique pourquoi certaines règles documentées dans cette section paraissent arbitraires. Ce ne sont pas des limites de Tiled : elles viennent du format de données RPG Maker XP visé par la conversion. L'exemple le plus net est celui des **trois couches de tuiles** dans lesquelles une carte est compressée, qui commande à la fois le système de priorités des couches et le budget de tuiles animées.
+Cette deuxième étape explique pourquoi certaines règles documentées dans cette section paraissent arbitraires. Ce ne sont pas des limites de Tiled : elles viennent du format de données RPG Maker XP visé par la conversion. L'exemple le plus net est celui des **trois calques de tuiles** dans lesquels une carte est compressée, qui commande à la fois le système de priorités des calques et le budget de tuiles animées.
 
 :::info[Ces contraintes sont liées à RPG Maker XP]
 
@@ -46,7 +55,7 @@ Une carte existe donc à deux endroits à la fois : sa description visuelle et p
 
 ## Apprendre Tiled
 
-Cette section documente ce qui est **spécifique à un projet PSDK** : organisation des dossiers, noms de couches réservés, contraintes de conversion. Elle n'enseigne pas l'éditeur lui-même. Pour cela, on commence ici :
+Cette section documente ce qui est **spécifique à un projet PSDK** : organisation des dossiers, noms de calques réservés, contraintes de conversion. Elle n'enseigne pas l'éditeur lui-même. Pour cela, on commence ici :
 
 | Ressource | Langue | Lien |
 | --- | --- | --- |

@@ -1,7 +1,7 @@
 ---
 title: "Le dossier Data/Tiled"
 slug: structure-du-projet-tiled
-sidebar_position: 3
+sidebar_position: 4
 description: "Tout ce qui touche à Tiled dans un projet PSDK vit sous Data/Tiled, réparti entre Maps, Tilesets, Assets et Overviews. Trois de ces dossiers appartiennent au maker et un est écrit par Pokémon Studio. Cette page décrit ce qui va où, pourquoi une carte enregistre ses tilesets en chemins relatifs, et à quoi servent les cartes de la démo."
 ---
 
@@ -16,7 +16,7 @@ Tout ce qui touche à Tiled dans un projet PSDK vit sous `Data/Tiled`, réparti 
 | `Assets` | les images `.png` dans lesquelles les tilesets sont découpés | vous |
 | `Overviews` | un aperçu `.png` par carte | Pokémon Studio |
 
-On ne modifie jamais `Overviews` à la main. Pokémon Studio le régénère en lançant le moteur de rendu de Tiled dès qu'une carte change, avec les couches réservées masquées.
+On ne modifie jamais `Overviews` à la main. Pokémon Studio le régénère en lançant le moteur de rendu de Tiled dès qu'une carte change, avec les calques réservés masqués.
 
 Une cinquième entrée, le dossier caché `.jobs`, contient la file de conversion que Studio écrit et que le moteur consomme. C'est de la tuyauterie interne : on n'y touche pas.
 
@@ -46,7 +46,7 @@ On n'ouvre jamais des cartes de deux projets différents dans la même fenêtre 
 
 ## Les cartes de la démo technique
 
-Le projet de base est livré avec les cartes de la démo technique, numérotées de `001` à `021` dans `Maps`. Ce sont de vraies cartes converties et fonctionnelles, et c'est la référence la plus rapide dont on dispose : un tileset animé, une carte portant toutes les couches réservées, un pont, une grotte, un intérieur.
+Le projet de base est livré avec les cartes de la démo technique, numérotées de `001` à `021` dans `Maps`. Ce sont de vraies cartes converties et fonctionnelles, et c'est la référence la plus rapide dont on dispose : un tileset animé, une carte portant tous les calques réservés, un pont, une grotte, un intérieur.
 
 On les garde. Les supprimer coûte cette référence et ne rapporte pas grand-chose, puisqu'elles ne sont pas accessibles depuis votre propre jeu tant que vous ne les liez pas. Si on préfère livrer un projet propre, l'approche habituelle consiste à en garder deux : le sien, et un second conservé uniquement pour ouvrir la démo et y chercher des réponses.
 
@@ -54,9 +54,9 @@ Jouer la démo avant de la disséquer vaut les trois à quatre heures que cela p
 
 ## Le Blank Template
 
-`000 Blank_Template.tmx` est une carte de départ dont la pile de couches est déjà en place : des couches nommées d'après leur rôle et leur priorité de superposition, et les couches réservées en bas de la pile. Elle a été construite autour des tilesets HGSS de SirMalo et des règles d'automapping livrées à côté d'elle dans `Maps`, sous la forme de `rules.txt` et des fichiers `rules_TECH_*.tmx`.
+`000 Blank_Template.tmx` est une carte de départ dont la pile de calques est déjà en place : des calques nommés d'après leur rôle et leur priorité de superposition, et les calques réservés en bas de la pile. Elle a été construite autour des tilesets HGSS de SirMalo et des règles d'automapping livrées à côté d'elle dans `Maps`, sous la forme de `rules.txt` et des fichiers `rules_TECH_*.tmx`.
 
-Si on utilise ces tilesets, on part d'une copie du template. Sinon, ses noms de couches ne correspondront pas à vos propres règles d'automapping, et mieux vaut construire son propre template une bonne fois et le copier pour chaque nouvelle carte.
+Si on utilise ces tilesets, on part d'une copie du template. Sinon, ses noms de calques ne correspondront pas à vos propres règles d'automapping, et mieux vaut construire son propre template une bonne fois et le copier pour chaque nouvelle carte.
 
 ## Conclusion
 
@@ -64,4 +64,4 @@ Si on utilise ces tilesets, on part d'une copie du template. Sinon, ses noms de 
 - Les cartes référencent leurs tilesets par chemin relatif, donc un fichier enregistré dans le mauvais dossier casse la carte pour tout le monde sauf vous.
 - Deux projets ouverts dans une même fenêtre Tiled peuvent s'emprunter leurs tilesets : une instance par projet.
 - Les cartes de la démo technique sont la référence à conserver, et la démo mérite d'être jouée avant d'être lue.
-- `000 Blank_Template.tmx` est une pile de couches prête à l'emploi, liée aux tilesets HGSS et à leurs règles d'automapping.
+- `000 Blank_Template.tmx` est une pile de calques prête à l'emploi, liée aux tilesets HGSS et à leurs règles d'automapping.

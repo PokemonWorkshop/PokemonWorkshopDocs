@@ -1,7 +1,7 @@
 ---
 title: "Les tuiles animées"
 slug: tuiles-animees
-sidebar_position: 7
+sidebar_position: 8
 description: "Les tuiles animées de Tiled fonctionnent dans un projet PSDK, sous des contraintes héritées du format RPG Maker XP visé par la conversion : les frames doivent partager un même tileset, les durées sont quantifiées selon un pas fixe, et chaque carte dispose d'un budget strict de tuiles animées distinctes. Cette page couvre la création d'une tuile animée et la façon de rester dans ce budget."
 ---
 
@@ -36,13 +36,15 @@ RPG Maker XP range les tuiles animées dans sept emplacements d'autotiles de 32 
 [RMXP ERROR] This map has too many animated diverse tiles
 ```
 
+Celui-ci n'apparaît pas dans Studio. Contrairement aux contrôles évoqués plus haut, qui rejettent un fichier au moment où Studio le lit, cette limite n'est atteinte que plus tard, côté moteur : le message sort donc dans la sortie de compilation et non à côté d'un nom de fichier.
+
 Le décompte n'est pas un simple total. Les tuiles animées sont regroupées par **nombre de frames**, et chaque groupe est arrondi au multiple de 32 supérieur. Une carte utilisant 33 tuiles de 4 frames et 2 tuiles de 8 frames dépense 64 plus 32, soit 96 de ses 224, et non 35. Limiter ses animations à un petit nombre de longueurs de frames coûte donc bien moins de budget que de les éparpiller.
 
 ### La règle des 3
 
-Une carte convertie possède exactement trois couches de tuiles, parce que c'est tout ce que propose RPG Maker XP. Quand plus de trois tuiles se superposent sur une position, la conversion les **fusionne** en tuiles composites. Une tuile composite qui contient une tuile animée est elle-même une nouvelle tuile animée distincte, et elle consomme du budget que rien à l'écran ne justifie.
+Une carte convertie possède exactement trois calques de tuiles, parce que c'est tout ce que propose RPG Maker XP. Quand plus de trois tuiles se superposent sur une position, la conversion les **fusionne** en tuiles composites. Une tuile composite qui contient une tuile animée est elle-même une nouvelle tuile animée distincte, et elle consomme du budget que rien à l'écran ne justifie.
 
-La règle pratique : à une position portant une tuile animée, on garde au plus trois tuiles superposées. Autrement dit, on ne mappe que ce qui est visible. Les tuiles cachées sous une couche opaque coûtent du budget et ne montrent rien.
+La règle pratique : à une position portant une tuile animée, on garde au plus trois tuiles superposées. Autrement dit, on ne mappe que ce qui est visible. Les tuiles cachées sous un calque opaque coûtent du budget et ne montrent rien.
 
 Cela ne s'applique pas aux tuiles animées empilées les unes sur les autres : la conversion en fusionne autant qu'elle peut, selon leur nombre de frames.
 

@@ -1,7 +1,7 @@
 ---
 title: "The Data/Tiled folder"
 slug: tiled-project-structure
-sidebar_position: 3
+sidebar_position: 4
 description: "Everything Tiled-related in a PSDK project lives under Data/Tiled, split into Maps, Tilesets, Assets and Overviews. Three of these folders belong to the maker and one is written by Pokémon Studio. This page describes what goes where, why a map records its tilesets as relative paths, and what the demo maps are for."
 ---
 

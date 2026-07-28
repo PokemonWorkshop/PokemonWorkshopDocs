@@ -18,7 +18,7 @@ On l'installe à son emplacement par défaut. Une copie portable extraite dans u
 Deux fonctionnalités en dépendent :
 
 - **Ouvrir une carte.** L'action **Ouvrir avec Tiled** lance l'éditeur sur le fichier `.tmx` de la carte sélectionnée.
-- **Générer les aperçus de cartes.** Les images de prévisualisation que Studio affiche pour chaque carte ne sont pas dessinées par Studio. Il exécute `tmxrasterizer`, le moteur de rendu en ligne de commande livré avec Tiled, et range le résultat dans `Data/Tiled/Overviews`. Les couches réservées sont masquées pendant ce rendu, de sorte qu'un aperçu montre la carte telle que le joueur la voit.
+- **Générer les aperçus de cartes.** Les images de prévisualisation que Studio affiche pour chaque carte ne sont pas dessinées par Studio. Il exécute `tmxrasterizer`, le moteur de rendu en ligne de commande livré avec Tiled, et range le résultat dans `Data/Tiled/Overviews`. Les calques réservés sont masqués pendant ce rendu, de sorte qu'un aperçu montre la carte telle que le joueur la voit.
 
 Comme `tmxrasterizer` se trouve à côté du binaire de Tiled, Studio déduit son emplacement du chemin déclaré. Un mauvais chemin casse donc les deux fonctionnalités d'un coup.
 

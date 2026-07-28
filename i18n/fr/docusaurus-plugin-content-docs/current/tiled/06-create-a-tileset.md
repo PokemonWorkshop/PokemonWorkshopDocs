@@ -1,7 +1,7 @@
 ---
 title: "Créer un tileset Tiled"
 slug: creer-un-tileset
-sidebar_position: 5
+sidebar_position: 6
 description: "Un tileset se crée dans Tiled à partir d'un PNG placé dans le dossier Assets du projet, puis s'enregistre en fichier .tsx à côté des autres tilesets. Deux réglages décident si la carte se convertira : une taille de tuile de 32 sur 32 pixels, et un tileset externe plutôt qu'embarqué. Cette page détaille la création et la façon de vérifier qu'une planche est bien en 32 sur 32."
 ---
 
@@ -34,7 +34,7 @@ Le `name` interne du tileset est indépendant de son nom de fichier, et rien n'i
 
 :::danger[On n'embarque jamais un tileset dans la carte]
 
-Un tileset embarqué vit à l'intérieur du `.tmx` au lieu d'avoir son propre fichier `.tsx`. La conversion rejette la carte sans détour avec le message « Embedded tilesets are not supported ». On laisse **Intégrer dans la carte** décoché, toujours.
+Un tileset embarqué vit à l'intérieur du `.tmx` au lieu d'avoir son propre fichier `.tsx`. Studio rejette la carte sans détour, avec le message « Embedded tilesets are not supported » affiché à côté du nom du fichier. On laisse **Intégrer dans la carte** décoché, toujours.
 
 :::
 

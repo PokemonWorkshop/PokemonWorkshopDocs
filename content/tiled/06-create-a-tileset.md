@@ -1,7 +1,7 @@
 ---
 title: "Create a Tiled tileset"
 slug: create-a-tileset
-sidebar_position: 5
+sidebar_position: 6
 description: "A tileset is created in Tiled from a PNG placed in the project's Assets folder, and saved as a .tsx file next to the other tilesets. Two settings decide whether the map will convert at all: a tile size of 32 by 32 pixels, and the tileset staying external rather than embedded. This page walks through the creation and how to check a sheet really is a 32 by 32 tileset."
 ---
 
@@ -34,7 +34,7 @@ The tileset's internal `name` is independent of its filename, and nothing requir
 
 :::danger[Never embed a tileset in the map]
 
-An embedded tileset lives inside the `.tmx` instead of its own `.tsx` file. Conversion rejects the map outright with *Embedded tilesets are not supported*. Leave **Embed in map** unchecked, always.
+An embedded tileset lives inside the `.tmx` instead of its own `.tsx` file. Studio rejects the map outright, with *Embedded tilesets are not supported* shown next to the filename. Leave **Embed in map** unchecked, always.
 
 :::
 
