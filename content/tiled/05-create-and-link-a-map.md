@@ -24,16 +24,16 @@ From the map list, **New map** opens the creation editor:
 
 The Tiled field is optional. Creating the map first and drawing it later is a normal workflow, and the next section covers attaching the file afterwards.
 
-## Import or assign several maps
+## Import several maps at once
 
-The batch dialog handles an existing set of `.tmx` files, which is the usual case when starting from a Tiled project built outside Studio, or when migrating.
+The **Import** button handles an existing set of `.tmx` files, which is the usual case when starting from a Tiled project built outside Studio, or when migrating. It opens a dialog titled **Assign Tiled maps**, which does both jobs at once.
 
-Select the files, then decide **per file** what it becomes:
+Select the folder and the files, then decide **per file** what it becomes:
 
 - **New map** creates a fresh Studio entry for it.
 - An **existing map** in the list attaches the file to that entry instead, replacing whatever it was linked to.
 
-The same dialog therefore covers both **Import Tiled maps**, for files that should become new maps, and **Assign Tiled maps**, for files that belong to maps you already created.
+That per-file choice is the whole point of the dialog: importing a project and attaching a file to a map you already created are the same operation, told apart only by what you pick in that column.
 
 ## Re-convert a map after editing it
 
@@ -51,6 +51,6 @@ A map you edited but never updated keeps playing its previous version, which is 
 
 - A Studio map entry stores the name of the Tiled file that draws it; linking is what makes a `.tmx` playable.
 - **New map** creates one map and takes its `.tmx` in the **Map made with Tiled** field.
-- The batch dialog lets you choose, per file, between creating a new map and assigning the file to an existing one.
+- **Import** opens the **Assign Tiled maps** dialog, where each file becomes either a new map or an assignment to an existing one.
 - Studio copies the `.tmx` and its dependencies into `Data/Tiled` itself; you do not place them by hand.
 - After editing a map in Tiled, run **Update modified maps** or the change never reaches the game.

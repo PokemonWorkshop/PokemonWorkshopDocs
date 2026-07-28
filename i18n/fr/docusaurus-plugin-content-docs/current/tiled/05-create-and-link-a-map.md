@@ -24,16 +24,16 @@ Depuis la liste des cartes, **Nouvelle carte** ouvre l'éditeur de création :
 
 Le champ Tiled est facultatif. Créer la carte d'abord et la dessiner ensuite est un flux de travail normal, et la section suivante couvre l'association du fichier après coup.
 
-## Importer ou assigner plusieurs cartes
+## Importer plusieurs cartes d'un coup
 
-La boîte de dialogue par lot traite un ensemble de fichiers `.tmx` existants, ce qui est le cas courant quand on part d'un projet Tiled construit hors de Studio, ou lors d'une migration.
+Le bouton **Importer** traite un ensemble de fichiers `.tmx` existants, ce qui est le cas courant quand on part d'un projet Tiled construit hors de Studio, ou lors d'une migration. Il ouvre une boîte de dialogue intitulée **Assigner des cartes Tiled**, qui fait les deux travaux à la fois.
 
-On sélectionne les fichiers, puis on décide **fichier par fichier** de ce qu'il devient :
+On sélectionne le dossier puis les fichiers, et on décide **fichier par fichier** de ce que chacun devient :
 
 - **Nouvelle carte** lui crée une entrée Studio neuve.
 - Une **carte existante** de la liste lui associe le fichier à la place, en remplaçant ce à quoi elle était liée.
 
-La même boîte de dialogue couvre donc à la fois **Importer des cartes Tiled**, pour les fichiers qui doivent devenir de nouvelles cartes, et **Assigner des cartes Tiled**, pour les fichiers qui appartiennent à des cartes déjà créées.
+Ce choix fichier par fichier est toute la raison d'être de la boîte de dialogue : importer un projet et associer un fichier à une carte déjà créée sont la même opération, que seule cette colonne distingue.
 
 ## Reconvertir une carte après l'avoir modifiée
 
@@ -51,6 +51,6 @@ Une carte modifiée mais jamais mise à jour continue de jouer sa version préc�
 
 - Une entrée de carte Studio mémorise le nom du fichier Tiled qui la dessine ; c'est la liaison qui rend un `.tmx` jouable.
 - **Nouvelle carte** crée une carte et reçoit son `.tmx` dans le champ **Carte réalisée avec Tiled**.
-- La boîte de dialogue par lot permet de choisir, fichier par fichier, entre créer une nouvelle carte et l'assigner à une carte existante.
+- **Importer** ouvre la boîte de dialogue **Assigner des cartes Tiled**, où chaque fichier devient soit une nouvelle carte, soit une association à une carte existante.
 - Studio copie lui-même le `.tmx` et ses dépendances dans `Data/Tiled` ; on ne les dépose pas à la main.
 - Après avoir modifié une carte dans Tiled, on lance **Mettre à jour les cartes modifiées**, sinon le changement n'atteint jamais le jeu.

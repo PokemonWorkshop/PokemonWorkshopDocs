@@ -24,11 +24,11 @@ A wrong path breaks both at once, and neither failure says why.
 
 ## Declare the path in Pokémon Studio
 
-The setting lives in **Settings**, tab **Maps**, under the **Tiled installation path** field. Drop the file there, or click the field to browse for it.
+The setting lives in **Settings**, under **Integrations**, on the **Map management** page. Drop the file on the **Tiled installation path** field, or click it to browse.
 
 ### Windows
 
-Point at the **Tiled executable** itself, not at its folder. The file must be `tiled.exe`, typically:
+Point at the Tiled executable itself, not at its folder. The file must be `tiled.exe`, typically:
 
 ```bash
 C:\Program Files\Tiled\tiled.exe
@@ -51,7 +51,7 @@ Open any map with **Open with Tiled**. If the editor starts on the right `.tmx`,
 ## Conclusion
 
 - Tiled is installed separately and downloaded from `mapeditor.org`; Pokémon Studio only launches it.
-- The path is declared in **Settings**, tab **Maps**, field **Tiled installation path**.
+- The path is declared in **Settings**, **Integrations**, **Map management**, field **Tiled installation path**.
 - On Windows the field expects the `tiled.exe` file, on Linux the AppImage or the binary, on macOS the application bundle.
 - Studio needs the path both to open maps and to run `tmxrasterizer`, which renders the overviews stored in `Data/Tiled/Overviews`.
 - Installing in a temporary or portable folder works until that folder disappears.

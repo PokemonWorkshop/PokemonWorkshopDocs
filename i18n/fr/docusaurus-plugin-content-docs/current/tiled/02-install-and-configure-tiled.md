@@ -24,11 +24,11 @@ Un mauvais chemin casse les deux d'un coup, et aucun des deux échecs n'en donne
 
 ## Déclarer le chemin dans Pokémon Studio
 
-Le réglage se trouve dans **Paramètres**, onglet **Cartes**, champ **Chemin d'installation de Tiled**. On y dépose le fichier, ou on clique sur le champ pour aller le chercher.
+Le réglage se trouve dans les **Paramètres**, sous **Intégrations**, sur la page **Gestion des cartes**. On dépose le fichier sur le champ **Chemin d'installation de Tiled**, ou on clique dessus pour aller le chercher.
 
 ### Windows
 
-On pointe vers l'**exécutable de Tiled** lui-même, pas vers son dossier. Le fichier doit être `tiled.exe`, en général :
+On pointe vers l'exécutable de Tiled lui-même, pas vers son dossier. Le fichier doit être `tiled.exe`, en général :
 
 ```bash
 C:\Program Files\Tiled\tiled.exe
@@ -51,7 +51,7 @@ On ouvre n'importe quelle carte avec **Ouvrir avec Tiled**. Si l'éditeur démar
 ## Conclusion
 
 - Tiled s'installe séparément et se télécharge sur `mapeditor.org` ; Pokémon Studio ne fait que le lancer.
-- Le chemin se déclare dans **Paramètres**, onglet **Cartes**, champ **Chemin d'installation de Tiled**.
+- Le chemin se déclare dans les **Paramètres**, **Intégrations**, **Gestion des cartes**, champ **Chemin d'installation de Tiled**.
 - Sur Windows le champ attend le fichier `tiled.exe`, sur Linux l'AppImage ou le binaire, sur macOS l'application.
 - Studio a besoin de ce chemin à la fois pour ouvrir les cartes et pour exécuter `tmxrasterizer`, qui produit les aperçus rangés dans `Data/Tiled/Overviews`.
 - Une installation dans un dossier temporaire ou portable fonctionne jusqu'à la disparition de ce dossier.
