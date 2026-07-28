@@ -157,7 +157,7 @@ ruby Particles.rb
 
 ## Paint the tag in Tiled
 
-The constant only becomes useful once the tag is painted on a map. System Tags are painted in Tiled on the `systemtags` layer, from the System Tags tileset image at `Data/Tiled/Assets/prio_w.png`. Add your tile on the first free cell of that image, matching the `(x, y)` position you passed to `gen`, then paint it wherever the terrain should apply. How the `systemtags` layer works is detailed in [Understanding System Tags](/psdk/core-systems/system-tags).
+The constant only becomes useful once the tag is painted on a map. System Tags are painted in Tiled on the `systemtags` layer, from the System Tags tileset image at `Data/Tiled/Assets/prio_w.png`. That layer and the rules it follows are described in [Layers and superposition priorities](/tiled/layers-and-priorities). Add your tile on the first free cell of that image, matching the `(x, y)` position you passed to `gen`, then paint it wherever the terrain should apply. How the `systemtags` layer works is detailed in [Understanding System Tags](/psdk/core-systems/system-tags).
 
 ## Conclusion
 
