@@ -9,7 +9,7 @@ A Tiled file only becomes a playable map once Pokémon Studio knows about it. St
 
 ## What linking actually does
 
-A Studio map is a database entry: a name, a description, an average step count for wild encounters, a background music, and the name of the Tiled file that draws it. Linking writes that filename into the entry, then Studio reads the `.tmx`, extracts the tile metadata, and stores it so the engine-side converter can build the RPG Maker XP data.
+A Studio map is a database entry: a name, a description, a step count for wild encounters, a background music, and the name of the Tiled file that draws it. Linking is what writes that filename into the entry and makes Studio read the file.
 
 This is why you never place a `.tmx` in `Data/Tiled/Maps` by hand and expect it to appear: the folder is where the file must **end up**, not how Studio learns it exists. Every route below copies the file there for you.
 

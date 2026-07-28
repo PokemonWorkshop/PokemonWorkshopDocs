@@ -17,14 +17,12 @@ Déclarer une animation frame par frame dans l'éditeur d'animation de Tiled dev
 
 ## La durée des frames
 
-Les durées se règlent en millisecondes dans Tiled, et la conversion les **quantifie**. Le pas vient de la configuration d'affichage du projet, précisément du nombre de frames moteur pendant lesquelles un autotile est maintenu, qui vaut 6 par défaut. À 60 images par seconde, cela donne un pas de **100 millisecondes**.
-
-Deux conséquences en découlent :
+Les durées se règlent en millisecondes dans Tiled, mais la conversion les arrondit à un pas de **100 millisecondes**. Deux conséquences en découlent :
 
 - Une durée est tronquée vers le bas au pas inférieur. 250 ms devient 200 ms, pas 300.
 - Toute durée inférieure au pas est remontée à un pas. 40 ms se joue en 100 ms.
 
-Utiliser des multiples de 100 ms garantit donc que l'animation joue à la vitesse prévue, et non à celle que laisse la troncature.
+Utiliser des multiples de 100 ms garantit donc que l'animation joue à la vitesse prévue, et non à celle que laisse la troncature. Ce pas n'est pas une propriété du format : il suit les réglages d'affichage du projet, donc un projet qui les modifie obtient un pas différent.
 
 Le nombre de frames lui-même n'est pas plafonné par la conversion, mais chaque frame ajoute une rangée à la texture générée. Les animations longues produisent des images hautes, un coût à garder en tête sur les machines modestes.
 

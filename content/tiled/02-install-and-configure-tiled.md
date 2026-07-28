@@ -18,9 +18,9 @@ Install it in its default location. A portable copy extracted to a temporary fol
 Two features depend on it:
 
 - **Opening a map.** The **Open with Tiled** action launches the editor on the `.tmx` file of the selected map.
-- **Showing a map's overview.** Every map has two tabs, **Data** and **Map**. The **Map** tab displays a rendered preview of the map, which Studio does not draw itself: it runs `tmxrasterizer`, the command-line renderer shipped alongside Tiled, and stores the image in `Data/Tiled/Overviews`. The reserved layers are hidden during that render, so an overview shows the map as the player sees it. When the image is missing, the tab offers a **Generate map overview** button, which stays disabled until the path is set.
+- **Rendering map previews.** The image shown in a map's **Map** tab is produced by a tool that ships with Tiled, not by Studio. Without the path, the **Generate map overview** button stays disabled.
 
-Because `tmxrasterizer` sits next to the Tiled binary, Studio derives its location from the path you declare. A wrong path breaks both features at once.
+A wrong path breaks both at once, and neither failure says why.
 
 ## Declare the path in Pokémon Studio
 
@@ -38,11 +38,11 @@ Studio checks the filename and rejects anything else with *The Tiled installatio
 
 ### Linux
 
-Point at the Tiled **AppImage** if that is how Tiled was installed. With a package-manager installation, point at the `tiled` binary instead; Studio then expects `tmxrasterizer` in the same directory.
+Point at the Tiled **AppImage** if that is how Tiled was installed, or at the `tiled` binary for a package-manager installation.
 
 ### macOS
 
-Point at the Tiled application bundle in the **Applications** folder. Studio looks for the renderer inside it, at `Contents/MacOS/tmxrasterizer`.
+Point at the Tiled application in the **Applications** folder.
 
 ## Check that it works
 

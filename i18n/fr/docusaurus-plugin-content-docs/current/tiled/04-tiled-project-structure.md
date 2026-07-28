@@ -16,9 +16,7 @@ Tout ce qui touche à Tiled dans un projet PSDK vit sous `Data/Tiled`, réparti 
 | `Assets` | les images `.png` dans lesquelles les tilesets sont découpés | vous |
 | `Overviews` | un aperçu `.png` par carte | Pokémon Studio |
 
-On ne modifie jamais `Overviews` à la main. Pokémon Studio le remplit en lançant le moteur de rendu de Tiled, avec les calques réservés masqués : automatiquement lors de l'import et de la mise à jour des cartes, et à la demande depuis l'onglet **Carte** d'une carte dont l'image manque.
-
-Une cinquième entrée, le dossier caché `.jobs`, contient la file de conversion que Studio écrit et que le moteur consomme. C'est de la tuyauterie interne : on n'y touche pas.
+On ne modifie jamais `Overviews` à la main : Studio le remplit lors de l'import et de la mise à jour des cartes, et à la demande depuis l'onglet **Carte** d'une carte. Les calques réservés sont masqués dans ces images, ce qui explique qu'un aperçu montre la carte telle que le joueur la voit et non telle qu'on l'a peinte.
 
 ## Pourquoi cette répartition compte
 

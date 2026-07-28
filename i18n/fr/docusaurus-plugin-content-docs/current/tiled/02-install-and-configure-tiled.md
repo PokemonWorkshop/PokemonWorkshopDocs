@@ -18,9 +18,9 @@ On l'installe à son emplacement par défaut. Une copie portable extraite dans u
 Deux fonctionnalités en dépendent :
 
 - **Ouvrir une carte.** L'action **Ouvrir avec Tiled** lance l'éditeur sur le fichier `.tmx` de la carte sélectionnée.
-- **Afficher l'aperçu d'une carte.** Chaque carte possède deux onglets, **Données** et **Carte**. L'onglet **Carte** affiche un rendu de la carte, que Studio ne dessine pas lui-même : il exécute `tmxrasterizer`, le moteur de rendu en ligne de commande livré avec Tiled, et range l'image dans `Data/Tiled/Overviews`. Les calques réservés sont masqués pendant ce rendu, de sorte qu'un aperçu montre la carte telle que le joueur la voit. Quand l'image manque, l'onglet propose un bouton **Générer l'aperçu de la carte**, désactivé tant que le chemin n'est pas renseigné.
+- **Produire les aperçus de cartes.** L'image affichée dans l'onglet **Carte** d'une carte est produite par un outil livré avec Tiled, pas par Studio. Sans le chemin, le bouton **Générer l'aperçu de la carte** reste grisé.
 
-Comme `tmxrasterizer` se trouve à côté du binaire de Tiled, Studio déduit son emplacement du chemin déclaré. Un mauvais chemin casse donc les deux fonctionnalités d'un coup.
+Un mauvais chemin casse les deux d'un coup, et aucun des deux échecs n'en donne la raison.
 
 ## Déclarer le chemin dans Pokémon Studio
 
@@ -38,11 +38,11 @@ Studio vérifie le nom du fichier et refuse tout autre choix avec le message « 
 
 ### Linux
 
-On pointe vers l'**AppImage** de Tiled si c'est ainsi qu'il a été installé. Avec une installation par gestionnaire de paquets, on pointe vers le binaire `tiled` ; Studio s'attend alors à trouver `tmxrasterizer` dans le même répertoire.
+On pointe vers l'**AppImage** de Tiled si c'est ainsi qu'il a été installé, ou vers le binaire `tiled` pour une installation par gestionnaire de paquets.
 
 ### macOS
 
-On pointe vers l'application Tiled dans le dossier **Applications**. Studio y cherche le moteur de rendu, à l'emplacement `Contents/MacOS/tmxrasterizer`.
+On pointe vers l'application Tiled dans le dossier **Applications**.
 
 ## Vérifier que ça fonctionne
 

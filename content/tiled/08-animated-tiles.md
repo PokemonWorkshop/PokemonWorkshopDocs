@@ -17,14 +17,12 @@ Declaring an animation frame by frame in Tiled's animation editor gets tedious q
 
 ## Frame durations
 
-Durations are set in milliseconds in Tiled, and the conversion **quantises** them. The step comes from the project's display configuration, specifically the number of engine frames an autotile holds, which is 6 by default. At 60 frames per second that gives a step of **100 milliseconds**.
-
-Two consequences follow:
+Durations are set in milliseconds in Tiled, but the conversion rounds them to a step of **100 milliseconds**. Two consequences follow:
 
 - A duration is truncated down to the step. 250 ms becomes 200 ms, not 300.
 - Any duration below the step is raised to one step. 40 ms plays at 100 ms.
 
-Using multiples of 100 ms therefore means the animation plays at the speed you designed, rather than at whatever the truncation leaves.
+Using multiples of 100 ms therefore means the animation plays at the speed you designed, rather than at whatever the truncation leaves. That step is not a property of the format: it follows the project's display settings, so a project that changes them gets a different step.
 
 The frame count itself is not capped by the conversion, but every frame adds a row to the generated texture. Long animations produce tall images, which is a cost worth keeping in mind on weaker machines.
 

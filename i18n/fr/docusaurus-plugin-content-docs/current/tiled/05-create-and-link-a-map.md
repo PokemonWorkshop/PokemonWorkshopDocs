@@ -9,7 +9,7 @@ Un fichier Tiled ne devient une carte jouable qu'une fois que Pokémon Studio le
 
 ## Ce que la liaison fait vraiment
 
-Une carte Studio est une entrée de base de données : un nom, une description, un nombre moyen de pas pour les rencontres sauvages, une musique de fond, et le nom du fichier Tiled qui la dessine. Lier une carte écrit ce nom de fichier dans l'entrée, puis Studio lit le `.tmx`, en extrait les métadonnées de tuiles et les enregistre pour que le convertisseur côté moteur puisse produire les données RPG Maker XP.
+Une carte Studio est une entrée de base de données : un nom, une description, un nombre de pas pour les rencontres sauvages, une musique de fond, et le nom du fichier Tiled qui la dessine. C'est la liaison qui écrit ce nom de fichier dans l'entrée et qui pousse Studio à lire le fichier.
 
 C'est pourquoi on ne dépose jamais un `.tmx` à la main dans `Data/Tiled/Maps` en espérant le voir apparaître : ce dossier est l'endroit où le fichier doit **arriver**, pas la façon dont Studio apprend son existence. Chacune des voies ci-dessous s'occupe de la copie.
 
