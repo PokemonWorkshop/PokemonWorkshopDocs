@@ -18,7 +18,7 @@ C'est pourquoi on ne dépose jamais un `.tmx` à la main dans `Data/Tiled/Maps` 
 Depuis la liste des cartes, **Nouvelle carte** ouvre l'éditeur de création :
 
 1. On donne un **nom** et une description à la carte.
-2. On règle le **nombre moyen de pas** entre deux rencontres sauvages, de 1 à 999. La valeur par défaut est 30.
+2. On règle **Pas moyens requis**, le nombre de pas entre deux rencontres sauvages, de 1 à 999. La valeur par défaut est 30.
 3. Dans le champ **Carte réalisée avec Tiled**, on dépose le fichier `.tmx`. Studio le copie dans le projet, ainsi que les tilesets et les images qu'il référence.
 4. On peut définir une musique et une ambiance sonore de fond.
 

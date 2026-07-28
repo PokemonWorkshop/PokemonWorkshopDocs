@@ -16,7 +16,7 @@ Everything Tiled-related in a PSDK project lives under `Data/Tiled`, split into 
 | `Assets` | the `.png` images the tilesets are cut from | you |
 | `Overviews` | one `.png` preview per map | Pokémon Studio |
 
-You never edit `Overviews` by hand. Pokémon Studio regenerates it by running Tiled's renderer whenever a map changes, with the reserved layers hidden.
+You never edit `Overviews` by hand. Pokémon Studio fills it by running Tiled's renderer, with the reserved layers hidden: automatically when maps are imported or updated, and on demand from a map's **Map** tab when its image is missing.
 
 A fifth entry, the hidden `.jobs` folder, holds the conversion queue Studio writes and the engine consumes. It is internal plumbing: leave it alone.
 

@@ -18,7 +18,7 @@ This is why you never place a `.tmx` in `Data/Tiled/Maps` by hand and expect it 
 From the map list, **New map** opens the creation editor:
 
 1. Give the map a **name** and a description.
-2. Set the **average number of steps** between two wild encounters, from 1 to 999. The default is 30.
+2. Set **Steps average**, the number of steps between two wild encounters, from 1 to 999. The default is 30.
 3. In the **Map made with Tiled** field, drop the `.tmx` file. Studio copies it, and the tilesets and images it references, into the project.
 4. Optionally set a background music and a background sound.
 

@@ -18,7 +18,7 @@ Install it in its default location. A portable copy extracted to a temporary fol
 Two features depend on it:
 
 - **Opening a map.** The **Open with Tiled** action launches the editor on the `.tmx` file of the selected map.
-- **Generating map overviews.** The preview images Studio displays for each map are not drawn by Studio. It runs `tmxrasterizer`, the command-line renderer shipped alongside Tiled, and stores the result in `Data/Tiled/Overviews`. The reserved layers are hidden during that render, so an overview shows the map as the player sees it.
+- **Showing a map's overview.** Every map has two tabs, **Data** and **Map**. The **Map** tab displays a rendered preview of the map, which Studio does not draw itself: it runs `tmxrasterizer`, the command-line renderer shipped alongside Tiled, and stores the image in `Data/Tiled/Overviews`. The reserved layers are hidden during that render, so an overview shows the map as the player sees it. When the image is missing, the tab offers a **Generate map overview** button, which stays disabled until the path is set.
 
 Because `tmxrasterizer` sits next to the Tiled binary, Studio derives its location from the path you declare. A wrong path breaks both features at once.
 

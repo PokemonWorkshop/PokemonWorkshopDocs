@@ -26,7 +26,7 @@ Comme le fichier se trouve déjà dans `Data/Tiled/Maps`, Studio l'utilisera sur
 Dans Studio, on va dans la liste des cartes et on clique sur **Nouvelle carte** :
 
 1. On lui donne un nom.
-2. On laisse le nombre moyen de pas à 30 pour l'instant. Il commande la fréquence des rencontres sauvages.
+2. On laisse **Pas moyens requis** à 30 pour l'instant. Ce champ commande la fréquence des rencontres sauvages.
 3. Dans le champ **Carte réalisée avec Tiled**, on sélectionne le `.tmx` que l'on vient de créer.
 4. On valide.
 

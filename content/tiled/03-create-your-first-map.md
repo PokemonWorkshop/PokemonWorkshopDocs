@@ -26,7 +26,7 @@ Because the file is already inside `Data/Tiled/Maps`, Studio will use it where i
 In Studio, go to the map list and click **New map**:
 
 1. Give it a name.
-2. Leave the average number of steps at 30 for now. It controls how often wild encounters trigger.
+2. Leave **Steps average** at 30 for now. That field controls how often wild encounters trigger.
 3. In the **Map made with Tiled** field, select the `.tmx` you just created.
 4. Validate.
 
