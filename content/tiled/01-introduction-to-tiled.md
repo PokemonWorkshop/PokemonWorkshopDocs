@@ -29,6 +29,12 @@ The chain that turns a Tiled map into something the engine can run has two steps
 
 This second step is why some of the rules documented in this section look arbitrary. They are not Tiled limitations: they come from the RPG Maker XP data format the conversion targets. The clearest example is the **three tile layers** a map is compressed into, which drives the layer priority system and the animated tile budget.
 
+:::info[These constraints are tied to RPG Maker XP]
+
+Pokémon Studio v3.0 will move away from RPG Maker. The limits documented in this section that come from that target format, rather than from Tiled itself, are expected to be relaxed then. Which ones, and how far, is not settled: map with the rules as they stand today.
+
+:::
+
 ## What Tiled does not handle
 
 Tiled only produces the map. Everything else lives elsewhere:

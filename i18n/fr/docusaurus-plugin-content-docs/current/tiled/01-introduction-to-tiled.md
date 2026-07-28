@@ -29,6 +29,12 @@ La chaîne qui transforme une carte Tiled en quelque chose que le moteur sait ex
 
 Cette deuxième étape explique pourquoi certaines règles documentées dans cette section paraissent arbitraires. Ce ne sont pas des limites de Tiled : elles viennent du format de données RPG Maker XP visé par la conversion. L'exemple le plus net est celui des **trois couches de tuiles** dans lesquelles une carte est compressée, qui commande à la fois le système de priorités des couches et le budget de tuiles animées.
 
+:::info[Ces contraintes sont liées à RPG Maker XP]
+
+Pokémon Studio v3.0 abandonnera RPG Maker. Les limites documentées dans cette section qui viennent de ce format cible, et non de Tiled lui-même, ont vocation à être assouplies à ce moment-là. Lesquelles, et jusqu'où, n'est pas arrêté : on mappe avec les règles telles qu'elles sont aujourd'hui.
+
+:::
+
 ## Ce dont Tiled ne s'occupe pas
 
 Tiled ne produit que la carte. Tout le reste vit ailleurs :
