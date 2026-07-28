@@ -11,6 +11,10 @@
     "message": "PSDK",
     "description": "Navbar item with label PSDK"
   },
+  "item.label.Tiled": {
+    "message": "Tiled",
+    "description": "Navbar item with label Tiled"
+  },
   "item.label.RMXP": {
     "message": "RMXP",
     "description": "Navbar item with label RMXP"

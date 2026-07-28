@@ -37,11 +37,14 @@ The repository is structured around the i18n architecture:
 ├── content/                  # English source docs (default locale)
 │   ├── index.md
 │   ├── getting-started/
+│   ├── pokemon-studio/
 │   ├── psdk/
 │   │   ├── battle-engine/
 │   │   └── ui-development/
+│   ├── tiled/
 │   ├── rpg-maker-xp/
-│   └── ruby/
+│   ├── ruby/
+│   └── misc/
 ├── i18n/fr/
 │   ├── docusaurus-plugin-content-docs/
 │   │   ├── current/          # French translations of every English page
