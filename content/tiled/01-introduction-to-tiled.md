@@ -48,6 +48,7 @@ This section documents what is **specific to a PSDK project**: folder layout, re
 | Official Tiled manual | French | [doc.mapeditor.org](https://doc.mapeditor.org/fr/stable/) |
 | Video tutorial by Invatorzen | English | [YouTube](https://www.youtube.com/watch?v=5A8gjBRGAAI) |
 | Video tutorial by SirLinfey | French | [YouTube](https://www.youtube.com/watch?v=0WnjTuulYMY) |
+| Moving from RPG Maker XP to Tiled, by Fuyutaa | French | [YouTube](https://www.youtube.com/watch?v=ItE0JN9ben0) |
 
 The technical demo shipped with the base project is the other reference worth using. Its maps are real, converted, working maps, and reading one in Tiled answers most questions faster than any guide.
 
