@@ -23,6 +23,10 @@
     "message": "PSDK",
     "description": "The label of footer link with label=PSDK linking to /psdk"
   },
+  "link.item.label.Tiled": {
+    "message": "Tiled",
+    "description": "The label of footer link with label=Tiled linking to /tiled"
+  },
   "link.item.label.RMXP": {
     "message": "RMXP",
     "description": "The label of footer link with label=RMXP linking to /rpg-maker-xp"
