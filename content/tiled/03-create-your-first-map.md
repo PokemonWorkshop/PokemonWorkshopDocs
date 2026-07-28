@@ -77,10 +77,10 @@ Now that the loop makes sense, the rest of the section fills it in:
 
 | You want to | Read |
 | --- | --- |
+| Draw things above the player, or add tile behaviours | [Layers and superposition priorities](/tiled/layers-and-priorities) |
+| Use your own tile sheets | [Create a Tiled tileset](/tiled/create-a-tileset) |
 | Understand where files live and why | [The Data/Tiled folder](/tiled/tiled-project-structure) |
 | Add maps in batches, or attach a file to an existing map | [Create a map and link it to Studio](/tiled/create-and-link-a-map) |
-| Use your own tile sheets | [Create a Tiled tileset](/tiled/create-a-tileset) |
-| Draw things above the player, or add tile behaviours | [Layers and superposition priorities](/tiled/layers-and-priorities) |
 | Animate water, flowers or grass | [Animated tiles](/tiled/animated-tiles) |
 
 ## Conclusion

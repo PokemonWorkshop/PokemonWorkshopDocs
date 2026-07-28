@@ -77,10 +77,10 @@ Maintenant que la boucle a du sens, le reste de la section la complète :
 
 | Ce que l'on veut | À lire |
 | --- | --- |
+| Dessiner au-dessus du joueur, ou ajouter des comportements de tuiles | [Calques et priorités de superposition](/tiled/calques-et-priorites) |
+| Utiliser ses propres planches de tuiles | [Créer un tileset Tiled](/tiled/creer-un-tileset) |
 | Comprendre où vivent les fichiers et pourquoi | [Le dossier Data/Tiled](/tiled/structure-du-projet-tiled) |
 | Ajouter des cartes par lot, ou associer un fichier à une carte existante | [Créer une carte et la lier à Studio](/tiled/creer-et-lier-une-carte) |
-| Utiliser ses propres planches de tuiles | [Créer un tileset Tiled](/tiled/creer-un-tileset) |
-| Dessiner au-dessus du joueur, ou ajouter des comportements de tuiles | [Calques et priorités de superposition](/tiled/calques-et-priorites) |
 | Animer l'eau, les fleurs ou l'herbe | [Les tuiles animées](/tiled/tuiles-animees) |
 
 ## Conclusion
