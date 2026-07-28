@@ -132,7 +132,7 @@
     "description": "The generated-index page description for category Studio in sidebar mainSidebar"
   },
   "sidebar.mainSidebar.category.Tiled.link.generated-index.description": {
-    "message": "Documentation de Tiled, l'éditeur de cartes utilisé par les projets PSDK. Les guides de référence et tutoriels arriveront ici au fil de la rédaction.",
+    "message": "Tout ce qu'un projet PSDK attend de Tiled, l'éditeur avec lequel ses cartes sont construites : l'installer, dessiner une première carte jouable, et les règles de nommage et limites de conversion attendues par le moteur.",
     "description": "The generated-index page description for category Tiled in sidebar mainSidebar"
   },
   "sidebar.mainSidebar.category.Misc": {

@@ -13,7 +13,7 @@ An animation is defined in the tileset, not in the map. Every frame is a tile of
 
 The demo ships a reference, `TECH-Animations.tsx`, used by several maps including `006 Beach.tmx`. Opening it shows how frames are laid out on the sheet before being tied together.
 
-Declaring an animation frame by frame in Tiled's animation editor gets tedious quickly. The [Bulk Animations plugin](https://github.com/lukas-shawford/tiled-bulk-animations) automates it across a whole tileset. If you use it, credit its authors in your game: work like this deserves to be named.
+Declaring an animation frame by frame in Tiled's animation editor gets tedious quickly. The [Bulk Animations plugin](https://github.com/lukas-shawford/tiled-bulk-animations) automates it across a whole tileset. If you use it, remember to credit its authors in your game.
 
 ## Frame durations
 
@@ -24,17 +24,17 @@ Durations are set in milliseconds in Tiled, but the conversion rounds them to a 
 
 Using multiples of 100 ms therefore means the animation plays at the speed you designed, rather than at whatever the truncation leaves. That step is not a property of the format: it follows the project's display settings, so a project that changes them gets a different step.
 
-The frame count itself is not capped by the conversion, but every frame adds a row to the generated texture. Long animations produce tall images, which is a cost worth keeping in mind on weaker machines.
+Nothing in the conversion rejects a long animation, but every frame adds a row to the generated texture, and the practical maximum is 32 frames: 32 frames of 32 pixels is the 1024 pixel texture ceiling the whole conversion is built around. Sticking to 4, 8, 16 or 32 frames is the recommended shape.
 
 ## The budget of distinct animated tiles
 
-RPG Maker XP holds animated tiles in seven autotile slots of 32 tiles each. That gives a hard ceiling of **224 distinct animated tiles per map**. Past it, the conversion stops with:
+RPG Maker XP offers seven autotile slots. The conversion packs 32 animated tiles into each, so that the generated texture stays within 1024 pixels for weaker machines. That gives a hard ceiling of **224 distinct animated tiles per map**. Past it, that map fails to convert while the others go through, and the compilation output shows:
 
 ```bash
-[RMXP ERROR] This map has too many animated diverse tiles
+Failed to process <map_name>: [RMXP ERROR] This map has too many animated diverse tiles (256)
 ```
 
-This one does not appear in Studio. Unlike the checks above, which reject a file the moment Studio reads it, this limit is only hit later, on the engine side, so the message shows up in the compilation output rather than next to a filename.
+The number in brackets is what the map actually consumed. This message does not appear in Studio: unlike the checks that reject a file the moment Studio reads it, this limit is only hit later, on the engine side. The map stays in the conversion queue and is retried on the next run.
 
 The count is not a simple total. Animated tiles are grouped by **number of frames**, and each group is rounded up to a multiple of 32. A map using 33 tiles of 4 frames and 2 tiles of 8 frames spends 64 plus 32, so 96 of its 224, not 35. Keeping animations to a small number of frame counts costs far less budget than spreading them across many.
 
@@ -44,7 +44,7 @@ A converted map has exactly three tile layers, because that is all RPG Maker XP 
 
 The practical rule: at a position carrying an animated tile, keep at most three superposed tiles. In other words, only map what is visible. Tiles hidden under an opaque layer cost budget and show nothing.
 
-This does not apply to animated tiles stacked on each other: the conversion fuses as many of them as it can, based on their frame counts.
+Stacking two animated tiles on one position is the case the merge handles best: the composite counts as a single animated tile. It only works cleanly if both have the **same frame count**. If they do not, the shorter one is drawn over its own frames and disappears for the rest of the cycle, and only one of the two timings survives for the whole column.
 
 ## Conclusion
 

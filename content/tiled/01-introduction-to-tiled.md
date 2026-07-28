@@ -25,11 +25,11 @@ Four words come back on every page of this section. If you have never used a map
 - A **tile** is one square of the map, 32 by 32 pixels. A map is a grid of tiles, and you never draw pixel by pixel.
 - A **tileset** is a sheet of artwork cut into tiles, the palette you pick from. A map uses as many as it needs.
 - A **layer** is one level of drawing. A map stacks several: the ground, then what stands on it, then what passes over the player's head. Tiled shows them as a list you paint on one at a time.
-- **Automapping** is a Tiled feature that places transition tiles for you, so that grass meeting sand gets its border without you drawing it by hand.
+- **Automapping** is a Tiled feature that replaces tiles automatically from rules you write, which takes repetitive placement off your hands.
 
 ## Why PSDK uses Tiled
 
-The RPG Maker XP map editor only offers three layers, no per-tile animation, and tilesets of a single column. Tiled lifts those limits at authoring time: as many layers as you want, layer folders, animated tiles, tile flipping and rotation, and automapping.
+The RPG Maker XP map editor only offers three layers, a single tileset per map, and animation only through its seven autotile slots. Tiled lifts those limits at authoring time: as many layers as you want, group layers to organise them, animated tiles, tile flipping and rotation, and automapping.
 
 The chain that turns a Tiled map into something the engine can run has two steps:
 

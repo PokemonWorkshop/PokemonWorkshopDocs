@@ -4,6 +4,6 @@
   "link": {
     "type": "generated-index",
     "slug": "/tiled",
-    "description": "Documentation for Tiled, the map editor used by PSDK projects. Reference guides and how-tos will land here as they are written."
+    "description": "Everything a PSDK project needs from Tiled, the map editor its maps are built with: installing it, drawing a first playable map, and the naming rules and conversion limits the engine expects."
   }
 }

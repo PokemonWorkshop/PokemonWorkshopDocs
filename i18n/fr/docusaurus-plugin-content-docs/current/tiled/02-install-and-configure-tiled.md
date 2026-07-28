@@ -15,12 +15,13 @@ On l'installe à son emplacement par défaut. Une copie portable extraite dans u
 
 ## Pourquoi Pokémon Studio a besoin du chemin
 
-Deux fonctionnalités en dépendent :
+Trois fonctionnalités en dépendent :
 
 - **Ouvrir une carte.** L'action **Ouvrir avec Tiled** lance l'éditeur sur le fichier `.tmx` de la carte sélectionnée.
-- **Produire les aperçus de cartes.** L'image affichée dans l'onglet **Carte** d'une carte est produite par un outil livré avec Tiled, pas par Studio. Sans le chemin, le bouton **Générer l'aperçu de la carte** reste grisé.
+- **Mettre à jour les cartes.** **Mettre à jour les cartes modifiées** relit les fichiers `.tmx` et reconstruit ce que le moteur charge. Sans le chemin, ce bouton est grisé, et avec lui toute la boucle de création et de test.
+- **Produire les aperçus de cartes.** L'image affichée dans l'onglet **Carte** d'une carte est produite par un outil livré avec Tiled, pas par Studio. Sans le chemin, le bouton **Générer l'aperçu de la carte** est grisé lui aussi.
 
-Un mauvais chemin casse les deux d'un coup, et aucun des deux échecs n'en donne la raison.
+Un bouton grisé affiche au survol « Le chemin d'installation de Tiled doit être renseigné dans les paramètres de l'application. » Un mauvais chemin est pire que pas de chemin : les boutons restent actifs et les échecs ne disent rien d'utile.
 
 ## Déclarer le chemin dans Pokémon Studio
 
@@ -53,5 +54,5 @@ On ouvre n'importe quelle carte avec **Ouvrir avec Tiled**. Si l'éditeur démar
 - Tiled s'installe séparément et se télécharge sur `mapeditor.org` ; Pokémon Studio ne fait que le lancer.
 - Le chemin se déclare dans les **Paramètres**, **Intégrations**, **Gestion des cartes**, champ **Chemin d'installation de Tiled**.
 - Sur Windows le champ attend le fichier `tiled.exe`, sur Linux l'AppImage ou le binaire, sur macOS l'application.
-- Studio a besoin de ce chemin à la fois pour ouvrir les cartes et pour exécuter `tmxrasterizer`, qui produit les aperçus rangés dans `Data/Tiled/Overviews`.
+- Sans le chemin, l'ouverture des cartes, leur mise à jour et la production des aperçus sont toutes désactivées.
 - Une installation dans un dossier temporaire ou portable fonctionne jusqu'à la disparition de ce dossier.

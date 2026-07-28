@@ -15,12 +15,13 @@ Install it in its default location. A portable copy extracted to a temporary fol
 
 ## Why Pokémon Studio needs the path
 
-Two features depend on it:
+Three features depend on it:
 
 - **Opening a map.** The **Open with Tiled** action launches the editor on the `.tmx` file of the selected map.
-- **Rendering map previews.** The image shown in a map's **Map** tab is produced by a tool that ships with Tiled, not by Studio. Without the path, the **Generate map overview** button stays disabled.
+- **Updating maps.** **Update modified maps** re-reads your `.tmx` files and rebuilds what the engine loads. Without the path, its button is greyed out, and with it the whole edit-and-test loop.
+- **Rendering map previews.** The image shown in a map's **Map** tab is produced by a tool that ships with Tiled, not by Studio. Without the path, the **Generate map overview** button is greyed out too.
 
-A wrong path breaks both at once, and neither failure says why.
+A greyed-out button shows *Tiled installation path must be specified in the application settings.* when you hover it. A wrong path is worse than no path: the buttons stay active and the failures say nothing useful.
 
 ## Declare the path in Pokémon Studio
 
@@ -53,5 +54,5 @@ Open any map with **Open with Tiled**. If the editor starts on the right `.tmx`,
 - Tiled is installed separately and downloaded from `mapeditor.org`; Pokémon Studio only launches it.
 - The path is declared in **Settings**, **Integrations**, **Map management**, field **Tiled installation path**.
 - On Windows the field expects the `tiled.exe` file, on Linux the AppImage or the binary, on macOS the application bundle.
-- Studio needs the path both to open maps and to run `tmxrasterizer`, which renders the overviews stored in `Data/Tiled/Overviews`.
+- Without the path, opening a map, updating maps and generating previews are all disabled.
 - Installing in a temporary or portable folder works until that folder disappears.

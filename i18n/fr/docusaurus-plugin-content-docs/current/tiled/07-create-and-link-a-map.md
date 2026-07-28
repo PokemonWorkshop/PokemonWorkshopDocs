@@ -21,14 +21,23 @@ Depuis la liste des cartes, **Nouvelle carte** ouvre l'éditeur de création :
 2. On règle **Pas moyens requis**, le nombre de pas entre deux rencontres sauvages, de 1 à 999. La valeur par défaut est 30.
 3. Dans le champ **Carte réalisée avec Tiled**, on dépose le fichier `.tmx`. Studio le copie dans le projet, ainsi que les tilesets et les images qu'il référence.
 4. On peut définir une musique et une ambiance sonore de fond.
+5. On clique sur **Ajouter la carte**.
 
-Le champ Tiled est facultatif. Créer la carte d'abord et la dessiner ensuite est un flux de travail normal, et la section suivante couvre l'association du fichier après coup.
+Le champ Tiled est facultatif. Créer la carte d'abord et la dessiner ensuite est un flux de travail normal.
+
+Si le fichier est refusé, le message s'affiche en rouge dans la section **Musiques** de l'éditeur, préfixé du nom du fichier. On déplie cette section quand on a déposé un fichier et que rien ne semble s'être passé.
+
+## Associer un fichier à une carte existante
+
+On clique sur le bloc d'information de la carte pour ouvrir son éditeur **Information**. Il porte le même champ **Carte réalisée avec Tiled** : on y dépose le `.tmx`.
+
+Vider ce champ détache le fichier et jette les métadonnées de tuiles que Studio en avait tirées, si bien que la carte n'est plus jouable tant qu'aucun fichier n'y est réassocié.
 
 ## Importer plusieurs cartes d'un coup
 
-Le bouton **Importer** traite un ensemble de fichiers `.tmx` existants, ce qui est le cas courant quand on part d'un projet Tiled construit hors de Studio, ou lors d'une migration. Il ouvre une boîte de dialogue intitulée **Assigner des cartes Tiled**, qui fait les deux travaux à la fois.
+Pour un ensemble de fichiers `.tmx` existants, cas courant quand on part d'un projet Tiled construit hors de Studio ou lors d'une migration, Studio propose une voie par lot. On ouvre **Nouvelle carte**, puis on clique sur **Assigner** dans le panneau **Assigner des cartes Tiled**. Sur un projet encore dépourvu de carte, le même dialogue s'atteint depuis le bouton **Importer** de la liste vide.
 
-On sélectionne le dossier puis les fichiers, et on décide **fichier par fichier** de ce que chacun devient :
+On sélectionne le dossier puis les fichiers, et on se sert de la colonne **Carte dans Pokémon Studio** pour décider **fichier par fichier** de ce que chacun devient :
 
 - **Nouvelle carte** lui crée une entrée Studio neuve.
 - Une **carte existante** de la liste lui associe le fichier à la place, en remplaçant ce à quoi elle était liée.
@@ -37,7 +46,7 @@ Ce choix fichier par fichier est toute la raison d'être de la boîte de dialogu
 
 ## Reconvertir une carte après l'avoir modifiée
 
-Modifier une carte dans Tiled ne met pas le jeu à jour tout seul. Studio suit la date de modification et l'empreinte de chaque `.tmx` lié, et lorsqu'il détecte un changement il propose **Mettre à jour les cartes modifiées**. Cette action relit les fichiers et rafraîchit les métadonnées de tuiles.
+Modifier une carte dans Tiled ne met pas le jeu à jour tout seul. Chaque fois que la fenêtre de Studio reprend le focus, il revérifie chaque `.tmx` lié en comparant sa date de modification à celle qu'il a mémorisée, et propose **Mettre à jour les cartes modifiées** si quelque chose a changé. L'action relit les fichiers et reconstruit ce que le moteur charge.
 
 Une carte modifiée mais jamais mise à jour continue de jouer sa version précédente, ce qui explique la plupart des changements qui refusent obstinément d'apparaître en jeu.
 
@@ -51,6 +60,6 @@ Une carte modifiée mais jamais mise à jour continue de jouer sa version préc�
 
 - Une entrée de carte Studio mémorise le nom du fichier Tiled qui la dessine ; c'est la liaison qui rend un `.tmx` jouable.
 - **Nouvelle carte** crée une carte et reçoit son `.tmx` dans le champ **Carte réalisée avec Tiled**.
-- **Importer** ouvre la boîte de dialogue **Assigner des cartes Tiled**, où chaque fichier devient soit une nouvelle carte, soit une association à une carte existante.
+- **Assigner**, dans l'éditeur **Nouvelle carte**, ouvre la boîte de dialogue **Assigner des cartes Tiled**, où chaque fichier devient soit une nouvelle carte, soit une association à une carte existante.
 - Studio copie lui-même le `.tmx` et ses dépendances dans `Data/Tiled` ; on ne les dépose pas à la main.
 - Après avoir modifié une carte dans Tiled, on lance **Mettre à jour les cartes modifiées**, sinon le changement n'atteint jamais le jeu.

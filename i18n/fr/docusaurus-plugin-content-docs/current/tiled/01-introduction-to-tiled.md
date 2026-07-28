@@ -25,11 +25,11 @@ Quatre mots reviennent sur chaque page de cette section. Si on n'a jamais utilis
 - Une **tuile** est une case de la carte, de 32 sur 32 pixels. Une carte est une grille de tuiles, et on ne dessine jamais pixel par pixel.
 - Un **tileset** est une planche de graphismes découpée en tuiles, la palette dans laquelle on pioche. Une carte en utilise autant qu'elle en a besoin.
 - Un **calque** est un niveau de dessin. Une carte en empile plusieurs : le sol, puis ce qui se pose dessus, puis ce qui passe au-dessus de la tête du joueur. Tiled les présente sous forme de liste, et on peint sur un calque à la fois.
-- L'**automapping** est une fonction de Tiled qui place les tuiles de transition à votre place, de sorte que la rencontre entre l'herbe et le sable reçoive sa bordure sans qu'on la dessine à la main.
+- L'**automapping** est une fonction de Tiled qui remplace automatiquement des tuiles à partir de règles que l'on écrit, ce qui décharge des placements répétitifs.
 
 ## Pourquoi PSDK utilise Tiled
 
-L'éditeur de cartes de RPG Maker XP ne propose que trois calques, aucune animation par tuile, et des tilesets d'une seule colonne. Tiled fait sauter ces limites au moment de la création : autant de calques qu'on veut, des dossiers de calques, des tuiles animées, le retournement et la rotation des tuiles, et l'automapping.
+L'éditeur de cartes de RPG Maker XP ne propose que trois calques, un seul tileset par carte, et de l'animation uniquement via ses sept emplacements d'autotiles. Tiled fait sauter ces limites au moment de la création : autant de calques qu'on veut, des groupes de calques pour les organiser, des tuiles animées, le retournement et la rotation des tuiles, et l'automapping.
 
 La chaîne qui transforme une carte Tiled en quelque chose que le moteur sait exécuter compte deux étapes :
 
@@ -40,7 +40,7 @@ Cette deuxième étape explique pourquoi certaines règles documentées dans cet
 
 :::info[Ces contraintes sont liées à RPG Maker XP]
 
-Pokémon Studio v3.0 abandonnera RPG Maker. Les limites documentées dans cette section qui viennent de ce format cible, et non de Tiled lui-même, ont vocation à être assouplies à ce moment-là. Lesquelles, et jusqu'où, n'est pas arrêté : on mappe avec les règles telles qu'elles sont aujourd'hui.
+Pokémon Studio v3.0 abandonnera RPG Maker. Les limites documentées dans cette section qui viennent de ce format cible, et non de Tiled lui-même, ont vocation à être assouplies à ce moment-là. On ne sait pas encore lesquelles seront assouplies, ni jusqu'où : on mappe avec les règles telles qu'elles sont aujourd'hui.
 
 :::
 

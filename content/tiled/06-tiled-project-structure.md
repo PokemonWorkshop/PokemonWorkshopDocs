@@ -7,14 +7,15 @@ description: "Everything Tiled-related in a PSDK project lives under Data/Tiled,
 
 Everything Tiled-related in a PSDK project lives under `Data/Tiled`, split into `Maps`, `Tilesets`, `Assets` and `Overviews`. Three of these folders belong to the maker and one is written by Pokémon Studio. This page describes what goes where, why a map records its tilesets as relative paths, and what the demo maps are for.
 
-## The four folders
+## What is in there
 
-| Folder | Contents | Written by |
+| Entry | Contents | Written by |
 | --- | --- | --- |
-| `Maps` | the maps of the project, `.tmx` files only | you |
+| `Maps` | the maps of the project as `.tmx`, plus the automapping rules | you |
 | `Tilesets` | the tilesets of the project, `.tsx` files only | you |
 | `Assets` | the `.png` images the tilesets are cut from | you |
 | `Overviews` | one `.png` preview per map | Pokémon Studio |
+| `.jobs` | the conversion queue handed from Studio to the engine | Studio and the converter |
 
 You never edit `Overviews` by hand: Studio fills it when maps are imported or updated, and on demand from a map's **Map** tab. Reserved layers are hidden in those images, which is why an overview shows the map as the player sees it rather than as you painted it.
 
@@ -30,6 +31,12 @@ A `.tsx` in turn references its `.png` the same way. That chain only resolves if
 
 The upside of relative paths is that the whole `Data/Tiled` tree is portable: it moves, it is archived, it is committed to Git as-is.
 
+:::warning[Studio never overwrites a file that is already there]
+
+When it copies a map's dependencies, Studio flattens `.tsx` and `.png` into `Tilesets` and `Assets` by filename, and skips any file whose name already exists. Importing a tileset called `Nature.tsx` into a project that already has one keeps the old file and points the new map at it, silently. Give your tilesets and sheets distinct names before importing them.
+
+:::
+
 ## One project per Tiled window
 
 Tiled makes the tilesets of every open map available to every other open map in the same window. With two projects open side by side, nothing stops you from painting a tile from project A onto a map of project B. The map records that tileset as a relative path pointing outside its own project, and the conversion fails.
@@ -44,7 +51,7 @@ Never open maps from two different projects in the same Tiled window. Their tile
 
 ## The Technical Demo maps
 
-The base project ships with the maps of the technical demo, numbered `001` to `021` in `Maps`. They are real, converted, working maps, and they are the fastest reference available: an animated tileset, a map carrying all the reserved layers, a bridge, a cave, an interior.
+The base project ships with the maps of the technical demo, numbered `001` to `021` in `Maps`. They are real, converted, working maps, and they are the fastest reference available: an animated tileset, a map carrying a `terrain_tag` layer, a bridge, a cave, an interior.
 
 Keep them. Deleting them costs you that reference and gains you little, since they are not reachable from your own game unless you link them. If you would rather ship a clean project, the usual approach is to keep two: yours, and a second one kept solely to open the demo and look things up.
 
