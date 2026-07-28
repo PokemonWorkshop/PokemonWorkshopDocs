@@ -1,7 +1,7 @@
 ---
 title: "Créer un tileset Tiled"
 slug: creer-un-tileset
-sidebar_position: 6
+sidebar_position: 5
 description: "Un tileset se crée dans Tiled à partir d'un PNG placé dans le dossier Assets du projet, puis s'enregistre en fichier .tsx à côté des autres tilesets. Deux réglages décident si la carte se convertira : une taille de tuile de 32 sur 32 pixels, et un tileset externe plutôt qu'embarqué. Cette page détaille la création et la façon de vérifier qu'une planche est bien en 32 sur 32."
 ---
 

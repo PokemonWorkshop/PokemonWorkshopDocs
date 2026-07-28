@@ -1,7 +1,7 @@
 ---
 title: "Create a Tiled tileset"
 slug: create-a-tileset
-sidebar_position: 6
+sidebar_position: 5
 description: "A tileset is created in Tiled from a PNG placed in the project's Assets folder, and saved as a .tsx file next to the other tilesets. Two settings decide whether the map will convert at all: a tile size of 32 by 32 pixels, and the tileset staying external rather than embedded. This page walks through the creation and how to check a sheet really is a 32 by 32 tileset."
 ---
 

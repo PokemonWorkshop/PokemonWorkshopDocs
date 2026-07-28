@@ -1,7 +1,7 @@
 ---
 title: "Create a map and link it to Studio"
 slug: create-and-link-a-map
-sidebar_position: 5
+sidebar_position: 7
 description: "A Tiled file only becomes a playable map once Pokémon Studio knows about it. Studio offers one route for a single map and another for a batch, and in both cases it copies the .tmx into the project itself. This page covers creating a map, attaching a Tiled file to an existing one, and re-converting a map after editing it."
 ---
 
