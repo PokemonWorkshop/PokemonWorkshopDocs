@@ -27,7 +27,7 @@ $data_system_tags[@map.tileset_id] ||= Array.new($data_tilesets[@map.tileset_id]
 
 Ainsi `@system_tags[tile_id]` donne le tag d'une tuile donnée du tileset. La valeur `0` signifie « aucun tag ». Comme une case de carte empile jusqu'à trois couches de tuiles, le moteur les lit **de la couche du haut vers le bas** et renvoie le premier tag non nul trouvé.
 
-On ne définit pas les System Tags dans le code : ils se peignent dans **Tiled**, l'éditeur avec lequel les cartes PSDK sont construites. Chaque carte est un fichier `.tmx` sous `Data/Tiled/Maps`, et les System Tags vivent sur des calques dédiés : `systemtags` pour les tags de terrain, plus `systemtags_bridge1` et `systemtags_bridge2` pour les ponts. Peindre un tag revient à poser une tuile du tileset des System Tags, dont les tuiles correspondent aux constantes listées plus bas. Pokémon Studio est le hub de projet qui ouvre la carte dans Tiled ; il ne peint pas les tags lui-même.
+On ne définit pas les System Tags dans le code : ils se peignent dans **Tiled**, l'éditeur avec lequel les cartes PSDK sont construites. Chaque carte est un fichier `.tmx` sous `Data/Tiled/Maps`, et les System Tags vivent sur des calques dédiés : `systemtags` pour les tags de terrain, plus `systemtags_bridge1` et `systemtags_bridge2` pour les ponts, comme détaillé dans [Calques et priorités de superposition](/tiled/calques-et-priorites). Peindre un tag revient à poser une tuile du tileset des System Tags, dont les tuiles correspondent aux constantes listées plus bas. Pokémon Studio est le hub de projet qui ouvre la carte dans Tiled ; il ne peint pas les tags lui-même.
 
 Chaque constante de tag est générée par un utilitaire :
 

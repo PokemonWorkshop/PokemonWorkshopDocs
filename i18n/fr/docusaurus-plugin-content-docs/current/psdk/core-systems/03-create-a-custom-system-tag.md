@@ -157,7 +157,7 @@ ruby Particles.rb
 
 ## Peindre le tag dans Tiled
 
-La constante ne devient utile qu'une fois le tag peint sur une carte. Les System Tags se peignent dans Tiled sur le calque `systemtags`, à partir de l'image de tileset des System Tags située dans `Data/Tiled/Assets/prio_w.png`. On ajoute sa tuile sur la première case libre de cette image, en respectant la position `(x, y)` passée à `gen`, puis on la peint partout où le terrain doit s'appliquer. Le fonctionnement du calque `systemtags` est détaillé dans [Comprendre les System Tags](/psdk/core-systems/les-system-tags).
+La constante ne devient utile qu'une fois le tag peint sur une carte. Les System Tags se peignent dans Tiled sur le calque `systemtags`, à partir de l'image de tileset des System Tags située dans `Data/Tiled/Assets/prio_w.png`. Ce calque et les règles qu'il suit sont décrits dans [Calques et priorités de superposition](/tiled/calques-et-priorites). On ajoute sa tuile sur la première case libre de cette image, en respectant la position `(x, y)` passée à `gen`, puis on la peint partout où le terrain doit s'appliquer. Le fonctionnement du calque `systemtags` est détaillé dans [Comprendre les System Tags](/psdk/core-systems/les-system-tags).
 
 ## Conclusion
 

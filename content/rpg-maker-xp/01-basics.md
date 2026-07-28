@@ -15,7 +15,7 @@ PSDK uses **RPG Maker XP** (RMXP) only for **event** management: maps are create
 
 ## Do you need RPG Maker XP?
 
-Yes, for now. PSDK relies specifically on **RPG Maker XP** (not VX, MV or MZ). Since Pokémon Studio 2.0, maps are built with **Tiled** and the database lives in **Pokémon Studio**, so RMXP is now used only to create and edit **events**. It stays required until Pokémon Studio v3 is released.
+Yes, for now. PSDK relies specifically on **RPG Maker XP** (not VX, MV or MZ). Since Pokémon Studio 2.0, maps are built with [**Tiled**](/tiled/introduction-to-tiled) and the database lives in **Pokémon Studio**, so RMXP is now used only to create and edit **events**. It stays required until Pokémon Studio v3 is released.
 
 RPG Maker XP is sold on Steam, at a low price and often on sale: [RPG Maker XP on Steam](https://store.steampowered.com/app/235900/RPG_Maker_XP/).
 
