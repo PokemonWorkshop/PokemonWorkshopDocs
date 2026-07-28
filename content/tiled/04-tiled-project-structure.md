@@ -52,7 +52,7 @@ Playing the demo before dissecting it is worth the three to four hours it takes.
 
 ## The Blank Template
 
-`000 Blank_Template.tmx` is a starting map with its layer stack already set up: layers named for their role and their superposition priority, and the reserved layers at the bottom of the stack. It was built around SirMalo's HGSS tilesets and the automapping rules shipped next to it in `Maps`, as `rules.txt` and the `rules_TECH_*.tmx` files.
+`000 Blank_Template.tmx` is a starting map with its layer stack already set up: layers named for their role and their superposition priority, and the reserved layers already in place. It was built around SirMalo's HGSS tilesets and the automapping rules shipped next to it in `Maps`, as `rules.txt` and the `rules_TECH_*.tmx` files.
 
 If you use those tilesets, start from a copy of the template. If you do not, the template's layer names will not match your automapping rules, and you are better off building your own template once and copying it for every new map.
 

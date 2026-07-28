@@ -52,7 +52,7 @@ Jouer la démo avant de la disséquer vaut les trois à quatre heures que cela p
 
 ## Le Blank Template
 
-`000 Blank_Template.tmx` est une carte de départ dont la pile de calques est déjà en place : des calques nommés d'après leur rôle et leur priorité de superposition, et les calques réservés en bas de la pile. Elle a été construite autour des tilesets HGSS de SirMalo et des règles d'automapping livrées à côté d'elle dans `Maps`, sous la forme de `rules.txt` et des fichiers `rules_TECH_*.tmx`.
+`000 Blank_Template.tmx` est une carte de départ dont la pile de calques est déjà en place : des calques nommés d'après leur rôle et leur priorité de superposition, et les calques réservés déjà en place. Elle a été construite autour des tilesets HGSS de SirMalo et des règles d'automapping livrées à côté d'elle dans `Maps`, sous la forme de `rules.txt` et des fichiers `rules_TECH_*.tmx`.
 
 Si on utilise ces tilesets, on part d'une copie du template. Sinon, ses noms de calques ne correspondront pas à vos propres règles d'automapping, et mieux vaut construire son propre template une bonne fois et le copier pour chaque nouvelle carte.
 

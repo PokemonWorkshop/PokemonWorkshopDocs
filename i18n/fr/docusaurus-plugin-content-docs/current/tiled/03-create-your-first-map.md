@@ -36,7 +36,7 @@ La carte existe désormais dans le jeu, vide mais bien réelle.
 
 Toujours dans Studio, on utilise **Ouvrir avec Tiled** sur sa carte. Tiled s'ouvre sur le bon fichier.
 
-À gauche se trouve la liste des calques, à droite les tilesets chargés par le template. Pour peindre :
+Les panneaux de Tiled se déplacent et s'ancrent où l'on veut : on les repère donc par leur nom et non par leur position. Un panneau liste les **calques** de la carte, un autre liste les **jeux de tuiles**, c'est-à-dire les tilesets qu'elle a chargés. Pour peindre :
 
 1. On choisit un calque dont le nom se termine par `1`, par exemple `Grass_1`. Ce sont les calques de sol, ceux dessinés sous le joueur.
 2. On choisit un tileset et une tuile dedans.

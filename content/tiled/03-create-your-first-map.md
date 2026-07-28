@@ -36,7 +36,7 @@ The map now exists in your game, empty but real.
 
 Still in Studio, use **Open with Tiled** on your map. Tiled opens on the right file.
 
-On the left you have the layer list, on the right the tilesets loaded by the template. To paint:
+Tiled's panels can be moved and docked anywhere, so find them by name rather than by position: one panel lists the **layers** of the map, another lists the **tilesets** it has loaded. To paint:
 
 1. Pick a layer whose name ends with `1`, for example `Grass_1`. These are the ground layers, the ones drawn under the player.
 2. Pick a tileset and a tile in it.
