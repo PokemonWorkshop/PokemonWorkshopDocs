@@ -47,6 +47,9 @@ jobs:
       - name: Check code fences
         run: bun run lint:fences
 
+      - name: Lint TypeScript and CSS
+        run: bun run lint
+
       - name: Cache Docusaurus build
         uses: actions/cache@v6
         with:

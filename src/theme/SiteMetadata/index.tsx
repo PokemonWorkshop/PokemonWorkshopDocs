@@ -1,4 +1,4 @@
-import React, { type ReactNode } from "react";
+import type { ReactNode } from "react";
 import Head from "@docusaurus/Head";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
@@ -44,7 +44,7 @@ function AlternateLangHeaders(): ReactNode {
   const currentPath = normalizePathname(location.pathname);
   const paths = resolveLocalePaths(currentLocale, currentPath, localeMap);
 
-  const currentHtmlLang = localeConfigs[currentLocale]!.htmlLang;
+  const currentHtmlLang = localeConfigs[currentLocale].htmlLang;
   const bcp47ToOpenGraphLocale = (code: string): string =>
     code.replace("-", "_");
 
@@ -162,8 +162,8 @@ export default function SiteMetadata(): ReactNode {
       <SearchMetadata tag={DEFAULT_SEARCH_TAG} locale={currentLocale} />
 
       <Head>
-        {metadata.map((metadatum, i) => (
-          <meta key={i} {...metadatum} />
+        {metadata.map((metadatum) => (
+          <meta key={JSON.stringify(metadatum)} {...metadatum} />
         ))}
       </Head>
     </>

@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { useLocation } from "@docusaurus/router";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { usePluginData } from "@docusaurus/useGlobalData";
@@ -61,7 +61,7 @@ export default function LocaleDropdownNavbarItem({
   ) : (
     <>
       <IconLanguage style={{ verticalAlign: "text-bottom", marginRight: "0.3em" }} />
-      {localeConfigs[currentLocale]!.label}
+      {localeConfigs[currentLocale].label}
     </>
   );
 

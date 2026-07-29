@@ -1,7 +1,7 @@
 import RubyPlayground from "@site/src/components/RubyPlayground";
 import OriginalCodeBlock from "@theme-original/CodeBlock";
 import type { Props } from "@theme/CodeBlock";
-import React from "react";
+import type React from "react";
 
 function isLiveRuby(props: Props): boolean {
   const { metastring, className } = props as Props & {
