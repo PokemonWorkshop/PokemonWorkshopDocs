@@ -22,6 +22,37 @@
   letter-spacing: 0.05em;
 }
 
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.resetButton {
+  padding: 4px 12px;
+  border: 1px solid #2b2a32;
+  border-radius: 6px;
+  background: transparent;
+  color: #9191a1;
+  font-family: "Avenir Next", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+}
+
+.resetButton:hover:not(:disabled) {
+  color: #f4f4f5;
+  border-color: #4b4a55;
+}
+
+.resetButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .runButton {
   display: inline-flex;
   align-items: center;
@@ -91,6 +122,10 @@
   white-space: pre-wrap;
   word-break: break-word;
   min-height: 24px;
+  /* A snippet printing a hundred lines scrolls here instead of pushing the rest
+     of the page down. */
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .error {
