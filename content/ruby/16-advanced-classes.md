@@ -144,7 +144,7 @@ puts Move.new('Thunder', :electric, 90, 100)
 
 `method_missing` is called when you invoke a method that does not exist. You can use it to create dynamic accessors:
 
-```ruby
+```ruby live
 class Pokemon
   KNOWN_STATS = [:hp, :attack, :defense, :speed]
 

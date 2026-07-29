@@ -44,7 +44,7 @@ puts "Level: #{level}"
 
 `while` repeats a block **as long as** the condition is true:
 
-```ruby
+```ruby live
 level = 1
 
 while level < 5
@@ -162,7 +162,7 @@ puts 'Evolution!'
 
 We already saw `each` in chapter 3. It is **the** iteration method in Ruby:
 
-```ruby
+```ruby live
 team = ['Pikachu', 'Charizard', 'Blastoise']
 
 team.each { |pokemon| puts "Go, #{pokemon} !" }

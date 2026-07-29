@@ -21,7 +21,7 @@ We say that `WildPokemon` **is a** `Pokemon` with additional properties. It is t
 
 The syntax is `class Child < Parent`:
 
-```ruby
+```ruby live
 class Pokemon
   attr_reader :name, :level
 
@@ -92,7 +92,7 @@ Beware: confusing `super` and `super()` is a common source of bugs. If the paren
 
 The child can **redefine** a parent method to change its behavior:
 
-```ruby
+```ruby live
 class Pokemon
   attr_reader :name, :level
 

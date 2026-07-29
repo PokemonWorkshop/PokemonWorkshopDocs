@@ -74,7 +74,7 @@ puts Pokemon.new('Pikachu', 25)    # => [Modified] Pikachu Lvl.25
 
 `prepend` inserts a module **before** the class in the ancestor chain. The module can call `super` to execute the original method:
 
-```ruby
+```ruby live
 class Pokemon
   attr_reader :name, :hp
 

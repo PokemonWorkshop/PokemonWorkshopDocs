@@ -117,7 +117,7 @@ puts Pokedex::MAX_TEAM_SIZE    # => 6
 
 `include` injects a module's methods into a class. The module's methods become **instance methods** of the class:
 
-```ruby
+```ruby live
 module Displayable
   def summary
     return "#{@name} Lvl.#{@level}"
@@ -205,7 +205,7 @@ puts fire_pokemon.first.name    # => Charizard
 
 `module_function` makes methods callable directly on the module, like utility functions:
 
-```ruby
+```ruby live
 module Pokedex
   module Combat
     def calculate_damage(attack, defense, power)

@@ -52,13 +52,13 @@ greet_pokemon('Charizard')   # Prints: Go, Charizard!
 
 You can give a parameter a default value:
 
-```ruby
+```ruby live
 def greet_pokemon(name, greeting = 'Go')
   puts "#{greeting}, #{name} !"
 end
 
-greet_pokemon('Pikachu')              # Prints: Go, Pikachu !
-greet_pokemon('Pikachu', 'Onward')  # Prints: En avant, Pikachu !
+greet_pokemon('Pikachu')                # Prints: Go, Pikachu !
+greet_pokemon('Pikachu', 'Onward')      # Prints: Onward, Pikachu !
 ```
 
 - `greeting = 'Go'`: if the argument is not provided, `greeting` defaults to `'Go'`.
@@ -67,7 +67,7 @@ greet_pokemon('Pikachu', 'Onward')  # Prints: En avant, Pikachu !
 
 For methods with multiple optional parameters, named parameters are more readable:
 
-```ruby
+```ruby live
 def create_pokemon(name, level:, type: :normal)
   return { name: name, level: level, type: type }
 end

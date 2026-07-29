@@ -81,7 +81,7 @@ But `attr_accessor` does not perform any validation. If you want to control the 
 
 A custom setter is a method whose name ends with `=`. Ruby translates `pikachu.level = 50` into a call to this method:
 
-```ruby
+```ruby live
 class Pokemon
   attr_reader :name, :level
 
@@ -112,7 +112,7 @@ puts pokemon.level    # => 1 (clamped by the setter)
 
 Methods defined inside a class are **instance methods**. They operate on the object's data:
 
-```ruby
+```ruby live
 class Pokemon
   attr_reader :name, :hp, :max_hp
 

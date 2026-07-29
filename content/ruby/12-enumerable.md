@@ -216,7 +216,7 @@ top_three = registry
 
 Comparable works on the same principle as Enumerable: you include the module and define **a single method**, the `<=>` (spaceship) operator. In return, you get `<`, `>`, `<=`, `>=`, `between?` and `clamp`.
 
-```ruby
+```ruby live
 class Pokemon
   include Comparable
 

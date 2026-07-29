@@ -49,7 +49,7 @@ p levels   # => [10, 20, 30, 40, 50, 60]
 
 Each element has an **index** (its position in the Array). Note: indexes start at **0**, not 1:
 
-```ruby
+```ruby live
 team = ['Pikachu', 'Charizard', 'Blastoise', 'Gengar', 'Dragonite', 'Snorlax']
 #        index 0      index 1     index 2     index 3       index 4      index 5
 
@@ -229,16 +229,16 @@ p team               # => ["Pikachu", "Charizard", "Blastoise"]  (unchanged)
 
 ## Filtering an Array with select and reject
 
-```ruby
+```ruby live
 team = ['Pikachu', 'Charizard', 'Blastoise', 'Gengar', 'Dragonite']
 
 # Keep only names longer than 8 characters
 long_names = team.select { |pokemon| pokemon.length > 8 }
-p long_names    # => ["Charizard", "Gengar", "Dragonite"]
+p long_names    # => ["Charizard", "Blastoise", "Dragonite"]
 
 # Exclude names longer than 8 characters
 short_names = team.reject { |pokemon| pokemon.length > 8 }
-p short_names   # => ["Pikachu", "Blastoise"]
+p short_names   # => ["Pikachu", "Gengar"]
 ```
 
 - `.select` keeps elements for which the block returns `true`.

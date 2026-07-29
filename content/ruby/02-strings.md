@@ -15,7 +15,7 @@ We saw that a String is text and that a Symbol is an identifier. In this chapter
 
 Single quotes create raw text. Double quotes allow interpolation (`#{}`) and escape sequences:
 
-```ruby
+```ruby live
 name = 'Pikachu'
 
 # Single quotes: raw text, no interpolation
@@ -78,7 +78,7 @@ puts ''.length           # => 0
 
 Ruby offers several methods to change uppercase and lowercase:
 
-```ruby
+```ruby live
 puts 'pikachu'.upcase        # => PIKACHU
 puts 'PIKACHU'.downcase      # => pikachu
 puts 'pikachu'.capitalize    # => Pikachu

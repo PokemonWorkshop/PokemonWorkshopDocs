@@ -35,7 +35,7 @@ puts 'oui' if nil         # not printed
 
 The most common structure for executing code based on a condition:
 
-```ruby
+```ruby live
 level = 50
 
 if level >= 100
@@ -100,7 +100,7 @@ puts 'The Pokémon is healthy.' unless health_points <= 0
 
 When comparing the same value against multiple possibilities, `case/when` is more readable than a chain of `if/elsif`:
 
-```ruby
+```ruby live
 pokemon_type = :fire
 
 case pokemon_type
