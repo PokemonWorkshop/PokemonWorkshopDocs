@@ -28,11 +28,11 @@ The dialog asks for two things about the build, then how much of it to recompile
 
 Below them, **Compilation options** is a set of four toggles, all on by default:
 
-| Option | What it recompiles |
-| --- | --- |
-| Update visuals | Changes made to the graphics |
-| Update libraries | Changes applied to the Ruby libraries |
-| Update audio | Changes applied to the audio |
+| Option                   | What it recompiles                                                          |
+| ------------------------ | --------------------------------------------------------------------------- |
+| Update visuals           | Changes made to the graphics                                                |
+| Update libraries         | Changes applied to the Ruby libraries                                       |
+| Update audio             | Changes applied to the audio                                                |
 | Update the game binaries | Changes applied to the binary files (the engine executable and its runtime) |
 
 Why toggles at all? Compilation writes into the `Release/` folder and keeps it between runs. Turning an option off tells Studio to skip that part and reuse whatever the previous compilation already put there.

@@ -51,11 +51,11 @@ Ici, l'event s'arrête dès qu'il arrive à 3 cases de (10, 15). Un rayon est ut
 
 Au lieu de coordonnées fixes, `to:` accepte un autre personnage, et le chemin le suit alors : si la cible bouge, PSDK recalcule l'itinéraire automatiquement. On désigne un personnage avec `get_character` :
 
-| Argument de `get_character` | Ce qu'il renvoie |
-| --- | --- |
-| `0` | l'event courant (celui qui exécute le script) |
-| `-1` | le joueur |
-| un nombre positif | l'event portant cet ID sur la carte |
+| Argument de `get_character` | Ce qu'il renvoie                              |
+| --------------------------- | --------------------------------------------- |
+| `0`                         | l'event courant (celui qui exécute le script) |
+| `-1`                        | le joueur                                     |
+| un nombre positif           | l'event portant cet ID sur la carte           |
 
 Ainsi, un event qui poursuit le joueur et s'arrête à une case de lui :
 

@@ -18,15 +18,15 @@ The Main Menu (often just called **Menu**) lets the player access the main inter
 
 This is why the screenshot above has no Dex and no party button: their conditions are false as long as the player has no Dex and no creature. Here are the buttons PSDK registers by default:
 
-| Button       | Action        | Condition                          | Meaning                                    |
-| ------------ | ------------- | ---------------------------------- | ------------------------------------------ |
-| Dex          | `:open_dex`   | `$game_switches[Yuki::Sw::Pokedex]` | The game switch enabling the Dex is on    |
-| Party        | `:open_party` | `$actors.any?`                     | The player has at least one creature       |
-| Bag          | `:open_bag`   | `!$bag.locked`                     | The bag is not locked by an event          |
-| Trainer card | `:open_tcard` | `true`                             | Always visible                             |
-| Options      | `:open_option`| `true`                             | Always visible                             |
-| Save         | `:open_save`  | `!$game_system.save_disabled`      | Saving is not disabled by an event         |
-| Quit         | `:open_quit`  | `true`                             | Always visible, always pushed to the end   |
+| Button       | Action         | Condition                           | Meaning                                  |
+| ------------ | -------------- | ----------------------------------- | ---------------------------------------- |
+| Dex          | `:open_dex`    | `$game_switches[Yuki::Sw::Pokedex]` | The game switch enabling the Dex is on   |
+| Party        | `:open_party`  | `$actors.any?`                      | The player has at least one creature     |
+| Bag          | `:open_bag`    | `!$bag.locked`                      | The bag is not locked by an event        |
+| Trainer card | `:open_tcard`  | `true`                              | Always visible                           |
+| Options      | `:open_option` | `true`                              | Always visible                           |
+| Save         | `:open_save`   | `!$game_system.save_disabled`       | Saving is not disabled by an event       |
+| Quit         | `:open_quit`   | `true`                              | Always visible, always pushed to the end |
 
 Since the conditions are re-evaluated each time the menu opens, a button appears as soon as its condition becomes true. For example, the party button shows up right after the player receives their first creature.
 

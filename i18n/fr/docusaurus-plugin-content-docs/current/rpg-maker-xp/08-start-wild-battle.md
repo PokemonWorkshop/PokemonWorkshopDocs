@@ -116,13 +116,13 @@ Le premier argument est le Pokémon de tête, le `nil` tient lieu de niveau igno
 
 À la fin du combat, PSDK écrit le résultat dans des switches du jeu. On les lit dans une **Condition** (Conditional Branch) juste après la commande `call_battle_wild` pour aiguiller le déroulement selon ce qui s'est passé :
 
-| Switch | ID | Signification |
-| --- | --- | --- |
-| `BT_Victory` | 37 | le joueur a gagné |
-| `BT_Defeat` | 36 | le joueur a été vaincu |
-| `BT_Player_Flee` | 35 | le joueur a fui |
-| `BT_Wild_Flee` | 34 | le Pokémon sauvage a fui |
-| `BT_Catch` | 38 | le joueur a capturé le Pokémon |
+| Switch           | ID  | Signification                  |
+| ---------------- | --- | ------------------------------ |
+| `BT_Victory`     | 37  | le joueur a gagné              |
+| `BT_Defeat`      | 36  | le joueur a été vaincu         |
+| `BT_Player_Flee` | 35  | le joueur a fui                |
+| `BT_Wild_Flee`   | 34  | le Pokémon sauvage a fui       |
+| `BT_Catch`       | 38  | le joueur a capturé le Pokémon |
 
 Par exemple, on ne donne une récompense que si le joueur a réellement gagné, en testant le switch `37` dans une Condition après le combat. En cas de défaite réelle (switch `36`), le joueur a déjà été ramené en arrière, et l'event reprend à partir de là.
 

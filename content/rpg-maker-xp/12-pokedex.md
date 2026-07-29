@@ -108,10 +108,10 @@ game_state.pokedex.variant_creature_seen(:regional)  # seen, for a specific dex
 
 Called with no argument they count the dex currently displayed; pass a dex db_symbol to count another one.
 
-| What you read | What it counts |
-| --- | --- |
+| What you read                                           | What it counts                                     |
+| ------------------------------------------------------- | -------------------------------------------------- |
 | `pokemon_seen` / `pokemon_captured` (variables 2 and 3) | the national total, unchanged by the displayed dex |
-| `variant_creature_seen` / `variant_creature_caught` | only the dex currently shown |
+| `variant_creature_seen` / `variant_creature_caught`     | only the dex currently shown                       |
 
 :::note
 

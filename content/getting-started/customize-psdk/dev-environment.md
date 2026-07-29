@@ -42,7 +42,7 @@ git --version
 
 A version number confirms Git is installed.
 
-4. Configure your identity so Git can stamp every commit with an author. Still in **cmd**, from any folder:
+1. Configure your identity so Git can stamp every commit with an author. Still in **cmd**, from any folder:
 
 ```bash
 git config --global user.name "Your Name"
@@ -226,7 +226,7 @@ If autocompletion still shows nothing once parsing has finished, restart Solargr
 
 Configuring Solargraph only affects the editor. It does not change which files PSDK actually runs. The engine loads a script from `scripts/` only if its filename starts with **3 to 5 digits, then a space, then the name**, for example:
 
-```
+```text
 001 Test.rb
 ```
 
@@ -264,7 +264,7 @@ psdk debug skip_title
 
 Load a save, then call the method in the debug console:
 
-```
+```text
 pokemon_name(:pikachu)
 ```
 

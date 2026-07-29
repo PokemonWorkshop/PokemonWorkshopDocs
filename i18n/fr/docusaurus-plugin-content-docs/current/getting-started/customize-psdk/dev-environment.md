@@ -42,7 +42,7 @@ git --version
 
 Un numéro de version confirme que Git est installé.
 
-4. Configurer son identité pour que Git puisse signer chaque commit avec un auteur. Toujours dans **cmd**, depuis n'importe quel dossier :
+1. Configurer son identité pour que Git puisse signer chaque commit avec un auteur. Toujours dans **cmd**, depuis n'importe quel dossier :
 
 ```bash
 git config --global user.name "Votre Nom"
@@ -226,7 +226,7 @@ Si l'autocomplétion n'affiche toujours rien une fois l'analyse terminée, redé
 
 Configurer Solargraph n'affecte que l'éditeur. Cela ne change pas quels fichiers PSDK exécute réellement. Le moteur ne charge un script de `scripts/` que si son nom commence par **3 à 5 chiffres, puis un espace, puis le nom**, par exemple :
 
-```
+```text
 001 Test.rb
 ```
 
@@ -264,7 +264,7 @@ psdk debug skip_title
 
 Charger une partie, puis appeler la méthode dans la console de debug :
 
-```
+```text
 pokemon_name(:pikachu)
 ```
 

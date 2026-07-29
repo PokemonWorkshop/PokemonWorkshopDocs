@@ -60,12 +60,12 @@ PSDK has no built-in step counter, timer or ball budget for the Safari Zone. The
 
 Each turn the player picks one of four actions instead of a move:
 
-| Action | What it does |
-| --- | --- |
-| **Safari Ball** | Throws a Safari Ball at the Pokémon, consuming one from the bag, then rolls the normal catch formula. |
-| **Bait** | Raises the catch rate by one stage. 90% of the time it also makes the Pokémon **more** likely to flee. |
-| **Mud** | Lowers the flee rate by one stage. 90% of the time it also makes the Pokémon **harder** to catch. |
-| **Flee** | Leaves the battle. In a Safari battle this always succeeds. |
+| Action          | What it does                                                                                           |
+| --------------- | ------------------------------------------------------------------------------------------------------ |
+| **Safari Ball** | Throws a Safari Ball at the Pokémon, consuming one from the bag, then rolls the normal catch formula.  |
+| **Bait**        | Raises the catch rate by one stage. 90% of the time it also makes the Pokémon **more** likely to flee. |
+| **Mud**         | Lowers the flee rate by one stage. 90% of the time it also makes the Pokémon **harder** to catch.      |
+| **Flee**        | Leaves the battle. In a Safari battle this always succeeds.                                            |
 
 Bait and mud are deliberate opposites, and each carries a downside the other does not:
 
@@ -81,14 +81,14 @@ When the player runs out of Safari Balls, throwing one is impossible: the Pokém
 Bait and mud do not edit a percentage directly. They move a **stage**, an integer that starts at `0` and is bounded to the `-6`…`+6` range, exactly like an in-battle stat change. A stage is turned into a multiplier on the underlying rate:
 
 | Stage | Multiplier |
-| --- | --- |
-| +6 | ×4.0 |
-| +2 | ×2.0 |
-| +1 | ×1.5 |
-| 0 | ×1.0 |
-| −1 | ×0.67 |
-| −2 | ×0.5 |
-| −6 | ×0.25 |
+| ----- | ---------- |
+| +6    | ×4.0       |
+| +2    | ×2.0       |
+| +1    | ×1.5       |
+| 0     | ×1.0       |
+| −1    | ×0.67      |
+| −2    | ×0.5       |
+| −6    | ×0.25      |
 
 Two separate stages run in parallel: a **catch** stage and a **flee** stage.
 
@@ -113,10 +113,10 @@ A rarer Pokémon (lower `rareness`) and a faster one (higher `base_spd`) flee mo
 
 A Safari battle reports through the same switches as a normal wild encounter, so an event after the battle can branch on what happened. The catch is that the Safari scene only ever ends two ways: a capture, or `battle_result = 1` for everything else, whether the player chose Flee, the Pokémon fled, or the bag ran empty. That single result maps to one switch:
 
-| Switch | ID | Meaning |
-| --- | --- | --- |
-| `BT_Catch` | 38 | the player caught the Pokémon |
-| `BT_Player_Flee` | 35 | the battle ended any other way (the player fled, the Pokémon fled, or no balls were left) |
+| Switch           | ID  | Meaning                                                                                   |
+| ---------------- | --- | ----------------------------------------------------------------------------------------- |
+| `BT_Catch`       | 38  | the player caught the Pokémon                                                             |
+| `BT_Player_Flee` | 35  | the battle ended any other way (the player fled, the Pokémon fled, or no balls were left) |
 
 `BT_Wild_Flee` (switch `34`) is **not** set by a Safari battle: it requires the result code `3`, which the Safari scene never produces, so a fleeing wild Pokémon still reports as `BT_Player_Flee`. The only distinction worth reading is therefore `BT_Catch`: test it (switch `38`) right after the battle to react to a successful catch, and treat every other ending as the player walking away empty-handed.
 

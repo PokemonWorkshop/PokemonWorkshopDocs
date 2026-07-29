@@ -57,9 +57,9 @@ This quietly adds a level 12 Pikachu to the party. **If the party already holds 
 
 Because `add_pokemon` may divert to the PC, PSDK records the destination in a game switch you can test right after the call:
 
-| Switch | ID | Meaning |
-| --- | --- | --- |
-| `SYS_Stored` | 9 | `true` = the Pokémon went to the PC box; `false` = it joined the party |
+| Switch       | ID  | Meaning                                                                |
+| ------------ | --- | ---------------------------------------------------------------------- |
+| `SYS_Stored` | 9   | `true` = the Pokémon went to the PC box; `false` = it joined the party |
 
 Read switch `9` in a **Conditional Branch** to react, for example to tell the player their new Pokémon is waiting in the PC. `receive_pokemon_sequence` already reads it for you to show the "sent to Box" message, so you only need this when you call `add_pokemon` directly.
 
@@ -226,16 +226,16 @@ This removes the lead Pokémon, whatever its species.
 
 PSDK was built by a French-speaking team, so every command above also answers to a French alias. Both names are the exact same method, use whichever reads better to you:
 
-| English name | French alias |
-| --- | --- |
-| `add_pokemon` | `ajouter_pokemon`, `ajouter_stocker_pokemon` |
-| `store_pokemon` | `stocker_pokemon` |
-| `add_specific_pokemon` | `ajouter_pokemon_param` |
-| `add_rename_pokemon` | `ajouter_renommer_pokemon` |
-| `rename_pokemon` | `renommer_pokemon` |
-| `add_egg` | `ajouter_oeuf` |
-| `withdraw_pokemon` | `retirer_pokemon` |
-| `withdraw_pokemon_at` | `retirer_pokemon_index` |
+| English name           | French alias                                 |
+| ---------------------- | -------------------------------------------- |
+| `add_pokemon`          | `ajouter_pokemon`, `ajouter_stocker_pokemon` |
+| `store_pokemon`        | `stocker_pokemon`                            |
+| `add_specific_pokemon` | `ajouter_pokemon_param`                      |
+| `add_rename_pokemon`   | `ajouter_renommer_pokemon`                   |
+| `rename_pokemon`       | `renommer_pokemon`                           |
+| `add_egg`              | `ajouter_oeuf`                               |
+| `withdraw_pokemon`     | `retirer_pokemon`                            |
+| `withdraw_pokemon_at`  | `retirer_pokemon_index`                      |
 
 `receive_pokemon_sequence` has no French alias; use its English name in either locale.
 

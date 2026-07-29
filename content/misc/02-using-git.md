@@ -46,9 +46,9 @@ git remote add upstream git@gitlab.com:pokemonsdk/pokemonsdk.git
 
 You now have two remotes:
 
-| Remote | Points to | Usage |
-| --- | --- | --- |
-| `origin` | your fork | pushing your branches |
+| Remote     | Points to           | Usage                                   |
+| ---------- | ------------------- | --------------------------------------- |
+| `origin`   | your fork           | pushing your branches                   |
 | `upstream` | official repository | fetching new commits to keep up to date |
 
 You can verify with `git remote -v`.

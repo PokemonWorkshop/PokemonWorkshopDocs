@@ -86,10 +86,10 @@ With `false` the pan still plays out over its full duration, but the following c
 
 The fourth argument, `distortion`, sets how the speed of the pan is spread across its duration. It defaults to `:UNICITY_DISTORTION`, a constant, linear glide. Pass another symbol to change the feel:
 
-| Distortion | What the pan does |
-| --- | --- |
-| `:UNICITY_DISTORTION` | Constant speed from start to finish (the default). |
-| `:SMOOTH_DISTORTION` | A softened, non-linear pace instead of a flat speed, for a gentler glide. |
+| Distortion              | What the pan does                                                                                                                  |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `:UNICITY_DISTORTION`   | Constant speed from start to finish (the default).                                                                                 |
+| `:SMOOTH_DISTORTION`    | A softened, non-linear pace instead of a flat speed, for a gentler glide.                                                          |
 | `:SQUARE010_DISTORTION` | Travels all the way to the target by the halfway point, then returns to the start by the end, a single "peek" within the duration. |
 
 ```ruby

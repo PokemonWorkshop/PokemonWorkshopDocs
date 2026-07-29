@@ -57,9 +57,9 @@ Cela ajoute discrètement un Pikachu niveau 12 à l'équipe. **Si l'équipe cont
 
 Comme `add_pokemon` peut dévier vers le PC, PSDK enregistre la destination dans un switch du jeu qu'on peut tester juste après l'appel :
 
-| Switch | ID | Signification |
-| --- | --- | --- |
-| `SYS_Stored` | 9 | `true` = le Pokémon est parti au PC ; `false` = il a rejoint l'équipe |
+| Switch       | ID  | Signification                                                         |
+| ------------ | --- | --------------------------------------------------------------------- |
+| `SYS_Stored` | 9   | `true` = le Pokémon est parti au PC ; `false` = il a rejoint l'équipe |
 
 On lit le switch `9` dans une **Condition** (Conditional Branch) pour réagir, par exemple pour prévenir le joueur que son nouveau Pokémon l'attend au PC. `receive_pokemon_sequence` le lit déjà pour afficher le message « envoyé à la Boîte », ce test n'est donc utile que lorsqu'on appelle `add_pokemon` directement.
 
@@ -226,16 +226,16 @@ Cela retire le Pokémon de tête, quelle que soit son espèce.
 
 PSDK a été conçu par une équipe francophone : chaque commande ci-dessus répond aussi à un alias français. Les deux noms désignent exactement la même méthode, on utilise celui qui se lit le mieux :
 
-| Nom anglais | Alias français |
-| --- | --- |
-| `add_pokemon` | `ajouter_pokemon`, `ajouter_stocker_pokemon` |
-| `store_pokemon` | `stocker_pokemon` |
-| `add_specific_pokemon` | `ajouter_pokemon_param` |
-| `add_rename_pokemon` | `ajouter_renommer_pokemon` |
-| `rename_pokemon` | `renommer_pokemon` |
-| `add_egg` | `ajouter_oeuf` |
-| `withdraw_pokemon` | `retirer_pokemon` |
-| `withdraw_pokemon_at` | `retirer_pokemon_index` |
+| Nom anglais            | Alias français                               |
+| ---------------------- | -------------------------------------------- |
+| `add_pokemon`          | `ajouter_pokemon`, `ajouter_stocker_pokemon` |
+| `store_pokemon`        | `stocker_pokemon`                            |
+| `add_specific_pokemon` | `ajouter_pokemon_param`                      |
+| `add_rename_pokemon`   | `ajouter_renommer_pokemon`                   |
+| `rename_pokemon`       | `renommer_pokemon`                           |
+| `add_egg`              | `ajouter_oeuf`                               |
+| `withdraw_pokemon`     | `retirer_pokemon`                            |
+| `withdraw_pokemon_at`  | `retirer_pokemon_index`                      |
 
 `receive_pokemon_sequence` n'a pas d'alias français ; on utilise son nom anglais dans les deux langues.
 

@@ -192,13 +192,13 @@ pokemon_shop_open(:game_corner_prizes, { eevee: 2500 }, show_background: true)
 
 Quelle que soit la boutique ouverte, PSDK écrit un code de résultat dans la **variable système 26** (`Yuki::Var::TMP1` dans le moteur) quand la fenêtre se ferme. La lire ensuite permet au marchand de dire quelque chose d'adapté au lieu d'une ligne générique. Les codes sont :
 
-| Code | Signification |
-| --- | --- |
+| Code | Signification                                                                                                   |
+| ---- | --------------------------------------------------------------------------------------------------------------- |
 | `-1` | La boutique n'a même pas pu s'ouvrir : toutes les entrées étaient filtrées (prix `0`, ou objets déjà possédés). |
-| `0` | Le joueur a fermé la boutique sans rien acheter. |
-| `1` | Le joueur a acheté un seul type d'objet, ou une seule espèce de Pokémon. |
-| `2` | Le joueur a acheté plusieurs types d'objets, ou plusieurs espèces de Pokémon. |
-| `3` | Le joueur a acheté la dernière unité en stock, donc une boutique limitée s'est vidée et fermée d'elle-même. |
+| `0`  | Le joueur a fermé la boutique sans rien acheter.                                                                |
+| `1`  | Le joueur a acheté un seul type d'objet, ou une seule espèce de Pokémon.                                        |
+| `2`  | Le joueur a acheté plusieurs types d'objets, ou plusieurs espèces de Pokémon.                                   |
+| `3`  | Le joueur a acheté la dernière unité en stock, donc une boutique limitée s'est vidée et fermée d'elle-même.     |
 
 Pour une boutique de Pokémon, la distinction `1` contre `2` compte les **espèces**, pas les unités : acheter trois Magicarpe reste `1`, alors qu'acheter un Magicarpe et un Évoli donne `2`.
 

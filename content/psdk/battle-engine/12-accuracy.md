@@ -9,7 +9,7 @@ description: "This guide explains how to dynamically modify a move's accuracy, w
 
 A move's accuracy is calculated by the `chance_of_hit` method using the formula:
 
-```
+```text
 chance_of_hit = factor x accuracy
 ```
 

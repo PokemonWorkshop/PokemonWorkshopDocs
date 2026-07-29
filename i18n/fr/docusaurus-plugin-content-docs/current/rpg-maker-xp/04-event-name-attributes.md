@@ -30,21 +30,21 @@ La partie lisible du nom n'a aucune importance pour le joueur, qui ne la voit ja
 
 ### Aide-mémoire
 
-| Attribut | Forme | Effet |
-| --- | --- | --- |
-| `§` | caractère de tête | Supprime l'ombre de l'event |
-| `¤` | caractère de tête | Affiche l'event au-dessus du héros en cas de superposition |
-| `$` | n'importe où | Réutilise l'apparence de la page 1 sur toutes les pages |
-| `[particle=off]` | n'importe où | Désactive les particules de déplacement |
-| `[sprite=off]` | n'importe où | Ne crée aucun sprite (event purement logique) |
-| `[reflection=on]` | n'importe où | Ajoute un reflet dans l'eau |
-| `[offset_x=N]` | n'importe où | Décale l'event horizontalement |
-| `[offset_y=N]` | n'importe où | Décale l'event verticalement |
-| `[z=N]` | n'importe où | Définit la couche d'altitude de l'event |
-| `[noslide=on]` | n'importe où | Ignore les cases glissantes (glace, rapides) |
-| `[alias=nom]` | n'importe où | Donne à l'event un nom stable pour les scripts |
-| `surf_` | n'importe où | Fait se déplacer l'event sur l'eau uniquement |
-| `invisible_` | n'importe où | Objet caché, trouvé en lui faisant face ou au Cherch'Objet |
+| Attribut          | Forme             | Effet                                                      |
+| ----------------- | ----------------- | ---------------------------------------------------------- |
+| `§`               | caractère de tête | Supprime l'ombre de l'event                                |
+| `¤`               | caractère de tête | Affiche l'event au-dessus du héros en cas de superposition |
+| `$`               | n'importe où      | Réutilise l'apparence de la page 1 sur toutes les pages    |
+| `[particle=off]`  | n'importe où      | Désactive les particules de déplacement                    |
+| `[sprite=off]`    | n'importe où      | Ne crée aucun sprite (event purement logique)              |
+| `[reflection=on]` | n'importe où      | Ajoute un reflet dans l'eau                                |
+| `[offset_x=N]`    | n'importe où      | Décale l'event horizontalement                             |
+| `[offset_y=N]`    | n'importe où      | Décale l'event verticalement                               |
+| `[z=N]`           | n'importe où      | Définit la couche d'altitude de l'event                    |
+| `[noslide=on]`    | n'importe où      | Ignore les cases glissantes (glace, rapides)               |
+| `[alias=nom]`     | n'importe où      | Donne à l'event un nom stable pour les scripts             |
+| `surf_`           | n'importe où      | Fait se déplacer l'event sur l'eau uniquement              |
+| `invisible_`      | n'importe où      | Objet caché, trouvé en lui faisant face ou au Cherch'Objet |
 
 ## Affichage et profondeur
 

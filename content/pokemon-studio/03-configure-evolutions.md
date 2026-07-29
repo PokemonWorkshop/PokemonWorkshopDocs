@@ -33,24 +33,24 @@ An evolution with no condition at all is legal. Studio calls it **No condition**
 
 Here is every condition the editor offers, in the order the dropdown lists them.
 
-| Condition | What it checks | Value to fill in |
-| --- | --- | --- |
-| By level increase | The Pokémon is at least this level | **Level**, 1 to 999 |
-| Before a level | The Pokémon is at most this level | **Level**, 1 to 999 |
-| With an evolving stone | The stone used on the Pokémon | **Item** |
-| By trade with a trainer | The Pokémon is being traded, with anyone | No value |
-| By trade for another Pokémon | The Pokémon is traded for this exact species | **Pokémon** |
-| By holding an item | The item the Pokémon holds | **Item** |
-| Before a maximum of loyalty | Loyalty is at most this value | **Loyalty**, 1 to 255 |
-| With a minimum of loyalty | Loyalty is at least this value | **Loyalty**, 1 to 255 |
-| By having the move | The Pokémon knows this move | **Move** |
-| Depending on the weather | The weather currently in play | **Weather** |
-| Depending on the environment | The System Tag the player stands on | **SystemTag**, a number from 0 |
-| At a certain time of the day | The current moment of the day | **Moment**: Day, Sunset, Night or Morning |
-| If the player is on a map | The player is on one of these maps | **Maps**, map IDs separated by commas |
-| Depending on the gender | The Pokémon's gender | **Gender**: Male, Female or Unknown |
-| Depending on a function | A condition coded in Ruby, called by name | **Function**, the method name |
-| By Mega-Evolving | Reserved for Mega-Evolution, see below | **Item** |
+| Condition                    | What it checks                               | Value to fill in                          |
+| ---------------------------- | -------------------------------------------- | ----------------------------------------- |
+| By level increase            | The Pokémon is at least this level           | **Level**, 1 to 999                       |
+| Before a level               | The Pokémon is at most this level            | **Level**, 1 to 999                       |
+| With an evolving stone       | The stone used on the Pokémon                | **Item**                                  |
+| By trade with a trainer      | The Pokémon is being traded, with anyone     | No value                                  |
+| By trade for another Pokémon | The Pokémon is traded for this exact species | **Pokémon**                               |
+| By holding an item           | The item the Pokémon holds                   | **Item**                                  |
+| Before a maximum of loyalty  | Loyalty is at most this value                | **Loyalty**, 1 to 255                     |
+| With a minimum of loyalty    | Loyalty is at least this value               | **Loyalty**, 1 to 255                     |
+| By having the move           | The Pokémon knows this move                  | **Move**                                  |
+| Depending on the weather     | The weather currently in play                | **Weather**                               |
+| Depending on the environment | The System Tag the player stands on          | **SystemTag**, a number from 0            |
+| At a certain time of the day | The current moment of the day                | **Moment**: Day, Sunset, Night or Morning |
+| If the player is on a map    | The player is on one of these maps           | **Maps**, map IDs separated by commas     |
+| Depending on the gender      | The Pokémon's gender                         | **Gender**: Male, Female or Unknown       |
+| Depending on a function      | A condition coded in Ruby, called by name    | **Function**, the method name             |
+| By Mega-Evolving             | Reserved for Mega-Evolution, see below       | **Item**                                  |
 
 **By having the move** appears four times in the data, as four separate slots, which is why a single evolution can require up to four different moves. The dropdown only offers you the next free slot, so you never have to think about the numbering.
 

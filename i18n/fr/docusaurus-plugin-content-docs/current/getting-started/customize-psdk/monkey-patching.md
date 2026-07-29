@@ -25,7 +25,7 @@ Trois techniques permettent de monkey-patcher dans PSDK :
 
 Tous les scripts utilisateur vont dans le dossier `scripts/` à la racine du projet. C'est le seul endroit où PSDK charge du code personnalisé. La structure typique :
 
-```
+```text
 scripts/
   my-project/
     001 Patches/

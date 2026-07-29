@@ -116,13 +116,13 @@ The first argument is the lead Pokémon, the `nil` stands in for the ignored lev
 
 When the battle ends, PSDK writes the result into game switches. Read them in a **Conditional Branch** right after the `call_battle_wild` command to branch on what happened:
 
-| Switch | ID | Meaning |
-| --- | --- | --- |
-| `BT_Victory` | 37 | the player won |
-| `BT_Defeat` | 36 | the player was defeated |
-| `BT_Player_Flee` | 35 | the player fled |
-| `BT_Wild_Flee` | 34 | the wild Pokémon fled |
-| `BT_Catch` | 38 | the player caught the Pokémon |
+| Switch           | ID  | Meaning                       |
+| ---------------- | --- | ----------------------------- |
+| `BT_Victory`     | 37  | the player won                |
+| `BT_Defeat`      | 36  | the player was defeated       |
+| `BT_Player_Flee` | 35  | the player fled               |
+| `BT_Wild_Flee`   | 34  | the wild Pokémon fled         |
+| `BT_Catch`       | 38  | the player caught the Pokémon |
 
 For example, give a reward only if the player actually won, by testing switch `37` in a Conditional Branch after the battle. On a real defeat (switch `36`), the player has already been warped back, so the event continues from there.
 

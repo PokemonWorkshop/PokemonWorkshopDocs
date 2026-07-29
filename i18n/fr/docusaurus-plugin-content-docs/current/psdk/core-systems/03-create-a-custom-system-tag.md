@@ -19,13 +19,13 @@ Ce guide suppose que l'on sait déjà comment un tag est lu et stocké. Sinon, c
 
 Un tag n'est pas un simple interrupteur : chaque comportement vit dans une partie différente du moteur. Ajouter un tag revient à en toucher jusqu'à cinq, la dernière étant facultative.
 
-| Étape | Point d'ancrage du moteur | Ce qu'il contrôle |
-| --- | --- | --- |
-| 1 | `GameData::SystemTags.system_tag_db_symbol` | Le symbole lisible renvoyé pour la tuile. |
-| 2 | `PFM::Environment#get_zone_type` / `#convert_zone_type` | Le type de zone, qui pilote les rencontres sauvages. |
-| 3 | `Battle::Logic::BattleInfo::BACKGROUND_NAMES` | L'arrière-plan de combat affiché quand un combat démarre sur la tuile. |
-| 4 | `Game_Map::TERRAIN_TAGS_TABLE` | Le lieu utilisé par les capacités `LocationBased`. |
-| 5 | `Game_Character::PARTICLES_METHODS` (facultatif) | La particule générée quand un personnage marche sur la tuile. |
+| Étape | Point d'ancrage du moteur                               | Ce qu'il contrôle                                                      |
+| ----- | ------------------------------------------------------- | ---------------------------------------------------------------------- |
+| 1     | `GameData::SystemTags.system_tag_db_symbol`             | Le symbole lisible renvoyé pour la tuile.                              |
+| 2     | `PFM::Environment#get_zone_type` / `#convert_zone_type` | Le type de zone, qui pilote les rencontres sauvages.                   |
+| 3     | `Battle::Logic::BattleInfo::BACKGROUND_NAMES`           | L'arrière-plan de combat affiché quand un combat démarre sur la tuile. |
+| 4     | `Game_Map::TERRAIN_TAGS_TABLE`                          | Le lieu utilisé par les capacités `LocationBased`.                     |
+| 5     | `Game_Character::PARTICLES_METHODS` (facultatif)        | La particule générée quand un personnage marche sur la tuile.          |
 
 Les cinq extraits peuvent vivre dans des fichiers de script séparés ou être fusionnés en un seul, du moment que la constante de l'étape 1 est définie avant que les étapes suivantes la référencent. L'emplacement de ces scripts dans un projet PSDK est traité dans [monkey-patch](/getting-started/customize-psdk/monkey-patch-dans-psdk).
 

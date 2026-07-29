@@ -42,15 +42,15 @@ A remote is a distant repository hosted on a server such as GitHub or GitLab. A 
 
 You can do everything above without opening a terminal. The commands below are the terminal equivalents, useful to recognize when you read about Git elsewhere, or when you move on to contributing to the engine, where a few steps need the terminal:
 
-| Command | Purpose |
-| --- | --- |
-| `git status` | see modified/added/deleted files |
-| `git add <file>` | add a file to the next commit |
-| `git commit -m "message"` | create a commit |
-| `git log --oneline` | view commit history |
-| `git push` | send commits to the remote |
-| `git pull` | fetch commits from the remote |
-| `git checkout <branch>` | switch branch |
+| Command                    | Purpose                           |
+| -------------------------- | --------------------------------- |
+| `git status`               | see modified/added/deleted files  |
+| `git add <file>`           | add a file to the next commit     |
+| `git commit -m "message"`  | create a commit                   |
+| `git log --oneline`        | view commit history               |
+| `git push`                 | send commits to the remote        |
+| `git pull`                 | fetch commits from the remote     |
+| `git checkout <branch>`    | switch branch                     |
 | `git checkout -b <branch>` | create and switch to a new branch |
 
 ## Setting up SSH

@@ -135,7 +135,7 @@ psdk --util=plugin load
 
 This reinstalls the plugin and prints every file it skipped because the file already exists at its destination. Here is the output for a plugin called `test` that ships three files:
 
-```
+```text
 ================================================================================
 #                           PSDK Plugin Manager v1.0                           #
 # Something changed in your plugins!                                           #

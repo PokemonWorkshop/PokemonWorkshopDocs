@@ -29,16 +29,16 @@ Chaque fonction de définition ci-dessous remplit une ou plusieurs de ces étape
 
 Le wrapper porte des drapeaux que le sac, l'équipe et les UI de combat lisent :
 
-| Propriété            | Signification quand elle est levée                                           |
-| -------------------- | ---------------------------------------------------------------------------- |
-| `no_effect`          | L'UI affiche le message « cet objet n'a aucun effet »                         |
-| `chen`               | L'UI affiche le message « ce n'est pas le moment d'utiliser cet objet »       |
-| `open_party`         | L'UI ouvre l'équipe pour que le joueur choisisse une créature                 |
-| `open_skill`         | L'UI ouvre la sélection de capacité sur la créature choisie                   |
-| `open_skill_learn`   | L'UI d'équipe ouvre l'apprentissage de la capacité portée par l'objet         |
-| `stone_evolve`       | L'UI indique si la créature choisie peut évoluer avec cet objet               |
+| Propriété            | Signification quand elle est levée                                              |
+| -------------------- | ------------------------------------------------------------------------------- |
+| `no_effect`          | L'UI affiche le message « cet objet n'a aucun effet »                           |
+| `chen`               | L'UI affiche le message « ce n'est pas le moment d'utiliser cet objet »         |
+| `open_party`         | L'UI ouvre l'équipe pour que le joueur choisisse une créature                   |
+| `open_skill`         | L'UI ouvre la sélection de capacité sur la créature choisie                     |
+| `open_skill_learn`   | L'UI d'équipe ouvre l'apprentissage de la capacité portée par l'objet           |
+| `stone_evolve`       | L'UI indique si la créature choisie peut évoluer avec cet objet                 |
 | `use_before_telling` | L'objet agit avant le message « l'objet est utilisé », donc peut encore refuser |
-| `skill_message_id`   | ID du message affiché dans l'UI Résumé pendant la sélection de capacité       |
+| `skill_message_id`   | ID du message affiché dans l'UI Résumé pendant la sélection de capacité         |
 
 Il porte aussi les fonctions de comportement remplies par vos définitions : `on_creature_choice` et `on_creature_use` (l'objet est-il utilisable sur cette créature, et ce qu'il fait), `on_skill_choice` et `on_skill_use` (pareil pour une capacité), `on_use` (action depuis le sac), plus `bind(scene, creature, skill)` et `execute_battle_action` utilisées par le moteur de combat.
 

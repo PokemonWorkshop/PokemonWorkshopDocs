@@ -106,17 +106,17 @@ start_trainer_battle(0)                # lance le combat contre ce dresseur
 
 `start_trainer_battle(id)` construit et démarre le combat de dresseur à notre place, sans aucun `BattleInfo`. Les clés que `extra` comprend reprennent les champs par Pokémon de Studio :
 
-| Champ Studio | Clé `extra` | Valeur |
-| --- | --- | --- |
-| Surnom | `:given_name` | une `String` |
-| Genre | `:gender` | `1` (mâle) ou `2` (femelle) |
-| Nature | `:nature` | un db_symbol, ex. `:adamant` |
-| IV | `:stats` | `[hp, atk, dfe, spd, ats, dfs]`, chacun de `0` à `31` |
-| EV | `:bonus` | `[hp, atk, dfe, spd, ats, dfs]` |
-| Objet tenu | `:item` | un db_symbol d'objet, ex. `:leftovers` |
-| Talent | `:ability` | un db_symbol de talent |
-| Capacités | `:moves` | un tableau de db_symbols de capacités |
-| Bonheur | `:loyalty` | un `Integer` |
+| Champ Studio | Clé `extra`   | Valeur                                                |
+| ------------ | ------------- | ----------------------------------------------------- |
+| Surnom       | `:given_name` | une `String`                                          |
+| Genre        | `:gender`     | `1` (mâle) ou `2` (femelle)                           |
+| Nature       | `:nature`     | un db_symbol, ex. `:adamant`                          |
+| IV           | `:stats`      | `[hp, atk, dfe, spd, ats, dfs]`, chacun de `0` à `31` |
+| EV           | `:bonus`      | `[hp, atk, dfe, spd, ats, dfs]`                       |
+| Objet tenu   | `:item`       | un db_symbol d'objet, ex. `:leftovers`                |
+| Talent       | `:ability`    | un db_symbol de talent                                |
+| Capacités    | `:moves`      | un tableau de db_symbols de capacités                 |
+| Bonheur      | `:loyalty`    | un `Integer`                                          |
 
 Régler l'une de ces valeurs dans Studio ou l'écraser ici, c'est la même opération : on ne recourt à `extra` que lorsque la valeur ne peut pas être fixée d'avance.
 

@@ -86,15 +86,15 @@ $game_map.system_tag_here?(x, y, GameData::SystemTags::TGrass)  # => true / fals
 
 `Game_Map#system_tag` accepts a `skip_bridge:` keyword. With `skip_bridge: true` it ignores bridge tags (`BridgeRL`, `BridgeUD`) and keeps looking at the layers below, which is how the engine checks the ground *under* a bridge rather than the bridge itself.
 
-| Method | Receives | Returns |
-| --- | --- | --- |
-| `Game_Character#system_tag` | nothing | tag id of the tile the character stands on |
-| `Game_Character#front_system_tag` | nothing | tag id of the tile the character faces |
-| `Game_Character#system_tag_db_symbol` | nothing | symbol for the current tile |
-| `Game_Character#front_system_tag_db_symbol` | nothing | symbol for the faced tile |
-| `Game_Map#system_tag` | `x`, `y`, `skip_bridge:` | tag id at that cell, `0` if none |
-| `Game_Map#system_tag_here?` | `x`, `y`, `tag` | `true` if that exact tag is on the cell |
-| `GameData::SystemTags.system_tag_db_symbol` | a tag id | the matching symbol, or `:regular_ground` |
+| Method                                      | Receives                 | Returns                                    |
+| ------------------------------------------- | ------------------------ | ------------------------------------------ |
+| `Game_Character#system_tag`                 | nothing                  | tag id of the tile the character stands on |
+| `Game_Character#front_system_tag`           | nothing                  | tag id of the tile the character faces     |
+| `Game_Character#system_tag_db_symbol`       | nothing                  | symbol for the current tile                |
+| `Game_Character#front_system_tag_db_symbol` | nothing                  | symbol for the faced tile                  |
+| `Game_Map#system_tag`                       | `x`, `y`, `skip_bridge:` | tag id at that cell, `0` if none           |
+| `Game_Map#system_tag_here?`                 | `x`, `y`, `tag`          | `true` if that exact tag is on the cell    |
+| `GameData::SystemTags.system_tag_db_symbol` | a tag id                 | the matching symbol, or `:regular_ground`  |
 
 ## The families of tags
 
@@ -104,87 +104,87 @@ Every tag is a constant in the `GameData::SystemTags` module. The engine groups 
 
 These tags drive wild battles, the location type and the ground particles.
 
-| Tag | Effect |
-| --- | --- |
-| `Empty` | Neutral tile; cancels the effect of water tags such as `TSea` or `TPond`. |
-| `TGrass` | Grass; shows grass particles and starts grass wild battles. |
-| `TTallGrass` | Taller grass; same role as `TGrass` with a distinct animation. |
-| `TCave` | Cave; starts cave wild battles. |
-| `TMount` | Mountain; starts mountain wild battles. |
-| `TSand` | Sand; starts sand wild battles. |
-| `TWetSand` | Wet sand; shows a particle when walking, otherwise behaves like sand. |
-| `TPond` | Pond or river; starts pond wild battles (also surfable). |
-| `TSea` | Sea or ocean; starts sea wild battles (also surfable). |
-| `TUnderWater` | Underwater terrain; starts underwater wild battles. |
-| `TSnow` | Snow; starts snow wild battles. |
-| `Puddle` | Puddle; shows a water particle when walking. |
-| `HeadButt` | A tile you can use Headbutt on; counts as grass for the location type. |
+| Tag           | Effect                                                                    |
+| ------------- | ------------------------------------------------------------------------- |
+| `Empty`       | Neutral tile; cancels the effect of water tags such as `TSea` or `TPond`. |
+| `TGrass`      | Grass; shows grass particles and starts grass wild battles.               |
+| `TTallGrass`  | Taller grass; same role as `TGrass` with a distinct animation.            |
+| `TCave`       | Cave; starts cave wild battles.                                           |
+| `TMount`      | Mountain; starts mountain wild battles.                                   |
+| `TSand`       | Sand; starts sand wild battles.                                           |
+| `TWetSand`    | Wet sand; shows a particle when walking, otherwise behaves like sand.     |
+| `TPond`       | Pond or river; starts pond wild battles (also surfable).                  |
+| `TSea`        | Sea or ocean; starts sea wild battles (also surfable).                    |
+| `TUnderWater` | Underwater terrain; starts underwater wild battles.                       |
+| `TSnow`       | Snow; starts snow wild battles.                                           |
+| `Puddle`      | Puddle; shows a water particle when walking.                              |
+| `HeadButt`    | A tile you can use Headbutt on; counts as grass for the location type.    |
 
 ### Water and surfing
 
 The engine keeps two arrays here: `SurfTag` (the water tiles you can only enter while surfing) and `SurfLTag` (every tile you are allowed to stand on while surfing, which adds bridges, jumps and the acro-bike bridges).
 
-| Tag | Effect |
-| --- | --- |
-| `TSea`, `TPond` | Surfable water; part of `SurfTag`. |
+| Tag                                        | Effect                                                        |
+| ------------------------------------------ | ------------------------------------------------------------- |
+| `TSea`, `TPond`                            | Surfable water; part of `SurfTag`.                            |
 | `RapidsL`, `RapidsD`, `RapidsU`, `RapidsR` | Water current forcing the character left / down / up / right. |
-| `WaterFall` | Waterfall tile; an aid for waterfall events. |
-| `Whirlpool` | Whirlpool tile. |
+| `WaterFall`                                | Waterfall tile; an aid for waterfall events.                  |
+| `Whirlpool`                                | Whirlpool tile.                                               |
 
 ### Sliding
 
 These tags take control of the character and move them automatically. They are collected in `SlideTags`.
 
-| Tag | Effect |
-| --- | --- |
-| `TIce` | Ice; the character keeps sliding forward. |
-| `RapidsL`, `RapidsD`, `RapidsU`, `RapidsR` | Force the character to slide in that direction. |
-| `RocketL`, `RocketD`, `RocketU`, `RocketR` | Force the character to move that way until they hit a wall. |
-| `RocketRL`, `RocketRD`, `RocketRU`, `RocketRR` | Same as the `Rocket*` tags but the character also rotates. |
-| `StopSlide` | Stops a sliding character. |
+| Tag                                            | Effect                                                      |
+| ---------------------------------------------- | ----------------------------------------------------------- |
+| `TIce`                                         | Ice; the character keeps sliding forward.                   |
+| `RapidsL`, `RapidsD`, `RapidsU`, `RapidsR`     | Force the character to slide in that direction.             |
+| `RocketL`, `RocketD`, `RocketU`, `RocketR`     | Force the character to move that way until they hit a wall. |
+| `RocketRL`, `RocketRD`, `RocketRU`, `RocketRR` | Same as the `Rocket*` tags but the character also rotates.  |
+| `StopSlide`                                    | Stops a sliding character.                                  |
 
 ### Ledges and jumps
 
-| Tag | Effect |
-| --- | --- |
+| Tag                                | Effect                                                                |
+| ---------------------------------- | --------------------------------------------------------------------- |
 | `JumpR`, `JumpL`, `JumpD`, `JumpU` | Ledge; the character jumps across it to the right / left / down / up. |
 
 ### Stairs and slopes
 
-| Tag | Effect |
-| --- | --- |
-| `StairsL`, `StairsD`, `StairsU`, `StairsR` | Stairs; adjust the character's elevation while moving. |
-| `SlopesL`, `SlopesR` | Left and right slopes; shift the character's on-screen position as they climb or descend. |
+| Tag                                        | Effect                                                                                    |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| `StairsL`, `StairsD`, `StairsU`, `StairsR` | Stairs; adjust the character's elevation while moving.                                    |
+| `SlopesL`, `SlopesR`                       | Left and right slopes; shift the character's on-screen position as they climb or descend. |
 
 ### Bridges and elevation
 
 Bridges are grouped in `BRIDGE_TILES`; `ZTag` is an array of tiles that change the character's z (priority layer).
 
-| Tag | Effect |
-| --- | --- |
-| `BridgeUD` | Bridge crossed up and down (the layer below stays reachable). |
-| `BridgeRL` | Bridge crossed right and left. |
-| `ZTag` | Seven tiles that set the character's z layer, so they pass above or below other tiles. |
+| Tag        | Effect                                                                                 |
+| ---------- | -------------------------------------------------------------------------------------- |
+| `BridgeUD` | Bridge crossed up and down (the layer below stays reachable).                          |
+| `BridgeRL` | Bridge crossed right and left.                                                         |
+| `ZTag`     | Seven tiles that set the character's z layer, so they pass above or below other tiles. |
 
 ### Bikes
 
-| Tag | Effect |
-| --- | --- |
-| `AcroBike` | Ledge passable only by the Acro bike bunny hop. |
-| `AcroBikeRL` | Bike bridge allowing only right and left movement (plus up/down jumps). |
-| `AcroBikeUD` | Bike bridge allowing only up and down movement (plus left/right jumps). |
-| `MachBike` | Requires high speed; otherwise the character falls down. |
-| `CrackedSoil` | Requires high speed; otherwise the character falls into a hole. |
-| `Hole` | Hole tile. |
+| Tag           | Effect                                                                  |
+| ------------- | ----------------------------------------------------------------------- |
+| `AcroBike`    | Ledge passable only by the Acro bike bunny hop.                         |
+| `AcroBikeRL`  | Bike bridge allowing only right and left movement (plus up/down jumps). |
+| `AcroBikeUD`  | Bike bridge allowing only up and down movement (plus left/right jumps). |
+| `MachBike`    | Requires high speed; otherwise the character falls down.                |
+| `CrackedSoil` | Requires high speed; otherwise the character falls into a hole.         |
+| `Hole`        | Hole tile.                                                              |
 
 ### Swamp and pathfinding
 
-| Tag | Effect |
-| --- | --- |
-| `SwampBorder` | Shallow swamp; slows the character down. |
-| `DeepSwamp` | Deep swamp; the character can get stuck. |
-| `Road` | Marks a road, used as a preferred route by the pathfinding system. |
-| `RClimb` | Rock Climb tile. |
+| Tag           | Effect                                                             |
+| ------------- | ------------------------------------------------------------------ |
+| `SwampBorder` | Shallow swamp; slows the character down.                           |
+| `DeepSwamp`   | Deep swamp; the character can get stuck.                           |
+| `Road`        | Marks a road, used as a preferred route by the pathfinding system. |
+| `RClimb`      | Rock Climb tile.                                                   |
 
 The canonical, always-current list is the engine file that declares them. If a future PSDK version adds a tag, it appears there first.
 

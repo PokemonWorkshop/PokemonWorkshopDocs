@@ -33,24 +33,24 @@ Une évolution sans aucune condition est valide. Studio l'appelle **Aucune condi
 
 Voici toutes les conditions proposées par l'éditeur, dans l'ordre de la liste déroulante.
 
-| Condition | Ce qui est vérifié | Valeur à renseigner |
-| --- | --- | --- |
-| Par montée de niveau | Le Pokémon a au moins ce niveau | **Niveau**, de 1 à 999 |
-| Avant un certain niveau | Le Pokémon a au plus ce niveau | **Niveau**, de 1 à 999 |
-| Avec une pierre évolutive | La pierre utilisée sur le Pokémon | **Objet** |
-| Par échange de dresseur | Le Pokémon est échangé, avec n'importe qui | Aucune valeur |
-| En échange d'un Pokémon | Le Pokémon est échangé contre cette espèce précise | **Pokémon** |
-| En portant un objet | L'objet tenu par le Pokémon | **Objet** |
-| Avant un bonheur maximum | Le bonheur vaut au plus cette valeur | **Bonheur**, de 1 à 255 |
-| Avec un bonheur minimum | Le bonheur vaut au moins cette valeur | **Bonheur**, de 1 à 255 |
-| En possédant la capacité | Le Pokémon connaît cette capacité | **Attaque** |
-| En fonction de la météo | La météo en cours | **Météo** |
-| En fonction de l'environnement | Le Système Tag sur lequel se tient le joueur | **Système Tag**, un nombre à partir de 0 |
-| À un moment de la journée | Le moment de la journée en cours | **Moment** : Jour, Couché de soleil, Nuit ou Matin |
-| Si le joueur est sur une carte | Le joueur se trouve sur l'une de ces cartes | **Cartes**, des ID séparés par des virgules |
-| En fonction du genre | Le genre du Pokémon | **Genre** : Mâle, Femelle ou Inconnu |
-| Selon une fonction | Une condition codée en Ruby, appelée par son nom | **Fonction**, le nom de la méthode |
-| Par Méga-Évolution | Réservé à la Méga-Évolution, voir plus bas | **Objet** |
+| Condition                      | Ce qui est vérifié                                 | Valeur à renseigner                                |
+| ------------------------------ | -------------------------------------------------- | -------------------------------------------------- |
+| Par montée de niveau           | Le Pokémon a au moins ce niveau                    | **Niveau**, de 1 à 999                             |
+| Avant un certain niveau        | Le Pokémon a au plus ce niveau                     | **Niveau**, de 1 à 999                             |
+| Avec une pierre évolutive      | La pierre utilisée sur le Pokémon                  | **Objet**                                          |
+| Par échange de dresseur        | Le Pokémon est échangé, avec n'importe qui         | Aucune valeur                                      |
+| En échange d'un Pokémon        | Le Pokémon est échangé contre cette espèce précise | **Pokémon**                                        |
+| En portant un objet            | L'objet tenu par le Pokémon                        | **Objet**                                          |
+| Avant un bonheur maximum       | Le bonheur vaut au plus cette valeur               | **Bonheur**, de 1 à 255                            |
+| Avec un bonheur minimum        | Le bonheur vaut au moins cette valeur              | **Bonheur**, de 1 à 255                            |
+| En possédant la capacité       | Le Pokémon connaît cette capacité                  | **Attaque**                                        |
+| En fonction de la météo        | La météo en cours                                  | **Météo**                                          |
+| En fonction de l'environnement | Le Système Tag sur lequel se tient le joueur       | **Système Tag**, un nombre à partir de 0           |
+| À un moment de la journée      | Le moment de la journée en cours                   | **Moment** : Jour, Couché de soleil, Nuit ou Matin |
+| Si le joueur est sur une carte | Le joueur se trouve sur l'une de ces cartes        | **Cartes**, des ID séparés par des virgules        |
+| En fonction du genre           | Le genre du Pokémon                                | **Genre** : Mâle, Femelle ou Inconnu               |
+| Selon une fonction             | Une condition codée en Ruby, appelée par son nom   | **Fonction**, le nom de la méthode                 |
+| Par Méga-Évolution             | Réservé à la Méga-Évolution, voir plus bas         | **Objet**                                          |
 
 **En possédant la capacité** existe en quatre exemplaires dans les données, sous forme de quatre emplacements distincts : c'est ce qui permet à une même évolution d'exiger jusqu'à quatre capacités différentes. La liste déroulante ne propose que le prochain emplacement libre, on n'a donc jamais à se soucier de la numérotation.
 

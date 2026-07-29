@@ -51,51 +51,21 @@ None of these tools are mandatory. Choose the ones that best fit the way you lik
 
 ### Project Management
 
-#### Atlassian Agile Guide
-
-An excellent introduction to Agile practices with simple, accessible examples.
-[https://www.atlassian.com/agile](https://www.atlassian.com/agile)
-
-#### Kanban Guide
-
-A practical introduction to visual task management using Kanban.
-[https://kanbanguides.org/](https://kanbanguides.org/)
+- [Atlassian Agile Guide](https://www.atlassian.com/agile) - An excellent introduction to Agile practices with simple, accessible examples.
+- [Kanban Guide](https://kanbanguides.org/) - A practical introduction to visual task management using Kanban.
 
 ### Game Design
 
-#### The Door Problem - Liz England
-
-A classic article illustrating the wide variety of disciplines involved in game development.
-[https://lizengland.com/blog/2014/04/the-door-problem/](https://lizengland.com/blog/2014/04/the-door-problem/)
-
-#### Game Developer
-
-Articles covering game design, production, programming, and the game industry.
-[https://www.gamedeveloper.com/](https://www.gamedeveloper.com/)
-
-#### Extra Credits
-
-A YouTube channel covering game design, storytelling, and many aspects of game development.
-[https://www.youtube.com/@ExtraCredits](https://www.youtube.com/@ExtraCredits)
-
-#### Game Maker's Toolkit (GMTK)
-
-A YouTube channel analyzing game design decisions and explaining why they work.
-[https://www.youtube.com/@GMTK](https://www.youtube.com/@GMTK)
+- [The Door Problem, Liz England](https://lizengland.com/blog/2014/04/the-door-problem/) - A classic article illustrating the wide variety of disciplines involved in game development.
+- [Game Developer](https://www.gamedeveloper.com/) - Articles covering game design, production, programming, and the game industry.
+- [Extra Credits](https://www.youtube.com/@ExtraCredits) - A YouTube channel covering game design, storytelling, and many aspects of game development.
+- [Game Maker's Toolkit (GMTK)](https://www.youtube.com/@GMTK) - A YouTube channel analyzing game design decisions and explaining why they work.
 
 ### Productivity
 
-#### Getting Things Done - David Allen
-
-A personal productivity methodology that has inspired many modern organizational tools. Even if you don't adopt the entire system, many of its principles are useful for managing an amateur project.
-
-#### The Lean Startup - Eric Ries
-
-An excellent book for understanding the value of prototypes, iterations, and validating ideas early.
-
-#### Peopleware - Tom DeMarco & Timothy Lister
-
-A classic reference on the human side of collaborative projects. Especially useful if you're starting to build a team.
+- Getting Things Done, David Allen - A personal productivity methodology that has inspired many modern organizational tools. Even if you don't adopt the entire system, many of its principles are useful for managing an amateur project.
+- The Lean Startup, Eric Ries - An excellent book for understanding the value of prototypes, iterations, and validating ideas early.
+- Peopleware, Tom DeMarco & Timothy Lister - A classic reference on the human side of collaborative projects. Especially useful if you're starting to build a team.
 
 ### Pokémon Workshop Resources
 

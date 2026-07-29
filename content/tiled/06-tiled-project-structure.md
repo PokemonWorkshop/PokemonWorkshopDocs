@@ -9,13 +9,13 @@ Everything Tiled-related in a PSDK project lives under `Data/Tiled`, split into 
 
 ## What is in there
 
-| Entry | Contents | Written by |
-| --- | --- | --- |
-| `Maps` | the maps of the project as `.tmx`, plus the automapping rules | you |
-| `Tilesets` | the tilesets of the project, `.tsx` files only | you |
-| `Assets` | the `.png` images the tilesets are cut from | you |
-| `Overviews` | one `.png` preview per map | Pokémon Studio |
-| `.jobs` | the conversion queue handed from Studio to the engine | Studio and the converter |
+| Entry       | Contents                                                      | Written by               |
+| ----------- | ------------------------------------------------------------- | ------------------------ |
+| `Maps`      | the maps of the project as `.tmx`, plus the automapping rules | you                      |
+| `Tilesets`  | the tilesets of the project, `.tsx` files only                | you                      |
+| `Assets`    | the `.png` images the tilesets are cut from                   | you                      |
+| `Overviews` | one `.png` preview per map                                    | Pokémon Studio           |
+| `.jobs`     | the conversion queue handed from Studio to the engine         | Studio and the converter |
 
 You never edit `Overviews` by hand: Studio fills it when maps are imported or updated, and on demand from a map's **Map** tab. Reserved layers are hidden in those images, which is why an overview shows the map as the player sees it rather than as you painted it.
 

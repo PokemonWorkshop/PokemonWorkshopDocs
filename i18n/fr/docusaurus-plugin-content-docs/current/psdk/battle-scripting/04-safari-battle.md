@@ -60,12 +60,12 @@ PSDK n'a pas de compteur de pas, de minuteur ni de budget de balls intégré pou
 
 À chaque tour, le joueur choisit une des quatre actions au lieu d'une capacité :
 
-| Action | Ce qu'elle fait |
-| --- | --- |
+| Action          | Ce qu'elle fait                                                                                              |
+| --------------- | ------------------------------------------------------------------------------------------------------------ |
 | **Safari Ball** | Lance une Safari Ball sur le Pokémon, en consommant une du sac, puis applique la formule de capture normale. |
-| **Appât** | Augmente le taux de capture d'un palier. 90 % du temps, rend aussi le Pokémon **plus** enclin à fuir. |
-| **Boue** | Diminue le taux de fuite d'un palier. 90 % du temps, rend aussi le Pokémon **plus difficile** à capturer. |
-| **Fuir** | Quitte le combat. Dans un combat Safari, cela réussit toujours. |
+| **Appât**       | Augmente le taux de capture d'un palier. 90 % du temps, rend aussi le Pokémon **plus** enclin à fuir.        |
+| **Boue**        | Diminue le taux de fuite d'un palier. 90 % du temps, rend aussi le Pokémon **plus difficile** à capturer.    |
+| **Fuir**        | Quitte le combat. Dans un combat Safari, cela réussit toujours.                                              |
 
 L'appât et la boue sont volontairement opposés, et chacun porte un inconvénient que l'autre n'a pas :
 
@@ -81,14 +81,14 @@ Quand le joueur n'a plus de Safari Balls, en lancer une est impossible : le Pok�
 L'appât et la boue ne modifient pas un pourcentage directement. Ils déplacent un **palier**, un entier qui part de `0` et reste borné à l'intervalle `-6`…`+6`, exactement comme un changement de stat en combat. Un palier est transformé en multiplicateur appliqué au taux sous-jacent :
 
 | Palier | Multiplicateur |
-| --- | --- |
-| +6 | ×4.0 |
-| +2 | ×2.0 |
-| +1 | ×1.5 |
-| 0 | ×1.0 |
-| −1 | ×0.67 |
-| −2 | ×0.5 |
-| −6 | ×0.25 |
+| ------ | -------------- |
+| +6     | ×4.0           |
+| +2     | ×2.0           |
+| +1     | ×1.5           |
+| 0      | ×1.0           |
+| −1     | ×0.67          |
+| −2     | ×0.5           |
+| −6     | ×0.25          |
 
 Deux paliers distincts évoluent en parallèle : un palier de **capture** et un palier de **fuite**.
 
@@ -113,10 +113,10 @@ Un Pokémon plus rare (`rareness` plus bas) et plus rapide (`base_spd` plus haut
 
 Un combat Safari rend compte via les mêmes interrupteurs que les combats sauvages, si bien qu'un event lancé après le combat peut s'aiguiller selon ce qui s'est passé. Le piège, c'est que la scène Safari ne se termine que de deux façons : une capture, ou `battle_result = 1` pour tout le reste, que le joueur ait choisi Fuir, que le Pokémon ait fui, ou que le sac soit vide. Ce résultat unique correspond à un seul interrupteur :
 
-| Interrupteur | ID | Signification |
-| --- | --- | --- |
-| `BT_Catch` | 38 | le joueur a capturé le Pokémon |
-| `BT_Player_Flee` | 35 | le combat s'est terminé de toute autre façon (le joueur a fui, le Pokémon a fui, ou il n'y avait plus de balls) |
+| Interrupteur     | ID  | Signification                                                                                                   |
+| ---------------- | --- | --------------------------------------------------------------------------------------------------------------- |
+| `BT_Catch`       | 38  | le joueur a capturé le Pokémon                                                                                  |
+| `BT_Player_Flee` | 35  | le combat s'est terminé de toute autre façon (le joueur a fui, le Pokémon a fui, ou il n'y avait plus de balls) |
 
 `BT_Wild_Flee` (interrupteur `34`) n'est **pas** positionné par un combat Safari : il exige le code de résultat `3`, que la scène Safari ne produit jamais, donc un Pokémon sauvage qui fuit est tout de même signalé par `BT_Player_Flee`. La seule distinction à lire est donc `BT_Catch` : on le teste (interrupteur `38`) juste après le combat pour réagir à une capture réussie, et on traite toutes les autres fins comme le joueur repartant les mains vides.
 

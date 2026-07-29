@@ -45,9 +45,7 @@ The conditions for applying the effect are checked **before** its execution. If 
 
 ### For offensive moves
 
-Override the `effect_working?` method which determines whether the move's secondary effect can be applied.
-
-#### Example: Core Enforcer
+Override the `effect_working?` method which determines whether the move's secondary effect can be applied. Core Enforcer illustrates it:
 
 ```ruby
 # Test if the effect is working
@@ -64,9 +62,7 @@ end
 
 ### For status moves
 
-Override the `move_usable_by_user` method which determines whether the move can be launched (see guide 001 for full details).
-
-#### Example: Gravity
+Override the `move_usable_by_user` method which determines whether the move can be launched (see guide 001 for full details). Gravity illustrates it:
 
 ```ruby
 # Function that tests if the user is able to use the move

@@ -15,13 +15,13 @@ Pour les boutons ctrl, utilisez l'**héritage** (une sous-classe imbriquée), ja
 
 ## Méthodes surchargeables
 
-| Besoin                               | Classe                  | Méthode à surcharger          | Valeur par défaut           |
-| ------------------------------------ | ----------------------- | ----------------------------- | --------------------------- |
-| Fond différent                       | sous-classe GenericBase | `background_filename`         | `'team/Fond'`               |
-| Barre de boutons différente          | sous-classe GenericBase | `button_background_filename`  | `'tcard/button_background'` |
-| Pas d'animation de fond              | sous-classe GenericBase | `create_background_animation` | Animation de défilement     |
-| Classe de bouton ctrl personnalisée  | sous-classe GenericBase | `control_button_class`        | `ControlButton`             |
-| Texture de bouton différente         | sous-classe ControlButton | `button_texture`            | `'buttons'`                 |
+| Besoin                              | Classe                    | Méthode à surcharger          | Valeur par défaut           |
+| ----------------------------------- | ------------------------- | ----------------------------- | --------------------------- |
+| Fond différent                      | sous-classe GenericBase   | `background_filename`         | `'team/Fond'`               |
+| Barre de boutons différente         | sous-classe GenericBase   | `button_background_filename`  | `'tcard/button_background'` |
+| Pas d'animation de fond             | sous-classe GenericBase   | `create_background_animation` | Animation de défilement     |
+| Classe de bouton ctrl personnalisée | sous-classe GenericBase   | `control_button_class`        | `ControlButton`             |
+| Texture de bouton différente        | sous-classe ControlButton | `button_texture`              | `'buttons'`                 |
 
 ## Terminer MysteryGiftBase
 

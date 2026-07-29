@@ -18,10 +18,10 @@ Le code Ruby référence ces ressources par leur nom (`'mystery_gift/header'`) o
 
 ## Où va chaque ressource
 
-| Ressource         | Source (téléchargement ci-dessous)              | Chemin cible dans votre projet               |
-| ----------------- | ----------------------------------------------- | -------------------------------------------- |
-| 7 graphismes      | `*.png`                                          | `graphics/interface/mystery_gift/`           |
-| Texte i18n        | `311125.csv`                                     | `Data/Text/Dialogs/311125.csv`               |
+| Ressource    | Source (téléchargement ci-dessous) | Chemin cible dans votre projet     |
+| ------------ | ---------------------------------- | ---------------------------------- |
+| 7 graphismes | `*.png`                            | `graphics/interface/mystery_gift/` |
+| Texte i18n   | `311125.csv`                       | `Data/Text/Dialogs/311125.csv`     |
 
 Le nom de dossier `mystery_gift` (sous `graphics/interface/`) est le préfixe utilisé dans chaque appel `add_sprite`/`add_background`, par exemple `add_sprite(0, 0, 'mystery_gift/header')`. Le nom de fichier `311125.csv` correspond à la constante `TEXT_FILE_ID = 311_125` que le code utilise avec `ext_text`.
 

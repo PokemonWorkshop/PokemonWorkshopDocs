@@ -19,7 +19,7 @@ Un battle event est un fichier Ruby qui s'accroche à la scène de combat à des
 
 Les battle events vivent dans `Data/Events/Battle/` sous forme de fichiers Ruby. Le nom de fichier doit commencer par **cinq chiffres**, suivis de n'importe quoi, puis de `.rb` :
 
-```
+```text
 Data/Events/Battle/00234 Brock battle.rb
 ```
 
@@ -105,16 +105,16 @@ On le place dans un script personnalisé, pas dans le fichier de battle event, p
 
 PSDK déclenche huit events au cours d'un combat. Ils s'enregistrent tous de la même façon ; ils diffèrent par le moment où ils se déclenchent et par les arguments supplémentaires que reçoit le bloc.
 
-| Event | Arguments du bloc | Moment de déclenchement |
-| ---------------------- | ------------------------- | ----------------------------------------------------------------------------- |
-| `:logic_init` | `\|scene\|` | Juste après la construction de la scène, avant toute animation. On y met en place la logique. |
-| `:pre_battle_begin` | `\|scene\|` | Pendant l'intro, après « Le dresseur veut se battre ! », avant l'envoi du premier Pokémon. |
-| `:battle_begin` | `\|scene\|` | Après que les deux camps ont envoyé leur premier Pokémon, avant le premier choix du joueur. |
-| `:trainer_dialog` | `\|scene\|` | Chaque tour, après le choix du joueur, avant celui de l'IA. |
-| `:AI_force_action` | `\|scene, ai, index\|` | Chaque tour, une fois par IA. On retourne des actions pour les forcer, ou `nil` pour l'IA par défaut. |
-| `:after_attack` | `\|scene, launcher, move\|` | Après la résolution de chaque attaque. |
-| `:after_action_dialog` | `\|scene\|` | Après les actions du tour, avant le remplacement des Pokémon K.O. |
-| `:battle_turn_end` | `\|scene\|` | À la fin du tour, après le remplacement des Pokémon K.O. |
+| Event                  | Arguments du bloc           | Moment de déclenchement                                                                               |
+| ---------------------- | --------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `:logic_init`          | `\|scene\|`                 | Juste après la construction de la scène, avant toute animation. On y met en place la logique.         |
+| `:pre_battle_begin`    | `\|scene\|`                 | Pendant l'intro, après « Le dresseur veut se battre ! », avant l'envoi du premier Pokémon.            |
+| `:battle_begin`        | `\|scene\|`                 | Après que les deux camps ont envoyé leur premier Pokémon, avant le premier choix du joueur.           |
+| `:trainer_dialog`      | `\|scene\|`                 | Chaque tour, après le choix du joueur, avant celui de l'IA.                                           |
+| `:AI_force_action`     | `\|scene, ai, index\|`      | Chaque tour, une fois par IA. On retourne des actions pour les forcer, ou `nil` pour l'IA par défaut. |
+| `:after_attack`        | `\|scene, launcher, move\|` | Après la résolution de chaque attaque.                                                                |
+| `:after_action_dialog` | `\|scene\|`                 | Après les actions du tour, avant le remplacement des Pokémon K.O.                                     |
+| `:battle_turn_end`     | `\|scene\|`                 | À la fin du tour, après le remplacement des Pokémon K.O.                                              |
 
 ### Mettre en place la logique
 
