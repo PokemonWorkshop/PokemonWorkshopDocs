@@ -169,7 +169,7 @@ p numbers    # => {:level=>36, :hp=>150}
 
 ## Merging two Hashes
 
-```ruby
+```ruby live
 base = { hp: 78, attack: 84 }
 bonus = { attack: 100, speed: 120 }
 
@@ -218,7 +218,7 @@ puts charizard.dig(:moves, :first)    # => nil (no error)
 
 Normally, accessing a nonexistent key returns `nil`. You can change this behavior with `Hash.new`:
 
-```ruby
+```ruby live
 # Counter: each nonexistent key defaults to 0
 counter = Hash.new(0)
 

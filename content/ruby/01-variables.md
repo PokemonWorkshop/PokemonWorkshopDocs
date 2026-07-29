@@ -58,7 +58,7 @@ level = 25
 
 We can then use these variables anywhere we would have used the value directly:
 
-```ruby
+```ruby live
 name = 'Pikachu'
 level = 25
 
@@ -126,7 +126,7 @@ description = "An adorable Electric-type Pokémon"
 
 The difference between the two is important. Double quotes allow you to **insert variables into text** using the `#{}` syntax. This is called **interpolation**:
 
-```ruby
+```ruby live
 name = 'Pikachu'
 level = 25
 

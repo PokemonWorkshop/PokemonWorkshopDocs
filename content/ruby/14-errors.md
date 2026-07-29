@@ -35,7 +35,7 @@ raise ArgumentError, 'Level must be between 1 and 100'
 
 The `begin...rescue...end` block catches exceptions:
 
-```ruby
+```ruby live
 begin
   level = -5
   raise ArgumentError, 'Level must be positive' if level < 1
@@ -45,7 +45,7 @@ rescue ArgumentError => error
   puts "Error: #{error.message}"
 end
 
-puts 'Le programme continue normalement.'
+puts 'The program continues normally.'
 ```
 
 Outputs:
