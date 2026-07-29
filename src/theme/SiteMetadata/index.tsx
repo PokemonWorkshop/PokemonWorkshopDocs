@@ -1,13 +1,13 @@
-import type { ReactNode } from "react";
 import Head from "@docusaurus/Head";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import useBaseUrl from "@docusaurus/useBaseUrl";
+import { useLocation } from "@docusaurus/router";
 import { PageMetadata, useThemeConfig } from "@docusaurus/theme-common";
 import { DEFAULT_SEARCH_TAG } from "@docusaurus/theme-common/internal";
-import { useLocation } from "@docusaurus/router";
-import { applyTrailingSlash } from "@docusaurus/utils-common";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { usePluginData } from "@docusaurus/useGlobalData";
+import { applyTrailingSlash } from "@docusaurus/utils-common";
 import SearchMetadata from "@theme/SearchMetadata";
+import type { ReactNode } from "react";
 import { normalizePathname } from "../../utils/locale";
 
 function resolveLocalePaths(
@@ -61,11 +61,7 @@ function AlternateLangHeaders(): ReactNode {
           hrefLang={htmlLang}
         />
       ))}
-      <link
-        rel="alternate"
-        href={urlFor(defaultLocale)}
-        hrefLang="x-default"
-      />
+      <link rel="alternate" href={urlFor(defaultLocale)} hrefLang="x-default" />
 
       <meta
         property="og:locale"

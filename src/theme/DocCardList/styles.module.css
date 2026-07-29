@@ -47,7 +47,8 @@
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   line-height: 1;
-  transition: background-color var(--ifm-transition-fast) ease,
+  transition:
+    background-color var(--ifm-transition-fast) ease,
     color var(--ifm-transition-fast) ease;
 }
 
