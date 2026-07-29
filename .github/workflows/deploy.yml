@@ -41,6 +41,9 @@ jobs:
       - name: Typecheck
         run: bun run typecheck
 
+      - name: Lint Markdown
+        run: bun run lint:md
+
       - name: Cache Docusaurus build
         uses: actions/cache@v6
         with:

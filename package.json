@@ -28,7 +28,9 @@
     "typecheck": "tsc",
     "lint": "biome lint",
     "format": "biome format --write",
-    "check": "biome check --write"
+    "check": "biome check --write",
+    "lint:md": "markdownlint-cli2",
+    "lint:md:fix": "markdownlint-cli2 --fix"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.2",
@@ -47,6 +49,7 @@
     "@docusaurus/module-type-aliases": "3.10.2",
     "@docusaurus/tsconfig": "3.10.2",
     "@docusaurus/types": "3.10.2",
+    "markdownlint-cli2": "^0.23.2",
     "typescript": "6.0.3"
   },
   "overrides": {
