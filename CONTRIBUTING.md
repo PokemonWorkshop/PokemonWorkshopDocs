@@ -222,6 +222,12 @@ bun run lint:md
 
 (`bun run lint:md:fix` fixes what can be fixed automatically.)
 
+- Check that every code block closes:
+
+```bash
+bun run lint:fences
+```
+
 - Run the type checker:
 
 ```bash

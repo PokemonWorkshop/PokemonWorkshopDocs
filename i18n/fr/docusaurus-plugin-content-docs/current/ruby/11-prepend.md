@@ -103,16 +103,16 @@ Pokemon.prepend(DamageLog)
 
 pikachu = Pokemon.new('Pikachu', 100)
 pikachu.take_damage(30)
-```text
+```
 
 Affiche :
 
-```
+```text
 
 Pikachu subit 30 dégâts !
 Pikachu a 70 PV restants.
 
-```text
+```
 
 - `super` dans le module appelle la méthode **de la classe originale**. Le comportement original est préservé et enrichi.
 - Le module peut exécuter du code **avant** et **après** `super`.
@@ -130,7 +130,7 @@ Pokemon.prepend(DamageLog)
 
 puts Pokemon.ancestors.inspect
 # Après : [DamageLog, Pokemon, Object, Kernel, BasicObject]
-```text
+```
 
 - Le module `DamageLog` est maintenant **en tête** de la chaîne, avant `Pokemon`.
 - Quand on appelle `pikachu.take_damage(30)`, Ruby cherche la méthode dans l'ordre : d'abord dans `DamageLog`, puis dans `Pokemon`.
@@ -161,7 +161,7 @@ Pokemon.prepend(MagicShield)
 
 puts Pokemon.ancestors.inspect
 # => [MagicShield, DamageLog, Pokemon, Object, ...]
-```text
+```
 
 - Le dernier module prependé est en tête. L'ordre d'appel est : `MagicShield` → `DamageLog` → `Pokemon`.
 - `super(reduced_damage)` dans `MagicShield` passe les dégâts réduits à `DamageLog`, qui appelle `super` vers `Pokemon`.
@@ -180,7 +180,7 @@ end
 
 puts Pokemon.ancestors.inspect
 # => [DamageLog, Pokemon, Displayable, Object, ...]
-```text
+```
 
 | Méthode   | Position dans ancestors | Appel via                        | Usage                   |
 | --------- | ----------------------- | -------------------------------- | ----------------------- |
@@ -212,7 +212,7 @@ module MyExtension
   end
 end
 Pokemon.prepend(MyExtension)
-```text
+```
 
 ## Conclusion
 

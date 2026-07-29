@@ -102,7 +102,7 @@ puts pokemon.level    # => 100 (limité par le setter)
 
 pokemon.level = -5
 puts pokemon.level    # => 1 (limité par le setter)
-```text
+```
 
 - `def level=(new_level)` : le `=` fait partie du nom de la méthode. C'est ce qui permet d'écrire `pokemon.level = 50`.
 - `.clamp(1, 100)` borne la valeur entre 1 et 100.

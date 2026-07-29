@@ -238,7 +238,7 @@ charizard = Pokemon.new('Dracaufeu', 50)
 puts pikachu < charizard                                    # => true
 puts charizard > pikachu                                    # => true
 puts pikachu.between?(Pokemon.new('Min', 10), charizard)    # => true
-```text
+```
 
 - `<=>` retourne `-1` si `self` est inférieur, `0` si égal, `1` si supérieur.
 - Une fois `<=>` défini, `.sort` fonctionne automatiquement sans bloc.

@@ -170,7 +170,7 @@ puts pikachu.speed     # => 90
 
 puts pikachu.respond_to?(:attack)    # => true
 puts pikachu.respond_to?(:unknown)   # => false
-```text
+```
 
 - `method_missing` intercepte l'appel. Si le nom correspond à une stat connue, on retourne sa valeur. Sinon, `super` propage l'erreur normalement.
 - **Toujours** implémenter `respond_to_missing?` en parallèle. Sans elle, `respond_to?` retournerait `false` même si `method_missing` gère l'appel.
@@ -187,7 +187,7 @@ b = 'Pikachu'
 puts a == b         # => true  (même valeur)
 puts a.equal?(b)    # => false (objets différents en mémoire)
 puts a.eql?(b)      # => true  (même valeur et même type)
-```text
+```
 
 - `==` : égalité par valeur (la plus courante, celle qu'on redéfinit)
 - `.equal?` : identité mémoire (même objet). **Ne jamais la redéfinir.**
@@ -209,7 +209,7 @@ class Pokemon
     return [@name, @level].hash
   end
 end
-```text
+```
 
 - `eql?` et `hash` doivent être cohérents avec `==` : deux objets égaux doivent avoir le même `hash`.
 - Sans ça, utiliser un Pokémon comme clé de Hash donnerait des résultats incohérents.
@@ -223,7 +223,7 @@ name = 'Pikachu'
 name.freeze
 puts name.frozen?    # => true
 # name.upcase!       # => Erreur ! FrozenError
-```text
+```
 
 `dup` crée une copie superficielle :
 
@@ -233,7 +233,7 @@ copy = original.dup
 
 copy[:name] = 'Raichu'          # Ne modifie PAS l'original
 copy[:stats][:hp] = 999         # MODIFIE l'original aussi !
-```text
+```
 
 - `dup` copie le Hash lui-même, mais les valeurs imbriquées (comme le Hash `stats`) sont **partagées**. C'est une copie "superficielle".
 - `clone` est similaire à `dup` mais préserve aussi l'état `frozen`.

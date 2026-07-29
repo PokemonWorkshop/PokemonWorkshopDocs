@@ -176,7 +176,7 @@ bonus = { attack: 100, speed: 120 }
 result = base.merge(bonus)
 p result      # => {:hp=>78, :attack=>100, :speed=>120}
 p base        # => {:hp=>78, :attack=>84}  (inchangé)
-```text
+```
 
 - `.merge` retourne un **nouveau** Hash. En cas de clé en commun, la valeur du second Hash gagne.
 - L'original n'est pas modifié.
@@ -194,7 +194,7 @@ dracaufeu = {
 
 puts dracaufeu[:stats][:hp]       # => 78
 puts dracaufeu[:stats][:speed]    # => 100
-```text
+```
 
 - On enchaîne les `[]` pour accéder aux niveaux imbriqués : `hash[:clé1][:clé2]`.
 
@@ -203,14 +203,14 @@ Le problème arrive quand un niveau intermédiaire n'existe pas :
 ```ruby
 # Si :stats n'existait pas, on aurait une erreur
 # dracaufeu[:moves][:first]    # => Erreur ! NoMethodError (nil n'a pas de [])
-```text
+```
 
 Pour éviter ce problème, Ruby offre `.dig` qui navigue en profondeur sans erreur :
 
 ```ruby
 puts dracaufeu.dig(:stats, :hp)       # => 78
 puts dracaufeu.dig(:moves, :first)    # => nil (pas d'erreur)
-```text
+```
 
 - `.dig` retourne `nil` si un niveau intermédiaire n'existe pas, au lieu de lever une erreur.
 

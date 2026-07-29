@@ -30,7 +30,8 @@
     "format": "biome format --write",
     "check": "biome check --write",
     "lint:md": "markdownlint-cli2",
-    "lint:md:fix": "markdownlint-cli2 --fix"
+    "lint:md:fix": "markdownlint-cli2 --fix",
+    "lint:fences": "node scripts/check-code-fences.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.2",
