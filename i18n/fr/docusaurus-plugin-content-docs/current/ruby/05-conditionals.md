@@ -47,7 +47,7 @@ elsif level >= 20
 else
   puts 'Pokémon de bas niveau'
 end
-```text
+```
 
 - Ruby évalue chaque condition de haut en bas et exécute la **première** qui est vraie.
 - `elsif` (pas `elseif` ni `else if`) ajoute des conditions supplémentaires.
@@ -62,7 +62,7 @@ health_points = 0
 if health_points <= 0
   puts 'Le Pokémon est KO !'
 end
-```text
+```
 
 ## unless
 
@@ -74,7 +74,7 @@ held_item = nil
 unless held_item
   puts 'Le Pokémon ne tient aucun objet.'
 end
-```text
+```
 
 - `unless held_item` veut dire "si `held_item` est faux (c'est-à-dire `nil` ou `false`)".
 - `unless` rend le code plus lisible quand on teste une négation simple. La règle d'or est d'éviter les **doubles négations** : `unless !condition` est déroutant, un simple `if condition` est bien plus clair. `unless` avec `&&` est acceptable tant que la phrase reste facile à comprendre. En revanche, éviter `unless` avec `else` : si on a besoin d'un `else`, c'est qu'un `if` serait plus lisible.
@@ -90,7 +90,7 @@ health_points = 0
 puts 'Niveau maximum !' if level >= 100
 puts 'Le Pokémon est KO !' if health_points <= 0
 puts 'Le Pokémon est en forme.' unless health_points <= 0
-```text
+```
 
 - C'est exactement la même chose qu'un `if ... end`, mais plus compact.
 - On lit naturellement : "affiche ce message **si** le niveau est supérieur ou égal à 100".

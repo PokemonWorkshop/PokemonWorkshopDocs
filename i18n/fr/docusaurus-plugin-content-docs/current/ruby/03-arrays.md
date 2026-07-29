@@ -58,7 +58,7 @@ puts team[2]      # => Tortank      (troisième élément)
 puts team[5]      # => Ronflex      (dernier élément)
 puts team[-1]     # => Ronflex      (dernier, en comptant depuis la fin)
 puts team[-2]     # => Dracolosse   (avant-dernier)
-```text
+```
 
 - `team[0]` accède au premier élément. C'est une convention de la programmation : on commence à compter à partir de 0.
 - Les index négatifs comptent depuis la fin. `-1` est le dernier, `-2` l'avant-dernier.
@@ -70,7 +70,7 @@ team = ['Pikachu', 'Dracaufeu', 'Tortank']
 
 puts team.first    # => Pikachu
 puts team.last     # => Tortank
-```text
+```
 
 ## Modifier un élément
 
@@ -83,7 +83,7 @@ puts team[0]       # => Pikachu
 team[0] = 'Raichu'
 puts team[0]       # => Raichu
 p team             # => ["Raichu", "Dracaufeu", "Tortank"]
-```text
+```
 
 ## Connaître la taille
 
@@ -94,7 +94,7 @@ puts team.size      # => 3
 puts team.length    # => 3  (identique à .size)
 puts team.empty?    # => false
 puts [].empty?      # => true
-```text
+```
 
 - `.size` et `.length` font la même chose. `.empty?` retourne `true` si l'Array ne contient aucun élément.
 
@@ -115,7 +115,7 @@ p team    # => ["Mew", "Pikachu", "Dracaufeu", "Tortank"]
 # Insérer à une position précise
 team.insert(2, 'Ectoplasma')
 p team    # => ["Mew", "Pikachu", "Ectoplasma", "Dracaufeu", "Tortank"]
-```text
+```
 
 - `<<` est la forme la plus courante pour ajouter à la fin. On le lit "ajouter" ou "pousser".
 - `.unshift` ajoute au début. `.insert(position, valeur)` insère à un index donné.
@@ -144,7 +144,7 @@ p team    # => ["Dracaufeu"]
 team = ['Pikachu', 'Dracaufeu', 'Tortank']
 team.delete_at(1)
 p team    # => ["Pikachu", "Tortank"]
-```text
+```
 
 - `.pop` et `.shift` retournent l'élément retiré, ce qui permet de le stocker dans une variable.
 - `.delete(valeur)` supprime **toutes** les occurrences de cette valeur.
@@ -158,7 +158,7 @@ puts team.include?('Pikachu')      # => true
 puts team.include?('Mewtwo')       # => false
 puts team.index('Tortank')         # => 2 (sa position)
 puts team.index('Mewtwo')          # => nil (pas trouvé)
-```text
+```
 
 - `.include?` vérifie si une valeur est dans l'Array. `.index` retourne sa position, ou `nil` si elle n'y est pas.
 
@@ -170,17 +170,17 @@ Pour faire quelque chose avec chaque élément d'un Array, on utilise `.each` :
 team = ['Pikachu', 'Dracaufeu', 'Tortank']
 
 team.each { |pokemon| puts "Go, #{pokemon} !" }
-```text
+```
 
 Affiche :
 
-```
+```text
 
 Go, Pikachu !
 Go, Dracaufeu !
 Go, Tortank !
 
-```text
+```
 
 - `.each` passe chaque élément, un par un, au **bloc** `{ |pokemon| ... }`. Le mot `pokemon` entre les barres `| |` est le nom qu'on donne à l'élément courant. On peut choisir n'importe quel nom, mais il est plus lisible de prendre le singulier de la collection.
 - En Ruby, beaucoup de méthodes d'Array acceptent un bloc pour personnaliser leur comportement. Dans ce chapitre, certaines méthodes sont montrées sans bloc (comme `.sort`, `.reverse`), mais elles ont souvent une variante avec bloc qu'on découvrira plus tard. Quand on voit une méthode d'Array, il y a de bonnes chances qu'on puisse lui passer un bloc.
@@ -191,7 +191,7 @@ team.each do |pokemon|
   puts "Pokémon : #{pokemon}"
   puts "  Longueur du nom : #{pokemon.length}"
 end
-```text
+```
 
 ## Parcourir avec l'index
 
@@ -203,17 +203,17 @@ team = ['Pikachu', 'Dracaufeu', 'Tortank']
 team.each_with_index do |pokemon, index|
   puts "#{index + 1}. #{pokemon}"
 end
-```text
+```
 
 Affiche :
 
-```
+```text
 
 1. Pikachu
 2. Dracaufeu
 3. Tortank
 
-```text
+```
 
 - `.each_with_index` passe deux valeurs au bloc : l'élément et son index. On ajoute 1 à l'index pour un affichage plus naturel (commencer à 1 plutôt qu'à 0).
 
@@ -227,7 +227,7 @@ team = ['Pikachu', 'Dracaufeu', 'Tortank']
 uppercased_team = team.map { |pokemon| pokemon.upcase }
 p uppercased_team    # => ["PIKACHU", "DRACAUFEU", "TORTANK"]
 p team               # => ["Pikachu", "Dracaufeu", "Tortank"]  (inchangé)
-```text
+```
 
 - `.map` ne modifie pas l'Array original. Il retourne un nouvel Array avec les résultats.
 

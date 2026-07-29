@@ -147,7 +147,7 @@ sacha = Trainer.new('Sacha', 10)
 
 puts pikachu.summary    # => Pikachu Niv.25
 puts sacha.summary      # => Sacha Niv.10
-```text
+```
 
 - `include Displayable` donne la méthode `summary` à `Pokemon` **et** à `Trainer`. On a partagé du comportement sans héritage.
 - Le module accède aux variables d'instance (`@name`, `@level`) de l'objet qui l'inclut. Il faut donc que la classe définisse ces variables.
@@ -160,7 +160,7 @@ Quand on inclut un module, il apparaît dans `.ancestors` :
 ```ruby
 puts Pokemon.ancestors.inspect
 # => [Pokemon, Displayable, Object, Kernel, BasicObject]
-```text
+```
 
 - Ruby cherche les méthodes dans l'ordre de `.ancestors` : d'abord dans la classe, puis dans les modules inclus, puis dans la classe parent.
 - Si plusieurs modules définissent la même méthode, le **dernier inclus** a la priorité.
@@ -196,7 +196,7 @@ team = [
 # Appel sur la classe (pas sur un objet)
 fire_pokemon = Pokemon.find_by_type(team, :fire)
 puts fire_pokemon.first.name    # => Dracaufeu
-```text
+```
 
 - `include` → méthodes d'instance (appelées sur un objet : `pikachu.summary`)
 - `extend` → méthodes de classe (appelées sur la classe : `Pokemon.find_by_type(...)`)

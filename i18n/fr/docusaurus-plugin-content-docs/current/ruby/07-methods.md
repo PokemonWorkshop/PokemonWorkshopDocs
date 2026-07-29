@@ -59,7 +59,7 @@ end
 
 greet_pokemon('Pikachu')              # Affiche : Go, Pikachu !
 greet_pokemon('Pikachu', 'En avant')  # Affiche : En avant, Pikachu !
-```text
+```
 
 - `greeting = 'Go'` : si l'argument n'est pas fourni, `greeting` vaut `'Go'`.
 

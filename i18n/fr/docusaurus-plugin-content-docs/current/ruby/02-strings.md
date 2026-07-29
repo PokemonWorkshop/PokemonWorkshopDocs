@@ -24,7 +24,7 @@ puts 'Bonjour, #{name}'     # Affiche : Bonjour, #{name}
 # Guillemets doubles : interpolation et séquences d'échappement
 puts "Bonjour, #{name} !"   # Affiche : Bonjour, Pikachu !
 puts "Ligne 1\nLigne 2"     # Affiche sur deux lignes
-```text
+```
 
 - `\n` crée un retour à la ligne. `\t` crée une tabulation. Ces séquences ne fonctionnent qu'avec les guillemets doubles.
 - Règle simple : guillemets simples par défaut, guillemets doubles si on a besoin d'interpolation ou de `\n`.
@@ -40,7 +40,7 @@ description = <<~TEXT
 TEXT
 
 puts description
-```text
+```
 
 - `<<~TEXT` ouvre le heredoc. Le texte se termine quand Ruby rencontre `TEXT` seul sur une ligne.
 - Le `~` supprime l'indentation commune, ce qui permet d'indenter le texte dans le code sans que les espaces apparaissent à l'affichage.
@@ -59,7 +59,7 @@ puts "#{name} est niveau #{level}"
 
 # Concaténation (à éviter)
 puts name + ' est niveau ' + level.to_s
-```text
+```
 
 - L'interpolation convertit automatiquement les valeurs en texte. La concaténation exige un appel à `.to_s` sinon Ruby lève une erreur.
 - L'interpolation est plus lisible, plus courte, et plus performante. C'est toujours le bon choix.
@@ -70,7 +70,7 @@ puts name + ' est niveau ' + level.to_s
 puts 'Pikachu'.length    # => 7
 puts 'Pikachu'.size      # => 7
 puts ''.length           # => 0
-```text
+```
 
 - `.length` et `.size` font exactement la même chose. Utiliser l'un ou l'autre, c'est une question de préférence.
 

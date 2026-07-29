@@ -53,7 +53,7 @@ puts wild           # => Rattata Niv.3
 puts wild.name      # => Rattata
 puts wild.area      # => Route 1
 puts wild.cry       # => Rattata !
-```text
+```
 
 - `class WildPokemon < Pokemon` : `WildPokemon` hérite de `Pokemon`. Il reçoit `name`, `level`, `to_s`, `cry` — tout ce que `Pokemon` définit.
 - `super(name, level)` dans `initialize` appelle le constructeur du parent. Sans cet appel, `@name` et `@level` ne seraient pas initialisés.
@@ -78,7 +78,7 @@ class WildPokemon < Pokemon
     @area = area
   end
 end
-```text
+```
 
 Les trois formes de `super` :
 
