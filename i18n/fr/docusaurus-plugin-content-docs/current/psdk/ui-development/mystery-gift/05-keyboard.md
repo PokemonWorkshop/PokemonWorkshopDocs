@@ -5,7 +5,7 @@ sidebar_position: 5
 description: "Ce guide explique comment gérer les inputs clavier dans une scène UI : touches boutons, navigation dans la liste, et déplacement de la gestion des entrées dans son propre fichier."
 ---
 
-Ce guide s'appuie sur le [guide couche de données](./04-mystery-gift-data.md) : la scène affiche maintenant les cadeaux réclamés par le joueur. Ici, on ajoute la gestion clavier -- naviguer dans la liste avec les flèches et quitter avec B -- et on sort le code d'entrée de `001 Main.rb` vers son propre fichier.
+Ce guide s'appuie sur le [guide couche de données](/psdk/ui-development/mystery-gift/ajouter-une-couche-de-donnees) : la scène affiche maintenant les cadeaux réclamés par le joueur. Ici, on ajoute la gestion clavier -- naviguer dans la liste avec les flèches et quitter avec B -- et on sort le code d'entrée de `001 Main.rb` vers son propre fichier.
 
 ## Principe
 
@@ -17,7 +17,7 @@ Les entrées clavier se répartissent en deux mécanismes :
 Deux règles importantes :
 
 - `update_inputs` et la constante `AIU_KEY2METHOD` doivent rester **publics** (au-dessus de `private`). Le framework appelle `update_inputs` depuis l'extérieur de la classe ; si elle était privée, le framework ne pourrait pas l'atteindre.
-- La gestion des entrées vit dans son propre fichier qui **rouvre** la classe de scène (`003 Input.rb`). Dans le [guide de la scène](./01-ui-scene.md), on avait mis un `update_inputs`/`action_b` temporaire directement dans `001 Main.rb` ; on les déplace maintenant ici et on les étoffe. Les mêmes méthodes d'action sont partagées par le clavier **et** la souris.
+- La gestion des entrées vit dans son propre fichier qui **rouvre** la classe de scène (`003 Input.rb`). Dans le [guide de la scène](/psdk/ui-development/mystery-gift/creer-une-scene-ui), on avait mis un `update_inputs`/`action_b` temporaire directement dans `001 Main.rb` ; on les déplace maintenant ici et on les étoffe. Les mêmes méthodes d'action sont partagées par le clavier **et** la souris.
 
 ## Le fichier Input
 
@@ -64,7 +64,7 @@ module GamePlay
 end
 ```
 
-- `AIU_KEY2METHOD` associe une touche à un nom de méthode. On liste déjà `A: :action_a` ici, mais on ne définit que `action_b` pour l'instant -- `automatic_input_update` vérifie `respond_to?` avant d'appeler, donc appuyer sur A ne fait simplement rien jusqu'à ce qu'on ajoute `action_a` dans le [guide dialogues](./08-dialogs.md).
+- `AIU_KEY2METHOD` associe une touche à un nom de méthode. On liste déjà `A: :action_a` ici, mais on ne définit que `action_b` pour l'instant -- `automatic_input_update` vérifie `respond_to?` avant d'appeler, donc appuyer sur A ne fait simplement rien jusqu'à ce qu'on ajoute `action_a` dans le [guide dialogues](/psdk/ui-development/mystery-gift/utiliser-les-dialogues-de-confirmation).
 - `@composition.done?` bloque les entrées pendant qu'une animation joue. Elle renvoie toujours `true` aujourd'hui (pas encore d'animation), mais brancher la garde maintenant fait que les entrées seront automatiquement bloquées une fois les animations ajoutées.
 - `automatic_input_update(AIU_KEY2METHOD)` vérifie `Input.trigger?` pour chaque touche mappée et appelle la méthode correspondante. Elle renvoie `false` quand elle a consommé un appui, ce qu'on propage pour stopper le traitement suivant.
 - `update_navigation` gère les flèches séparément avec `Input.repeat?`. Elle renvoie `false` pour consommer l'input, `true` pour laisser le traitement continuer.

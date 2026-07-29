@@ -5,7 +5,7 @@ sidebar_position: 6
 description: "This guide explains how to handle mouse interactions in a UI scene: wheel, hover, click and ctrl buttons."
 ---
 
-This guide builds on the [keyboard guide](./05-keyboard.md): the scene has a navigable gift list. Here we add mouse handling -- scrolling, hovering, clicking rows, and the bottom ctrl buttons -- in its own file that reopens the scene class.
+This guide builds on the [keyboard guide](/psdk/ui-development/mystery-gift/handle-keyboard-input): the scene has a navigable gift list. Here we add mouse handling -- scrolling, hovering, clicking rows, and the bottom ctrl buttons -- in its own file that reopens the scene class.
 
 ## Principle
 
@@ -89,7 +89,7 @@ end
 - Order matters: wheel first, then hover (only if the cursor moved), then click, and finally the ctrl buttons as a fallback.
 - `Mouse.wheel = 0` resets the value after reading. This reset is mandatory: without it, the value persists and the wheel keeps scrolling every frame.
 - `update_mouse_hover` and `update_mouse_click` reuse `@composition.find_hovered_row_index` and `@composition.select_row` -- the same selection methods the keyboard uses. Hover compares against `@composition.selected_index` so it only fires when the selection actually changes.
-- `update_ctrl_button_mouse` delegates to `update_mouse_ctrl_buttons`, a helper inherited from `GamePlay::Base`. It handles hover highlight, press animation and triggers the mapped action on click. `MOUSE_BUTTON_ACTIONS` maps positions `[A, X, Y, B]` to action methods; `nil` skips a position. The A entry (`:action_a`) becomes active once we show the A button and add `action_a` in the [i18n](./07-i18n.md) and [dialogs](./08-dialogs.md) guides.
+- `update_ctrl_button_mouse` delegates to `update_mouse_ctrl_buttons`, a helper inherited from `GamePlay::Base`. It handles hover highlight, press animation and triggers the mapped action on click. `MOUSE_BUTTON_ACTIONS` maps positions `[A, X, Y, B]` to action methods; `nil` skips a position. The A entry (`:action_a`) becomes active once we show the A button and add `action_a` in the [i18n](/psdk/ui-development/mystery-gift/add-i18n-text) and [dialogs](/psdk/ui-development/mystery-gift/use-confirmation-dialogs) guides.
 
 ## Hit testing in the Composition
 

@@ -5,7 +5,7 @@ sidebar_position: 4
 description: "Ce guide ajoute la couche de persistence PFM qui stocke les codes cadeaux déjà réclamés par le joueur, et la branche dans la Composition pour que les lignes affichent de vraies données."
 ---
 
-Ce guide s'appuie sur le [guide SpriteStack](./03-spritestack.md) : vous avez une Composition qui dessine six lignes vides. Ici, on ajoute la couche **PFM** -- le modèle de données qui sait quels codes sont valides et lesquels le joueur a déjà réclamés -- et on la branche pour que les lignes affichent de vrais cadeaux.
+Ce guide s'appuie sur le [guide SpriteStack](/psdk/ui-development/mystery-gift/creer-un-composant-spritestack) : vous avez une Composition qui dessine six lignes vides. Ici, on ajoute la couche **PFM** -- le modèle de données qui sait quels codes sont valides et lesquels le joueur a déjà réclamés -- et on la branche pour que les lignes affichent de vrais cadeaux.
 
 ## Principe
 

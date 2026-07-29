@@ -5,7 +5,7 @@ sidebar_position: 1
 description: "C'est le premier guide de code d'une série où l'on construit pas à pas une UI Mystery Gift complète. Ce système permet aux joueurs d'entrer des codes pour recevoir des récompenses. Ici, on crée la structure de fichiers et une scène minimale qui s'affiche et se ferme avec B."
 ---
 
-C'est le premier guide de code d'une série où l'on construit pas à pas une UI Mystery Gift complète. Ce système permet aux joueurs d'entrer des codes pour recevoir des récompenses. Le [guide de préparation](./00-setup.md) a déjà mis en place les graphismes et les textes ; ici, on crée la structure de fichiers et une scène minimale qui s'affiche et se ferme avec B.
+C'est le premier guide de code d'une série où l'on construit pas à pas une UI Mystery Gift complète. Ce système permet aux joueurs d'entrer des codes pour recevoir des récompenses. Le [guide de préparation](/psdk/ui-development/mystery-gift/preparer-assets-ui) a déjà mis en place les graphismes et les textes ; ici, on crée la structure de fichiers et une scène minimale qui s'affiche et se ferme avec B.
 
 ## Principe
 
@@ -95,7 +95,7 @@ end
 - `MysteryGiftBase < GenericBase` : on hérite de GenericBase pour récupérer toute la fondation visuelle sans rien réécrire.
 - `background_filename` : surcharge de la méthode privée qui renvoie le chemin de l'image de fond (`graphics/interface/mystery_gift/background.png`, installée dans le guide de préparation). Le framework charge cette image automatiquement.
 - `create_background_animation` : en définissant une méthode vide, on désactive l'animation de défilement du fond. Si vous voulez l'animation, ne redéfinissez tout simplement pas cette méthode.
-- C'est une version minimale. On personnalise la barre de boutons et les boutons ctrl dans le [guide GenericBase](./10-genericbase.md).
+- C'est une version minimale. On personnalise la barre de boutons et les boutons ctrl dans le [guide GenericBase](/psdk/ui-development/mystery-gift/personnaliser-genericbase).
 
 ## Scène minimale
 
@@ -159,9 +159,9 @@ GamePlay.mystery_gift_class = GamePlay::MysteryGift
 - `create_graphics` est appelée automatiquement par le framework après `initialize`. Elle crée le viewport, instancie la base UI, puis appelle `Graphics.sort_z` pour trier tous les éléments visuels par profondeur.
 - `create_viewport` est héritée de `GamePlay::Base`. Elle crée le viewport principal `@viewport` en z=10_000, ce qui garantit que la scène s'affiche au-dessus des éléments du jeu.
 - `create_base_ui` instancie la sous-classe de GenericBase définie plus haut. Le deuxième argument `button_texts` définit les textes des boutons ctrl.
-- `button_texts` renvoie un tableau de 4 éléments correspondant aux boutons ctrl dans l'ordre [A, X, Y, B]. Mettre `nil` cache le bouton correspondant. Ici, seul le bouton B est visible avec le texte « Quit ». (On déplace ce texte vers le CSV dans le [guide i18n](./07-i18n.md).)
+- `button_texts` renvoie un tableau de 4 éléments correspondant aux boutons ctrl dans l'ordre [A, X, Y, B]. Mettre `nil` cache le bouton correspondant. Ici, seul le bouton B est visible avec le texte « Quit ». (On déplace ce texte vers le CSV dans le [guide i18n](/psdk/ui-development/mystery-gift/ajouter-du-texte-multilingue).)
 - `update_inputs` est appelée à chaque frame par le framework. `automatic_input_update` vérifie chaque touche et appelle la méthode `action_*` correspondante si elle est pressée et définie. Ici, seule `action_b` existe, donc appuyer sur B fait sortir.
-- `action_b` passe `@running` à `false` pour sortir de la scène. Dans le [guide clavier](./05-keyboard.md), on extrait `update_inputs` et les actions dans leur propre fichier, `003 Input.rb`, et on ajoute la navigation.
+- `action_b` passe `@running` à `false` pour sortir de la scène. Dans le [guide clavier](/psdk/ui-development/mystery-gift/gerer-les-entrees-clavier), on extrait `update_inputs` et les actions dans leur propre fichier, `003 Input.rb`, et on ajoute la navigation.
 - `update_graphics` est appelée à chaque frame pour mettre à jour les animations. `update_background_animation` anime le défilement du fond (sans effet ici puisqu'on l'a désactivé).
 - La dernière ligne `GamePlay.mystery_gift_class = GamePlay::MysteryGift` enregistre la classe dans l'accesseur défini dans `000 Entry.rb`, ce qui fait fonctionner `GamePlay.open_mystery_gift`.
 
@@ -177,7 +177,7 @@ Le framework exécute la scène selon un cycle précis :
    - `update_graphics` : mises à jour des animations
 4. La boucle se répète jusqu'à ce que `@running` soit mis à `false`.
 
-Ce cycle est le même pour toutes les scènes PSDK. Le framework gère automatiquement l'équilibrage de frames via la classe `BaseCleanUpdate::FrameBalanced`. Dans notre scène minimale, on n'a pas encore défini `update_mouse` -- on l'ajoute dans le [guide souris](./06-mouse.md).
+Ce cycle est le même pour toutes les scènes PSDK. Le framework gère automatiquement l'équilibrage de frames via la classe `BaseCleanUpdate::FrameBalanced`. Dans notre scène minimale, on n'a pas encore défini `update_mouse` -- on l'ajoute dans le [guide souris](/psdk/ui-development/mystery-gift/gerer-la-souris).
 
 ## Essayez
 

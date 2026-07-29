@@ -5,7 +5,7 @@ sidebar_position: 3
 description: "This guide explains how to create a visual sub-component by extending SpriteStack, using the Mystery Gift gift row as a concrete example."
 ---
 
-This guide explains how to create a visual sub-component by extending SpriteStack. We build **GiftRow**, the row that displays a claimed gift (name on the left, code on the right). It builds on the [composition guide](./02-composition.md): you already have a scene with a Composition that draws the header and frame.
+This guide explains how to create a visual sub-component by extending SpriteStack. We build **GiftRow**, the row that displays a claimed gift (name on the left, code on the right). It builds on the [composition guide](/psdk/ui-development/mystery-gift/create-a-composition): you already have a scene with a Composition that draws the header and frame.
 
 ## Principle
 
@@ -226,7 +226,7 @@ end
 
 - `Array.new(VISIBLE_ROWS)` creates a fixed number of rows, positioned vertically with regular spacing (`GIFT_ROW_PITCH`). Each row is created with computed coordinates -- the sub-component does not know its position in the list.
 - `push_sprite(row)` adds each GiftRow to the Composition's stack for lifecycle management: when the Composition is disposed, the GiftRows are disposed too.
-- For now the rows show their placeholder text (`---`). In the [next guide](./04-mystery-gift-data.md) we add the data layer and fill the rows with the player's claimed gifts; the [keyboard](./05-keyboard.md) and [mouse](./06-mouse.md) guides then add selection and hover, which is why GiftRow already exposes `selected=` and `hovered?`.
+- For now the rows show their placeholder text (`---`). In the [next guide](/psdk/ui-development/mystery-gift/add-the-data-layer) we add the data layer and fill the rows with the player's claimed gifts; the [keyboard](/psdk/ui-development/mystery-gift/handle-keyboard-input) and [mouse](/psdk/ui-development/mystery-gift/handle-mouse-input) guides then add selection and hover, which is why GiftRow already exposes `selected=` and `hovered?`.
 
 ## Try it
 

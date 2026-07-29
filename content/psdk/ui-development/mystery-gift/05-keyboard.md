@@ -5,7 +5,7 @@ sidebar_position: 5
 description: "This guide explains how to handle keyboard input in a UI scene: button keys, list navigation, and moving the input handling into its own file."
 ---
 
-This guide builds on the [data layer guide](./04-mystery-gift-data.md): the scene now shows the player's claimed gifts. Here we add keyboard handling -- navigating the list with the arrows and quitting with B -- and we move the input code out of `001 Main.rb` into its own file.
+This guide builds on the [data layer guide](/psdk/ui-development/mystery-gift/add-the-data-layer): the scene now shows the player's claimed gifts. Here we add keyboard handling -- navigating the list with the arrows and quitting with B -- and we move the input code out of `001 Main.rb` into its own file.
 
 ## Principle
 
@@ -17,7 +17,7 @@ Keyboard input is split into two mechanisms:
 Two rules matter:
 
 - `update_inputs` and the `AIU_KEY2METHOD` constant must stay **public** (above `private`). The framework calls `update_inputs` from outside the class; if it were private, the framework could not reach it.
-- Input handling lives in its own file that **reopens** the scene class (`003 Input.rb`). In the [scene guide](./01-ui-scene.md) we put a temporary `update_inputs`/`action_b` directly in `001 Main.rb`; now we move them here and expand them. The same action methods are shared by keyboard **and** mouse.
+- Input handling lives in its own file that **reopens** the scene class (`003 Input.rb`). In the [scene guide](/psdk/ui-development/mystery-gift/create-a-ui-scene) we put a temporary `update_inputs`/`action_b` directly in `001 Main.rb`; now we move them here and expand them. The same action methods are shared by keyboard **and** mouse.
 
 ## The Input file
 
@@ -64,7 +64,7 @@ module GamePlay
 end
 ```
 
-- `AIU_KEY2METHOD` maps a key to a method name. We already list `A: :action_a` here, but we only define `action_b` for now -- `automatic_input_update` checks `respond_to?` before calling, so pressing A simply does nothing until we add `action_a` in the [dialogs guide](./08-dialogs.md).
+- `AIU_KEY2METHOD` maps a key to a method name. We already list `A: :action_a` here, but we only define `action_b` for now -- `automatic_input_update` checks `respond_to?` before calling, so pressing A simply does nothing until we add `action_a` in the [dialogs guide](/psdk/ui-development/mystery-gift/use-confirmation-dialogs).
 - `@composition.done?` blocks input while an animation plays. It always returns `true` today (no animations yet), but wiring the guard now means input is automatically blocked once we add animations.
 - `automatic_input_update(AIU_KEY2METHOD)` checks `Input.trigger?` for each mapped key and calls the matching method. It returns `false` when it consumed a press, which we forward to stop further processing.
 - `update_navigation` handles the arrows separately with `Input.repeat?`. It returns `false` to consume the input, `true` to let processing continue.

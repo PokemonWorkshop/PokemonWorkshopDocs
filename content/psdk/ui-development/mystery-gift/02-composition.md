@@ -5,7 +5,7 @@ sidebar_position: 2
 description: "This guide explains how to create a Composition, the central UI class that groups all visual components of a scene."
 ---
 
-This guide builds on the [scene guide](./01-ui-scene.md): you already have a minimal Mystery Gift scene that displays and closes with B. Here we add the **Composition**, the central UI class that groups all visual components of a scene.
+This guide builds on the [scene guide](/psdk/ui-development/mystery-gift/create-a-ui-scene): you already have a minimal Mystery Gift scene that displays and closes with B. Here we add the **Composition**, the central UI class that groups all visual components of a scene.
 
 ## Principle
 
@@ -18,7 +18,7 @@ The Composition orchestrates **all** visual rendering of a scene. It follows pre
 
 ## Constants file
 
-The Composition (and every other UI file) reads shared values from a constants module: text IDs, dimensions and positions. We centralize them in one file now, and each constant is used as we build the matching piece -- the [i18n guide](./07-i18n.md) explains the text IDs in detail.
+The Composition (and every other UI file) reads shared values from a constants module: text IDs, dimensions and positions. We centralize them in one file now, and each constant is used as we build the matching piece -- the [i18n guide](/psdk/ui-development/mystery-gift/add-i18n-text) explains the text IDs in detail.
 
 Create `scripts/20 MysteryGift/001 Constants.rb`:
 
@@ -120,7 +120,7 @@ end
 - `add_sprite(x, y, filename)` creates a sprite at the given position; the filename is the image name in the cache (`mystery_gift/header` → `graphics/interface/mystery_gift/header.png`).
 - `set_z(2)` and `@title.z = 3` control depth ordering: the title displays above the header.
 - `add_text` loads the translated title via `ext_text(TEXT_FILE_ID, TEXT_TITLE)`. The `1` is the alignment (center), `nil` is the optional font, and `color: 10` is white.
-- `done?` returns `true` unconditionally because there are no animations yet. We change this in the [animations guide](./09-animations.md).
+- `done?` returns `true` unconditionally because there are no animations yet. We change this in the [animations guide](/psdk/ui-development/mystery-gift/create-animations).
 - `update` is empty but **mandatory**: the framework calls it every frame.
 - The constants (`HEADER_Y`, `FRAME_X`, `TEXT_FILE_ID`, `TEXT_TITLE`) are accessible directly because the Composition is declared inside the `UI::MysteryGift` module.
 

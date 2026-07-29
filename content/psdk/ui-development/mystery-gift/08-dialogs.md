@@ -5,7 +5,7 @@ sidebar_position: 8
 description: "This guide adds the business logic of the scene: entering a code, validating it, and claiming a gift through confirmation dialogs and blocking messages."
 ---
 
-This guide builds on the [i18n guide](./07-i18n.md). Until now the A button did nothing; here we make it work. We add the business logic file -- entering a code, validating it, and claiming a gift -- using PSDK's blocking messages and Yes/No dialogs, and we finally reveal the A button.
+This guide builds on the [i18n guide](/psdk/ui-development/mystery-gift/add-i18n-text). Until now the A button did nothing; here we make it work. We add the business logic file -- entering a code, validating it, and claiming a gift -- using PSDK's blocking messages and Yes/No dialogs, and we finally reveal the A button.
 
 ## Principle
 
@@ -72,7 +72,7 @@ end
 - The guard `return if code.nil? || code.empty?` handles the player cancelling the input (B in NameInput).
 - `process_code` validates the code via the PFM layer and dispatches: `:invalid` and `:already_claimed` show a simple message; `:valid` proceeds to claim.
 - `claim_gift` shows a Yes/No dialog: `display_message_and_wait(message, default, choice1, choice2)`. The default `1` puts the cursor on "No" -- the safe choice. The return value is the chosen index (0 = first label = Yes), so we continue only on `choice == 0`.
-- On confirmation we `claim` the gift, announce it with `format(gift_text(TEXT_RECEIVED), gift_name)`, and call `@composition.refresh` to show it in the list. In the [animations guide](./09-animations.md) we replace this message + refresh with an animated banner.
+- On confirmation we `claim` the gift, announce it with `format(gift_text(TEXT_RECEIVED), gift_name)`, and call `@composition.refresh` to show it in the list. In the [animations guide](/psdk/ui-development/mystery-gift/create-animations) we replace this message + refresh with an animated banner.
 
 ## Wiring the A button
 

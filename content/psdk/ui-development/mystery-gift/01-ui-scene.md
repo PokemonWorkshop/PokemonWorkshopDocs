@@ -5,7 +5,7 @@ sidebar_position: 1
 description: "This is the first code guide in a series where we build a complete Mystery Gift UI step by step. This system lets players enter codes to claim rewards. Here we create the file structure and a minimal scene that displays and closes with B."
 ---
 
-This is the first code guide in a series where we build a complete Mystery Gift UI step by step. This system lets players enter codes to claim rewards. The [setup guide](./00-setup.md) already put the graphics and text in place; here we create the file structure and a minimal scene that displays and closes with B.
+This is the first code guide in a series where we build a complete Mystery Gift UI step by step. This system lets players enter codes to claim rewards. The [setup guide](/psdk/ui-development/mystery-gift/prepare-ui-assets) already put the graphics and text in place; here we create the file structure and a minimal scene that displays and closes with B.
 
 ## Principle
 
@@ -95,7 +95,7 @@ end
 - `MysteryGiftBase < GenericBase`: inherit from GenericBase to get the entire visual foundation without rewriting anything.
 - `background_filename`: override of the private method that returns the background image path (`graphics/interface/mystery_gift/background.png`, installed in the setup guide). The framework loads this image automatically.
 - `create_background_animation`: by defining an empty method, you disable the background scroll animation. If you want the animation, simply do not redefine this method.
-- This is a minimal version. We customize the button bar and ctrl buttons in the [GenericBase guide](./10-genericbase.md).
+- This is a minimal version. We customize the button bar and ctrl buttons in the [GenericBase guide](/psdk/ui-development/mystery-gift/customize-genericbase).
 
 ## Minimal scene
 
@@ -159,9 +159,9 @@ GamePlay.mystery_gift_class = GamePlay::MysteryGift
 - `create_graphics` is automatically called by the framework after `initialize`. It creates the viewport, instantiates the base UI, then calls `Graphics.sort_z` to sort all visual elements by depth.
 - `create_viewport` is inherited from `GamePlay::Base`. It creates the main viewport `@viewport` at z=10_000, which ensures the scene displays above game elements.
 - `create_base_ui` instantiates the GenericBase subclass defined earlier. The second argument `button_texts` defines the ctrl button texts.
-- `button_texts` returns an array of 4 elements corresponding to the ctrl buttons in order [A, X, Y, B]. Setting `nil` hides the corresponding button. Here, only the B button is visible with the text "Quit". (We move this text to the CSV in the [i18n guide](./07-i18n.md).)
+- `button_texts` returns an array of 4 elements corresponding to the ctrl buttons in order [A, X, Y, B]. Setting `nil` hides the corresponding button. Here, only the B button is visible with the text "Quit". (We move this text to the CSV in the [i18n guide](/psdk/ui-development/mystery-gift/add-i18n-text).)
 - `update_inputs` is called every frame by the framework. `automatic_input_update` checks each key and calls the matching `action_*` method if it is pressed and defined. Here only `action_b` exists, so pressing B exits.
-- `action_b` sets `@running` to `false` to exit the scene. In the [keyboard guide](./05-keyboard.md) we extract `update_inputs` and the actions into their own file, `003 Input.rb`, and add navigation.
+- `action_b` sets `@running` to `false` to exit the scene. In the [keyboard guide](/psdk/ui-development/mystery-gift/handle-keyboard-input) we extract `update_inputs` and the actions into their own file, `003 Input.rb`, and add navigation.
 - `update_graphics` is called every frame to update animations. `update_background_animation` animates the background scrolling (a no-op here since we disabled it).
 - The last line `GamePlay.mystery_gift_class = GamePlay::MysteryGift` registers the class in the accessor defined in `000 Entry.rb`, which makes `GamePlay.open_mystery_gift` work.
 
@@ -177,7 +177,7 @@ The framework executes the scene following a precise cycle:
    - `update_graphics`: animation updates
 4. The loop repeats until `@running` is set to `false`.
 
-This cycle is the same for all PSDK scenes. The framework automatically handles frame balancing through the `BaseCleanUpdate::FrameBalanced` class. In our minimal scene, we have not defined `update_mouse` yet -- we add it in the [mouse guide](./06-mouse.md).
+This cycle is the same for all PSDK scenes. The framework automatically handles frame balancing through the `BaseCleanUpdate::FrameBalanced` class. In our minimal scene, we have not defined `update_mouse` yet -- we add it in the [mouse guide](/psdk/ui-development/mystery-gift/handle-mouse-input).
 
 ## Try it
 
