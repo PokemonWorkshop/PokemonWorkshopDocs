@@ -47,7 +47,7 @@ jobs:
       - name: Check code fences
         run: bun run lint:fences
 
-      - name: Lint TypeScript and CSS
+      - name: Lint and format TypeScript and CSS
         run: bun run lint
 
       - name: Cache Docusaurus build
