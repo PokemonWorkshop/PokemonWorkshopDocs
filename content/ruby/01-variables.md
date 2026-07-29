@@ -25,7 +25,7 @@ irb
 
 You get a prompt `irb(main):001:0>` where you can type Ruby:
 
-```
+```text
 irb(main):001:0> 1 + 1
 => 2
 irb(main):002:0> 'Pikachu'.length

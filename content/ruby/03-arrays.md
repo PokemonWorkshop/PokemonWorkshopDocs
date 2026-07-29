@@ -174,7 +174,7 @@ team.each { |pokemon| puts "Go, #{pokemon} !" }
 
 Displays:
 
-```
+```text
 Go, Pikachu !
 Go, Charizard !
 Go, Blastoise !
@@ -205,7 +205,7 @@ end
 
 Displays:
 
-```
+```text
 1. Pikachu
 2. Charizard
 3. Blastoise

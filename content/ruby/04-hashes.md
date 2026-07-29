@@ -138,7 +138,7 @@ end
 
 Displays:
 
-```
+```text
 name : Pikachu
 type : electric
 level : 25

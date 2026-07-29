@@ -25,7 +25,7 @@ irb
 
 On obtient un prompt `irb(main):001:0>` où l'on peut taper du Ruby :
 
-```
+```text
 irb(main):001:0> 1 + 1
 => 2
 irb(main):002:0> 'Pikachu'.length
@@ -64,7 +64,7 @@ level = 25
 
 puts name     # Affiche : Pikachu
 puts level    # Affiche : 25
-```
+```text
 
 - `puts` est une commande qui affiche une valeur à l'écran. C'est l'un des premiers outils qu'on utilise pour vérifier que notre code fait bien ce qu'on attend.
 
@@ -78,7 +78,7 @@ puts name          # Affiche : Pikachu
 
 name = 'Évoli'
 puts name          # Affiche : Évoli
-```
+```text
 
 - La variable `name` pointe d'abord vers `'Pikachu'`, puis vers `'Évoli'`. Le nom ne change pas, seul le contenu change.
 
@@ -94,7 +94,7 @@ Un Integer est un nombre sans virgule. On l'utilise pour les niveaux, les numér
 pokedex_number = 25
 level = 50
 max_team_size = 6
-```
+```text
 
 Pour les grands nombres, Ruby autorise les underscores `_` pour faciliter la lecture. Le programme les ignore complètement :
 
@@ -102,7 +102,7 @@ Pour les grands nombres, Ruby autorise les underscores `_` pour faciliter la lec
 # Ces deux lignes sont identiques pour Ruby
 experience = 1000000
 experience = 1_000_000
-```
+```text
 
 ### Les nombres décimaux (Float)
 
@@ -111,7 +111,7 @@ Un Float est un nombre avec une virgule (en Ruby, on utilise le point `.` comme 
 ```ruby
 damage_multiplier = 1.5
 capture_rate = 0.75
-```
+```text
 
 - On utilise les Float quand on a besoin de précision décimale, comme les multiplicateurs de dégâts.
 
@@ -122,7 +122,7 @@ Une String est une suite de caractères entourée de guillemets. Ruby accepte le
 ```ruby
 pokemon_name = 'Pikachu'
 description = "Un adorable Pokémon de type Électrik"
-```
+```text
 
 La différence entre les deux est importante. Les guillemets doubles permettent d'**insérer des variables dans le texte** grâce à la syntaxe `#{}`. C'est ce qu'on appelle l'**interpolation** :
 

@@ -107,7 +107,7 @@ pikachu.take_damage(30)
 
 Output:
 
-```
+```text
 Pikachu takes 30 damage!
 Pikachu has 70 HP remaining.
 ```
