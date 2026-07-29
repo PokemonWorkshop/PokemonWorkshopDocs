@@ -5,7 +5,7 @@ sidebar_position: 10
 description: "Ce guide termine la base UI : personnaliser le fond, la barre de boutons et les boutons ctrl en héritant de GenericBase."
 ---
 
-Ce guide s'appuie sur toute la série : vous avez une scène Mystery Gift entièrement fonctionnelle. Dans le [guide de la scène](./01-ui-scene.md), on avait écrit un `MysteryGiftBase` minimal qui ne changeait que le fond. Ici, on le termine -- une barre de boutons et des boutons ctrl thématisés -- c'est le dernier changement de la scène.
+Ce guide s'appuie sur toute la série : vous avez une scène Mystery Gift entièrement fonctionnelle. Dans le [guide de la scène](/psdk/ui-development/mystery-gift/creer-une-scene-ui), on avait écrit un `MysteryGiftBase` minimal qui ne changeait que le fond. Ici, on le termine -- une barre de boutons et des boutons ctrl thématisés -- c'est le dernier changement de la scène.
 
 ## Principe
 

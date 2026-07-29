@@ -5,7 +5,7 @@ sidebar_position: 3
 description: "Ce guide explique comment créer un sous-composant visuel en étendant SpriteStack, avec la ligne de cadeau de Mystery Gift comme exemple concret."
 ---
 
-Ce guide explique comment créer un sous-composant visuel en étendant SpriteStack. On construit **GiftRow**, la ligne qui affiche un cadeau réclamé (nom à gauche, code à droite). Il s'appuie sur le [guide composition](./02-composition.md) : vous avez déjà une scène avec une Composition qui dessine l'en-tête et le cadre.
+Ce guide explique comment créer un sous-composant visuel en étendant SpriteStack. On construit **GiftRow**, la ligne qui affiche un cadeau réclamé (nom à gauche, code à droite). Il s'appuie sur le [guide composition](/psdk/ui-development/mystery-gift/creer-une-composition) : vous avez déjà une scène avec une Composition qui dessine l'en-tête et le cadre.
 
 ## Principe
 
@@ -226,7 +226,7 @@ end
 
 - `Array.new(VISIBLE_ROWS)` crée un nombre fixe de lignes, positionnées verticalement avec un espacement régulier (`GIFT_ROW_PITCH`). Chaque ligne est créée avec des coordonnées calculées -- le sous-composant ne connaît pas sa position dans la liste.
 - `push_sprite(row)` ajoute chaque GiftRow au stack de la Composition pour la gestion du cycle de vie : quand la Composition est disposée, les GiftRow le sont aussi.
-- Pour l'instant les lignes affichent leur texte de remplacement (`---`). Dans le [guide suivant](./04-mystery-gift-data.md), on ajoute la couche de données et on remplit les lignes avec les cadeaux réclamés par le joueur ; les guides [clavier](./05-keyboard.md) et [souris](./06-mouse.md) ajoutent ensuite la sélection et le survol, d'où le fait que GiftRow expose déjà `selected=` et `hovered?`.
+- Pour l'instant les lignes affichent leur texte de remplacement (`---`). Dans le [guide suivant](/psdk/ui-development/mystery-gift/ajouter-une-couche-de-donnees), on ajoute la couche de données et on remplit les lignes avec les cadeaux réclamés par le joueur ; les guides [clavier](/psdk/ui-development/mystery-gift/gerer-les-entrees-clavier) et [souris](/psdk/ui-development/mystery-gift/gerer-la-souris) ajoutent ensuite la sélection et le survol, d'où le fait que GiftRow expose déjà `selected=` et `hovered?`.
 
 ## Essayez
 

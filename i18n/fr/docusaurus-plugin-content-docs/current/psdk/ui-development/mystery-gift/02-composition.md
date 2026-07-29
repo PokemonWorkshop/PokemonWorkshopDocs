@@ -5,7 +5,7 @@ sidebar_position: 2
 description: "Ce guide explique comment créer une Composition, la classe UI centrale qui regroupe tous les composants visuels d'une scène."
 ---
 
-Ce guide s'appuie sur le [guide de la scène](./01-ui-scene.md) : vous avez déjà une scène Mystery Gift minimale qui s'affiche et se ferme avec B. Ici, on ajoute la **Composition**, la classe UI centrale qui regroupe tous les composants visuels d'une scène.
+Ce guide s'appuie sur le [guide de la scène](/psdk/ui-development/mystery-gift/creer-une-scene-ui) : vous avez déjà une scène Mystery Gift minimale qui s'affiche et se ferme avec B. Ici, on ajoute la **Composition**, la classe UI centrale qui regroupe tous les composants visuels d'une scène.
 
 ## Principe
 
@@ -18,7 +18,7 @@ La Composition orchestre **tout** le rendu visuel d'une scène. Elle suit des r�
 
 ## Fichier de constantes
 
-La Composition (et tous les autres fichiers UI) lisent des valeurs partagées dans un module de constantes : IDs de texte, dimensions et positions. On les centralise dans un fichier dès maintenant, et chaque constante est utilisée au fur et à mesure qu'on construit la pièce correspondante -- le [guide i18n](./07-i18n.md) explique les IDs de texte en détail.
+La Composition (et tous les autres fichiers UI) lisent des valeurs partagées dans un module de constantes : IDs de texte, dimensions et positions. On les centralise dans un fichier dès maintenant, et chaque constante est utilisée au fur et à mesure qu'on construit la pièce correspondante -- le [guide i18n](/psdk/ui-development/mystery-gift/ajouter-du-texte-multilingue) explique les IDs de texte en détail.
 
 Créez `scripts/20 MysteryGift/001 Constants.rb` :
 
@@ -120,7 +120,7 @@ end
 - `add_sprite(x, y, filename)` crée un sprite à la position donnée ; le filename est le nom de l'image dans le cache (`mystery_gift/header` → `graphics/interface/mystery_gift/header.png`).
 - `set_z(2)` et `@title.z = 3` contrôlent l'ordre de profondeur : le titre s'affiche au-dessus de l'en-tête.
 - `add_text` charge le titre traduit via `ext_text(TEXT_FILE_ID, TEXT_TITLE)`. Le `1` est l'alignement (centré), `nil` est la police optionnelle, et `color: 10` est le blanc.
-- `done?` renvoie `true` sans condition car il n'y a pas encore d'animation. On change ça dans le [guide animations](./09-animations.md).
+- `done?` renvoie `true` sans condition car il n'y a pas encore d'animation. On change ça dans le [guide animations](/psdk/ui-development/mystery-gift/creer-des-animations).
 - `update` est vide mais **obligatoire** : le framework l'appelle à chaque frame.
 - Les constantes (`HEADER_Y`, `FRAME_X`, `TEXT_FILE_ID`, `TEXT_TITLE`) sont accessibles directement car la Composition est déclarée à l'intérieur du module `UI::MysteryGift`.
 

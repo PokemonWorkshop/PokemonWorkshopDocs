@@ -5,7 +5,7 @@ sidebar_position: 6
 description: "Ce guide explique comment gérer les interactions souris dans une scène UI : molette, survol, clic et boutons ctrl."
 ---
 
-Ce guide s'appuie sur le [guide clavier](./05-keyboard.md) : la scène a une liste de cadeaux navigable. Ici, on ajoute la gestion souris -- défilement, survol, clic sur les lignes, et les boutons ctrl du bas -- dans son propre fichier qui rouvre la classe de scène.
+Ce guide s'appuie sur le [guide clavier](/psdk/ui-development/mystery-gift/gerer-les-entrees-clavier) : la scène a une liste de cadeaux navigable. Ici, on ajoute la gestion souris -- défilement, survol, clic sur les lignes, et les boutons ctrl du bas -- dans son propre fichier qui rouvre la classe de scène.
 
 ## Principe
 
@@ -89,7 +89,7 @@ end
 - L'ordre compte : molette d'abord, puis survol (seulement si le curseur a bougé), puis clic, et enfin les boutons ctrl en dernier recours.
 - `Mouse.wheel = 0` réinitialise la valeur après lecture. Cette remise à zéro est obligatoire : sans elle, la valeur persiste et la molette défile à chaque frame.
 - `update_mouse_hover` et `update_mouse_click` réutilisent `@composition.find_hovered_row_index` et `@composition.select_row` -- les mêmes méthodes de sélection que le clavier. Le survol compare avec `@composition.selected_index` pour ne se déclencher que quand la sélection change réellement.
-- `update_ctrl_button_mouse` délègue à `update_mouse_ctrl_buttons`, un helper hérité de `GamePlay::Base`. Il gère la surbrillance au survol, l'animation d'appui et déclenche l'action mappée au clic. `MOUSE_BUTTON_ACTIONS` associe les positions `[A, X, Y, B]` à des méthodes d'action ; `nil` saute une position. L'entrée A (`:action_a`) devient active une fois qu'on affiche le bouton A et qu'on ajoute `action_a` dans les guides [i18n](./07-i18n.md) et [dialogues](./08-dialogs.md).
+- `update_ctrl_button_mouse` délègue à `update_mouse_ctrl_buttons`, un helper hérité de `GamePlay::Base`. Il gère la surbrillance au survol, l'animation d'appui et déclenche l'action mappée au clic. `MOUSE_BUTTON_ACTIONS` associe les positions `[A, X, Y, B]` à des méthodes d'action ; `nil` saute une position. L'entrée A (`:action_a`) devient active une fois qu'on affiche le bouton A et qu'on ajoute `action_a` dans les guides [i18n](/psdk/ui-development/mystery-gift/ajouter-du-texte-multilingue) et [dialogues](/psdk/ui-development/mystery-gift/utiliser-les-dialogues-de-confirmation).
 
 ## Test de collision dans la Composition
 

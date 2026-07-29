@@ -73,7 +73,8 @@
   --ifm-font-color-secondary: #9191a1;
   --ifm-heading-color: #f4f4f5;
 
-  --ifm-font-family-base: "Avenir Next", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ifm-font-family-base:
+    "Avenir Next", system-ui, -apple-system, "Segoe UI", sans-serif;
   --ifm-heading-font-family: "Gilroy", "Avenir Next", sans-serif;
   --ifm-font-family-monospace: "Source Code Pro", "Fira Code", monospace;
   --ifm-heading-font-weight: 600;
@@ -211,4 +212,3 @@
       "copyright";
   }
 }
-

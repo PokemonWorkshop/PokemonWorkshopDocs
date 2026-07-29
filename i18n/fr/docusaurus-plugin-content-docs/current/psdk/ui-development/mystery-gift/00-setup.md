@@ -5,7 +5,7 @@ sidebar_position: 0
 description: "Avant d'écrire la moindre ligne de Ruby, une UI a besoin de ses graphismes et de ses textes traduits. Cette étape de préparation installe les assets et le CSV de Mystery Gift pour que la scène s'affiche vraiment."
 ---
 
-Ce guide est l'étape de préparation d'une série de 10 où l'on construit pas à pas une UI Mystery Gift complète. Avant d'écrire le moindre Ruby dans [le guide suivant](./01-ui-scene.md), votre UI a besoin de deux types de ressources non-code en place : ses **graphismes** et ses **textes traduits**. Sans eux, la scène se charge mais n'affiche rien à l'écran. Ici, on installe les deux pour l'exemple Mystery Gift.
+Ce guide est l'étape de préparation d'une série de 10 où l'on construit pas à pas une UI Mystery Gift complète. Avant d'écrire le moindre Ruby dans [le guide suivant](/psdk/ui-development/mystery-gift/creer-une-scene-ui), votre UI a besoin de deux types de ressources non-code en place : ses **graphismes** et ses **textes traduits**. Sans eux, la scène se charge mais n'affiche rien à l'écran. Ici, on installe les deux pour l'exemple Mystery Gift.
 
 ## Principe
 
@@ -130,7 +130,7 @@ Avant de continuer, vérifiez que :
 - `graphics/interface/mystery_gift/` contient les 7 fichiers PNG.
 - `Data/Text/Dialogs/311125.csv` existe.
 
-Une fois les assets et le texte en place, vous êtes prêt à écrire le premier fichier Ruby dans [le guide de la scène](./01-ui-scene.md).
+Une fois les assets et le texte en place, vous êtes prêt à écrire le premier fichier Ruby dans [le guide de la scène](/psdk/ui-development/mystery-gift/creer-une-scene-ui).
 
 ## Conclusion
 

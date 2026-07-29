@@ -5,7 +5,7 @@ sidebar_position: 4
 description: "This guide adds the PFM persistence layer that stores which gift codes the player has claimed, and wires it into the Composition so the gift rows show real data."
 ---
 
-This guide builds on the [SpriteStack guide](./03-spritestack.md): you have a Composition that draws six empty rows. Here we add the **PFM** layer -- the data model that knows which codes are valid and which the player has already claimed -- and wire it in so the rows show real gifts.
+This guide builds on the [SpriteStack guide](/psdk/ui-development/mystery-gift/create-a-spritestack-component): you have a Composition that draws six empty rows. Here we add the **PFM** layer -- the data model that knows which codes are valid and which the player has already claimed -- and wire it in so the rows show real gifts.
 
 ## Principle
 

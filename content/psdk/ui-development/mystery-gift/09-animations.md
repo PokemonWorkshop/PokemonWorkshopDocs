@@ -5,7 +5,7 @@ sidebar_position: 9
 description: "This guide adds UI animations with Yuki::Animation: a fade-in banner component, an animation handler in the Composition, and using them when a gift is claimed."
 ---
 
-This guide builds on the [dialogs guide](./08-dialogs.md). Claiming a gift currently shows a plain message; here we replace it with an animated banner using `Yuki::Animation`, and we wire an animation handler into the Composition so input is blocked while it plays.
+This guide builds on the [dialogs guide](/psdk/ui-development/mystery-gift/use-confirmation-dialogs). Claiming a gift currently shows a plain message; here we replace it with an animated banner using `Yuki::Animation`, and we wire an animation handler into the Composition so input is blocked while it plays.
 
 ## Principle
 

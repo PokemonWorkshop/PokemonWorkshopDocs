@@ -5,7 +5,7 @@ sidebar_position: 8
 description: "Ce guide ajoute la logique métier de la scène : entrer un code, le valider, et réclamer un cadeau via des dialogues de confirmation et des messages bloquants."
 ---
 
-Ce guide s'appuie sur le [guide i18n](./07-i18n.md). Jusqu'ici le bouton A ne faisait rien ; ici, on le rend fonctionnel. On ajoute le fichier de logique métier -- entrer un code, le valider, réclamer un cadeau -- avec les messages bloquants et les dialogues Oui/Non de PSDK, et on révèle enfin le bouton A.
+Ce guide s'appuie sur le [guide i18n](/psdk/ui-development/mystery-gift/ajouter-du-texte-multilingue). Jusqu'ici le bouton A ne faisait rien ; ici, on le rend fonctionnel. On ajoute le fichier de logique métier -- entrer un code, le valider, réclamer un cadeau -- avec les messages bloquants et les dialogues Oui/Non de PSDK, et on révèle enfin le bouton A.
 
 ## Principe
 
@@ -72,7 +72,7 @@ end
 - La garde `return if code.nil? || code.empty?` gère l'annulation de la saisie par le joueur (B dans NameInput).
 - `process_code` valide le code via la couche PFM et aiguille : `:invalid` et `:already_claimed` affichent un message simple ; `:valid` passe à la réclamation.
 - `claim_gift` affiche un dialogue Oui/Non : `display_message_and_wait(message, default, choice1, choice2)`. Le défaut `1` met le curseur sur « Non » -- le choix sûr. La valeur de retour est l'index choisi (0 = premier libellé = Oui), donc on ne continue que sur `choice == 0`.
-- À la confirmation, on `claim` le cadeau, on l'annonce avec `format(gift_text(TEXT_RECEIVED), gift_name)`, et on appelle `@composition.refresh` pour l'afficher dans la liste. Dans le [guide animations](./09-animations.md), on remplace ce message + refresh par une bannière animée.
+- À la confirmation, on `claim` le cadeau, on l'annonce avec `format(gift_text(TEXT_RECEIVED), gift_name)`, et on appelle `@composition.refresh` pour l'afficher dans la liste. Dans le [guide animations](/psdk/ui-development/mystery-gift/creer-des-animations), on remplace ce message + refresh par une bannière animée.
 
 ## Brancher le bouton A
 

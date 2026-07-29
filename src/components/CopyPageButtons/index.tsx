@@ -83,12 +83,14 @@ export default function CopyPageButtons() {
             ? translate({
                 id: "copyPageButtons.copied",
                 message: "Copied!",
-                description: "Confirmation shown after copying the page Markdown",
+                description:
+                  "Confirmation shown after copying the page Markdown",
               })
             : translate({
                 id: "copyPageButtons.copy",
                 message: "Copy page",
-                description: "Label of the button that copies the page Markdown",
+                description:
+                  "Label of the button that copies the page Markdown",
               })}
         </span>
       </button>
@@ -103,7 +105,8 @@ export default function CopyPageButtons() {
           {translate({
             id: "copyPageButtons.view",
             message: "View",
-            description: "Label of the link that opens the page Markdown in a new tab",
+            description:
+              "Label of the link that opens the page Markdown in a new tab",
           })}
         </span>
       </a>

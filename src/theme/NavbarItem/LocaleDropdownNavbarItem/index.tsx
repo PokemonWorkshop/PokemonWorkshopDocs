@@ -1,11 +1,11 @@
-import type React from "react";
 import { useLocation } from "@docusaurus/router";
+import { translate } from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { usePluginData } from "@docusaurus/useGlobalData";
-import { translate } from "@docusaurus/Translate";
-import DropdownNavbarItem from "@theme/NavbarItem/DropdownNavbarItem";
 import IconLanguage from "@theme/Icon/Language";
+import DropdownNavbarItem from "@theme/NavbarItem/DropdownNavbarItem";
 import type { Props } from "@theme/NavbarItem/LocaleDropdownNavbarItem";
+import type React from "react";
 import { normalizePathname } from "../../../utils/locale";
 
 export default function LocaleDropdownNavbarItem({
@@ -60,12 +60,19 @@ export default function LocaleDropdownNavbarItem({
     })
   ) : (
     <>
-      <IconLanguage style={{ verticalAlign: "text-bottom", marginRight: "0.3em" }} />
+      <IconLanguage
+        style={{ verticalAlign: "text-bottom", marginRight: "0.3em" }}
+      />
       {localeConfigs[currentLocale].label}
     </>
   );
 
   return (
-    <DropdownNavbarItem {...props} mobile={mobile} label={label} items={items} />
+    <DropdownNavbarItem
+      {...props}
+      mobile={mobile}
+      label={label}
+      items={items}
+    />
   );
 }

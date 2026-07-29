@@ -5,7 +5,7 @@ sidebar_position: 9
 description: "Ce guide ajoute des animations UI avec Yuki::Animation : un composant bannière en fondu, un handler d'animation dans la Composition, et leur usage à la réclamation d'un cadeau."
 ---
 
-Ce guide s'appuie sur le [guide dialogues](./08-dialogs.md). Réclamer un cadeau affiche pour l'instant un message simple ; ici, on le remplace par une bannière animée avec `Yuki::Animation`, et on branche un handler d'animation dans la Composition pour que les entrées soient bloquées pendant qu'elle joue.
+Ce guide s'appuie sur le [guide dialogues](/psdk/ui-development/mystery-gift/utiliser-les-dialogues-de-confirmation). Réclamer un cadeau affiche pour l'instant un message simple ; ici, on le remplace par une bannière animée avec `Yuki::Animation`, et on branche un handler d'animation dans la Composition pour que les entrées soient bloquées pendant qu'elle joue.
 
 ## Principe
 

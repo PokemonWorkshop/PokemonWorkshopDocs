@@ -5,7 +5,7 @@ sidebar_position: 10
 description: "This guide finishes the base UI: customizing the background, button bar and ctrl buttons by subclassing GenericBase."
 ---
 
-This guide builds on the whole series: you have a fully working Mystery Gift scene. Back in the [scene guide](./01-ui-scene.md) we wrote a minimal `MysteryGiftBase` that only changed the background. Here we finish it -- a themed button bar and ctrl buttons -- which is the last change to the scene.
+This guide builds on the whole series: you have a fully working Mystery Gift scene. Back in the [scene guide](/psdk/ui-development/mystery-gift/create-a-ui-scene) we wrote a minimal `MysteryGiftBase` that only changed the background. Here we finish it -- a themed button bar and ctrl buttons -- which is the last change to the scene.
 
 ## Principle
 
