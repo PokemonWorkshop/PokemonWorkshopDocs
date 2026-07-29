@@ -45,18 +45,18 @@ In short: your job is to register; the engine does the triggering.
 
 A **reason** is the lifecycle moment that triggers a task. There are ten, each fired by the engine at a specific point:
 
-| Reason | When it fires |
-| --- | --- |
-| `:on_update` | Every frame, continuously while the scene is on screen. This is the main loop, the place for anything that must run all the time. |
-| `:on_init` | Right after the scene is created, just before it appears on screen. The place to set things up. |
-| `:on_transition` | When the scene plays its visual transition, the fade in or out between two scenes. |
-| `:on_scene_switch` | Just before the scene hands control to another one, that is, when the game changes scene. |
-| `:on_dispose` | When the scene closes and frees its resources. The place to clean up what you created. |
-| `:on_warp_start` | The moment the player starts moving to another map (this is called a **warp**), before anything else happens. |
-| `:on_warp_process` | Once the player has arrived on the new map, but before the game states are refreshed. |
-| `:on_warp_end` | When the map change is finished, just before the new map's transition plays. |
-| `:on_hour_update` | When the in-game clock rolls over to a new hour (day and night system), for example to refresh which wild Pokémon are available. |
-| `:on_getting_tileset_name` | When the map engine decides which **tileset**, the sheet of map tiles, to load for the current map. |
+| Reason                     | When it fires                                                                                                                     |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `:on_update`               | Every frame, continuously while the scene is on screen. This is the main loop, the place for anything that must run all the time. |
+| `:on_init`                 | Right after the scene is created, just before it appears on screen. The place to set things up.                                   |
+| `:on_transition`           | When the scene plays its visual transition, the fade in or out between two scenes.                                                |
+| `:on_scene_switch`         | Just before the scene hands control to another one, that is, when the game changes scene.                                         |
+| `:on_dispose`              | When the scene closes and frees its resources. The place to clean up what you created.                                            |
+| `:on_warp_start`           | The moment the player starts moving to another map (this is called a **warp**), before anything else happens.                     |
+| `:on_warp_process`         | Once the player has arrived on the new map, but before the game states are refreshed.                                             |
+| `:on_warp_end`             | When the map change is finished, just before the new map's transition plays.                                                      |
+| `:on_hour_update`          | When the in-game clock rolls over to a new hour (day and night system), for example to refresh which wild Pokémon are available.  |
+| `:on_getting_tileset_name` | When the map engine decides which **tileset**, the sheet of map tiles, to load for the current map.                               |
 
 `:on_update` is the one you will reach for most often: it is the per-frame loop, the equivalent of a scene's own update, but contributed from outside.
 
@@ -109,12 +109,12 @@ You will see `Scheduler.start(reason, scene_class)` in the engine, but you rarel
 
 These tasks are not a special API: the engine's own features are built on the exact calls above. Seeing them makes the role concrete:
 
-| Feature | Reason | What it does |
-| --- | --- | --- |
-| Berry growth | `:on_update` | Grows planted berries using the time system. |
+| Feature          | Reason                                   | What it does                                                                |
+| ---------------- | ---------------------------------------- | --------------------------------------------------------------------------- |
+| Berry growth     | `:on_update`                             | Grows planted berries using the time system.                                |
 | Dynamic lighting | `:on_update`, `:on_init`, `:on_warp_end` | Updates the map's light sources each frame and rebuilds them on map change. |
-| Debug overlay | `:on_update` (`:any`) | Refreshes the debugger on top of every scene. |
-| Soft reset | `:on_update` (`:any`) | Watches for the soft-reset key combination on every scene. |
+| Debug overlay    | `:on_update` (`:any`)                    | Refreshes the debugger on top of every scene.                               |
+| Soft reset       | `:on_update` (`:any`)                    | Watches for the soft-reset key combination on every scene.                  |
 
 The dynamic lighting system, for example, registers its per-frame update on the map and removes it when it is no longer needed, exactly as your own code would:
 
@@ -208,15 +208,15 @@ This works because an event task type is created on demand. The lifecycle schedu
 
 Most of what happens "as the player walks" is an event task on the player (`event_id -1`):
 
-| Task | Action | What it does |
-| --- | --- | --- |
-| Repel count | `:end_step` | Counts down the remaining Repel steps. |
-| Poison | `:end_step` | Applies poison damage while walking. |
-| Hatch check | `:end_step` | Advances eggs toward hatching. |
-| Daycare | `:end_step` | Updates the Day Care state. |
-| Step evolution | `:end_step` | Handles evolutions that depend on steps walked. |
-| Battle starting | `:begin_step` | Rolls for a wild encounter as the step begins. |
-| Jump dust | `:end_jump` | Spawns dust or water particles where a character lands. |
+| Task            | Action        | What it does                                            |
+| --------------- | ------------- | ------------------------------------------------------- |
+| Repel count     | `:end_step`   | Counts down the remaining Repel steps.                  |
+| Poison          | `:end_step`   | Applies poison damage while walking.                    |
+| Hatch check     | `:end_step`   | Advances eggs toward hatching.                          |
+| Daycare         | `:end_step`   | Updates the Day Care state.                             |
+| Step evolution  | `:end_step`   | Handles evolutions that depend on steps walked.         |
+| Battle starting | `:begin_step` | Rolls for a wild encounter as the step begins.          |
+| Jump dust       | `:end_jump`   | Spawns dust or water particles where a character lands. |
 
 The jump-dust task is a good template because it applies to every character, not just the player:
 

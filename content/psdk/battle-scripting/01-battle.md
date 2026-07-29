@@ -106,17 +106,17 @@ start_trainer_battle(0)                # launch the fight against that trainer
 
 `start_trainer_battle(id)` builds and starts the trainer battle for you, no `BattleInfo` required. The keys `extra` understands mirror Studio's per-Pokémon fields:
 
-| Studio field | `extra` key | Value |
-| --- | --- | --- |
-| Nickname | `:given_name` | a `String` |
-| Gender | `:gender` | `1` (male) or `2` (female) |
-| Nature | `:nature` | a db_symbol, e.g. `:adamant` |
-| IVs | `:stats` | `[hp, atk, dfe, spd, ats, dfs]`, each `0` to `31` |
-| EVs | `:bonus` | `[hp, atk, dfe, spd, ats, dfs]` |
-| Held item | `:item` | an item db_symbol, e.g. `:leftovers` |
-| Ability | `:ability` | an ability db_symbol |
-| Moves | `:moves` | an array of move db_symbols |
-| Loyalty | `:loyalty` | an `Integer` |
+| Studio field | `extra` key   | Value                                             |
+| ------------ | ------------- | ------------------------------------------------- |
+| Nickname     | `:given_name` | a `String`                                        |
+| Gender       | `:gender`     | `1` (male) or `2` (female)                        |
+| Nature       | `:nature`     | a db_symbol, e.g. `:adamant`                      |
+| IVs          | `:stats`      | `[hp, atk, dfe, spd, ats, dfs]`, each `0` to `31` |
+| EVs          | `:bonus`      | `[hp, atk, dfe, spd, ats, dfs]`                   |
+| Held item    | `:item`       | an item db_symbol, e.g. `:leftovers`              |
+| Ability      | `:ability`    | an ability db_symbol                              |
+| Moves        | `:moves`      | an array of move db_symbols                       |
+| Loyalty      | `:loyalty`    | an `Integer`                                      |
 
 Setting one of these in Studio and overwriting it here are the same operation, so reach for `extra` only when the value cannot be fixed ahead of time.
 

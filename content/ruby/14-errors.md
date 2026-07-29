@@ -50,7 +50,7 @@ puts 'Le programme continue normalement.'
 
 Outputs:
 
-```
+```text
 Error: Level must be positive
 Le programme continue normalement.
 ```
@@ -110,7 +110,7 @@ end
 
 Ruby exceptions form a class hierarchy (like the inheritance seen in chapter 9):
 
-```
+```text
 Exception
   SignalException          (Ctrl+C)
   NoMemoryError
@@ -180,7 +180,7 @@ save(nil, 'save.dat')
 
 Outputs:
 
-```
+```text
 Saving in progress...
 Saved to save.dat
 Cleanup complete.

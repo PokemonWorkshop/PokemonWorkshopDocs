@@ -86,15 +86,15 @@ $game_map.system_tag_here?(x, y, GameData::SystemTags::TGrass)  # => true / fals
 
 `Game_Map#system_tag` accepte un mot-clé `skip_bridge:`. Avec `skip_bridge: true`, il ignore les tags de pont (`BridgeRL`, `BridgeUD`) et continue d'examiner les couches en dessous, ce qui permet au moteur de vérifier le sol *sous* un pont plutôt que le pont lui-même.
 
-| Méthode | Reçoit | Renvoie |
-| --- | --- | --- |
-| `Game_Character#system_tag` | rien | id du tag de la tuile sous le personnage |
-| `Game_Character#front_system_tag` | rien | id du tag de la tuile que le personnage regarde |
-| `Game_Character#system_tag_db_symbol` | rien | symbole de la tuile courante |
-| `Game_Character#front_system_tag_db_symbol` | rien | symbole de la tuile regardée |
-| `Game_Map#system_tag` | `x`, `y`, `skip_bridge:` | id du tag sur cette case, `0` si aucun |
-| `Game_Map#system_tag_here?` | `x`, `y`, `tag` | `true` si ce tag exact est sur la case |
-| `GameData::SystemTags.system_tag_db_symbol` | un id de tag | le symbole correspondant, ou `:regular_ground` |
+| Méthode                                     | Reçoit                   | Renvoie                                         |
+| ------------------------------------------- | ------------------------ | ----------------------------------------------- |
+| `Game_Character#system_tag`                 | rien                     | id du tag de la tuile sous le personnage        |
+| `Game_Character#front_system_tag`           | rien                     | id du tag de la tuile que le personnage regarde |
+| `Game_Character#system_tag_db_symbol`       | rien                     | symbole de la tuile courante                    |
+| `Game_Character#front_system_tag_db_symbol` | rien                     | symbole de la tuile regardée                    |
+| `Game_Map#system_tag`                       | `x`, `y`, `skip_bridge:` | id du tag sur cette case, `0` si aucun          |
+| `Game_Map#system_tag_here?`                 | `x`, `y`, `tag`          | `true` si ce tag exact est sur la case          |
+| `GameData::SystemTags.system_tag_db_symbol` | un id de tag             | le symbole correspondant, ou `:regular_ground`  |
 
 ## Les familles de tags
 
@@ -104,87 +104,87 @@ Chaque tag est une constante du module `GameData::SystemTags`. Le moteur regroup
 
 Ces tags pilotent les combats sauvages, le type de lieu et les particules au sol.
 
-| Tag | Effet |
-| --- | --- |
-| `Empty` | Tuile neutre ; annule l'effet des tags d'eau comme `TSea` ou `TPond`. |
-| `TGrass` | Herbe ; affiche des particules d'herbe et lance les combats sauvages d'herbe. |
-| `TTallGrass` | Herbe plus haute ; même rôle que `TGrass` avec une animation distincte. |
-| `TCave` | Grotte ; lance les combats sauvages de grotte. |
-| `TMount` | Montagne ; lance les combats sauvages de montagne. |
-| `TSand` | Sable ; lance les combats sauvages de sable. |
-| `TWetSand` | Sable mouillé ; affiche une particule à la marche, se comporte sinon comme le sable. |
-| `TPond` | Étang ou rivière ; lance les combats sauvages d'étang (surfable). |
-| `TSea` | Mer ou océan ; lance les combats sauvages de mer (surfable). |
-| `TUnderWater` | Terrain sous-marin ; lance les combats sauvages sous-marins. |
-| `TSnow` | Neige ; lance les combats sauvages de neige. |
-| `Puddle` | Flaque ; affiche une particule d'eau à la marche. |
-| `HeadButt` | Tuile sur laquelle on peut utiliser Coup d'Boule ; compte comme de l'herbe pour le type de lieu. |
+| Tag           | Effet                                                                                            |
+| ------------- | ------------------------------------------------------------------------------------------------ |
+| `Empty`       | Tuile neutre ; annule l'effet des tags d'eau comme `TSea` ou `TPond`.                            |
+| `TGrass`      | Herbe ; affiche des particules d'herbe et lance les combats sauvages d'herbe.                    |
+| `TTallGrass`  | Herbe plus haute ; même rôle que `TGrass` avec une animation distincte.                          |
+| `TCave`       | Grotte ; lance les combats sauvages de grotte.                                                   |
+| `TMount`      | Montagne ; lance les combats sauvages de montagne.                                               |
+| `TSand`       | Sable ; lance les combats sauvages de sable.                                                     |
+| `TWetSand`    | Sable mouillé ; affiche une particule à la marche, se comporte sinon comme le sable.             |
+| `TPond`       | Étang ou rivière ; lance les combats sauvages d'étang (surfable).                                |
+| `TSea`        | Mer ou océan ; lance les combats sauvages de mer (surfable).                                     |
+| `TUnderWater` | Terrain sous-marin ; lance les combats sauvages sous-marins.                                     |
+| `TSnow`       | Neige ; lance les combats sauvages de neige.                                                     |
+| `Puddle`      | Flaque ; affiche une particule d'eau à la marche.                                                |
+| `HeadButt`    | Tuile sur laquelle on peut utiliser Coup d'Boule ; compte comme de l'herbe pour le type de lieu. |
 
 ### Eau et surf
 
 Le moteur tient deux tableaux ici : `SurfTag` (les tuiles d'eau où l'on ne peut entrer qu'en surfant) et `SurfLTag` (toutes les tuiles sur lesquelles on est autorisé à se tenir en surfant, ce qui ajoute les ponts, les sauts et les ponts de vélo).
 
-| Tag | Effet |
-| --- | --- |
-| `TSea`, `TPond` | Eau surfable ; font partie de `SurfTag`. |
+| Tag                                        | Effet                                                         |
+| ------------------------------------------ | ------------------------------------------------------------- |
+| `TSea`, `TPond`                            | Eau surfable ; font partie de `SurfTag`.                      |
 | `RapidsL`, `RapidsD`, `RapidsU`, `RapidsR` | Courant forçant le personnage à gauche / bas / haut / droite. |
-| `WaterFall` | Tuile de cascade ; une aide pour les événements de cascade. |
-| `Whirlpool` | Tuile de tourbillon. |
+| `WaterFall`                                | Tuile de cascade ; une aide pour les événements de cascade.   |
+| `Whirlpool`                                | Tuile de tourbillon.                                          |
 
 ### Glissade
 
 Ces tags prennent le contrôle du personnage et le déplacent automatiquement. Ils sont rassemblés dans `SlideTags`.
 
-| Tag | Effet |
-| --- | --- |
-| `TIce` | Glace ; le personnage continue de glisser tout droit. |
-| `RapidsL`, `RapidsD`, `RapidsU`, `RapidsR` | Forcent le personnage à glisser dans cette direction. |
-| `RocketL`, `RocketD`, `RocketU`, `RocketR` | Forcent le personnage à avancer dans ce sens jusqu'à un mur. |
-| `RocketRL`, `RocketRD`, `RocketRU`, `RocketRR` | Comme les tags `Rocket*` mais le personnage pivote aussi. |
-| `StopSlide` | Arrête un personnage en train de glisser. |
+| Tag                                            | Effet                                                        |
+| ---------------------------------------------- | ------------------------------------------------------------ |
+| `TIce`                                         | Glace ; le personnage continue de glisser tout droit.        |
+| `RapidsL`, `RapidsD`, `RapidsU`, `RapidsR`     | Forcent le personnage à glisser dans cette direction.        |
+| `RocketL`, `RocketD`, `RocketU`, `RocketR`     | Forcent le personnage à avancer dans ce sens jusqu'à un mur. |
+| `RocketRL`, `RocketRD`, `RocketRU`, `RocketRR` | Comme les tags `Rocket*` mais le personnage pivote aussi.    |
+| `StopSlide`                                    | Arrête un personnage en train de glisser.                    |
 
 ### Rebords et sauts
 
-| Tag | Effet |
-| --- | --- |
+| Tag                                | Effet                                                                              |
+| ---------------------------------- | ---------------------------------------------------------------------------------- |
 | `JumpR`, `JumpL`, `JumpD`, `JumpU` | Rebord ; le personnage le franchit d'un saut vers la droite / gauche / bas / haut. |
 
 ### Escaliers et pentes
 
-| Tag | Effet |
-| --- | --- |
-| `StairsL`, `StairsD`, `StairsU`, `StairsR` | Escaliers ; ajustent l'élévation du personnage pendant le déplacement. |
-| `SlopesL`, `SlopesR` | Pentes gauche et droite ; décalent la position à l'écran du personnage qui monte ou descend. |
+| Tag                                        | Effet                                                                                        |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| `StairsL`, `StairsD`, `StairsU`, `StairsR` | Escaliers ; ajustent l'élévation du personnage pendant le déplacement.                       |
+| `SlopesL`, `SlopesR`                       | Pentes gauche et droite ; décalent la position à l'écran du personnage qui monte ou descend. |
 
 ### Ponts et élévation
 
 Les ponts sont regroupés dans `BRIDGE_TILES` ; `ZTag` est un tableau de tuiles qui changent le z (la couche de priorité) du personnage.
 
-| Tag | Effet |
-| --- | --- |
-| `BridgeUD` | Pont traversé de haut en bas (la couche en dessous reste accessible). |
-| `BridgeRL` | Pont traversé de droite à gauche. |
-| `ZTag` | Sept tuiles qui fixent la couche z du personnage, pour passer au-dessus ou en dessous d'autres tuiles. |
+| Tag        | Effet                                                                                                  |
+| ---------- | ------------------------------------------------------------------------------------------------------ |
+| `BridgeUD` | Pont traversé de haut en bas (la couche en dessous reste accessible).                                  |
+| `BridgeRL` | Pont traversé de droite à gauche.                                                                      |
+| `ZTag`     | Sept tuiles qui fixent la couche z du personnage, pour passer au-dessus ou en dessous d'autres tuiles. |
 
 ### Vélos
 
-| Tag | Effet |
-| --- | --- |
-| `AcroBike` | Rebord franchissable uniquement par le bunny hop du vélo Cross. |
-| `AcroBikeRL` | Pont de vélo n'autorisant que les déplacements droite et gauche (plus les sauts haut/bas). |
-| `AcroBikeUD` | Pont de vélo n'autorisant que les déplacements haut et bas (plus les sauts gauche/droite). |
-| `MachBike` | Exige une vitesse élevée ; sinon le personnage tombe. |
-| `CrackedSoil` | Exige une vitesse élevée ; sinon le personnage tombe dans un trou. |
-| `Hole` | Tuile de trou. |
+| Tag           | Effet                                                                                      |
+| ------------- | ------------------------------------------------------------------------------------------ |
+| `AcroBike`    | Rebord franchissable uniquement par le bunny hop du vélo Cross.                            |
+| `AcroBikeRL`  | Pont de vélo n'autorisant que les déplacements droite et gauche (plus les sauts haut/bas). |
+| `AcroBikeUD`  | Pont de vélo n'autorisant que les déplacements haut et bas (plus les sauts gauche/droite). |
+| `MachBike`    | Exige une vitesse élevée ; sinon le personnage tombe.                                      |
+| `CrackedSoil` | Exige une vitesse élevée ; sinon le personnage tombe dans un trou.                         |
+| `Hole`        | Tuile de trou.                                                                             |
 
 ### Marais et recherche de chemin
 
-| Tag | Effet |
-| --- | --- |
-| `SwampBorder` | Marais peu profond ; ralentit le personnage. |
-| `DeepSwamp` | Marais profond ; le personnage peut s'y retrouver bloqué. |
-| `Road` | Marque une route, utilisée comme trajet préférentiel par la recherche de chemin. |
-| `RClimb` | Tuile d'Escalade. |
+| Tag           | Effet                                                                            |
+| ------------- | -------------------------------------------------------------------------------- |
+| `SwampBorder` | Marais peu profond ; ralentit le personnage.                                     |
+| `DeepSwamp`   | Marais profond ; le personnage peut s'y retrouver bloqué.                        |
+| `Road`        | Marque une route, utilisée comme trajet préférentiel par la recherche de chemin. |
+| `RClimb`      | Tuile d'Escalade.                                                                |
 
 La liste de référence, toujours à jour, est le fichier du moteur qui les déclare. Si une future version de PSDK ajoute un tag, il y apparaît en premier.
 

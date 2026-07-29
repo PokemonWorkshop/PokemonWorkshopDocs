@@ -1,0 +1,40 @@
+{
+  // Markdown linting for the documentation content.
+  // Rules are calibrated on the conventions written in CONTRIBUTING.md.
+  "globs": ["content/**/*.md", "i18n/**/*.md", "*.md"],
+  "ignores": ["node_modules", "build", ".docusaurus", "tasks"],
+  "config": {
+    "default": true,
+
+    // Pages carry their title in the frontmatter, not as an H1 heading.
+    "MD041": false,
+    "MD025": { "front_matter_title": "" },
+
+    // Prose is written one paragraph per line, on purpose.
+    "MD013": false,
+
+    // Docusaurus admonitions (:::note) and JSX-free HTML entities are fine.
+    "MD033": false,
+
+    // CONTRIBUTING.md: bullet lists use dashes.
+    "MD004": { "style": "dash" },
+
+    // CONTRIBUTING.md: every code block declares its language.
+    "MD040": true,
+
+    // One table style across the whole site: cells padded to the column width,
+    // delimiter row included. The default ("any") only checks consistency
+    // within a single file, which lets compact and aligned tables coexist.
+    "MD060": { "style": "aligned", "aligned_delimiter": true },
+
+    // The same subsection name may legitimately appear under two different
+    // parents (e.g. "Boutique illimitée" for items and for Pokémon).
+    "MD024": { "siblings_only": true },
+
+    // Heading and structure hygiene.
+    "MD022": true,
+    "MD031": true,
+    "MD032": true,
+    "MD047": true
+  }
+}

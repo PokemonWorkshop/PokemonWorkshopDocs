@@ -29,14 +29,14 @@ The key thing to understand is that FollowMe stores its whole configuration in *
 
 These are the system switch and variables FollowMe reads. You can set them directly with the **Control Switches** and **Control Variables** event commands, or through the matching `Yuki::FollowMe` accessor.
 
-| ID | Kind | Role | Script accessor |
-| --- | --- | --- | --- |
-| Switch **19** | Switch | Whole system on/off (`Sw::FM_Enabled`) | `Yuki::FollowMe.enabled` |
-| Switch **29** | Switch | Let's Go mode on/off (`Sw::FollowMe_LetsGoMode`) | `Yuki::FollowMe.in_lets_go_mode?` / `lets_go_mode=` |
-| Variable **18** | Variable | Number of human followers (`Var::FM_N_Human`) | `Yuki::FollowMe.human_count` |
-| Variable **19** | Variable | Number of party Pokémon followers (`Var::FM_N_Pokem`) | `Yuki::FollowMe.pokemon_count` |
-| Variable **20** | Variable | Number of friend's Pokémon followers (`Var::FM_N_Friend`) | `Yuki::FollowMe.other_pokemon_count` |
-| Variable **21** | Variable | Selected follower for movement (`Var::FM_Sel_Foll`) | `Yuki::FollowMe.selected_follower` |
+| ID              | Kind     | Role                                                      | Script accessor                                     |
+| --------------- | -------- | --------------------------------------------------------- | --------------------------------------------------- |
+| Switch **19**   | Switch   | Whole system on/off (`Sw::FM_Enabled`)                    | `Yuki::FollowMe.enabled`                            |
+| Switch **29**   | Switch   | Let's Go mode on/off (`Sw::FollowMe_LetsGoMode`)          | `Yuki::FollowMe.in_lets_go_mode?` / `lets_go_mode=` |
+| Variable **18** | Variable | Number of human followers (`Var::FM_N_Human`)             | `Yuki::FollowMe.human_count`                        |
+| Variable **19** | Variable | Number of party Pokémon followers (`Var::FM_N_Pokem`)     | `Yuki::FollowMe.pokemon_count`                      |
+| Variable **20** | Variable | Number of friend's Pokémon followers (`Var::FM_N_Friend`) | `Yuki::FollowMe.other_pokemon_count`                |
+| Variable **21** | Variable | Selected follower for movement (`Var::FM_Sel_Foll`)       | `Yuki::FollowMe.selected_follower`                  |
 
 Note that switch 19 and variable 19 are unrelated: one is the on/off switch, the other is the party Pokémon count. They live in separate switch and variable spaces.
 

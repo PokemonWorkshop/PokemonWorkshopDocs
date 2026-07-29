@@ -19,20 +19,20 @@ Each kind of entity has a `data_<kind>` function taking the **db_symbol** of the
 
 | Function                              | Returns                |
 | ------------------------------------- | ---------------------- |
-| `data_ability(db_symbol)`              | `Studio::Ability`      |
-| `data_creature(db_symbol)`             | `Studio::Creature`     |
-| `data_creature_form(db_symbol, form)`  | `Studio::CreatureForm` |
-| `data_dex(db_symbol)`                  | `Studio::Dex`          |
-| `data_group(db_symbol)`                | `Studio::Group`        |
-| `data_item(db_symbol)`                 | `Studio::Item`         |
-| `data_map_link(db_symbol)`             | `Studio::MapLink`      |
-| `data_move(db_symbol)`                 | `Studio::Move`         |
-| `data_nature(db_symbol)`               | `Studio::Nature`       |
-| `data_quest(db_symbol)`                | `Studio::Quest`        |
-| `data_trainer(db_symbol)`              | `Studio::Trainer`      |
-| `data_type(db_symbol)`                 | `Studio::Type`         |
-| `data_world_map(db_symbol)`            | `Studio::WorldMap`     |
-| `data_zone(db_symbol)`                 | `Studio::Zone`         |
+| `data_ability(db_symbol)`             | `Studio::Ability`      |
+| `data_creature(db_symbol)`            | `Studio::Creature`     |
+| `data_creature_form(db_symbol, form)` | `Studio::CreatureForm` |
+| `data_dex(db_symbol)`                 | `Studio::Dex`          |
+| `data_group(db_symbol)`               | `Studio::Group`        |
+| `data_item(db_symbol)`                | `Studio::Item`         |
+| `data_map_link(db_symbol)`            | `Studio::MapLink`      |
+| `data_move(db_symbol)`                | `Studio::Move`         |
+| `data_nature(db_symbol)`              | `Studio::Nature`       |
+| `data_quest(db_symbol)`               | `Studio::Quest`        |
+| `data_trainer(db_symbol)`             | `Studio::Trainer`      |
+| `data_type(db_symbol)`                | `Studio::Type`         |
+| `data_world_map(db_symbol)`           | `Studio::WorldMap`     |
+| `data_zone(db_symbol)`                | `Studio::Zone`         |
 
 `data_pokemon` also exists as an alias of `data_creature`.
 

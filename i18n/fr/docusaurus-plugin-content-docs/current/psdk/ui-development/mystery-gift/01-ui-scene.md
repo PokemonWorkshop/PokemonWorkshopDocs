@@ -21,7 +21,7 @@ Le nom doit être **identique** dans les trois couches : `PFM::MysteryGift`, `UI
 
 Voici la structure complète de fichiers de l'UI Mystery Gift que l'on va construire au fil des guides suivants :
 
-```
+```text
 scripts/20 MysteryGift/
   000 Entry.rb              -> GamePlay accessor
   001 Constants.rb          -> UI::MysteryGift module constants

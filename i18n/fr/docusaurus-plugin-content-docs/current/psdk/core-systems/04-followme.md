@@ -29,14 +29,14 @@ Le point essentiel à comprendre est que FollowMe stocke toute sa configuration 
 
 Voici l'interrupteur du système et les variables que FollowMe lit. On peut les définir directement avec les commandes d'événement **Gestion des interrupteurs** et **Gestion des variables**, ou via l'accesseur `Yuki::FollowMe` correspondant.
 
-| ID | Type | Rôle | Accesseur script |
-| --- | --- | --- | --- |
-| Interrupteur **19** | Interrupteur | Système entier activé/désactivé (`Sw::FM_Enabled`) | `Yuki::FollowMe.enabled` |
-| Interrupteur **29** | Interrupteur | Mode Let's Go activé/désactivé (`Sw::FollowMe_LetsGoMode`) | `Yuki::FollowMe.in_lets_go_mode?` / `lets_go_mode=` |
-| Variable **18** | Variable | Nombre de followers humains (`Var::FM_N_Human`) | `Yuki::FollowMe.human_count` |
-| Variable **19** | Variable | Nombre de Pokémon de l'équipe suiveurs (`Var::FM_N_Pokem`) | `Yuki::FollowMe.pokemon_count` |
-| Variable **20** | Variable | Nombre de Pokémon alliés suiveurs (`Var::FM_N_Friend`) | `Yuki::FollowMe.other_pokemon_count` |
-| Variable **21** | Variable | Follower sélectionné pour le déplacement (`Var::FM_Sel_Foll`) | `Yuki::FollowMe.selected_follower` |
+| ID                  | Type         | Rôle                                                          | Accesseur script                                    |
+| ------------------- | ------------ | ------------------------------------------------------------- | --------------------------------------------------- |
+| Interrupteur **19** | Interrupteur | Système entier activé/désactivé (`Sw::FM_Enabled`)            | `Yuki::FollowMe.enabled`                            |
+| Interrupteur **29** | Interrupteur | Mode Let's Go activé/désactivé (`Sw::FollowMe_LetsGoMode`)    | `Yuki::FollowMe.in_lets_go_mode?` / `lets_go_mode=` |
+| Variable **18**     | Variable     | Nombre de followers humains (`Var::FM_N_Human`)               | `Yuki::FollowMe.human_count`                        |
+| Variable **19**     | Variable     | Nombre de Pokémon de l'équipe suiveurs (`Var::FM_N_Pokem`)    | `Yuki::FollowMe.pokemon_count`                      |
+| Variable **20**     | Variable     | Nombre de Pokémon alliés suiveurs (`Var::FM_N_Friend`)        | `Yuki::FollowMe.other_pokemon_count`                |
+| Variable **21**     | Variable     | Follower sélectionné pour le déplacement (`Var::FM_Sel_Foll`) | `Yuki::FollowMe.selected_follower`                  |
 
 À noter que l'interrupteur 19 et la variable 19 n'ont aucun rapport : l'un est l'interrupteur d'activation, l'autre est le compte de Pokémon de l'équipe. Ils vivent dans des espaces d'interrupteurs et de variables séparés.
 

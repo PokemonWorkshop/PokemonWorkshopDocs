@@ -55,7 +55,7 @@ end
 
 Outputs:
 
-```
+```text
 Pikachu is at level 1
 Pikachu is at level 2
 Pikachu is at level 3
@@ -125,7 +125,7 @@ end
 
 Outputs:
 
-```
+```text
 Turn 1
 Turn 2
 Turn 3
@@ -216,7 +216,7 @@ puts 'Blastoise found!'
 
 Outputs:
 
-```
+```text
 Checking Pikachu...
 Checking Charizard...
 Blastoise found!
@@ -240,7 +240,7 @@ end
 
 Outputs:
 
-```
+```text
 Level 5 Pokémon
 Level 12 Pokémon
 Level 8 Pokémon

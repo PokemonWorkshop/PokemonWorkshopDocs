@@ -18,10 +18,10 @@ The Ruby code references these resources by name (`'mystery_gift/header'`) or by
 
 ## Where everything goes
 
-| Resource         | Source (download below)                         | Target path in your project                  |
-| ---------------- | ----------------------------------------------- | -------------------------------------------- |
-| 7 graphics       | `*.png`                                          | `graphics/interface/mystery_gift/`           |
-| i18n text        | `311125.csv`                                     | `Data/Text/Dialogs/311125.csv`               |
+| Resource   | Source (download below) | Target path in your project        |
+| ---------- | ----------------------- | ---------------------------------- |
+| 7 graphics | `*.png`                 | `graphics/interface/mystery_gift/` |
+| i18n text  | `311125.csv`            | `Data/Text/Dialogs/311125.csv`     |
 
 The folder name `mystery_gift` (under `graphics/interface/`) is the prefix used in every `add_sprite`/`add_background` call, e.g. `add_sprite(0, 0, 'mystery_gift/header')`. The CSV filename `311125.csv` matches the `TEXT_FILE_ID = 311_125` constant the code uses with `ext_text`.
 

@@ -178,7 +178,7 @@ end
 
 Outputs:
 
-```
+```text
 --- Start ---
 Pikachu uses Thunderbolt!
 --- End ---

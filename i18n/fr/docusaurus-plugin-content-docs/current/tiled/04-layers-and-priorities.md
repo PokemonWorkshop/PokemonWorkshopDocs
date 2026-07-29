@@ -11,13 +11,13 @@ La conversion lit une carte Tiled à travers les noms de ses calques : cinq noms
 
 Cinq noms de calques sont réservés. Chacun est lu comme des **propriétés** de tuiles et non comme des graphismes, et chacun n'accepte que les tuiles d'un tileset précis :
 
-| Nom de calque | Rôle | Tileset exigé |
-| --- | --- | --- |
-| `passages` | les directions par lesquelles une tuile peut être traversée | `passages.tsx` |
-| `systemtags` | le comportement de tuile lu par le moteur de carte | `systemtags.tsx` |
-| `systemtags_bridge1` | le comportement du premier niveau de pont | `systemtags.tsx` |
-| `systemtags_bridge2` | le comportement du second niveau de pont | `systemtags.tsx` |
-| `terrain_tag` | les variantes d'une même tuile, par exemple des groupes de rencontre différents entre deux carrés d'herbe | `terrain_tag.tsx` |
+| Nom de calque        | Rôle                                                                                                      | Tileset exigé     |
+| -------------------- | --------------------------------------------------------------------------------------------------------- | ----------------- |
+| `passages`           | les directions par lesquelles une tuile peut être traversée                                               | `passages.tsx`    |
+| `systemtags`         | le comportement de tuile lu par le moteur de carte                                                        | `systemtags.tsx`  |
+| `systemtags_bridge1` | le comportement du premier niveau de pont                                                                 | `systemtags.tsx`  |
+| `systemtags_bridge2` | le comportement du second niveau de pont                                                                  | `systemtags.tsx`  |
+| `terrain_tag`        | les variantes d'une même tuile, par exemple des groupes de rencontre différents entre deux carrés d'herbe | `terrain_tag.tsx` |
 
 Les noms sont comparés à l'identique et sensibles à la casse. `SystemTags` ou `Passages` sont des calques ordinaires du point de vue de la conversion, et leur contenu finit dessiné sur la carte comme un graphisme.
 
@@ -51,11 +51,11 @@ Seul le chiffre final est lu. L'underscore est une convention de lisibilité, `R
 
 Les six niveaux correspondent à trois comportements distincts :
 
-| Chiffre final | Comportement |
-| --- | --- |
-| `1` | sol, dessiné sous le joueur |
-| `2` | dessiné au-dessus du joueur |
-| `3` à `6` | dessiné au-dessus du joueur, à priorité croissante |
+| Chiffre final | Comportement                                       |
+| ------------- | -------------------------------------------------- |
+| `1`           | sol, dessiné sous le joueur                        |
+| `2`           | dessiné au-dessus du joueur                        |
+| `3` à `6`     | dessiné au-dessus du joueur, à priorité croissante |
 
 Six niveaux de création se replient sur les trois calques de tuiles que fournit RPG Maker XP. C'est cette compression que traite la règle des 3, sur la page des [tuiles animées](/tiled/tuiles-animees).
 

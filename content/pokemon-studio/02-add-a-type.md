@@ -44,18 +44,18 @@ The fix follows directly: the type count grew, so each image has to grow by one 
 
 PSDK ships ten type-indexed spritesheets across two folders, `graphics/interface/` (battle and menus) and `graphics/pokedex/` (the Pokédex screen). Each is a single column with one row per type, currently **19 rows** (the "none" type plus the 18 default types):
 
-| File | Current size | Cell height | What it feeds |
-| ---- | ------------ | ----------- | ------------- |
-| `graphics/interface/battle/types.png` | 120 × 513 | 27 px | Type icon on moves in the battle move menu |
-| `graphics/interface/battle_attack_dummy.png` | 155 × 1007 | 53 px | Type plate handled by the `AttackDummySprite` helper |
-| `graphics/interface/types.png` | 32 × 266 | 14 px | Type icons in menus; fallback when no localized file exists |
-| `graphics/interface/types_en.png` | 32 × 266 | 14 px | English variant of `interface/types.png` |
-| `graphics/interface/types_fr.png` | 32 × 266 | 14 px | French variant of `interface/types.png` |
-| `graphics/interface/types_es.png` | 32 × 266 | 14 px | Spanish variant of `interface/types.png` |
-| `graphics/pokedex/types.png` | 48 × 304 | 16 px | Type icons on the Pokédex screen; fallback when no localized file exists |
-| `graphics/pokedex/types_en.png` | 48 × 304 | 16 px | English variant of `pokedex/types.png` |
-| `graphics/pokedex/types_fr.png` | 48 × 304 | 16 px | French variant of `pokedex/types.png` |
-| `graphics/pokedex/types_es.png` | 48 × 304 | 16 px | Spanish variant of `pokedex/types.png` |
+| File                                         | Current size | Cell height | What it feeds                                                            |
+| -------------------------------------------- | ------------ | ----------- | ------------------------------------------------------------------------ |
+| `graphics/interface/battle/types.png`        | 120 × 513    | 27 px       | Type icon on moves in the battle move menu                               |
+| `graphics/interface/battle_attack_dummy.png` | 155 × 1007   | 53 px       | Type plate handled by the `AttackDummySprite` helper                     |
+| `graphics/interface/types.png`               | 32 × 266     | 14 px       | Type icons in menus; fallback when no localized file exists              |
+| `graphics/interface/types_en.png`            | 32 × 266     | 14 px       | English variant of `interface/types.png`                                 |
+| `graphics/interface/types_fr.png`            | 32 × 266     | 14 px       | French variant of `interface/types.png`                                  |
+| `graphics/interface/types_es.png`            | 32 × 266     | 14 px       | Spanish variant of `interface/types.png`                                 |
+| `graphics/pokedex/types.png`                 | 48 × 304     | 16 px       | Type icons on the Pokédex screen; fallback when no localized file exists |
+| `graphics/pokedex/types_en.png`              | 48 × 304     | 16 px       | English variant of `pokedex/types.png`                                   |
+| `graphics/pokedex/types_fr.png`              | 48 × 304     | 16 px       | French variant of `pokedex/types.png`                                    |
+| `graphics/pokedex/types_es.png`              | 48 × 304     | 16 px       | Spanish variant of `pokedex/types.png`                                   |
 
 Both folders carry localized variants (`types_en.png`, `types_fr.png`, `types_es.png`): the icon includes the type's name as text, so there is one image per language. PSDK loads `types_<language>.png` from the relevant folder for the current language and falls back to that same folder's `types.png` when the localized file is missing. Update the variant for every language your game ships; if you keep only `types.png` in a folder, that single file is enough there.
 

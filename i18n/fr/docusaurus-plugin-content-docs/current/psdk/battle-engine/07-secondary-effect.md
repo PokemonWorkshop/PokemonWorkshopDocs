@@ -43,9 +43,7 @@ Les conditions d'application de l'effet sont vérifiées **avant** son exécutio
 
 ### Pour les attaques offensives
 
-On override la méthode `effect_working?` qui détermine si l'effet secondaire de l'attaque peut s'appliquer.
-
-#### Exemple : Sanction Suprême
+On override la méthode `effect_working?` qui détermine si l'effet secondaire de l'attaque peut s'appliquer. Sanction Suprême l'illustre :
 
 ```ruby
 # Test if the effect is working
@@ -66,9 +64,7 @@ end
 
 ### Pour les attaques de statut
 
-On override la méthode `move_usable_by_user` qui détermine si l'attaque peut être lancée (voir guide 001 pour le détail complet).
-
-#### Exemple : Gravité
+On override la méthode `move_usable_by_user` qui détermine si l'attaque peut être lancée (voir guide 001 pour le détail complet). Gravité l'illustre :
 
 ```ruby
 # Function that tests if the user is able to use the move

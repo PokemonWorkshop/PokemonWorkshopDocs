@@ -25,7 +25,7 @@ Three techniques allow monkey-patching in PSDK:
 
 All user scripts go in the `scripts/` folder at the root of the project. This is the only place where PSDK loads custom code. The typical structure:
 
-```
+```text
 scripts/
   my-project/
     001 Patches/

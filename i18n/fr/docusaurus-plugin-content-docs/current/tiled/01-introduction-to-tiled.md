@@ -57,13 +57,13 @@ Une carte existe donc à deux endroits à la fois : sa description visuelle et p
 
 Cette section documente ce qui est **spécifique à un projet PSDK** : organisation des dossiers, noms de calques réservés, contraintes de conversion. Elle n'enseigne pas l'éditeur lui-même. Pour cela, on commence ici :
 
-| Ressource | Langue | Lien |
-| --- | --- | --- |
-| Manuel officiel de Tiled | Anglais | [doc.mapeditor.org](https://doc.mapeditor.org/en/stable/) |
-| Manuel officiel de Tiled | Français | [doc.mapeditor.org](https://doc.mapeditor.org/fr/stable/) |
-| Tutoriel vidéo d'Invatorzen | Anglais | [YouTube](https://www.youtube.com/watch?v=5A8gjBRGAAI) |
-| Tutoriel vidéo de SirLinfey | Français | [YouTube](https://www.youtube.com/watch?v=0WnjTuulYMY) |
-| Passer de RPG Maker XP à Tiled, par Fuyutaa | Français | [YouTube](https://www.youtube.com/watch?v=ItE0JN9ben0) |
+| Ressource                                   | Langue   | Lien                                                      |
+| ------------------------------------------- | -------- | --------------------------------------------------------- |
+| Manuel officiel de Tiled                    | Anglais  | [doc.mapeditor.org](https://doc.mapeditor.org/en/stable/) |
+| Manuel officiel de Tiled                    | Français | [doc.mapeditor.org](https://doc.mapeditor.org/fr/stable/) |
+| Tutoriel vidéo d'Invatorzen                 | Anglais  | [YouTube](https://www.youtube.com/watch?v=5A8gjBRGAAI)    |
+| Tutoriel vidéo de SirLinfey                 | Français | [YouTube](https://www.youtube.com/watch?v=0WnjTuulYMY)    |
+| Passer de RPG Maker XP à Tiled, par Fuyutaa | Français | [YouTube](https://www.youtube.com/watch?v=ItE0JN9ben0)    |
 
 La démo technique livrée avec le projet de base est l'autre référence à utiliser. Ses cartes sont de vraies cartes converties et fonctionnelles, et en ouvrir une dans Tiled répond à la plupart des questions plus vite que n'importe quel guide.
 

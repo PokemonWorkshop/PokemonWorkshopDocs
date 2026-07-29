@@ -20,11 +20,11 @@ bun install
 
 The site uses Docusaurus with two locales: English (default) and French. The dev server can only run one locale at a time, so the right command depends on what you want to test:
 
-| Command            | What it serves                                                                                                                                                                                |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bun start`        | The English version on `localhost:3000`. Hot reload.                                                                                                                                          |
-| `bun run start:fr` | The French version on `localhost:3000`. Hot reload.                                                                                                                                           |
-| `bun run preview`  | A full production build of both locales together on `localhost:3000`. Slower to start (full build) but the only way to test the locale dropdown and cross-locale navigation.                  |
+| Command            | What it serves                                                                                                                                                               |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bun start`        | The English version on `localhost:3000`. Hot reload.                                                                                                                         |
+| `bun run start:fr` | The French version on `localhost:3000`. Hot reload.                                                                                                                          |
+| `bun run preview`  | A full production build of both locales together on `localhost:3000`. Slower to start (full build) but the only way to test the locale dropdown and cross-locale navigation. |
 
 For everyday content edits, `bun start` (or `bun run start:fr`) is the right tool. Switch to `bun run preview` whenever you change navigation, slugs, or anything that touches both locales.
 
@@ -150,7 +150,7 @@ def example
 end
 ```
 
-Supported languages: `ruby`, `bash`, `json`, `yaml`, `markdown`.
+Supported languages: `ruby`, `bash`, `json`, `yaml`, `markdown`, `csv`, and `text` for raw console output or directory trees. Every code block must declare one — a fence with no language is a lint error.
 
 - Markdown tables for tabular data (commands, comparisons).
 - Bullet lists with dashes (`-`), not asterisks.
@@ -204,6 +204,14 @@ The branch name follows the same `<type>/<topic>` convention as the commit prefi
 - Write the page in `content/` and translate it in `i18n/fr/docusaurus-plugin-content-docs/current/` following the conventions above.
 - Verify the rendering locally with `bun start` (English) or `bun run start:fr` (French).
 - For locale-switcher or cross-locale checks, use `bun run preview`.
+- Lint the Markdown:
+
+```bash
+bun run lint:md
+```
+
+(`bun run lint:md:fix` fixes what can be fixed automatically.)
+
 - Run the type checker:
 
 ```bash
@@ -220,17 +228,17 @@ bun run build
 
 Use [Conventional Commits](https://www.conventionalcommits.org/) for commit messages. The type prefix mirrors the branch type:
 
-| Type       | When to use                                              |
-| ---------- | -------------------------------------------------------- |
-| `docs`     | Documentation content (new pages, edits, translations)   |
-| `feat`     | New site feature (custom component, plugin)              |
-| `fix`      | Bug fix                                                  |
-| `chore`    | Tooling, configuration, repo meta                        |
-| `ci`       | CI/CD workflow changes                                   |
-| `refactor` | Code restructuring without behavior change               |
-| `perf`     | Performance improvement                                  |
-| `style`    | Formatting, whitespace, linter pass                      |
-| `test`     | Tests                                                    |
+| Type       | When to use                                            |
+| ---------- | ------------------------------------------------------ |
+| `docs`     | Documentation content (new pages, edits, translations) |
+| `feat`     | New site feature (custom component, plugin)            |
+| `fix`      | Bug fix                                                |
+| `chore`    | Tooling, configuration, repo meta                      |
+| `ci`       | CI/CD workflow changes                                 |
+| `refactor` | Code restructuring without behavior change             |
+| `perf`     | Performance improvement                                |
+| `style`    | Formatting, whitespace, linter pass                    |
+| `test`     | Tests                                                  |
 
 One commit per logical change. Message in English, concise, present tense:
 

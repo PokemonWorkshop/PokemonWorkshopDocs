@@ -28,11 +28,11 @@ La fenêtre demande deux informations sur le build, puis quelle part de celui-ci
 
 En dessous, **Options de compilation** regroupe quatre interrupteurs, tous activés par défaut :
 
-| Option | Ce qu'elle recompile |
-| --- | --- |
-| Mettre à jour les visuels | Les modifications apportées aux graphismes |
-| Mettre à jour les bibliothèques | Les modifications appliquées aux bibliothèques Ruby |
-| Mettre à jour l'audio | Les modifications appliquées à l'audio |
+| Option                            | Ce qu'elle recompile                                                                       |
+| --------------------------------- | ------------------------------------------------------------------------------------------ |
+| Mettre à jour les visuels         | Les modifications apportées aux graphismes                                                 |
+| Mettre à jour les bibliothèques   | Les modifications appliquées aux bibliothèques Ruby                                        |
+| Mettre à jour l'audio             | Les modifications appliquées à l'audio                                                     |
 | Mettre à jour les binaires du jeu | Les modifications appliquées aux fichiers binaires (l'exécutable du moteur et son runtime) |
 
 Pourquoi des interrupteurs ? La compilation écrit dans le dossier `Release/` et le conserve d'une exécution à l'autre. Désactiver une option indique à Studio de sauter cette partie et de réutiliser ce que la compilation précédente y a déjà déposé.

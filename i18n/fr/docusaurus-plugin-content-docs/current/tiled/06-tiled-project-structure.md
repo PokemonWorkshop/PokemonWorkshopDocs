@@ -9,13 +9,13 @@ Tout ce qui touche à Tiled dans un projet PSDK vit sous `Data/Tiled`, réparti 
 
 ## Ce qu'on y trouve
 
-| Entrée | Contenu | Écrit par |
-| --- | --- | --- |
-| `Maps` | les cartes du projet en `.tmx`, plus les règles d'automapping | le maker |
-| `Tilesets` | les tilesets du projet, uniquement des fichiers `.tsx` | le maker |
-| `Assets` | les images `.png` dans lesquelles les tilesets sont découpés | le maker |
-| `Overviews` | un aperçu `.png` par carte | Pokémon Studio |
-| `.jobs` | la file de conversion transmise par Studio au moteur | Studio et le convertisseur |
+| Entrée      | Contenu                                                       | Écrit par                  |
+| ----------- | ------------------------------------------------------------- | -------------------------- |
+| `Maps`      | les cartes du projet en `.tmx`, plus les règles d'automapping | le maker                   |
+| `Tilesets`  | les tilesets du projet, uniquement des fichiers `.tsx`        | le maker                   |
+| `Assets`    | les images `.png` dans lesquelles les tilesets sont découpés  | le maker                   |
+| `Overviews` | un aperçu `.png` par carte                                    | Pokémon Studio             |
+| `.jobs`     | la file de conversion transmise par Studio au moteur          | Studio et le convertisseur |
 
 On ne modifie jamais `Overviews` à la main : Studio le remplit lors de l'import et de la mise à jour des cartes, et à la demande depuis l'onglet **Carte** d'une carte. Les calques réservés sont masqués dans ces images, ce qui explique qu'un aperçu montre la carte telle que le joueur la voit et non telle qu'on l'a peinte.
 

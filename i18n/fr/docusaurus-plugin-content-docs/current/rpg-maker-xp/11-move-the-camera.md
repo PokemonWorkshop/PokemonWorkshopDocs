@@ -86,10 +86,10 @@ Avec `false`, le panoramique se déroule quand même sur toute sa durée, mais l
 
 Le quatrième argument, `distortion`, règle la façon dont la vitesse du panoramique est répartie sur sa durée. Il vaut `:UNICITY_DISTORTION` par défaut, un glissement linéaire à vitesse constante. On passe un autre symbole pour en changer le ressenti :
 
-| Distortion | Ce que fait le panoramique |
-| --- | --- |
-| `:UNICITY_DISTORTION` | Vitesse constante du début à la fin (la valeur par défaut). |
-| `:SMOOTH_DISTORTION` | Un rythme adouci, non linéaire, au lieu d'une vitesse plate, pour un glissement plus doux. |
+| Distortion              | Ce que fait le panoramique                                                                                         |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `:UNICITY_DISTORTION`   | Vitesse constante du début à la fin (la valeur par défaut).                                                        |
+| `:SMOOTH_DISTORTION`    | Un rythme adouci, non linéaire, au lieu d'une vitesse plate, pour un glissement plus doux.                         |
 | `:SQUARE010_DISTORTION` | Va jusqu'à la cible à mi-parcours, puis revient au point de départ à la fin, un seul « coup d'œil » dans la durée. |
 
 ```ruby

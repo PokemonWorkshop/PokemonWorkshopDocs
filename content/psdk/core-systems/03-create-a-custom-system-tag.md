@@ -19,13 +19,13 @@ This guide assumes you already know how a tag is read and stored. If not, start 
 
 A tag is not a single switch: each behaviour lives in a different part of the engine. Adding a tag means touching up to five of them, the last one optional.
 
-| Step | Engine hook | What it controls |
-| --- | --- | --- |
-| 1 | `GameData::SystemTags.system_tag_db_symbol` | The readable symbol returned for the tile. |
-| 2 | `PFM::Environment#get_zone_type` / `#convert_zone_type` | The zone type, which drives wild encounters. |
-| 3 | `Battle::Logic::BattleInfo::BACKGROUND_NAMES` | The battle background shown when a fight starts on the tile. |
-| 4 | `Game_Map::TERRAIN_TAGS_TABLE` | The location used by `LocationBased` moves. |
-| 5 | `Game_Character::PARTICLES_METHODS` (optional) | The particle spawned when a character walks on the tile. |
+| Step | Engine hook                                             | What it controls                                             |
+| ---- | ------------------------------------------------------- | ------------------------------------------------------------ |
+| 1    | `GameData::SystemTags.system_tag_db_symbol`             | The readable symbol returned for the tile.                   |
+| 2    | `PFM::Environment#get_zone_type` / `#convert_zone_type` | The zone type, which drives wild encounters.                 |
+| 3    | `Battle::Logic::BattleInfo::BACKGROUND_NAMES`           | The battle background shown when a fight starts on the tile. |
+| 4    | `Game_Map::TERRAIN_TAGS_TABLE`                          | The location used by `LocationBased` moves.                  |
+| 5    | `Game_Character::PARTICLES_METHODS` (optional)          | The particle spawned when a character walks on the tile.     |
 
 The five snippets can live in separate script files or be merged into one, as long as the constant from step 1 is defined before the later steps reference it. Where these scripts go in a PSDK project is covered in [monkey-patching](/getting-started/customize-psdk/monkey-patching-in-psdk).
 

@@ -51,51 +51,21 @@ Aucun de ces outils n'est obligatoire. Choisissez ceux qui correspondent le mieu
 
 ### Gestion de projet
 
-#### Guide Agile de Atlassian
-
-Une excellente introduction aux méthodes agiles, avec des exemples simples et accessibles.
-[https://www.atlassian.com/agile](https://www.atlassian.com/agile)
-
-#### Kanban Guide
-
-Pour découvrir une méthode simple de gestion visuelle des tâches.
-[https://kanbanguides.org](https://kanbanguides.org/)
+- [Guide Agile de Atlassian](https://www.atlassian.com/agile) - Une excellente introduction aux méthodes agiles, avec des exemples simples et accessibles.
+- [Kanban Guide](https://kanbanguides.org/) - Pour découvrir une méthode simple de gestion visuelle des tâches.
 
 ### Game Design
 
-#### The Door Problem – Liz England
-
-Un article devenu une référence qui montre la diversité des métiers impliqués dans le développement d'un jeu vidéo.
-[https://lizengland.com/blog/2014/04/the-door-problem/](https://lizengland.com/blog/2014/04/the-door-problem/)
-
-#### Game Developer
-
-De nombreux articles sur le game design, la production et le développement de jeux.
-[https://www.gamedeveloper.com](https://www.gamedeveloper.com/)
-
-#### Extra Credits
-
-Une chaîne YouTube très accessible sur le game design, la narration et la production de jeux vidéo.
-[https://www.youtube.com/@ExtraCredits](https://www.youtube.com/@ExtraCredits)
-
-#### GMTK (Game Maker's Toolkit)
-
-Une chaîne YouTube qui analyse les choix de design de nombreux jeux et explique pourquoi ils fonctionnent.
-[https://www.youtube.com/@GMTK](https://www.youtube.com/@GMTK)
+- [The Door Problem, Liz England](https://lizengland.com/blog/2014/04/the-door-problem/) - Un article devenu une référence qui montre la diversité des métiers impliqués dans le développement d'un jeu vidéo.
+- [Game Developer](https://www.gamedeveloper.com/) - De nombreux articles sur le game design, la production et le développement de jeux.
+- [Extra Credits](https://www.youtube.com/@ExtraCredits) - Une chaîne YouTube très accessible sur le game design, la narration et la production de jeux vidéo.
+- [GMTK (Game Maker's Toolkit)](https://www.youtube.com/@GMTK) - Une chaîne YouTube qui analyse les choix de design de nombreux jeux et explique pourquoi ils fonctionnent.
 
 ### Productivité
 
-#### Getting Things Done (David Allen)
-
-Une méthode d'organisation personnelle qui a inspiré de nombreux outils modernes. Même sans appliquer toute la méthode, plusieurs principes sont très utiles pour gérer un projet amateur.
-
-#### The Lean Startup (Eric Ries)
-
-Un excellent ouvrage pour comprendre l'intérêt des prototypes, des itérations et de la validation rapide des idées.
-
-#### Peopleware (Tom DeMarco & Timothy Lister)
-
-Une référence sur les aspects humains des projets collaboratifs. Particulièrement intéressant si vous commencez à constituer une équipe.
+- Getting Things Done, David Allen - Une méthode d'organisation personnelle qui a inspiré de nombreux outils modernes. Même sans appliquer toute la méthode, plusieurs principes sont très utiles pour gérer un projet amateur.
+- The Lean Startup, Eric Ries - Un excellent ouvrage pour comprendre l'intérêt des prototypes, des itérations et de la validation rapide des idées.
+- Peopleware, Tom DeMarco & Timothy Lister - Une référence sur les aspects humains des projets collaboratifs. Particulièrement intéressant si vous commencez à constituer une équipe.
 
 ### Ressources Pokémon Workshop
 

@@ -30,21 +30,21 @@ The readable part of the name is irrelevant to the player, who never sees it. So
 
 ### Quick reference
 
-| Attribute | Form | Effect |
-| --- | --- | --- |
-| `§` | leading character | Removes the event's shadow |
-| `¤` | leading character | Draws the event above the player when they overlap |
-| `$` | anywhere | Reuses page 1's appearance on every page |
-| `[particle=off]` | anywhere | Disables movement particles |
-| `[sprite=off]` | anywhere | Creates no sprite at all (logic-only event) |
-| `[reflection=on]` | anywhere | Adds a water reflection |
-| `[offset_x=N]` | anywhere | Shifts the event horizontally |
-| `[offset_y=N]` | anywhere | Shifts the event vertically |
-| `[z=N]` | anywhere | Sets the event's altitude layer |
-| `[noslide=on]` | anywhere | Ignores sliding tiles (ice, rapids) |
-| `[alias=name]` | anywhere | Gives the event a stable name for scripts |
-| `surf_` | anywhere | Makes the event move on water only |
-| `invisible_` | anywhere | Hidden object, found by facing it or with the Itemfinder |
+| Attribute         | Form              | Effect                                                   |
+| ----------------- | ----------------- | -------------------------------------------------------- |
+| `§`               | leading character | Removes the event's shadow                               |
+| `¤`               | leading character | Draws the event above the player when they overlap       |
+| `$`               | anywhere          | Reuses page 1's appearance on every page                 |
+| `[particle=off]`  | anywhere          | Disables movement particles                              |
+| `[sprite=off]`    | anywhere          | Creates no sprite at all (logic-only event)              |
+| `[reflection=on]` | anywhere          | Adds a water reflection                                  |
+| `[offset_x=N]`    | anywhere          | Shifts the event horizontally                            |
+| `[offset_y=N]`    | anywhere          | Shifts the event vertically                              |
+| `[z=N]`           | anywhere          | Sets the event's altitude layer                          |
+| `[noslide=on]`    | anywhere          | Ignores sliding tiles (ice, rapids)                      |
+| `[alias=name]`    | anywhere          | Gives the event a stable name for scripts                |
+| `surf_`           | anywhere          | Makes the event move on water only                       |
+| `invisible_`      | anywhere          | Hidden object, found by facing it or with the Itemfinder |
 
 ## Rendering and depth
 

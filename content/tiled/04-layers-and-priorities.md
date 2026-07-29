@@ -11,13 +11,13 @@ The conversion reads a Tiled map through its layer names: five reserved names ca
 
 Five layer names are reserved. Each one is read as tile **properties** rather than as graphics, and each one only accepts tiles from one specific tileset:
 
-| Layer name | Role | Required tileset |
-| --- | --- | --- |
-| `passages` | which directions a tile can be crossed from | `passages.tsx` |
-| `systemtags` | tile behaviour read by the map engine | `systemtags.tsx` |
-| `systemtags_bridge1` | behaviour of the first bridge level | `systemtags.tsx` |
-| `systemtags_bridge2` | behaviour of the second bridge level | `systemtags.tsx` |
-| `terrain_tag` | variants of one tile, for example different encounter groups between two patches of tall grass | `terrain_tag.tsx` |
+| Layer name           | Role                                                                                           | Required tileset  |
+| -------------------- | ---------------------------------------------------------------------------------------------- | ----------------- |
+| `passages`           | which directions a tile can be crossed from                                                    | `passages.tsx`    |
+| `systemtags`         | tile behaviour read by the map engine                                                          | `systemtags.tsx`  |
+| `systemtags_bridge1` | behaviour of the first bridge level                                                            | `systemtags.tsx`  |
+| `systemtags_bridge2` | behaviour of the second bridge level                                                           | `systemtags.tsx`  |
+| `terrain_tag`        | variants of one tile, for example different encounter groups between two patches of tall grass | `terrain_tag.tsx` |
 
 The names are matched exactly and are case sensitive. `SystemTags` or `Passages` are ordinary layers as far as the conversion is concerned, and their contents end up drawn on the map as graphics.
 
@@ -51,11 +51,11 @@ Only the final digit is read. The underscore is a readability convention, `Roof6
 
 The six levels map onto three distinct behaviours:
 
-| Trailing digit | Behaviour |
-| --- | --- |
-| `1` | ground, drawn under the player |
-| `2` | drawn over the player |
-| `3` to `6` | drawn over the player, at increasing priority |
+| Trailing digit | Behaviour                                     |
+| -------------- | --------------------------------------------- |
+| `1`            | ground, drawn under the player                |
+| `2`            | drawn over the player                         |
+| `3` to `6`     | drawn over the player, at increasing priority |
 
 Six levels of authoring collapse into the three tile layers RPG Maker XP provides. That compression is what the rule of three, on the [animated tiles](/tiled/animated-tiles) page, is about.
 

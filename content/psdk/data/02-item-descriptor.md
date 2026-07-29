@@ -29,16 +29,16 @@ Each definition function below fills one or several of these steps. You only wri
 
 The wrapper carries flags that the bag, party and battle UIs read:
 
-| Property             | Meaning when set                                                            |
-| -------------------- | --------------------------------------------------------------------------- |
-| `no_effect`          | The UI shows the "this item has no effect" message                           |
-| `chen`               | The UI shows the "it's not time to use this item" message                    |
-| `open_party`         | The UI opens the party so the player picks a creature                        |
-| `open_skill`         | The UI opens the move selection on the chosen creature                       |
-| `open_skill_learn`   | The party UI opens the move teaching UI for the move carried by the item     |
-| `stone_evolve`       | The UI shows whether the chosen creature can evolve with this item           |
-| `use_before_telling` | The item acts before the "item is used" message, so it can still refuse      |
-| `skill_message_id`   | ID of the message shown in the Summary UI during move selection              |
+| Property             | Meaning when set                                                         |
+| -------------------- | ------------------------------------------------------------------------ |
+| `no_effect`          | The UI shows the "this item has no effect" message                       |
+| `chen`               | The UI shows the "it's not time to use this item" message                |
+| `open_party`         | The UI opens the party so the player picks a creature                    |
+| `open_skill`         | The UI opens the move selection on the chosen creature                   |
+| `open_skill_learn`   | The party UI opens the move teaching UI for the move carried by the item |
+| `stone_evolve`       | The UI shows whether the chosen creature can evolve with this item       |
+| `use_before_telling` | The item acts before the "item is used" message, so it can still refuse  |
+| `skill_message_id`   | ID of the message shown in the Summary UI during move selection          |
 
 It also carries the behavior functions filled by your definitions: `on_creature_choice` and `on_creature_use` (can the item be used on this creature, and what it does), `on_skill_choice` and `on_skill_use` (same for a move), `on_use` (action from the bag), plus `bind(scene, creature, skill)` and `execute_battle_action` used by the battle engine.
 

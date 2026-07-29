@@ -49,11 +49,11 @@ raikou_fuyard = $wild_battle.add_roaming_pokemon(50, 1, { id: :raikou, level: 40
 
 Le `proc_id` passé à `add_roaming_pokemon` sélectionne un **schéma de déplacement**. Un schéma est un petit bloc de code, réévalué au fur et à mesure que le joueur se déplace, qui répond à une seule question : *où se trouve le Pokémon en ce moment ?* Il y répond en renseignant trois valeurs.
 
-| Valeur | Signification |
-| --- | --- |
-| `map_id` | L'ID de la carte sur laquelle se trouve le Pokémon, le même numéro de carte que celui affiché dans RPG Maker XP et Pokémon Studio. |
-| `zone_type` | Le type de terrain sur lequel se produit la rencontre. `1` correspond aux hautes herbes, comme une rencontre sauvage normale. |
-| `tag` | Le terrain (terrain tag) sur lequel le joueur doit se tenir, tel que défini sur le tileset. `0` est la valeur par défaut. |
+| Valeur      | Signification                                                                                                                      |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `map_id`    | L'ID de la carte sur laquelle se trouve le Pokémon, le même numéro de carte que celui affiché dans RPG Maker XP et Pokémon Studio. |
+| `zone_type` | Le type de terrain sur lequel se produit la rencontre. `1` correspond aux hautes herbes, comme une rencontre sauvage normale.      |
+| `tag`       | Le terrain (terrain tag) sur lequel le joueur doit se tenir, tel que défini sur le tileset. `0` est la valeur par défaut.          |
 
 Les valeurs de `zone_type` sont : `0` sol normal, `1` hautes herbes, `2` très hautes herbes, `3` grotte, `4` montagne, `5` sable, `6` mare, `7` mer, `8` sous l'eau, `9` neige, `10` glace.
 

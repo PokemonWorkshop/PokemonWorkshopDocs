@@ -135,7 +135,7 @@ psdk --util=plugin load
 
 Cela réinstalle le plugin et affiche chaque fichier ignoré parce qu'il existe déjà à sa destination. Voici la sortie pour un plugin nommé `test` qui livre trois fichiers :
 
-```
+```text
 ================================================================================
 #                           PSDK Plugin Manager v1.0                           #
 # Something changed in your plugins!                                           #

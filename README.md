@@ -50,7 +50,7 @@ The site will be available at `http://localhost:3000` with hot reload.
 
 ## Project Structure
 
-```
+```text
 .
 ├── content/                              # English source docs (default locale)
 │   ├── index.md

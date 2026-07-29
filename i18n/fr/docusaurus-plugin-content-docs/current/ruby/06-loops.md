@@ -51,16 +51,18 @@ while level < 5
   puts "Pikachu est au niveau #{level}"
   level += 1
 end
-```
+```text
 
 Affiche :
 
 ```
+
 Pikachu est au niveau 1
 Pikachu est au niveau 2
 Pikachu est au niveau 3
 Pikachu est au niveau 4
-```
+
+```text
 
 - La condition `level < 5` est évaluée **avant** chaque tour. Quand `level` atteint 5, la condition devient fausse et la boucle s'arrête.
 - `level += 1` est indispensable. Sans lui, `level` resterait à 1 et la boucle tournerait indéfiniment (boucle infinie). Si ça arrive, appuyer sur Ctrl+C pour interrompre le programme.
@@ -79,7 +81,7 @@ until hp >= max_hp
 end
 
 puts 'Soin terminé !'
-```
+```text
 
 - `until hp >= max_hp` se lit : "répéter jusqu'à ce que les PV atteignent le maximum".
 - `until` est parfois plus lisible que `while` quand on pense en termes de "jusqu'à ce que".
@@ -99,7 +101,7 @@ loop do
 end
 
 puts 'Sorti de la boucle !'
-```
+```text
 
 - `loop do ... end` tourne indéfiniment jusqu'à ce qu'un `break` soit atteint.
 - `break if input == 'quit'` quitte la boucle quand l'utilisateur tape "quit".
@@ -113,7 +115,7 @@ puts 'Sorti de la boucle !'
 3.times do
   puts 'Pikachu utilise Tonnerre !'
 end
-```
+```text
 
 On peut aussi récupérer le numéro du tour :
 
@@ -121,17 +123,19 @@ On peut aussi récupérer le numéro du tour :
 5.times do |turn|
   puts "Tour #{turn + 1}"
 end
-```
+```text
 
 Affiche :
 
 ```
+
 Tour 1
 Tour 2
 Tour 3
 Tour 4
 Tour 5
-```
+
+```text
 
 - `|turn|` reçoit le numéro de l'itération, en commençant à **0**. On ajoute 1 pour un affichage humain.
 - `times` est parfait quand on connaît le nombre de répétitions à l'avance.
@@ -145,7 +149,7 @@ Pour parcourir un intervalle de nombres :
 1.upto(5) do |level|
   puts "Niveau #{level}"
 end
-```
+```text
 
 ```ruby
 # Compte à rebours
@@ -153,7 +157,7 @@ end
   puts "#{count}..."
 end
 puts 'Évolution !'
-```
+```text
 
 - `1.upto(5)` parcourt de 1 à 5 inclus, dans l'ordre croissant.
 - `5.downto(1)` parcourt de 5 à 1 inclus, dans l'ordre décroissant.
@@ -216,7 +220,7 @@ puts 'Tortank trouvé !'
 
 Affiche :
 
-```
+```text
 Vérification de Pikachu...
 Vérification de Dracaufeu...
 Tortank trouvé !
@@ -240,7 +244,7 @@ end
 
 Affiche :
 
-```
+```text
 Pokémon de niveau 5
 Pokémon de niveau 12
 Pokémon de niveau 8

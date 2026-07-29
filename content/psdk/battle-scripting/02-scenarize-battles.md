@@ -19,7 +19,7 @@ A battle event is a Ruby file that hooks into the battle scene at specific momen
 
 Battle events live in `Data/Events/Battle/` as Ruby files. The filename must start with **five digits**, followed by anything, then `.rb`:
 
-```
+```text
 Data/Events/Battle/00234 Brock battle.rb
 ```
 
@@ -105,16 +105,16 @@ Place it in a custom script, not in the battle event file, so every battle can u
 
 PSDK fires eight events over the course of a battle. They are all registered the same way; they differ in when they fire and in the extra arguments the block receives.
 
-| Event | Block arguments | When it fires |
-| ---------------------- | ------------------------- | ----------------------------------------------------------------------------- |
-| `:logic_init` | `\|scene\|` | Right after the scene is built, before any animation. Set up the logic here. |
-| `:pre_battle_begin` | `\|scene\|` | During the intro, after "Trainer wants to fight!", before any Pokémon is sent out. |
-| `:battle_begin` | `\|scene\|` | After both sides sent their first Pokémon, before the first player choice. |
-| `:trainer_dialog` | `\|scene\|` | Each turn, after the player has chosen, before the AI chooses. |
-| `:AI_force_action` | `\|scene, ai, index\|` | Each turn, once per AI. Return actions to force them, or `nil` for default AI. |
-| `:after_attack` | `\|scene, launcher, move\|` | After each move resolves. |
-| `:after_action_dialog` | `\|scene\|` | After the turn's actions, before fainted Pokémon are replaced. |
-| `:battle_turn_end` | `\|scene\|` | At the end of the turn, after fainted Pokémon are replaced. |
+| Event                  | Block arguments             | When it fires                                                                      |
+| ---------------------- | --------------------------- | ---------------------------------------------------------------------------------- |
+| `:logic_init`          | `\|scene\|`                 | Right after the scene is built, before any animation. Set up the logic here.       |
+| `:pre_battle_begin`    | `\|scene\|`                 | During the intro, after "Trainer wants to fight!", before any Pokémon is sent out. |
+| `:battle_begin`        | `\|scene\|`                 | After both sides sent their first Pokémon, before the first player choice.         |
+| `:trainer_dialog`      | `\|scene\|`                 | Each turn, after the player has chosen, before the AI chooses.                     |
+| `:AI_force_action`     | `\|scene, ai, index\|`      | Each turn, once per AI. Return actions to force them, or `nil` for default AI.     |
+| `:after_attack`        | `\|scene, launcher, move\|` | After each move resolves.                                                          |
+| `:after_action_dialog` | `\|scene\|`                 | After the turn's actions, before fainted Pokémon are replaced.                     |
+| `:battle_turn_end`     | `\|scene\|`                 | At the end of the turn, after fainted Pokémon are replaced.                        |
 
 ### Setting up the logic
 

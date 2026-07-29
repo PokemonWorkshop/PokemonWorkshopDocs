@@ -45,18 +45,18 @@ En résumé : notre rôle est d'enregistrer ; c'est le moteur qui déclenche.
 
 Une **raison** est le moment du cycle de vie qui déclenche une tâche. Il en existe dix, chacune déclenchée par le moteur à un point précis :
 
-| Raison | Quand elle se déclenche |
-| --- | --- |
-| `:on_update` | À chaque frame, en continu tant que la scène est affichée. C'est la boucle principale, l'endroit pour tout ce qui doit tourner en permanence. |
-| `:on_init` | Juste après la création de la scène, avant qu'elle n'apparaisse à l'écran. L'endroit pour préparer ses éléments. |
-| `:on_transition` | Quand la scène joue sa transition visuelle, le fondu d'entrée ou de sortie entre deux scènes. |
-| `:on_scene_switch` | Juste avant que la scène ne cède la place à une autre, c'est-à-dire quand le jeu change de scène. |
-| `:on_dispose` | Quand la scène se ferme et libère ses ressources. L'endroit pour nettoyer ce qu'on a créé. |
-| `:on_warp_start` | Au moment où le joueur commence à passer sur une autre carte (on appelle ça un **warp**), avant tout le reste. |
-| `:on_warp_process` | Une fois le joueur arrivé sur la nouvelle carte, mais avant que les états du jeu ne soient rafraîchis. |
-| `:on_warp_end` | Quand le changement de carte est terminé, juste avant que la transition de la nouvelle carte ne se joue. |
-| `:on_hour_update` | Quand l'horloge en jeu passe à l'heure suivante (système jour/nuit), par exemple pour rafraîchir les Pokémon sauvages disponibles. |
-| `:on_getting_tileset_name` | Quand le moteur de carte choisit quel **tileset**, la planche de tuiles graphiques, charger pour la carte courante. |
+| Raison                     | Quand elle se déclenche                                                                                                                       |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `:on_update`               | À chaque frame, en continu tant que la scène est affichée. C'est la boucle principale, l'endroit pour tout ce qui doit tourner en permanence. |
+| `:on_init`                 | Juste après la création de la scène, avant qu'elle n'apparaisse à l'écran. L'endroit pour préparer ses éléments.                              |
+| `:on_transition`           | Quand la scène joue sa transition visuelle, le fondu d'entrée ou de sortie entre deux scènes.                                                 |
+| `:on_scene_switch`         | Juste avant que la scène ne cède la place à une autre, c'est-à-dire quand le jeu change de scène.                                             |
+| `:on_dispose`              | Quand la scène se ferme et libère ses ressources. L'endroit pour nettoyer ce qu'on a créé.                                                    |
+| `:on_warp_start`           | Au moment où le joueur commence à passer sur une autre carte (on appelle ça un **warp**), avant tout le reste.                                |
+| `:on_warp_process`         | Une fois le joueur arrivé sur la nouvelle carte, mais avant que les états du jeu ne soient rafraîchis.                                        |
+| `:on_warp_end`             | Quand le changement de carte est terminé, juste avant que la transition de la nouvelle carte ne se joue.                                      |
+| `:on_hour_update`          | Quand l'horloge en jeu passe à l'heure suivante (système jour/nuit), par exemple pour rafraîchir les Pokémon sauvages disponibles.            |
+| `:on_getting_tileset_name` | Quand le moteur de carte choisit quel **tileset**, la planche de tuiles graphiques, charger pour la carte courante.                           |
 
 `:on_update` est celle qu'on utilise le plus souvent : c'est la boucle par frame, l'équivalent du `update` d'une scène, mais apporté depuis l'extérieur.
 
@@ -109,12 +109,12 @@ On croise `Scheduler.start(raison, classe_de_scene)` dans le moteur, mais on l'a
 
 Ces tâches ne reposent pas sur une API spéciale : les fonctionnalités du moteur lui-même sont construites sur exactement les appels ci-dessus. Les voir rend le rôle concret :
 
-| Fonctionnalité | Raison | Ce qu'elle fait |
-| --- | --- | --- |
-| Croissance des baies | `:on_update` | Fait pousser les baies plantées via le système de temps. |
-| Lumière dynamique | `:on_update`, `:on_init`, `:on_warp_end` | Met à jour les sources de lumière de la carte à chaque frame et les reconstruit au changement de carte. |
-| Surcouche de debug | `:on_update` (`:any`) | Rafraîchit le débogueur par-dessus chaque scène. |
-| Soft reset | `:on_update` (`:any`) | Surveille la combinaison de touches de soft reset sur chaque scène. |
+| Fonctionnalité       | Raison                                   | Ce qu'elle fait                                                                                         |
+| -------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Croissance des baies | `:on_update`                             | Fait pousser les baies plantées via le système de temps.                                                |
+| Lumière dynamique    | `:on_update`, `:on_init`, `:on_warp_end` | Met à jour les sources de lumière de la carte à chaque frame et les reconstruit au changement de carte. |
+| Surcouche de debug   | `:on_update` (`:any`)                    | Rafraîchit le débogueur par-dessus chaque scène.                                                        |
+| Soft reset           | `:on_update` (`:any`)                    | Surveille la combinaison de touches de soft reset sur chaque scène.                                     |
 
 Le système de lumière dynamique, par exemple, enregistre sa mise à jour par frame sur la carte et la retire quand elle n'est plus nécessaire, exactement comme le ferait notre propre code :
 
@@ -208,15 +208,15 @@ Cela fonctionne parce qu'un type de tâche d'événement est créé à la demand
 
 L'essentiel de ce qui se produit « pendant que le joueur marche » est une tâche d'événement sur le joueur (`event_id -1`) :
 
-| Tâche | Action | Ce qu'elle fait |
-| --- | --- | --- |
-| Repousse | `:end_step` | Décompte les pas de Repousse restants. |
-| Poison | `:end_step` | Applique les dégâts de poison pendant la marche. |
-| Éclosion | `:end_step` | Fait progresser les œufs vers l'éclosion. |
-| Pension | `:end_step` | Met à jour l'état de la Pension. |
-| Évolution à la marche | `:end_step` | Gère les évolutions qui dépendent du nombre de pas. |
-| Démarrage de combat | `:begin_step` | Tire une rencontre sauvage au début du pas. |
-| Poussière au saut | `:end_jump` | Crée des particules de poussière ou d'eau là où un personnage atterrit. |
+| Tâche                 | Action        | Ce qu'elle fait                                                         |
+| --------------------- | ------------- | ----------------------------------------------------------------------- |
+| Repousse              | `:end_step`   | Décompte les pas de Repousse restants.                                  |
+| Poison                | `:end_step`   | Applique les dégâts de poison pendant la marche.                        |
+| Éclosion              | `:end_step`   | Fait progresser les œufs vers l'éclosion.                               |
+| Pension               | `:end_step`   | Met à jour l'état de la Pension.                                        |
+| Évolution à la marche | `:end_step`   | Gère les évolutions qui dépendent du nombre de pas.                     |
+| Démarrage de combat   | `:begin_step` | Tire une rencontre sauvage au début du pas.                             |
+| Poussière au saut     | `:end_jump`   | Crée des particules de poussière ou d'eau là où un personnage atterrit. |
 
 La tâche de poussière au saut est un bon modèle car elle s'applique à tous les personnages, pas seulement au joueur :
 

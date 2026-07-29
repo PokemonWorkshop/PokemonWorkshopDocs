@@ -46,14 +46,16 @@ rescue ArgumentError => error
 end
 
 puts 'Le programme continue normalement.'
-```
+```text
 
 Affiche :
 
 ```
+
 Erreur : Le niveau doit être positif
 Le programme continue normalement.
-```
+
+```text
 
 - `rescue ArgumentError => error` capture les `ArgumentError` et stocke l'objet dans `error`.
 - `error.message` retourne le message passé à `raise`.
@@ -79,7 +81,7 @@ puts result.inspect    # => nil
 
 result = create_pokemon('Pikachu', 25)
 puts result.inspect    # => {:name=>"Pikachu", :level=>25}
-```
+```text
 
 - Le `rescue` s'applique à tout le corps de la méthode.
 - On retourne `nil` dans le `rescue` pour que l'appelant puisse vérifier si la création a réussi.
@@ -101,7 +103,7 @@ rescue RuntimeError => error
   puts "Erreur : #{error.message}"
   return nil
 end
-```
+```text
 
 - Ruby essaie chaque `rescue` dans l'ordre. Le premier qui correspond est exécuté.
 - Toujours placer les exceptions **les plus spécifiques en premier**. Sinon, une clause générale les attraperait toutes.
@@ -111,6 +113,7 @@ end
 Les exceptions Ruby forment une hiérarchie de classes (comme l'héritage vu au chapitre 9) :
 
 ```
+
 Exception
   SignalException          (Ctrl+C)
   NoMemoryError
@@ -127,7 +130,8 @@ Exception
     ZeroDivisionError
     KeyError
     IndexError
-```
+
+```text
 
 - `rescue` sans type capture `StandardError` et tous ses descendants. C'est le comportement correct dans 99% des cas.
 - **Ne jamais écrire `rescue Exception`** : cela capture aussi `SignalException` (Ctrl+C), ce qui rend le programme impossible à interrompre.
@@ -152,7 +156,7 @@ rescue RuntimeError => error
   retry if attempts < 3
   puts 'Abandon après 3 tentatives.'
 end
-```
+```text
 
 - `retry` revient au `begin` et réexécute tout le bloc.
 - Sans le compteur `attempts < 3`, la boucle serait infinie en cas d'erreur permanente.
@@ -176,18 +180,20 @@ end
 
 save({ name: 'Pikachu' }, 'save.dat')
 save(nil, 'save.dat')
-```
+```text
 
 Affiche :
 
 ```
+
 Sauvegarde en cours...
 Sauvegardé dans save.dat
 Nettoyage terminé.
 Sauvegarde en cours...
 Échec : Erreur de sauvegarde
 Nettoyage terminé.
-```
+
+```text
 
 - `ensure` s'exécute dans **tous** les cas : après le code normal, après un `rescue`, même après un `return`.
 - C'est l'endroit idéal pour fermer des fichiers, libérer des ressources, ou afficher un message final.
@@ -202,7 +208,7 @@ module Pokedex
   class DuplicateError < StandardError; end
   class TeamFullError < StandardError; end
 end
-```
+```text
 
 On les utilise ensuite comme n'importe quelle exception :
 
@@ -221,7 +227,7 @@ begin
 rescue Pokedex::TeamFullError => error
   puts error.message
 end
-```
+```text
 
 Affiche : `L'équipe est pleine (6 max)`
 
@@ -243,7 +249,7 @@ rescue RuntimeError => error
   puts "Échec : #{error.message}"
   raise
 end
-```
+```text
 
 - `raise` seul relève exactement la même exception. L'appelant devra la capturer à son tour.
 

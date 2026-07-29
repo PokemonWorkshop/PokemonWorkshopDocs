@@ -9,7 +9,7 @@ description: "Ce guide explique comment modifier dynamiquement la précision d'u
 
 La précision d'une attaque est calculée par la méthode `chance_of_hit` selon la formule :
 
-```
+```text
 chance_of_hit = factor × accuracy
 ```
 

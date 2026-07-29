@@ -88,6 +88,9 @@ const config: Config = {
         hashed: true,
         language: ["en", "fr"],
         docsRouteBasePath: "/",
+        // Sources live in content/, not the plugin's default "docs/".
+        docsDir: "content",
+        indexBlog: false,
       },
     ],
   ],

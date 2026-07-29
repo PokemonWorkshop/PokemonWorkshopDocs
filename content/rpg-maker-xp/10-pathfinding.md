@@ -51,11 +51,11 @@ Here the event stops as soon as it gets within 3 tiles of (10, 15). A radius hel
 
 Instead of fixed coordinates, `to:` accepts another character, and the path then tracks it: if the target moves, PSDK recalculates the route automatically. You point at a character with `get_character`:
 
-| `get_character` argument | Who it returns |
-| --- | --- |
-| `0` | the current event (the one running the script) |
-| `-1` | the player |
-| a positive number | the event with that ID on the map |
+| `get_character` argument | Who it returns                                 |
+| ------------------------ | ---------------------------------------------- |
+| `0`                      | the current event (the one running the script) |
+| `-1`                     | the player                                     |
+| a positive number        | the event with that ID on the map              |
 
 So an event that chases the player and stops one tile away:
 

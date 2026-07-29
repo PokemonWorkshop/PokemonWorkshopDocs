@@ -44,18 +44,18 @@ La correction en découle directement : le nombre de types a augmenté, donc cha
 
 PSDK fournit dix spritesheets indexées par type réparties dans deux dossiers, `graphics/interface/` (combat et menus) et `graphics/pokedex/` (l'écran Pokédex). Chacune est une seule colonne avec une ligne par type, actuellement **19 lignes** (le type « none » plus les 18 types par défaut) :
 
-| Fichier | Taille actuelle | Hauteur de ligne | Ce qu'il alimente |
-| ------- | --------------- | ---------------- | ----------------- |
-| `graphics/interface/battle/types.png` | 120 × 513 | 27 px | Icône de type sur les attaques dans le menu d'attaques en combat |
-| `graphics/interface/battle_attack_dummy.png` | 155 × 1007 | 53 px | Plaque de type gérée par le helper `AttackDummySprite` |
-| `graphics/interface/types.png` | 32 × 266 | 14 px | Icônes de types dans les menus ; image de repli si aucun fichier localisé |
-| `graphics/interface/types_en.png` | 32 × 266 | 14 px | Variante anglaise de `interface/types.png` |
-| `graphics/interface/types_fr.png` | 32 × 266 | 14 px | Variante française de `interface/types.png` |
-| `graphics/interface/types_es.png` | 32 × 266 | 14 px | Variante espagnole de `interface/types.png` |
-| `graphics/pokedex/types.png` | 48 × 304 | 16 px | Icônes de types sur l'écran Pokédex ; image de repli si aucun fichier localisé |
-| `graphics/pokedex/types_en.png` | 48 × 304 | 16 px | Variante anglaise de `pokedex/types.png` |
-| `graphics/pokedex/types_fr.png` | 48 × 304 | 16 px | Variante française de `pokedex/types.png` |
-| `graphics/pokedex/types_es.png` | 48 × 304 | 16 px | Variante espagnole de `pokedex/types.png` |
+| Fichier                                      | Taille actuelle | Hauteur de ligne | Ce qu'il alimente                                                              |
+| -------------------------------------------- | --------------- | ---------------- | ------------------------------------------------------------------------------ |
+| `graphics/interface/battle/types.png`        | 120 × 513       | 27 px            | Icône de type sur les attaques dans le menu d'attaques en combat               |
+| `graphics/interface/battle_attack_dummy.png` | 155 × 1007      | 53 px            | Plaque de type gérée par le helper `AttackDummySprite`                         |
+| `graphics/interface/types.png`               | 32 × 266        | 14 px            | Icônes de types dans les menus ; image de repli si aucun fichier localisé      |
+| `graphics/interface/types_en.png`            | 32 × 266        | 14 px            | Variante anglaise de `interface/types.png`                                     |
+| `graphics/interface/types_fr.png`            | 32 × 266        | 14 px            | Variante française de `interface/types.png`                                    |
+| `graphics/interface/types_es.png`            | 32 × 266        | 14 px            | Variante espagnole de `interface/types.png`                                    |
+| `graphics/pokedex/types.png`                 | 48 × 304        | 16 px            | Icônes de types sur l'écran Pokédex ; image de repli si aucun fichier localisé |
+| `graphics/pokedex/types_en.png`              | 48 × 304        | 16 px            | Variante anglaise de `pokedex/types.png`                                       |
+| `graphics/pokedex/types_fr.png`              | 48 × 304        | 16 px            | Variante française de `pokedex/types.png`                                      |
+| `graphics/pokedex/types_es.png`              | 48 × 304        | 16 px            | Variante espagnole de `pokedex/types.png`                                      |
 
 Les deux dossiers possèdent des variantes localisées (`types_en.png`, `types_fr.png`, `types_es.png`) : l'icône inclut le nom du type sous forme de texte, il y a donc une image par langue. PSDK charge `types_<langue>.png` depuis le dossier concerné pour la langue courante et se rabat sur le `types.png` de ce même dossier quand le fichier localisé manque. On met à jour la variante de chaque langue présente dans son jeu ; si l'on ne garde que `types.png` dans un dossier, ce seul fichier y suffit.
 

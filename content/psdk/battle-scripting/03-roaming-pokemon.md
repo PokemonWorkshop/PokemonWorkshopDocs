@@ -49,11 +49,11 @@ roaming_raikou = $wild_battle.add_roaming_pokemon(50, 1, { id: :raikou, level: 4
 
 The `proc_id` you pass to `add_roaming_pokemon` selects a **movement pattern**. A pattern is a short block of code, re-run as the player walks around, that answers a single question: *where is the Pokémon right now?* It answers by filling in three values.
 
-| Value | What it means |
-| --- | --- |
-| `map_id` | The ID of the map the Pokémon is currently on, the same map number shown in RPG Maker XP and Pokémon Studio. |
-| `zone_type` | The kind of terrain the encounter happens on. `1` is tall grass, the same as a normal wild encounter. |
-| `tag` | The terrain tag the player must be standing on, as defined on the tileset. `0` is the default. |
+| Value       | What it means                                                                                                |
+| ----------- | ------------------------------------------------------------------------------------------------------------ |
+| `map_id`    | The ID of the map the Pokémon is currently on, the same map number shown in RPG Maker XP and Pokémon Studio. |
+| `zone_type` | The kind of terrain the encounter happens on. `1` is tall grass, the same as a normal wild encounter.        |
+| `tag`       | The terrain tag the player must be standing on, as defined on the tileset. `0` is the default.               |
 
 The `zone_type` values are: `0` regular ground, `1` tall grass, `2` very tall grass, `3` cave, `4` mountain, `5` sand, `6` pond, `7` sea, `8` underwater, `9` snow, `10` ice.
 

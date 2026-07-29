@@ -438,20 +438,20 @@ With a highest ID of 20, `STATE_COUNT` becomes 21. Update this value whenever yo
 
 ## File summary
 
-| File                                         | Action                                                            |
-| -------------------------------------------- | ----------------------------------------------------------------- |
-| Studio -> Moves                              | Set the custom status on every move that should inflict it        |
-| `Data/configs/states.json`                   | Declare the status ID                                             |
-| Studio -> Battle text (file 100019)          | Add the application, prevention and (optional) cure messages       |
-| `my-project/scripts/001 PokemonStatus.rb`    | Add `groggy?`, `status_groggy`, `can_be_groggy?` to `PFM::Pokemon`|
-| `my-project/scripts/002 StatusChange.rb`     | Register in `STATUS_APPLY_METHODS`, messages, and prevention      |
-| `my-project/scripts/003 CatchHandler.rb`     | Add to `STATUS_MODIFIER` (optional catch bonus)                   |
-| `my-project/scripts/004 StatusEffect.rb`     | Add the base query method and create the effect class             |
-| `my-project/scripts/005 CustomStatusPatch.rb`| Paste the compatibility patch (makes animation and tint optional) |
-| `graphics/animations/status/<name>.png`      | Add the battle animation sheet (optional)                         |
-| `my-project/scripts/006 StatusAnimation.rb`  | Register a `UI::StatusAnimation` subclass (optional animation)    |
-| `graphics/interface/statuts[lang].png`       | Add the status icon                                               |
-| `my-project/scripts/007 StatusSprite.rb`     | Update `STATE_COUNT`                                              |
+| File                                          | Action                                                             |
+| --------------------------------------------- | ------------------------------------------------------------------ |
+| Studio -> Moves                               | Set the custom status on every move that should inflict it         |
+| `Data/configs/states.json`                    | Declare the status ID                                              |
+| Studio -> Battle text (file 100019)           | Add the application, prevention and (optional) cure messages       |
+| `my-project/scripts/001 PokemonStatus.rb`     | Add `groggy?`, `status_groggy`, `can_be_groggy?` to `PFM::Pokemon` |
+| `my-project/scripts/002 StatusChange.rb`      | Register in `STATUS_APPLY_METHODS`, messages, and prevention       |
+| `my-project/scripts/003 CatchHandler.rb`      | Add to `STATUS_MODIFIER` (optional catch bonus)                    |
+| `my-project/scripts/004 StatusEffect.rb`      | Add the base query method and create the effect class              |
+| `my-project/scripts/005 CustomStatusPatch.rb` | Paste the compatibility patch (makes animation and tint optional)  |
+| `graphics/animations/status/<name>.png`       | Add the battle animation sheet (optional)                          |
+| `my-project/scripts/006 StatusAnimation.rb`   | Register a `UI::StatusAnimation` subclass (optional animation)     |
+| `graphics/interface/statuts[lang].png`        | Add the status icon                                                |
+| `my-project/scripts/007 StatusSprite.rb`      | Update `STATE_COUNT`                                               |
 
 ## Conclusion
 
