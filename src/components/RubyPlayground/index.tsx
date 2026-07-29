@@ -1,6 +1,7 @@
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { translate } from "@docusaurus/Translate";
+import { withDownloadProgress } from "./downloadProgress";
 import styles from "./styles.module.css";
 
 // Singleton: shared Ruby VM across all playgrounds on the page
@@ -75,7 +76,7 @@ interface RubyWasmGlobal {
   DefaultRubyVM: (module: WebAssembly.Module) => Promise<{ vm: RubyVM }>;
 }
 
-async function initVM(): Promise<RubyVM> {
+async function initVM(onProgress: (bytes: number) => void): Promise<RubyVM> {
   // Load the UMD bundle which exposes window["ruby-wasm-wasi"]
   await loadScript(UMD_CDN);
   const { DefaultRubyVM } = (
@@ -83,15 +84,27 @@ async function initVM(): Promise<RubyVM> {
   )["ruby-wasm-wasi"];
 
   const response = await fetch(WASM_CDN);
-  const wasmModule = await WebAssembly.compileStreaming(response);
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status} on ${WASM_CDN}`);
+  }
+  const wasmModule = await WebAssembly.compileStreaming(
+    withDownloadProgress(response, onProgress),
+  );
   const { vm } = await DefaultRubyVM(wasmModule);
   vm.eval(STDOUT_INIT);
   return vm;
 }
 
-function getVM(): Promise<RubyVM> {
+function getVM(onProgress: (bytes: number) => void): Promise<RubyVM> {
   if (!vmPromise) {
-    vmPromise = initVM();
+    // Drop the memoised promise when it rejects. Keeping it would turn a single
+    // interrupted download — the runtime weighs about 31 MB — into a permanent
+    // failure: every later click would replay the same rejection without ever
+    // retrying the fetch.
+    vmPromise = initVM(onProgress).catch((error) => {
+      vmPromise = null;
+      throw error;
+    });
   }
   return vmPromise;
 }
@@ -153,7 +166,19 @@ function RubyPlaygroundInner({ code: initialCode }: Props) {
     );
 
     try {
-      const vm = await getVM();
+      const vm = await getVM((bytes) => {
+        setOutput(
+          translate(
+            {
+              id: "rubyPlayground.downloading",
+              message: "Downloading the Ruby runtime… {megabytes} MB",
+              description:
+                "Status message showing how much of the Ruby WebAssembly runtime has downloaded",
+            },
+            { megabytes: (bytes / 1024 / 1024).toFixed(1) },
+          ),
+        );
+      });
       setStatus("running");
       setOutput("");
 
@@ -199,7 +224,8 @@ function RubyPlaygroundInner({ code: initialCode }: Props) {
         translate(
           {
             id: "rubyPlayground.loadError",
-            message: "Loading error: {error}",
+            message:
+              "Loading error: {error}\n\nThe Ruby runtime is about 31 MB. On a slow connection the download can be interrupted — press Run again to retry.",
             description: "Status message shown when the Ruby runtime fails to load",
           },
           { error: String(e) },

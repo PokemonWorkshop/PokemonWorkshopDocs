@@ -403,8 +403,12 @@
     "message": "(pas de sortie)",
     "description": "Placeholder shown when executed code produced no output"
   },
+  "rubyPlayground.downloading": {
+    "message": "Téléchargement de l'environnement Ruby… {megabytes} Mo",
+    "description": "Status message showing how much of the Ruby WebAssembly runtime has downloaded"
+  },
   "rubyPlayground.loadError": {
-    "message": "Erreur de chargement : {error}",
+    "message": "Erreur de chargement : {error}\n\nL'environnement Ruby pèse environ 31 Mo. Sur une connexion lente, le téléchargement peut être interrompu : appuyer de nouveau sur Exécuter pour réessayer.",
     "description": "Status message shown when the Ruby runtime fails to load"
   },
   "rubyPlayground.button.loading": {
