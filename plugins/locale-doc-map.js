@@ -45,7 +45,7 @@ module.exports = function localeDocMapPlugin(context) {
         "i18n",
         "fr",
         "docusaurus-plugin-content-docs",
-        "current"
+        "current",
       );
 
       const enDocs = walkDocs(enDir, enDir);
@@ -59,8 +59,7 @@ module.exports = function localeDocMapPlugin(context) {
         if (!frDoc) continue;
 
         const enPath = docToPath(enDoc);
-        const frPath =
-          frDoc.slug === "/" ? "/fr" : `/fr${docToPath(frDoc)}`;
+        const frPath = frDoc.slug === "/" ? "/fr" : `/fr${docToPath(frDoc)}`;
 
         mapping[enPath] = frPath;
         mapping[frPath] = enPath;

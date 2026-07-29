@@ -26,9 +26,8 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
-    "lint": "biome lint",
-    "format": "biome format --write",
-    "check": "biome check --write",
+    "lint": "biome check",
+    "lint:fix": "biome check --write",
     "lint:md": "markdownlint-cli2",
     "lint:md:fix": "markdownlint-cli2 --fix",
     "lint:fences": "node scripts/check-code-fences.mjs"
