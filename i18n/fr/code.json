@@ -391,10 +391,6 @@
     "message": "Voir",
     "description": "Label of the link that opens the page Markdown in a new tab"
   },
-  "rubyPlayground.scriptLoadError": {
-    "message": "Impossible de charger {src}",
-    "description": "Error thrown when a Ruby WebAssembly CDN script fails to load"
-  },
   "rubyPlayground.loadingWasm": {
     "message": "Chargement de Ruby WebAssembly...",
     "description": "Status message shown while the Ruby WebAssembly runtime loads"
@@ -423,6 +419,14 @@
     "message": "Exécuter",
     "description": "Run button label in its idle state"
   },
+  "rubyPlayground.button.reset": {
+    "message": "Réinitialiser",
+    "description": "Label of the button restoring the original snippet"
+  },
+  "rubyPlayground.resetHint": {
+    "message": "Restaurer le code d'origine",
+    "description": "Tooltip on the reset button"
+  },
   "rubyPlayground.runHint": {
     "message": "Ctrl+Enter pour exécuter",
     "description": "Tooltip on the run button explaining the keyboard shortcut"
@@ -434,5 +438,17 @@
   "rubyPlayground.placeholder": {
     "message": "Clique sur Exécuter ou appuie sur Ctrl+Enter",
     "description": "Placeholder shown in the output area before any run"
+  },
+  "rubyPlayground.executing": {
+    "message": "Exécution en cours…",
+    "description": "Status message shown in the output area while code runs"
+  },
+  "rubyPlayground.timeout": {
+    "message": "Exécution interrompue après {seconds} secondes. Le code contient probablement une boucle sans fin.",
+    "description": "Status message shown when user code is killed for running too long"
+  },
+  "rubyPlayground.outputTruncated": {
+    "message": "(sortie tronquée après {lines} lignes)",
+    "description": "Notice appended when a run printed more lines than the playground keeps"
   }
 }
