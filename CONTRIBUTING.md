@@ -112,6 +112,8 @@ To create a new section (a new directory under `content/`), add a `_category_.js
 
 The explicit `slug` keeps the section index page at `/section-name` rather than the default `/category/section-name`. Pages inside the section then live at `/section-name/<page-slug>`.
 
+Name a section by the concrete action the reader performs there, never by an audience identity. "Customize PSDK" / "Personnaliser PSDK" invites anyone who wants to change something, however simple; "For developers" / "Pour les développeurs" turns away a hobbyist who only wants to tweak their shiny rate and does not think of themselves as a developer. Convey the range from simple to advanced in the description, not by narrowing the label to an expert persona.
+
 To translate the section label in French, add an entry under `i18n/fr/docusaurus-plugin-content-docs/current.json`:
 
 ```json
@@ -129,6 +131,7 @@ To translate the section label in French, add an entry under `i18n/fr/docusaurus
 - The English source in `content/` is the canonical text. French translations in `i18n/fr/...` should mirror it page-for-page.
 - French translations use the impersonal **on** rather than "vous" or "tu": _"On crée un commit"_, not _"Vous créez un commit"_.
 - Both languages keep a direct, educational tone. Explain the **why**, not just the **how**.
+- Introduce a non-obvious engine mechanism by the in-game problem it solves, then the mechanism, then its contract. A contract stated on its own reads out of context even when it is exact: open with what the player sees, or what breaks without it.
 
 ### Page Structure
 
@@ -137,6 +140,8 @@ To translate the section label in French, add an entry under `i18n/fr/docusaurus
 3. **`##` sections** for major parts.
 4. **`###` subsections** if needed. Do not go deeper than `###`.
 5. **`## Conclusion` section** at the end: bullet list summarizing key points.
+
+An overview or "foundations" page stays on the core mental model: lead with the concept, show two or three representative examples rather than the full catalog, and state that the other variants follow the same shape. Push every specific use case to its own page and list them under a final "Going further" section, linking the ones that exist and naming the future ones without a link. A foundations page that grows into an exhaustive API reference has to be split.
 
 ### Formatting
 
@@ -152,6 +157,9 @@ end
 
 Supported languages: `ruby`, `bash`, `json`, `yaml`, `markdown`, `csv`, and `text` for raw console output or directory trees. Every code block must declare one — a fence with no language is a lint error.
 
+- A titled admonition uses the bracket form `:::info[Required versions]`. The space-separated form `:::info Required versions` is Docusaurus v2 syntax: it renders as a literal paragraph with no box, and neither `typecheck` nor `build` catches it. Untitled `:::note` is fine as is.
+- A code example that overrides an existing PSDK method follows the convention taught by the [monkey-patching guide](/getting-started/customize-psdk/monkey-patching-in-psdk): a named patch module declared inside the reopened class, the method redefined there delegating with `super`, then `prepend`. Never patch with `alias` — `prepend` chains with other patches where `alias` overwrites them.
+
 - Markdown tables for tabular data (commands, comparisons).
 - Bullet lists with dashes (`-`), not asterisks.
 - 2-space indentation in Ruby code blocks.
@@ -166,6 +174,8 @@ See the guide [How to use Git with PSDK?](/getting-started/using-git-with-psdk).
 ```
 
 Do not use file paths (`content/getting-started/using-git.md`).
+
+Docusaurus prepends the locale prefix, but it does **not** translate the slug. A link written on a French page must target the destination's **French** slug: `/rpg-maker-xp/demarrer-un-combat-sauvage`, not `/rpg-maker-xp/start-a-wild-battle`. Since `onBrokenLinks` is set to `throw`, an English slug used from a French page fails the build. Open the target's French file and read its `slug:` before linking.
 
 ### Images
 
