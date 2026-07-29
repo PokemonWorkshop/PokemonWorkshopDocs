@@ -127,7 +127,10 @@ export default function DocCardList(props: Props): ReactNode {
     <section className={clsx(styles.list, className)}>
       {filteredItems.map((item, index) => (
         <DocListRow
-          key={index}
+          key={
+            findFirstSidebarItemLink(item) ??
+            ("label" in item ? item.label : item.value)
+          }
           item={item}
           index={numbered ? index + 1 : undefined}
         />

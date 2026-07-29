@@ -1,3 +1,7 @@
+import type {
+  PropSidebar,
+  PropSidebarItem,
+} from "@docusaurus/plugin-content-docs";
 import { useDocsSidebar } from "@docusaurus/plugin-content-docs/client";
 import { useEffect, useMemo, useState } from "react";
 
@@ -13,7 +17,7 @@ interface ChapterProgressResult {
   visitedIds: Set<string>;
 }
 
-function extractDirectLinks(items: any[]): ChapterInfo[] {
+function extractDirectLinks(items: PropSidebarItem[]): ChapterInfo[] {
   const links: ChapterInfo[] = [];
   for (const item of items) {
     if (item.type === "link" && item.docId) {
@@ -27,13 +31,15 @@ function extractDirectLinks(items: any[]): ChapterInfo[] {
  * Walk the sidebar tree depth-first and return the **most specific** (deepest)
  * category whose direct link children contain `docId`.
  */
+// `useDocsSidebar` returns the sidebar wrapper ({ name, items }), whose type is
+// not exported publicly, hence the structural parameter.
 function findCategoryChapters(
-  sidebar: any,
+  sidebar: { items: PropSidebar } | null,
   docId: string,
 ): ChapterInfo[] | null {
-  if (!sidebar?.items) return null;
+  if (!sidebar) return null;
 
-  function search(items: any[]): ChapterInfo[] | null {
+  function search(items: PropSidebarItem[]): ChapterInfo[] | null {
     for (const item of items) {
       if (item.type === "category" && item.items) {
         const deeper = search(item.items);

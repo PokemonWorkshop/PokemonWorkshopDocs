@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import type React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { translate } from "@docusaurus/Translate";
 import styles from "./styles.module.css";
 
@@ -68,10 +69,18 @@ function loadScript(src: string): Promise<void> {
   });
 }
 
+// Shape of the global the UMD bundle installs on `window`. It ships no types,
+// so this declares the single entry point we call.
+interface RubyWasmGlobal {
+  DefaultRubyVM: (module: WebAssembly.Module) => Promise<{ vm: RubyVM }>;
+}
+
 async function initVM(): Promise<RubyVM> {
   // Load the UMD bundle which exposes window["ruby-wasm-wasi"]
   await loadScript(UMD_CDN);
-  const { DefaultRubyVM } = (window as any)["ruby-wasm-wasi"];
+  const { DefaultRubyVM } = (
+    window as unknown as Record<string, RubyWasmGlobal>
+  )["ruby-wasm-wasi"];
 
   const response = await fetch(WASM_CDN);
   const wasmModule = await WebAssembly.compileStreaming(response);
@@ -121,12 +130,15 @@ function RubyPlaygroundInner({ code: initialCode }: Props) {
   const [status, setStatus] = useState<Status>("idle");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Auto-resize textarea to fit content
+  // Auto-resize the textarea to fit its content. `code` is never read inside
+  // the effect, but it is precisely what must re-trigger the resize on every
+  // keystroke: dropping it would resize on mount only.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: code re-triggers the resize
   useEffect(() => {
     const el = textareaRef.current;
     if (el) {
       el.style.height = "auto";
-      el.style.height = el.scrollHeight + "px";
+      el.style.height = `${el.scrollHeight}px`;
     }
   }, [code]);
 
@@ -170,7 +182,7 @@ function RubyPlaygroundInner({ code: initialCode }: Props) {
         result !== "" &&
         result !== stdout.trim()
       ) {
-        display += (display ? "\n" : "") + "=> " + result;
+        display += `${display ? "\n" : ""}=> ${result}`;
       }
 
       setOutput(
@@ -205,7 +217,7 @@ function RubyPlaygroundInner({ code: initialCode }: Props) {
         const el = e.currentTarget;
         const start = el.selectionStart;
         const end = el.selectionEnd;
-        const newValue = code.slice(0, start) + "  " + code.slice(end);
+        const newValue = `${code.slice(0, start)}  ${code.slice(end)}`;
         setCode(newValue);
         requestAnimationFrame(() => {
           el.selectionStart = el.selectionEnd = start + 2;
@@ -233,6 +245,7 @@ function RubyPlaygroundInner({ code: initialCode }: Props) {
       <div className={styles.header}>
         <span className={styles.lang}>Ruby</span>
         <button
+          type="button"
           className={styles.runButton}
           onClick={run}
           disabled={status === "loading" || status === "running"}
