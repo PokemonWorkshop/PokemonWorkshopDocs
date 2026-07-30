@@ -7,10 +7,6 @@ description: "PSDK ships three trainer transitions built on the vs_bar graphics:
 
 PSDK ships three trainer transitions built on the `vs_bar` graphics: the **Diamond/Pearl/Platinum** gym leader intro, the **HeartGold/SoulSilver** one, and the **Team Rocket** one. This guide explains how to trigger them and which images each one expects.
 
-:::warning[The readme shipped with the pack is wrong]
-The `readme.txt` inside `graphics/battlebacks/vs_bar` tells you to "set the switch 31 to 3". There is no switch involved: the transition is picked by **game variable 31**. That readme also only covers one of the three transitions, and links to a Discord message nobody outside that server can open. This page replaces it.
-:::
-
 ## What a transition is
 
 When a battle starts, the map does not cut straight to the battle screen. A short animation plays first: the screen flashes, an effect sweeps over it, and only then the battlers appear. That animation is the **transition**.
@@ -86,7 +82,7 @@ The `vs_bar` folder comes with sample bars and portraits you can use as referenc
 
 ## Conclusion
 
-- The transition is chosen by **game variable 31**, not by a switch: `3` for the Diamond/Pearl/Platinum gym leader intro, `10` for the HeartGold/SoulSilver one, `11` for Team Rocket.
+- The transition is chosen by **game variable 31**: `3` for the Diamond/Pearl/Platinum gym leader intro, `10` for the HeartGold/SoulSilver one, `11` for Team Rocket.
 - The same variable also drives wild battle transitions, so set it back to its usual value once the battle is over.
 - Every file lives in `graphics/battlebacks/vs_bar/` and ends with the opponent's **Battle sprite** name, read from the **Resources** tab in Pokémon Studio.
 - Bars are 576x60 for the DPP transition and 576x65 for the HGSS one; portraits are 96x60 and shared by the three transitions.

@@ -7,10 +7,6 @@ description: "PSDK fournit trois transitions de dresseur construites sur les gra
 
 PSDK fournit trois transitions de dresseur construites sur les graphismes `vs_bar` : l'intro de champion d'arène de **Diamant/Perle/Platine**, celle de **HeartGold/SoulSilver**, et celle de la **Team Rocket**. Ce guide explique comment les déclencher et quelles images chacune attend.
 
-:::warning[Le readme livré avec le pack est faux]
-Le fichier `readme.txt` présent dans `graphics/battlebacks/vs_bar` demande de « régler l'interrupteur 31 sur 3 ». Aucun interrupteur n'intervient : la transition est choisie par la **variable de jeu 31**. Ce readme ne couvre par ailleurs qu'une des trois transitions, et renvoie vers un message Discord que personne d'extérieur au serveur ne peut ouvrir. Cette page le remplace.
-:::
-
 ## Ce qu'est une transition
 
 Quand un combat démarre, la carte ne bascule pas directement sur l'écran de combat. Une courte animation joue d'abord : l'écran clignote, un effet le balaye, et seulement ensuite les combattants apparaissent. Cette animation, c'est la **transition**.
@@ -86,7 +82,7 @@ Le dossier `vs_bar` arrive avec des barres et des portraits d'exemple, utilisabl
 
 ## Conclusion
 
-- La transition est choisie par la **variable de jeu 31**, pas par un interrupteur : `3` pour l'intro de champion d'arène de Diamant/Perle/Platine, `10` pour celle de HeartGold/SoulSilver, `11` pour la Team Rocket.
+- La transition est choisie par la **variable de jeu 31** : `3` pour l'intro de champion d'arène de Diamant/Perle/Platine, `10` pour celle de HeartGold/SoulSilver, `11` pour la Team Rocket.
 - Cette même variable pilote aussi les transitions de combat sauvage : on la remet à sa valeur habituelle une fois le combat terminé.
 - Tous les fichiers vivent dans `graphics/battlebacks/vs_bar/` et se terminent par le nom du **Battle sprite** de l'adversaire, lu dans l'onglet **Resources** de Pokémon Studio.
 - Les barres font 576x60 pour la transition DPP et 576x65 pour celle de HGSS ; les portraits font 96x60 et servent aux trois transitions.
