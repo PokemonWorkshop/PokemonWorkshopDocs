@@ -56,6 +56,8 @@ call_battle_wild(:zubat, 12, :zubat, 11, :golbat, 14)
 
 A triple battle needs the player to have three able Pokémon to fill their own side. Beyond three the format stays capped at a triple; a full five-Pokémon horde is a property of a wild group configured in Studio, not something this command produces.
 
+The player's side can also be filled by an allied trainer instead of their own Pokémon, see [Battle with an ally](/rpg-maker-xp/battle-with-an-ally).
+
 ## Configure the wild Pokémon
 
 The two forms above always generate a plain Pokémon. When you need control over its form, gender, held item or other attributes, build the Pokémon first with `PFM::Pokemon.generate_from_hash`, then hand it to `call_battle_wild`:
