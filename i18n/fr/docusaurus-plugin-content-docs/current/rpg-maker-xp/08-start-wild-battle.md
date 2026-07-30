@@ -56,6 +56,8 @@ call_battle_wild(:zubat, 12, :zubat, 11, :golbat, 14)
 
 Un combat triple exige que le joueur ait trois Pokémon valides pour remplir son propre camp. Au-delà de trois, le format reste plafonné au triple ; une horde complète de cinq Pokémon est une propriété d'un groupe sauvage configuré dans Studio, pas quelque chose que cette commande produit.
 
+Le camp du joueur peut aussi être rempli par un dresseur allié plutôt que par ses propres Pokémon, voir [Combattre avec un allié](/rpg-maker-xp/combattre-avec-un-allie).
+
 ## Configurer le Pokémon sauvage
 
 Les deux formes ci-dessus génèrent toujours un Pokémon ordinaire. Lorsqu'on a besoin de contrôler sa forme, son genre, son objet tenu ou d'autres attributs, on construit d'abord le Pokémon avec `PFM::Pokemon.generate_from_hash`, puis on le passe à `call_battle_wild` :
