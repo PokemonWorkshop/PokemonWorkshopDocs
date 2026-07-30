@@ -1,0 +1,9 @@
+{
+  "label": "Battle Visuals",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "slug": "/psdk/battle-visual",
+    "description": "The graphics side of a battle: the transitions PSDK ships and the resources they expect."
+  }
+}
