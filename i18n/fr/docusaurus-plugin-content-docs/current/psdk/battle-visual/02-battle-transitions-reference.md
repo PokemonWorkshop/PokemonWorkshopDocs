@@ -28,6 +28,10 @@ $game_variables[Yuki::Var::TrainerTransitionType] = 3
 
 Dans les deux tableaux ci-dessous, les chemins de la colonne **Graphismes** sont relatifs à `graphics/transitions/` sauf mention contraire. Tous ces fichiers sont fournis avec PSDK, on n'a donc besoin d'y toucher que pour rhabiller une transition.
 
+:::tip[Les voir avant de choisir]
+Une description écrite ne remplace pas une animation. Ce diaporama montre chaque transition en mouvement : [Aperçu des transitions de combat](https://docs.google.com/presentation/d/17xe4j_5-2eBovWIwJ88T-4r0c4DO_X259twZba9frEU/edit). On y choisit celle que l'on veut, puis on revient ici pour la valeur à mettre.
+:::
+
 ## Transitions de combat sauvage
 
 Elles se jouent quand le combat n'oppose pas un dresseur.

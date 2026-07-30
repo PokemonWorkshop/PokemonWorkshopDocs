@@ -28,6 +28,10 @@ $game_variables[Yuki::Var::TrainerTransitionType] = 3
 
 In the two tables below, the paths in the **Graphics** column are relative to `graphics/transitions/` unless stated otherwise. Every one of those files ships with PSDK, so you only have to touch them if you want to reskin a transition.
 
+:::tip[See them before you choose]
+A written description only goes so far for an animation. This slideshow shows each transition in motion: [Battle transitions preview](https://docs.google.com/presentation/d/17xe4j_5-2eBovWIwJ88T-4r0c4DO_X259twZba9frEU/edit). Look there first to pick the one you want, then come back here for the value to set.
+:::
+
 ## Wild transitions
 
 These play when the battle is not against a trainer.
