@@ -2,9 +2,9 @@ import type * as Preset from "@docusaurus/preset-classic";
 import type { Config } from "@docusaurus/types";
 import { themes as prismThemes } from "prism-react-renderer";
 
-// Pages relocated by the Getting Started / Pokémon Studio / Misc restructure.
-// Key = current route (per locale, FR prefixed with /fr); value = former route
-// to preserve. Consumed by plugin-client-redirects below.
+// Pages relocated by the site restructures.
+// Key = current route (locale-relative, never prefixed with /fr); value = former
+// route to preserve. Consumed by plugin-client-redirects below.
 const RELOCATED_ROUTES: Record<string, string> = {
   "/getting-started/customize-psdk/setup-development-environment":
     "/getting-started/setup-development-environment",
@@ -34,6 +34,18 @@ const RELOCATED_ROUTES: Record<string, string> = {
     "/pokemon-studio/mettre-a-jour-pokemon-studio-macos",
   "/pokemon-studio/macos/executer-pokemon-studio-depuis-les-sources-macos":
     "/pokemon-studio/executer-pokemon-studio-depuis-les-sources-macos",
+  // 3D Camera moved under Battle Visuals. The category index slug is shared by
+  // both locales, only its label and description are translated.
+  "/psdk/battle-visual/3d-camera": "/psdk/3d-camera",
+  "/psdk/battle-visual/3d-camera/how-to-create-a-3d-battleback":
+    "/psdk/3d-camera/how-to-create-a-3d-battleback",
+  "/psdk/battle-visual/3d-camera/how-to-create-a-battle-transition":
+    "/psdk/3d-camera/how-to-create-a-battle-transition",
+  // French routes for the same move: keyed WITHOUT the /fr prefix.
+  "/psdk/battle-visual/3d-camera/creer-un-fond-de-combat-3d":
+    "/psdk/3d-camera/creer-un-fond-de-combat-3d",
+  "/psdk/battle-visual/3d-camera/creer-une-transition-de-combat":
+    "/psdk/3d-camera/creer-une-transition-de-combat",
 };
 
 const config: Config = {
