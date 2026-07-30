@@ -87,4 +87,4 @@ Le dossier `vs_bar` arrive avec des barres et des portraits d'exemple, utilisabl
 - Tous les fichiers vivent dans `graphics/battlebacks/vs_bar/` et se terminent par le nom du **Battle sprite** de l'adversaire, lu dans l'onglet **Resources** de Pokémon Studio.
 - Les barres font 576x60 pour la transition DPP et 576x65 pour celle de HGSS ; les portraits font 96x60 et servent aux trois transitions.
 - Un fichier nommé d'après le seul préfixe, comme `mugshot.png`, sert de valeur par défaut pour tous les dresseurs qui n'en ont pas.
-- Pour construire sa propre transition au lieu d'utiliser celles fournies, voir [Créer une transition de combat personnalisée](/psdk/3d-camera/creer-une-transition-de-combat).
+- Pour construire sa propre transition au lieu d'utiliser celles fournies, voir [Créer une transition de combat personnalisée](/psdk/battle-visual/3d-camera/creer-une-transition-de-combat).
