@@ -142,5 +142,13 @@
   "sidebar.mainSidebar.category.Misc.link.generated-index.description": {
     "message": "Contenu transversal de l'écosystème Pokémon Workshop : bases de Git, contribution au moteur PSDK et création de plugins pour la communauté.",
     "description": "The generated-index page description for category Misc in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Battle Visuals": {
+    "message": "Visuels de combat",
+    "description": "The label for category 'Battle Visuals' in sidebar 'mainSidebar'"
+  },
+  "sidebar.mainSidebar.category.Battle Visuals.link.generated-index.description": {
+    "message": "Le versant graphique d'un combat : les transitions fournies par PSDK et les ressources qu'elles attendent.",
+    "description": "The generated-index page description for category Battle Visuals in sidebar mainSidebar"
   }
 }

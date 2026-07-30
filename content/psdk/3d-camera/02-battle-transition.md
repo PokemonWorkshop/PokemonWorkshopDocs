@@ -64,6 +64,8 @@ A battle plays the transition whose id is stored in the `Yuki::Var::TrainerTrans
 $game_variables[Yuki::Var::TrainerTransitionType] = 100
 ```
 
+The transitions PSDK already ships are selected through that same variable. For the three that need graphics of your own, see [Set up a VS bar trainer transition](/psdk/battle-visual/vs-bar-trainer-transitions).
+
 ## Customizing the 3D behavior
 
 If `CameraHandling`'s defaults do not fit your transition, register your own 3D class. The auto-import skips any id already present in the 3D hash (`next if WILD_TRANSITIONS_3D.key?(id)`), so your file must load **before** `501 Transition3D.rb`, the script that runs the import. Inherit your 2D transition, include `CameraHandling`, and override only the 3D methods you need:
