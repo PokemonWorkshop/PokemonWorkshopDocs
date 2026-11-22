@@ -36,17 +36,51 @@ Le Plugin Manager n'agit que lorsque quelque chose a réellement changé. Il ré
 
 Si rien n'a changé depuis la dernière exécution, il reste en retrait et le jeu démarre normalement.
 
+## Installer psdk-cli
+
+La construction et la gestion des plugins s'effectuent via la commande `psdk-plugin`, fournie par la gem Ruby `psdk-cli`.
+
+Pour l'installer, ouvrir un terminal et lancer :
+
+```bash
+gem install psdk-cli
+```
+
+:::note[Prérequis Ruby]
+`psdk-cli` requiert Ruby 3.2.0 ou une version plus récente. Si l'environnement de développement pour PSDK est déjà installé (voir [Préparer son environnement de développement](/getting-started/customize-psdk/preparer-son-environnement)), Ruby est déjà disponible.
+:::
+
+Pour confirmer l'installation, lancer :
+
+```bash
+psdk-plugin --help
+```
+
 ## Construire un plugin
 
 ### Structurer le dossier du plugin
 
-Pour construire un plugin, on crée un dossier portant son nom dans `project_root/scripts`. À l'intérieur, PSDK attend cette organisation :
+Un plugin peut être structuré soit au sein d'un projet PSDK existant (pratique pour tester pendant le développement), soit dans un dossier / dépôt autonome (*standalone*, idéal pour le suivi de version et l'intégration continue).
 
-- `config.yml` à la racine du dossier : le manifeste du plugin (décrit plus bas).
-- Un sous-dossier `scripts` contenant le code lui-même, à `project_root/scripts/votre_dossier/scripts`. Chaque fichier de script suit toujours la norme de nommage PSDK, `XXXXX NomDuScript.rb`.
+#### Dans un projet PSDK
+
+On crée un dossier portant le nom du plugin dans `project_root/scripts` (par exemple `project_root/scripts/votre_plugin`). À l'intérieur, PSDK attend cette organisation :
+
+- `config.yml` à la racine du dossier du plugin (`scripts/votre_plugin/config.yml`) : le manifeste du plugin (décrit plus bas).
+- Un sous-dossier `scripts` contenant le code lui-même (`scripts/votre_plugin/scripts/`). Chaque fichier de script suit la norme de nommage PSDK, `XXXXX NomDuScript.rb`.
 - Les scripts de test de compatibilité, le cas échéant, se placent à la racine du dossier du plugin, à côté de `config.yml`.
+- **Fichiers additionnels** (configurations par défaut dans `Data/configs/plugins/`, graphismes, audio) : ils ne doivent **pas** être placés dans `scripts/votre_plugin/`. Ils résident directement à leur emplacement de destination final par rapport à la **racine du projet** (par ex. `project_root/Data/configs/your_plugin_user_config.json`, `project_root/graphics/...`). Lors de la compilation dans un projet, l'outil résout les chemins par rapport à la racine du projet.
 
-Pour un exemple concret, le [dépôt psdk-plugins](https://gitlab.com/NuriYuri/psdk-plugins) montre comment un dossier de plugin est organisé.
+#### Dans un dépôt autonome (*standalone*)
+
+Si on développe le plugin dans son propre dépôt dédié en dehors d'un projet PSDK :
+
+- `config.yml` à la racine du dépôt.
+- Un sous-dossier `scripts` contenant les scripts Ruby (`scripts/XXXXX NomDuScript.rb`).
+- Les scripts de test de compatibilité, le cas échéant, se placent à la racine à côté de `config.yml`.
+- **Fichiers additionnels** : reproduire l'arborescence du projet PSDK directement à la racine du dépôt (par ex. `votre_depot/Data/configs/your_plugin_user_config.json`, `votre_depot/graphics/...`). Lors de la compilation en mode autonome, l'outil résout les chemins par rapport à la racine du dépôt.
+
+Pour un exemple concret, le [dépôt psdk-plugins](https://gitlab.com/NuriYuri/psdk-plugins) montre comment les dossiers sources de plugins sont organisés.
 
 ### Le fichier config.yml
 
@@ -75,7 +109,16 @@ Chaque champ :
 - `psdk_compatibility_script` : le nom du script qui vérifie que le plugin est compatible avec PSDK. Optionnel, on retire la ligne si on ne l'utilise pas.
 - `retry_psdk_compatibility_after_plugin_load` : un booléen indiquant si `psdk_compatibility_script` doit aussi s'exécuter une fois tous les plugins installés et chargés.
 - `additional_compatibility_script` : le nom du script qui vérifie que le plugin fonctionne avec les autres plugins installés. Optionnel, on retire la ligne si on ne l'utilise pas.
-- `added_files` : la liste des fichiers livrés par le plugin. Cette valeur est passée au `Dir[]` de Ruby, elle accepte donc des globs ou des chemins de fichiers explicites. Les fichiers doivent déjà exister à leur emplacement définitif au moment de la construction. Pour livrer un fichier situé à la racine du projet, on préfixe son chemin par `./`, par exemple `./mon_fichier.extension`.
+- `added_files` : la liste des fichiers livrés par le plugin. Cette valeur est passée au `Dir[]` de Ruby, elle accepte donc des globs ou des chemins de fichiers explicites. L'endroit d'où ces fichiers sont lus dépend du contexte dans lequel vous compilez le plugin :
+  - **Dans un projet PSDK** : les chemins sont résolus par rapport à la **racine du projet** (par ex. `Data/configs/plugins/test/*.yml` cherche dans `project_root/Data/configs/plugins/test/`). Les fichiers doivent déjà exister à leur emplacement définitif dans le projet.
+  - **Dans un dépôt autonome** : les chemins sont résolus par rapport à la **racine de votre dépôt de plugin** (par ex. `Data/configs/plugins/test/*.yml` cherche dans `votre_depot/Data/configs/plugins/test/`).
+  Lorsqu'un utilisateur installe l'archive `.psdkplug`, ces fichiers sont extraits vers ces mêmes chemins relatifs par rapport à la racine de son projet. Pour livrer un fichier situé à la racine, on préfixe son chemin par `./`, par exemple `./mon_fichier.extension`.
+
+:::important[Résolution des chemins pour les fichiers additionnels]
+Comme `added_files` enregistre le chemin relatif exact où les fichiers seront extraits dans le projet utilisateur :
+- Dans un **projet PSDK**, ne placez pas les fichiers additionnels dans `scripts/votre_plugin/`. Laissez-les à leur emplacement réel dans le projet (`Data/...`, `graphics/...`).
+- Dans un **dépôt autonome**, reproduisez l'arborescence cible depuis la racine de votre dépôt (`Data/...`, `graphics/...`).
+:::
 
 ### Déclarer les dépendances et les incompatibilités
 
@@ -117,17 +160,57 @@ Une URL de dépendance doit permettre à PSDK de récupérer le fichier en HTTPS
 
 ### Construire le fichier .psdkplug
 
-Une fois le dossier en place, on construit le plugin avec :
+Les plugins sont compilés en archives `.psdkplug` à l'aide de la commande `psdk-plugin build` de `psdk-cli`.
+
+#### Compiler dans un projet PSDK
+
+Lorsque vous êtes dans un projet PSDK (un dossier contenant un fichier `project.studio`), passez le nom du dossier du plugin :
 
 ```bash
-psdk --util=plugin build name
+psdk-plugin build nom_du_plugin
 ```
 
-On remplace `name` par le nom du plugin. On peut construire plusieurs plugins d'un coup en listant d'autres noms après le premier. La commande produit un fichier `.psdkplug`, nommé d'après le champ `name` de `config.yml`, dans `project_root/scripts`.
+Remplacez `nom_du_plugin` par le nom du dossier sous `scripts/`. Par défaut, la commande compile l'archive dans le répertoire courant.
+
+Pour générer le fichier `.psdkplug` directement dans votre dossier `scripts/` afin que PSDK puisse le détecter et l'installer :
+
+```bash
+psdk-plugin build nom_du_plugin --out-dir=scripts
+```
+
+#### Compiler en mode autonome (en dehors d'un projet PSDK)
+
+Si vous développez votre plugin dans un dossier ou un dépôt Git isolé, placez-vous à la racine du dossier du plugin et lancez :
+
+```bash
+psdk-plugin build
+```
+
+En dehors d'un projet PSDK, `psdk-plugin build` prend automatiquement le répertoire courant (`.`) comme source du plugin.
+
+Vous pouvez aussi cibler un autre dossier ou spécifier un dossier de sortie :
+
+```bash
+psdk-plugin build chemin/vers/plugin --out-dir=dist
+```
+
+Si vous êtes dans un dossier de projet PSDK mais souhaitez compiler un dossier de plugin autonome sans tenir compte de la structure du projet, utilisez l'option `--no-psdk-project` :
+
+```bash
+psdk-plugin build chemin/vers/plugin --no-psdk-project
+```
+
+#### Options de la commande
+
+| Option | Description |
+| --- | --- |
+| `[PLUGIN_NAME]` | Nom du dossier du plugin dans `scripts/` (dans un projet) ou chemin du dossier (en mode autonome, par défaut `.`). |
+| `--out-dir` | Répertoire de sortie pour le fichier `.psdkplug` généré (par défaut `.`). |
+| `--no-psdk-project` | Force le mode autonome en ignorant la détection du projet PSDK. |
 
 ### Vérifier les fichiers empaquetés
 
-Le moyen le plus simple de confirmer que chaque fichier est bien entré dans l'archive est de forcer une réinstallation :
+Une fois compilé, assurez-vous que le fichier `.psdkplug` se trouve dans le dossier `scripts/` de votre projet. Le moyen le plus simple de confirmer que chaque fichier est bien entré dans l'archive est de forcer une réinstallation :
 
 ```bash
 psdk --util=plugin load
@@ -162,11 +245,15 @@ Si l'un de ces scripts lève une exception, le Plugin Manager signale le plugin 
 
 ## Lister les plugins installés
 
-Pour voir ce qui est installé, avec la version et les auteurs de chaque plugin, on lance :
+Pour voir quels plugins sont actuellement installés dans votre projet PSDK, avec la version et les auteurs de chaque plugin, lancez :
 
 ```bash
-psdk --util=plugin list
+psdk-plugin list
 ```
+
+:::note[À exécuter dans un projet PSDK]
+`psdk-plugin list` doit être exécuté depuis un répertoire de projet PSDK. La commande lit la liste des plugins enregistrés dans `scripts/plugins.dat`.
+:::
 
 ## Distribuer un plugin
 
@@ -182,4 +269,4 @@ Si le plugin est incompatible avec un autre plugin ou avec certaines versions de
 
 ## Conclusion
 
-Un plugin n'est qu'un dossier avec un manifeste `config.yml`, construit en un seul fichier `.psdkplug` via `psdk --util=plugin build`. Le manifeste déclare la version, les fichiers à livrer, les dépendances à télécharger et les incompatibilités à rejeter, tandis que des scripts de compatibilité optionnels laissent le plugin échouer tôt avec un message lisible. Une fois construit et vérifié avec `psdk --util=plugin load`, on le distribue en téléchargement direct HTTPS, et le Plugin Manager se charge de l'installer dans le bon ordre sur chaque projet.
+Un plugin n'est qu'un dossier avec un manifeste `config.yml`, compilé en un seul fichier `.psdkplug` avec `psdk-plugin build` de `psdk-cli`. Le manifeste déclare la version, les fichiers à livrer, les dépendances à télécharger et les incompatibilités à rejeter, tandis que des scripts de compatibilité optionnels laissent le plugin échouer tôt avec un message lisible. Une fois construit et vérifié avec `psdk --util=plugin load`, on le distribue en téléchargement direct HTTPS, et le Plugin Manager se charge de l'installer dans le bon ordre sur chaque projet.
