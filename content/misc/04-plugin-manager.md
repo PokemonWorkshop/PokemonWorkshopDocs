@@ -116,8 +116,10 @@ Each field:
 
 :::important[Path resolution for additional files]
 Because `added_files` records the exact relative path where files will be unpacked in the user's project:
+
 - Inside a **PSDK project**, do not put additional files in `scripts/your_plugin/`. Place them in their real project locations (`Data/...`, `graphics/...`).
 - In a **standalone repository**, replicate the target folder structure from the root of your repository (`Data/...`, `graphics/...`).
+
 :::
 
 ### Declaring dependencies and incompatibilities

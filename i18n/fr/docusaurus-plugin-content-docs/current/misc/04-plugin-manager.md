@@ -116,8 +116,10 @@ Chaque champ :
 
 :::important[Résolution des chemins pour les fichiers additionnels]
 Comme `added_files` enregistre le chemin relatif exact où les fichiers seront extraits dans le projet utilisateur :
+
 - Dans un **projet PSDK**, ne placez pas les fichiers additionnels dans `scripts/votre_plugin/`. Laissez-les à leur emplacement réel dans le projet (`Data/...`, `graphics/...`).
 - Dans un **dépôt autonome**, reproduisez l'arborescence cible depuis la racine de votre dépôt (`Data/...`, `graphics/...`).
+
 :::
 
 ### Déclarer les dépendances et les incompatibilités
