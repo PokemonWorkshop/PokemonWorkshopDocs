@@ -36,17 +36,51 @@ The Plugin Manager only does its work when something actually changed. It reinst
 
 If nothing changed since the last run, it stays out of the way and your game boots normally.
 
+## Installing psdk-cli
+
+Building and managing plugins is handled through the `psdk-plugin` command, provided by the `psdk-cli` RubyGem.
+
+To install it, open a terminal and run:
+
+```bash
+gem install psdk-cli
+```
+
+:::note[Ruby requirement]
+`psdk-cli` requires Ruby 3.2.0 or newer. If you have already set up your development environment for PSDK (see [Set up the development environment](/getting-started/customize-psdk/setup-development-environment)), Ruby is already available.
+:::
+
+To confirm the installation, run:
+
+```bash
+psdk-plugin --help
+```
+
 ## Building a plugin
 
 ### Structuring the plugin folder
 
-To build a plugin, create a folder named after it in `project_root/scripts`. Inside, PSDK expects this layout:
+A plugin can be structured either inside an existing PSDK project (convenient for testing while developing) or as a standalone folder / repository (convenient for version control and CI/CD).
 
-- `config.yml` at the root of the folder: the plugin manifest (described below).
-- A `scripts` subfolder holding your actual code, at `project_root/scripts/your_folder/scripts`. Each script file still follows the PSDK naming norm, `XXXXX NameOfScript.rb`.
-- The compatibility test scripts, if any, sit at the root of the plugin folder next to `config.yml`.
+#### In a PSDK project
 
-If you need a concrete example, the [psdk-plugins repository](https://gitlab.com/NuriYuri/psdk-plugins) shows how a plugin folder is laid out.
+Create a folder named after your plugin in `project_root/scripts` (e.g. `project_root/scripts/your_plugin`). Inside, PSDK expects this layout:
+
+- `config.yml` at the root of the plugin folder (`scripts/your_plugin/config.yml`): the plugin manifest (described below).
+- A `scripts` subfolder holding your actual code (`scripts/your_plugin/scripts/`). Each script file follows the PSDK naming norm, `XXXXX NameOfScript.rb`.
+- Compatibility test scripts, if any, sit at the root of the plugin folder next to `config.yml`.
+- **Additional files** (such as default configs in `Data/configs/plugins/`, graphics, audio): these must **not** be placed inside `scripts/your_plugin/`. Instead, they reside directly at their destination paths relative to the **project root** (e.g. `project_root/Data/configs/your_plugin_user_config.json`, `project_root/graphics/...`). When building inside a project, the builder resolves paths relative to the project root.
+
+#### In a standalone repository
+
+If you develop the plugin in its own dedicated repository outside a PSDK project:
+
+- `config.yml` at the root of the repository.
+- A `scripts` subfolder holding your Ruby scripts (`scripts/XXXXX NameOfScript.rb`).
+- Compatibility test scripts, if any, sit at the root next to `config.yml`.
+- **Additional files**: mirror the PSDK project structure directly at the root of your repository (e.g. `your_repo/Data/configs/your_plugin_user_config.json`, `your_repo/graphics/...`). When building in standalone mode, the builder resolves paths relative to the repository root.
+
+If you need a concrete example, the [psdk-plugins repository](https://gitlab.com/NuriYuri/psdk-plugins) shows how plugin source folders are laid out.
 
 ### The config.yml file
 
@@ -75,7 +109,16 @@ Each field:
 - `psdk_compatibility_script`: the name of the script that checks the plugin is compatible with PSDK. Optional, remove the line if you do not use it.
 - `retry_psdk_compatibility_after_plugin_load`: a boolean telling whether `psdk_compatibility_script` should also run once all plugins are installed and loaded.
 - `additional_compatibility_script`: the name of the script that checks the plugin works with the other installed plugins. Optional, remove the line if you do not use it.
-- `added_files`: the list of files the plugin ships. This value is passed to Ruby's `Dir[]`, so it accepts globs or explicit file paths. The files must already exist at their final location when you build the plugin. To ship a file located at the project root, prefix its path with `./`, for example `./my_file.extension`.
+- `added_files`: the list of files the plugin ships. This value is passed to Ruby's `Dir[]`, so it accepts globs or explicit file paths. Note that where these files are read from depends on where you run the build:
+  - **In a PSDK project**: paths are read relative to the **project root** (e.g. `Data/configs/plugins/test/*.yml` looks in `project_root/Data/configs/plugins/test/`). The files must already exist at their final location in your project.
+  - **In a standalone repository**: paths are read relative to the **root of your plugin repository** (e.g. `Data/configs/plugins/test/*.yml` looks in `your_repo/Data/configs/plugins/test/`).
+  When a user installs the `.psdkplug` archive, these files are extracted to these exact paths relative to their project root. To ship a file located at the root, prefix its path with `./`, for example `./my_file.extension`.
+
+:::important[Path resolution for additional files]
+Because `added_files` records the exact relative path where files will be unpacked in the user's project:
+- Inside a **PSDK project**, do not put additional files in `scripts/your_plugin/`. Place them in their real project locations (`Data/...`, `graphics/...`).
+- In a **standalone repository**, replicate the target folder structure from the root of your repository (`Data/...`, `graphics/...`).
+:::
 
 ### Declaring dependencies and incompatibilities
 
@@ -117,17 +160,57 @@ A dependency URL has to let PSDK fetch the file over HTTPS without any "download
 
 ### Building the .psdkplug file
 
-Once the folder is set up, build the plugin with:
+Plugins are compiled into `.psdkplug` archives using the `psdk-plugin build` command from `psdk-cli`.
+
+#### Building inside a PSDK project
+
+When you are inside a PSDK project (a folder containing `project.studio`), pass the plugin folder name:
 
 ```bash
-psdk --util=plugin build name
+psdk-plugin build plugin_name
 ```
 
-Replace `name` with your plugin name. You can build several plugins at once by listing more names after the first. The command produces a `.psdkplug` file, named after the `name` field in `config.yml`, in `project_root/scripts`.
+Replace `plugin_name` with the name of the folder under `scripts/`. By default, this builds the archive into the current directory.
+
+To output the compiled `.psdkplug` file directly into your `scripts/` folder so PSDK can detect and install it:
+
+```bash
+psdk-plugin build plugin_name --out-dir=scripts
+```
+
+#### Building in standalone mode (outside a PSDK project)
+
+If you develop your plugin in an isolated folder or Git repository, navigate to the plugin's root directory and run:
+
+```bash
+psdk-plugin build
+```
+
+When run outside a PSDK project, `psdk-plugin build` automatically defaults to the current directory (`.`) as the plugin source.
+
+You can also target another folder or specify an output directory:
+
+```bash
+psdk-plugin build path/to/plugin --out-dir=dist
+```
+
+If you are working inside a PSDK project directory but want to build a standalone plugin folder without using the project structure, use the `--no-psdk-project` flag:
+
+```bash
+psdk-plugin build path/to/plugin --no-psdk-project
+```
+
+#### Command options
+
+| Option | Description |
+| --- | --- |
+| `[PLUGIN_NAME]` | Name of the plugin folder inside `scripts/` (when in a project) or directory path (in standalone mode, defaults to `.`). |
+| `--out-dir` | Output directory for the generated `.psdkplug` file (default: `.`). |
+| `--no-psdk-project` | Force standalone mode, ignoring PSDK project detection. |
 
 ### Checking the bundled files
 
-The easiest way to confirm every file made it into the archive is to force a reinstall:
+Once built, ensure the `.psdkplug` file is in your project's `scripts/` folder. The easiest way to confirm every file made it into the archive is to force a reinstall:
 
 ```bash
 psdk --util=plugin load
@@ -162,11 +245,15 @@ If any of these scripts raises, the Plugin Manager reports the plugin as incompa
 
 ## Listing installed plugins
 
-To see what is currently installed, with each plugin's version and authors, run:
+To see what plugins are currently installed in your PSDK project, along with each plugin's version and authors, run:
 
 ```bash
-psdk --util=plugin list
+psdk-plugin list
 ```
+
+:::note[Run inside a PSDK project]
+`psdk-plugin list` must be run from inside a PSDK project directory. It inspects the installed plugins recorded in `scripts/plugins.dat`.
+:::
 
 ## Distributing a plugin
 
@@ -182,4 +269,4 @@ If your plugin is incompatible with another plugin or with some PSDK versions, t
 
 ## Conclusion
 
-A plugin is just a folder with a `config.yml` manifest, built into a single `.psdkplug` file with `psdk --util=plugin build`. The manifest declares the version, the files to ship, the dependencies to download and the incompatibilities to reject, while optional compatibility scripts let the plugin fail fast with a readable message. Once built and verified with `psdk --util=plugin load`, you distribute it as a direct HTTPS download, and the Plugin Manager takes care of installing it in the right order on every project.
+A plugin is a folder with a `config.yml` manifest, built into a single `.psdkplug` file with `psdk-plugin build` from `psdk-cli`. The manifest declares the version, the files to ship, the dependencies to download and the incompatibilities to reject, while optional compatibility scripts let the plugin fail fast with a readable message. Once built and verified with `psdk --util=plugin load`, you distribute it as a direct HTTPS download, and the Plugin Manager takes care of installing it in the right order on every project.
