@@ -204,11 +204,11 @@ psdk-plugin build chemin/vers/plugin --no-psdk-project
 
 #### Options de la commande
 
-| Option | Description |
-| --- | --- |
-| `[PLUGIN_NAME]` | Nom du dossier du plugin dans `scripts/` (dans un projet) ou chemin du dossier (en mode autonome, par défaut `.`). |
-| `--out-dir` | Répertoire de sortie pour le fichier `.psdkplug` généré (par défaut `.`). |
-| `--no-psdk-project` | Force le mode autonome en ignorant la détection du projet PSDK. |
+| Option              | Description                                                  |
+| ------------------- | ------------------------------------------------------------ |
+| `[PLUGIN_NAME]`     | Plugin dans `scripts/` ou chemin autonome (`.` par défaut).  |
+| `--out-dir`         | Dossier de sortie du `.psdkplug` (par défaut `.`).           |
+| `--no-psdk-project` | Force le mode autonome sans détecter le projet PSDK.         |
 
 ### Vérifier les fichiers empaquetés
 

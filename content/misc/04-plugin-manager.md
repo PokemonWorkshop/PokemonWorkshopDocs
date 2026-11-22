@@ -204,11 +204,11 @@ psdk-plugin build path/to/plugin --no-psdk-project
 
 #### Command options
 
-| Option | Description |
-| --- | --- |
-| `[PLUGIN_NAME]` | Name of the plugin folder inside `scripts/` (when in a project) or directory path (in standalone mode, defaults to `.`). |
-| `--out-dir` | Output directory for the generated `.psdkplug` file (default: `.`). |
-| `--no-psdk-project` | Force standalone mode, ignoring PSDK project detection. |
+| Option                 | Description                                                                                                                                            |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `[PLUGIN_NAME]`        | Name of the plugin folder inside `scripts/` (when in a project) or directory path (in standalone mode, defaults to `.`).                               |
+| `--out-dir`            | Output directory for the generated `.psdkplug` file (default: `.`).                                                                                    |
+| `--no-psdk-project`    | Force standalone mode, ignoring PSDK project detection.                                                                                                |
 
 ### Checking the bundled files
 
